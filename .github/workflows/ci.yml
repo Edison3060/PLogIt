@@ -2,8 +2,8 @@
 # PLogIt - CI / DevSecOps pipeline.
 #
 # Designed to be GREEN from day one and light up progressively:
-#  - the backend / frontend jobs only run once backend/pom.xml or
-#    frontend/package.json exist (file-existence guards).
+#  - the backend / frontend jobs check whether their code exists in
+#    the first step; if not, the job exits cleanly (no failure).
 #  - Semgrep (SAST) and Trivy (deps + secrets) run on every push/PR and are
 #    BLOCKING - they fail the build on findings.
 #
@@ -26,40 +26,65 @@ permissions:
 jobs:
   backend:
     name: Backend - Maven build & tests
-    if: ${{ hashFiles('backend/pom.xml') != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check backend code exists
+        id: check
+        run: |
+          if [ -f "backend/pom.xml" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Backend code found, continuing."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "No backend/pom.xml yet, skipping backend job."
+          fi
       - uses: actions/setup-java@v4
+        if: steps.check.outputs.exists == 'true'
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
       - name: Build & test
+        if: steps.check.outputs.exists == 'true'
         working-directory: backend
         run: mvn -B verify
 
   frontend:
     name: Frontend - lint, build, test
-    if: ${{ hashFiles('frontend/package.json') != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check frontend code exists
+        id: check
+        run: |
+          if [ -f "frontend/package.json" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Frontend code found, continuing."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "No frontend/package.json yet, skipping frontend job."
+          fi
       - uses: actions/setup-node@v4
+        if: steps.check.outputs.exists == 'true'
         with:
           node-version: "20"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - name: Install
+        if: steps.check.outputs.exists == 'true'
         working-directory: frontend
         run: npm ci
       - name: Lint
+        if: steps.check.outputs.exists == 'true'
         working-directory: frontend
         run: npm run lint --if-present
       - name: Build
+        if: steps.check.outputs.exists == 'true'
         working-directory: frontend
         run: npm run build
       - name: Test
+        if: steps.check.outputs.exists == 'true'
         working-directory: frontend
         run: npm test --if-present
 
