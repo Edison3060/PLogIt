@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/plogit}
+    username: ${SPRING_DATASOURCE_USERNAME:plogit}
+    password: ${SPRING_DATASOURCE_PASSWORD:change-me-strong-db-password}
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    io.muzoo.ssc.plogit: debug
+
+plogit:
+  storage:
+    dir: ${APP_STORAGE_DIR:./attachments}
+  cors:
+    origins: ${APP_CORS_ORIGINS:http://localhost:5173}
+  seed:
+    user-email: ${SEED_USER_EMAIL:leader@plogit.local}
+    user-password: ${SEED_USER_PASSWORD:change-me-leader}
+    user-name: ${SEED_USER_NAME:Demo Leader}
