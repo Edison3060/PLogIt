@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import EngagementDetailPage from "./pages/EngagementDetail";
 import AppShell from "./components/AppShell";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -17,6 +18,7 @@ export default function App() {
             <AppShell>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/engagements/:id" element={<EngagementDetailPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </AppShell>
