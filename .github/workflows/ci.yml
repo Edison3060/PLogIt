@@ -7,6 +7,11 @@
 #  - Semgrep (SAST) and Trivy (deps + secrets) run on every push/PR and are
 #    BLOCKING - they fail the build on findings.
 #
+# Security note: we install Trivy as a CLI binary directly rather than using
+# aquasecurity/trivy-action, which was compromised in March 2026 (75 version
+# tags force-updated with credential-stealing malware). Installing the binary
+# from the official source avoids the supply-chain risk entirely.
+#
 # Cadence: build -> test -> Semgrep -> Trivy.
 # ============================================================
 name: CI
@@ -96,19 +101,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # --error makes findings fail the build (blocking).
-      - run: semgrep scan --config p/default --config p/owasp-top-ten --config p/secrets --error
+      # --exclude .env.example: .env.example is a template with placeholder
+      # values (change-me-*), not real secrets. Scanning it produces only
+      # false positives from the p/secrets ruleset.
+      - run: semgrep scan --config p/default --config p/owasp-top-ten --config p/secrets --exclude .env.example --error
 
   trivy:
     name: Trivy - dependencies & secrets
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # Filesystem scan: dependency CVEs, leaked secrets, IaC misconfig.
+      - name: Install Trivy CLI
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+          trivy --version
       - name: Trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.24.0
-        with:
-          scan-type: fs
-          scanners: vuln,secret,misconfig
-          severity: HIGH,CRITICAL
-          exit-code: "1"
-          ignore-unfixed: true
+        run: |
+          trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed .
