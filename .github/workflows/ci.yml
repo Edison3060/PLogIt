@@ -120,6 +120,15 @@ jobs:
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
           trivy --version
+      - name: Set up JDK (for Maven dependency resolution)
+        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Populate local Maven cache
+        working-directory: backend
+        run: mvn -B dependency:resolve -DskipTests || true
       - name: Trivy filesystem scan
         run: |
           trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed .
