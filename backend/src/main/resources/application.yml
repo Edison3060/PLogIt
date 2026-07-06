@@ -1,6 +1,8 @@
 spring:
   application:
     name: plogit
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   jpa:
     open-in-view: false
     hibernate:
