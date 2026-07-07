@@ -1,11 +1,12 @@
 package io.muzoo.ssc.plogit;
 
-import org.junit.jupiter.api.Disabled;
+import io.muzoo.ssc.plogit.support.PostgresTestConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
 @SpringBootTest
-@Disabled("Requires PostgreSQL - integration tests added in Slice 3 with Testcontainers")
+@Import(PostgresTestConfig.class)
 class PlogitApplicationTests {
 
     @Test
