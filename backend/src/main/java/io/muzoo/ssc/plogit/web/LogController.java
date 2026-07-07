@@ -5,12 +5,14 @@ import io.muzoo.ssc.plogit.domain.Outcome;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.security.CurrentUser;
+import io.muzoo.ssc.plogit.service.LogReviewService;
 import io.muzoo.ssc.plogit.service.LogService;
 import io.muzoo.ssc.plogit.web.dto.LogCreateRequest;
 import io.muzoo.ssc.plogit.web.dto.LogDetail;
 import io.muzoo.ssc.plogit.web.dto.LogFilter;
 import io.muzoo.ssc.plogit.web.dto.LogSummary;
 import io.muzoo.ssc.plogit.web.dto.LogUpdateRequest;
+import io.muzoo.ssc.plogit.web.dto.TransitionRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,9 +34,11 @@ import java.util.UUID;
 public class LogController {
 
     private final LogService logService;
+    private final LogReviewService logReviewService;
 
-    public LogController(LogService logService) {
+    public LogController(LogService logService, LogReviewService logReviewService) {
         this.logService = logService;
+        this.logReviewService = logReviewService;
     }
 
     @PostMapping("/api/engagements/{engagementId}/logs")
@@ -86,5 +90,14 @@ public class LogController {
         @CurrentUser User currentUser
     ) {
         return ResponseEntity.ok(logService.update(logId, request, currentUser));
+    }
+
+    @PostMapping("/api/logs/{logId}/transition")
+    public ResponseEntity<LogDetail> transition(
+        @PathVariable UUID logId,
+        @Valid @RequestBody TransitionRequest request,
+        @CurrentUser User currentUser
+    ) {
+        return ResponseEntity.ok(logReviewService.transition(logId, request, currentUser));
     }
 }

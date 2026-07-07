@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLogs } from "../hooks/useLogs";
+import { useEngagements } from "../hooks/useEngagements";
 import {
   ACTIVITY_TYPES,
   OUTCOMES,
@@ -34,6 +35,11 @@ export default function LogBoard() {
   };
 
   const { data, isLoading, isFetching } = useLogs(engagementId, queryParams);
+  const { data: engagements } = useEngagements();
+
+  const isLeader =
+    engagements?.find((e) => e.id === engagementId)?.role === "LEADER";
+  const inReviewQueue = reviewState === "SUBMITTED";
 
   const totalPages = data?.totalPages ?? 0;
   const hasFilters = search || activityType || outcome || reviewState;
@@ -68,12 +74,31 @@ export default function LogBoard() {
           <i className="fa-solid fa-list-check text-text-muted"></i>
           Logs
         </h1>
-        <button
-          onClick={() => navigate(`/engagements/${engagementId}/logs/new`)}
-          className="bg-primary text-white rounded px-4 py-2 text-sm font-medium hover:bg-primary-hover flex items-center gap-2"
-        >
-          <i className="fa-solid fa-plus"></i> New Log
-        </button>
+        <div className="flex items-center gap-2">
+          {isLeader && (
+            <button
+              onClick={() =>
+                onFilterChange(
+                  setReviewState,
+                  inReviewQueue ? "" : "SUBMITTED"
+                )
+              }
+              className={`rounded px-4 py-2 text-sm font-medium flex items-center gap-2 ${
+                inReviewQueue
+                  ? "bg-amber-100 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-800"
+                  : "bg-bg-inset text-text-strong hover:bg-border-default border border-border-default"
+              }`}
+            >
+              <i className="fa-solid fa-clipboard-check"></i> Review Queue
+            </button>
+          )}
+          <button
+            onClick={() => navigate(`/engagements/${engagementId}/logs/new`)}
+            className="bg-primary text-white rounded px-4 py-2 text-sm font-medium hover:bg-primary-hover flex items-center gap-2"
+          >
+            <i className="fa-solid fa-plus"></i> New Log
+          </button>
+        </div>
       </div>
 
       <div className="bg-bg-card rounded-lg border border-border-subtle p-4 mb-4 flex flex-wrap gap-3 items-center">

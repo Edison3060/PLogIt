@@ -4,7 +4,9 @@ import {
   fetchLog,
   createLog,
   updateLog,
+  transitionLog,
   type LogFormData,
+  type ReviewAction,
 } from "../lib/logs";
 
 type LogQueryParams = {
@@ -48,6 +50,25 @@ export function useUpdateLog(engagementId: number) {
   return useMutation({
     mutationFn: ({ logId, data }: { logId: string; data: Partial<LogFormData> }) =>
       updateLog(logId, data),
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["logs", engagementId] });
+      queryClient.invalidateQueries({ queryKey: ["log", variables.logId] });
+    },
+  });
+}
+
+export function useTransitionLog(engagementId: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      logId,
+      action,
+      comment,
+    }: {
+      logId: string;
+      action: ReviewAction;
+      comment?: string;
+    }) => transitionLog(logId, action, comment),
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["logs", engagementId] });
       queryClient.invalidateQueries({ queryKey: ["log", variables.logId] });
