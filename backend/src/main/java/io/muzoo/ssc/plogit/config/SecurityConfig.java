@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -58,12 +60,29 @@ public class SecurityConfig {
         HttpSecurity http,
         DaoAuthenticationProvider authenticationProvider
     ) throws Exception {
+        CookieCsrfTokenRepository csrfRepo = CookieCsrfTokenRepository.withHttpOnlyFalse();
         http
             .authenticationProvider(authenticationProvider)
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/logout")
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .csrfTokenRepository(csrfRepo)
+                .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
+            )
+            .addFilterAfter(
+                (request, response, chain) -> {
+                    Object attr = request.getAttribute(CsrfToken.class.getName());
+                    if (attr instanceof CsrfToken token) {
+                        token.getToken();
+                        csrfRepo.saveToken(
+                            token,
+                            (jakarta.servlet.http.HttpServletRequest) request,
+                            (jakarta.servlet.http.HttpServletResponse) response
+                        );
+                    }
+                    chain.doFilter(request, response);
+                },
+                org.springframework.security.web.csrf.CsrfFilter.class
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)

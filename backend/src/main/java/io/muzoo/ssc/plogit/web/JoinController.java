@@ -1,7 +1,6 @@
 package io.muzoo.ssc.plogit.web;
 
 import io.muzoo.ssc.plogit.domain.Engagement;
-import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.security.CurrentUser;
@@ -11,8 +10,6 @@ import io.muzoo.ssc.plogit.service.MembershipService;
 import io.muzoo.ssc.plogit.web.dto.EngagementSummary;
 import io.muzoo.ssc.plogit.web.dto.JoinCodeResponse;
 import io.muzoo.ssc.plogit.web.dto.JoinRequest;
-import io.muzoo.ssc.plogit.web.exception.ConflictException;
-import io.muzoo.ssc.plogit.web.exception.NotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,19 +44,7 @@ public class JoinController {
         @Valid @RequestBody JoinRequest request,
         @CurrentUser User currentUser
     ) {
-        Engagement engagement = joinCodeService.resolveCode(request.code());
-
-        if (membershipService.isMember(engagement, currentUser)) {
-            throw new ConflictException("You are already a member of this engagement");
-        }
-
-        membershipService.addMember(engagement, currentUser, EngagementRole.MEMBER, "code");
-
-        engagementRepository.save(engagement);
-
-        return ResponseEntity.ok(
-            EngagementSummary.from(engagement, "MEMBER")
-        );
+        return ResponseEntity.ok(engagementService.joinByCode(request.code(), currentUser));
     }
 
     @PostMapping("/engagements/{id}/join-code")
