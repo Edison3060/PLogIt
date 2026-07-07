@@ -17,6 +17,12 @@ public record EngagementDetail(
     String role,
     LeaderInfo leader,
     List<MemberInfo> members,
+    List<String> inScopeTargets,
+    String allowedHours,
+    String allowedTechniques,
+    String forbiddenTechniques,
+    String emergencyContacts,
+    String outOfScope,
     Instant createdAt
 ) {
     public record LeaderInfo(Long id, String email, String displayName) {
@@ -40,6 +46,12 @@ public record EngagementDetail(
                 engagement.getLeader().getDisplayName()
             ),
             members,
+            engagement.getInScopeTargets(),
+            engagement.getAllowedHours(),
+            engagement.getAllowedTechniques(),
+            engagement.getForbiddenTechniques(),
+            engagement.getEmergencyContacts(),
+            engagement.getOutOfScope(),
             engagement.getCreatedAt()
         );
     }

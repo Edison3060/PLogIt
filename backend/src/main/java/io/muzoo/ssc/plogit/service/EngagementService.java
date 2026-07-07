@@ -8,6 +8,7 @@ import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.EngagementMemberRepository;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.web.dto.CreateEngagementRequest;
+import io.muzoo.ssc.plogit.web.dto.UpdateEngagementRequest;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,5 +65,46 @@ public class EngagementService {
     @Transactional(readOnly = true)
     public List<EngagementMember> getMembers(Engagement engagement) {
         return memberRepository.findByEngagement(engagement);
+    }
+
+    public Engagement updateEngagement(Engagement engagement, UpdateEngagementRequest request) {
+        if (request.name() != null) {
+            engagement.setName(request.name());
+        }
+        if (request.description() != null) {
+            engagement.setDescription(request.description());
+        }
+        if (request.startDate() != null) {
+            engagement.setStartDate(request.startDate());
+        }
+        if (request.dueDate() != null) {
+            engagement.setDueDate(request.dueDate());
+        }
+        if (request.allowedHours() != null) {
+            engagement.setAllowedHours(request.allowedHours());
+        }
+        if (request.allowedTechniques() != null) {
+            engagement.setAllowedTechniques(request.allowedTechniques());
+        }
+        if (request.forbiddenTechniques() != null) {
+            engagement.setForbiddenTechniques(request.forbiddenTechniques());
+        }
+        if (request.emergencyContacts() != null) {
+            engagement.setEmergencyContacts(request.emergencyContacts());
+        }
+        if (request.outOfScope() != null) {
+            engagement.setOutOfScope(request.outOfScope());
+        }
+        if (request.inScopeTargets() != null) {
+            engagement.setInScopeTargets(request.inScopeTargets());
+        }
+        return engagementRepository.save(engagement);
+    }
+
+    public Engagement findByIdAndAssertLeader(Long engagementId, User user) {
+        Engagement engagement = engagementRepository.findById(engagementId)
+            .orElseThrow(() -> new NotFoundException("Engagement not found"));
+        membershipService.assertLeader(engagement, user);
+        return engagement;
     }
 }
