@@ -27,29 +27,36 @@ export default function AppShell({ children }: AppShellProps) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-header text-white h-14 flex items-center px-4 justify-between">
-        <div className="flex items-center gap-2">
+      <header className="bg-header text-white h-14 flex items-center px-6 justify-between sticky top-0 z-10">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 hover:opacity-90"
+        >
+          <i className="fa-solid fa-shield-halved text-primary"></i>
           <span className="font-semibold text-lg">PLogIt</span>
-        </div>
-        <div className="flex items-center gap-3">
+        </button>
+        <div className="flex items-center gap-4">
           {user && (
-            <span className="text-sm text-white/80">
-              {user.displayName}
-            </span>
+            <div className="flex items-center gap-2 text-sm">
+              <i className="fa-solid fa-user text-white/60"></i>
+              <span className="text-white/90">{user.displayName}</span>
+            </div>
           )}
           <button
             onClick={() => setDark(!dark)}
-            className="text-sm border border-white/20 rounded px-2 py-1 hover:bg-white/10"
+            className="text-sm border border-white/20 rounded-md w-8 h-8 flex items-center justify-center hover:bg-white/10"
+            title={dark ? "Switch to light" : "Switch to dark"}
           >
-            {dark ? "Light" : "Dark"}
+            <i className={dark ? "fa-solid fa-sun" : "fa-solid fa-moon"}></i>
           </button>
           {user && (
             <button
               onClick={handleLogout}
               disabled={logout.isPending}
-              className="text-sm border border-white/20 rounded px-2 py-1 hover:bg-white/10 disabled:opacity-50"
+              className="text-sm border border-white/20 rounded-md px-3 h-8 flex items-center gap-2 hover:bg-white/10 disabled:opacity-50"
             >
-              {logout.isPending ? "..." : "Sign out"}
+              <i className="fa-solid fa-right-from-bracket"></i>
+              <span>Sign out</span>
             </button>
           )}
         </div>
