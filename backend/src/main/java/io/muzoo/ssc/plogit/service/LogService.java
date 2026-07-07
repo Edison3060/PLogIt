@@ -7,7 +7,9 @@ import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.LogEntryRepository;
 import io.muzoo.ssc.plogit.repository.LogSpecifications;
 import io.muzoo.ssc.plogit.web.dto.LogCreateRequest;
+import io.muzoo.ssc.plogit.web.dto.LogDetail;
 import io.muzoo.ssc.plogit.web.dto.LogFilter;
+import io.muzoo.ssc.plogit.web.dto.LogSummary;
 import io.muzoo.ssc.plogit.web.dto.LogUpdateRequest;
 import io.muzoo.ssc.plogit.web.exception.ConflictException;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
@@ -37,7 +39,7 @@ public class LogService {
         this.membershipService = membershipService;
     }
 
-    public LogEntry create(Long engagementId, LogCreateRequest request, User author) {
+    public LogDetail create(Long engagementId, LogCreateRequest request, User author) {
         Engagement engagement = engagementService.findByIdAndAssertMember(engagementId, author);
 
         LogEntry log = LogEntry.builder()
@@ -57,11 +59,11 @@ public class LogService {
             .lastEditedById(author.getId())
             .build();
 
-        return logRepository.save(log);
+        return LogDetail.from(logRepository.save(log));
     }
 
     @Transactional(readOnly = true)
-    public Page<LogEntry> list(Long engagementId, User viewer, LogFilter filter, Pageable pageable) {
+    public Page<LogSummary> list(Long engagementId, User viewer, LogFilter filter, Pageable pageable) {
         Engagement engagement = engagementService.findByIdAndAssertMember(engagementId, viewer);
 
         Specification<LogEntry> spec = LogSpecifications.forEngagement(engagement);
@@ -83,18 +85,18 @@ public class LogService {
             }
         }
 
-        return logRepository.findAll(spec, pageable);
+        return logRepository.findAll(spec, pageable).map(LogSummary::from);
     }
 
     @Transactional(readOnly = true)
-    public LogEntry findByIdAndAssertMember(UUID logId, User viewer) {
+    public LogDetail findDetailByIdAndAssertMember(UUID logId, User viewer) {
         LogEntry log = logRepository.findById(logId)
             .orElseThrow(() -> new NotFoundException("Log not found"));
         membershipService.assertMember(log.getEngagement(), viewer);
-        return log;
+        return LogDetail.from(log);
     }
 
-    public LogEntry update(UUID logId, LogUpdateRequest request, User editor) {
+    public LogDetail update(UUID logId, LogUpdateRequest request, User editor) {
         LogEntry log = logRepository.findById(logId)
             .orElseThrow(() -> new NotFoundException("Log not found"));
 
@@ -143,6 +145,6 @@ public class LogService {
         }
         log.setLastEditedById(editor.getId());
 
-        return logRepository.save(log);
+        return LogDetail.from(logRepository.save(log));
     }
 }

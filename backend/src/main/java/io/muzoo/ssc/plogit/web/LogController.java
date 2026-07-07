@@ -1,7 +1,6 @@
 package io.muzoo.ssc.plogit.web;
 
 import io.muzoo.ssc.plogit.domain.ActivityType;
-import io.muzoo.ssc.plogit.domain.LogEntry;
 import io.muzoo.ssc.plogit.domain.Outcome;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,8 +43,7 @@ public class LogController {
         @Valid @RequestBody LogCreateRequest request,
         @CurrentUser User currentUser
     ) {
-        LogEntry log = logService.create(engagementId, request, currentUser);
-        return ResponseEntity.ok(LogDetail.from(log));
+        return ResponseEntity.ok(logService.create(engagementId, request, currentUser));
     }
 
     @GetMapping("/api/engagements/{engagementId}/logs")
@@ -63,10 +60,10 @@ public class LogController {
     ) {
         LogFilter filter = new LogFilter(authorId, activityType, outcome, reviewState, search);
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
-        Page<LogEntry> result = logService.list(engagementId, currentUser, filter, pageable);
+        Page<LogSummary> result = logService.list(engagementId, currentUser, filter, pageable);
 
         return ResponseEntity.ok(Map.of(
-            "items", result.getContent().stream().map(LogSummary::from).toList(),
+            "items", result.getContent(),
             "page", result.getNumber(),
             "size", result.getSize(),
             "totalElements", result.getTotalElements(),
@@ -79,8 +76,7 @@ public class LogController {
         @PathVariable UUID logId,
         @CurrentUser User currentUser
     ) {
-        LogEntry log = logService.findByIdAndAssertMember(logId, currentUser);
-        return ResponseEntity.ok(LogDetail.from(log));
+        return ResponseEntity.ok(logService.findDetailByIdAndAssertMember(logId, currentUser));
     }
 
     @PutMapping("/api/logs/{logId}")
@@ -89,7 +85,6 @@ public class LogController {
         @Valid @RequestBody LogUpdateRequest request,
         @CurrentUser User currentUser
     ) {
-        LogEntry log = logService.update(logId, request, currentUser);
-        return ResponseEntity.ok(LogDetail.from(log));
+        return ResponseEntity.ok(logService.update(logId, request, currentUser));
     }
 }

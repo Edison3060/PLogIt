@@ -70,20 +70,7 @@ public class EngagementController {
         @PathVariable Long id,
         @CurrentUser User currentUser
     ) {
-        Engagement engagement = engagementService.findByIdAndAssertMember(id, currentUser);
-        String role = membershipService.getRole(engagement, currentUser).name();
-
-        List<EngagementDetail.MemberInfo> members = engagementService.getMembers(engagement).stream()
-            .filter(m -> m.getRemovedAt() == null)
-            .map(m -> new EngagementDetail.MemberInfo(
-                m.getUser().getId(),
-                m.getUser().getEmail(),
-                m.getUser().getDisplayName(),
-                m.getRole().name()
-            ))
-            .toList();
-
-        return ResponseEntity.ok(EngagementDetail.from(engagement, role, members));
+        return ResponseEntity.ok(engagementService.getDetailForMember(id, currentUser));
     }
 
     @PutMapping("/{id}")
@@ -92,21 +79,7 @@ public class EngagementController {
         @Valid @RequestBody UpdateEngagementRequest request,
         @CurrentUser User currentUser
     ) {
-        Engagement engagement = engagementService.findByIdAndAssertLeader(id, currentUser);
-        engagement = engagementService.updateEngagement(engagement, request);
-
-        String role = membershipService.getRole(engagement, currentUser).name();
-        List<EngagementDetail.MemberInfo> members = engagementService.getMembers(engagement).stream()
-            .filter(m -> m.getRemovedAt() == null)
-            .map(m -> new EngagementDetail.MemberInfo(
-                m.getUser().getId(),
-                m.getUser().getEmail(),
-                m.getUser().getDisplayName(),
-                m.getRole().name()
-            ))
-            .toList();
-
-        return ResponseEntity.ok(EngagementDetail.from(engagement, role, members));
+        return ResponseEntity.ok(engagementService.updateAndBuildDetail(id, currentUser, request));
     }
 
     @DeleteMapping("/{id}/members/{userId}")

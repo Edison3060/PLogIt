@@ -8,6 +8,7 @@ import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.EngagementMemberRepository;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.web.dto.CreateEngagementRequest;
+import io.muzoo.ssc.plogit.web.dto.EngagementDetail;
 import io.muzoo.ssc.plogit.web.dto.UpdateEngagementRequest;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,40 @@ public class EngagementService {
         this.engagementRepository = engagementRepository;
         this.memberRepository = memberRepository;
         this.membershipService = membershipService;
+    }
+
+    @Transactional(readOnly = true)
+    public List<EngagementDetail.MemberInfo> buildMemberInfos(Engagement engagement) {
+        return getMembers(engagement).stream()
+            .filter(m -> m.getRemovedAt() == null)
+            .map(m -> new EngagementDetail.MemberInfo(
+                m.getUser().getId(),
+                m.getUser().getEmail(),
+                m.getUser().getDisplayName(),
+                m.getRole().name()
+            ))
+            .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public EngagementDetail getDetailForMember(Long engagementId, User viewer) {
+        Engagement engagement = engagementRepository.findById(engagementId)
+            .orElseThrow(() -> new NotFoundException("Engagement not found"));
+        membershipService.assertMember(engagement, viewer);
+        String role = membershipService.getRole(engagement, viewer).name();
+        List<EngagementDetail.MemberInfo> members = buildMemberInfos(engagement);
+        return EngagementDetail.from(engagement, role, members);
+    }
+
+    @Transactional
+    public EngagementDetail updateAndBuildDetail(Long engagementId, User leader, UpdateEngagementRequest request) {
+        Engagement engagement = engagementRepository.findById(engagementId)
+            .orElseThrow(() -> new NotFoundException("Engagement not found"));
+        membershipService.assertLeader(engagement, leader);
+        updateEngagement(engagement, request);
+        String role = membershipService.getRole(engagement, leader).name();
+        List<EngagementDetail.MemberInfo> members = buildMemberInfos(engagement);
+        return EngagementDetail.from(engagement, role, members);
     }
 
     public Engagement create(CreateEngagementRequest request, User creator) {
