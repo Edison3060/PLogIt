@@ -9,6 +9,7 @@ import io.muzoo.ssc.plogit.repository.EngagementMemberRepository;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.web.dto.CreateEngagementRequest;
 import io.muzoo.ssc.plogit.web.dto.EngagementDetail;
+import io.muzoo.ssc.plogit.web.dto.EngagementSummary;
 import io.muzoo.ssc.plogit.web.dto.UpdateEngagementRequest;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,15 +24,18 @@ public class EngagementService {
     private final EngagementRepository engagementRepository;
     private final EngagementMemberRepository memberRepository;
     private final MembershipService membershipService;
+    private final JoinCodeService joinCodeService;
 
     public EngagementService(
         EngagementRepository engagementRepository,
         EngagementMemberRepository memberRepository,
-        MembershipService membershipService
+        MembershipService membershipService,
+        JoinCodeService joinCodeService
     ) {
         this.engagementRepository = engagementRepository;
         this.memberRepository = memberRepository;
         this.membershipService = membershipService;
+        this.joinCodeService = joinCodeService;
     }
 
     @Transactional(readOnly = true)
@@ -87,6 +91,25 @@ public class EngagementService {
     @Transactional(readOnly = true)
     public List<EngagementMember> getMembershipsForUser(User user) {
         return memberRepository.findByUser(user);
+    }
+
+    @Transactional(readOnly = true)
+    public List<EngagementSummary> listSummariesForUser(User user) {
+        return memberRepository.findByUser(user).stream()
+            .filter(m -> m.getRemovedAt() == null)
+            .map(m -> EngagementSummary.from(m.getEngagement(), m.getRole().name()))
+            .toList();
+    }
+
+    @Transactional
+    public EngagementSummary joinByCode(String code, User user) {
+        Engagement engagement = joinCodeService.resolveCode(code);
+        if (membershipService.isMember(engagement, user)) {
+            throw new io.muzoo.ssc.plogit.web.exception.ConflictException("You are already a member of this engagement");
+        }
+        membershipService.addMember(engagement, user, EngagementRole.MEMBER, "code");
+        engagementRepository.save(engagement);
+        return EngagementSummary.from(engagement, "MEMBER");
     }
 
     @Transactional(readOnly = true)

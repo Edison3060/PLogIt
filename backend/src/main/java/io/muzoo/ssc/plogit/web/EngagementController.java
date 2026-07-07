@@ -1,7 +1,6 @@
 package io.muzoo.ssc.plogit.web;
 
 import io.muzoo.ssc.plogit.domain.Engagement;
-import io.muzoo.ssc.plogit.domain.EngagementMember;
 import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.security.CurrentUser;
@@ -44,14 +43,7 @@ public class EngagementController {
 
     @GetMapping
     public ResponseEntity<List<EngagementSummary>> listMine(@CurrentUser User currentUser) {
-        List<EngagementMember> memberships = engagementService.getMembershipsForUser(currentUser);
-
-        List<EngagementSummary> summaries = memberships.stream()
-            .filter(m -> m.getRemovedAt() == null)
-            .map(m -> EngagementSummary.from(m.getEngagement(), m.getRole().name()))
-            .toList();
-
-        return ResponseEntity.ok(summaries);
+        return ResponseEntity.ok(engagementService.listSummariesForUser(currentUser));
     }
 
     @PostMapping
