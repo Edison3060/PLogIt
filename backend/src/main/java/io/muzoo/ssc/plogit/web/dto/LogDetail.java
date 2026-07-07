@@ -12,6 +12,7 @@ import java.util.UUID;
 public record LogDetail(
     UUID id,
     Long engagementId,
+    Long leaderId,
     Long authorId,
     String authorDisplayName,
     ActivityType activityType,
@@ -34,6 +35,7 @@ public record LogDetail(
         return new LogDetail(
             log.getId(),
             log.getEngagement().getId(),
+            log.getEngagement().getLeader().getId(),
             log.getAuthor().getId(),
             log.getAuthor().getDisplayName(),
             log.getActivityType(),

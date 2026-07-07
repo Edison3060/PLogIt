@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useLog } from "../hooks/useLogs";
+import { useLog, useTransitionLog } from "../hooks/useLogs";
 import { useCurrentUser } from "../hooks/useAuth";
 import {
   formatActivityType,
@@ -7,12 +8,18 @@ import {
   outcomeBadgeClass,
   reviewStateBadgeClass,
 } from "../lib/logs";
+import type { ReviewAction } from "../lib/logs";
 
 export default function LogDetailPage() {
   const { id, logId } = useParams<{ id: string; logId: string }>();
   const navigate = useNavigate();
   const { data: user } = useCurrentUser();
   const { data: log, isLoading } = useLog(logId);
+  const transition = useTransitionLog(Number(id));
+
+  const [showReject, setShowReject] = useState(false);
+  const [rejectComment, setRejectComment] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   if (isLoading) {
     return (
@@ -32,7 +39,29 @@ export default function LogDetailPage() {
   }
 
   const isAuthor = user?.id === log.authorId;
-  const canEdit = log.reviewState === "DRAFT" && isAuthor;
+  const isLeader = user?.id === log.leaderId;
+  const canEdit = log.reviewState === "DRAFT" && (isAuthor || isLeader);
+  const canSubmit = log.reviewState === "DRAFT" && (isAuthor || isLeader);
+  const canReview = log.reviewState === "SUBMITTED" && isLeader;
+
+  const onTransition = (action: ReviewAction, comment?: string) => {
+    setError(null);
+    transition.mutate(
+      { logId: log.id, action, comment },
+      {
+        onError: (err: Error) => setError(err.message),
+        onSuccess: () => setShowReject(false),
+      }
+    );
+  };
+
+  const onSubmitReject = () => {
+    if (!rejectComment.trim()) {
+      setError("A rejection comment is required");
+      return;
+    }
+    onTransition("REJECT", rejectComment.trim());
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -88,13 +117,19 @@ export default function LogDetailPage() {
               onClick={() =>
                 navigate(`/engagements/${id}/logs/${log.id}/edit`)
               }
-              className="bg-primary text-white rounded px-3 py-1.5 text-sm font-medium hover:bg-primary-hover flex items-center gap-2"
+              className="bg-bg-inset text-text-strong rounded px-3 py-1.5 text-sm font-medium hover:bg-border-default flex items-center gap-2"
             >
               <i className="fa-solid fa-pen"></i> Edit
             </button>
           )}
         </div>
       </div>
+
+      {error && (
+        <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-lg p-3 mb-4 text-red-700 dark:text-red-400 text-sm flex items-center gap-2">
+          <i className="fa-solid fa-circle-exclamation"></i> {error}
+        </div>
+      )}
 
       {log.rejectionComment && (
         <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-lg p-4 mb-4">
@@ -104,6 +139,79 @@ export default function LogDetailPage() {
           <p className="text-red-600 dark:text-red-300 text-sm whitespace-pre-wrap">
             {log.rejectionComment}
           </p>
+        </div>
+      )}
+
+      {(canSubmit || canReview) && (
+        <div className="bg-bg-card rounded-lg border border-border-subtle p-4 mb-4 flex flex-wrap items-center gap-3">
+          {canSubmit && (
+            <button
+              onClick={() => onTransition("SUBMIT")}
+              disabled={transition.isPending}
+              className="bg-primary text-white rounded px-4 py-2 text-sm font-medium hover:bg-primary-hover disabled:opacity-50 flex items-center gap-2"
+            >
+              <i className="fa-solid fa-paper-plane"></i> Submit for review
+            </button>
+          )}
+          {canReview && (
+            <>
+              <span className="text-text-muted text-sm mr-2">
+                Awaiting your review:
+              </span>
+              <button
+                onClick={() => onTransition("APPROVE")}
+                disabled={transition.isPending}
+                className="bg-green-600 text-white rounded px-4 py-2 text-sm font-medium hover:bg-green-700 disabled:opacity-50 flex items-center gap-2"
+              >
+                <i className="fa-solid fa-check"></i> Approve
+              </button>
+              <button
+                onClick={() => {
+                  setError(null);
+                  setShowReject(true);
+                }}
+                disabled={transition.isPending}
+                className="bg-red-600 text-white rounded px-4 py-2 text-sm font-medium hover:bg-red-700 disabled:opacity-50 flex items-center gap-2"
+              >
+                <i className="fa-solid fa-arrow-rotate-left"></i> Reject
+              </button>
+            </>
+          )}
+        </div>
+      )}
+
+      {showReject && (
+        <div className="bg-bg-card rounded-lg border border-border-subtle p-4 mb-4">
+          <h3 className="text-sm font-medium text-text-strong mb-2 flex items-center gap-2">
+            <i className="fa-solid fa-comment-dots text-text-muted"></i> Rejection
+            comment (required)
+          </h3>
+          <textarea
+            value={rejectComment}
+            onChange={(e) => setRejectComment(e.target.value)}
+            rows={3}
+            placeholder="Explain what needs to be fixed before resubmission..."
+            className="bg-bg-canvas border border-border-default rounded px-3 py-2 w-full text-text-strong focus:outline-none focus:border-primary text-sm"
+          />
+          <div className="flex gap-2 mt-2">
+            <button
+              onClick={onSubmitReject}
+              disabled={transition.isPending}
+              className="bg-red-600 text-white rounded px-4 py-2 text-sm font-medium hover:bg-red-700 disabled:opacity-50 flex items-center gap-2"
+            >
+              <i className="fa-solid fa-paper-plane"></i> Send back to draft
+            </button>
+            <button
+              onClick={() => {
+                setShowReject(false);
+                setRejectComment("");
+                setError(null);
+              }}
+              className="text-text-muted rounded px-4 py-2 text-sm hover:text-text-strong"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
 

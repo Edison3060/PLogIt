@@ -14,6 +14,7 @@ export interface LogSummary {
 export interface LogDetail {
   id: string;
   engagementId: number;
+  leaderId: number;
   authorId: number;
   authorDisplayName: string;
   activityType: string;
@@ -165,5 +166,22 @@ export async function updateLog(
   return apiFetch<LogDetail>(`/logs/${logId}`, {
     method: "PUT",
     body: JSON.stringify(data),
+  });
+}
+
+export type ReviewAction = "SUBMIT" | "APPROVE" | "REJECT";
+
+export async function transitionLog(
+  logId: string,
+  action: ReviewAction,
+  comment?: string
+): Promise<LogDetail> {
+  const body: { action: ReviewAction; comment?: string } = { action };
+  if (comment) {
+    body.comment = comment;
+  }
+  return apiFetch<LogDetail>(`/logs/${logId}/transition`, {
+    method: "POST",
+    body: JSON.stringify(body),
   });
 }
