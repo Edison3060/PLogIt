@@ -416,10 +416,19 @@ export default function EngagementDetailPage() {
         </>
       )}
 
-      <p className="text-text-muted text-sm mt-6 flex items-center gap-2">
-        <i className="fa-solid fa-info-circle"></i>
-        Logs board coming in Slice 6
-      </p>
+      {!editing && tab === "overview" && (
+        <button
+          onClick={() => navigate(`/engagements/${engagement.id}/logs`)}
+          className="mt-6 w-full bg-bg-card rounded-lg border border-border-subtle p-4 text-left hover:border-primary transition-colors flex items-center gap-4"
+        >
+          <i className="fa-solid fa-list-check text-primary text-xl"></i>
+          <div className="flex-1">
+            <h3 className="font-medium text-text-strong">Logs</h3>
+            <p className="text-text-muted text-sm">View and manage activity logs</p>
+          </div>
+          <i className="fa-solid fa-chevron-right text-text-faint"></i>
+        </button>
+      )}
     </div>
   );
 }
