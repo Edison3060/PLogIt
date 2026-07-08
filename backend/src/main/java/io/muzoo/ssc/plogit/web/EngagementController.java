@@ -6,6 +6,7 @@ import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.security.CurrentUser;
 import io.muzoo.ssc.plogit.service.EngagementService;
 import io.muzoo.ssc.plogit.service.MembershipService;
+import io.muzoo.ssc.plogit.web.dto.AuditLogEntry;
 import io.muzoo.ssc.plogit.web.dto.CreateEngagementRequest;
 import io.muzoo.ssc.plogit.web.dto.EngagementDetail;
 import io.muzoo.ssc.plogit.web.dto.EngagementSummary;
@@ -63,6 +64,14 @@ public class EngagementController {
         @CurrentUser User currentUser
     ) {
         return ResponseEntity.ok(engagementService.getDetailForMember(id, currentUser));
+    }
+
+    @GetMapping("/{id}/audit")
+    public ResponseEntity<List<AuditLogEntry>> audit(
+        @PathVariable Long id,
+        @CurrentUser User currentUser
+    ) {
+        return ResponseEntity.ok(engagementService.getAuditLogForLeader(id, currentUser));
     }
 
     @PutMapping("/{id}")

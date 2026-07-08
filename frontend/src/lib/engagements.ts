@@ -31,6 +31,25 @@ export async function fetchEngagements(): Promise<EngagementSummary[]> {
   return apiFetch<EngagementSummary[]>("/engagements");
 }
 
+export interface AuditLogEntry {
+  id: number;
+  actorId: number;
+  action: string;
+  targetType: string;
+  targetId: string;
+  metadata: {
+    fromState?: string;
+    toState?: string;
+    engagementId?: number;
+    comment?: string;
+  };
+  timestamp: string;
+}
+
+export async function fetchAuditLog(engagementId: number): Promise<AuditLogEntry[]> {
+  return apiFetch<AuditLogEntry[]>(`/engagements/${engagementId}/audit`);
+}
+
 export async function fetchEngagement(id: number): Promise<EngagementDetail> {
   return apiFetch<EngagementDetail>(`/engagements/${id}`);
 }

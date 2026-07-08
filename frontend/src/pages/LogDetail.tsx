@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useLog, useTransitionLog } from "../hooks/useLogs";
+import { useLog, useLogHistory, useTransitionLog } from "../hooks/useLogs";
 import { useCurrentUser } from "../hooks/useAuth";
 import {
   formatActivityType,
@@ -16,10 +16,12 @@ export default function LogDetailPage() {
   const { data: user } = useCurrentUser();
   const { data: log, isLoading } = useLog(logId);
   const transition = useTransitionLog(Number(id));
+  const { data: history, isLoading: historyLoading } = useLogHistory(logId);
 
   const [showReject, setShowReject] = useState(false);
   const [rejectComment, setRejectComment] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [showHistory, setShowHistory] = useState(false);
 
   if (isLoading) {
     return (
@@ -283,6 +285,50 @@ export default function LogDetailPage() {
         <i className="fa-solid fa-info-circle"></i>
         Markdown rendering arrives in Slice 9
       </p>
+
+      <div className="mt-6">
+        <button
+          onClick={() => setShowHistory(!showHistory)}
+          className="text-text-muted text-sm hover:text-text-strong flex items-center gap-2 mb-3"
+        >
+          <i className={`fa-solid fa-chevron-${showHistory ? "down" : "right"}`}></i>
+          Edit history {history && history.length > 0 && `(${history.length})`}
+        </button>
+        {showHistory && (
+          <div className="bg-bg-card rounded-lg border border-border-subtle p-4">
+            {historyLoading ? (
+              <div className="flex items-center gap-2 text-text-muted text-sm">
+                <i className="fa-solid fa-circle-notch fa-spin"></i> Loading...
+              </div>
+            ) : history && history.length > 0 ? (
+              <div className="space-y-3">
+                {history.map((v) => (
+                  <div key={v.id} className="border-b border-border-subtle pb-3 last:border-0 last:pb-0">
+                    <div className="flex items-center gap-2 text-sm mb-1">
+                      <span className="font-mono text-text-strong font-medium">
+                        v{v.versionNumber}
+                      </span>
+                      <span className="text-text-faint">
+                        {new Date(v.editedAt).toLocaleString()}
+                      </span>
+                    </div>
+                    <p className="text-text-body text-sm">
+                      <span className="text-text-muted">Title:</span>{" "}
+                      {v.snapshot.title || "-"}
+                    </p>
+                    <p className="text-text-body text-sm">
+                      <span className="text-text-muted">Result:</span>{" "}
+                      {v.snapshot.result || "-"}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-text-muted text-sm">No edit history</p>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

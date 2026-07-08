@@ -185,3 +185,26 @@ export async function transitionLog(
     body: JSON.stringify(body),
   });
 }
+
+export interface LogVersionSummary {
+  id: number;
+  versionNumber: number;
+  snapshot: {
+    activityType?: string;
+    title?: string;
+    description?: string;
+    result?: string;
+    target?: string | null;
+    toolUsed?: string | null;
+    outcome?: string;
+    tags?: string[] | null;
+    codeBlock?: string | null;
+    codeLanguage?: string | null;
+  };
+  editedById: number;
+  editedAt: string;
+}
+
+export async function fetchLogHistory(logId: string): Promise<LogVersionSummary[]> {
+  return apiFetch<LogVersionSummary[]>(`/logs/${logId}/history`);
+}

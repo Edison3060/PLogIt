@@ -12,6 +12,7 @@ import io.muzoo.ssc.plogit.web.dto.LogDetail;
 import io.muzoo.ssc.plogit.web.dto.LogFilter;
 import io.muzoo.ssc.plogit.web.dto.LogSummary;
 import io.muzoo.ssc.plogit.web.dto.LogUpdateRequest;
+import io.muzoo.ssc.plogit.web.dto.LogVersionSummary;
 import io.muzoo.ssc.plogit.web.dto.TransitionRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -81,6 +82,14 @@ public class LogController {
         @CurrentUser User currentUser
     ) {
         return ResponseEntity.ok(logService.findDetailByIdAndAssertMember(logId, currentUser));
+    }
+
+    @GetMapping("/api/logs/{logId}/history")
+    public ResponseEntity<java.util.List<LogVersionSummary>> history(
+        @PathVariable UUID logId,
+        @CurrentUser User currentUser
+    ) {
+        return ResponseEntity.ok(logService.historyFor(logId, currentUser));
     }
 
     @PutMapping("/api/logs/{logId}")
