@@ -117,11 +117,22 @@ public class AttachmentService {
             throw new NotFoundException("Attachment not found");
         }
 
+        return readFile(attachment);
+    }
+
+    @Transactional(readOnly = true)
+    public List<AttachmentFile> loadImagesForLog(LogEntry log) {
+        return attachmentRepository.findByLogOrderByUploadedAtDesc(log).stream()
+            .filter(a -> a.getMimeType() != null && a.getMimeType().startsWith("image/"))
+            .map(this::readFile)
+            .toList();
+    }
+
+    private AttachmentFile readFile(Attachment attachment) {
         Path path = storageDir.resolve(attachment.getStoragePath());
         if (!Files.exists(path)) {
             throw new NotFoundException("File not found on disk");
         }
-
         try {
             return new AttachmentFile(
                 attachment.getFilename(),

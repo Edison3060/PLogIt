@@ -107,3 +107,42 @@ export async function generateJoinCode(engagementId: number): Promise<{ code: st
     method: "POST",
   });
 }
+
+export type ExportFormat = "PDF" | "JSON" | "CSV";
+
+export interface ExportResult {
+  blob: Blob;
+  filename: string;
+}
+
+export async function exportEngagement(
+  engagementId: number,
+  format: ExportFormat,
+  includeExported: boolean
+): Promise<ExportResult> {
+  const csrfMatch = document.cookie.match(/XSRF-TOKEN=([^;]+)/);
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (csrfMatch) {
+    headers["X-XSRF-TOKEN"] = decodeURIComponent(csrfMatch[1]);
+  }
+
+  const res = await fetch(`/api/engagements/${engagementId}/export`, {
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: JSON.stringify({ format, includeExported }),
+  });
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.message || `Export failed: ${res.status}`);
+  }
+
+  const blob = await res.blob();
+  const disposition = res.headers.get("Content-Disposition") || "";
+  const match = disposition.match(/filename="?([^";]+)"?/i);
+  const filename = match ? match[1] : `engagement-${engagementId}-export`;
+  return { blob, filename };
+}
