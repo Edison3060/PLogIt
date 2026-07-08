@@ -9,9 +9,11 @@ import io.muzoo.ssc.plogit.domain.LogEntry;
 import io.muzoo.ssc.plogit.domain.Outcome;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
+import io.muzoo.ssc.plogit.repository.AuditLogRepository;
 import io.muzoo.ssc.plogit.repository.EngagementMemberRepository;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.repository.LogEntryRepository;
+import io.muzoo.ssc.plogit.repository.LogVersionRepository;
 import io.muzoo.ssc.plogit.repository.UserRepository;
 import io.muzoo.ssc.plogit.security.AuthenticatedUser;
 import io.muzoo.ssc.plogit.security.PlogitUserDetailsService;
@@ -44,6 +46,12 @@ public abstract class IntegrationTestBase {
     protected LogEntryRepository logRepository;
 
     @Autowired
+    protected LogVersionRepository versionRepository;
+
+    @Autowired
+    protected AuditLogRepository auditLogRepository;
+
+    @Autowired
     protected PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -51,6 +59,8 @@ public abstract class IntegrationTestBase {
 
     @BeforeEach
     void wipeData() {
+        versionRepository.deleteAll();
+        auditLogRepository.deleteAll();
         logRepository.deleteAll();
         memberRepository.deleteAll();
         engagementRepository.deleteAll();

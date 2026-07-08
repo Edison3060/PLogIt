@@ -1,6 +1,7 @@
 package io.muzoo.ssc.plogit.service;
 
 import io.muzoo.ssc.plogit.domain.LogEntry;
+import io.muzoo.ssc.plogit.domain.LogTransitionedEvent;
 import io.muzoo.ssc.plogit.domain.ReviewAction;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
@@ -11,6 +12,7 @@ import io.muzoo.ssc.plogit.repository.LogEntryRepository;
 import io.muzoo.ssc.plogit.web.dto.LogDetail;
 import io.muzoo.ssc.plogit.web.dto.TransitionRequest;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,10 +25,16 @@ public class LogReviewService {
 
     private final LogEntryRepository logRepository;
     private final MembershipService membershipService;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public LogReviewService(LogEntryRepository logRepository, MembershipService membershipService) {
+    public LogReviewService(
+        LogEntryRepository logRepository,
+        MembershipService membershipService,
+        ApplicationEventPublisher eventPublisher
+    ) {
         this.logRepository = logRepository;
         this.membershipService = membershipService;
+        this.eventPublisher = eventPublisher;
     }
 
     public LogDetail transition(UUID logId, TransitionRequest request, User actor) {
@@ -40,12 +48,24 @@ public class LogReviewService {
 
         TransitionContext ctx = new TransitionContext(isAuthor, isLeader, request.comment());
         ReviewStateBehavior behavior = ReviewStates.of(log.getReviewState());
+        ReviewState fromState = log.getReviewState();
         ReviewState next = behavior.transition(request.action(), ctx);
 
         applySideEffects(log, request.action(), next, actor, request.comment());
         log.setReviewState(next);
+        LogEntry saved = logRepository.save(log);
 
-        return LogDetail.from(logRepository.save(log));
+        eventPublisher.publishEvent(new LogTransitionedEvent(
+            actor.getId(),
+            saved.getId(),
+            saved.getEngagement().getId(),
+            request.action().name(),
+            fromState.name(),
+            next.name(),
+            request.comment()
+        ));
+
+        return LogDetail.from(saved);
     }
 
     private void applySideEffects(LogEntry log, ReviewAction action, ReviewState next, User actor, String comment) {

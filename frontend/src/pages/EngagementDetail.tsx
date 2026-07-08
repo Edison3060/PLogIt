@@ -8,8 +8,10 @@ import {
   transferLeadership,
   generateJoinCode,
 } from "../lib/engagements";
+import { useAuditLog } from "../hooks/useEngagements";
+import { formatEnum } from "../lib/logs";
 
-type Tab = "overview" | "scope" | "team";
+type Tab = "overview" | "scope" | "team" | "audit";
 
 export default function EngagementDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -27,6 +29,12 @@ export default function EngagementDetailPage() {
     queryFn: () => fetchEngagement(Number(id)),
     enabled: !!id,
   });
+
+  const engagementId = engagement?.id;
+  const isLeaderDerived = engagement?.role === "LEADER";
+  const { data: auditLog, isLoading: auditLoading } = useAuditLog(
+    isLeaderDerived ? engagementId : undefined
+  );
 
   const [editName, setEditName] = useState("");
   const [editDesc, setEditDesc] = useState("");
@@ -208,6 +216,18 @@ export default function EngagementDetailPage() {
             {t === "scope" ? "Scope & RoE" : t}
           </button>
         ))}
+        {isLeader && (
+          <button
+            onClick={() => setTab("audit")}
+            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+              tab === "audit"
+                ? "border-primary text-primary"
+                : "border-transparent text-text-muted hover:text-text-strong"
+            }`}
+          >
+            Audit
+          </button>
+        )}
       </div>
 
       {editing ? (
@@ -411,6 +431,51 @@ export default function EngagementDetailPage() {
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {tab === "audit" && isLeader && (
+            <div className="bg-bg-card rounded-lg border border-border-subtle p-6">
+              <h2 className="font-medium text-text-strong mb-3 flex items-center gap-2">
+                <i className="fa-solid fa-shield-halved text-text-muted"></i> Audit log
+              </h2>
+              {auditLoading ? (
+                <div className="flex items-center gap-2 text-text-muted text-sm">
+                  <i className="fa-solid fa-circle-notch fa-spin"></i> Loading...
+                </div>
+              ) : auditLog && auditLog.length > 0 ? (
+                <ul className="divide-y divide-border-subtle">
+                  {auditLog.map((entry) => (
+                    <li key={entry.id} className="py-3 flex items-center gap-3">
+                      <i className={`fa-solid ${
+                        entry.action === "APPROVE" ? "fa-check text-green-500" :
+                        entry.action === "REJECT" ? "fa-arrow-rotate-left text-red-500" :
+                        "fa-paper-plane text-amber-500"
+                      }`}></i>
+                      <div className="flex-1">
+                        <span className="text-text-strong text-sm font-medium">
+                          {formatEnum(entry.action)}
+                        </span>
+                        {entry.metadata.fromState && entry.metadata.toState && (
+                          <span className="text-text-muted text-sm ml-2">
+                            {formatEnum(entry.metadata.fromState)} → {formatEnum(entry.metadata.toState)}
+                          </span>
+                        )}
+                        {entry.metadata.comment && (
+                          <p className="text-text-muted text-sm italic">
+                            "{entry.metadata.comment}"
+                          </p>
+                        )}
+                      </div>
+                      <span className="text-text-faint text-xs font-mono whitespace-nowrap">
+                        {new Date(entry.timestamp).toLocaleString()}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-text-muted text-sm">No audit events yet</p>
+              )}
             </div>
           )}
         </>

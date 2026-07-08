@@ -5,8 +5,10 @@ import io.muzoo.ssc.plogit.domain.EngagementMember;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.EngagementStatus;
 import io.muzoo.ssc.plogit.domain.User;
+import io.muzoo.ssc.plogit.repository.AuditLogRepository;
 import io.muzoo.ssc.plogit.repository.EngagementMemberRepository;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
+import io.muzoo.ssc.plogit.web.dto.AuditLogEntry;
 import io.muzoo.ssc.plogit.web.dto.CreateEngagementRequest;
 import io.muzoo.ssc.plogit.web.dto.EngagementDetail;
 import io.muzoo.ssc.plogit.web.dto.EngagementSummary;
@@ -25,17 +27,20 @@ public class EngagementService {
     private final EngagementMemberRepository memberRepository;
     private final MembershipService membershipService;
     private final JoinCodeService joinCodeService;
+    private final AuditLogRepository auditLogRepository;
 
     public EngagementService(
         EngagementRepository engagementRepository,
         EngagementMemberRepository memberRepository,
         MembershipService membershipService,
-        JoinCodeService joinCodeService
+        JoinCodeService joinCodeService,
+        AuditLogRepository auditLogRepository
     ) {
         this.engagementRepository = engagementRepository;
         this.memberRepository = memberRepository;
         this.membershipService = membershipService;
         this.joinCodeService = joinCodeService;
+        this.auditLogRepository = auditLogRepository;
     }
 
     @Transactional(readOnly = true)
@@ -110,6 +115,16 @@ public class EngagementService {
         membershipService.addMember(engagement, user, EngagementRole.MEMBER, "code");
         engagementRepository.save(engagement);
         return EngagementSummary.from(engagement, "MEMBER");
+    }
+
+    @Transactional(readOnly = true)
+    public List<AuditLogEntry> getAuditLogForLeader(Long engagementId, User viewer) {
+        Engagement engagement = engagementRepository.findById(engagementId)
+            .orElseThrow(() -> new NotFoundException("Engagement not found"));
+        membershipService.assertLeader(engagement, viewer);
+        return auditLogRepository.findByEngagementId(String.valueOf(engagementId), 200).stream()
+            .map(AuditLogEntry::from)
+            .toList();
     }
 
     @Transactional(readOnly = true)

@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   fetchLogs,
   fetchLog,
+  fetchLogHistory,
   createLog,
   updateLog,
   transitionLog,
@@ -31,6 +32,14 @@ export function useLog(logId: string | undefined) {
   return useQuery({
     queryKey: ["log", logId],
     queryFn: () => fetchLog(logId!),
+    enabled: !!logId,
+  });
+}
+
+export function useLogHistory(logId: string | undefined) {
+  return useQuery({
+    queryKey: ["log-history", logId],
+    queryFn: () => fetchLogHistory(logId!),
     enabled: !!logId,
   });
 }
