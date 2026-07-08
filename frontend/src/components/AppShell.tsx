@@ -20,7 +20,7 @@ function pageTitle(pathname: string): string {
 }
 
 export default function AppShell({ children }: AppShellProps) {
-  const [dark, setDark] = useState(
+  const [dark] = useState(
     document.documentElement.classList.contains("dark")
   );
   const { data: user } = useCurrentUser();
@@ -58,7 +58,7 @@ export default function AppShell({ children }: AppShellProps) {
     { label: "Settings", icon: "fa-gear", path: "/settings", active: location.pathname === "/settings" },
   ];
 
-  const engagementNavItems: any[] = [];
+  const engagementNavItems: { label: string; icon: string; path: string; active: boolean }[] = [];
   if (currentEngagement) {
     engagementNavItems.push({
       label: currentEngagement.name,
