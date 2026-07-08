@@ -276,6 +276,74 @@ class ReviewTransitionIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void leaderCanExportApproved() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.APPROVED);
+
+        mockMvc.perform(post(transitionUri(log.getId()))
+                .with(asUser(leader))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"action":"EXPORT"}
+                    """))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.reviewState").value("EXPORTED"));
+    }
+
+    @Test
+    void memberCannotExportApproved() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        LogEntry log = createLog(engagement, author, ReviewState.APPROVED);
+
+        mockMvc.perform(post(transitionUri(log.getId()))
+                .with(asUser(author))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"action":"EXPORT"}
+                    """))
+            .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void cannotExportFromSubmitted() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.SUBMITTED);
+
+        mockMvc.perform(post(transitionUri(log.getId()))
+                .with(asUser(leader))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"action":"EXPORT"}
+                    """))
+            .andExpect(status().isConflict());
+    }
+
+    @Test
+    void leaderCanReExportExported() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.EXPORTED);
+
+        mockMvc.perform(post(transitionUri(log.getId()))
+                .with(asUser(leader))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"action":"EXPORT"}
+                    """))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.reviewState").value("EXPORTED"));
+    }
+
+    @Test
     void resubmitClearsRejectionComment() throws Exception {
         User leader = createUser("leader@test.local");
         User author = createUser("author@test.local");

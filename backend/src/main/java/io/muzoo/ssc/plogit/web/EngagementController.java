@@ -10,8 +10,13 @@ import io.muzoo.ssc.plogit.web.dto.AuditLogEntry;
 import io.muzoo.ssc.plogit.web.dto.CreateEngagementRequest;
 import io.muzoo.ssc.plogit.web.dto.EngagementDetail;
 import io.muzoo.ssc.plogit.web.dto.EngagementSummary;
+import io.muzoo.ssc.plogit.web.dto.ExportRequest;
 import io.muzoo.ssc.plogit.web.dto.UpdateEngagementRequest;
 import jakarta.validation.Valid;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,15 +36,18 @@ public class EngagementController {
     private final EngagementService engagementService;
     private final MembershipService membershipService;
     private final EngagementRepository engagementRepository;
+    private final io.muzoo.ssc.plogit.service.ExportService exportService;
 
     public EngagementController(
         EngagementService engagementService,
         MembershipService membershipService,
-        EngagementRepository engagementRepository
+        EngagementRepository engagementRepository,
+        io.muzoo.ssc.plogit.service.ExportService exportService
     ) {
         this.engagementService = engagementService;
         this.membershipService = membershipService;
         this.engagementRepository = engagementRepository;
+        this.exportService = exportService;
     }
 
     @GetMapping
@@ -72,6 +80,29 @@ public class EngagementController {
         @CurrentUser User currentUser
     ) {
         return ResponseEntity.ok(engagementService.getAuditLogForLeader(id, currentUser));
+    }
+
+    @PostMapping("/{id}/export")
+    public ResponseEntity<ByteArrayResource> export(
+        @PathVariable Long id,
+        @Valid @RequestBody ExportRequest request,
+        @CurrentUser User currentUser
+    ) {
+        io.muzoo.ssc.plogit.service.export.ReportOutput output = exportService.export(id, request, currentUser);
+
+        ContentDisposition disposition = ContentDisposition.attachment()
+            .filename(output.filename())
+            .build();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDisposition(disposition);
+        headers.setContentType(MediaType.parseMediaType(output.contentType()));
+
+        ByteArrayResource resource = new ByteArrayResource(output.content());
+        return ResponseEntity.ok()
+            .headers(headers)
+            .contentLength(output.content().length)
+            .body(resource);
     }
 
     @PutMapping("/{id}")
