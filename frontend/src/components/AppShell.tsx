@@ -9,6 +9,8 @@ interface AppShellProps {
 
 function pageTitle(pathname: string): string {
   if (pathname === "/") return "Dashboard";
+  if (pathname === "/engagements") return "Manage Engagements";
+  if (pathname === "/settings") return "Settings";
   if (pathname.includes("/logs/new")) return "New Log";
   if (pathname.includes("/logs/") && pathname.includes("/edit")) return "Edit Log";
   if (pathname.includes("/logs/")) return "Log Detail";
@@ -50,17 +52,21 @@ export default function AppShell({ children }: AppShellProps) {
     return engagements?.find((e) => e.id === id) ?? null;
   })();
 
-  const navItems = [
+  const globalNavItems = [
     { label: "Dashboard", icon: "fa-gauge-high", path: "/", active: location.pathname === "/" },
+    { label: "Engagements", icon: "fa-folder-tree", path: "/engagements", active: location.pathname === "/engagements" },
+    { label: "Settings", icon: "fa-gear", path: "/settings", active: location.pathname === "/settings" },
   ];
+
+  const engagementNavItems: any[] = [];
   if (currentEngagement) {
-    navItems.push({
+    engagementNavItems.push({
       label: currentEngagement.name,
       icon: "fa-folder",
       path: `/engagements/${currentEngagement.id}`,
       active: location.pathname === `/engagements/${currentEngagement.id}`,
     });
-    navItems.push({
+    engagementNavItems.push({
       label: "Activity Logs",
       icon: "fa-list-check",
       path: `/engagements/${currentEngagement.id}/logs`,
@@ -99,7 +105,7 @@ export default function AppShell({ children }: AppShellProps) {
           <p className="px-3 text-[10px] uppercase tracking-wider text-white/40 mb-1">
             Menu
           </p>
-          {navItems.map((item) => (
+          {globalNavItems.map((item) => (
             <button
               key={item.path}
               onClick={() => navigate(item.path)}
@@ -113,17 +119,31 @@ export default function AppShell({ children }: AppShellProps) {
               <span className="truncate">{item.label}</span>
             </button>
           ))}
+
+          {engagementNavItems.length > 0 && (
+            <>
+              <p className="px-3 text-[10px] uppercase tracking-wider text-white/40 mt-4 mb-1">
+                Current Engagement
+              </p>
+              {engagementNavItems.map((item) => (
+                <button
+                  key={item.path}
+                  onClick={() => navigate(item.path)}
+                  className={`flex items-center gap-3 px-3 py-2 rounded text-sm transition-colors ${
+                    item.active
+                      ? "bg-primary text-white font-medium"
+                      : "text-white/70 hover:bg-white/10 hover:text-white"
+                  }`}
+                >
+                  <i className={`fa-solid ${item.icon} w-4 text-center`}></i>
+                  <span className="truncate">{item.label}</span>
+                </button>
+              ))}
+            </>
+          )}
         </nav>
 
         <div className="px-3 py-4 border-t border-white/10 flex flex-col gap-1">
-          <button
-            onClick={() => setDark(!dark)}
-            className="flex items-center gap-3 px-3 py-2 rounded text-sm text-white/70 hover:bg-white/10 hover:text-white transition-colors w-full"
-            title={dark ? "Switch to light" : "Switch to dark"}
-          >
-            <i className={`fa-solid ${dark ? "fa-sun" : "fa-moon"} w-4 text-center`}></i>
-            <span>{dark ? "Light mode" : "Dark mode"}</span>
-          </button>
 
           {user && (
             <>

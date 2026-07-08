@@ -8,6 +8,8 @@ import LogDetailPage from "./pages/LogDetail";
 import LogForm from "./pages/LogForm";
 import AppShell from "./components/AppShell";
 import ProtectedRoute from "./components/ProtectedRoute";
+import EngagementsPage from "./pages/EngagementsPage";
+import Settings from "./pages/Settings";
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
             <AppShell>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/engagements" element={<EngagementsPage />} />
+                <Route path="/settings" element={<Settings />} />
                 <Route path="/engagements/:id" element={<EngagementDetailPage />} />
                 <Route path="/engagements/:id/logs" element={<LogBoard />} />
                 <Route path="/engagements/:id/logs/new" element={<LogForm />} />
