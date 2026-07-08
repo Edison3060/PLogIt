@@ -26,15 +26,18 @@ public class LogReviewService {
     private final LogEntryRepository logRepository;
     private final MembershipService membershipService;
     private final ApplicationEventPublisher eventPublisher;
+    private final MarkdownService markdownService;
 
     public LogReviewService(
         LogEntryRepository logRepository,
         MembershipService membershipService,
-        ApplicationEventPublisher eventPublisher
+        ApplicationEventPublisher eventPublisher,
+        MarkdownService markdownService
     ) {
         this.logRepository = logRepository;
         this.membershipService = membershipService;
         this.eventPublisher = eventPublisher;
+        this.markdownService = markdownService;
     }
 
     public LogDetail transition(UUID logId, TransitionRequest request, User actor) {
@@ -65,7 +68,7 @@ public class LogReviewService {
             request.comment()
         ));
 
-        return LogDetail.from(saved);
+        return LogDetail.from(saved, markdownService);
     }
 
     private void applySideEffects(LogEntry log, ReviewAction action, ReviewState next, User actor, String comment) {

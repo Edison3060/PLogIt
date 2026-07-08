@@ -9,4 +9,6 @@ import java.util.List;
 public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
 
     List<Attachment> findByLog(LogEntry log);
+
+    List<Attachment> findByLogOrderByUploadedAtDesc(LogEntry log);
 }

@@ -31,17 +31,20 @@ public class LogService {
     private final EngagementService engagementService;
     private final MembershipService membershipService;
     private final LogVersionService versionService;
+    private final MarkdownService markdownService;
 
     public LogService(
         LogEntryRepository logRepository,
         EngagementService engagementService,
         MembershipService membershipService,
-        LogVersionService versionService
+        LogVersionService versionService,
+        MarkdownService markdownService
     ) {
         this.logRepository = logRepository;
         this.engagementService = engagementService;
         this.membershipService = membershipService;
         this.versionService = versionService;
+        this.markdownService = markdownService;
     }
 
     public LogDetail create(Long engagementId, LogCreateRequest request, User author) {
@@ -66,7 +69,7 @@ public class LogService {
 
         LogEntry saved = logRepository.save(log);
         versionService.snapshot(saved, author.getId());
-        return LogDetail.from(saved);
+        return LogDetail.from(saved, markdownService);
     }
 
     @Transactional(readOnly = true)
@@ -100,7 +103,7 @@ public class LogService {
         LogEntry log = logRepository.findById(logId)
             .orElseThrow(() -> new NotFoundException("Log not found"));
         membershipService.assertMember(log.getEngagement(), viewer);
-        return LogDetail.from(log);
+        return LogDetail.from(log, markdownService);
     }
 
     @Transactional(readOnly = true)
@@ -162,6 +165,6 @@ public class LogService {
 
         LogEntry saved = logRepository.save(log);
         versionService.snapshot(saved, editor.getId());
-        return LogDetail.from(saved);
+        return LogDetail.from(saved, markdownService);
     }
 }

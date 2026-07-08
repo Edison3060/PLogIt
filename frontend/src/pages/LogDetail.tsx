@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLog, useLogHistory, useTransitionLog } from "../hooks/useLogs";
 import { useCurrentUser } from "../hooks/useAuth";
@@ -7,6 +7,11 @@ import {
   formatEnum,
   outcomeBadgeClass,
   reviewStateBadgeClass,
+  fetchAttachments,
+  uploadAttachment,
+  attachmentUrl,
+  formatFileSize,
+  type Attachment,
 } from "../lib/logs";
 import type { ReviewAction } from "../lib/logs";
 
@@ -22,6 +27,38 @@ export default function LogDetailPage() {
   const [rejectComment, setRejectComment] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [showHistory, setShowHistory] = useState(false);
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const loadAttachments = async (lid: string) => {
+    try {
+      const list = await fetchAttachments(lid);
+      setAttachments(list);
+    } catch {
+      setAttachments([]);
+    }
+  };
+
+  useEffect(() => {
+    if (logId) loadAttachments(logId);
+  }, [logId]);
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !logId) return;
+    setUploading(true);
+    setError(null);
+    try {
+      await uploadAttachment(logId, file);
+      await loadAttachments(logId);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
 
   if (isLoading) {
     return (
@@ -259,14 +296,20 @@ export default function LogDetailPage() {
         <h2 className="font-medium text-text-strong mb-2 flex items-center gap-2">
           <i className="fa-solid fa-align-left text-text-muted"></i> Description
         </h2>
-        <p className="text-text-body whitespace-pre-wrap">{log.description}</p>
+        <div
+          className="text-text-body prose prose-sm dark:prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: log.descriptionHtml || log.description }}
+        />
       </div>
 
       <div className="bg-bg-card rounded-lg border border-border-subtle p-6 mb-4">
         <h2 className="font-medium text-text-strong mb-2 flex items-center gap-2">
           <i className="fa-solid fa-clipboard-check text-text-muted"></i> Result
         </h2>
-        <p className="text-text-body whitespace-pre-wrap">{log.result}</p>
+        <div
+          className="text-text-body prose prose-sm dark:prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: log.resultHtml || log.result }}
+        />
       </div>
 
       {log.codeBlock && (
@@ -281,10 +324,68 @@ export default function LogDetailPage() {
         </div>
       )}
 
-      <p className="text-text-muted text-sm mt-6 flex items-center gap-2">
-        <i className="fa-solid fa-info-circle"></i>
-        Markdown rendering arrives in Slice 9
-      </p>
+      <div className="mt-6">
+        <h2 className="font-medium text-text-strong mb-3 flex items-center gap-2">
+          <i className="fa-solid fa-paperclip text-text-muted"></i> Attachments
+        </h2>
+        <div className="bg-bg-card rounded-lg border border-border-subtle p-4">
+          <div className="flex flex-wrap gap-3 mb-3">
+            {attachments.length > 0 ? (
+              attachments.map((att) => (
+                <div
+                  key={att.id}
+                  className="relative group w-32 h-32 rounded-lg border border-border-subtle overflow-hidden bg-bg-inset"
+                >
+                  <img
+                    src={attachmentUrl(log.id, att.id)}
+                    alt={att.filename}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 p-1">
+                    <a
+                      href={attachmentUrl(log.id, att.id)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white text-xs flex items-center gap-1 hover:text-primary-light"
+                    >
+                      <i className="fa-solid fa-expand"></i> View
+                    </a>
+                    <span className="text-white/70 text-[10px] truncate w-full text-center" title={att.filename}>
+                      {att.filename}
+                    </span>
+                    <span className="text-white/50 text-[10px]">{formatFileSize(att.size)}</span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-text-muted text-sm">No attachments yet</p>
+            )}
+          </div>
+          {canEdit && (
+            <div>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/png,image/jpeg,image/gif,image/webp"
+                onChange={handleUpload}
+                disabled={uploading}
+                className="hidden"
+                id="attachment-upload"
+              />
+              <label
+                htmlFor="attachment-upload"
+                className="border border-border-default rounded px-3 py-1.5 text-sm hover:bg-bg-inset flex items-center gap-2 cursor-pointer w-fit"
+              >
+                {uploading ? (
+                  <><i className="fa-solid fa-circle-notch fa-spin"></i> Uploading...</>
+                ) : (
+                  <><i className="fa-solid fa-upload"></i> Upload image</>
+                )}
+              </label>
+            </div>
+          )}
+        </div>
+      </div>
 
       <div className="mt-6">
         <button
