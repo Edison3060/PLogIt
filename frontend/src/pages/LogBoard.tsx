@@ -14,6 +14,9 @@ import {
 
 const PAGE_SIZE = 10;
 
+const selectClass =
+  "bg-bg-canvas border border-border-default rounded-lg px-3 py-2 text-text-strong text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors cursor-pointer";
+
 export default function LogBoard() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -61,19 +64,17 @@ export default function LogBoard() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <button
-        onClick={() => navigate(`/engagements/${engagementId}`)}
-        className="text-text-muted text-sm mb-4 hover:text-text-strong flex items-center gap-2"
-      >
-        <i className="fa-solid fa-arrow-left"></i> Back to engagement
-      </button>
-
+    <div className="max-w-7xl mx-auto p-6 md:p-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-text-strong flex items-center gap-3">
-          <i className="fa-solid fa-list-check text-text-muted"></i>
-          Logs
-        </h1>
+        <div>
+          <h1 className="text-2xl font-bold text-text-strong flex items-center gap-3">
+            <i className="fa-solid fa-list-check text-primary"></i>
+            Activity Logs
+          </h1>
+          <p className="text-text-muted text-sm mt-1">
+            Capture and track engagement activity.
+          </p>
+        </div>
         <div className="flex items-center gap-2">
           {isLeader && (
             <button
@@ -83,10 +84,10 @@ export default function LogBoard() {
                   inReviewQueue ? "" : "SUBMITTED"
                 )
               }
-              className={`rounded px-4 py-2 text-sm font-medium flex items-center gap-2 ${
+              className={`rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 transition-colors ${
                 inReviewQueue
-                  ? "bg-amber-100 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-800"
-                  : "bg-bg-inset text-text-strong hover:bg-border-default border border-border-default"
+                  ? "bg-warning-soft text-warning border border-warning/40"
+                  : "bg-bg-inset text-text-strong hover:bg-border-subtle border border-border-default"
               }`}
             >
               <i className="fa-solid fa-clipboard-check"></i> Review Queue
@@ -94,28 +95,28 @@ export default function LogBoard() {
           )}
           <button
             onClick={() => navigate(`/engagements/${engagementId}/logs/new`)}
-            className="bg-primary text-white rounded px-4 py-2 text-sm font-medium hover:bg-primary-hover flex items-center gap-2"
+            className="bg-primary text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-primary-hover flex items-center gap-2 transition-colors"
           >
             <i className="fa-solid fa-plus"></i> New Log
           </button>
         </div>
       </div>
 
-      <div className="bg-bg-card rounded-lg border border-border-subtle p-4 mb-4 flex flex-wrap gap-3 items-center">
-        <div className="relative flex-1 min-w-[200px]">
-          <i className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-text-faint text-sm"></i>
+      <div className="bg-bg-card border border-border-default rounded-xl shadow-sm p-4 mb-6 flex flex-wrap gap-3 items-center">
+        <div className="relative flex-1 min-w-[220px]">
+          <i className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-text-faint text-sm pointer-events-none"></i>
           <input
             type="text"
             value={search}
             onChange={(e) => onFilterChange(setSearch, e.target.value)}
             placeholder="Search title or description..."
-            className="bg-bg-canvas border border-border-default rounded pl-9 pr-3 py-2 w-full text-text-strong focus:outline-none focus:border-primary text-sm"
+            className="bg-bg-canvas border border-border-default rounded-lg pl-9 pr-3 py-2 w-full text-text-strong text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
           />
         </div>
         <select
           value={activityType}
           onChange={(e) => onFilterChange(setActivityType, e.target.value)}
-          className="bg-bg-canvas border border-border-default rounded px-3 py-2 text-text-strong focus:outline-none focus:border-primary text-sm"
+          className={selectClass}
         >
           <option value="">All types</option>
           {ACTIVITY_TYPES.map((t) => (
@@ -127,7 +128,7 @@ export default function LogBoard() {
         <select
           value={outcome}
           onChange={(e) => onFilterChange(setOutcome, e.target.value)}
-          className="bg-bg-canvas border border-border-default rounded px-3 py-2 text-text-strong focus:outline-none focus:border-primary text-sm"
+          className={selectClass}
         >
           <option value="">All outcomes</option>
           {OUTCOMES.map((o) => (
@@ -139,7 +140,7 @@ export default function LogBoard() {
         <select
           value={reviewState}
           onChange={(e) => onFilterChange(setReviewState, e.target.value)}
-          className="bg-bg-canvas border border-border-default rounded px-3 py-2 text-text-strong focus:outline-none focus:border-primary text-sm"
+          className={selectClass}
         >
           <option value="">All states</option>
           {REVIEW_STATES.map((s) => (
@@ -151,7 +152,7 @@ export default function LogBoard() {
         {hasFilters && (
           <button
             onClick={resetFilters}
-            className="text-text-muted text-sm hover:text-text-strong flex items-center gap-1 px-2"
+            className="text-text-muted text-sm hover:text-danger flex items-center gap-1 px-2 transition-colors"
           >
             <i className="fa-solid fa-xmark"></i> Clear
           </button>
@@ -159,74 +160,76 @@ export default function LogBoard() {
       </div>
 
       {isLoading ? (
-        <div className="flex items-center gap-2 text-text-muted">
-          <i className="fa-solid fa-circle-notch fa-spin"></i>
-          <span>Loading logs...</span>
+        <div className="text-center py-16 text-text-muted">
+          <i className="fa-solid fa-circle-notch fa-spin text-3xl mb-3"></i>
+          <p>Loading logs...</p>
         </div>
       ) : data && data.items.length > 0 ? (
         <>
-          <div className="bg-bg-card rounded-lg border border-border-subtle overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-bg-inset border-b border-border-subtle">
-                <tr className="text-left text-xs text-text-muted uppercase">
-                  <th className="px-4 py-3 font-medium">Timestamp</th>
-                  <th className="px-4 py-3 font-medium">Author</th>
-                  <th className="px-4 py-3 font-medium">Title</th>
-                  <th className="px-4 py-3 font-medium">Type</th>
-                  <th className="px-4 py-3 font-medium">Target</th>
-                  <th className="px-4 py-3 font-medium">Outcome</th>
-                  <th className="px-4 py-3 font-medium">State</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border-subtle">
-                {data.items.map((log) => (
-                  <tr
-                    key={log.id}
-                    onClick={() =>
-                      navigate(`/engagements/${engagementId}/logs/${log.id}`)
-                    }
-                    className="hover:bg-bg-inset cursor-pointer transition-colors"
-                  >
-                    <td className="px-4 py-3 text-text-muted text-sm font-mono whitespace-nowrap">
-                      {new Date(log.createdAt).toLocaleString()}
-                    </td>
-                    <td className="px-4 py-3 text-text-strong text-sm">
-                      {log.authorDisplayName}
-                    </td>
-                    <td className="px-4 py-3 text-text-strong text-sm font-medium">
-                      {log.title}
-                    </td>
-                    <td className="px-4 py-3 text-text-body text-sm">
-                      {formatActivityType(log.activityType)}
-                    </td>
-                    <td className="px-4 py-3 text-text-body text-sm font-mono">
-                      {log.target || "-"}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`text-xs px-2 py-1 rounded font-mono ${outcomeBadgeClass(
-                          log.outcome
-                        )}`}
-                      >
-                        {formatEnum(log.outcome)}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`text-xs px-2 py-1 rounded font-mono ${reviewStateBadgeClass(
-                          log.reviewState
-                        )}`}
-                      >
-                        {formatEnum(log.reviewState)}
-                      </span>
-                    </td>
+          <div className="bg-bg-card rounded-xl border border-border-default shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-bg-inset border-b border-border-default">
+                  <tr className="text-left text-[11px] text-text-muted uppercase tracking-wider">
+                    <th className="px-4 py-3 font-semibold">Timestamp</th>
+                    <th className="px-4 py-3 font-semibold">Author</th>
+                    <th className="px-4 py-3 font-semibold">Title</th>
+                    <th className="px-4 py-3 font-semibold">Type</th>
+                    <th className="px-4 py-3 font-semibold">Target</th>
+                    <th className="px-4 py-3 font-semibold">Outcome</th>
+                    <th className="px-4 py-3 font-semibold">State</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-border-subtle">
+                  {data.items.map((log) => (
+                    <tr
+                      key={log.id}
+                      onClick={() =>
+                        navigate(`/engagements/${engagementId}/logs/${log.id}`)
+                      }
+                      className="hover:bg-bg-inset cursor-pointer transition-colors"
+                    >
+                      <td className="px-4 py-3 text-text-muted text-xs font-mono whitespace-nowrap">
+                        {new Date(log.createdAt).toLocaleString()}
+                      </td>
+                      <td className="px-4 py-3 text-text-strong text-sm font-medium whitespace-nowrap">
+                        {log.authorDisplayName}
+                      </td>
+                      <td className="px-4 py-3 text-text-strong text-sm font-medium">
+                        {log.title}
+                      </td>
+                      <td className="px-4 py-3 text-text-body text-sm">
+                        {formatActivityType(log.activityType)}
+                      </td>
+                      <td className="px-4 py-3 text-text-body text-sm font-mono">
+                        {log.target || "-"}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide ${outcomeBadgeClass(
+                            log.outcome
+                          )}`}
+                        >
+                          {formatEnum(log.outcome)}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide ${reviewStateBadgeClass(
+                            log.reviewState
+                          )}`}
+                        >
+                          {formatEnum(log.reviewState)}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center justify-between mt-4 px-1">
             <p className="text-text-muted text-sm">
               {isFetching ? (
                 <span className="flex items-center gap-2">
@@ -244,17 +247,17 @@ export default function LogBoard() {
                 <button
                   onClick={() => setPage(Math.max(0, page - 1))}
                   disabled={page === 0}
-                  className="border border-border-default rounded px-3 py-1 text-sm text-text-strong hover:bg-bg-inset disabled:opacity-50 flex items-center gap-1"
+                  className="border border-border-default rounded-lg px-3 py-1.5 text-sm text-text-strong hover:bg-bg-inset disabled:opacity-50 flex items-center gap-1 transition-colors"
                 >
                   <i className="fa-solid fa-chevron-left"></i> Prev
                 </button>
-                <span className="text-text-muted text-sm font-mono">
+                <span className="text-text-muted text-sm font-mono px-2">
                   {page + 1} / {totalPages}
                 </span>
                 <button
                   onClick={() => setPage(Math.min(totalPages - 1, page + 1))}
                   disabled={page >= totalPages - 1}
-                  className="border border-border-default rounded px-3 py-1 text-sm text-text-strong hover:bg-bg-inset disabled:opacity-50 flex items-center gap-1"
+                  className="border border-border-default rounded-lg px-3 py-1.5 text-sm text-text-strong hover:bg-bg-inset disabled:opacity-50 flex items-center gap-1 transition-colors"
                 >
                   Next <i className="fa-solid fa-chevron-right"></i>
                 </button>
@@ -263,16 +266,16 @@ export default function LogBoard() {
           </div>
         </>
       ) : (
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-12 text-center">
-          <i className="fa-solid fa-clipboard text-text-faint text-3xl mb-3"></i>
-          <p className="text-text-muted">
+        <div className="bg-bg-card border border-dashed border-border-default rounded-xl p-12 text-center">
+          <div className="w-16 h-16 mx-auto rounded-full bg-bg-inset flex items-center justify-center mb-4">
+            <i className="fa-solid fa-clipboard text-text-faint text-2xl"></i>
+          </div>
+          <h3 className="text-lg font-bold text-text-strong mb-1">
             {hasFilters ? "No logs match your filters" : "No logs yet"}
+          </h3>
+          <p className="text-text-muted text-sm">
+            {hasFilters ? "Try adjusting or clearing your filters." : "Create one to get started."}
           </p>
-          {!hasFilters && (
-            <p className="text-text-muted text-sm mt-1">
-              Create one to get started
-            </p>
-          )}
         </div>
       )}
     </div>

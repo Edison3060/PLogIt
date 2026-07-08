@@ -30,6 +30,18 @@ export default {
           press: "var(--primary-press)",
           soft: "var(--primary-soft)",
         },
+        success: {
+          DEFAULT: "var(--success)",
+          soft: "var(--success-soft)",
+        },
+        danger: {
+          DEFAULT: "var(--danger)",
+          soft: "var(--danger-soft)",
+        },
+        warning: {
+          DEFAULT: "var(--warning)",
+          soft: "var(--warning-soft)",
+        },
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],

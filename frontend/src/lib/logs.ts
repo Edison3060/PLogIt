@@ -96,9 +96,9 @@ export function formatEnum(value: string): string {
 export function outcomeBadgeClass(outcome: string): string {
   switch (outcome) {
     case "CONFIRMED":
-      return "bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-400";
+      return "bg-success-soft text-success";
     case "IN_PROGRESS":
-      return "bg-blue-100 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400";
+      return "bg-primary-soft text-primary";
     case "DEAD_END":
       return "bg-bg-inset text-text-muted";
     default:
@@ -111,11 +111,11 @@ export function reviewStateBadgeClass(state: string): string {
     case "DRAFT":
       return "bg-bg-inset text-text-muted";
     case "SUBMITTED":
-      return "bg-amber-100 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400";
+      return "bg-warning-soft text-warning";
     case "APPROVED":
-      return "bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-400";
+      return "bg-success-soft text-success";
     case "EXPORTED":
-      return "bg-purple-100 dark:bg-purple-950/30 text-purple-700 dark:text-purple-400";
+      return "bg-primary-soft text-primary";
     default:
       return "bg-bg-inset text-text-muted";
   }
