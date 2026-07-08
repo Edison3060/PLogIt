@@ -22,7 +22,6 @@ export default function Settings() {
       </div>
 
       <div className="grid gap-6">
-        {/* Profile Settings */}
         <section className="bg-bg-card border border-border-default rounded-xl shadow-sm overflow-hidden">
           <div className="p-5 border-b border-border-subtle bg-bg-inset/30">
             <h2 className="text-lg font-semibold text-text-strong flex items-center gap-2">
@@ -64,7 +63,6 @@ export default function Settings() {
           </div>
         </section>
 
-        {/* Appearance Settings */}
         <section className="bg-bg-card border border-border-default rounded-xl shadow-sm overflow-hidden">
           <div className="p-5 border-b border-border-subtle bg-bg-inset/30">
             <h2 className="text-lg font-semibold text-text-strong flex items-center gap-2">
