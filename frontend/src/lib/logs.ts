@@ -20,7 +20,9 @@ export interface LogDetail {
   activityType: string;
   title: string;
   description: string;
+  descriptionHtml: string;
   result: string;
+  resultHtml: string;
   target: string | null;
   toolUsed: string | null;
   outcome: string;
@@ -207,4 +209,56 @@ export interface LogVersionSummary {
 
 export async function fetchLogHistory(logId: string): Promise<LogVersionSummary[]> {
   return apiFetch<LogVersionSummary[]>(`/logs/${logId}/history`);
+}
+
+export interface Attachment {
+  id: number;
+  logId: string;
+  filename: string;
+  mimeType: string;
+  size: number;
+  uploadedById: number;
+  uploadedAt: string;
+}
+
+export async function fetchAttachments(logId: string): Promise<Attachment[]> {
+  return apiFetch<Attachment[]>(`/logs/${logId}/attachments`);
+}
+
+export async function uploadAttachment(
+  logId: string,
+  file: File
+): Promise<Attachment> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const csrfMatch = document.cookie.match(/XSRF-TOKEN=([^;]+)/);
+  const headers: Record<string, string> = {};
+  if (csrfMatch) {
+    headers["X-XSRF-TOKEN"] = decodeURIComponent(csrfMatch[1]);
+  }
+
+  const res = await fetch(`/api/logs/${logId}/attachments`, {
+    method: "POST",
+    credentials: "include",
+    headers,
+    body: formData,
+  });
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.message || `Upload failed: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+export function attachmentUrl(logId: string, attachmentId: number): string {
+  return `/api/logs/${logId}/attachments/${attachmentId}`;
+}
+
+export function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }

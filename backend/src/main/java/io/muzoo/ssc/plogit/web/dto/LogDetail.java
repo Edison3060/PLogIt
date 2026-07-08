@@ -4,6 +4,7 @@ import io.muzoo.ssc.plogit.domain.ActivityType;
 import io.muzoo.ssc.plogit.domain.LogEntry;
 import io.muzoo.ssc.plogit.domain.Outcome;
 import io.muzoo.ssc.plogit.domain.ReviewState;
+import io.muzoo.ssc.plogit.service.MarkdownService;
 
 import java.time.Instant;
 import java.util.List;
@@ -18,7 +19,9 @@ public record LogDetail(
     ActivityType activityType,
     String title,
     String description,
+    String descriptionHtml,
     String result,
+    String resultHtml,
     String target,
     String toolUsed,
     Outcome outcome,
@@ -41,7 +44,36 @@ public record LogDetail(
             log.getActivityType(),
             log.getTitle(),
             log.getDescription(),
+            "",
             log.getResult(),
+            "",
+            log.getTarget(),
+            log.getToolUsed(),
+            log.getOutcome(),
+            log.getTags(),
+            log.getCodeBlock(),
+            log.getCodeLanguage(),
+            log.getReviewState(),
+            log.getRejectionComment(),
+            log.getCreatedAt(),
+            log.getLastEditedAt(),
+            log.getLastEditedById()
+        );
+    }
+
+    public static LogDetail from(LogEntry log, MarkdownService md) {
+        return new LogDetail(
+            log.getId(),
+            log.getEngagement().getId(),
+            log.getEngagement().getLeader().getId(),
+            log.getAuthor().getId(),
+            log.getAuthor().getDisplayName(),
+            log.getActivityType(),
+            log.getTitle(),
+            log.getDescription(),
+            md.render(log.getDescription()),
+            log.getResult(),
+            md.render(log.getResult()),
             log.getTarget(),
             log.getToolUsed(),
             log.getOutcome(),
@@ -56,3 +88,4 @@ public record LogDetail(
         );
     }
 }
+
