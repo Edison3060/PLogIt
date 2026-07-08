@@ -62,17 +62,20 @@ export default function LogDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="max-w-4xl mx-auto p-6 flex items-center gap-2 text-text-muted">
-        <i className="fa-solid fa-circle-notch fa-spin"></i>
-        <span>Loading...</span>
+      <div className="max-w-4xl mx-auto p-8 text-center text-text-muted">
+        <i className="fa-solid fa-circle-notch fa-spin text-3xl mb-3"></i>
+        <p>Loading...</p>
       </div>
     );
   }
 
   if (!log) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
-        <p className="text-text-muted">Log not found</p>
+      <div className="max-w-4xl mx-auto p-8">
+        <div className="bg-bg-card border border-dashed border-border-default rounded-xl p-12 text-center">
+          <i className="fa-solid fa-file-circle-question text-text-faint text-3xl mb-3"></i>
+          <p className="text-text-muted">Log not found</p>
+        </div>
       </div>
     );
   }
@@ -102,52 +105,49 @@ export default function LogDetailPage() {
     onTransition("REJECT", rejectComment.trim());
   };
 
-  return (
-    <div className="max-w-4xl mx-auto p-6">
-      <button
-        onClick={() => navigate(`/engagements/${id}/logs`)}
-        className="text-text-muted text-sm mb-4 hover:text-text-strong flex items-center gap-2"
-      >
-        <i className="fa-solid fa-arrow-left"></i> Back to logs
-      </button>
+  const metaCards = [
+    { label: "Activity type", value: formatActivityType(log.activityType), icon: "fa-tag", mono: false },
+    { label: "Target", value: log.target || "-", icon: "fa-crosshairs", mono: true },
+    { label: "Tool", value: log.toolUsed || "-", icon: "fa-screwdriver-wrench", mono: false },
+  ];
 
+  return (
+    <div className="max-w-4xl mx-auto p-6 md:p-8">
       <div className="flex items-start justify-between mb-6 gap-4">
-        <div className="flex-1">
-          <h1 className="text-2xl font-semibold text-text-strong">
-            {log.title}
-          </h1>
-          <div className="flex flex-wrap items-center gap-3 mt-2 text-text-muted text-sm">
-            <span className="flex items-center gap-1">
-              <i className="fa-solid fa-user"></i>
+        <div className="flex-1 min-w-0">
+          <h1 className="text-2xl font-bold text-text-strong">{log.title}</h1>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-text-muted text-sm">
+            <span className="flex items-center gap-1.5">
+              <i className="fa-solid fa-user text-text-faint"></i>
               {log.authorDisplayName}
             </span>
-            <span className="flex items-center gap-1">
-              <i className="fa-solid fa-clock"></i>
+            <span className="flex items-center gap-1.5">
+              <i className="fa-solid fa-clock text-text-faint"></i>
               {new Date(log.createdAt).toLocaleString()}
             </span>
             {log.lastEditedAt !== log.createdAt && (
-              <span className="text-text-faint">
-                (edited {new Date(log.lastEditedAt).toLocaleString()})
+              <span className="text-text-faint text-xs">
+                edited {new Date(log.lastEditedAt).toLocaleString()}
               </span>
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-2 items-end">
+        <div className="flex flex-col gap-2 items-end shrink-0">
           <div className="flex gap-2">
             <span
-              className={`text-xs px-2 py-1 rounded font-mono ${outcomeBadgeClass(
+              className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide flex items-center gap-1 ${outcomeBadgeClass(
                 log.outcome
               )}`}
             >
-              <i className="fa-solid fa-flag"></i>{" "}
+              <i className="fa-solid fa-flag"></i>
               {formatEnum(log.outcome)}
             </span>
             <span
-              className={`text-xs px-2 py-1 rounded font-mono ${reviewStateBadgeClass(
+              className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide flex items-center gap-1 ${reviewStateBadgeClass(
                 log.reviewState
               )}`}
             >
-              <i className="fa-solid fa-check-circle"></i>{" "}
+              <i className="fa-solid fa-circle-check"></i>
               {formatEnum(log.reviewState)}
             </span>
           </div>
@@ -156,7 +156,7 @@ export default function LogDetailPage() {
               onClick={() =>
                 navigate(`/engagements/${id}/logs/${log.id}/edit`)
               }
-              className="bg-bg-inset text-text-strong rounded px-3 py-1.5 text-sm font-medium hover:bg-border-default flex items-center gap-2"
+              className="bg-bg-inset text-text-strong rounded-lg px-3 py-1.5 text-sm font-medium hover:bg-border-subtle flex items-center gap-2 transition-colors"
             >
               <i className="fa-solid fa-pen"></i> Edit
             </button>
@@ -165,42 +165,42 @@ export default function LogDetailPage() {
       </div>
 
       {error && (
-        <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-lg p-3 mb-4 text-red-700 dark:text-red-400 text-sm flex items-center gap-2">
+        <div className="bg-danger-soft border border-danger/30 text-danger rounded-lg p-3 mb-4 text-sm flex items-center gap-2 font-medium">
           <i className="fa-solid fa-circle-exclamation"></i> {error}
         </div>
       )}
 
       {log.rejectionComment && (
-        <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-lg p-4 mb-4">
-          <h3 className="text-sm font-medium text-red-700 dark:text-red-400 flex items-center gap-2 mb-1">
+        <div className="bg-danger-soft border border-danger/30 rounded-xl p-4 mb-4">
+          <h3 className="text-sm font-semibold text-danger flex items-center gap-2 mb-1">
             <i className="fa-solid fa-comment-dots"></i> Rejection feedback
           </h3>
-          <p className="text-red-600 dark:text-red-300 text-sm whitespace-pre-wrap">
+          <p className="text-danger/90 text-sm whitespace-pre-wrap">
             {log.rejectionComment}
           </p>
         </div>
       )}
 
       {(canSubmit || canReview) && (
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-4 mb-4 flex flex-wrap items-center gap-3">
+        <div className="bg-bg-card border border-border-default rounded-xl shadow-sm p-4 mb-4 flex flex-wrap items-center gap-3">
           {canSubmit && (
             <button
               onClick={() => onTransition("SUBMIT")}
               disabled={transition.isPending}
-              className="bg-primary text-white rounded px-4 py-2 text-sm font-medium hover:bg-primary-hover disabled:opacity-50 flex items-center gap-2"
+              className="bg-primary text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-primary-hover disabled:opacity-50 flex items-center gap-2 transition-colors"
             >
               <i className="fa-solid fa-paper-plane"></i> Submit for review
             </button>
           )}
           {canReview && (
             <>
-              <span className="text-text-muted text-sm mr-2">
+              <span className="text-text-muted text-sm mr-1">
                 Awaiting your review:
               </span>
               <button
                 onClick={() => onTransition("APPROVE")}
                 disabled={transition.isPending}
-                className="bg-green-600 text-white rounded px-4 py-2 text-sm font-medium hover:bg-green-700 disabled:opacity-50 flex items-center gap-2"
+                className="bg-success text-white rounded-lg px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50 flex items-center gap-2 transition-colors"
               >
                 <i className="fa-solid fa-check"></i> Approve
               </button>
@@ -210,7 +210,7 @@ export default function LogDetailPage() {
                   setShowReject(true);
                 }}
                 disabled={transition.isPending}
-                className="bg-red-600 text-white rounded px-4 py-2 text-sm font-medium hover:bg-red-700 disabled:opacity-50 flex items-center gap-2"
+                className="bg-danger text-white rounded-lg px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50 flex items-center gap-2 transition-colors"
               >
                 <i className="fa-solid fa-arrow-rotate-left"></i> Reject
               </button>
@@ -220,9 +220,9 @@ export default function LogDetailPage() {
       )}
 
       {showReject && (
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-4 mb-4">
-          <h3 className="text-sm font-medium text-text-strong mb-2 flex items-center gap-2">
-            <i className="fa-solid fa-comment-dots text-text-muted"></i> Rejection
+        <div className="bg-bg-card border border-danger/40 rounded-xl shadow-sm p-4 mb-4">
+          <h3 className="text-sm font-semibold text-text-strong mb-2 flex items-center gap-2">
+            <i className="fa-solid fa-comment-dots text-danger"></i> Rejection
             comment (required)
           </h3>
           <textarea
@@ -230,13 +230,13 @@ export default function LogDetailPage() {
             onChange={(e) => setRejectComment(e.target.value)}
             rows={3}
             placeholder="Explain what needs to be fixed before resubmission..."
-            className="bg-bg-canvas border border-border-default rounded px-3 py-2 w-full text-text-strong focus:outline-none focus:border-primary text-sm"
+            className="bg-bg-canvas border border-border-default rounded-lg px-3 py-2 w-full text-text-strong text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
           />
           <div className="flex gap-2 mt-2">
             <button
               onClick={onSubmitReject}
               disabled={transition.isPending}
-              className="bg-red-600 text-white rounded px-4 py-2 text-sm font-medium hover:bg-red-700 disabled:opacity-50 flex items-center gap-2"
+              className="bg-danger text-white rounded-lg px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50 flex items-center gap-2 transition-colors"
             >
               <i className="fa-solid fa-paper-plane"></i> Send back to draft
             </button>
@@ -246,7 +246,7 @@ export default function LogDetailPage() {
                 setRejectComment("");
                 setError(null);
               }}
-              className="text-text-muted rounded px-4 py-2 text-sm hover:text-text-strong"
+              className="text-text-muted rounded-lg px-4 py-2 text-sm hover:text-text-strong hover:bg-bg-inset transition-colors"
             >
               Cancel
             </button>
@@ -255,32 +255,28 @@ export default function LogDetailPage() {
       )}
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-3">
-          <p className="text-text-muted text-xs mb-1">Activity type</p>
-          <p className="text-text-strong text-sm">
-            {formatActivityType(log.activityType)}
+        {metaCards.map((m) => (
+          <div key={m.label} className="bg-bg-card rounded-xl border border-border-default shadow-sm p-3">
+            <p className="text-text-faint text-[11px] mb-1 flex items-center gap-1 uppercase tracking-wide font-semibold">
+              <i className={`fa-solid ${m.icon}`}></i>
+              {m.label}
+            </p>
+            <p className={`text-text-strong text-sm ${m.mono ? "font-mono" : ""}`}>
+              {m.value}
+            </p>
+          </div>
+        ))}
+        <div className="bg-bg-card rounded-xl border border-border-default shadow-sm p-3">
+          <p className="text-text-faint text-[11px] mb-1 flex items-center gap-1 uppercase tracking-wide font-semibold">
+            <i className="fa-solid fa-hashtag"></i>
+            Tags
           </p>
-        </div>
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-3">
-          <p className="text-text-muted text-xs mb-1">Target</p>
-          <p className="text-text-strong text-sm font-mono">
-            {log.target || "-"}
-          </p>
-        </div>
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-3">
-          <p className="text-text-muted text-xs mb-1">Tool</p>
-          <p className="text-text-strong text-sm">
-            {log.toolUsed || "-"}
-          </p>
-        </div>
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-3">
-          <p className="text-text-muted text-xs mb-1">Tags</p>
           <div className="flex flex-wrap gap-1">
             {log.tags && log.tags.length > 0 ? (
               log.tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="text-xs bg-bg-inset text-text-muted px-1.5 py-0.5 rounded font-mono"
+                  className="text-[11px] bg-primary-soft text-primary px-1.5 py-0.5 rounded font-mono"
                 >
                   {tag}
                 </span>
@@ -292,9 +288,9 @@ export default function LogDetailPage() {
         </div>
       </div>
 
-      <div className="bg-bg-card rounded-lg border border-border-subtle p-6 mb-4">
-        <h2 className="font-medium text-text-strong mb-2 flex items-center gap-2">
-          <i className="fa-solid fa-align-left text-text-muted"></i> Description
+      <div className="bg-bg-card rounded-xl border border-border-default shadow-sm p-6 mb-4">
+        <h2 className="font-semibold text-text-strong mb-3 flex items-center gap-2">
+          <i className="fa-solid fa-align-left text-primary"></i> Description
         </h2>
         <div
           className="text-text-body prose prose-sm dark:prose-invert max-w-none"
@@ -302,9 +298,9 @@ export default function LogDetailPage() {
         />
       </div>
 
-      <div className="bg-bg-card rounded-lg border border-border-subtle p-6 mb-4">
-        <h2 className="font-medium text-text-strong mb-2 flex items-center gap-2">
-          <i className="fa-solid fa-clipboard-check text-text-muted"></i> Result
+      <div className="bg-bg-card rounded-xl border border-border-default shadow-sm p-6 mb-4">
+        <h2 className="font-semibold text-text-strong mb-3 flex items-center gap-2">
+          <i className="fa-solid fa-clipboard-check text-success"></i> Result
         </h2>
         <div
           className="text-text-body prose prose-sm dark:prose-invert max-w-none"
@@ -313,90 +309,88 @@ export default function LogDetailPage() {
       </div>
 
       {log.codeBlock && (
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-6 mb-4">
-          <h2 className="font-medium text-text-strong mb-2 flex items-center gap-2">
+        <div className="bg-bg-card rounded-xl border border-border-default shadow-sm p-6 mb-4">
+          <h2 className="font-semibold text-text-strong mb-3 flex items-center gap-2">
             <i className="fa-solid fa-code text-text-muted"></i>
             {log.codeLanguage ? `Code (${log.codeLanguage})` : "Code"}
           </h2>
-          <pre className="bg-bg-inset rounded p-4 overflow-x-auto text-sm text-text-body font-mono">
+          <pre className="bg-bg-inset rounded-lg p-4 overflow-x-auto text-sm text-text-body font-mono border border-border-subtle">
             <code>{log.codeBlock}</code>
           </pre>
         </div>
       )}
 
-      <div className="mt-6">
-        <h2 className="font-medium text-text-strong mb-3 flex items-center gap-2">
+      <div className="bg-bg-card rounded-xl border border-border-default shadow-sm p-6 mb-4">
+        <h2 className="font-semibold text-text-strong mb-3 flex items-center gap-2">
           <i className="fa-solid fa-paperclip text-text-muted"></i> Attachments
         </h2>
-        <div className="bg-bg-card rounded-lg border border-border-subtle p-4">
-          <div className="flex flex-wrap gap-3 mb-3">
-            {attachments.length > 0 ? (
-              attachments.map((att) => (
-                <div
-                  key={att.id}
-                  className="relative group w-32 h-32 rounded-lg border border-border-subtle overflow-hidden bg-bg-inset"
-                >
-                  <img
-                    src={attachmentUrl(log.id, att.id)}
-                    alt={att.filename}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 p-1">
-                    <a
-                      href={attachmentUrl(log.id, att.id)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white text-xs flex items-center gap-1 hover:text-primary-light"
-                    >
-                      <i className="fa-solid fa-expand"></i> View
-                    </a>
-                    <span className="text-white/70 text-[10px] truncate w-full text-center" title={att.filename}>
-                      {att.filename}
-                    </span>
-                    <span className="text-white/50 text-[10px]">{formatFileSize(att.size)}</span>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p className="text-text-muted text-sm">No attachments yet</p>
-            )}
-          </div>
-          {canEdit && (
-            <div>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/png,image/jpeg,image/gif,image/webp"
-                onChange={handleUpload}
-                disabled={uploading}
-                className="hidden"
-                id="attachment-upload"
-              />
-              <label
-                htmlFor="attachment-upload"
-                className="border border-border-default rounded px-3 py-1.5 text-sm hover:bg-bg-inset flex items-center gap-2 cursor-pointer w-fit"
+        <div className="flex flex-wrap gap-3 mb-3">
+          {attachments.length > 0 ? (
+            attachments.map((att) => (
+              <div
+                key={att.id}
+                className="relative group w-32 h-32 rounded-lg border border-border-default overflow-hidden bg-bg-inset"
               >
-                {uploading ? (
-                  <><i className="fa-solid fa-circle-notch fa-spin"></i> Uploading...</>
-                ) : (
-                  <><i className="fa-solid fa-upload"></i> Upload image</>
-                )}
-              </label>
-            </div>
+                <img
+                  src={attachmentUrl(log.id, att.id)}
+                  alt={att.filename}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 p-1">
+                  <a
+                    href={attachmentUrl(log.id, att.id)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white text-xs flex items-center gap-1 hover:text-white/80"
+                  >
+                    <i className="fa-solid fa-expand"></i> View
+                  </a>
+                  <span className="text-white/70 text-[10px] truncate w-full text-center" title={att.filename}>
+                    {att.filename}
+                  </span>
+                  <span className="text-white/50 text-[10px]">{formatFileSize(att.size)}</span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-text-muted text-sm">No attachments yet</p>
           )}
         </div>
+        {canEdit && (
+          <div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/png,image/jpeg,image/gif,image/webp"
+              onChange={handleUpload}
+              disabled={uploading}
+              className="hidden"
+              id="attachment-upload"
+            />
+            <label
+              htmlFor="attachment-upload"
+              className="bg-bg-inset border border-border-default rounded-lg px-4 py-2 text-sm text-text-strong hover:bg-border-subtle flex items-center gap-2 cursor-pointer w-fit transition-colors"
+            >
+              {uploading ? (
+                <><i className="fa-solid fa-circle-notch fa-spin"></i> Uploading...</>
+              ) : (
+                <><i className="fa-solid fa-upload"></i> Upload image</>
+              )}
+            </label>
+          </div>
+        )}
       </div>
 
-      <div className="mt-6">
+      <div>
         <button
           onClick={() => setShowHistory(!showHistory)}
-          className="text-text-muted text-sm hover:text-text-strong flex items-center gap-2 mb-3"
+          className="text-text-muted text-sm hover:text-text-strong flex items-center gap-2 mb-3 transition-colors"
         >
           <i className={`fa-solid fa-chevron-${showHistory ? "down" : "right"}`}></i>
           Edit history {history && history.length > 0 && `(${history.length})`}
         </button>
         {showHistory && (
-          <div className="bg-bg-card rounded-lg border border-border-subtle p-4">
+          <div className="bg-bg-card rounded-xl border border-border-default shadow-sm p-4">
             {historyLoading ? (
               <div className="flex items-center gap-2 text-text-muted text-sm">
                 <i className="fa-solid fa-circle-notch fa-spin"></i> Loading...
@@ -406,7 +400,7 @@ export default function LogDetailPage() {
                 {history.map((v) => (
                   <div key={v.id} className="border-b border-border-subtle pb-3 last:border-0 last:pb-0">
                     <div className="flex items-center gap-2 text-sm mb-1">
-                      <span className="font-mono text-text-strong font-medium">
+                      <span className="font-mono text-text-strong font-semibold bg-bg-inset px-2 py-0.5 rounded">
                         v{v.versionNumber}
                       </span>
                       <span className="text-text-faint">
