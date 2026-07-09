@@ -8,6 +8,7 @@ const inputClass =
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState("");
   const [dark, setDark] = useState(
@@ -27,6 +28,10 @@ export default function Register() {
     setError("");
     if (password.length < 8) {
       setError("Password must be at least 8 characters");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
       return;
     }
     register.mutate(
@@ -100,6 +105,21 @@ export default function Register() {
                   required
                   minLength={8}
                   placeholder="At least 8 characters"
+                  className={inputClass}
+                />
+              </div>
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className="text-sm font-medium text-text-strong">Confirm password</span>
+              <div className="relative">
+                <i className="fa-solid fa-key absolute left-3 top-1/2 -translate-y-1/2 text-text-faint text-sm pointer-events-none"></i>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={8}
+                  placeholder="Re-enter your password"
                   className={inputClass}
                 />
               </div>
