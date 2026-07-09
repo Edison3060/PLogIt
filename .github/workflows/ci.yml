@@ -132,3 +132,20 @@ jobs:
       - name: Trivy filesystem scan
         run: |
           trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed .
+
+  deploy:
+    name: CD - Deploy to Production
+    needs: [backend, frontend, semgrep, trivy]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: SSH and Deploy
+        uses: appleboy/ssh-action@7eaf76671a0d7eecfd2c82cb4628f4094e038ebe
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USERNAME }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          script: |
+            cd ~/plogit/Repo
+            git pull origin main
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app up -d --build
