@@ -135,7 +135,7 @@ export default function LogDetailPage() {
         <div className="flex flex-col gap-2 items-end shrink-0">
           <div className="flex gap-2">
             <span
-              className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide flex items-center gap-1 ${outcomeBadgeClass(
+              className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide flex items-center gap-1 whitespace-nowrap ${outcomeBadgeClass(
                 log.outcome
               )}`}
             >
@@ -143,7 +143,7 @@ export default function LogDetailPage() {
               {formatEnum(log.outcome)}
             </span>
             <span
-              className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide flex items-center gap-1 ${reviewStateBadgeClass(
+              className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide flex items-center gap-1 whitespace-nowrap ${reviewStateBadgeClass(
                 log.reviewState
               )}`}
             >

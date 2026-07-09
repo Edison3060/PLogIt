@@ -204,18 +204,18 @@ export default function LogBoard() {
                       <td className="px-4 py-3 text-text-body text-sm font-mono">
                         {log.target || "-"}
                       </td>
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-3 whitespace-nowrap">
                         <span
-                          className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide ${outcomeBadgeClass(
+                          className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide whitespace-nowrap ${outcomeBadgeClass(
                             log.outcome
                           )}`}
                         >
                           {formatEnum(log.outcome)}
                         </span>
                       </td>
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-3 whitespace-nowrap">
                         <span
-                          className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide ${reviewStateBadgeClass(
+                          className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wide whitespace-nowrap ${reviewStateBadgeClass(
                             log.reviewState
                           )}`}
                         >
