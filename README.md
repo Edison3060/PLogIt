@@ -11,7 +11,7 @@ flowchart LR
 
 The pentester stage is PLogIt's job. Severity rating, CVSS, CVE mapping, and client-facing reporting belong to the downstream auditor, not to us. The principle is capture everything, judge nothing: a log is raw activity, and judgment is someone else's job.
 
-Most teams track pentest activity in a notebook or a shared document. PLogIt replaces that with a multi-user system that keeps an audit trail, enforces who is allowed to approve what, versions every edit, and exports an evidence pack a downstream tool can ingest directly instead of retyping. It was built as a university capstone for a systems software construction course.
+Most teams track pentest activity in a notebook or a shared document. PLogIt replaces that with a multi-user system that keeps an audit trail, enforces who is allowed to approve what, versions every edit, and exports an evidence pack a downstream tool can ingest directly instead of retyping.
 
 <p align="center">
   <img src=".github/assets/login.png" width="900" alt="Login page with the PLogIt brand tile and sign-in form, plus a theme toggle" />
@@ -89,13 +89,13 @@ Export is a state-changing action: every approved log included in the pack is ma
 
 PLogIt is two separate applications. The frontend is a React single-page app built by Vite. The backend is a standalone Spring Boot REST API. They talk over HTTP and JSON and are never merged into one process.
 
-The Vite dev proxy serves the API under the same origin as the SPA, and production uses Caddy to do the same thing, so the browser never deals with CORS and the session cookie stays first-party.
+The Vite dev proxy serves the API under the same origin as the SPA during development. In production, a reverse proxy of your choice fronts the two app containers and does the same same-origin routing, so the browser never deals with CORS and the session cookie stays first-party. The production Compose file deliberately binds the backend and frontend ports to loopback only, which means the containers are not reachable on a public interface and something has to sit in front of them. That proxy layer is left to whoever deploys: Caddy and Nginx are both common choices, and the repo ships a `Caddyfile` template for convenience, but the project does not mandate either. Whatever you run, set `server.forward-headers-strategy: framework` (already in the prod Spring profile) so Spring honors the `X-Forwarded-*` headers.
 
 ```mermaid
 flowchart TD
-    Browser["Browser\nReact SPA (Vite build)"] -->|"same-origin HTTPS"| Caddy
-    Caddy["Caddy\nTLS via Let's Encrypt\nserves the SPA, proxies /api"] --> Frontend
-    Caddy --> Backend
+    Browser["Browser\nReact SPA (Vite build)"] -->|"same-origin HTTPS"| Proxy
+    Proxy["Reverse proxy (your choice)\nCaddy, Nginx, or similar\nTLS via Let's Encrypt\nserves the SPA, proxies /api"] --> Frontend
+    Proxy --> Backend
     Frontend["Frontend container"] --> Backend["Backend (Spring Boot)\nSpring Security (session + CSRF)\nJPA / Hibernate, Flyway"]
     Backend --> DB[("PostgreSQL")]
 ```
@@ -117,7 +117,7 @@ A handful of patterns carry real weight in the code rather than sitting in comme
 | Reporting | OpenHTMLtoPDF 1.1.40 (PDF), Jackson (JSON), hand-rolled RFC 4180 CSV |
 | Frontend | React 18, Vite 6, TypeScript, Tailwind CSS 3.4 |
 | Containers | Docker multi-stage builds, non-root images |
-| Proxy and TLS | Caddy with automatic TLS via Let's Encrypt |
+| Proxy and TLS | Bring your own reverse proxy (Caddy template included; Nginx works too). Let's Encrypt for TLS. |
 | CI/CD | GitHub Actions with Semgrep (SAST) and Trivy (CVE, secret, misconfiguration scanning), both blocking |
 
 A few of these were deliberate. The frontend is a Vite SPA rather than Next.js, on purpose, so no frontend framework can quietly become a second backend; the backend is Spring Boot and only Spring Boot. Authentication uses stateful session cookies with CSRF protection rather than JWTs, which suits an app served from a single origin and avoids the storage and expiry concerns tokens introduce. The UI is written from scratch against a token-based design system rather than pulled from a component kit, so the look is purpose-built for a security tool rather than a generic framework skin.
@@ -151,7 +151,7 @@ Every push runs a GitHub Actions pipeline. The backend job builds and runs the f
 
 ## Testing
 
-The backend has 77 integration test methods running against a real PostgreSQL in CI via Testcontainers. They cover authentication, engagement authorization and isolation, log CRUD and its edit constraints, the full review state machine including role gating and the export transition, markdown sanitization, attachment upload and download authorization, version history, and the audit trail. A separate HTTP-level test script exercises the real wire contract including the CSRF cookie flow, and it caught a Spring Security 6 deferred-token bug that the MockMvc suite could not, because MockMvc synthesizes CSRF tokens and bypasses the real cookie flow.
+The backend has 76 integration test methods running against a real PostgreSQL in CI via Testcontainers. They cover authentication, engagement authorization and isolation, log CRUD and its edit constraints, the full review state machine including role gating and the export transition, markdown sanitization, attachment upload and download authorization, version history, and the audit trail. A separate HTTP-level test script exercises the real wire contract including the CSRF cookie flow, and it caught a Spring Security 6 deferred-token bug that the MockMvc suite could not, because MockMvc synthesizes CSRF tokens and bypasses the real cookie flow.
 
 ## Project layout
 
@@ -165,11 +165,11 @@ The backend has 77 integration test methods running against a real PostgreSQL in
 | `frontend/src/` | `components/`, `hooks/`, `lib/`, `pages/` |
 | `.github/workflows/ci.yml` | CI pipeline (Semgrep + Trivy, blocking) |
 | `docker-compose.yml` / `docker-compose.prod.yml` | Dev and prod Compose stacks |
-| `Caddyfile` | Reverse proxy with automatic TLS |
+| `Caddyfile` | Optional Caddy template for reverse proxy and automatic TLS (use as-is, or replace with your own Nginx/Traefik config) |
 | `.env.example` | Documented configuration keys |
 
 The codebase has 9 JPA entities, 9 repositories, 24 REST endpoints, and about 9 React pages across the engagement and log workflows.
 
 ## About this project
 
-PLogIt was built as a university capstone for a systems software construction course. The package name (`io.muzoo.ssc.plogit`) reflects the course convention.
+PLogIt is an open-source project. The package name (`io.muzoo.ssc.plogit`) is historical and kept for continuity.
