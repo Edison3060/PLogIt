@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -109,10 +110,18 @@ public class EngagementService {
     @Transactional
     public EngagementSummary joinByCode(String code, User user) {
         Engagement engagement = joinCodeService.resolveCode(code);
-        if (membershipService.isMember(engagement, user)) {
+        Optional<EngagementMember> existingMembership = memberRepository.findByEngagementAndUser(engagement, user);
+        if (existingMembership.isPresent() && existingMembership.get().getRemovedAt() == null) {
             throw new io.muzoo.ssc.plogit.web.exception.ConflictException("You are already a member of this engagement");
         }
-        membershipService.addMember(engagement, user, EngagementRole.MEMBER, "code");
+        if (existingMembership.isPresent()) {
+            EngagementMember member = existingMembership.get();
+            member.setRemovedAt(null);
+            member.setJoinedVia("code");
+            memberRepository.save(member);
+        } else {
+            membershipService.addMember(engagement, user, EngagementRole.MEMBER, "code");
+        }
         engagementRepository.save(engagement);
         return EngagementSummary.from(engagement, "MEMBER");
     }

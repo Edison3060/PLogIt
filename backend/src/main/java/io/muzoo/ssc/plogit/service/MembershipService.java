@@ -26,19 +26,19 @@ public class MembershipService {
 
     @Transactional(readOnly = true)
     public boolean isMember(Engagement engagement, User user) {
-        return memberRepository.existsByEngagementAndUser(engagement, user);
+        return memberRepository.existsByEngagementAndUserAndRemovedAtIsNull(engagement, user);
     }
 
     @Transactional(readOnly = true)
     public boolean isLeader(Engagement engagement, User user) {
-        return memberRepository.findByEngagementAndUser(engagement, user)
+        return memberRepository.findByEngagementAndUserAndRemovedAtIsNull(engagement, user)
             .map(m -> m.getRole() == EngagementRole.LEADER)
             .orElse(false);
     }
 
     @Transactional(readOnly = true)
     public EngagementRole getRole(Engagement engagement, User user) {
-        return memberRepository.findByEngagementAndUser(engagement, user)
+        return memberRepository.findByEngagementAndUserAndRemovedAtIsNull(engagement, user)
             .map(EngagementMember::getRole)
             .orElseThrow(() -> new NotFoundException("You are not a member of this engagement"));
     }
@@ -70,7 +70,7 @@ public class MembershipService {
     public void removeMember(Engagement engagement, Long userIdToRemove) {
         User userToRemove = userRepository.findById(userIdToRemove)
             .orElseThrow(() -> new NotFoundException("User not found"));
-        EngagementMember member = memberRepository.findByEngagementAndUser(engagement, userToRemove)
+        EngagementMember member = memberRepository.findByEngagementAndUserAndRemovedAtIsNull(engagement, userToRemove)
             .orElseThrow(() -> new NotFoundException("Member not found"));
         if (member.getRole() == EngagementRole.LEADER) {
             throw new IllegalArgumentException("Cannot remove the leader. Transfer leadership first.");
@@ -80,17 +80,13 @@ public class MembershipService {
     }
 
     public void transferLeadership(Engagement engagement, User currentLeader, Long newLeaderUserId) {
-        EngagementMember currentLeaderMember = memberRepository.findByEngagementAndUser(engagement, currentLeader)
+        EngagementMember currentLeaderMember = memberRepository.findByEngagementAndUserAndRemovedAtIsNull(engagement, currentLeader)
             .orElseThrow(() -> new NotFoundException("Engagement not found"));
 
         User newLeaderUser = userRepository.findById(newLeaderUserId)
             .orElseThrow(() -> new NotFoundException("User not found"));
-        EngagementMember newLeaderMember = memberRepository.findByEngagementAndUser(engagement, newLeaderUser)
+        EngagementMember newLeaderMember = memberRepository.findByEngagementAndUserAndRemovedAtIsNull(engagement, newLeaderUser)
             .orElseThrow(() -> new NotFoundException("Member not found"));
-
-        if (newLeaderMember.getRemovedAt() != null) {
-            throw new IllegalArgumentException("Cannot transfer to a removed member");
-        }
 
         currentLeaderMember.setRole(EngagementRole.MEMBER);
         newLeaderMember.setRole(EngagementRole.LEADER);

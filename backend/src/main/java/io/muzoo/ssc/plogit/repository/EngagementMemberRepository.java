@@ -16,7 +16,9 @@ public interface EngagementMemberRepository extends JpaRepository<EngagementMemb
 
     Optional<EngagementMember> findByEngagementAndUser(Engagement engagement, User user);
 
-    boolean existsByEngagementAndUser(Engagement engagement, User user);
+    Optional<EngagementMember> findByEngagementAndUserAndRemovedAtIsNull(Engagement engagement, User user);
+
+    boolean existsByEngagementAndUserAndRemovedAtIsNull(Engagement engagement, User user);
 
     long countByEngagement(Engagement engagement);
 }
