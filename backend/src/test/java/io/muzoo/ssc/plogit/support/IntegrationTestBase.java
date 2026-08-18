@@ -12,6 +12,7 @@ import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.AuditLogRepository;
 import io.muzoo.ssc.plogit.repository.EngagementMemberRepository;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
+import io.muzoo.ssc.plogit.repository.JoinCodeRepository;
 import io.muzoo.ssc.plogit.repository.LogEntryRepository;
 import io.muzoo.ssc.plogit.repository.LogVersionRepository;
 import io.muzoo.ssc.plogit.repository.UserRepository;
@@ -43,6 +44,9 @@ public abstract class IntegrationTestBase {
     protected EngagementMemberRepository memberRepository;
 
     @Autowired
+    protected JoinCodeRepository joinCodeRepository;
+
+    @Autowired
     protected LogEntryRepository logRepository;
 
     @Autowired
@@ -63,6 +67,7 @@ public abstract class IntegrationTestBase {
         auditLogRepository.deleteAll();
         logRepository.deleteAll();
         memberRepository.deleteAll();
+        joinCodeRepository.deleteAll();
         engagementRepository.deleteAll();
         userRepository.deleteAll();
     }
