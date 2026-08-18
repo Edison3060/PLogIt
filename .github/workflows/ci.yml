@@ -141,11 +141,16 @@ jobs:
     steps:
       - name: SSH and Deploy
         uses: appleboy/ssh-action@068c0c7a4e59a5ae12fb7cb454b05735d830c82b
+        env:
+          DEPLOY_SHA: ${{ github.sha }}
         with:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.PROD_SSH_KEY }}
+          envs: DEPLOY_SHA
           script: |
+            set -eu
             cd ~/plogit/Repo
-            git pull origin main
+            git fetch --no-tags origin main
+            git checkout --detach "$DEPLOY_SHA"
             docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app up -d --build

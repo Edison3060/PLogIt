@@ -1,13 +1,13 @@
 services:
   db:
-    ports: []
+    ports: !override []
 
   backend:
     environment:
       SPRING_PROFILES_ACTIVE: prod
-    ports:
+    ports: !override
       - "127.0.0.1:8090:8080"
 
   frontend:
-    ports:
+    ports: !override
       - "127.0.0.1:8081:80"
