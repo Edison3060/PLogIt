@@ -127,7 +127,7 @@ public class LogService {
             throw new ConflictException("You can only edit your own logs");
         }
 
-        if (!isLeader && log.getReviewState() != ReviewState.DRAFT) {
+        if (log.getReviewState() != ReviewState.DRAFT) {
             throw new ConflictException("Only draft logs can be edited");
         }
 

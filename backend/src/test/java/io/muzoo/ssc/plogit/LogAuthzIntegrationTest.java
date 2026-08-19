@@ -79,6 +79,42 @@ class LogAuthzIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void leaderCannotEditApprovedLog() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        LogEntry log = createLog(engagement, author, ReviewState.APPROVED);
+
+        mockMvc.perform(put(logUri(log.getId()))
+                .with(asUser(leader))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"title":"updated title"}
+                    """))
+            .andExpect(status().isConflict());
+    }
+
+    @Test
+    void leaderCannotEditExportedLog() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        LogEntry log = createLog(engagement, author, ReviewState.EXPORTED);
+
+        mockMvc.perform(put(logUri(log.getId()))
+                .with(asUser(leader))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"title":"updated title"}
+                    """))
+            .andExpect(status().isConflict());
+    }
+
+    @Test
     void nonAuthorCannotEditOthersDraft() throws Exception {
         User leader = createUser("leader@test.local");
         User author = createUser("author@test.local");
