@@ -59,7 +59,7 @@ public class ExportService {
             .orElseThrow(() -> new NotFoundException("Engagement not found"));
         membershipService.assertLeader(engagement, leader);
 
-        List<LogEntry> logsToInclude = findIncludedLogs(engagement, request.includeExported());
+        List<LogEntry> logsToInclude = findIncludedLogs(engagement, Boolean.TRUE.equals(request.includeExported()));
         long totalLogCount = logRepository.countByEngagement(engagement);
 
         EngagementReportData data = buildReportData(engagement, logsToInclude, totalLogCount);

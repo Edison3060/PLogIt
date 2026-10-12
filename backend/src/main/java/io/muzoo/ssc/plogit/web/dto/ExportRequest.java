@@ -5,6 +5,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record ExportRequest(
     @NotNull ReportFormat format,
-    boolean includeExported
+    Boolean includeExported
 ) {
 }
