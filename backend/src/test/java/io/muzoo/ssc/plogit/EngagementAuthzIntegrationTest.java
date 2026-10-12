@@ -8,13 +8,18 @@ import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.support.IntegrationTestBase;
 import io.muzoo.ssc.plogit.support.PostgresTestConfig;
+import io.muzoo.ssc.plogit.service.MembershipService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 
 import java.time.Instant;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -24,6 +29,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Import(PostgresTestConfig.class)
 class EngagementAuthzIntegrationTest extends IntegrationTestBase {
+
+    @Autowired
+    private MembershipService membershipService;
 
     @Test
     void memberCanViewEngagement() throws Exception {
@@ -151,6 +159,47 @@ class EngagementAuthzIntegrationTest extends IntegrationTestBase {
                     {"newLeaderId":999}
                     """))
             .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void leadershipTransferUpdatesLeaderAndMemberRoles() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+
+        mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/transfer-leadership")
+                .with(asUser(leader))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"newLeaderId\":" + member.getId() + "}"))
+            .andExpect(status().isNoContent());
+
+        Engagement updated = engagementRepository.findById(engagement.getId()).orElseThrow();
+        assertEquals(member.getId(), updated.getLeader().getId());
+        assertEquals(EngagementRole.MEMBER, memberRepository.findByEngagementAndUser(updated, leader).orElseThrow().getRole());
+        assertEquals(EngagementRole.LEADER, memberRepository.findByEngagementAndUser(updated, member).orElseThrow().getRole());
+    }
+
+    @Test
+    void failedLeadershipTransferRollsBackMemberRoles() {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+
+        Engagement staleEngagement = engagementRepository.findById(engagement.getId()).orElseThrow();
+        Engagement updated = engagementRepository.findById(engagement.getId()).orElseThrow();
+        updated.setDescription("Updated after the transfer started");
+        engagementRepository.saveAndFlush(updated);
+
+        assertThrows(OptimisticLockingFailureException.class, () ->
+            membershipService.transferLeadership(staleEngagement, leader, member.getId()));
+
+        Engagement persisted = engagementRepository.findById(engagement.getId()).orElseThrow();
+        assertEquals(leader.getId(), persisted.getLeader().getId());
+        assertEquals(EngagementRole.LEADER, memberRepository.findByEngagementAndUser(persisted, leader).orElseThrow().getRole());
+        assertEquals(EngagementRole.MEMBER, memberRepository.findByEngagementAndUser(persisted, member).orElseThrow().getRole());
     }
 
     @Test

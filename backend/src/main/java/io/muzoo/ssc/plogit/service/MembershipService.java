@@ -5,6 +5,7 @@ import io.muzoo.ssc.plogit.domain.EngagementMember;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.EngagementMemberRepository;
+import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.repository.UserRepository;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,16 @@ import java.time.Instant;
 public class MembershipService {
 
     private final EngagementMemberRepository memberRepository;
+    private final EngagementRepository engagementRepository;
     private final UserRepository userRepository;
 
-    public MembershipService(EngagementMemberRepository memberRepository, UserRepository userRepository) {
+    public MembershipService(
+        EngagementMemberRepository memberRepository,
+        EngagementRepository engagementRepository,
+        UserRepository userRepository
+    ) {
         this.memberRepository = memberRepository;
+        this.engagementRepository = engagementRepository;
         this.userRepository = userRepository;
     }
 
@@ -95,5 +102,6 @@ public class MembershipService {
         memberRepository.save(newLeaderMember);
 
         engagement.setLeader(newLeaderUser);
+        engagementRepository.save(engagement);
     }
 }

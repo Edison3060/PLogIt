@@ -2,7 +2,6 @@ package io.muzoo.ssc.plogit.web;
 
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.User;
-import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.security.CurrentUser;
 import io.muzoo.ssc.plogit.service.EngagementService;
 import io.muzoo.ssc.plogit.service.MembershipService;
@@ -35,18 +34,15 @@ public class EngagementController {
 
     private final EngagementService engagementService;
     private final MembershipService membershipService;
-    private final EngagementRepository engagementRepository;
     private final io.muzoo.ssc.plogit.service.ExportService exportService;
 
     public EngagementController(
         EngagementService engagementService,
         MembershipService membershipService,
-        EngagementRepository engagementRepository,
         io.muzoo.ssc.plogit.service.ExportService exportService
     ) {
         this.engagementService = engagementService;
         this.membershipService = membershipService;
-        this.engagementRepository = engagementRepository;
         this.exportService = exportService;
     }
 
@@ -137,7 +133,6 @@ public class EngagementController {
             throw new IllegalArgumentException("newLeaderId is required");
         }
         membershipService.transferLeadership(engagement, currentUser, newLeaderId);
-        engagementRepository.save(engagement);
         return ResponseEntity.noContent().build();
     }
 }
