@@ -294,7 +294,7 @@ export default function LogDetailPage() {
         </h2>
         <div
           className="text-text-body prose prose-sm dark:prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: log.descriptionHtml || log.description }}
+          dangerouslySetInnerHTML={{ __html: log.descriptionHtml ?? "" }}
         />
       </div>
 
@@ -304,7 +304,7 @@ export default function LogDetailPage() {
         </h2>
         <div
           className="text-text-body prose prose-sm dark:prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: log.resultHtml || log.result }}
+          dangerouslySetInnerHTML={{ __html: log.resultHtml ?? "" }}
         />
       </div>
 
