@@ -1,7 +1,7 @@
 package io.muzoo.ssc.plogit.service.export;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.json.JsonMapper;
 import io.muzoo.ssc.plogit.domain.ReportFormat;
 import io.muzoo.ssc.plogit.web.exception.ConflictException;
 import org.springframework.stereotype.Component;
@@ -13,9 +13,9 @@ import java.util.List;
 @Component
 public class JsonReportStrategy implements ReportStrategy {
 
-    private final ObjectMapper objectMapper;
+    private final JsonMapper objectMapper;
 
-    public JsonReportStrategy(ObjectMapper objectMapper) {
+    public JsonReportStrategy(JsonMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
@@ -52,7 +52,7 @@ public class JsonReportStrategy implements ReportStrategy {
             byte[] content = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(report);
             String filename = safeName(data.engagementName()) + "-evidence.json";
             return new ReportOutput(content, "application/json", filename);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             throw new ConflictException("Could not serialize report");
         }
     }

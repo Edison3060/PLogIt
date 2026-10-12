@@ -2,6 +2,7 @@ package io.muzoo.ssc.plogit.service;
 
 import io.muzoo.ssc.plogit.domain.Attachment;
 import io.muzoo.ssc.plogit.domain.LogEntry;
+import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.AttachmentRepository;
 import io.muzoo.ssc.plogit.repository.LogEntryRepository;
@@ -51,6 +52,17 @@ public class AttachmentService {
         LogEntry log = logRepository.findById(logId)
             .orElseThrow(() -> new NotFoundException("Log not found"));
         membershipService.assertMember(log.getEngagement(), uploader);
+
+        boolean isLeader = membershipService.isLeader(log.getEngagement(), uploader);
+        boolean isAuthor = log.getAuthor().getId().equals(uploader.getId());
+
+        if (!isLeader && !isAuthor) {
+            throw new ConflictException("You can only upload attachments to your own logs");
+        }
+
+        if (log.getReviewState() != ReviewState.DRAFT) {
+            throw new ConflictException("Only draft logs can have attachments uploaded");
+        }
 
         String detectedType;
         try {

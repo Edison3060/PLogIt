@@ -140,7 +140,7 @@ class AttachmentIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
-    void memberCanUploadToAnyLog() throws Exception {
+    void memberCannotUploadToOtherMembersDraftLog() throws Exception {
         User leader = createUser("leader@test.local");
         User member = createUser("member@test.local");
         Engagement engagement = createEngagement(leader);
@@ -151,7 +151,73 @@ class AttachmentIntegrationTest extends IntegrationTestBase {
                 .file(pngFile())
                 .with(asUser(member))
                 .with(csrf()))
+            .andExpect(status().isConflict());
+    }
+
+    @Test
+    void memberCanUploadToOwnDraftLog() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        LogEntry log = createLog(engagement, member, ReviewState.DRAFT);
+
+        mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                .file(pngFile())
+                .with(asUser(member))
+                .with(csrf()))
             .andExpect(status().isOk());
+    }
+
+    @Test
+    void leaderCanUploadToMemberDraftLog() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        LogEntry log = createLog(engagement, member, ReviewState.DRAFT);
+
+        mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                .file(pngFile())
+                .with(asUser(leader))
+                .with(csrf()))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void authorCannotUploadToNonDraftLog() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+
+        for (ReviewState state : new ReviewState[]{ReviewState.SUBMITTED, ReviewState.APPROVED, ReviewState.EXPORTED}) {
+            LogEntry log = createLog(engagement, member, state);
+
+            mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                    .file(pngFile())
+                    .with(asUser(member))
+                    .with(csrf()))
+                .andExpect(status().isConflict());
+        }
+    }
+
+    @Test
+    void leaderCannotUploadToNonDraftLog() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+
+        for (ReviewState state : new ReviewState[]{ReviewState.SUBMITTED, ReviewState.APPROVED, ReviewState.EXPORTED}) {
+            LogEntry log = createLog(engagement, member, state);
+
+            mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                    .file(pngFile())
+                    .with(asUser(leader))
+                    .with(csrf()))
+                .andExpect(status().isConflict());
+        }
     }
 
     @Test
