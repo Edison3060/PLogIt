@@ -42,6 +42,15 @@ export interface AuditLogEntry {
     toState?: string;
     engagementId?: number;
     comment?: string;
+    format?: string;
+    logCount?: number;
+    includeExported?: boolean;
+    memberId?: number;
+    previousLeaderId?: number;
+    newLeaderId?: number;
+    regenerated?: boolean;
+    rejoined?: boolean;
+    changedFields?: string[];
   };
   timestamp: string;
 }
