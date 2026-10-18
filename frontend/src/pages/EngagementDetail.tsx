@@ -61,6 +61,7 @@ export default function EngagementDetailPage() {
       updateEngagement(Number(id), data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+      queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
       setEditing(false);
       setSuccess("Engagement updated");
       setTimeout(() => setSuccess(""), 3000);
@@ -72,6 +73,7 @@ export default function EngagementDetailPage() {
     mutationFn: (userId: number) => removeMember(Number(id), userId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+      queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
       setSuccess("Member removed");
       setTimeout(() => setSuccess(""), 3000);
     },
@@ -82,6 +84,7 @@ export default function EngagementDetailPage() {
     mutationFn: (newLeaderId: number) => transferLeadership(Number(id), newLeaderId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+      queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
       setShowTransfer(false);
       setSuccess("Leadership transferred");
       setTimeout(() => setSuccess(""), 3000);
@@ -95,6 +98,7 @@ export default function EngagementDetailPage() {
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
     queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+    queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
   };
 
   const handleExport = async () => {
@@ -118,6 +122,7 @@ export default function EngagementDetailPage() {
       setSuccess(`Exported ${exportFormat} (${filename})`);
       setTimeout(() => setSuccess(""), 4000);
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+      queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Export failed");
     } finally {
