@@ -275,8 +275,8 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
         List<AuditLog> entries = auditFor(engagement);
         assertEquals(1, entries.size());
         assertEquals("TRANSFER_LEADERSHIP", entries.get(0).getAction());
-        assertEquals(leader.getId(), entries.get(0).getMetadata().get("previousLeaderId"));
-        assertEquals(member.getId(), entries.get(0).getMetadata().get("newLeaderId"));
+        assertEquals(leader.getId().longValue(), ((Number) entries.get(0).getMetadata().get("previousLeaderId")).longValue());
+        assertEquals(member.getId().longValue(), ((Number) entries.get(0).getMetadata().get("newLeaderId")).longValue());
 
         mockMvc.perform(get("/api/engagements/" + engagement.getId() + "/audit")
                 .with(asUser(member)))
