@@ -117,7 +117,7 @@ public class EngagementController {
         @CurrentUser User currentUser
     ) {
         Engagement engagement = engagementService.findByIdAndAssertLeader(id, currentUser);
-        membershipService.removeMember(engagement, userId);
+        membershipService.removeMember(engagement, userId, currentUser);
         return ResponseEntity.noContent().build();
     }
 

@@ -1,6 +1,7 @@
 package io.muzoo.ssc.plogit.service;
 
 import io.muzoo.ssc.plogit.domain.Engagement;
+import io.muzoo.ssc.plogit.domain.EngagementAuditEvent;
 import io.muzoo.ssc.plogit.domain.EngagementMember;
 import io.muzoo.ssc.plogit.domain.LogEntry;
 import io.muzoo.ssc.plogit.domain.ReviewAction;
@@ -14,12 +15,14 @@ import io.muzoo.ssc.plogit.service.export.ReportOutput;
 import io.muzoo.ssc.plogit.service.export.ReportStrategy;
 import io.muzoo.ssc.plogit.web.dto.TransitionRequest;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -33,6 +36,7 @@ public class ExportService {
     private final MarkdownService markdownService;
     private final LogReviewService logReviewService;
     private final ReportFactory reportFactory;
+    private final ApplicationEventPublisher eventPublisher;
 
     public ExportService(
         EngagementRepository engagementRepository,
@@ -42,7 +46,8 @@ public class ExportService {
         AttachmentService attachmentService,
         MarkdownService markdownService,
         LogReviewService logReviewService,
-        ReportFactory reportFactory
+        ReportFactory reportFactory,
+        ApplicationEventPublisher eventPublisher
     ) {
         this.engagementRepository = engagementRepository;
         this.engagementService = engagementService;
@@ -52,6 +57,7 @@ public class ExportService {
         this.markdownService = markdownService;
         this.logReviewService = logReviewService;
         this.reportFactory = reportFactory;
+        this.eventPublisher = eventPublisher;
     }
 
     public ReportOutput export(Long engagementId, io.muzoo.ssc.plogit.web.dto.ExportRequest request, User leader) {
@@ -68,6 +74,18 @@ public class ExportService {
         ReportOutput output = strategy.generate(data);
 
         markExported(logsToInclude, leader);
+        eventPublisher.publishEvent(new EngagementAuditEvent(
+            leader.getId(),
+            engagementId,
+            "EXPORT_ENGAGEMENT",
+            "ENGAGEMENT",
+            String.valueOf(engagementId),
+            Map.of(
+                "format", request.format().name(),
+                "logCount", logsToInclude.size(),
+                "includeExported", Boolean.TRUE.equals(request.includeExported())
+            )
+        ));
 
         return output;
     }
@@ -141,9 +159,7 @@ public class ExportService {
     private void markExported(List<LogEntry> logs, User leader) {
         TransitionRequest exportRequest = new TransitionRequest(ReviewAction.EXPORT, null);
         for (LogEntry log : logs) {
-            if (log.getReviewState() == ReviewState.APPROVED) {
-                logReviewService.transition(log.getId(), exportRequest, leader);
-            }
+            logReviewService.transition(log.getId(), exportRequest, leader);
         }
     }
 }

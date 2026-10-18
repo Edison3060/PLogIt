@@ -1,6 +1,7 @@
 package io.muzoo.ssc.plogit.service;
 
 import io.muzoo.ssc.plogit.domain.AuditLog;
+import io.muzoo.ssc.plogit.domain.EngagementAuditEvent;
 import io.muzoo.ssc.plogit.domain.LogTransitionedEvent;
 import io.muzoo.ssc.plogit.repository.AuditLogRepository;
 import org.springframework.context.event.EventListener;
@@ -37,6 +38,22 @@ public class AuditEventListener {
             .action(event.getAction())
             .targetType("LOG")
             .targetId(String.valueOf(event.getLogId()))
+            .metadata(metadata)
+            .build();
+        auditLogRepository.save(entry);
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    @Transactional
+    public void onEngagementChanged(EngagementAuditEvent event) {
+        Map<String, Object> metadata = new LinkedHashMap<>(event.metadata());
+        metadata.put("engagementId", event.engagementId());
+
+        AuditLog entry = AuditLog.builder()
+            .actorId(event.actorId())
+            .action(event.action())
+            .targetType(event.targetType())
+            .targetId(event.targetId())
             .metadata(metadata)
             .build();
         auditLogRepository.save(entry);

@@ -2,7 +2,6 @@ package io.muzoo.ssc.plogit.web;
 
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.User;
-import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.security.CurrentUser;
 import io.muzoo.ssc.plogit.service.EngagementService;
 import io.muzoo.ssc.plogit.service.JoinCodeService;
@@ -25,18 +24,15 @@ public class JoinController {
     private final JoinCodeService joinCodeService;
     private final MembershipService membershipService;
     private final EngagementService engagementService;
-    private final EngagementRepository engagementRepository;
 
     public JoinController(
         JoinCodeService joinCodeService,
         MembershipService membershipService,
-        EngagementService engagementService,
-        EngagementRepository engagementRepository
+        EngagementService engagementService
     ) {
         this.joinCodeService = joinCodeService;
         this.membershipService = membershipService;
         this.engagementService = engagementService;
-        this.engagementRepository = engagementRepository;
     }
 
     @PostMapping("/join")
@@ -56,7 +52,6 @@ public class JoinController {
         membershipService.assertLeader(engagement, currentUser);
 
         String code = joinCodeService.generateFor(engagement, currentUser);
-        engagementRepository.save(engagement);
 
         return ResponseEntity.ok(new JoinCodeResponse(code, engagement.getId()));
     }

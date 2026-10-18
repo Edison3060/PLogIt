@@ -1,13 +1,17 @@
 package io.muzoo.ssc.plogit.service;
 
 import io.muzoo.ssc.plogit.domain.Engagement;
+import io.muzoo.ssc.plogit.domain.EngagementAuditEvent;
 import io.muzoo.ssc.plogit.domain.JoinCode;
 import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.JoinCodeRepository;
+import io.muzoo.ssc.plogit.repository.EngagementRepository;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -18,14 +22,23 @@ public class JoinCodeService {
     private static final String CODE_PREFIX = "PL0G-";
 
     private final JoinCodeRepository joinCodeRepository;
+    private final EngagementRepository engagementRepository;
+    private final ApplicationEventPublisher eventPublisher;
     private final SecureRandom random = new SecureRandom();
 
-    public JoinCodeService(JoinCodeRepository joinCodeRepository) {
+    public JoinCodeService(
+        JoinCodeRepository joinCodeRepository,
+        EngagementRepository engagementRepository,
+        ApplicationEventPublisher eventPublisher
+    ) {
         this.joinCodeRepository = joinCodeRepository;
+        this.engagementRepository = engagementRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     public String generateFor(Engagement engagement, User generatedBy) {
-        if (engagement.getCurrentJoinCode() != null) {
+        boolean regenerated = engagement.getCurrentJoinCode() != null;
+        if (regenerated) {
             revokeCode(engagement.getCurrentJoinCode());
         }
 
@@ -42,6 +55,13 @@ public class JoinCodeService {
         joinCodeRepository.save(joinCode);
 
         engagement.setCurrentJoinCode(code);
+        engagementRepository.save(engagement);
+        eventPublisher.publishEvent(new EngagementAuditEvent(
+            generatedBy.getId(), engagement.getId(),
+            regenerated ? "REGENERATE_JOIN_CODE" : "GENERATE_JOIN_CODE",
+            "ENGAGEMENT", String.valueOf(engagement.getId()),
+            Map.of("regenerated", regenerated)
+        ));
         return code;
     }
 

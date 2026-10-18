@@ -1,6 +1,7 @@
 package io.muzoo.ssc.plogit.service;
 
 import io.muzoo.ssc.plogit.domain.Engagement;
+import io.muzoo.ssc.plogit.domain.EngagementAuditEvent;
 import io.muzoo.ssc.plogit.domain.EngagementMember;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.EngagementStatus;
@@ -14,10 +15,14 @@ import io.muzoo.ssc.plogit.web.dto.EngagementDetail;
 import io.muzoo.ssc.plogit.web.dto.EngagementSummary;
 import io.muzoo.ssc.plogit.web.dto.UpdateEngagementRequest;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -29,19 +34,22 @@ public class EngagementService {
     private final MembershipService membershipService;
     private final JoinCodeService joinCodeService;
     private final AuditLogRepository auditLogRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     public EngagementService(
         EngagementRepository engagementRepository,
         EngagementMemberRepository memberRepository,
         MembershipService membershipService,
         JoinCodeService joinCodeService,
-        AuditLogRepository auditLogRepository
+        AuditLogRepository auditLogRepository,
+        ApplicationEventPublisher eventPublisher
     ) {
         this.engagementRepository = engagementRepository;
         this.memberRepository = memberRepository;
         this.membershipService = membershipService;
         this.joinCodeService = joinCodeService;
         this.auditLogRepository = auditLogRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     @Transactional(readOnly = true)
@@ -72,7 +80,14 @@ public class EngagementService {
         Engagement engagement = engagementRepository.findById(engagementId)
             .orElseThrow(() -> new NotFoundException("Engagement not found"));
         membershipService.assertLeader(engagement, leader);
+        List<String> changedFields = changedFields(engagement, request);
         updateEngagement(engagement, request);
+        if (!changedFields.isEmpty()) {
+            eventPublisher.publishEvent(new EngagementAuditEvent(
+                leader.getId(), engagementId, "UPDATE_ENGAGEMENT", "ENGAGEMENT",
+                String.valueOf(engagementId), Map.of("changedFields", changedFields)
+            ));
+        }
         String role = membershipService.getRole(engagement, leader).name();
         List<EngagementDetail.MemberInfo> members = buildMemberInfos(engagement);
         return EngagementDetail.from(engagement, role, members);
@@ -123,6 +138,10 @@ public class EngagementService {
             membershipService.addMember(engagement, user, EngagementRole.MEMBER, "code");
         }
         engagementRepository.save(engagement);
+        eventPublisher.publishEvent(new EngagementAuditEvent(
+            user.getId(), engagement.getId(), "JOIN_ENGAGEMENT", "MEMBER",
+            String.valueOf(user.getId()), Map.of("rejoined", existingMembership.isPresent())
+        ));
         return EngagementSummary.from(engagement, "MEMBER");
     }
 
@@ -181,6 +200,41 @@ public class EngagementService {
             engagement.setInScopeTargets(request.inScopeTargets());
         }
         return engagementRepository.save(engagement);
+    }
+
+    private List<String> changedFields(Engagement engagement, UpdateEngagementRequest request) {
+        List<String> fields = new ArrayList<>();
+        if (request.name() != null && !Objects.equals(request.name(), engagement.getName())) {
+            fields.add("name");
+        }
+        if (request.description() != null && !Objects.equals(request.description(), engagement.getDescription())) {
+            fields.add("description");
+        }
+        if (request.startDate() != null && !Objects.equals(request.startDate(), engagement.getStartDate())) {
+            fields.add("startDate");
+        }
+        if (request.dueDate() != null && !Objects.equals(request.dueDate(), engagement.getDueDate())) {
+            fields.add("dueDate");
+        }
+        if (request.allowedHours() != null && !Objects.equals(request.allowedHours(), engagement.getAllowedHours())) {
+            fields.add("allowedHours");
+        }
+        if (request.allowedTechniques() != null && !Objects.equals(request.allowedTechniques(), engagement.getAllowedTechniques())) {
+            fields.add("allowedTechniques");
+        }
+        if (request.forbiddenTechniques() != null && !Objects.equals(request.forbiddenTechniques(), engagement.getForbiddenTechniques())) {
+            fields.add("forbiddenTechniques");
+        }
+        if (request.emergencyContacts() != null && !Objects.equals(request.emergencyContacts(), engagement.getEmergencyContacts())) {
+            fields.add("emergencyContacts");
+        }
+        if (request.outOfScope() != null && !Objects.equals(request.outOfScope(), engagement.getOutOfScope())) {
+            fields.add("outOfScope");
+        }
+        if (request.inScopeTargets() != null && !Objects.equals(request.inScopeTargets(), engagement.getInScopeTargets())) {
+            fields.add("inScopeTargets");
+        }
+        return fields;
     }
 
     public Engagement findByIdAndAssertLeader(Long engagementId, User user) {
