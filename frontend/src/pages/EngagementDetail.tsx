@@ -61,6 +61,7 @@ export default function EngagementDetailPage() {
       updateEngagement(Number(id), data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+      queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
       setEditing(false);
       setSuccess("Engagement updated");
       setTimeout(() => setSuccess(""), 3000);
@@ -72,6 +73,7 @@ export default function EngagementDetailPage() {
     mutationFn: (userId: number) => removeMember(Number(id), userId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+      queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
       setSuccess("Member removed");
       setTimeout(() => setSuccess(""), 3000);
     },
@@ -82,6 +84,7 @@ export default function EngagementDetailPage() {
     mutationFn: (newLeaderId: number) => transferLeadership(Number(id), newLeaderId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+      queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
       setShowTransfer(false);
       setSuccess("Leadership transferred");
       setTimeout(() => setSuccess(""), 3000);
@@ -95,6 +98,7 @@ export default function EngagementDetailPage() {
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
     queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+    queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
   };
 
   const handleExport = async () => {
@@ -118,6 +122,7 @@ export default function EngagementDetailPage() {
       setSuccess(`Exported ${exportFormat} (${filename})`);
       setTimeout(() => setSuccess(""), 4000);
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
+      queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Export failed");
     } finally {
@@ -494,13 +499,13 @@ export default function EngagementDetailPage() {
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                         entry.action === "APPROVE" ? "bg-success-soft" :
                         entry.action === "REJECT" ? "bg-danger-soft" :
-                        entry.action === "EXPORT" ? "bg-primary-soft" :
+                        (entry.action === "EXPORT" || entry.action === "EXPORT_ENGAGEMENT") ? "bg-primary-soft" :
                         "bg-warning-soft"
                       }`}>
                         <i className={`fa-solid ${
                           entry.action === "APPROVE" ? "fa-check text-success" :
                           entry.action === "REJECT" ? "fa-arrow-rotate-left text-danger" :
-                          entry.action === "EXPORT" ? "fa-file-export text-primary" :
+                          (entry.action === "EXPORT" || entry.action === "EXPORT_ENGAGEMENT") ? "fa-file-export text-primary" :
                           "fa-paper-plane text-warning"
                         } text-xs`}></i>
                       </div>
@@ -518,6 +523,25 @@ export default function EngagementDetailPage() {
                             "{entry.metadata.comment}"
                           </p>
                         )}
+                        {entry.metadata.format && (
+                          <p className="text-text-muted text-sm">
+                            {entry.metadata.format} · {entry.metadata.logCount} logs
+                          </p>
+                        )}
+                        {entry.metadata.changedFields && (
+                          <p className="text-text-muted text-sm">
+                            Updated: {entry.metadata.changedFields.join(", ")}
+                          </p>
+                        )}
+                        {entry.metadata.memberId != null && (
+                          <p className="text-text-muted text-sm">Member #{entry.metadata.memberId}</p>
+                        )}
+                        {entry.metadata.previousLeaderId != null && entry.metadata.newLeaderId != null && (
+                          <p className="text-text-muted text-sm">
+                            Leader #{entry.metadata.previousLeaderId} → #{entry.metadata.newLeaderId}
+                          </p>
+                        )}
+                        <p className="text-text-faint text-xs">Actor #{entry.actorId}</p>
                       </div>
                       <span className="text-text-faint text-xs font-mono whitespace-nowrap">
                         {new Date(entry.timestamp).toLocaleString()}
