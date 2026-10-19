@@ -3,15 +3,37 @@ package io.muzoo.ssc.plogit;
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.LogEntry;
+import io.muzoo.ssc.plogit.domain.LogVersion;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.support.IntegrationTestBase;
 import io.muzoo.ssc.plogit.support.PostgresTestConfig;
+import io.muzoo.ssc.plogit.service.LogService;
+import io.muzoo.ssc.plogit.service.LogVersionService;
+import io.muzoo.ssc.plogit.web.dto.LogUpdateRequest;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.support.TransactionTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -22,6 +44,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Import(PostgresTestConfig.class)
 class LogVersioningIntegrationTest extends IntegrationTestBase {
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
+    @Autowired
+    private LogVersionService versionService;
+
+    @Autowired
+    private LogService logService;
 
     private static final String CREATE_BODY = """
         {
@@ -129,4 +160,125 @@ class LogVersioningIntegrationTest extends IntegrationTestBase {
         mockMvc.perform(get("/api/logs/" + log.getId() + "/history").with(asUser(outsider)))
             .andExpect(status().isNotFound());
     }
+    @Test
+    void duplicateVersionNumbersAreRejectedByDatabase() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        UUID logId = UUID.fromString(createLogViaApi(engagement, leader));
+        LogEntry log = logRepository.findById(logId).orElseThrow();
+
+        assertThrows(DataIntegrityViolationException.class, () ->
+            transactionTemplate.executeWithoutResult(status ->
+                versionRepository.saveAndFlush(LogVersion.builder()
+                    .log(log)
+                    .versionNumber(1)
+                    .snapshot(Map.of("title", "duplicate"))
+                    .editedById(leader.getId())
+                    .build())
+            ));
+
+        assertEquals(1, versionRepository.findByLogOrderByVersionNumberAsc(log).size());
+    }
+
+    @Test
+    void concurrentSnapshotsGetUniqueSequentialNumbers() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        UUID logId = UUID.fromString(createLogViaApi(engagement, leader));
+        CountDownLatch loaded = new CountDownLatch(2);
+        CountDownLatch proceed = new CountDownLatch(1);
+
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        try {
+            List<Future<?>> results = new ArrayList<>();
+            for (int i = 0; i < 2; i++) {
+                results.add(executor.submit(() ->
+                    transactionTemplate.executeWithoutResult(status -> {
+                        LogEntry log = logRepository.findById(logId).orElseThrow();
+                        loaded.countDown();
+                        await(proceed);
+                        versionService.snapshot(log, leader.getId());
+                    })
+                ));
+            }
+
+            assertTrue(loaded.await(10, TimeUnit.SECONDS));
+            proceed.countDown();
+            for (Future<?> result : results) {
+                result.get(20, TimeUnit.SECONDS);
+            }
+        } finally {
+            proceed.countDown();
+            executor.shutdownNow();
+        }
+
+        LogEntry log = logRepository.findById(logId).orElseThrow();
+        List<Integer> versions = versionRepository.findByLogOrderByVersionNumberAsc(log).stream()
+            .map(LogVersion::getVersionNumber)
+            .toList();
+        assertEquals(List.of(1, 2, 3), versions);
+    }
+
+    @Test
+    void concurrentEditsOnlySnapshotCommittedChanges() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        UUID logId = UUID.fromString(createLogViaApi(engagement, leader));
+        CountDownLatch loaded = new CountDownLatch(2);
+        CountDownLatch proceed = new CountDownLatch(1);
+
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        try {
+            List<Future<Throwable>> results = new ArrayList<>();
+            for (int i = 0; i < 2; i++) {
+                String title = "Concurrent edit " + i;
+                results.add(executor.submit(() -> {
+                    try {
+                        transactionTemplate.executeWithoutResult(status -> {
+                            logRepository.findById(logId).orElseThrow();
+                            loaded.countDown();
+                            await(proceed);
+                            logService.update(logId, new LogUpdateRequest(
+                                null, title, null, null, null, null, null, null, null, null
+                            ), leader);
+                        });
+                        return null;
+                    } catch (Throwable ex) {
+                        return ex;
+                    }
+                }));
+            }
+
+            assertTrue(loaded.await(10, TimeUnit.SECONDS));
+            proceed.countDown();
+
+            List<Throwable> failures = new ArrayList<>();
+            for (Future<Throwable> result : results) {
+                Throwable failure = result.get(20, TimeUnit.SECONDS);
+                if (failure != null) {
+                    failures.add(failure);
+                }
+            }
+            assertEquals(1, failures.size());
+            assertInstanceOf(OptimisticLockingFailureException.class, failures.get(0));
+        } finally {
+            proceed.countDown();
+            executor.shutdownNow();
+        }
+
+        LogEntry log = logRepository.findById(logId).orElseThrow();
+        List<LogVersion> versions = versionRepository.findByLogOrderByVersionNumberAsc(log);
+        assertEquals(List.of(1, 2), versions.stream().map(LogVersion::getVersionNumber).toList());
+        assertEquals(log.getTitle(), versions.get(1).getSnapshot().get("title"));
+    }
+
+    private void await(CountDownLatch latch) {
+        try {
+            latch.await();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException(ex);
+        }
+    }
+
 }

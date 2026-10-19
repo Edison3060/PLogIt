@@ -67,7 +67,7 @@ public class LogService {
             .lastEditedById(author.getId())
             .build();
 
-        LogEntry saved = logRepository.save(log);
+        LogEntry saved = logRepository.saveAndFlush(log);
         versionService.snapshot(saved, author.getId());
         return LogDetail.from(saved, markdownService);
     }
@@ -163,7 +163,7 @@ public class LogService {
         }
         log.setLastEditedById(editor.getId());
 
-        LogEntry saved = logRepository.save(log);
+        LogEntry saved = logRepository.saveAndFlush(log);
         versionService.snapshot(saved, editor.getId());
         return LogDetail.from(saved, markdownService);
     }
