@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +23,13 @@ import java.time.Instant;
 import java.util.Map;
 
 @Entity
-@Table(name = "log_versions")
+@Table(
+    name = "log_versions",
+    uniqueConstraints = @UniqueConstraint(
+        name = "uk_log_versions_log_version",
+        columnNames = {"log_id", "version_number"}
+    )
+)
 @Getter
 @Setter
 @NoArgsConstructor

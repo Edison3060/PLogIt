@@ -5,6 +5,8 @@ import io.muzoo.ssc.plogit.domain.LogSnapshot;
 import io.muzoo.ssc.plogit.domain.LogVersion;
 import io.muzoo.ssc.plogit.repository.LogVersionRepository;
 import io.muzoo.ssc.plogit.web.dto.LogVersionSummary;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,13 +17,18 @@ import java.util.List;
 public class LogVersionService {
 
     private final LogVersionRepository versionRepository;
+    private final EntityManager entityManager;
 
-    public LogVersionService(LogVersionRepository versionRepository) {
+    public LogVersionService(LogVersionRepository versionRepository, EntityManager entityManager) {
         this.versionRepository = versionRepository;
+        this.entityManager = entityManager;
     }
 
     public void snapshot(LogEntry log, Long editedById) {
-        int nextVersion = versionRepository.findByLogOrderByVersionNumberAsc(log).size() + 1;
+        entityManager.lock(log, LockModeType.PESSIMISTIC_WRITE);
+        int nextVersion = versionRepository.findTopByLogOrderByVersionNumberDesc(log)
+            .map(version -> version.getVersionNumber() + 1)
+            .orElse(1);
         LogVersion version = LogVersion.builder()
             .log(log)
             .versionNumber(nextVersion)
