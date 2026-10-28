@@ -96,7 +96,7 @@ jobs:
       - name: Test
         if: steps.check.outputs.exists == 'true'
         working-directory: frontend
-        run: npm test --if-present
+        run: npm test
 
   semgrep:
     name: Semgrep - SAST
