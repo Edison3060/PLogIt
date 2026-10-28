@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -166,4 +168,51 @@ class LogAuthzIntegrationTest extends IntegrationTestBase {
                     """))
             .andExpect(status().isForbidden());
     }
+    @Test
+    void authorCannotEditApprovedOrExportedLog() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+
+        for (ReviewState state : new ReviewState[]{ReviewState.APPROVED, ReviewState.EXPORTED}) {
+            LogEntry log = createLog(engagement, author, state);
+
+            mockMvc.perform(put(logUri(log.getId()))
+                    .with(asUser(author))
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("""
+                        {"title":"unauthorized change"}
+                        """))
+                .andExpect(status().isConflict());
+
+            LogEntry unchanged = logRepository.findById(log.getId()).orElseThrow();
+            assertEquals("Test log", unchanged.getTitle());
+            assertEquals(state, unchanged.getReviewState());
+        }
+    }
+
+    @Test
+    void leaderCannotEditSubmittedLog() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        LogEntry log = createLog(engagement, author, ReviewState.SUBMITTED);
+
+        mockMvc.perform(put(logUri(log.getId()))
+                .with(asUser(leader))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"title":"unauthorized change"}
+                    """))
+            .andExpect(status().isConflict());
+
+        LogEntry unchanged = logRepository.findById(log.getId()).orElseThrow();
+        assertEquals("Test log", unchanged.getTitle());
+        assertEquals(ReviewState.SUBMITTED, unchanged.getReviewState());
+    }
+
 }
