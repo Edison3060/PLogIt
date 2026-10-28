@@ -1,6 +1,7 @@
 package io.muzoo.ssc.plogit;
 
 import io.muzoo.ssc.plogit.domain.Engagement;
+import io.muzoo.ssc.plogit.domain.EngagementMember;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.LogEntry;
 import io.muzoo.ssc.plogit.domain.ReviewState;
@@ -12,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+
+import java.time.Instant;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -231,4 +234,81 @@ class AttachmentIntegrationTest extends IntegrationTestBase {
                 .with(csrf()))
             .andExpect(status().isForbidden());
     }
+    @Test
+    void renamedTextFileCannotBypassImageValidation() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.DRAFT);
+        MockMultipartFile disguisedFile = new MockMultipartFile(
+            "file", "exploit.png", MediaType.IMAGE_PNG_VALUE, "<script>alert(1)</script>".getBytes()
+        );
+
+        mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                .file(disguisedFile)
+                .with(asUser(leader))
+                .with(csrf()))
+            .andExpect(status().isConflict());
+
+        mockMvc.perform(get("/api/logs/" + log.getId() + "/attachments")
+                .with(asUser(leader)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(0));
+    }
+
+    @Test
+    void missingCsrfTokenRejectsAttachmentUpload() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.DRAFT);
+
+        mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                .file(pngFile())
+                .with(asUser(leader)))
+            .andExpect(status().isForbidden());
+
+        mockMvc.perform(get("/api/logs/" + log.getId() + "/attachments")
+                .with(asUser(leader)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(0));
+    }
+
+    @Test
+    void removedMemberCannotListDownloadOrUploadAttachments() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        Engagement engagement = createEngagement(leader);
+        EngagementMember membership = addMember(engagement, member, EngagementRole.MEMBER);
+        LogEntry log = createLog(engagement, member, ReviewState.DRAFT);
+
+        String response = mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                .file(pngFile())
+                .with(asUser(member))
+                .with(csrf()))
+            .andExpect(status().isOk())
+            .andReturn().getResponse().getContentAsString();
+        Long attachmentId = Long.parseLong(response.replaceAll(".*\"id\":(\\d+).*", "$1"));
+
+        membership.setRemovedAt(Instant.now());
+        memberRepository.save(membership);
+
+        mockMvc.perform(get("/api/logs/" + log.getId() + "/attachments")
+                .with(asUser(member)))
+            .andExpect(status().isNotFound());
+
+        mockMvc.perform(get("/api/logs/" + log.getId() + "/attachments/" + attachmentId)
+                .with(asUser(member)))
+            .andExpect(status().isNotFound());
+
+        mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                .file(pngFile())
+                .with(asUser(member))
+                .with(csrf()))
+            .andExpect(status().isNotFound());
+
+        mockMvc.perform(get("/api/logs/" + log.getId() + "/attachments")
+                .with(asUser(leader)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(1));
+    }
+
 }
