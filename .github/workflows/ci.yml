@@ -85,6 +85,7 @@ jobs:
         if: steps.check.outputs.exists == 'true'
         working-directory: frontend
         run: |
+          npm install --global npm@11.19.1
           npm install --package-lock-only --ignore-scripts --no-audit --no-fund
           echo "LOCKFILE_BASE64_BEGIN"
           base64 -w 160 package-lock.json
