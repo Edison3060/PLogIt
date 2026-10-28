@@ -28,7 +28,7 @@ function renderLog(log: Record<string, unknown>) {
   vi.mocked(useLog).mockReturnValue({
     data: log,
     isLoading: false,
-  } as ReturnType<typeof useLog>);
+  } as unknown as ReturnType<typeof useLog>);
   return render(
     <MemoryRouter initialEntries={["/engagements/1/logs/test-log"]}>
       <Routes>
@@ -69,7 +69,7 @@ describe("LogDetail HTML rendering", () => {
     vi.mocked(useLogHistory).mockReturnValue({
       data: [],
       isLoading: false,
-    } as ReturnType<typeof useLogHistory>);
+    } as unknown as ReturnType<typeof useLogHistory>);
     vi.mocked(useTransitionLog).mockReturnValue({
       mutate: vi.fn(),
       isPending: false,
