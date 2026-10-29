@@ -188,8 +188,7 @@ jobs:
             cd ~/plogit/Repo
             git fetch --no-tags origin main
             git checkout --detach "$DEPLOY_SHA"
-            if grep -Eq '^APP_ENABLE_TLS=true
- .env; then
+            if grep -Eq '^APP_ENABLE_TLS=true$' .env; then
               docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app --profile tls up -d --build
             else
               docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app up -d --build
