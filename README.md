@@ -171,6 +171,18 @@ The Content Security Policy allows the existing Font Awesome and Google Fonts st
 
 If a host proxy already handles TLS, keep `APP_ENABLE_TLS=false`. The host proxy must forward `/api/*` to port 8090 **without stripping `/api`**, route all other SPA paths to port 8081, forward the original scheme/host, enforce HTTPS with equivalent security headers, and preserve first-party cookies. Run the same verification script against that domain.
 
+### SSH host-key verification for production deployment
+
+The CD job requires a GitHub Actions repository secret named `PROD_SSH_HOST_FINGERPRINT`. Read the public host-key fingerprint **from your trusted production server console** (or another independently verified administrative channel), not from an unverified `ssh-keyscan` connection:
+
+```bash
+ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub -E sha256
+```
+
+Copy only the `SHA256:...` value into **GitHub repository → Settings → Secrets and variables → Actions → New repository secret**, with the name `PROD_SSH_HOST_FINGERPRINT`. Verify that it belongs to the actual host key presented by SSH. If the server uses a different host-key algorithm, inspect the matching `/etc/ssh/ssh_host_*.pub` key instead. A legitimate host-key rotation requires updating this secret from a newly verified fingerprint.
+
+Deployment **fails closed** when the fingerprint secret is missing or malformed; appleboy/ssh-action checks that the remote SSH host presents the pinned key. The deploy continues checking out `DEPLOY_SHA` (the exact CI-tested commit), not the moving `main` branch. GitHub Actions pins Trivy to v0.76.1 and checks the release checksum manifest against a digest committed in the workflow before executing the downloaded scanner. The vulnerability database remains updateable, so future findings can still block CI.
+
 ## Continuous integration
 
 Every push runs a GitHub Actions pipeline. The backend job builds and runs the full test suite with Testcontainers against a real PostgreSQL on Java 21. The frontend job installs dependencies, lints with ESLint, type-checks and builds with Vite. Two security scanners run and can fail the build: Semgrep with the default, OWASP Top Ten, and secrets rulesets, and Trivy across dependencies, secrets, and misconfiguration at high and critical severity. All GitHub Actions are pinned to full commit SHAs, not mutable tags, after Semgrep flagged mutable-tag supply-chain risk in the pipeline itself.
