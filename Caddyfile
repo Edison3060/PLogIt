@@ -1,22 +1,21 @@
-# PLogIt - reverse proxy + automatic HTTPS (template, Slice 11).
-# APP_DOMAIN and ACME_EMAIL come from .env via docker-compose.prod.yml.
-# Caddy automatically provisions and renews a Let's Encrypt certificate.
-
+# PLogIt HTTPS reverse proxy.
 {
-	email {$ACME_EMAIL}
+  email {$ACME_EMAIL}
 }
-
 {$APP_DOMAIN} {
-	encode zstd gzip
-
-	# API -> Spring Boot
-	@api path /api/*
-	handle @api {
-		reverse_proxy backend:8080
-	}
-
-	# Everything else -> static SPA (nginx)
-	handle {
-		reverse_proxy frontend:80
-	}
+  encode zstd gzip
+  header {
+    Strict-Transport-Security "max-age=31536000"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "DENY"
+    Referrer-Policy "strict-origin-when-cross-origin"
+    Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+  }
+  @api path /api/*
+  handle @api {
+    reverse_proxy backend:8080
+  }
+  handle {
+    reverse_proxy frontend:80
+  }
 }

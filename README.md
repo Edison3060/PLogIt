@@ -89,12 +89,12 @@ Export is a state-changing action: every approved log included in the pack is ma
 
 PLogIt is two separate applications. The frontend is a React single-page app built by Vite. The backend is a standalone Spring Boot REST API. They talk over HTTP and JSON and are never merged into one process.
 
-The Vite dev proxy serves the API under the same origin as the SPA during development. In production, a reverse proxy of your choice fronts the two app containers and does the same same-origin routing, so the browser never deals with CORS and the session cookie stays first-party. The production Compose file deliberately binds the backend and frontend ports to loopback only, which means the containers are not reachable on a public interface and something has to sit in front of them. That proxy layer is left to whoever deploys: Caddy and Nginx are both common choices, and the repo ships a `Caddyfile` template for convenience, but the project does not mandate either. Whatever you run, set `server.forward-headers-strategy: framework` (already in the prod Spring profile) so Spring honors the `X-Forwarded-*` headers.
+The Vite dev proxy serves the API under the same origin as the SPA during development. In production, an optional `tls` Compose profile starts Caddy for automatic HTTPS: requests to `/api/*` reach Spring Boot unchanged and everything else goes to the nginx-hosted SPA. The browser uses one origin, so CORS is unnecessary and session cookies remain first-party. The backend and frontend also retain their loopback ports for deployments with an existing host-level proxy. Spring's production `server.forward-headers-strategy: framework` honors Caddy's `X-Forwarded-*` headers. See **Production HTTPS** below.
 
 ```mermaid
 flowchart TD
     Browser["Browser\nReact SPA (Vite build)"] -->|"same-origin HTTPS"| Proxy
-    Proxy["Reverse proxy (your choice)\nCaddy, Nginx, or similar\nTLS via Let's Encrypt\nserves the SPA, proxies /api"] --> Frontend
+    Proxy["Caddy (optional TLS profile) or host proxy\nautomatic HTTPS\nSPA + /api routes"] --> Frontend
     Proxy --> Backend
     Frontend["Frontend container"] --> Backend["Backend (Spring Boot)\nSpring Security (session + CSRF)\nJPA / Hibernate, Flyway"]
     Backend --> DB[("PostgreSQL")]
@@ -117,7 +117,7 @@ A handful of patterns carry real weight in the code rather than sitting in comme
 | Reporting | OpenHTMLtoPDF 1.1.40 (PDF), Jackson (JSON), hand-rolled RFC 4180 CSV |
 | Frontend | React 18, Vite 6, TypeScript, Tailwind CSS 3.4 |
 | Containers | Docker multi-stage builds, non-root images |
-| Proxy and TLS | Bring your own reverse proxy (Caddy template included; Nginx works too). Let's Encrypt for TLS. |
+| Proxy and TLS | Optional Caddy production profile (HTTPS and security headers), or an existing host proxy. |
 | CI/CD | GitHub Actions with Semgrep (SAST) and Trivy (CVE, secret, misconfiguration scanning), both blocking |
 
 A few of these were deliberate. The frontend is a Vite SPA rather than Next.js, on purpose, so no frontend framework can quietly become a second backend; the backend is Spring Boot and only Spring Boot. Authentication uses stateful session cookies with CSRF protection rather than JWTs, which suits an app served from a single origin and avoids the storage and expiry concerns tokens introduce. The UI is written from scratch against a token-based design system rather than pulled from a component kit, so the look is purpose-built for a security tool rather than a generic framework skin.
@@ -145,6 +145,32 @@ The frontend is served at http://localhost:5173, the API at http://localhost:808
 
 To run the backend and frontend directly during development, start Postgres with `docker compose up -d db`, then run the backend with `mvn spring-boot:run` and the frontend with `npm install && npm run dev` in the `frontend/` directory.
 
+## Production HTTPS
+
+Production deployments can use the included Caddy reverse proxy or keep an existing host-level reverse proxy. **Caddy is opt-in**, so a deployment update will not unexpectedly take over ports 80 and 443.
+
+Before enabling Caddy, point your domain's DNS A/AAAA records to the server, open inbound TCP 80/443 (and optionally UDP 443 for HTTP/3), and ensure no other service owns those ports. In the production server's existing `.env` (never commit this file), set:
+
+```dotenv
+APP_ENABLE_TLS=true
+APP_DOMAIN=plogit.example.com
+ACME_EMAIL=admin@example.com
+```
+
+The GitHub Actions CD step reads `APP_ENABLE_TLS=true` and starts the `tls` profile on subsequent deployments. You can also start or validate it manually:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app --profile tls config --quiet
+docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app --profile tls up -d --build
+APP_DOMAIN=plogit.example.com sh scripts/verify-https.sh
+```
+
+The verification script checks HTTPS, unchanged `/api` routing, SPA deep links, HTTP-to-HTTPS redirects, HSTS, CSP, other security headers, and the `Secure`, `SameSite=Lax`, JavaScript-readable CSRF cookie. It must be run against the actual public domain once DNS and TLS are configured; CI validates the Caddyfile and Compose configuration, but cannot prove a public certificate was issued. After logging in, check that the `JSESSIONID` cookie is `Secure`, `HttpOnly` and `SameSite=Lax`.
+
+The Content Security Policy allows the existing Font Awesome and Google Fonts stylesheet/font origins while restricting scripts and API requests to the same origin. Caddy passes the `X-Forwarded-Proto` and `X-Forwarded-Host` headers to Spring, whose production profile honors them. Certificates live in persistent Caddy volumes. Backend (`127.0.0.1:8090`) and frontend (`127.0.0.1:8081`) remain loopback-only, and the production database port is not published.
+
+If a host proxy already handles TLS, keep `APP_ENABLE_TLS=false`. The host proxy must forward `/api/*` to port 8090 **without stripping `/api`**, route all other SPA paths to port 8081, forward the original scheme/host, enforce HTTPS with equivalent security headers, and preserve first-party cookies. Run the same verification script against that domain.
+
 ## Continuous integration
 
 Every push runs a GitHub Actions pipeline. The backend job builds and runs the full test suite with Testcontainers against a real PostgreSQL on Java 21. The frontend job installs dependencies, lints with ESLint, type-checks and builds with Vite. Two security scanners run and can fail the build: Semgrep with the default, OWASP Top Ten, and secrets rulesets, and Trivy across dependencies, secrets, and misconfiguration at high and critical severity. All GitHub Actions are pinned to full commit SHAs, not mutable tags, after Semgrep flagged mutable-tag supply-chain risk in the pipeline itself.
@@ -165,7 +191,7 @@ The backend has 76 integration test methods running against a real PostgreSQL in
 | `frontend/src/` | `components/`, `hooks/`, `lib/`, `pages/` |
 | `.github/workflows/ci.yml` | CI pipeline (Semgrep + Trivy, blocking) |
 | `docker-compose.yml` / `docker-compose.prod.yml` | Dev and prod Compose stacks |
-| `Caddyfile` | Optional Caddy template for reverse proxy and automatic TLS (use as-is, or replace with your own Nginx/Traefik config) |
+| `Caddyfile` | Optional production HTTPS proxy, API routing and response security headers |
 | `.env.example` | Documented configuration keys |
 
 The codebase has 9 JPA entities, 9 repositories, 24 REST endpoints, and about 9 React pages across the engagement and log workflows.
