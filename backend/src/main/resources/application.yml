@@ -33,3 +33,10 @@ logging:
   level:
     org.hibernate.SQL: warn
     org.hibernate.type.descriptor.sql: warn
+
+plogit:
+  auth:
+    rate-limit:
+      # In-process, per-client-IP budgets (login per minute, registration per 10 minutes).
+      login-attempts: 20
+      registration-attempts: 5

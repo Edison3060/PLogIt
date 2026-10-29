@@ -25,8 +25,8 @@ export async function registerUser(
   email: string,
   password: string,
   displayName: string
-): Promise<User> {
-  return apiFetch<User>("/auth/register", {
+): Promise<{ message: string }> {
+  return apiFetch<{ message: string }>("/auth/register", {
     method: "POST",
     body: JSON.stringify({ email, password, displayName }),
   });

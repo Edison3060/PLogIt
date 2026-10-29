@@ -27,7 +27,6 @@ export function useLogin() {
 }
 
 export function useRegister() {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({
       email,
@@ -38,9 +37,6 @@ export function useRegister() {
       password: string;
       displayName: string;
     }) => registerUser(email, password, displayName),
-    onSuccess: (user) => {
-      queryClient.setQueryData(["currentUser"], user);
-    },
   });
 }
 

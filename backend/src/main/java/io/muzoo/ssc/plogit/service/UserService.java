@@ -21,15 +21,22 @@ public class UserService {
     }
 
     public User register(String email, String password, String displayName) {
+        // Keep password hashing work similar for new and already-registered emails.
+        String passwordHash = passwordEncoder.encode(password);
         if (userRepository.existsByEmail(email)) {
             throw new ConflictException("Email already registered");
         }
         User user = User.builder()
             .email(email)
-            .passwordHash(passwordEncoder.encode(password))
+            .passwordHash(passwordHash)
             .displayName(displayName)
             .build();
         return userRepository.save(user);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean emailExists(String email) {
+        return userRepository.existsByEmail(email);
     }
 
     @Transactional(readOnly = true)

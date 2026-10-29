@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useLogin } from "../hooks/useAuth";
 
 const inputClass =
@@ -15,6 +15,8 @@ export default function Login() {
 
   const login = useLogin();
   const navigate = useNavigate();
+  const location = useLocation();
+  const registrationMessage = (location.state as { registrationMessage?: string } | null)?.registrationMessage;
 
   useEffect(() => {
     localStorage.setItem("plogit-theme", dark ? "dark" : "light");
@@ -54,6 +56,11 @@ export default function Login() {
         </div>
 
         <div className="bg-bg-card rounded-xl shadow-sm border border-border-default p-6 md:p-8">
+          {registrationMessage && (
+            <p className="bg-success-soft text-success rounded-lg p-3 text-sm">
+              {registrationMessage}
+            </p>
+          )}
           <form onSubmit={onSubmit} className="flex flex-col gap-4">
             <label className="flex flex-col gap-1.5">
               <span className="text-sm font-medium text-text-strong">Email</span>
