@@ -8,10 +8,10 @@
 #    BLOCKING - they fail the build on findings.
 #
 # Security notes:
-#  - We install Trivy as a CLI binary directly rather than using
-#    aquasecurity/trivy-action, which was compromised in March 2026 (75 version
-#    tags force-updated with credential-stealing malware). Installing the binary
-#    from the official source avoids the supply-chain risk entirely.
+#  - We install Trivy from a pinned release asset rather than using
+#    aquasecurity/trivy-action or executing a mutable installation script.
+#    The published checksum manifest is also pinned by SHA256, so altered
+#    scanner binaries fail the build before execution.
 #  - All third-party actions are pinned to full 40-char commit SHAs, not
 #    mutable tags like @v4. Mutable tags can be silently repointed by the
 #    action owner, enabling supply-chain attacks (same root cause as the
@@ -116,10 +116,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-      - name: Install Trivy CLI
+      - name: Install pinned Trivy CLI
         run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+          set -euo pipefail
+          version="0.76.1"
+          archive="trivy_${version}_Linux-64bit.tar.gz"
+          checksums="trivy_${version}_checksums.txt"
+          release="https://github.com/aquasecurity/trivy/releases/download/v${version}"
+
+          curl -fsSL --retry 3 -o "$checksums" "$release/$checksums"
+          echo "885debc41b570179e81af560e5f393a66be29b9ff8c52915674f3eb2304c535d  $checksums" | sha256sum --check
+
+          curl -fsSL --retry 3 -o "$archive" "$release/$archive"
+          checksum_line="$(awk -v file="$archive" '$2 == file {print}' "$checksums")"
+          test -n "$checksum_line"
+          printf '%s\n' "$checksum_line" | sha256sum --check
+
+          tar -xzf "$archive" trivy
+          sudo install -m 0755 trivy /usr/local/bin/trivy
           trivy --version
+          test "$(trivy --version | head -1)" = "Version: ${version}"
       - name: Set up JDK (for Maven dependency resolution)
         uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9
         with:
@@ -174,6 +190,14 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
+      - name: Require trusted SSH host fingerprint
+        env:
+          PROD_SSH_HOST_FINGERPRINT: ${{ secrets.PROD_SSH_HOST_FINGERPRINT }}
+        run: |
+          if [[ ! "$PROD_SSH_HOST_FINGERPRINT" =~ ^SHA256:[A-Za-z0-9+/]{43}$ ]]; then
+            echo "::error::Configure PROD_SSH_HOST_FINGERPRINT with your verified server SSH host-key SHA256 fingerprint before deployment."
+            exit 1
+          fi
       - name: SSH and Deploy
         uses: appleboy/ssh-action@068c0c7a4e59a5ae12fb7cb454b05735d830c82b
         env:
@@ -182,6 +206,7 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.PROD_SSH_KEY }}
+          fingerprint: ${{ secrets.PROD_SSH_HOST_FINGERPRINT }}
           envs: DEPLOY_SHA
           script: |
             set -eu
