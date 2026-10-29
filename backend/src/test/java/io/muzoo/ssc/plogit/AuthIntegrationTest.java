@@ -27,9 +27,10 @@ class AuthIntegrationTest extends IntegrationTestBase {
                 .content("""
                     {"email":"new@test.local","password":"password123","displayName":"New User"}
                     """))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.email").value("new@test.local"))
-            .andExpect(jsonPath("$.displayName").value("New User"));
+            .andExpect(status().isAccepted())
+            .andExpect(jsonPath("$.message").value("Registration request received. Please sign in"));
+
+        org.junit.jupiter.api.Assertions.assertTrue(userRepository.existsByEmail("new@test.local"));
     }
 
     @Test

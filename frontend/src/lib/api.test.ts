@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { apiFetch } from "./api";
-import { fetchCurrentUser, loginUser, logoutUser } from "./auth";
+import { fetchCurrentUser, loginUser, logoutUser, registerUser } from "./auth";
 
 describe("API authentication and CSRF", () => {
   const fetchMock = vi.fn();
@@ -68,6 +68,29 @@ describe("API authentication and CSRF", () => {
     });
 
     await expect(apiFetch("/engagements/1")).rejects.toThrow("Forbidden");
+  });
+
+  it("returns a generic response for registration without a user session", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      status: 202,
+      json: async () => ({ message: "Registration request received. Please sign in" }),
+    });
+
+    await expect(registerUser("user@test.local", "password123", "User")).resolves.toEqual({
+      message: "Registration request received. Please sign in",
+    });
+
+    expect(fetchMock).toHaveBeenCalledWith("/api/auth/register", {
+      credentials: "include",
+      method: "POST",
+      body: JSON.stringify({
+        email: "user@test.local",
+        password: "password123",
+        displayName: "User",
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
   });
 
   it("treats a rejected session lookup as logged out", async () => {

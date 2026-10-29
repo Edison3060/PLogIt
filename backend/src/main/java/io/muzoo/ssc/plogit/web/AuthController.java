@@ -8,6 +8,8 @@ import io.muzoo.ssc.plogit.web.dto.ApiResponse;
 import io.muzoo.ssc.plogit.web.dto.LoginRequest;
 import io.muzoo.ssc.plogit.web.dto.RegisterRequest;
 import io.muzoo.ssc.plogit.web.dto.UserResponse;
+import io.muzoo.ssc.plogit.web.exception.ConflictException;
+import org.springframework.dao.DataIntegrityViolationException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -37,13 +39,17 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request) {
-        User user = userService.register(
-            request.email(),
-            request.password(),
-            request.displayName()
-        );
-        return ResponseEntity.ok(UserResponse.from(user));
+    public ResponseEntity<ApiResponse> register(@Valid @RequestBody RegisterRequest request) {
+        try {
+            userService.register(request.email(), request.password(), request.displayName());
+        } catch (ConflictException ex) {
+            // Do not disclose whether an email address is registered.
+        } catch (DataIntegrityViolationException ex) {
+            if (!userService.emailExists(request.email())) {
+                throw ex;
+            }
+        }
+        return ResponseEntity.accepted().body(ApiResponse.of("Registration request received. Please sign in"));
     }
 
     @PostMapping("/login")

@@ -128,6 +128,14 @@ Security is the point of the project, so it runs through the whole thing. Authen
 
 CSRF protection uses a cookie-based token that the SPA reads and echoes back in a header on unsafe requests. Markdown is sanitized on read with a strict allowlist, so script tags, javascript URLs, and event handlers are stripped before the HTML reaches the browser. Image uploads are validated by magic bytes, not extension. The CI scanners are treated as gates: when Semgrep or Trivy flags something, it gets fixed rather than suppressed. During development Trivy flagged a CVE in the OWASP HTML Sanitizer itself, the very library added for protection, and it was patched by a version bump.
 
+### Authentication request limits
+
+The backend limits each client IP to **20 login attempts per minute** and **5 registration attempts per 10 minutes** by default. Requests over the limit receive HTTP `429 Too Many Requests` with a `Retry-After` header. The limits also apply to malformed requests; clients cannot avoid them by submitting invalid JSON. Login and registration have separate budgets.
+
+Valid registration attempts return the same generic HTTP `202 Accepted` response whether the address is new or already registered. Registration does not create a signed-in session; the user proceeds to the login page. Authentication failures keep the same generic error for unknown emails and incorrect passwords.
+
+The in-memory limiter bounds its tracked client-IP state and is intended for the project's single backend instance. For multiple backend replicas, enforce a shared limit at the reverse proxy or replace the local store with a distributed one. In production, use Caddy or a **trusted** host proxy that removes untrusted forwarded IP headers; rate limiting uses the servlet's resolved remote address rather than client-supplied `X-Forwarded-For` values. The budgets can be adjusted with `plogit.auth.rate-limit.login-attempts` and `plogit.auth.rate-limit.registration-attempts` in Spring configuration.
+
 ## Running it locally
 
 Docker and Docker Compose are the only things you need installed. Java and Node both run inside the build.

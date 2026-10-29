@@ -1,6 +1,8 @@
 package io.muzoo.ssc.plogit.web.exception;
 
 import io.muzoo.ssc.plogit.web.dto.ErrorResponse;
+import io.muzoo.ssc.plogit.security.AuthRateLimitInterceptor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.ResponseEntity;
@@ -70,6 +72,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
             .body(ErrorResponse.of(400, "Bad Request", "Invalid value for parameter: " + ex.getName()));
+    }
+
+    @ExceptionHandler(AuthRateLimitInterceptor.RateLimitExceededException.class)
+    public ResponseEntity<ErrorResponse> handleRateLimit(AuthRateLimitInterceptor.RateLimitExceededException ex) {
+        return ResponseEntity
+            .status(HttpStatus.TOO_MANY_REQUESTS)
+            .header(HttpHeaders.RETRY_AFTER, String.valueOf(ex.getRetryAfterSeconds()))
+            .body(ErrorResponse.of(429, "Too Many Requests", ex.getMessage()));
     }
 
     @ExceptionHandler(AuthenticationException.class)

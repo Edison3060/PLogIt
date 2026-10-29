@@ -37,7 +37,9 @@ export default function Register() {
     register.mutate(
       { email, password, displayName },
       {
-        onSuccess: () => navigate("/"),
+        onSuccess: () => navigate("/login", {
+          state: { registrationMessage: "Registration request received. Please try signing in." },
+        }),
         onError: (err: Error) => setError(err.message),
       }
     );
