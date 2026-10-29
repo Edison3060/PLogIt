@@ -133,9 +133,44 @@ jobs:
         run: |
           trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed .
 
+  proxy:
+    name: Production proxy - validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Validate Caddyfile
+        run: |
+          docker run --rm -e APP_DOMAIN=plogit.example.com -e ACME_EMAIL=admin@example.com \
+            -v "$PWD/Caddyfile:/etc/caddy/Caddyfile:ro" \
+            caddy:2-alpine caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+      - name: Validate production Compose and verification script
+        env:
+          APP_DOMAIN: plogit.example.com
+          ACME_EMAIL: admin@example.com
+          POSTGRES_DB: plogit
+          POSTGRES_USER: plogit
+          POSTGRES_PASSWORD: ci-example-password
+          APP_SESSION_SECRET: ci-example-secret
+          APP_CORS_ORIGINS: http://localhost:5173
+          SEED_USER_EMAIL: leader@plogit.local
+          SEED_USER_PASSWORD: ci-example-password
+          SEED_USER_NAME: Demo Leader
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app --profile tls config --quiet
+          docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app --profile tls config --format json | python3 -c '
+          import json, sys
+          services = json.load(sys.stdin)["services"]
+          published = {(str(p["published"]), p["target"]) for p in services["caddy"]["ports"]}
+          assert ("80", 80) in published and ("443", 443) in published
+          assert not services["db"].get("ports")
+          for name in ("backend", "frontend"):
+              assert all(port.get("host_ip") == "127.0.0.1" for port in services[name]["ports"])
+          '
+          sh -n scripts/verify-https.sh
+
   deploy:
     name: CD - Deploy to Production
-    needs: [backend, frontend, semgrep, trivy]
+    needs: [backend, frontend, semgrep, trivy, proxy]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
@@ -153,4 +188,9 @@ jobs:
             cd ~/plogit/Repo
             git fetch --no-tags origin main
             git checkout --detach "$DEPLOY_SHA"
-            docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app up -d --build
+            if grep -Eq '^APP_ENABLE_TLS=true
+ .env; then
+              docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app --profile tls up -d --build
+            else
+              docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app up -d --build
+            fi

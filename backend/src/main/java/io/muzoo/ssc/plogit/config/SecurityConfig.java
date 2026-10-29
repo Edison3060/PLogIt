@@ -29,6 +29,9 @@ public class SecurityConfig {
     @Value("${plogit.cors.origins:}")
     private String corsOrigins;
 
+    @Value("${plogit.cookies.secure:false}")
+    private boolean secureCookies;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -61,6 +64,9 @@ public class SecurityConfig {
         DaoAuthenticationProvider authenticationProvider
     ) throws Exception {
         CookieCsrfTokenRepository csrfRepo = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        if (secureCookies) {
+            csrfRepo.setCookieCustomizer(cookie -> cookie.secure(true).sameSite("Lax"));
+        }
         http
             .authenticationProvider(authenticationProvider)
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))

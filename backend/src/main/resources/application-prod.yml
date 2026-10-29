@@ -1,5 +1,11 @@
 server:
   forward-headers-strategy: framework
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        secure: true
+        same-site: lax
 
 spring:
   datasource:
@@ -11,6 +17,8 @@ spring:
     show-sql: false
 
 plogit:
+  cookies:
+    secure: true
   storage:
     dir: ${APP_STORAGE_DIR:/data/attachments}
   cors:
