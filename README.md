@@ -124,7 +124,7 @@ A few of these were deliberate. The frontend is a Vite SPA rather than Next.js, 
 
 ## Security
 
-Security is the point of the project, so it runs through the whole thing. Authentication uses Spring Security with session cookies and BCrypt password hashing. Authorization is enforced on the server: every engagement-scoped endpoint checks membership, non-members get a 404 rather than a 403 so engagement existence cannot be enumerated, and leader-only actions use a dedicated assertion. The security filter chain requires authentication for everything except health, login, and registration.
+Security is the point of the project, so it runs through the whole thing. Authentication uses Spring Security with session cookies and BCrypt password hashing. Sessions are stored server-side; they do not use an application-defined `APP_SESSION_SECRET` or cookie-signing secret. Authorization is enforced on the server: every engagement-scoped endpoint checks membership, non-members get a 404 rather than a 403 so engagement existence cannot be enumerated, and leader-only actions use a dedicated assertion. The security filter chain requires authentication for everything except health, login, and registration.
 
 CSRF protection uses a cookie-based token that the SPA reads and echoes back in a header on unsafe requests. Markdown is sanitized on read with a strict allowlist, so script tags, javascript URLs, and event handlers are stripped before the HTML reaches the browser. Image uploads are validated by magic bytes, not extension. The CI scanners are treated as gates: when Semgrep or Trivy flags something, it gets fixed rather than suppressed. During development Trivy flagged a CVE in the OWASP HTML Sanitizer itself, the very library added for protection, and it was patched by a version bump.
 
@@ -143,7 +143,7 @@ Docker and Docker Compose are the only things you need installed. Java and Node 
 ```bash
 # 1. Configure the environment
 cp .env.example .env
-# edit .env: set POSTGRES_PASSWORD and APP_SESSION_SECRET
+# edit .env: set POSTGRES_PASSWORD
 
 # 2. Start Postgres, the backend, and the frontend
 docker compose --profile app up --build
