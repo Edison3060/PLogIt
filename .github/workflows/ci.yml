@@ -190,7 +190,6 @@ jobs:
           POSTGRES_DB: plogit
           POSTGRES_USER: plogit
           POSTGRES_PASSWORD: ci-example-password
-          APP_SESSION_SECRET: ci-example-secret
           APP_CORS_ORIGINS: http://localhost:5173
           SEED_USER_EMAIL: leader@plogit.local
           SEED_USER_PASSWORD: ci-example-password
@@ -203,6 +202,7 @@ jobs:
           published = {(str(p["published"]), p["target"]) for p in services["caddy"]["ports"]}
           assert ("80", 80) in published and ("443", 443) in published
           assert not services["db"].get("ports")
+          assert "APP_SESSION_SECRET" not in services["backend"].get("environment", {})
           for name in ("backend", "frontend"):
               assert all(port.get("host_ip") == "127.0.0.1" for port in services[name]["ports"])
           '
