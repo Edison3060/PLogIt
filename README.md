@@ -195,6 +195,14 @@ Deployment **fails closed** when the fingerprint secret is missing or malformed;
 
 Every push runs a GitHub Actions pipeline. The backend job builds and runs the full test suite with Testcontainers against a real PostgreSQL on Java 21. The frontend job installs dependencies, lints with ESLint, type-checks and builds with Vite. Two security scanners run and can fail the build: Semgrep with the default, OWASP Top Ten, and secrets rulesets, and Trivy across dependencies, secrets, and misconfiguration at high and critical severity. All GitHub Actions are pinned to full commit SHAs, not mutable tags, after Semgrep flagged mutable-tag supply-chain risk in the pipeline itself.
 
+### Trivy container image scanning
+
+The Trivy CI job builds the final backend and frontend runtime images from their Dockerfiles and scans both images, in addition to the existing filesystem/dependency/secret/misconfiguration scan. The image scan checks operating-system and application-package vulnerabilities in the **runtime images**, not just source code or build-stage dependencies.
+
+Each target runs two HIGH/CRITICAL checks. The **reporting** check omits `--ignore-unfixed`, prints all findings (including vulnerabilities without an upstream patch), and does not fail CI solely for those findings. The **blocking** check retains `--ignore-unfixed --exit-code 1`, so fixable HIGH/CRITICAL vulnerabilities and other actionable findings still fail CI. This is a conscious policy: unfixed findings are **visible, not silently discarded**, but should be triaged separately for mitigating controls or base-image replacements. Trivy uses its updated advisory database, so new findings can change CI results without source changes.
+
+CI builds and scans both application images at the tested commit. Production Compose currently rebuilds on deployment from that exact commit; it does not pull the precise CI-built image digest. Digest pinning and reproducible base-image selection are separate improvements.
+
 ## Testing
 
 The backend has 76 integration test methods running against a real PostgreSQL in CI via Testcontainers. They cover authentication, engagement authorization and isolation, log CRUD and its edit constraints, the full review state machine including role gating and the export transition, markdown sanitization, attachment upload and download authorization, version history, and the audit trail. A separate HTTP-level test script exercises the real wire contract including the CSRF cookie flow, and it caught a Spring Security 6 deferred-token bug that the MockMvc suite could not, because MockMvc synthesizes CSRF tokens and bypasses the real cookie flow.

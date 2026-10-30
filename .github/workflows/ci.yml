@@ -4,8 +4,8 @@
 # Designed to be GREEN from day one and light up progressively:
 #  - the backend / frontend jobs check whether their code exists in
 #    the first step; if not, the job exits cleanly (no failure).
-#  - Semgrep (SAST) and Trivy (deps + secrets) run on every push/PR and are
-#    BLOCKING - they fail the build on findings.
+#  - Semgrep (SAST) and Trivy (source + built images) run on every push/PR.
+#    Fixable HIGH/CRITICAL findings are blocking; unfixed findings remain visible.
 #
 # Security notes:
 #  - We install Trivy from a pinned release asset rather than using
@@ -145,9 +145,33 @@ jobs:
       - name: Populate local Maven cache
         working-directory: backend
         run: mvn -B dependency:resolve -DskipTests || true
-      - name: Trivy filesystem scan
-        run: |
-          trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed .
+      # Review all HIGH/CRITICAL findings, including those without an upstream fix.
+      # --ignore-unfixed is only used by the blocking check, not the report.
+      - name: Trivy filesystem findings (including unfixed)
+        run: trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 0 .
+
+      - name: Trivy filesystem scan (block fixable findings)
+        run: trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed .
+
+      # Scan the FINAL runtime images, not just their source and dependencies.
+      # Match the build contexts used in docker-compose.yml.
+      - name: Build backend image
+        run: docker build -t plogit-backend:ci ./backend
+
+      - name: Build frontend image
+        run: docker build -t plogit-frontend:ci ./frontend
+
+      - name: Trivy backend image findings (including unfixed)
+        run: trivy image --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 0 plogit-backend:ci
+
+      - name: Trivy backend image scan (block fixable findings)
+        run: trivy image --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed plogit-backend:ci
+
+      - name: Trivy frontend image findings (including unfixed)
+        run: trivy image --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 0 plogit-frontend:ci
+
+      - name: Trivy frontend image scan (block fixable findings)
+        run: trivy image --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed plogit-frontend:ci
 
   proxy:
     name: Production proxy - validate
