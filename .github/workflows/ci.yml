@@ -12,6 +12,8 @@
 #    aquasecurity/trivy-action or executing a mutable installation script.
 #    The published checksum manifest is also pinned by SHA256, so altered
 #    scanner binaries fail the build before execution.
+#  - Container base images are pinned to immutable multi-platform digest refs
+#    across build stages, Compose services, and CI jobs.
 #  - All third-party actions are pinned to full 40-char commit SHAs, not
 #    mutable tags like @v4. Mutable tags can be silently repointed by the
 #    action owner, enabling supply-chain attacks (same root cause as the
@@ -102,7 +104,7 @@ jobs:
     name: Semgrep - SAST
     runs-on: ubuntu-latest
     container:
-      image: semgrep/semgrep
+      image: semgrep/semgrep:latest@sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       # --error makes findings fail the build (blocking).
@@ -182,7 +184,9 @@ jobs:
         run: |
           docker run --rm -e APP_DOMAIN=plogit.example.com -e ACME_EMAIL=admin@example.com \
             -v "$PWD/Caddyfile:/etc/caddy/Caddyfile:ro" \
-            caddy:2-alpine caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+            caddy:2-alpine@sha256:e70b164da81ef698b3ad19af799ea6086ce6d9e48ed4079eb9fe26f6fbf14ee5 caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+      - name: Verify pinned PostgreSQL image is pullable
+        run: docker pull postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
       - name: Validate production Compose and verification script
         env:
           APP_DOMAIN: plogit.example.com
