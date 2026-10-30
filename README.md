@@ -201,7 +201,15 @@ The Trivy CI job builds the final backend and frontend runtime images from their
 
 Each target runs two HIGH/CRITICAL checks. The **reporting** check omits `--ignore-unfixed`, prints all findings (including vulnerabilities without an upstream patch), and does not fail CI solely for those findings. The **blocking** check retains `--ignore-unfixed --exit-code 1`, so fixable HIGH/CRITICAL vulnerabilities and other actionable findings still fail CI. This is a conscious policy: unfixed findings are **visible, not silently discarded**, but should be triaged separately for mitigating controls or base-image replacements. Trivy uses its updated advisory database, so new findings can change CI results without source changes.
 
-CI builds and scans both application images at the tested commit. Production Compose currently rebuilds on deployment from that exact commit; it does not pull the precise CI-built image digest. Digest pinning and reproducible base-image selection are separate improvements.
+CI builds and scans both application images at the tested commit. Production Compose currently rebuilds on deployment from that exact commit; it does not pull the precise CI-built image digest. Pinning the upstream base images below does not change that deployment behavior.
+
+### Immutable Docker image references
+
+All upstream Docker images are referenced as `name:tag@sha256:<manifest-index>` rather than floating tags alone. This covers both Maven/Java and Node/nginx Docker build stages, the PostgreSQL and optional Caddy Compose services, and the Semgrep CI container. The Caddy configuration-validation command uses exactly the same pinned Caddy image as production. The digest selects the immutable multi-platform index, leaving Docker to choose its supported architecture; the tag is included for human readability but cannot override the digest.
+
+The build-stage, nginx, Semgrep, and Caddy digests were obtained from successful GitHub Actions image pulls/builds on October 30, 2026; PostgreSQL's digest comes from the Docker Hub-published `postgres:16-alpine` multi-platform index. The proxy CI job also pulls that pinned PostgreSQL image to catch an invalid or unavailable digest. To take an upstream security update, deliberately review a newer version/index digest, update the reference(s), and rerun the full CI checks and image scans. This is a controlled update rather than an automatic floating-tag change.
+
+Base-image pinning is not a fully hermetic build: package downloads (including the frontend image's `apk upgrade`), dependency resolution, and the Trivy advisory database may still change over time. Production still rebuilds the validated commit instead of pulling an image built in CI.
 
 ## Testing
 
