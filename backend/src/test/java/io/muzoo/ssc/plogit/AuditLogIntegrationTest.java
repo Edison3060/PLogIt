@@ -158,7 +158,7 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
         addMember(engagement, member, EngagementRole.MEMBER);
 
         mockMvc.perform(get("/api/engagements/" + engagement.getId() + "/audit").with(asUser(member)))
-            .andExpect(status().isNotFound());
+            .andExpect(status().isForbidden());
     }
 
     @Test
