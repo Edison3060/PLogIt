@@ -20,5 +20,8 @@ RUN chown -R nginx:nginx /usr/share/nginx/html && \
     touch /var/run/nginx.pid && \
     chown nginx:nginx /var/run/nginx.pid
 EXPOSE 80
+# BusyBox wget is available in the Alpine-based nginx runtime image.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD ["wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
 USER nginx
 CMD ["nginx", "-g", "daemon off;"]

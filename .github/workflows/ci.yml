@@ -163,6 +163,12 @@ jobs:
       - name: Build frontend image
         run: docker build -t plogit-frontend:ci ./frontend
 
+      - name: Validate application image healthchecks
+        run: |
+          test "$(docker image inspect plogit-backend:ci --format '{{json .Config.Healthcheck}}')" != "null"
+          test "$(docker image inspect plogit-frontend:ci --format '{{json .Config.Healthcheck}}')" != "null"
+          docker run --rm --entrypoint /bin/bash plogit-backend:ci -c 'test -x /bin/bash'
+          docker run --rm --entrypoint /bin/sh plogit-frontend:ci -c 'command -v wget'
       - name: Trivy backend image findings (including unfixed)
         run: trivy image --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 0 plogit-backend:ci
 
