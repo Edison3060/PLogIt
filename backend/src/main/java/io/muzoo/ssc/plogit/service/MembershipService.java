@@ -8,6 +8,7 @@ import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.repository.EngagementMemberRepository;
 import io.muzoo.ssc.plogit.repository.EngagementRepository;
 import io.muzoo.ssc.plogit.repository.UserRepository;
+import io.muzoo.ssc.plogit.web.exception.ForbiddenException;
 import io.muzoo.ssc.plogit.web.exception.NotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -65,8 +66,10 @@ public class MembershipService {
 
     @Transactional(readOnly = true)
     public void assertLeader(Engagement engagement, User user) {
+        // Non-members still receive 404 to avoid exposing engagement existence.
+        assertMember(engagement, user);
         if (!isLeader(engagement, user)) {
-            throw new NotFoundException("Engagement not found");
+            throw new ForbiddenException("Only engagement leaders can perform this action");
         }
     }
 
