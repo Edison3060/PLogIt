@@ -10,6 +10,7 @@ import io.muzoo.ssc.plogit.web.dto.CreateEngagementRequest;
 import io.muzoo.ssc.plogit.web.dto.EngagementDetail;
 import io.muzoo.ssc.plogit.web.dto.EngagementSummary;
 import io.muzoo.ssc.plogit.web.dto.ExportRequest;
+import io.muzoo.ssc.plogit.web.dto.TransferLeadershipRequest;
 import io.muzoo.ssc.plogit.web.dto.UpdateEngagementRequest;
 import jakarta.validation.Valid;
 import org.springframework.core.io.ByteArrayResource;
@@ -124,15 +125,11 @@ public class EngagementController {
     @PostMapping("/{id}/transfer-leadership")
     public ResponseEntity<Void> transferLeadership(
         @PathVariable Long id,
-        @RequestBody java.util.Map<String, Long> body,
+        @Valid @RequestBody TransferLeadershipRequest request,
         @CurrentUser User currentUser
     ) {
         Engagement engagement = engagementService.findByIdAndAssertLeader(id, currentUser);
-        Long newLeaderId = body.get("newLeaderId");
-        if (newLeaderId == null) {
-            throw new IllegalArgumentException("newLeaderId is required");
-        }
-        membershipService.transferLeadership(engagement, currentUser, newLeaderId);
+        membershipService.transferLeadership(engagement, currentUser, request.newLeaderId());
         return ResponseEntity.noContent().build();
     }
 }
