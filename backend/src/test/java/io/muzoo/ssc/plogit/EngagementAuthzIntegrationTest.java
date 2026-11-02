@@ -203,6 +203,37 @@ class EngagementAuthzIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void leadershipTransferRejectsMissingOrNonPositiveTargetId() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+
+        for (String payload : new String[]{"{}", "{\"newLeaderId\":null}", "{\"newLeaderId\":0}", "{\"newLeaderId\":-1}"}) {
+            mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/transfer-leadership")
+                    .with(asUser(leader))
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(payload))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.fieldErrors[0].field").value("newLeaderId"));
+        }
+        assertEquals(leader.getId(),
+            engagementRepository.findById(engagement.getId()).orElseThrow().getLeader().getId());
+    }
+
+    @Test
+    void leadershipTransferRejectsMalformedTargetId() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+
+        mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/transfer-leadership")
+                .with(asUser(leader))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"newLeaderId\":\"invalid\"}"))
+            .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void memberCannotTransferLeadership() throws Exception {
         User leader = createUser("leader@test.local");
         User member = createUser("member@test.local");
