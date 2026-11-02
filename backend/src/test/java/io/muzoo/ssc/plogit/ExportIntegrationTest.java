@@ -195,7 +195,7 @@ class ExportIntegrationTest extends IntegrationTestBase {
                 .content("""
                     {"format":"JSON"}
                     """))
-            .andExpect(status().isNotFound());
+            .andExpect(status().isForbidden());
     }
 
     @Test
