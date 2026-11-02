@@ -247,6 +247,6 @@ class EngagementAuthzIntegrationTest extends IntegrationTestBase {
                 .content("""
                     {"newLeaderId":999}
                     """))
-            .andExpect(status().isNotFound());
+            .andExpect(status().isForbidden());
     }
 }
