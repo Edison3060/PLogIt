@@ -20,20 +20,12 @@ function pageTitle(pathname: string): string {
 }
 
 export default function AppShell({ children }: AppShellProps) {
-  const [dark] = useState(
-    document.documentElement.classList.contains("dark")
-  );
   const { data: user } = useCurrentUser();
   const logout = useLogout();
   const navigate = useNavigate();
   const location = useLocation();
   const { data: engagements } = useEngagements();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem("plogit-theme", dark ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", dark);
-  }, [dark]);
 
   useEffect(() => {
     setMobileOpen(false);
