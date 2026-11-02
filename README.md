@@ -203,6 +203,10 @@ Each target runs two HIGH/CRITICAL checks. The **reporting** check omits `--igno
 
 CI builds and scans both application images at the tested commit. Production Compose currently rebuilds on deployment from that exact commit; it does not pull the precise CI-built image digest. Pinning the upstream base images below does not change that deployment behavior.
 
+### Container healthchecks
+
+The backend image probes the public `/api/health` endpoint through Bash TCP, checking the HTTP 200 status without adding a network client package to the slim JRE image. The nginx image uses BusyBox `wget` to check the SPA root. Both Docker images declare periodic healthchecks with startup grace periods. Docker Compose waits for PostgreSQL health before starting the backend, and for the backend to be healthy before starting the frontend; the optional Caddy proxy waits for both application containers. These checks validate availability, not comprehensive application/database correctness.
+
 ### Immutable Docker image references
 
 All upstream Docker images are referenced as `name:tag@sha256:<manifest-index>` rather than floating tags alone. This covers both Maven/Java and Node/nginx Docker build stages, the PostgreSQL and optional Caddy Compose services, and the Semgrep CI container. The Caddy configuration-validation command uses exactly the same pinned Caddy image as production. The digest selects the immutable multi-platform index, leaving Docker to choose its supported architecture; the tag is included for human readability but cannot override the digest.
