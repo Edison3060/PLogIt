@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { getSavedTheme, setTheme } from "../lib/theme";
 import { useCurrentUser } from "../hooks/useAuth";
 
 export default function Settings() {
   const { data: user } = useCurrentUser();
-  const [dark, setDark] = useState(
-    document.documentElement.classList.contains("dark")
-  );
+  const [dark, setDark] = useState(() => getSavedTheme() === "dark");
 
-  useEffect(() => {
-    localStorage.setItem("plogit-theme", dark ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", dark);
-  }, [dark]);
+  const toggleTheme = () => {
+    const nextDark = !dark;
+    setTheme(nextDark ? "dark" : "light");
+    setDark(nextDark);
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-6 md:p-8">
@@ -77,7 +77,7 @@ export default function Settings() {
                 <p className="text-sm text-text-muted mt-0.5">Toggle between light and dark mode.</p>
               </div>
               <button
-                onClick={() => setDark(!dark)}
+                onClick={toggleTheme}
                 className="flex items-center gap-2 px-4 py-2 bg-bg-inset border border-border-default rounded-lg text-text-strong hover:bg-border-subtle transition-colors font-medium text-sm"
               >
                 <i className={`fa-solid ${dark ? "fa-sun text-warning" : "fa-moon text-primary"} w-4 text-center`}></i>
