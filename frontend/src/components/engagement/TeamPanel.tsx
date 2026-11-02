@@ -56,6 +56,7 @@ export default function TeamPanel({ engagement, isLeader, showTransfer, onToggle
                           )}
                           <button
                             onClick={() => onRemove(m.id)}
+                            aria-label={`Remove ${m.displayName}`}
                             className="text-xs border border-danger/40 text-danger rounded-lg px-2 py-1 hover:bg-danger-soft transition-colors"
                           >
                             <i className="fa-solid fa-trash"></i>
