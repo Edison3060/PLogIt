@@ -15,3 +15,10 @@
 
 **Historical vs current:** July prose can describe intended features; only current controllers and routes count as implemented. No JudgeIt-import, CVSS/finding/ticket or dedicated PLogIt reporting/scoring endpoint was found in six controllers. Deferred external apps/next-phase work are not shipped UI. **Reviewer:** Builder Lead read-only mapping; no source edits. Next JR-012.
 
+
+## JR-012 — acceptance and dated decision
+
+**Invariant (DEC-2026-11-06-05):** Count only currently declared MVC mappings, React routes, API client methods, entity owners and existing tests. A page is accepted only when its corresponding `frontend/src/lib/{auth,engagements,logs}.ts` function maps to a current controller. Classify missing end-to-end UI coverage as **unverified**, never as a PASS. Accept legacy current behavior, not aspirational July claims. New endpoints/roles/fields require a focused scoped change with independent tests and, where product-facing, owner approval. **Expected request/data:** authenticated cookie and CSRF-backed `/api` APIs; engagement numeric IDs, log UUIDs; leader-only mutating export (JSON/CSV/PDF); state and audit remain authoritative. No changes approved by this verification.
+
+**Decision owner:** Edison3060 for product/schema deviations; Builder Lead for an evidence-based no-change inventory. **Source:** `App.tsx`, `web/*Controller.java`, `frontend/src/lib`, Phase 01 roadmap, product/suite specs. **Expected vs observed:** six controllers / 24 mapping annotations, 10 leaf routes, unchanged no-scoring boundary. JR-013 exercises a structurally verifiable route-to-controller matrix.
+
