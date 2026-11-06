@@ -6,26 +6,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 
 | JR | Exact task | Session | Status | Evidence / commit or PR | Last updated (UTC) |
 |---|---|---:|---|---|---|
-| JR-001 | Inventory Canonical source identity | 01 | NOT STARTED | — | — |
-| JR-002 | Specify Canonical source identity acceptance | 01 | NOT STARTED | — | — |
-| JR-003 | Reproduce Canonical source identity success | 01 | NOT STARTED | — | — |
-| JR-004 | Reject Canonical source identity invalid operation | 01 | NOT STARTED | — | — |
-| JR-005 | Close Canonical source identity verification | 01 | NOT STARTED | — | — |
-| JR-006 | Inventory Product role boundary | 01 | NOT STARTED | — | — |
-| JR-007 | Specify Product role boundary acceptance | 01 | NOT STARTED | — | — |
-| JR-008 | Reproduce Product role boundary success | 01 | NOT STARTED | — | — |
-| JR-009 | Reject Product role boundary invalid operation | 01 | NOT STARTED | — | — |
-| JR-010 | Close Product role boundary verification | 01 | NOT STARTED | — | — |
-| JR-011 | Inventory Implemented API and UI inventory | 02 | NOT STARTED | — | — |
-| JR-012 | Specify Implemented API and UI inventory acceptance | 02 | NOT STARTED | — | — |
-| JR-013 | Reproduce Implemented API and UI inventory success | 02 | NOT STARTED | — | — |
-| JR-014 | Reject Implemented API and UI inventory invalid operation | 02 | NOT STARTED | — | — |
-| JR-015 | Close Implemented API and UI inventory verification | 02 | NOT STARTED | — | — |
-| JR-016 | Inventory Open decisions and rebaseline | 02 | NOT STARTED | — | — |
-| JR-017 | Specify Open decisions and rebaseline acceptance | 02 | NOT STARTED | — | — |
-| JR-018 | Reproduce Open decisions and rebaseline success | 02 | NOT STARTED | — | — |
-| JR-019 | Reject Open decisions and rebaseline invalid operation | 02 | NOT STARTED | — | — |
-| JR-020 | Close Open decisions and rebaseline verification | 02 | NOT STARTED | — | — |
+| JR-001 | Inventory Canonical source identity | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-001) • verified no change | 2026-11-06T10:56:32.144Z |
+| JR-002 | Specify Canonical source identity acceptance | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-002) • VERIFIED NO CHANGE | 2026-11-06T10:58:01.055Z |
+| JR-003 | Reproduce Canonical source identity success | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-003) • VERIFIED NO CHANGE | 2026-11-06T10:58:08.328Z |
+| JR-004 | Reject Canonical source identity invalid operation | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-004) • VERIFIED NO CHANGE | 2026-11-06T10:58:16.029Z |
+| JR-005 | Close Canonical source identity verification | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-005) • VERIFIED NO CHANGE | 2026-11-06T10:58:21.989Z |
+| JR-006 | Inventory Product role boundary | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-006) • VERIFIED NO CHANGE | 2026-11-06T11:00:11.032Z |
+| JR-007 | Specify Product role boundary acceptance | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-007) • VERIFIED NO CHANGE | 2026-11-06T11:00:17.485Z |
+| JR-008 | Reproduce Product role boundary success | 01 | DONE | [Run 42206996982](https://github.com/Edison3060/PLogIt/actions/runs/42206996982) • 125 backend + 18 frontend PASS; source verified, image-security issue separate | 2026-11-06T11:07:09.833Z |
+| JR-009 | Reject Product role boundary invalid operation | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-009) • VERIFIED NO CHANGE | 2026-11-06T11:00:37.872Z |
+| JR-010 | Close Product role boundary verification | 01 | DONE | [Run 42206996982](https://github.com/Edison3060/PLogIt/actions/runs/42206996982) • 125 backend + 18 frontend PASS; source verified, image-security issue separate | 2026-11-06T11:07:09.833Z |
+| JR-011 | Inventory Implemented API and UI inventory | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-011) • verified no application change | 2026-11-06T13:31:18.831Z |
+| JR-012 | Specify Implemented API and UI inventory acceptance | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-012) • verified no application change | 2026-11-06T13:31:34.340Z |
+| JR-013 | Reproduce Implemented API and UI inventory success | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-013) • verified no application change | 2026-11-06T13:31:41.622Z |
+| JR-014 | Reject Implemented API and UI inventory invalid operation | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-014) • verified no application change | 2026-11-06T13:31:52.396Z |
+| JR-015 | Close Implemented API and UI inventory verification | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-015) • verified no application change | 2026-11-06T13:34:22.725Z |
+| JR-016 | Inventory Open decisions and rebaseline | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-016) • verified no application change | 2026-11-06T13:34:31.327Z |
+| JR-017 | Specify Open decisions and rebaseline acceptance | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-017) • approval classifications verified, no app change | 2026-11-06T13:36:21.806Z |
+| JR-018 | Reproduce Open decisions and rebaseline success | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-018) • approval classifications verified, no app change | 2026-11-06T13:37:53.609Z |
+| JR-019 | Reject Open decisions and rebaseline invalid operation | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-019) • verified scoped evidence, no app change | 2026-11-06T13:39:55.966Z |
+| JR-020 | Close Open decisions and rebaseline verification | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-020) • verified scoped evidence, no app change | 2026-11-06T13:41:06.120Z |
 | JR-021 | Inventory Maven and Spring baseline | 03 | NOT STARTED | — | — |
 | JR-022 | Specify Maven and Spring baseline acceptance | 03 | NOT STARTED | — | — |
 | JR-023 | Reproduce Maven and Spring baseline success | 03 | NOT STARTED | — | — |
