@@ -37,3 +37,10 @@
 
 **Executed check / reproducible fixture:** Read-only Git tree and commit compare plus policy check: RES nested snapshot is not a canonical branch; no write attempted; 0 application mutations. A runtime HTTP denial test is not applicable to repository provenance. Evidence sources: GitHub tree APIs for `Edison3060/PLogIt@852cfbaa` and read-only `Edison3060/RES-application-plan@596f8a1`, commit comparison `28aa156...852cfbaa`, `AGENTS.md`, `planning/README.md`, and Phase 01 roadmap. A source policy refusal is not an HTTP error. Reviewer: Builder Lead; owner sign-off pending.
 
+
+## JR-005 — Close Canonical source identity verification
+
+**Expected:** Close Canonical source identity verification. **Actual:** Reviewed JR-001 inventory, JR-002 dated source decision, JR-003 185/185 success and JR-004 invalid fork rejection. No defect found in application code, no migration or rollback required. No RES edits. Scope closed VERIFIED NO CHANGE after source-provenance regression (same immutable SHAs).
+
+**Executed check / reproducible fixture:** Regressed git tree identity: 185 canonical application SHA matches RES; compare 28aa156..852cfbaa only documentation. No Maven or npm runtime tests claimed for source provenance. Evidence sources: GitHub tree APIs for `Edison3060/PLogIt@852cfbaa` and read-only `Edison3060/RES-application-plan@596f8a1`, commit comparison `28aa156...852cfbaa`, `AGENTS.md`, `planning/README.md`, and Phase 01 roadmap. A source policy refusal is not an HTTP error. Reviewer: Builder Lead; owner sign-off pending.
+
