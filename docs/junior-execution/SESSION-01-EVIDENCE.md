@@ -62,3 +62,12 @@
 
 **Synthetic test fixture (source inspected; execution pending CI where noted):** `backend/src/test/java/io/muzoo/ssc/plogit/ExportIntegrationTest.java` uses isolated `PostgresTestConfig`, `createUser("leader@test.local")`, `createEngagement`, `createLog(..., APPROVED)` and MockMvc `POST /api/engagements/{id}/export` with CSRF and `{"format":"JSON"}`; checks 200, JSON content, disposition and state EXPORTED. Negative fixtures create member/nonmember/anonymous and expect 403/404/403. Reviewer Builder Lead; owner sign-off at session boundary.
 
+
+## JR-008 — Reproduce Product role boundary success
+
+**Expected / boundary:** Reproduce Product role boundary success. **Observed source:** Traced existing synthetic JUnit fixture: create leader, engagement and APPROVED log, POST /api/engagements/{id}/export with CSRF and JSON format; expected HTTP 200 application/json, content-disposition and persisted EXPORTED state. Actual source flow EngagementController.export→ExportService.assertLeader→findIncludedLogs→JsonReportStrategy.generate→markExported, with audit event. Suite roles: PLogIt pentester capture→JudgeIt auditor score/finding→PatchIt blue team remediate→GaugeIt leadership metrics. Downstream steps documented only, not runnable.
+
+**Executed checks:** Read-only source-contract assertions 9/9 PASS; ExportIntegrationTest.leaderCanExportJsonAndMarksLogsExported JUnit fixture inspected, NOT locally executed; branch CI push build/test pending. For source-contract test rerun, use GitHub `fetch_file` on `backend/src/main/java/io/muzoo/ssc/plogit/{web/EngagementController.java,web/LogController.java,service/ExportService.java,service/export/JsonReportStrategy.java,domain/LogEntry.java}` at `852cfbaa` and assert `@PostMapping("/{id}/export")`, `membershipService.assertLeader(engagement, leader)`, APPROVED/optional EXPORTED selection, attachmentFilenames and absence of severity/CVSS/ticket routes. The 2026-11-06 read-only nine-assertion set reported 9 passed, 0 failed.
+
+**Synthetic test fixture (source inspected; execution pending CI where noted):** `backend/src/test/java/io/muzoo/ssc/plogit/ExportIntegrationTest.java` uses isolated `PostgresTestConfig`, `createUser("leader@test.local")`, `createEngagement`, `createLog(..., APPROVED)` and MockMvc `POST /api/engagements/{id}/export` with CSRF and `{"format":"JSON"}`; checks 200, JSON content, disposition and state EXPORTED. Negative fixtures create member/nonmember/anonymous and expect 403/404/403. Reviewer Builder Lead; owner sign-off at session boundary.
+

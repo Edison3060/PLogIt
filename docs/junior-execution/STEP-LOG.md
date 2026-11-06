@@ -119,3 +119,17 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Roadblock → resolution:** Runtime Maven/npm test toolchain not locally available; GitHub branch CI executes remotely after pushes. Read-only verification sufficient for scoped inventory/policy check.
 - **GitHub:** `work/plogit-phase-01`, JR-007 checkpoint commit in branch history; previous SHA `ada67aa9b88db821a1fd7e1adc06a4ed626132fa`. Current SHA recorded in next checkpoint or final follow-up.
 - **Learning / next task:** JR-008.
+
+### 2026-11-06T11:00:28.079Z | Session 01 | JR-008 | IN REVIEW
+
+- **What / files:** Traced existing synthetic JUnit fixture: create leader, engagement and APPROVED log, POST /api/engagements/{id}/export with CSRF and JSON format; expected HTTP 200 application/json, content-disposition and persisted EXPORTED state. Actual source flow EngagementController.export→ExportService.assertLeader→findIncludedLogs→JsonReportStrategy.generate→markExported, with audit event. Suite roles: PLogIt pentester capture→JudgeIt auditor score/finding→PatchIt blue team remediate→GaugeIt leadership metrics. Downstream steps documented only, not runnable. Updated per-JR evidence, register, log and handoff; no application files changed.
+- **Why / approach:** Preserve original product role and tested implementation; avoid converting PLogIt into the auditor/scoring/remediation layer.
+- **Web research / method:** No moving external fact materially affects this role-boundary audit. Primary current source, approved mirrored specs and GitHub API read 2026-11-06; no external web fact check required.
+- **Previous state → result:** NOT STARTED → IN REVIEW.
+- **Expected behavior:** Reproduce Product role boundary success; source-based acceptance in Phase 01 original roadmap.
+- **Observed evidence / tests:** Read-only source-contract assertions 9/9 PASS; ExportIntegrationTest.leaderCanExportJsonAndMarksLogsExported JUnit fixture inspected, NOT locally executed; branch CI push build/test pending. Exact source paths and assertions detailed in `SESSION-01-EVIDENCE.md`. Test execution limitations stated explicitly.
+- **Security / authorization:** Backend `ExportService.assertLeader` statically inspected; `memberCannotExport`, `nonMemberCannotExport`, `unauthenticatedCannotExport` JUnit fixtures are available. No live data, secret access, deploy, or app mutation. No untested HTTP result claimed.
+- **Decision / approval:** No new product change approved. Owner approval would be needed to introduce findings, scoring or ticketing in PLogIt.
+- **Roadblock → resolution:** Runtime Maven/npm test toolchain not locally available; GitHub branch CI executes remotely after pushes. Full integration confirmation remains pending.
+- **GitHub:** `work/plogit-phase-01`, JR-008 checkpoint commit in branch history; previous SHA `9985470a01e2eaeb172191c011c9cc59493d6992`. Current SHA recorded in next checkpoint or final follow-up.
+- **Learning / next task:** JR-009 (independent negative); JR-008 to be revisited when CI resolves.
