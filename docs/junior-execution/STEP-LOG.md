@@ -91,3 +91,17 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Roadblock → resolution:** Sandbox has no network-local checkout; GitHub API supplied authoritative tree/compare evidence. No Maven/npm execution claimed.
 - **GitHub:** `work/plogit-phase-01`, JR-005 checkpoint in branch history; previous checkpoint `55b6c3cadceca71752a5d7a3ca783f9667ab6f93`. Current SHA supplied in next log checkpoint.
 - **Learning / next task:** JR-006.
+
+### 2026-11-06T11:00:11.032Z | Session 01 | JR-006 | DONE (VERIFIED NO CHANGE)
+
+- **What / files:** Read mirrored Suite - Master Spec.md and PLogIt - Product Spec.md, current README, Java LogController, LogService, LogEntry, ExportService, JsonReportStrategy and React routes. Actual source owner is PLogIt main 852cfbaa, not archived RES source. JUnit ExportIntegrationTest (12 @Test), ReviewTransitionIntegrationTest (19), LogAuthzIntegrationTest (11) map the relevant PLogIt behavior; downstream JudgeIt/PatchIt/GaugeIt are planning scope, not implemented integrations. Updated per-JR evidence, register, log and handoff; no application files changed.
+- **Why / approach:** Preserve original product role and tested implementation; avoid converting PLogIt into the auditor/scoring/remediation layer.
+- **Web research / method:** No moving external fact materially affects this role-boundary audit. Primary current source, approved mirrored specs and GitHub API read 2026-11-06; no external web fact check required.
+- **Previous state → result:** NOT STARTED → DONE.
+- **Expected behavior:** Inventory Product role boundary; source-based acceptance in Phase 01 original roadmap.
+- **Observed evidence / tests:** GitHub fetch_file read assertions, JUnit method inventory, 9/9 source-contract checks executed; listing tests is not execution. Exact source paths and assertions detailed in `SESSION-01-EVIDENCE.md`. Test execution limitations stated explicitly.
+- **Security / authorization:** Backend `ExportService.assertLeader` statically inspected; `memberCannotExport`, `nonMemberCannotExport`, `unauthenticatedCannotExport` JUnit fixtures are available. No live data, secret access, deploy, or app mutation. No untested HTTP result claimed.
+- **Decision / approval:** No new product change approved. Owner approval would be needed to introduce findings, scoring or ticketing in PLogIt.
+- **Roadblock → resolution:** Runtime Maven/npm test toolchain not locally available; GitHub branch CI executes remotely after pushes. Read-only verification sufficient for scoped inventory/policy check.
+- **GitHub:** `work/plogit-phase-01`, JR-006 checkpoint commit in branch history; previous SHA `4f39193c5e3b2f82cf4d1b07f5f6388ad49cc8da`. Current SHA recorded in next checkpoint or final follow-up.
+- **Learning / next task:** JR-007.

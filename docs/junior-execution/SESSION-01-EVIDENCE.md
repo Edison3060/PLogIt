@@ -44,3 +44,12 @@
 
 **Executed check / reproducible fixture:** Regressed git tree identity: 185 canonical application SHA matches RES; compare 28aa156..852cfbaa only documentation. No Maven or npm runtime tests claimed for source provenance. Evidence sources: GitHub tree APIs for `Edison3060/PLogIt@852cfbaa` and read-only `Edison3060/RES-application-plan@596f8a1`, commit comparison `28aa156...852cfbaa`, `AGENTS.md`, `planning/README.md`, and Phase 01 roadmap. A source policy refusal is not an HTTP error. Reviewer: Builder Lead; owner sign-off pending.
 
+
+## JR-006 — Inventory Product role boundary
+
+**Expected / boundary:** Inventory Product role boundary. **Observed source:** Read mirrored Suite - Master Spec.md and PLogIt - Product Spec.md, current README, Java LogController, LogService, LogEntry, ExportService, JsonReportStrategy and React routes. Actual source owner is PLogIt main 852cfbaa, not archived RES source. JUnit ExportIntegrationTest (12 @Test), ReviewTransitionIntegrationTest (19), LogAuthzIntegrationTest (11) map the relevant PLogIt behavior; downstream JudgeIt/PatchIt/GaugeIt are planning scope, not implemented integrations.
+
+**Executed checks:** GitHub fetch_file read assertions, JUnit method inventory, 9/9 source-contract checks executed; listing tests is not execution. For source-contract test rerun, use GitHub `fetch_file` on `backend/src/main/java/io/muzoo/ssc/plogit/{web/EngagementController.java,web/LogController.java,service/ExportService.java,service/export/JsonReportStrategy.java,domain/LogEntry.java}` at `852cfbaa` and assert `@PostMapping("/{id}/export")`, `membershipService.assertLeader(engagement, leader)`, APPROVED/optional EXPORTED selection, attachmentFilenames and absence of severity/CVSS/ticket routes. The 2026-11-06 read-only nine-assertion set reported 9 passed, 0 failed.
+
+**Synthetic test fixture (source inspected; execution pending CI where noted):** `backend/src/test/java/io/muzoo/ssc/plogit/ExportIntegrationTest.java` uses isolated `PostgresTestConfig`, `createUser("leader@test.local")`, `createEngagement`, `createLog(..., APPROVED)` and MockMvc `POST /api/engagements/{id}/export` with CSRF and `{"format":"JSON"}`; checks 200, JSON content, disposition and state EXPORTED. Negative fixtures create member/nonmember/anonymous and expect 403/404/403. Reviewer Builder Lead; owner sign-off at session boundary.
+
