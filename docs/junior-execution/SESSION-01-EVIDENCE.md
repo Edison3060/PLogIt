@@ -30,3 +30,10 @@
 
 **Executed check / reproducible fixture:** Executed GitHub trees read and JS SHA equality assertions: 185 equal, 0 unequal; API returned success; no local app data required for this source-only task. Evidence sources: GitHub tree APIs for `Edison3060/PLogIt@852cfbaa` and read-only `Edison3060/RES-application-plan@596f8a1`, commit comparison `28aa156...852cfbaa`, `AGENTS.md`, `planning/README.md`, and Phase 01 roadmap. A source policy refusal is not an HTTP error. Reviewer: Builder Lead; owner sign-off pending.
 
+
+## JR-004 — Reject Canonical source identity invalid operation
+
+**Expected:** Reject Canonical source identity invalid operation. **Actual:** Invalid proposal: treat RES nested PLogIt Workspace/PLogIt copy as an independent editable development fork. Rejected by source-ownership policy from AGENTS.md, planning/README.md, SESSION-PROTOCOL.md and the matching app blob identities. Check performed using read-only API; no RES write, transaction, authorization bypass, or app state affected. There is no HTTP endpoint for this repository-policy rejection.
+
+**Executed check / reproducible fixture:** Read-only Git tree and commit compare plus policy check: RES nested snapshot is not a canonical branch; no write attempted; 0 application mutations. A runtime HTTP denial test is not applicable to repository provenance. Evidence sources: GitHub tree APIs for `Edison3060/PLogIt@852cfbaa` and read-only `Edison3060/RES-application-plan@596f8a1`, commit comparison `28aa156...852cfbaa`, `AGENTS.md`, `planning/README.md`, and Phase 01 roadmap. A source policy refusal is not an HTTP error. Reviewer: Builder Lead; owner sign-off pending.
+

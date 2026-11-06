@@ -63,3 +63,17 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Roadblock → resolution:** Sandbox has no network-local checkout; GitHub API supplied authoritative tree/compare evidence. No Maven/npm execution claimed.
 - **GitHub:** `work/plogit-phase-01`, JR-003 checkpoint in branch history; previous checkpoint `28afba83cc6e2fbf0aad2f53faa95e57d8bcf3eb`. Current SHA supplied in next log checkpoint.
 - **Learning / next task:** JR-004.
+
+### 2026-11-06T10:58:16.029Z | Session 01 | JR-004 | DONE (VERIFIED NO CHANGE)
+
+- **What / files:** Invalid proposal: treat RES nested PLogIt Workspace/PLogIt copy as an independent editable development fork. Rejected by source-ownership policy from AGENTS.md, planning/README.md, SESSION-PROTOCOL.md and the matching app blob identities. Check performed using read-only API; no RES write, transaction, authorization bypass, or app state affected. There is no HTTP endpoint for this repository-policy rejection. Evidence added to `SESSION-01-EVIDENCE.md` and tracked in register/handoff. No application source changes.
+- **Why / approach:** Keep the implemented standalone source authoritative and preserve the copied archive as a frozen reference; rejected an unapproved separate code fork or rewrite.
+- **Web fact-check / research:** Not needed; source-of-truth facts obtained through primary GitHub API and mirrored protocol, 2026-11-06.
+- **Previous state → result:** NOT STARTED → DONE, VERIFIED NO CHANGE.
+- **Expected behavior:** Reject Canonical source identity invalid operation; acceptance from Phase 01 original roadmap.
+- **Observed evidence:** Read-only Git tree and commit compare plus policy check: RES nested snapshot is not a canonical branch; no write attempted; 0 application mutations. A runtime HTTP denial test is not applicable to repository provenance. Review by Builder Lead, with owner sign-off at session boundary.
+- **Security and authorization:** Source-only checks, no production, secrets, or live data; no unapproved Git writes to the RES repo, no app mutation. HTTP authorization/transaction checks not applicable to repo source identity.
+- **Decision / approval:** No new owner-reserved decision.
+- **Roadblock → resolution:** Sandbox has no network-local checkout; GitHub API supplied authoritative tree/compare evidence. No Maven/npm execution claimed.
+- **GitHub:** `work/plogit-phase-01`, JR-004 checkpoint in branch history; previous checkpoint `69eaa5c2545ed354b2fea0aade4fa6b7d074a5cc`. Current SHA supplied in next log checkpoint.
+- **Learning / next task:** JR-005.
