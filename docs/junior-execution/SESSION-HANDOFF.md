@@ -2,13 +2,13 @@
 
 ## Session 02 current handoff (in progress, 2026-11-06 UTC)
 
-- **Scope:** JR-011–020 only. Completed through JR-015 (5/10); next JR-016.
-- **Branch:** `work/plogit-phase-01`, prior pushed checkpoint SHA `469cf2e40e6fca071a2c744e02218e6ed10300e0`; inspect GitHub branch ref for this commit's SHA.
-- **JR statuses:** JR-001–010 DONE from Session 01; JR-011–JR-015 DONE (verified inventory/no app changes); JR-016–JR-020 NOT STARTED.
+- **Scope:** JR-011–020 only. Completed through JR-016 (6/10); next JR-017.
+- **Branch:** `work/plogit-phase-01`, prior pushed checkpoint SHA `550736f7a3b084f05eb405a624636acbb0134326`; inspect GitHub branch ref for this commit's SHA.
+- **JR statuses:** JR-001–010 DONE from Session 01; JR-011–JR-016 DONE (verified inventory/no app changes); JR-017–JR-020 NOT STARTED.
 - **Evidence and tests:** `SESSION-02-EVIDENCE.md`, 33/33 static read-only source assertions; pre-session Phase CI [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) green on exact source, CD skipped. Current branch CI to check before phase acceptance.
-- **Integration:** PR #21 remains unmerged, `plogit-judgeit-provisional/0.1` has mock-only success and real JudgeIt interoperability pending. No producer JSON change.
+- **Integration:** `INTEGRATION-ASSUMPTIONS.md` updated; PR #21 remains unmerged, `plogit-judgeit-provisional/0.1` has mock-only success and real JudgeIt interoperability pending. No producer JSON change.
 - **Release:** Approved APT CVE fix present in phase branch; PR #20 open. Merging into main can trigger CD; NO production approval or merge. Owner-reserved contract, tenant, privacy and release choices remain pending.
-- **Exact next:** JR-016; source-based decision classification, no changes beyond Session 02.
+- **Exact next:** JR-017; source-based decision classification, no changes beyond Session 02.
 
 ## Archived Session 01 handoff
 

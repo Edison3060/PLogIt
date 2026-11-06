@@ -58,3 +58,22 @@
 
 Compared JR-011 source owners, JR-012 acceptance/DEC-2026-11-06-05, JR-013 page-to-client-to-controller test map and 33/33 structural source assertions, and JR-014 invalid historical-claim rejections. **DONE / VERIFIED NO APPLICATION CHANGE**, because the inventory and negative classification are documented, not evidence of complete interactive browser E2E coverage. Reference CI [run 42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) at `da9ebfa8`: Maven and frontend, Semgrep, Trivy and proxy PASS; CD SKIPPED. The branch already includes approved APT CVE correction. No local Maven/browser execution during this checkpoint. Regression must be re-checked on final branch head. No app code/schema change or data migration, rollback would revert docs only. **Reviewer:** Builder Lead; next JR-016.
 
+
+## JR-016 — unresolved decisions and rebaseline inventory
+
+**Source owner:** `planning/RES-application-plan/Suite - Research Refresh 2026-11-02.md`, `Suite - To Be Scoped.md`, `Suite - Handoff Contracts and Evidence.md`, `PlogIt Workspace/Project Info/PLogIt - Product Spec.md`, `docs/integrations/PROVISIONAL-SUITE-CONTRACTS.md`, `DECISIONS.md`, current `ExportService.java`, `JsonReportStrategy.java`, `MembershipService.java`, `backend/pom.xml`, `frontend/package.json`, `.github/workflows/ci.yml`. Mirrored 2026 research supersedes July deployment/version claims; no edits to those frozen source documents.
+
+**Inventory (classification is the outcome; decisions are not silently approved):**
+
+| Topic | Verified current fact | Working assumption / open decision | Approval / verification |
+|---|---|---|---|
+| Log inclusion | Leader POST export includes APPROVED by default, optionally prior EXPORTED; mutates state/audit | If JudgeIt needs DRAFT/SUBMITTED, change requires separate product authorization and regression tests | OPEN, do not change exporter |
+| Media packaging | Export JSON has `attachmentFilenames`, no image bytes/hashes | Self-contained bundle, redaction and integrity scheme to define | OPEN, no claim of evidence completeness |
+| Tenant/source identity | Engagement-local numeric ID and log UUID; membership/leader enforcement; no approved cross-instance identity | Operator-assigned `sourceNamespace` in provisional adapter, not org derived from email | PROVISIONAL; live consumer isolation unverified |
+| Sensitive evidence | Auth/CSRF/review controls exist; exact cross-app retention, permission/consent and classification policy not accepted | Local file-only, 0600 prototype output, no live transport, no secrets | OPEN owner privacy policy before real transfer |
+| Contract schema | Producer JSON unversioned; separate opt-in `plogit-judgeit-provisional/0.1` wrapper on PR #21 | Versioning/idempotency/replay rules of future JudgeIt receiver | PROVISIONAL; 12 synthetic mock tests PASS in CI 42212049183; real import NOT verified |
+| Tech stack | Current Spring Boot 4.1.1 / Java 21, React 18 / Vite 6, PostgreSQL 16 | Modernization prioritization and new-app stacks are separate scopes | OPEN; no unapproved upgrade |
+| Production | Main CD path runs on green `main` commits, has fingerprint preflight; Phase 01 push CI run 42212527183 green but CD skipped | Safe merge/release gate before `main` merge | **BLOCKED for release, not for read-only inventory**; owner approval needed |
+
+**Integration policy file created:** `INTEGRATION-ASSUMPTIONS.md` tracks field names and status explicitly, cross-referencing existing `docs/integrations/PROVISIONAL-SUITE-CONTRACTS.md`. Owner-authorized DEC-2026-11-06-04 permits reversible local mock work, not live interoperability or production. No tests executed against other apps. **Reviewer:** Builder Lead; next JR-017.
+
