@@ -8,6 +8,7 @@ This file is a **per-step evidence ledger**, not a summary. Begin with no comple
 
 - **What / files:** Actual work and affected code, docs, migrations or fixtures; distinguish verified no-code case.
 - **Why / approach:** Why chosen; important alternative rejected.
+- **Web fact-check / method research (when needed):** Claim or alternative checked; authoritative URL and version/date; date accessed; conclusion and impact. Otherwise state not needed or unavailable. Do not confuse research with tests executed.
 - **Previous state → result:** NOT STARTED/IN PROGRESS/... → DONE/IN REVIEW/BLOCKED.
 - **Expected behavior:** Specific acceptance and negative cases from the phase task.
 - **Observed evidence:** Actual output, test command, exit code and fixture, or exact unavailable test.
