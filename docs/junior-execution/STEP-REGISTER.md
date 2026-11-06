@@ -16,7 +16,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-008 | Reproduce Product role boundary success | 01 | DONE | [Run 42206996982](https://github.com/Edison3060/PLogIt/actions/runs/42206996982) • 125 backend + 18 frontend PASS; source verified, image-security issue separate | 2026-11-06T11:07:09.833Z |
 | JR-009 | Reject Product role boundary invalid operation | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-009) • VERIFIED NO CHANGE | 2026-11-06T11:00:37.872Z |
 | JR-010 | Close Product role boundary verification | 01 | DONE | [Run 42206996982](https://github.com/Edison3060/PLogIt/actions/runs/42206996982) • 125 backend + 18 frontend PASS; source verified, image-security issue separate | 2026-11-06T11:07:09.833Z |
-| JR-011 | Inventory Implemented API and UI inventory | 02 | NOT STARTED | — | — |
+| JR-011 | Inventory Implemented API and UI inventory | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-011) • verified no application change | 2026-11-06T13:31:18.831Z |
 | JR-012 | Specify Implemented API and UI inventory acceptance | 02 | NOT STARTED | — | — |
 | JR-013 | Reproduce Implemented API and UI inventory success | 02 | NOT STARTED | — | — |
 | JR-014 | Reject Implemented API and UI inventory invalid operation | 02 | NOT STARTED | — | — |

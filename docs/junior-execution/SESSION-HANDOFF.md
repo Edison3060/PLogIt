@@ -1,5 +1,17 @@
 # PLogIt: self-contained latest session handoff
 
+## Session 02 current handoff (in progress, 2026-11-06 UTC)
+
+- **Scope:** Session 02 only, JR-011–JR-020, Phase 01B. Latest completed JR-011 (1/10); next JR-012.
+- **Branch:** `work/plogit-phase-01`; previous pushed parent SHA `da9ebfa80d7ed9a0632af24284c95f90e49474b1`, JR checkpoint SHA is current branch HEAD after this commit (resolve GitHub branch). All checkpoints GitHub-pushed; no force push.
+- **Statuses:** JR-001–010 DONE from Session 01. JR-011 DONE; JR-012–JR-020 NOT STARTED.
+- **Evidence:** `SESSION-02-EVIDENCE.md`; 33/33 structural source assertions. Baseline Phase branch CI [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) green, CD skipped. No new local app/runtime tests; fresh final-head CI remains to check.
+- **Security:** CVE hotfix in phase branch, PR #20 still OPEN. Main merge can trigger production deploy, expressly not authorized. PR #21 (provisional adapter) open targeting Phase 01; JudgeIt interoperability UNVERIFIED, not part of this phase.
+- **Pending:** Product/schema/privacy choices in DECISIONS; don't merge to main without a safe deployment gate and completed CI. No other-app delay justifies a false integration DONE.
+- **Next exact action:** Continue JR-012; remain in current session until JR-020 then STOP.
+
+## Archived Session 01 handoff
+
 **Session 01 (Phase 01A) CLOSED, 2026-11-06 UTC.** Builder Lead executed directly (`USE_SUBAGENTS=NO`). Authorized scope JR-001–JR-010; **all 10 assessed DONE for their scoped acceptance, VERIFIED NO CHANGE**. Application source untouched. **No PR, merge or production deploy**. Session 02 requires new owner prompt.
 
 | Field | Complete handoff |
