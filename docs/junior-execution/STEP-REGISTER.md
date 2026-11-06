@@ -19,7 +19,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-011 | Inventory Implemented API and UI inventory | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-011) • verified no application change | 2026-11-06T13:31:18.831Z |
 | JR-012 | Specify Implemented API and UI inventory acceptance | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-012) • verified no application change | 2026-11-06T13:31:34.340Z |
 | JR-013 | Reproduce Implemented API and UI inventory success | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-013) • verified no application change | 2026-11-06T13:31:41.622Z |
-| JR-014 | Reject Implemented API and UI inventory invalid operation | 02 | NOT STARTED | — | — |
+| JR-014 | Reject Implemented API and UI inventory invalid operation | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-014) • verified no application change | 2026-11-06T13:31:52.396Z |
 | JR-015 | Close Implemented API and UI inventory verification | 02 | NOT STARTED | — | — |
 | JR-016 | Inventory Open decisions and rebaseline | 02 | NOT STARTED | — | — |
 | JR-017 | Specify Open decisions and rebaseline acceptance | 02 | NOT STARTED | — | — |

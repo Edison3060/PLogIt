@@ -46,3 +46,10 @@
 
 **Executed CI evidence:** [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183), exact reviewed branch SHA, completed SUCCESS. No interactive/browser journey was executed during this session; frontend test coverage is scoped, so do not claim every page has an E2E test. **Expected:** ten mapped routes, 24 controller operations; **observed:** yes. Next JR-014.
 
+
+## JR-014 — negative classification
+
+**Invalid claims tested against frozen sources:** (a) "PLogIt ships findings, CVSS scoring or remediation tickets" → REJECTED: none of six controllers declares those endpoints, product spec assigns them to other apps; (b) "Export JSON contains all image evidence" → REJECTED: `JsonReportStrategy.java` emits `attachmentFilenames`, not bytes/hashes; (c) "green CI proves live production deploy" → REJECTED: the workflow `deploy` job is gated on `refs/heads/main`, and reviewed run's CD job was SKIPPED; (d) "JudgeIt imports the provisional envelope" → REJECTED: prototype is file-only with a synthetic mock on separate PR #21.
+
+**Negative harness evidence:** controller denylist assertion PASS; filename-only assertion PASS; workflow gate and skipped deploy read from real `.github/workflows/ci.yml` and run [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183). This is rejection of an unsupported **documentation/requirement claim**, not an HTTP denial endpoint, so no fake 403/rollback scenario was asserted. **Side effects:** read-only source inspection and tests, zero API writes or auth bypass, no export/deployment executed. Next JR-015.
+
