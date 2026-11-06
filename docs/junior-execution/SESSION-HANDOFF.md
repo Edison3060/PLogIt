@@ -1,20 +1,20 @@
 # PLogIt: self-contained latest session handoff
 
-**Current work phase:** Build, Session 01, Phase 01A. **Authorized JRs:** JR-001 through JR-010. **No subagents** (user requested direct execution). No production deployment authorized.
+**Phase:** Build, Session 01 (Phase 01A); authorized JR-001–JR-010. **Direct execution** (USE_SUBAGENTS=NO). No deployment authorized.
 
 | Field | Current value |
 |---|---|
-| Current branch | `work/plogit-phase-01` |
-| Baseline main SHA | `852cfbaa6682de8e99895a63c09515ea659e4b94` |
-| Last JR attempted | JR-001 — DONE (VERIFIED NO CHANGE) |
-| Verified DONE this session | JR-001 |
-| In review / blocked | none yet |
-| Last pushed SHA | Branch started at `852cfbaa6682de8e99895a63c09515ea659e4b94`; see latest branch head for JR-001 checkpoint |
-| Last accepted phase / PR | none; Phase 01 gate occurs after Session 02 |
-| Tests actually executed | Read-only GitHub tree comparison, 185/185 SHA matches; no Maven/npm integration suite run |
-| Files affected | `docs/junior-execution/SESSION-01-EVIDENCE.md`, register, step log, handoff; zero application code |
-| Decisions | none required for JR-001 |
-| Exact next safe action | JR-002: specify source identity acceptance and dated decision row |
-| Next session authorization | Session 02 requires an explicit new owner prompt after Session 01 sign-off |
+| Branch | `work/plogit-phase-01` |
+| Current canonical baseline | main `852cfbaa6682de8e99895a63c09515ea659e4b94` |
+| Last JR attempted / result | JR-002 — DONE, VERIFIED NO CHANGE |
+| Verified DONE | JR-001, JR-002 |
+| In progress / blocked | No current blockers; remaining JR-006–JR-010 after source closure |
+| Last pushed SHA | `6fe55120fc39e2cb6e82017580df22b29899445a` before this checkpoint; inspect head for JR-002 |
+| Last accepted phase / PR | None, no PR/merge in odd Session 01 |
+| Actual tests / fixture | 185/185 primary Git blob provenance SHA checks (0 mismatches), Git compare 28aa156..852cfbaa; source-level assertions only; no local Maven/npm |
+| Source changes | Application source untouched; only tracked junior-execution docs |
+| Owner decisions pending | None for source identity; product contract changes remain reserved |
+| Exact next safe step | JR-003: continue source identity checkpoint |
+| Next session | 02 only after new owner authorization |
 
-**Carry forward:** Preserve auth, tenancy, review states, audit and JSON export, keep RES archive immutable, test before DONE. Do not deploy or merge Phase 01 during Session 01.
+**Integrity constraints:** Preserve auth, tenant membership, audit/review states, current JSON export. Archived RES app files never edited. Do not infer production deployment from CI. See `SESSION-01-EVIDENCE.md`, `STEP-LOG.md`, `DECISIONS.md` for exact evidence and decisions.

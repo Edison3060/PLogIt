@@ -35,3 +35,17 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Roadblock → resolution:** No independent local Git checkout or network reachable from sandbox; connector GitHub API supplied provenance, not a local Maven runtime.
 - **GitHub:** `work/plogit-phase-01`, JR-001 commit SHA available in branch history; SHA reference in subsequent step log. No PR in odd session.
 - **Learning / next task:** Specify acceptance and dated decision row, JR-002.
+
+### 2026-11-06T10:58:01.055Z | Session 01 | JR-002 | DONE (VERIFIED NO CHANGE)
+
+- **What / files:** DEC-2026-11-06-01 confirms canonical main as sole editable source; copied RES snapshot is a read-only planning reference. Expected main at reviewed SHA 28aa156; actual current main 852cfbaa remains identical for all 185 app blobs, six docs-only commits newer. No approval to fork the RES source or change applications. Evidence added to `SESSION-01-EVIDENCE.md` and tracked in register/handoff. No application source changes.
+- **Why / approach:** Keep the implemented standalone source authoritative and preserve the copied archive as a frozen reference; rejected an unapproved separate code fork or rewrite.
+- **Web fact-check / research:** Not needed; source-of-truth facts obtained through primary GitHub API and mirrored protocol, 2026-11-06.
+- **Previous state → result:** NOT STARTED → DONE, VERIFIED NO CHANGE.
+- **Expected behavior:** Specify Canonical source identity acceptance; acceptance from Phase 01 original roadmap.
+- **Observed evidence:** read-only compare_commits and two Git Trees: 185/185 identical; no runtime test applicable to editorial source-of-truth decision. Review by Builder Lead, with owner sign-off at session boundary.
+- **Security and authorization:** Source-only checks, no production, secrets, or live data; no unapproved Git writes to the RES repo, no app mutation. HTTP authorization/transaction checks not applicable to repo source identity.
+- **Decision / approval:** DEC-2026-11-06-01, engineering confirmation of already approved canonical source.
+- **Roadblock → resolution:** Sandbox has no network-local checkout; GitHub API supplied authoritative tree/compare evidence. No Maven/npm execution claimed.
+- **GitHub:** `work/plogit-phase-01`, JR-002 checkpoint in branch history; previous checkpoint `6fe55120fc39e2cb6e82017580df22b29899445a`. Current SHA supplied in next log checkpoint.
+- **Learning / next task:** JR-003.

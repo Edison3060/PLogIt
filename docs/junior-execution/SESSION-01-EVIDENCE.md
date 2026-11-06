@@ -16,3 +16,10 @@
 **Owner/source-and-test map:** `LogController` / `LogService` own log capture; `EngagementController` / `ExportService` and `JsonReportStrategy` own leader export; `LogEntry` and `ReviewState` own persisted log fields/states; JUnit `ExportIntegrationTest`, `ReviewTransitionIntegrationTest`, `LogAuthzIntegrationTest` contain synthetic coverage. React `frontend/src/App.tsx` registers pages. Current-source review only; listing a test does not mean it ran.
 
 **Expected / observed:** The deployed revision cannot be inferred from main; repository authoritative source is canonical, and archived copy is identical for application files. No production state was inspected.
+
+## JR-002 — Specify Canonical source identity acceptance
+
+**Expected:** Specify Canonical source identity acceptance. **Actual:** DEC-2026-11-06-01 confirms canonical main as sole editable source; copied RES snapshot is a read-only planning reference. Expected main at reviewed SHA 28aa156; actual current main 852cfbaa remains identical for all 185 app blobs, six docs-only commits newer. No approval to fork the RES source or change applications.
+
+**Executed check / reproducible fixture:** read-only compare_commits and two Git Trees: 185/185 identical; no runtime test applicable to editorial source-of-truth decision. Evidence sources: GitHub tree APIs for `Edison3060/PLogIt@852cfbaa` and read-only `Edison3060/RES-application-plan@596f8a1`, commit comparison `28aa156...852cfbaa`, `AGENTS.md`, `planning/README.md`, and Phase 01 roadmap. A source policy refusal is not an HTTP error. Reviewer: Builder Lead; owner sign-off pending.
+
