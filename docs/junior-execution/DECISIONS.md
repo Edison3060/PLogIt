@@ -109,3 +109,8 @@ _No execution-session decisions have been recorded._
 - **Alternatives / trade-offs:** Merge now (may deploy without permission: rejected); disable security checks or force merge (prohibited); keep PR open while safe independent future work is planned (allowed, but next phase main base may lag). A deployment workflow change is separately scoped and must be proven safe.
 - **Blocked JR IDs:** None of JR-011..020 for documentation/verification. Phase 01 **merge/release gate** is BLOCKED, and beginning Session 03 on an unreconciled main would risk missing prior phase work.
 - **Owner response:** PENDING, user explicitly forbids production deployment without separate authorization. No merge performed. Relevant PR to be created after Session 02; do not treat creation as merge approval.
+
+### 2026-11-06T13:43:48.226Z | ENGINEERING RECONCILIATION | Session 02 (no new JR)
+- **Decision:** Follow latest owner-approved `main@0fce5181a2265af5b37a8621d0156eb2eace21f8` policy for safe stacked work after an unmerged phase: READY WITH PROVISIONAL INTEGRATION is compatible with pending mock E2E and safe blocked main merge. Preserve DEC-11 deployment approval requirement, leave Phase 01 PR draft, and base next session phase branch on unmerged safe Phase 01 HEAD with explicit stacked ancestry.
+- **Alternative rejected:** Block all safe subsequent work solely because real JudgeIt is unfinished or because main merge could deploy. This would contradict latest SESSION-PROTOCOL. Also rejected merging main unsafely or claiming phase PR accepted.
+- **Evidence:** GitHub two-parent merge of 4 main docs, no code changes; CI at merge SHA to check. Owner sign-off still required to *start* Session 03; current session stops.

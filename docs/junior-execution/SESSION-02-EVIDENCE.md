@@ -128,3 +128,7 @@ Compared JR-011 source owners, JR-012 acceptance/DEC-2026-11-06-05, JR-013 page-
 
 **Session boundary:** STOP after JR-020. Next action is inspect final HEAD CI and Phase 01 PR, resolve release gate without deployment, then request owner sign-off for Session 03 (JR-021–030). No JR-021 action started.
 
+
+## Post-JR-020 branch reconciliation (not a new JR)
+
+`main@0fce5181a2265af5b37a8621d0156eb2eace21f8` added four newer owner-approved policy/ledger docs after Phase 01 branch fork. Builder Lead merged their complete AGENTS, Builder prompt and Session Protocol into Phase 01, and reconciled the main integration-ledger template with existing Session 02 provisional evidence as INT-001. The merge keeps Phase 01's 10 individual JR checkpoints and current source/CVE fix intact. No program source or deploy configuration change. Current Session Protocol authorizes safe stacked next-phase development from an unmerged phase branch while final PR merge remains gated. This policy merge is NOT a new JR, not a substitute for CI, not JudgeIt acceptance.
