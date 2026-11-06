@@ -1,32 +1,20 @@
 # PLogIt: self-contained latest session handoff
 
-**Current status:** Not started. No JR execution is evidenced by these planning files. This is a handoff template that must be rewritten and pushed after **each JR checkpoint**, not only at the end of a session.
+**Current work phase:** Build, Session 01, Phase 01A. **Authorized JRs:** JR-001 through JR-010. **No subagents** (user requested direct execution). No production deployment authorized.
 
 | Field | Current value |
 |---|---|
-| Current session | Not started |
-| Original 20-task phase | Not started |
-| Allowed JR range | None until SESSION_NUMBER is specified |
-| Last JR attempted / status | None |
-| Current branch and last pushed SHA | main / baseline; inspect GitHub for actual SHA |
-| Last accepted / merged phase and PR | None |
-| Next exact eligible JR | JR-001 |
-| Completed tasks in current session | None |
-| In progress / blocked tasks | None |
-| Owner decisions pending | Consult `DECISIONS.md` and suite `Suite - To Be Scoped.md` |
-| Tests run, result, fixture | None run by the planning synchronization |
-| Files / migrations / schemas changed | None by the execution process |
-| Current work phase | Intake pending user-selected session |
-| Next-session authorization | Owner must explicitly start a numbered session |
+| Current branch | `work/plogit-phase-01` |
+| Baseline main SHA | `852cfbaa6682de8e99895a63c09515ea659e4b94` |
+| Last JR attempted | JR-001 — DONE (VERIFIED NO CHANGE) |
+| Verified DONE this session | JR-001 |
+| In review / blocked | none yet |
+| Last pushed SHA | Branch started at `852cfbaa6682de8e99895a63c09515ea659e4b94`; see latest branch head for JR-001 checkpoint |
+| Last accepted phase / PR | none; Phase 01 gate occurs after Session 02 |
+| Tests actually executed | Read-only GitHub tree comparison, 185/185 SHA matches; no Maven/npm integration suite run |
+| Files affected | `docs/junior-execution/SESSION-01-EVIDENCE.md`, register, step log, handoff; zero application code |
+| Decisions | none required for JR-001 |
+| Exact next safe action | JR-002: specify source identity acceptance and dated decision row |
+| Next session authorization | Session 02 requires an explicit new owner prompt after Session 01 sign-off |
 
-## What a new session must do first
-
-Read `AGENTS.md`, `docs/junior-execution/SESSION-PROTOCOL.md`, `SESSION-INDEX.md`, `STEP-REGISTER.md`, `STEP-LOG.md`, `DECISIONS.md`, this file, and the selected original 20-task phase. Verify the authoritative branch, commits, CI status, and actual tests before resuming.
-
-## Last session summary
-
-_No session has started._
-
-## Exact next safe action
-
-Receive `SESSION_NUMBER` in the session prompt, verify prerequisites and start at the first unfinished task in that range.
+**Carry forward:** Preserve auth, tenancy, review states, audit and JSON export, keep RES archive immutable, test before DONE. Do not deploy or merge Phase 01 during Session 01.

@@ -21,3 +21,17 @@ This file is a **per-step evidence ledger**, not a summary. Begin with no comple
 ## Execution entries
 
 _No JR execution has been recorded yet. Planning document synchronization does not count as implementation or test acceptance._
+
+### 2026-11-06T10:56:32.144Z | Session 01 | JR-001 | DONE (VERIFIED NO CHANGE)
+
+- **What / files:** Read canonical `Edison3060/PLogIt` main `852cfbaa6682de8e99895a63c09515ea659e4b94`, historical review baseline `28aa1561cb59637e954a08caf2a2ed068178a9fb`, and read-only RES reference `596f8a1ad0997f2cdacfcc859107f3b642e2e545`; source/tests map in `SESSION-01-EVIDENCE.md`. Application source untouched.
+- **Why / approach:** Verified blob identities rather than trusting historical July completion claims; the RES copy is a reference snapshot, not a separate application development branch.
+- **Web research:** Not needed; authoritative GitHub Git Trees and Commits APIs used directly, 2026-11-06.
+- **Previous state → result:** NOT STARTED → DONE, VERIFIED NO CHANGE.
+- **Expected behavior:** Canonical standalone main is source of truth; archived copy is distinguishable and tests are mapped.
+- **Observed evidence:** Executed read-only Git tree SHA map comparison: 185 application blobs on canonical main matched archived RES byte identities (0 SHA mismatches); archived RES has one extra research markdown. Git compare 28aa156..852cfbaa shows 6 commits changing docs/planning only. GitHub API calls returned successfully; see evidence file for API paths and fixture.
+- **Security / authorization:** Read-only checks; no code/RES writes, no customer data, secrets, or deployment touched. Runtime auth integration tests NOT executed by this task.
+- **Decision / approval:** None, no product change. Reviewer: Builder Lead, source inspection (owner sign-off pending at session boundary).
+- **Roadblock → resolution:** No independent local Git checkout or network reachable from sandbox; connector GitHub API supplied provenance, not a local Maven runtime.
+- **GitHub:** `work/plogit-phase-01`, JR-001 commit SHA available in branch history; SHA reference in subsequent step log. No PR in odd session.
+- **Learning / next task:** Specify acceptance and dated decision row, JR-002.
