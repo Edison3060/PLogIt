@@ -13,11 +13,11 @@
 | Static source checks | 9/9 read-only contract assertions passed; no scoring/finding/ticket endpoints or fields introduced |
 | Actual runtime tests | GitHub Actions https://github.com/Edison3060/PLogIt/actions/runs/42206996982, `ec8f789a95b7d48f17b478b1cb518f91a7bad126`: `mvn -B verify` 125/125 PASS, `npm test` 18/18 PASS; frontend lint/build, Semgrep and proxy validation PASS |
 | **Failed CI check** | Trivy backend image scan FAIL (CVE-2026-109518, HIGH, Ubuntu 26.04 apt/libapt-pkg7.0 3.2.0; fixed 3.2.1ubuntu0.1). Frontend image vulnerability scans skipped. Overall workflow **FAILURE** |
-| Pending decision | DEC-2026-11-06-03: authorize separate digest-pinned security fix or scoped Phase 01B remediation; recommended fix early, no CI bypass |
+| Security decision | DEC-2026-11-06-03: focused hotfix implementation owner-approved and CI-green in [PR #20](https://github.com/Edison3060/PLogIt/pull/20); production release/merge **NOT authorized** |
 | Phase PR / merge | **None** in odd session; Phase 01B JR-011–020 and full green security/acceptance checks required before phase PR merge |
 | Source / data change | **Zero** application code, JSON schema, auth, tenancy, review-state, audit, or deployment modifications; only `docs/junior-execution/` tracking |
 | Work phase | Handoff / awaiting owner sign-off |
-| Exact next safe action | Stop Session 01. Owner reviews DEC-2026-11-06-03 and sign-off; only then start Session 02 beginning JR-011 (and plan separately approved security fix) |
+| Exact next safe action | Stop. PR #20 may merge only after separately authorized safe deployment/release path. To start new development work, owner explicitly starts Session 02 at JR-011; reconcile hotfix branch into Phase 01 branch without production release |
 
 ## Last-session work and decisions
 
@@ -36,3 +36,9 @@ Run `cd backend && mvn -B verify` (CI: 125 passing) and `cd frontend && npm ci &
 - [ ] All ten JR rows assessed; log/decisions/handoff saved to GitHub.
 - [ ] Owner accepted the unresolved CVE decision path.
 - [ ] Owner approved beginning **Session 02** in a separate prompt.
+
+## Authorized post-session security fix (2026-11-06)
+
+Owner authorized the targeted correction of CVE-2026-109518 (not a new JR execution). Separate `fix/ubuntu-apt-cve-2026-109518` commit `5c5657aa0997a53a6926ebd03375f06d776f9bc1`, [PR #20](https://github.com/Edison3060/PLogIt/pull/20). **CI PASS** at [run 42208728367](https://github.com/Edison3060/PLogIt/actions/runs/42208728367): backend 125 tests, frontend 18, Semgrep, proxy, container image builds/healthchecks, Trivy backend and frontend image scans. The Dockerfile retains a pinned Temurin base and fail-closed APT 3.2.1ubuntu0.1 verification. The **main** branch still does not contain this fix; **PR is OPEN, unmerged**, because a main push may trigger automatic production CD and deployment authorization is withheld.
+
+**No JR-011 or Session 02 work was performed.** JR-001–JR-010 historical source-baseline evidence and statuses remain unchanged. Phase 01 branch has not imported the hotfix; in a future owner-authorized session, incorporate the security fix safely, re-run all checks and observe the main deployment gate before any merge. The post-session tracking checkpoint updates only this repository's execution docs.
