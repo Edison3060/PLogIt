@@ -77,3 +77,10 @@ Compared JR-011 source owners, JR-012 acceptance/DEC-2026-11-06-05, JR-013 page-
 
 **Integration policy file created:** `INTEGRATION-ASSUMPTIONS.md` tracks field names and status explicitly, cross-referencing existing `docs/integrations/PROVISIONAL-SUITE-CONTRACTS.md`. Owner-authorized DEC-2026-11-06-04 permits reversible local mock work, not live interoperability or production. No tests executed against other apps. **Reviewer:** Builder Lead; next JR-017.
 
+
+## JR-017 — acceptance: facts vs assumptions vs approval
+
+**Acceptance standard:** Every unresolved item must include date, exact current source, observed fact, target/proposal, owner, approval state and a no-accidental-change action. Current PLogIt behavior is the default; source facts are not permission to change contracts. DEC-2026-11-06-06 through 10 record distinct **PENDING** choices for log inclusion, evidence packaging, tenant namespace, sensitive-data privacy and modernization. DEC-2026-11-06-04 already authorizes a replaceable file-only mock wrapper as **PROVISIONAL**, not a final schema. Any new producer/export behavior needs explicit product sign-off and security/regression testing. Merge into `main` is separately release-gated. No JR in this inventory is BLOCKED solely because JudgeIt is unbuilt; owners can decide final interoperability later. **Reviewer:** Builder Lead.
+
+**Expected:** documented, dated truth table; no unsupported security, production, tenant or schema claim marked DONE. **Observed:** source and decision ledger distinguish owner-reserved choices from tested legacy behavior. No code changes. Next JR-018.
+

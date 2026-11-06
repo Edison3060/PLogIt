@@ -2,13 +2,12 @@
 
 ## Session 02 current handoff (in progress, 2026-11-06 UTC)
 
-- **Scope:** JR-011–020 only. Completed through JR-016 (6/10); next JR-017.
-- **Branch:** `work/plogit-phase-01`, prior pushed checkpoint SHA `550736f7a3b084f05eb405a624636acbb0134326`; inspect GitHub branch ref for this commit's SHA.
-- **JR statuses:** JR-001–010 DONE from Session 01; JR-011–JR-016 DONE (verified inventory/no app changes); JR-017–JR-020 NOT STARTED.
-- **Evidence and tests:** `SESSION-02-EVIDENCE.md`, 33/33 static read-only source assertions; pre-session Phase CI [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) green on exact source, CD skipped. Current branch CI to check before phase acceptance.
-- **Integration:** `INTEGRATION-ASSUMPTIONS.md` updated; PR #21 remains unmerged, `plogit-judgeit-provisional/0.1` has mock-only success and real JudgeIt interoperability pending. No producer JSON change.
-- **Release:** Approved APT CVE fix present in phase branch; PR #20 open. Merging into main can trigger CD; NO production approval or merge. Owner-reserved contract, tenant, privacy and release choices remain pending.
-- **Exact next:** JR-017; source-based decision classification, no changes beyond Session 02.
+- **Scope / status:** Phase 01B, JR-011–020 ONLY. Completed JR-011 through JR-017 (7/10); next JR-018. Earlier JR-001–010 DONE.
+- **Branch:** `work/plogit-phase-01`; previous pushed SHA `e9da2e53876899e1ad49235de1afffadc13fb71c`, current JR commit = branch HEAD. No source code changes in Session 02.
+- **Evidence/tests:** `SESSION-02-EVIDENCE.md`, read-only 33/33 structural source checks. Previous exact source branch CI run [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) green, CD skipped. Await final branch-head checks before phase gate.
+- **Decisions:** DEC-06..10 created as PENDING owner choices, not approved producer/privacy changes. `INTEGRATION-ASSUMPTIONS.md` says mock-only version 0.1, no JudgeIt live interoperability. PR #21 remains OPEN on separate feature branch.
+- **Security/merge:** CVE correction already on phase branch, PR #20 open; `main` merge may trigger production CD. Do not merge without safe release authorization and mandatory CI, never bypass security.
+- **Exact next:** JR-018 within Session 02; stop at JR-020.
 
 ## Archived Session 01 handoff
 

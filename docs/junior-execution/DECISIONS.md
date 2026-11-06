@@ -66,3 +66,38 @@ _No execution-session decisions have been recorded._
 - **Date:** 2026-11-06 UTC. Branch reviewed at `da9ebfa80d7ed9a0632af24284c95f90e49474b1`. **Decision:** Inventory shipped surfaces only: 10 React leaf routes, six controllers with 24 HTTP mapping annotations, current DTOs and mapped regression test owners. July plan features do not become implementation evidence. No product/schema/auth change authorized by this decision.
 - **Actual vs expected:** `App.tsx` and six `web/*Controller.java` files agree with `frontend/src/lib/{auth,engagements,logs}.ts` and Phase 01 roadmap. No new endpoints, CVSS/tickets, self-contained attachment claim or live cross-app integration. Some UI routes have no explicit browser E2E test, therefore journey proof remains unverified.
 - **Reviewer / alternatives:** Builder Lead, source and CI review; rejected rebuilding routes merely to make old status prose true. Owner required for any new product behavior. Evidence: `SESSION-02-EVIDENCE.md` JR-011–015 and GitHub Actions run 42212527183.
+
+### DEC-2026-11-06-06 | PENDING OWNER PRODUCT DECISION | JR-017 | Export log inclusion for downstream
+- **Question:** Should future evidence handoff include states other than APPROVED/default and optional EXPORTED?
+- **RECOMMENDED ANSWER:** Keep legacy PLogIt exporter unchanged. Let a separately versioned, tested future consumer define whether broader capture is required; never silently include unapproved entries. Current source `ExportService.java` and `JsonReportStrategy.java`.
+- **Alternatives:** Include drafts (privacy/review leakage), silently change selection (break consumers): rejected pending explicit policy.
+- **Blocked JRs:** None in this source-inventory session; future producer schema changes and live handoff require owner approval.
+- **Owner response:** PENDING as of 2026-11-06. No sign-off inferred.
+
+### DEC-2026-11-06-07 | PENDING OWNER SECURITY/PRIVACY DECISION | JR-017 | Evidence bytes, portability and integrity
+- **Question:** What authorized archive/media bytes, redaction, hashes and recipient retention should accompany attachment filenames?
+- **RECOMMENDED ANSWER:** Keep filename-only current JSON; design an explicit versioned, permissioned evidence bundle and tests later. Label mock `evidenceCompleteness=attachment-filenames-only-unverified`.
+- **Alternatives:** Embed base64 now (privacy/size and compatibility), treat filenames as complete (incorrect): rejected.
+- **Blocked JRs:** None for provisional mock; real media handoff/integrity certification pending.
+- **Owner response:** PENDING as of 2026-11-06.
+
+### DEC-2026-11-06-08 | PENDING OWNER IDENTITY DECISION | JR-017 | Cross-instance tenancy
+- **Question:** How should engagement/tenant identity be proven at future JudgeIt import?
+- **RECOMMENDED ANSWER:** Maintain flat engagement membership/leader authorization. In mock only, use operator-assigned stable `sourceNamespace` plus log UUID; do not infer tenant from email or expose a shared endpoint.
+- **Alternatives:** Numeric engagement ID alone (collision), inferred email domains (unsafe): rejected.
+- **Blocked JRs:** None for opt-in file-only adapter; real authenticated multi-tenant receiver remains unverified.
+- **Owner response:** PENDING real cross-app mapping as of 2026-11-06; DEC-04 authorizes provisional mock only.
+
+### DEC-2026-11-06-09 | PENDING OWNER PRIVACY DECISION | JR-017 | Transfer consent, retention and access
+- **Question:** Which pentest evidence classifications, export/import permissions, consent, retention and deletion rules should apply across apps?
+- **RECOMMENDED ANSWER:** Do not transmit sensitive evidence to an imagined receiver; retain local authorized export only and add explicit consent/retention policy before real cross-app transfer.
+- **Alternatives:** Auto-upload, broad sharing, undocumented indefinite retention: rejected.
+- **Blocked JRs:** None in Phase 01; real integration/data transfer pending.
+- **Owner response:** PENDING as of 2026-11-06.
+
+### DEC-2026-11-06-10 | ENGINEERING REBASELINE, FUTURE OWNER PRIORITY OPEN | JR-017 | Supported stack and migration scope
+- **Observed:** Current `backend/pom.xml` Spring Boot 4.1.1 / Java 21, `frontend/package.json` React 18 / Vite 6; PostgreSQL 16. July 3.5.x and an assumed newer UI are not source facts.
+- **RECOMMENDED ANSWER:** Freeze the verified working Phase 01 code; address tooling modernization only in its already numbered later phases, with current dependency advisories researched at that point.
+- **Alternatives:** Rewrite or upgrade in baseline verification without focused tests: rejected.
+- **Blocked JRs:** None. Future modernization priority remains owner-reserved if it changes scope.
+- **Owner response:** No new stack change approved on 2026-11-06.

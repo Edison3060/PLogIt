@@ -277,3 +277,15 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Research:** Existing 2026 mirrored research and verified code sufficient, no new external web facts relied upon.
 - **GitHub:** Branch `work/plogit-phase-01`; prior checkpoint `550736f7a3b084f05eb405a624636acbb0134326`, this JR-numbered commit will be current branch head; PR/merge held for phase gate.
 - **Reviewer / next:** Builder Lead; next JR-017.
+
+### 2026-11-06T13:36:21.806Z | Session 02 | JR-017 | DONE (VERIFIED NO APPLICATION CHANGE)
+- **Previous → result:** NOT STARTED → IN PROGRESS → DONE, original Phase 01 "Specify Open decisions and rebaseline acceptance".
+- **What / files:** Updated `SESSION-02-EVIDENCE.md`, `STEP-REGISTER.md`, `STEP-LOG.md`, `SESSION-HANDOFF.md`, `DECISIONS.md`; app unchanged.
+- **Why / approach:** Preserve source-tested producer behavior, classify future privacy/identity/contract decisions as pending or mock-only provisional. Rejected conflating owner approval with a mock fixture.
+- **Expected vs observed:** Dated pending owner decision entries DEC-06..10 define actual state, recommendation, alternatives and nonblocking provisional path. Detailed evidence in `SESSION-02-EVIDENCE.md` #jr-017.
+- **Actual tests / limitation:** Read-only source and prior 33/33 static assertions; no new runtime tests. Phase CI run 42212527183 pre-session SUCCESS, deploy SKIPPED, 125 backend and 18 frontend in inherited evidence. No local Maven/browser or real downstream E2E test executed.
+- **Security / approval:** DEC-04 allows only opt-in local provisional mock, not production, cross-tenant privacy decisions, new producer schema or release. Negative security classification not equivalent to HTTP 403/transaction test.
+- **Research:** Existing dated suite research, current source and GitHub CI suffice; no new live external standard claim adopted.
+- **Roadblock:** No other-app production/importer; not a blocker for mock and inventory. Main merge would trigger CD, held.
+- **GitHub:** `work/plogit-phase-01`, parent `e9da2e53876899e1ad49235de1afffadc13fb71c`, JR checkpoint pushed, discover current SHA in branch history. Phase PR not merged.
+- **Reviewer / next:** Builder Lead; JR-018.
