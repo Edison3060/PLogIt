@@ -1,4 +1,4 @@
-# PLogIt: bounded Work session protocol
+# PLogIt: bounded development session protocol
 
 This is the **hot operating constitution**. A new chat must read this file, the step register, the log, decisions, session handoff, the selected phase file, and the mirrored [Master Prompt](../../planning/RES-application-plan/PlogIt%20Workspace/Rules%20to%20Follow/Master%20Prompt.md) before implementation.
 
@@ -13,12 +13,14 @@ This is the **hot operating constitution**. A new chat must read this file, the 
 
 ## Delegation placeholders
 
+The user selects the Session Lead model outside this prompt. Do not prescribe a Lead model or platform. The optional subagent model comes only from the user's SUBAGENT_MODEL value.
+
 - Follow `USE_SUBAGENTS` and `SUBAGENT_MODEL` exactly as specified in the session's prompt. When YES, use real available subagents; configure the requested model only if supported. If subagents or model selection are unavailable, proceed directly as Builder Lead and note the fallback. When NO, do all work directly. Never invent subagent runs.
 - The Lead remains responsible for review and executed tests in every mode. In parallel assign exclusive files and agree interfaces.
 
 ## GitHub procedure and boundaries
 
-- This workflow **authorizes writing to this repository**, including commits, pushes, PRs and merges. Work only in `Edison3060/PLogIt`. Do not touch the other apps without their own authorization. Never alter `planning/RES-application-plan/` reference copies merely to mark progress.
+- This workflow **authorizes writing to this repository**, including commits, pushes, PRs and merges. Operate only in `Edison3060/PLogIt`. Do not touch the other apps without their own authorization. Never alter `planning/RES-application-plan/` reference copies merely to mark progress.
 - For original phase XX, use `work/plogit-phase-XX` (01–12). Odd-numbered session creates or resumes branch from current main; even-numbered session must resume the same branch with Session A commits. Don't create a new Phase B branch or skip unfinished Phase A.
 - Commit a reviewed checkpoint with JR ID after **every step**, including a docs-only entry for BLOCKED or VERIFIED NO CHANGE. Push branch progress after each JR so another session sees it. Before committing, check secrets and generated files; never force-push or bypass branch protection.
 - After even-numbered sessions, run the original 20-task phase gate; open/review/merge PR into main **only if all required acceptance, security and CI checks genuinely pass**. If gate incomplete, keep branch/PR open, record the blocker and stop. GitHub main is not a testing shortcut.

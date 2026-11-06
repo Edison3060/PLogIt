@@ -2,7 +2,7 @@
 
 **This is a session partition of the existing 240 JR tasks, not a new roadmap.** The original 12 phase files and their instructions remain authoritative. Each session has 10 exact JR identifiers; odd/even sessions share one original 20-task phase.
 
-**Choose one session per new Work chat.** Change `SESSION_NUMBER` in `BUILDER-LEAD-PROMPT.md` to 01–24. Read `SESSION-PROTOCOL.md`, `STEP-REGISTER.md`, `STEP-LOG.md`, `SESSION-HANDOFF.md`, and `DECISIONS.md` before any work. Complete only the selected JR range, or record why specific tasks are blocked. Never skip unfinished earlier dependencies.
+**Choose one session per new coding session.** Change `SESSION_NUMBER` in `BUILDER-LEAD-PROMPT.md` to 01–24. Read `SESSION-PROTOCOL.md`, `STEP-REGISTER.md`, `STEP-LOG.md`, `SESSION-HANDOFF.md`, and `DECISIONS.md` before any work. Complete only the selected JR range, or record why specific tasks are blocked. Never skip unfinished earlier dependencies.
 
 **GitHub cadence:** every JR gets a reviewed commit and a progress-log update pushed to a phase branch. Session A starts the phase branch; Session B resumes that exact branch and, only when the 20-task phase gate is truly accepted, opens/reviews/merges its PR. End each 10-step session with a sign-off checklist and do not begin the next numbered session automatically.
 

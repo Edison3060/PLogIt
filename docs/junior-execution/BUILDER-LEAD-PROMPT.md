@@ -1,6 +1,8 @@
-# PLogIt: reusable Work Builder Lead prompt
+# PLogIt: reusable development Builder Lead prompt
 
-Copy this into a **new Work chat**, changing the three configuration lines below. Do not rely on any earlier chat history.
+**Model selection:** The user selects the Session Lead model outside this prompt in their coding environment. Do not assume, prescribe, or require any specific Lead model or vendor. SUBAGENT_MODEL is solely the user's optional choice of coding subagent model; use it only when the runtime genuinely supports it.
+
+Copy this into a **new coding session**, changing the three configuration lines below. Do not rely on any earlier chat history.
 
 ```text
 SESSION_NUMBER: 01
