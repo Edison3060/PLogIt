@@ -119,3 +119,12 @@ Compared JR-011 source owners, JR-012 acceptance/DEC-2026-11-06-05, JR-013 page-
 
 **Meaning of BLOCKED:** the *claim of final security/schema/deployment approval* is blocked, **not** these source-baseline JRs or reversible mock implementation. Rejection is a pure classification without HTTP endpoint, transaction or user data mutation; no 403 or database rollback invented. Current app permission checks are covered by existing backend regression suite in green Actions run. **Decision DEC-2026-11-06-11** records main merge/release pending owner authorization. Alternatives of bypassing CI, inventing deployment or calling mocked JudgeIt interoperable rejected. No code change. Next JR-020.
 
+
+## JR-020 — close rebaseline verification and bounded session
+
+**Reviewed:** JR-016 fact/deferred inventory; JR-017 dated DEC-06..10 recommended pending decisions; JR-018 seven-source register and **7/7** JS assertions; JR-019 negative fixture **6/6** denial/positive-control tests. Earlier JR-011..015 inventory verified: 33/33 structural source assertions, ten route/client/controller/test mappings, six Spring MVC controllers and 24 annotated operations. No app code/API/schema/auth/export/deployment change in Session 02; no production deploy, no use of real customer evidence. **DONE for scoped Phase 01B evidence tasks**, not sign-off of unbuilt integrations or production release. No migration/rollback necessary for docs-only commits; revert JR checkpoints if evidence is later contradicted.
+
+**Actual runtime CI evidence:** last known completed source-equivalent phase branch run [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) had backend Maven, frontend tests/build/lint, Semgrep, Trivy image and filesystem, proxy PASS; deployment SKIPPED. That run predates these documentation checkpoints. **Mandatory current-head CI check is PENDING** until run completes; never call it passed merely because code is unchanged. Phase 01 acceptance comprises JR-001–020, but phase merge cannot occur without current green checks AND safe production-CD decision DEC-11. Any final PR is to remain open/draft; do not merge under current authorization. **Reviewer:** Builder Lead.
+
+**Session boundary:** STOP after JR-020. Next action is inspect final HEAD CI and Phase 01 PR, resolve release gate without deployment, then request owner sign-off for Session 03 (JR-021–030). No JR-021 action started.
+

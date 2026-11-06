@@ -15,3 +15,8 @@
 - Keep mock fixture success distinct from real JudgeIt import verification; failed/not-run integration remains pending.
 - The prototype feature branch and PR #21 are open, not merged; avoid folding that work into the Phase 01 source-baseline checkpoint without its own acceptance.
 - Recheck decisions in JR-017–020 and later actual integration JRs. Production merges/deployments are independently gated.
+
+## Session 02 completion check (2026-11-06)
+- JR-018 synthetic register 7/7 PASS and JR-019 unsupported-claim rejection 6/6 PASS. These tests validate **classification**, not remote interoperability or evidence integrity.
+- PLogIt → JudgeIt real receiver, tenant authorization and evidence transfer **PENDING**. The optional versioned wrapper remains separate in PR #21; its 12 mock tests do not close the live-integration gate.
+- DEC-06..09 real log-inclusion, media, identity, privacy questions remain owner-reserved; DEC-11 production-safe merge approval remains PENDING. No real integration marked DONE.

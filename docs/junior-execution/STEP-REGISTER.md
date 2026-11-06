@@ -25,7 +25,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-017 | Specify Open decisions and rebaseline acceptance | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-017) • approval classifications verified, no app change | 2026-11-06T13:36:21.806Z |
 | JR-018 | Reproduce Open decisions and rebaseline success | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-018) • approval classifications verified, no app change | 2026-11-06T13:37:53.609Z |
 | JR-019 | Reject Open decisions and rebaseline invalid operation | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-019) • verified scoped evidence, no app change | 2026-11-06T13:39:55.966Z |
-| JR-020 | Close Open decisions and rebaseline verification | 02 | NOT STARTED | — | — |
+| JR-020 | Close Open decisions and rebaseline verification | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-020) • verified scoped evidence, no app change | 2026-11-06T13:41:06.120Z |
 | JR-021 | Inventory Maven and Spring baseline | 03 | NOT STARTED | — | — |
 | JR-022 | Specify Maven and Spring baseline acceptance | 03 | NOT STARTED | — | — |
 | JR-023 | Reproduce Maven and Spring baseline success | 03 | NOT STARTED | — | — |
