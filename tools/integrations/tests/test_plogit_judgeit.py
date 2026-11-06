@@ -1,6 +1,7 @@
 """Synthetic, file-only contract tests; no downstream service is simulated as live."""
 
 import copy
+import hashlib
 import importlib.util
 import json
 import os
@@ -112,6 +113,47 @@ class ProvisionalBridgeTests(unittest.TestCase):
             self.assertEqual(wrapped["sourceNamespace"], self.namespace)
             if os.name != "nt":
                 self.assertEqual(out.stat().st_mode & 0o777, 0o600)
+
+
+    def _mock_judgeit_import(self, envelope, namespace, imports):
+        """Contract-test-only receiver: no service, storage or HTTP is implied."""
+        self.assertEqual(envelope["contractVersion"], bridge.CONTRACT_VERSION)
+        self.assertEqual(envelope["sourceApp"], "PLogIt")
+        self.assertEqual(envelope["sourceNamespace"], namespace)
+        source_ids = [item["id"] for item in envelope["payload"]["logs"]]
+        self.assertEqual(envelope["sourceLogIds"], source_ids)
+        canonical = json.dumps(
+            envelope["payload"], ensure_ascii=False, sort_keys=True,
+            separators=(",", ":"), allow_nan=False,
+        ).encode("utf-8")
+        digest = hashlib.sha256(canonical).hexdigest()
+        self.assertEqual(envelope["payloadSha256"], digest)
+        expected_key = hashlib.sha256(
+            namespace.encode("utf-8") + b"\x00" + digest.encode("ascii")
+        ).hexdigest()
+        self.assertEqual(envelope["importKey"], expected_key)
+        if expected_key in imports:
+            return "already-seen"
+        imports.add(expected_key)
+        return "received"
+
+    def test_synthetic_mock_consumer_accepts_and_deduplicates_replay(self):
+        wrapped = bridge.convert(self.payload, self.namespace)
+        imports = set()
+        self.assertEqual(self._mock_judgeit_import(wrapped, self.namespace, imports), "received")
+        self.assertEqual(self._mock_judgeit_import(wrapped, self.namespace, imports), "already-seen")
+        self.assertEqual(len(imports), 1)
+
+    def test_synthetic_mock_consumer_rejects_tampered_payload(self):
+        wrapped = bridge.convert(self.payload, self.namespace)
+        wrapped["payload"]["logs"][0]["title"] = "tampered after wrapping"
+        with self.assertRaises(AssertionError):
+            self._mock_judgeit_import(wrapped, self.namespace, set())
+
+    def test_synthetic_mock_consumer_requires_explicit_namespace(self):
+        wrapped = bridge.convert(self.payload, self.namespace)
+        with self.assertRaises(AssertionError):
+            self._mock_judgeit_import(wrapped, "another-tenant-instance", set())
 
 
 if __name__ == "__main__":
