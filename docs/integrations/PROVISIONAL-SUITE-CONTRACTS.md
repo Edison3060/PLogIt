@@ -53,3 +53,24 @@ The abbreviated `payload` example is schematic only. Real output retains the com
 7. Follow normal per-JR/session gates and independently authorize any release. No production deployment from this work.
 
 Original research: `planning/RES-application-plan/Suite - Handoff Contracts and Evidence.md` and `Suite - To Be Scoped.md` are frozen references, not newly approved downstream product specs.
+
+## Command-line use and verification
+
+Run only on an evidence file obtained through PLogIt's existing **leader-authorized export** (the export itself mutates approved logs to EXPORTED and writes audit records):
+
+```bash
+python3 tools/integrations/plogit_judgeit.py \
+  --input engagement-evidence.json \
+  --output judgeit-provisional.json \
+  --namespace operator-assigned-instance-key
+```
+
+The output is a sensitive local JSON file written with owner-only `0600` permissions on POSIX. Do not check real export files into Git, send to a mock service or share across tenants. Source namespace must be a deliberately assigned stable instance identifier; not a guessed email, domain or credential. No live receiver exists. `payload` is the unchanged legacy export and `payloadSha256` / `importKey` are reproducibility hints, not signatures or attachment-integrity proofs.
+
+Run the **offline synthetic contract test suite** with:
+
+```bash
+python3 -m unittest discover -s tools/integrations/tests -p 'test_*.py' -v
+```
+
+[Actual GitHub Actions run 42212049183](https://github.com/Edison3060/PLogIt/actions/runs/42212049183), 2026-11-06, passed 12 synthetic bridge/mock-consumer tests, backend 125, frontend 18 and all other CI checks, including both blocking image scans. This proves only the local bridge and the continued PLogIt regressions. It does not prove a future JudgeIt accepts the envelope.
