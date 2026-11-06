@@ -12,7 +12,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-004 | Reject Canonical source identity invalid operation | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-004) • VERIFIED NO CHANGE | 2026-11-06T10:58:16.029Z |
 | JR-005 | Close Canonical source identity verification | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-005) • VERIFIED NO CHANGE | 2026-11-06T10:58:21.989Z |
 | JR-006 | Inventory Product role boundary | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-006) • VERIFIED NO CHANGE | 2026-11-06T11:00:11.032Z |
-| JR-007 | Specify Product role boundary acceptance | 01 | NOT STARTED | — | — |
+| JR-007 | Specify Product role boundary acceptance | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-007) • VERIFIED NO CHANGE | 2026-11-06T11:00:17.485Z |
 | JR-008 | Reproduce Product role boundary success | 01 | NOT STARTED | — | — |
 | JR-009 | Reject Product role boundary invalid operation | 01 | NOT STARTED | — | — |
 | JR-010 | Close Product role boundary verification | 01 | NOT STARTED | — | — |
