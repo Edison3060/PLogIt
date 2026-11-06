@@ -103,3 +103,19 @@ Compared JR-011 source owners, JR-012 acceptance/DEC-2026-11-06-05, JR-013 page-
 
 **Validation meaning:** This tests consistency of the decision fixture, not live API or remote-import operation. Real downstream validation remains pending and is not marked DONE. No web research needed beyond source and existing 2026 dated citations in plan. **Reviewer:** Builder Lead; next JR-019.
 
+
+## JR-019 — negative assumption-denial test
+
+**Isolated synthetic denial fixture, executed now:** six claims with attempted `DONE` statuses, classified from available source/approval/test evidence. **6/6 PASS**, including five rejected unsupported assertions and one allowed verified current-state control.
+
+| Attempted claim | Expected / observed | Evidence |
+|---|---|---|
+| Production already deployed | BLOCKED / BLOCKED | `deploy` only on main, branch run 42212527183 skipped CD |
+| Real JudgeIt accepts provisional versioned JSON | BLOCKED / BLOCKED | PR #21 mock bridge 12/12 test success only; no real receiving app |
+| Attachment content integrity proven | BLOCKED / BLOCKED | `JsonReportStrategy` filename-only |
+| Cross-tenant identity approved | BLOCKED / BLOCKED | only local engagement membership; sourceNamespace operator-assigned mock |
+| Retention, consent, transfer privacy approved | BLOCKED / BLOCKED | `Suite - To Be Scoped.md` unresolved, DEC-09 pending |
+| Existing approved-only export semantics implemented | DONE / DONE | current `ExportService`/controller and real prior `ExportIntegrationTest` run |
+
+**Meaning of BLOCKED:** the *claim of final security/schema/deployment approval* is blocked, **not** these source-baseline JRs or reversible mock implementation. Rejection is a pure classification without HTTP endpoint, transaction or user data mutation; no 403 or database rollback invented. Current app permission checks are covered by existing backend regression suite in green Actions run. **Decision DEC-2026-11-06-11** records main merge/release pending owner authorization. Alternatives of bypassing CI, inventing deployment or calling mocked JudgeIt interoperable rejected. No code change. Next JR-020.
+

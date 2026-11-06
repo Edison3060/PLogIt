@@ -101,3 +101,11 @@ _No execution-session decisions have been recorded._
 - **Alternatives:** Rewrite or upgrade in baseline verification without focused tests: rejected.
 - **Blocked JRs:** None. Future modernization priority remains owner-reserved if it changes scope.
 - **Owner response:** No new stack change approved on 2026-11-06.
+
+### DEC-2026-11-06-11 | PENDING OWNER RELEASE SAFETY DECISION | JR-019 / JR-020 | Phase 01 merge may trigger production CD
+- **Observed (2026-11-06):** `.github/workflows/ci.yml` has push-to-main production `deploy` job after validation, guarded by SSH host-key fingerprint preflight. Phase 01 branch CI run 42212527183 was green and CD SKIPPED on non-main; no proof of prod deployment. Branch includes focused APT CVE fix, separate security PR #20 remains OPEN.
+- **Question needing owner approval:** How should the accepted Phase 01 branch merge into main without triggering an unauthorized production deployment?
+- **RECOMMENDED ANSWER:** Keep the Phase 01 PR OPEN/DRAFT for review. Establish an independently verified fail-closed manual approval environment/deployment gate (or explicitly authorize a controlled deployment window) before merging to main. Re-run all mandatory CI/security checks at the merge candidate SHA. This is the preferred safe merge path; no security bypass or CI suppression.
+- **Alternatives / trade-offs:** Merge now (may deploy without permission: rejected); disable security checks or force merge (prohibited); keep PR open while safe independent future work is planned (allowed, but next phase main base may lag). A deployment workflow change is separately scoped and must be proven safe.
+- **Blocked JR IDs:** None of JR-011..020 for documentation/verification. Phase 01 **merge/release gate** is BLOCKED, and beginning Session 03 on an unreconciled main would risk missing prior phase work.
+- **Owner response:** PENDING, user explicitly forbids production deployment without separate authorization. No merge performed. Relevant PR to be created after Session 02; do not treat creation as merge approval.
