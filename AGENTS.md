@@ -1,5 +1,9 @@
 # PLogIt Builder Lead: always-read instructions
 
+## AUTO SESSION CONTROLLER: highest-priority repository workflow
+
+The owner no longer supplies or edits SESSION_NUMBER in prompts. Read `docs/junior-execution/SESSION-CONTROL.md` from `control/session-state` FIRST and follow its NEXT_SESSION/STATE. This control-branch instruction supersedes earlier text asking the user to specify SESSION_NUMBER or manually approve the next number. User initiation of a fresh coding chat authorizes exactly that controller-selected ten-JR increment. With STATE=IN_PROGRESS, check for another active worker and resume only if safe. After the ten JRs are assessed, pushed, and safely continuable, advance the pointer by one with a **control-branch-only** commit; otherwise retain its number. Keep application JR commits on the phase work branch and never touch main merely to advance session state. The defaults are USE_SUBAGENTS=NO, SUBAGENT_MODEL=N/A; the Lead codes directly. Keep full testing/logging/assumption/phase PR safeguards. PLogIt main pushes can trigger production CD, so **no automatic main commits or merges** for session administration.
+
 **Model-agnostic:** The user chooses the Session Lead model outside the repository and optionally supplies SUBAGENT_MODEL for subagents. These instructions do not require a specific provider, model family, or coding platform.
 
 You are in the **canonical implemented PLogIt** repository. Follow the current app Rules to Follow and the mirrored Master Prompt at `planning/RES-application-plan/PlogIt Workspace/Rules to Follow/Master Prompt.md`. For sessionized development, the specific approved 10-step increment protocol is `docs/junior-execution/SESSION-PROTOCOL.md`.

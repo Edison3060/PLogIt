@@ -1,5 +1,9 @@
 # PLogIt: bounded development session protocol
 
+## AUTO SESSION CONTROLLER: highest-priority repository workflow
+
+The owner no longer supplies or edits SESSION_NUMBER in prompts. Read `docs/junior-execution/SESSION-CONTROL.md` from `control/session-state` FIRST and follow its NEXT_SESSION/STATE. This control-branch instruction supersedes earlier text asking the user to specify SESSION_NUMBER or manually approve the next number. User initiation of a fresh coding chat authorizes exactly that controller-selected ten-JR increment. With STATE=IN_PROGRESS, check for another active worker and resume only if safe. After the ten JRs are assessed, pushed, and safely continuable, advance the pointer by one with a **control-branch-only** commit; otherwise retain its number. Keep application JR commits on the phase work branch and never touch main merely to advance session state. The defaults are USE_SUBAGENTS=NO, SUBAGENT_MODEL=N/A; the Lead codes directly. Keep full testing/logging/assumption/phase PR safeguards. PLogIt main pushes can trigger production CD, so **no automatic main commits or merges** for session administration.
+
 ## Owner-approved autonomy, provisional cross-app progress, and readiness (current session policy)
 
 These rules supersede older instructions below when they would otherwise force routine owner questions or BLOCKED status solely because a sibling app is unfinished. The owner has already approved **proceeding with the Lead's recommendation** within the selected ten-JR increment. State a concise Intake plan, choose an evidence-based reasonable implementation, document the recommendation/rationale in DECISIONS and STEP-LOG, and implement through the last assigned JR without seeking routine sign-off. **The user sign-off is at the numbered session boundary**, not after every small recommendation or task.

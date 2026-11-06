@@ -1,5 +1,9 @@
 # PLogIt: 24-session execution index
 
+## AUTO SESSION CONTROLLER: highest-priority repository workflow
+
+The owner no longer supplies or edits SESSION_NUMBER in prompts. Read `docs/junior-execution/SESSION-CONTROL.md` from `control/session-state` FIRST and follow its NEXT_SESSION/STATE. This control-branch instruction supersedes earlier text asking the user to specify SESSION_NUMBER or manually approve the next number. User initiation of a fresh coding chat authorizes exactly that controller-selected ten-JR increment. With STATE=IN_PROGRESS, check for another active worker and resume only if safe. After the ten JRs are assessed, pushed, and safely continuable, advance the pointer by one with a **control-branch-only** commit; otherwise retain its number. Keep application JR commits on the phase work branch and never touch main merely to advance session state. The defaults are USE_SUBAGENTS=NO, SUBAGENT_MODEL=N/A; the Lead codes directly. Keep full testing/logging/assumption/phase PR safeguards. PLogIt main pushes can trigger production CD, so **no automatic main commits or merges** for session administration.
+
 **This is a session partition of the existing 240 JR tasks, not a new roadmap.** The original 12 phase files and their instructions remain authoritative. Each session has 10 exact JR identifiers; odd/even sessions share one original 20-task phase.
 
 **Choose one session per new coding session.** Change `SESSION_NUMBER` in `BUILDER-LEAD-PROMPT.md` to 01–24. Read `SESSION-PROTOCOL.md`, `STEP-REGISTER.md`, `STEP-LOG.md`, `SESSION-HANDOFF.md`, and `DECISIONS.md` before any work. Complete only the selected JR range, or record why specific tasks are blocked. Never skip unfinished earlier dependencies.
