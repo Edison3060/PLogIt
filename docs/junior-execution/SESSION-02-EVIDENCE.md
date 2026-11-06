@@ -53,3 +53,8 @@
 
 **Negative harness evidence:** controller denylist assertion PASS; filename-only assertion PASS; workflow gate and skipped deploy read from real `.github/workflows/ci.yml` and run [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183). This is rejection of an unsupported **documentation/requirement claim**, not an HTTP denial endpoint, so no fake 403/rollback scenario was asserted. **Side effects:** read-only source inspection and tests, zero API writes or auth bypass, no export/deployment executed. Next JR-015.
 
+
+## JR-015 — closure and regression
+
+Compared JR-011 source owners, JR-012 acceptance/DEC-2026-11-06-05, JR-013 page-to-client-to-controller test map and 33/33 structural source assertions, and JR-014 invalid historical-claim rejections. **DONE / VERIFIED NO APPLICATION CHANGE**, because the inventory and negative classification are documented, not evidence of complete interactive browser E2E coverage. Reference CI [run 42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) at `da9ebfa8`: Maven and frontend, Semgrep, Trivy and proxy PASS; CD SKIPPED. The branch already includes approved APT CVE correction. No local Maven/browser execution during this checkpoint. Regression must be re-checked on final branch head. No app code/schema change or data migration, rollback would revert docs only. **Reviewer:** Builder Lead; next JR-016.
+
