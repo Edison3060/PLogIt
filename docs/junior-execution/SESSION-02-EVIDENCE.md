@@ -22,3 +22,27 @@
 
 **Decision owner:** Edison3060 for product/schema deviations; Builder Lead for an evidence-based no-change inventory. **Source:** `App.tsx`, `web/*Controller.java`, `frontend/src/lib`, Phase 01 roadmap, product/suite specs. **Expected vs observed:** six controllers / 24 mapping annotations, 10 leaf routes, unchanged no-scoring boundary. JR-013 exercises a structurally verifiable route-to-controller matrix.
 
+
+## JR-013 — reproducible success case
+
+**Fixture:** An isolated read-only snapshot of `App.tsx`, six controller files, `frontend/src/lib/{api,auth,engagements,logs}.ts`, `Settings.tsx` and `JsonReportStrategy.java` obtained by GitHub `fetch_file` at `work/plogit-phase-01`, SHA `da9ebfa80d7ed9a0632af24284c95f90e49474b1`. No live customer records. A JavaScript structural assertion harness exercised **33/33 PASS, 0 FAIL**: ten expected React leaf-route strings; each of six controllers has expected 4/8/2/6/3/1 HTTP annotations; 14 client URL/method snippets; local profile read-only and exporter filename-only; controller route denylist for finding/ticket/CVSS endpoints. This checks source wiring only, not every route's runtime behavior.
+
+**Page → client → controller → test map (current, not promised future features):**
+
+| Shipped page | Actual client API / server controller | Existing test/evidence owner |
+|---|---|---|
+| `/login` | `auth.loginUser` → POST `/api/auth/login`, `AuthController` | `AuthIntegrationTest`, `api.test.ts` |
+| `/register` | `auth.registerUser` → POST `/api/auth/register` | `AuthIntegrationTest`, `api.test.ts` |
+| `/` Dashboard | `fetchEngagements`, `fetchCurrentUser` → GET `/api/engagements`, `/api/auth/me` | `EngagementAuthzIntegrationTest`, `ProtectedRoute.test.tsx` (partial) |
+| `/engagements` | GET/POST `/api/engagements`, POST `/api/join` | `EngagementAuthzIntegrationTest` and join/audit tests |
+| `/settings` | GET `/api/auth/me`; theme local-only, read-only profile | `AuthIntegrationTest`, `theme.test.ts` |
+| `/engagements/:id` | GET/PUT `/api/engagements/{id}`, GET audit, POST export/join-code/transfer, DELETE member | `EngagementAuthzIntegrationTest`, `ExportIntegrationTest`, `AuditLogIntegrationTest`, `EngagementPanels.test.tsx` |
+| `/engagements/:id/logs` | GET `/api/engagements/{id}/logs` | `LogAuthzIntegrationTest`, `ReviewTransitionIntegrationTest` (partial) |
+| `/engagements/:id/logs/new` | POST `/api/engagements/{id}/logs` | `LogAuthzIntegrationTest` (partial) |
+| `/engagements/:id/logs/:logId` | GET `/api/logs/{logId}`, GET history/attachments/download, POST review transition | `LogAuthzIntegrationTest`, `AttachmentIntegrationTest`, `ReviewTransitionIntegrationTest`, `LogDetail.test.tsx` |
+| `/engagements/:id/logs/:logId/edit` | PUT `/api/logs/{logId}`; draft authorization | `LogAuthzIntegrationTest`, `LogVersioningIntegrationTest` |
+
+**Independent non-page route:** GET `/api/health` `HealthController` used for readiness; not exposed as a page.
+
+**Executed CI evidence:** [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183), exact reviewed branch SHA, completed SUCCESS. No interactive/browser journey was executed during this session; frontend test coverage is scoped, so do not claim every page has an E2E test. **Expected:** ten mapped routes, 24 controller operations; **observed:** yes. Next JR-014.
+
