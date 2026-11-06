@@ -1,5 +1,17 @@
 # PLogIt: bounded development session protocol
 
+## Owner-approved autonomy, provisional cross-app progress, and readiness (current session policy)
+
+These rules supersede older instructions below when they would otherwise force routine owner questions or BLOCKED status solely because a sibling app is unfinished. The owner has already approved **proceeding with the Lead's recommendation** within the selected ten-JR increment. State a concise Intake plan, choose an evidence-based reasonable implementation, document the recommendation/rationale in DECISIONS and STEP-LOG, and implement through the last assigned JR without seeking routine sign-off. **The user sign-off is at the numbered session boundary**, not after every small recommendation or task.
+
+If an upstream/downstream application or JSON contract is unfinished, **make the best documented provisional assumption and implement a swappable versioned file adapter, validator, and synthetic contract fixtures**. Prefer actual sibling repository code/approved specifications if available. Record every assumption and its verification debt in `INTEGRATION-ASSUMPTIONS.md` plus the current JR STEP-LOG. Keep one-way offline JSON and app-owned databases. Never claim a synthetic fixture proves a real producer integration. Where real cross-app evidence is mandatory, keep that criterion IN REVIEW rather than marking it DONE or blocking independent development. Never silently change a frozen API, tenant/privacy baseline, authorization rules or security requirements.
+
+For every JR, update its STEP-REGISTER row, append a dated STEP-LOG entry, update SESSION-HANDOFF, record relevant assumptions, make a JR-labeled Git checkpoint and push it. During an interrupted run, resume the same SESSION_NUMBER from the persisted branch. If the original 20-step phase acceptance/CI gate is not met, do not merge its PR; safe later work may continue on a documented branch based on that unmerged phase branch with clear stacked ancestry.
+
+At the end of the selected ten-JR session, **explicitly tell the owner if the next session may start**: READY, READY WITH PROVISIONAL INTEGRATION (local work can continue, named integration proof still pending), or NOT READY (a specific unsafe or blocking local prerequisite). Give the exact next SESSION_NUMBER/JR, concrete tests, SHAs/PRs and open verification debt. Stop until the owner initiates the next session.
+
+Only seek separate owner approval for genuinely unsafe/irreversible operations that cannot be isolated, including production deployment or destructive live data changes, disclosure of sensitive data, or weakening required security protections. When this exception applies, give the recommended safe choice first, alternatives and affected JRs; proceed on independent work.
+
 This is the **hot operating constitution**. A new chat must read this file, the step register, the log, decisions, session handoff, the selected phase file, and the mirrored [Master Prompt](../../planning/RES-application-plan/PlogIt%20Workspace/Rules%20to%20Follow/Master%20Prompt.md) before implementation.
 
 ## Selective web research: Lead and subagents
