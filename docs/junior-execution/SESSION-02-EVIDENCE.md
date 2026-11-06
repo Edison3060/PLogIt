@@ -84,3 +84,22 @@ Compared JR-011 source owners, JR-012 acceptance/DEC-2026-11-06-05, JR-013 page-
 
 **Expected:** documented, dated truth table; no unsupported security, production, tenant or schema claim marked DONE. **Observed:** source and decision ledger distinguish owner-reserved choices from tested legacy behavior. No code changes. Next JR-018.
 
+
+## JR-018 — synthetic register success case
+
+**Isolated fixture:** Seven non-customer decision items `LOG`, `MEDIA`, `TENANT`, `PRIVACY`, `SCHEMA`, `STACK`, `RELEASE`, each with `source`, `actual`, `proposal`, and `approval` fields, checked by synchronous JavaScript structural assertions inside the authorized Builder Lead tool environment. **Executed 7/7 PASS, 0 FAIL**: seven unique topics; non-empty source/actual/proposal; approvals classified rather than inferred; release NOT_AUTHORIZED; producer log inclusion unchanged; versioned wrapper PROVISIONAL; media incompleteness explicit.
+
+**Source-linked fact/assumption/approval register, dated 2026-11-06:**
+
+| ID | Actual, source of truth | Proposed or deferred | Approval |
+|---|---|---|---|
+| LOG | `backend/src/main/java/io/muzoo/ssc/plogit/service/ExportService.java`, `JsonReportStrategy.java`: APPROVED default, optional EXPORTED, mutation/audit | JudgeIt inclusion policy beyond current states | PENDING owner, DEC-06 |
+| MEDIA | `JsonReportStrategy.java`: filenames, no bytes/hashes | integrity/redaction/self-contained bundle | PENDING owner, DEC-07 |
+| TENANT | `MembershipService.java`: per-engagement membership and local IDs; `docs/integrations/PROVISIONAL-SUITE-CONTRACTS.md` | operator sourceNamespace for mock, real tenant identity agreement | PROVISIONAL mock; PENDING real mapping DEC-08 |
+| PRIVACY | `planning/RES-application-plan/Suite - To Be Scoped.md` | transfer consent, roles, retention/erasure policies | PENDING owner, DEC-09 |
+| SCHEMA | `docs/integrations/PROVISIONAL-SUITE-CONTRACTS.md`: actual unversioned producer | `plogit-judgeit-provisional/0.1` opt-in adapter, not producer contract | PROVISIONAL authorized DEC-04; real receiver UNVERIFIED |
+| STACK | `backend/pom.xml`, `frontend/package.json` | controlled upgrade in later JRs, not Phase 01 | PENDING scheduling DEC-10 |
+| RELEASE | `.github/workflows/ci.yml`, run [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) | safe `main` merge/deploy gating | NOT AUTHORIZED: no production release |
+
+**Validation meaning:** This tests consistency of the decision fixture, not live API or remote-import operation. Real downstream validation remains pending and is not marked DONE. No web research needed beyond source and existing 2026 dated citations in plan. **Reviewer:** Builder Lead; next JR-019.
+
