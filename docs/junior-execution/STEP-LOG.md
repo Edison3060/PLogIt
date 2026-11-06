@@ -49,3 +49,17 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Roadblock → resolution:** Sandbox has no network-local checkout; GitHub API supplied authoritative tree/compare evidence. No Maven/npm execution claimed.
 - **GitHub:** `work/plogit-phase-01`, JR-002 checkpoint in branch history; previous checkpoint `6fe55120fc39e2cb6e82017580df22b29899445a`. Current SHA supplied in next log checkpoint.
 - **Learning / next task:** JR-003.
+
+### 2026-11-06T10:58:08.328Z | Session 01 | JR-003 | DONE (VERIFIED NO CHANGE)
+
+- **What / files:** Reproduced canonical provenance against immutable GitHub REST tree objects at canonical 852cfbaa and RES 596f8a, with 28aa156 as baseline. On a read-only isolated source fixture, 185 canonical app blobs have identical archived SHA. Only archive extra is research markdown. The six later main commits are planning/docs only. Evidence added to `SESSION-01-EVIDENCE.md` and tracked in register/handoff. No application source changes.
+- **Why / approach:** Keep the implemented standalone source authoritative and preserve the copied archive as a frozen reference; rejected an unapproved separate code fork or rewrite.
+- **Web fact-check / research:** Not needed; source-of-truth facts obtained through primary GitHub API and mirrored protocol, 2026-11-06.
+- **Previous state → result:** NOT STARTED → DONE, VERIFIED NO CHANGE.
+- **Expected behavior:** Reproduce Canonical source identity success; acceptance from Phase 01 original roadmap.
+- **Observed evidence:** Executed GitHub trees read and JS SHA equality assertions: 185 equal, 0 unequal; API returned success; no local app data required for this source-only task. Review by Builder Lead, with owner sign-off at session boundary.
+- **Security and authorization:** Source-only checks, no production, secrets, or live data; no unapproved Git writes to the RES repo, no app mutation. HTTP authorization/transaction checks not applicable to repo source identity.
+- **Decision / approval:** No new owner-reserved decision.
+- **Roadblock → resolution:** Sandbox has no network-local checkout; GitHub API supplied authoritative tree/compare evidence. No Maven/npm execution claimed.
+- **GitHub:** `work/plogit-phase-01`, JR-003 checkpoint in branch history; previous checkpoint `28afba83cc6e2fbf0aad2f53faa95e57d8bcf3eb`. Current SHA supplied in next log checkpoint.
+- **Learning / next task:** JR-004.

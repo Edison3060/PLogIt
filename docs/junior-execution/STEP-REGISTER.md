@@ -8,7 +8,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 |---|---|---:|---|---|---|
 | JR-001 | Inventory Canonical source identity | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-001) • verified no change | 2026-11-06T10:56:32.144Z |
 | JR-002 | Specify Canonical source identity acceptance | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-002) • VERIFIED NO CHANGE | 2026-11-06T10:58:01.055Z |
-| JR-003 | Reproduce Canonical source identity success | 01 | NOT STARTED | — | — |
+| JR-003 | Reproduce Canonical source identity success | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-003) • VERIFIED NO CHANGE | 2026-11-06T10:58:08.328Z |
 | JR-004 | Reject Canonical source identity invalid operation | 01 | NOT STARTED | — | — |
 | JR-005 | Close Canonical source identity verification | 01 | NOT STARTED | — | — |
 | JR-006 | Inventory Product role boundary | 01 | NOT STARTED | — | — |

@@ -23,3 +23,10 @@
 
 **Executed check / reproducible fixture:** read-only compare_commits and two Git Trees: 185/185 identical; no runtime test applicable to editorial source-of-truth decision. Evidence sources: GitHub tree APIs for `Edison3060/PLogIt@852cfbaa` and read-only `Edison3060/RES-application-plan@596f8a1`, commit comparison `28aa156...852cfbaa`, `AGENTS.md`, `planning/README.md`, and Phase 01 roadmap. A source policy refusal is not an HTTP error. Reviewer: Builder Lead; owner sign-off pending.
 
+
+## JR-003 — Reproduce Canonical source identity success
+
+**Expected:** Reproduce Canonical source identity success. **Actual:** Reproduced canonical provenance against immutable GitHub REST tree objects at canonical 852cfbaa and RES 596f8a, with 28aa156 as baseline. On a read-only isolated source fixture, 185 canonical app blobs have identical archived SHA. Only archive extra is research markdown. The six later main commits are planning/docs only.
+
+**Executed check / reproducible fixture:** Executed GitHub trees read and JS SHA equality assertions: 185 equal, 0 unequal; API returned success; no local app data required for this source-only task. Evidence sources: GitHub tree APIs for `Edison3060/PLogIt@852cfbaa` and read-only `Edison3060/RES-application-plan@596f8a1`, commit comparison `28aa156...852cfbaa`, `AGENTS.md`, `planning/README.md`, and Phase 01 roadmap. A source policy refusal is not an HTTP error. Reviewer: Builder Lead; owner sign-off pending.
+
