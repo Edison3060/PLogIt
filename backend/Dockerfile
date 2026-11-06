@@ -10,6 +10,13 @@ COPY src ./src
 RUN mvn -B clean package -DskipTests
 
 FROM eclipse-temurin:21-jre@sha256:0b99b3376fbb50dbf9c0af8535fdd5b8eb0d3fdfc8b1e4967f383b6919f6901a
+RUN set -eu; \
+    apt-get -o Acquire::Retries=0 update; \
+    apt-get -o Acquire::Retries=0 install -y --no-install-recommends --only-upgrade apt libapt-pkg7.0; \
+    dpkg --compare-versions "$(dpkg-query -W -f='${Version}' apt)" ge '3.2.1ubuntu0.1'; \
+    dpkg --compare-versions "$(dpkg-query -W -f='${Version}' libapt-pkg7.0)" ge '3.2.1ubuntu0.1'; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/*
 RUN useradd -r -u 1001 -g root plogit
 WORKDIR /app
 COPY --from=build /workspace/target/*.jar /app/app.jar
