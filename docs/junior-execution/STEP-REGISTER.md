@@ -28,14 +28,14 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-020 | Close Open decisions and rebaseline verification | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-020) • verified scoped evidence, no app change | 2026-11-06T13:41:06.120Z |
 | JR-021 | Inventory Maven and Spring baseline | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-021) • canonical POM and 15 test classes inventoried, no application change | 2026-11-07T04:27:31.627Z |
 | JR-022 | Specify Maven and Spring baseline acceptance | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-022) • source-measured acceptance | 2026-11-07T04:28:46.764Z |
-| JR-023 | Reproduce Maven and Spring baseline success | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-023) • new branch CI required | 2026-11-07T04:28:53.122Z |
-| JR-024 | Reject Maven and Spring baseline invalid operation | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-024) • new branch CI required | 2026-11-07T04:28:58.243Z |
-| JR-025 | Close Maven and Spring baseline verification | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-025) • new branch CI required | 2026-11-07T04:29:04.630Z |
+| JR-023 | Reproduce Maven and Spring baseline success | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-023) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
+| JR-024 | Reject Maven and Spring baseline invalid operation | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-024) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
+| JR-025 | Close Maven and Spring baseline verification | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-025) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
 | JR-026 | Inventory React Vite toolchain | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-026) • source + resolved lock inventory/spec | 2026-11-07T04:29:59.100Z |
 | JR-027 | Specify React Vite toolchain acceptance | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-027) • source + resolved lock inventory/spec | 2026-11-07T04:30:05.583Z |
-| JR-028 | Reproduce React Vite toolchain success | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-028) • new branch CI required | 2026-11-07T04:30:12.027Z |
-| JR-029 | Reject React Vite toolchain invalid operation | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-029) • new branch CI required | 2026-11-07T04:30:20.879Z |
-| JR-030 | Close React Vite toolchain verification | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-030) • await final Node22 pinned CI and invalid lock test | 2026-11-07T04:30:54.097Z |
+| JR-028 | Reproduce React Vite toolchain success | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-028) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
+| JR-029 | Reject React Vite toolchain invalid operation | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-029) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
+| JR-030 | Close React Vite toolchain verification | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-030) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
 | JR-031 | Inventory PostgreSQL Flyway schema | 04 | NOT STARTED | — | — |
 | JR-032 | Specify PostgreSQL Flyway schema acceptance | 04 | NOT STARTED | — | — |
 | JR-033 | Reproduce PostgreSQL Flyway schema success | 04 | NOT STARTED | — | — |
