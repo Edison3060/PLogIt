@@ -87,3 +87,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-07T04:28:53.122Z | Session 03 checkpoint JR-023
 - JR-023 IN REVIEW; Reproduce Maven and Spring baseline success. Required fresh Actions verification pending; preserve this status. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-024. No main merge/deploy.
+
+### 2026-11-07T04:28:58.243Z | Session 03 checkpoint JR-024
+- JR-024 IN REVIEW; Reject Maven and Spring baseline invalid operation. Required fresh Actions verification pending; preserve this status. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-025. No main merge/deploy.

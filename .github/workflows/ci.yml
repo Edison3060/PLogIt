@@ -65,6 +65,20 @@ jobs:
           mvn -version
           mvn -B clean verify
 
+      - name: Reject incompatible Java target in disposable fixture
+        if: steps.check.outputs.exists == 'true'
+        run: |
+          set -euo pipefail
+          scratch="$(mktemp -d)"
+          trap 'rm -rf "$scratch"' EXIT
+          printf 'class ToolchainProbe {}\n' > "$scratch/ToolchainProbe.java"
+          if javac --release 22 -d "$scratch" "$scratch/ToolchainProbe.java" > "$scratch/negative.log" 2>&1; then
+            echo "::error::Unsupported Java 22 target unexpectedly compiled with JDK 21"
+            exit 1
+          fi
+          grep -Eiq 'release version 22 not supported|invalid target release.? 22' "$scratch/negative.log"
+          test ! -f "$scratch/ToolchainProbe.class"
+
   frontend:
     name: Frontend - lint, build, test
     runs-on: ubuntu-latest
