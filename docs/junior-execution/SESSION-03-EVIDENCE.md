@@ -1,0 +1,13 @@
+# Session 03: reproducible local engineering evidence (JR-021–JR-030)
+
+- Controller: Session 03, claimed on `control/session-state` at 2026-11-07T04:24:33.825Z; single Lead, no subagents.
+- Stacked branch: `work/plogit-phase-02` based on unmerged Phase 01 head `6426609e77b436e2804b9c65c9c3701134c54967`; Phase 01 draft PR #22 is not accepted/merged. `main` unchanged.
+- Scope: verify Maven/Spring and React/Vite reproducibility, record positive and negative gates; no change to application runtime, security, schemas, legacy JSON or production CD.
+- Prior valid CI baseline: [Phase 01 source-identical run 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) at `6426609e77b436e2804b9c65c9c3701134c54967`, overall SUCCESS, backend `mvn -B verify`, frontend `npm ci`, lint, build, test, Semgrep, Trivy, proxy SUCCESS, production CD SKIPPED. This is **inherited proof, not a new Session 03 local run**.
+- Session runtime: isolated sandbox JDK 21.0.12.1, Node 22.16.0, npm 10.9.2; no Maven executable, no Docker daemon, outbound github.com DNS unavailable. Do not call repository Maven/React tests locally completed. Build confirmation is via new GitHub Actions results, when finished.
+
+## JR-021
+- Requirement: inventory `backend/pom.xml` and `backend/src/test` at actual canonical source. **DONE, VERIFIED NO APPLICATION CHANGE.**
+- Source: `backend/pom.xml` blob `15e207eb6a6aac19d926f2d965ba3daa676b9e57` parent `org.springframework.boot:spring-boot-starter-parent:4.1.1`, `java.version=21`, Jackson/JPA/Security/Validation, Flyway PostgreSQL, JUnit Spring test starters and Testcontainers dependencies; version field is source-measured, not stale July claims.
+- Test inventory: 15 top-level tests (`AttachmentIntegrationTest`, `AuditLogIntegrationTest`, `AuthIntegrationTest`, `AuthRateLimitIntegrationTest`, `BadRequestIntegrationTest`, `CsrfIntegrationTest`, `EngagementAuthzIntegrationTest`, `ExportIntegrationTest`, `LogAuthzIntegrationTest`, `LogVersioningIntegrationTest`, `MarkdownSanitizationTest`, `OptimisticLockingIntegrationTest`, `PlogitApplicationTests`, `ProductionProxyIntegrationTest`, `ReviewTransitionIntegrationTest`) with `support/IntegrationTestBase.java` (Spring `MockMvc`, isolated synthetic fixtures, DB cleanup) and `support/PostgresTestConfig.java` (Testcontainers `postgres:16-alpine`). Test files are canonical, not frozen mirrored RES source.
+- Expected: source/test ownership and SHAs, current implementation distinguished from documents. Observed: matching canonical implementation and tests; no build executed for this inventory JR. Reviewer: Builder Lead; next JR-022 acceptance specification.
