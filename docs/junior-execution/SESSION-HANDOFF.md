@@ -81,3 +81,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Controller Session 03 IN_PROGRESS, run claim `gpt6-session03-2026-11-07T04:24:33.825Z`, JR-021 DONE. Phase branch `work/plogit-phase-02` stacked on Phase 01 `6426609e77b436e2804b9c65c9c3701134c54967`; this entry's commit is discoverable via JR-021 branch history.
 - Application unchanged. Prior baseline [CI 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) green. No Maven/Docker or checkout in this isolated tool runtime. Open Phase 01 draft PR #22, owner production release decision DEC-11, mock JudgeIt integration pending.
 - NEXT SAFE ACTION: JR-022 acceptance and baseline negative/positive gates; do not merge main or advance controller before JR-030.
+
+### 2026-11-07T04:28:46.764Z | Session 03 checkpoint JR-022
+- JR-022 DONE; Specify Maven and Spring baseline acceptance. Source baseline verified. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-023. No main merge/deploy.
