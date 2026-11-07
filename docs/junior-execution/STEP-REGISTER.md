@@ -30,7 +30,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-022 | Specify Maven and Spring baseline acceptance | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-022) • source-measured acceptance | 2026-11-07T04:28:46.764Z |
 | JR-023 | Reproduce Maven and Spring baseline success | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-023) • new branch CI required | 2026-11-07T04:28:53.122Z |
 | JR-024 | Reject Maven and Spring baseline invalid operation | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-024) • new branch CI required | 2026-11-07T04:28:58.243Z |
-| JR-025 | Close Maven and Spring baseline verification | 03 | NOT STARTED | — | — |
+| JR-025 | Close Maven and Spring baseline verification | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-025) • new branch CI required | 2026-11-07T04:29:04.630Z |
 | JR-026 | Inventory React Vite toolchain | 03 | NOT STARTED | — | — |
 | JR-027 | Specify React Vite toolchain acceptance | 03 | NOT STARTED | — | — |
 | JR-028 | Reproduce React Vite toolchain success | 03 | NOT STARTED | — | — |

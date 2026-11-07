@@ -370,3 +370,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Tests:** Phase 01 [Actions 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) passed `mvn -B verify`, not new clean gate. Local JDK21 incompatible release probe exit 2 expected denial; new CI step pending. No claim of production health or actual JudgeIt interoperability.
 - **Research / decision:** Actual canonical source and original roadmap. No new external API claim. No credentials, test data or user evidence. CI workflow push on work branch skips main-only CD.
 - **Git:** work/plogit-phase-02, JR-024 reviewed commit; SHA discoverable at GitHub branch history. Next: JR-025.
+
+### 2026-11-07T04:29:04.630Z | Session 03 | JR-025 | IN REVIEW
+- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; reviewer: Builder Lead.
+- **Original step:** Close Maven and Spring baseline verification. Expected vs actual, tests, assumptions and safe rollback in [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-025).
+- **Changed paths:** docs/junior-execution/STEP-REGISTER.md, STEP-LOG.md, SESSION-HANDOFF.md, SESSION-03-EVIDENCE.md; backend and frontend app code, DB, auth and JSON unchanged.
+- **Tests:** Phase 01 [Actions 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) passed `mvn -B verify`, not new clean gate. No new local Maven test (mvn/Docker not installed); CI validation of workflow changes pending. No claim of production health or actual JudgeIt interoperability.
+- **Research / decision:** Actual canonical source and original roadmap. No new external API claim. No credentials, test data or user evidence. CI workflow push on work branch skips main-only CD.
+- **Git:** work/plogit-phase-02, JR-025 reviewed commit; SHA discoverable at GitHub branch history. Next: JR-026 frontend inventory.
