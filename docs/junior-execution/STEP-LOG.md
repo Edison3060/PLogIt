@@ -402,3 +402,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Real tests / failures:** Earlier source-identical [CI 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) passed npm ci/lint/build/Vitest on Node20; NOT a new pinned Node22 run. No new local installed app tests: offline environment lacks checkout and registry. Await branch GitHub CI.
 - **Research / decision:** Official Node.js archive https://nodejs.org/en/download/archive/v22.23.4 accessed 2026-11-07, current source lock engines; DEC-2026-11-07-02 selects exact supported LTS CI pin. JDK21 tooling remains independent. No credentials or protected data used.
 - **Git:** work/plogit-phase-02, numbered JR-028 reviewed commit; SHA on GitHub branch history; no main merge/deploy. Next: JR-029.
+
+### 2026-11-07T04:30:20.879Z | Session 03 | JR-029 | IN REVIEW
+- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; reviewer Builder Lead; original JR: Reject React Vite toolchain invalid operation.
+- **Evidence / expected vs actual:** [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-029); current canonical `frontend/package.json` and `frontend/package-lock.json` inspected with source blob IDs. CI step execution must confirm actual new pinned-runtime result.
+- **Changed files:** docs/junior-execution/STEP-REGISTER.md, STEP-LOG.md, SESSION-HANDOFF.md, SESSION-03-EVIDENCE.md, .github/workflows/ci.yml. No app source/JSON/DB modifications.
+- **Real tests / failures:** Earlier source-identical [CI 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) passed npm ci/lint/build/Vitest on Node20; NOT a new pinned Node22 run. Local malformed lock synthetic npm ci exit 1 EUSAGE and no node_modules PASS; earlier offline missing-dep fixture failed ENOTCACHED, not classified lock proof.
+- **Research / decision:** Current source and original Phase 02 acceptance; no external consumer integration presumed. JDK21 tooling remains independent. No credentials or protected data used.
+- **Git:** work/plogit-phase-02, numbered JR-029 reviewed commit; SHA on GitHub branch history; no main merge/deploy. Next: JR-030.

@@ -122,6 +122,22 @@ jobs:
         working-directory: frontend
         run: npm test
 
+      - name: Reject corrupt npm lockfile in disposable fixture
+        if: steps.check.outputs.exists == 'true'
+        working-directory: frontend
+        run: |
+          set -euo pipefail
+          scratch="$(mktemp -d)"
+          trap 'rm -rf "$scratch"' EXIT
+          cp package.json package-lock.json "$scratch/"
+          printf '{"lockfileVersion":3, malformed\n' > "$scratch/package-lock.json"
+          if (cd "$scratch" && npm ci --offline --ignore-scripts --no-audit --no-fund > "$scratch/negative.log" 2>&1); then
+            echo "::error::npm ci unexpectedly accepted corrupt isolated lockfile"
+            exit 1
+          fi
+          grep -Eq 'EUSAGE|EJSONPARSE|existing package-lock.json' "$scratch/negative.log"
+          test ! -d "$scratch/node_modules"
+
   semgrep:
     name: Semgrep - SAST
     runs-on: ubuntu-latest

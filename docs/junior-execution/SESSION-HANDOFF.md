@@ -102,3 +102,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-07T04:30:12.027Z | Session 03 checkpoint JR-028
 - JR-028 IN REVIEW. Reproduce React Vite toolchain success. Pending fresh Phase 02 CI; do not mark passed. Source exports/auth unchanged. Latest pushed SHA from JR-028 branch history. Next JR-029. Main and CD remain untouched.
+
+### 2026-11-07T04:30:20.879Z | Session 03 checkpoint JR-029
+- JR-029 IN REVIEW. Reject React Vite toolchain invalid operation. Pending fresh Phase 02 CI; do not mark passed. Source exports/auth unchanged. Latest pushed SHA from JR-029 branch history. Next JR-030. Main and CD remain untouched.
