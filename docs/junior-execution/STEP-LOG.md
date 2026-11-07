@@ -386,3 +386,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Real tests / failures:** Earlier source-identical [CI 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) passed npm ci/lint/build/Vitest on Node20; NOT a new pinned Node22 run. Read-only package/lock/test source inventory (5 test files).
 - **Research / decision:** Current source and original Phase 02 acceptance; no external consumer integration presumed. JDK21 tooling remains independent. No credentials or protected data used.
 - **Git:** work/plogit-phase-02, numbered JR-026 reviewed commit; SHA on GitHub branch history; no main merge/deploy. Next: JR-027.
+
+### 2026-11-07T04:30:05.583Z | Session 03 | JR-027 | DONE
+- **Transition:** NOT STARTED → IN PROGRESS → DONE; reviewer Builder Lead; original JR: Specify React Vite toolchain acceptance.
+- **Evidence / expected vs actual:** [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-027); current canonical `frontend/package.json` and `frontend/package-lock.json` inspected with source blob IDs. Observed measured canonical specs, no user data.
+- **Changed files:** docs/junior-execution/STEP-REGISTER.md, STEP-LOG.md, SESSION-HANDOFF.md, SESSION-03-EVIDENCE.md, DECISIONS.md. No app source/JSON/DB modifications.
+- **Real tests / failures:** Earlier source-identical [CI 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) passed npm ci/lint/build/Vitest on Node20; NOT a new pinned Node22 run. No new local installed app tests: offline environment lacks checkout and registry. Await branch GitHub CI.
+- **Research / decision:** Official Node.js archive https://nodejs.org/en/download/archive/v22.23.4 accessed 2026-11-07, current source lock engines; DEC-2026-11-07-02 selects exact supported LTS CI pin. JDK21 tooling remains independent. No credentials or protected data used.
+- **Git:** work/plogit-phase-02, numbered JR-027 reviewed commit; SHA on GitHub branch history; no main merge/deploy. Next: JR-028.
