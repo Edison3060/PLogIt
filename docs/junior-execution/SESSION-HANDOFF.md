@@ -76,3 +76,44 @@ The owner authorized **provisional, documented and replaceable integration assum
 **PLogIt → JudgeIt proof:** [PR #21](https://github.com/Edison3060/PLogIt/pull/21) (`feat/plogit-provisional-handoff`, head `ce4ab70c449b8e98b3b66b262769a508be8231c9`) changes ONLY integration tooling/fixture/tests and a dedicated CI job. [Actual GitHub CI 42212049183](https://github.com/Edison3060/PLogIt/actions/runs/42212049183) **SUCCESS** (12 bridge mock tests, backend 125, frontend 18, Semgrep, proxy, all Trivy gates). Real JudgeIt ingestion remains unverified and no network transfer exists. Original PLogIt export behavior unchanged.
 
 **Approved CVE fix now on Phase 01 development branch** `ff49cf0d359f4a226e08e6a6b9d16cab77fc5029` (and feature), same runtime Dockerfile blob as green [PR #20](https://github.com/Edison3060/PLogIt/pull/20). Previous historical notes saying the phase branch *did not yet* include the fix applied only before this dated update. **PR #20 and PR #21 remain OPEN/unmerged**, main remains unchanged, no deployment authorized. **Session 01 is CLOSED**: JR-001..010 DONE; Session 02 remains NOT STARTED pending owner session prompt. Review prior phase docs and current branch refs before any new work.
+
+## Session 03 progress, 2026-11-07T04:27:31.627Z (latest appended checkpoint)
+- Controller Session 03 IN_PROGRESS, run claim `gpt6-session03-2026-11-07T04:24:33.825Z`, JR-021 DONE. Phase branch `work/plogit-phase-02` stacked on Phase 01 `6426609e77b436e2804b9c65c9c3701134c54967`; this entry's commit is discoverable via JR-021 branch history.
+- Application unchanged. Prior baseline [CI 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) green. No Maven/Docker or checkout in this isolated tool runtime. Open Phase 01 draft PR #22, owner production release decision DEC-11, mock JudgeIt integration pending.
+- NEXT SAFE ACTION: JR-022 acceptance and baseline negative/positive gates; do not merge main or advance controller before JR-030.
+
+### 2026-11-07T04:28:46.764Z | Session 03 checkpoint JR-022
+- JR-022 DONE; Specify Maven and Spring baseline acceptance. Source baseline verified. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-023. No main merge/deploy.
+
+### 2026-11-07T04:28:53.122Z | Session 03 checkpoint JR-023
+- JR-023 IN REVIEW; Reproduce Maven and Spring baseline success. Required fresh Actions verification pending; preserve this status. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-024. No main merge/deploy.
+
+### 2026-11-07T04:28:58.243Z | Session 03 checkpoint JR-024
+- JR-024 IN REVIEW; Reject Maven and Spring baseline invalid operation. Required fresh Actions verification pending; preserve this status. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-025. No main merge/deploy.
+
+### 2026-11-07T04:29:04.630Z | Session 03 checkpoint JR-025
+- JR-025 IN REVIEW; Close Maven and Spring baseline verification. Required fresh Actions verification pending; preserve this status. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-026. No main merge/deploy.
+
+### 2026-11-07T04:29:59.100Z | Session 03 checkpoint JR-026
+- JR-026 DONE. Inventory React Vite toolchain. Source/criteria assessed. Source exports/auth unchanged. Latest pushed SHA from JR-026 branch history. Next JR-027. Main and CD remain untouched.
+
+### 2026-11-07T04:30:05.583Z | Session 03 checkpoint JR-027
+- JR-027 DONE. Specify React Vite toolchain acceptance. Source/criteria assessed. Source exports/auth unchanged. Latest pushed SHA from JR-027 branch history. Next JR-028. Main and CD remain untouched.
+
+### 2026-11-07T04:30:12.027Z | Session 03 checkpoint JR-028
+- JR-028 IN REVIEW. Reproduce React Vite toolchain success. Pending fresh Phase 02 CI; do not mark passed. Source exports/auth unchanged. Latest pushed SHA from JR-028 branch history. Next JR-029. Main and CD remain untouched.
+
+### 2026-11-07T04:30:20.879Z | Session 03 checkpoint JR-029
+- JR-029 IN REVIEW. Reject React Vite toolchain invalid operation. Pending fresh Phase 02 CI; do not mark passed. Source exports/auth unchanged. Latest pushed SHA from JR-029 branch history. Next JR-030. Main and CD remain untouched.
+
+### 2026-11-07T04:30:54.097Z | Session 03 checkpoint JR-030 (all ten assessed, runtime verification pending)
+- JR-021, JR-022, JR-026, JR-027 DONE source/spec; JR-023–025 and JR-028–030 IN REVIEW until fresh final-head GH Actions. Ten JR-numbered commits on `work/plogit-phase-02` stacked on 6426609e77b436e2804b9c65c9c3701134c54967, no source code/API/export changes. Final handoff must append exact CI and controller result before advance; no JR-031 work authorized now.
+- Phase 01 draft PR #22 remains unmerged and main production CD release decision DEC-11 remains PENDING. Mock JudgeIt integration unverified. Next safe action: fetch Phase 02 CI for current SHA, reconcile statuses, draft stacked PR base Phase 01, then controller readiness and STOP.
+
+## Session 03 final handoff — 2026-11-07T04:34:47.828Z
+- **Outcome:** JR-021–JR-030 all DONE for scoped original 02A acceptance; all ten independently numbered commits pushed. This session's final documentation-only follow-up reconciles earlier IN REVIEW checkpoints and is current `work/plogit-phase-02` branch HEAD; use [branch history](https://github.com/Edison3060/PLogIt/commits/work/plogit-phase-02) for final full SHA. Executable workflow tested at `c3b5b562aaddba47b9d8f426418d6e2f343e5b1f` with [green CI 42338792629](https://github.com/Edison3060/PLogIt/actions/runs/42338792629). Backend `mvn -B clean verify` 125/125 PASS on Java21, Maven3.9.15; invalid JDK21 `--release 22` guard passed; Node22.23.4 npm ci/lint/build/Vitest 18/18 PASS, corrupt copied lock rejection passed; Semgrep, Trivy filesystem/backend image/frontend image, proxy passed; CD skipped.
+- **Ancestry/PR:** `work/plogit-phase-02` based on unmerged `work/plogit-phase-01@6426609e77b436e2804b9c65c9c3701134c54967`; draft stacked PR #23 targets phase01, draft PR #22 targets main. Both unmerged; no deployment authorization, main unchanged. Phase 02B JR-031–JR-040 not started.
+- **Open blockers for release, not independent development:** owner sign-off of production CD safe gate (DEC-11), real JudgeIt consumer/identity/privacy/evidence agreement, acceptance and mandatory CI/security for full 20 JR Phase 02. No automatic promotion of provisional integration.
+- **Next safe action:** after control/session-state pointer advances to READY Session 04, a separately started Builder Lead session will read control branch and execute only JR-031–JR-040 on same phase02 branch, verifying PostgreSQL/Flyway and Compose/healthchecks. Do not start those tasks in this session.
+- **Code/test caveat:** final evidence reconciliation is docs-only at a new SHA; `42338792629` tested the immediately preceding executable SHA `c3b5b562aaddba47b9d8f426418d6e2f343e5b1f`. Check any subsequent CI run independently before merging.
+- **Reviewer:** Builder Lead, no subagents. Phase: Handoff; READY WITH PROVISIONAL INTEGRATION for safe next session, not release readiness.

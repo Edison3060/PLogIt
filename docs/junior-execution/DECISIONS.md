@@ -114,3 +114,13 @@ _No execution-session decisions have been recorded._
 - **Decision:** Follow latest owner-approved `main@0fce5181a2265af5b37a8621d0156eb2eace21f8` policy for safe stacked work after an unmerged phase: READY WITH PROVISIONAL INTEGRATION is compatible with pending mock E2E and safe blocked main merge. Preserve DEC-11 deployment approval requirement, leave Phase 01 PR draft, and base next session phase branch on unmerged safe Phase 01 HEAD with explicit stacked ancestry.
 - **Alternative rejected:** Block all safe subsequent work solely because real JudgeIt is unfinished or because main merge could deploy. This would contradict latest SESSION-PROTOCOL. Also rejected merging main unsafely or claiming phase PR accepted.
 - **Evidence:** GitHub two-parent merge of 4 main docs, no code changes; CI at merge SHA to check. Owner sign-off still required to *start* Session 03; current session stops.
+
+### 2026-11-07T04:28:46.764Z | DEC-2026-11-07-01 | JR-022,23,24 | Test-only Maven baseline hardening
+- **Decision:** preserve application POM (Java21/Boot4.1.1); require `mvn -B clean verify`, Java/Maven runtime reporting and a separate isolated unsupported-release rejection in GitHub Actions. No runtime/export code or production settings changes.
+- **Basis:** original Phase 02 JR-021..025 and source at 6426609e77b436e2804b9c65c9c3701134c54967; existing Phase 01 CI ran `mvn -B verify` (not clean). Local sandbox has JDK21 but no Maven/Docker; actual CI needed.
+- **Alternatives rejected:** upgrading Spring or using static file assertions as a claim of tests passed; bypassing Testcontainers or altering database connections to manufacture success. Reviewer: Builder Lead.
+
+### 2026-11-07T04:29:59.100Z | DEC-2026-11-07-02 | JR-027,028,029 | Exact LTS Node pin and isolated negative lock guard
+- **Current facts:** canonical lock resolves React18.3.1, Vite6.4.3, Vitest4.1.12, TypeScript5.9.3; Vitest lock engines include Node22; source CI used floating Node20. Node.js official archive https://nodejs.org/en/download/archive/v22.23.4 (checked 2026-11-07 UTC) lists v22.23.4, updated 2026-10-20; Node20 end-of-maintenance confirmed at https://nodejs.org/en/download/archive/v20.19.5.
+- **Decision:** pin GitHub Actions runtime to supported Node22.23.4 without package dependency refresh; add version reporting plus isolated malformed lock failure test. Rationale: repeatable, supported, safe, no application or JSON changes. Pass is contingent on fresh CI evidence.
+- **Rejected:** retain unsupported Node20 indefinitely; change package-lock to make a failing install appear green; upgrade React/Vite and auth/export unrelated to this verification. Reviewer Builder Lead.
