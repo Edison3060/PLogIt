@@ -60,7 +60,10 @@ jobs:
       - name: Build & test
         if: steps.check.outputs.exists == 'true'
         working-directory: backend
-        run: mvn -B verify
+        run: |
+          java -version
+          mvn -version
+          mvn -B clean verify
 
   frontend:
     name: Frontend - lint, build, test

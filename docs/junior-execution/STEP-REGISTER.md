@@ -28,7 +28,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-020 | Close Open decisions and rebaseline verification | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-020) • verified scoped evidence, no app change | 2026-11-06T13:41:06.120Z |
 | JR-021 | Inventory Maven and Spring baseline | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-021) • canonical POM and 15 test classes inventoried, no application change | 2026-11-07T04:27:31.627Z |
 | JR-022 | Specify Maven and Spring baseline acceptance | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-022) • source-measured acceptance | 2026-11-07T04:28:46.764Z |
-| JR-023 | Reproduce Maven and Spring baseline success | 03 | NOT STARTED | — | — |
+| JR-023 | Reproduce Maven and Spring baseline success | 03 | IN REVIEW | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-023) • new branch CI required | 2026-11-07T04:28:53.122Z |
 | JR-024 | Reject Maven and Spring baseline invalid operation | 03 | NOT STARTED | — | — |
 | JR-025 | Close Maven and Spring baseline verification | 03 | NOT STARTED | — | — |
 | JR-026 | Inventory React Vite toolchain | 03 | NOT STARTED | — | — |
