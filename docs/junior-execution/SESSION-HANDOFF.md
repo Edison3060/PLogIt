@@ -126,3 +126,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T09:55:47.885Z | Session 04 checkpoint JR-033
 - JR-031/032 DONE; JR-033 IN REVIEW pending actual GitHub Actions new PostgreSQL16 Flyway lifecycle test; new synthetic positive test committed, no source schema change. Last pushed commit JR-033 on work/plogit-phase-02. Next JR-034 negative case. No main/prod activity, draft #22/#23 unchanged; controller claim retained.
+
+### 2026-11-08T09:56:44.795Z | Session 04 checkpoint JR-034
+- JR-031/032 DONE, JR-033/034 IN REVIEW until executed CI. Positive PG16 incremental and negative transactional migration tests are now in `FlywayMigrationLifecycleTest.java`. JR-035 closure next, possibly remains IN REVIEW until CI. No application schema/data changes, main merge/CD, or external integration acceptance. Latest branch checkpoint JR-034.

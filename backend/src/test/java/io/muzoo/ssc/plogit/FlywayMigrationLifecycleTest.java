@@ -1,6 +1,7 @@
 package io.muzoo.ssc.plogit;
 
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.FlywayException;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.postgresql.PostgreSQLContainer;
 
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FlywayMigrationLifecycleTest {
 
@@ -66,6 +68,50 @@ class FlywayMigrationLifecycleTest {
                 assertEquals(1, queryCount(postgres,
                     "SELECT count(*) FROM pg_constraint WHERE conname = 'uk_log_versions_log_version'"));
             } finally {
+                Files.deleteIfExists(directory.resolve("V1__init_schema.sql"));
+                Files.deleteIfExists(directory);
+            }
+        }
+    }
+
+
+    @Test
+    void invalidMigrationRollsBackPartialDdlAndPreservesV1Data() throws Exception {
+        try (PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:16-alpine")) {
+            postgres.start();
+            Path directory = Files.createTempDirectory("plogit-flyway-negative-");
+            try {
+                Path v1 = directory.resolve("V1__init_schema.sql");
+                try (InputStream source = getClass().getClassLoader()
+                        .getResourceAsStream("db/migration/V1__init_schema.sql")) {
+                    if (source == null) {
+                        throw new IllegalStateException("Canonical V1 migration unavailable");
+                    }
+                    Files.copy(source, v1);
+                }
+                migrate(postgres, "filesystem:" + directory.toAbsolutePath());
+                execute(postgres, """
+                    INSERT INTO users (id, email, password_hash, display_name)
+                    VALUES (34, 'migration-negative@invalid.test', 'synthetic', 'Negative fixture');
+                    """);
+
+                Files.writeString(directory.resolve("V2__invalid_transactional_fixture.sql"), """
+                    CREATE TABLE must_rollback (id BIGINT PRIMARY KEY);
+                    INSERT INTO missing_table_by_design (id) VALUES (1);
+                    """);
+
+                assertThrows(FlywayException.class,
+                    () -> migrate(postgres, "filesystem:" + directory.toAbsolutePath()));
+                assertEquals(0, queryCount(postgres,
+                    "SELECT count(*) FROM pg_class WHERE relname = 'must_rollback'"));
+                assertEquals(1, queryCount(postgres,
+                    "SELECT count(*) FROM users WHERE id = 34 AND email = 'migration-negative@invalid.test'"));
+                assertEquals(0, queryCount(postgres,
+                    "SELECT count(*) FROM flyway_schema_history WHERE version = '2' AND success"));
+                assertEquals(1, queryCount(postgres,
+                    "SELECT count(*) FROM flyway_schema_history WHERE version = '1' AND success"));
+            } finally {
+                Files.deleteIfExists(directory.resolve("V2__invalid_transactional_fixture.sql"));
                 Files.deleteIfExists(directory.resolve("V1__init_schema.sql"));
                 Files.deleteIfExists(directory);
             }

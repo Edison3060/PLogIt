@@ -477,3 +477,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Paths:** test + tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. No migrations, prod data, app auth or exports changed.
 - **Decision / future:** DEC-2026-11-08-01 isolated test-only lifecycle. No new downstream integration assumptions; INT-001 remains provisional. Next JR-034 separate negative fixture.
 - **Git:** JR-033 reviewed numbered atomic commit on work/plogit-phase-02; SHA in history.
+
+### 2026-11-08T09:56:44.795Z | Session 04 | JR-034 | IN REVIEW — awaiting actual negative test execution
+- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; negative PostgreSQL16/Flyway task reviewed by Builder Lead.
+- **Implementation:** extend `backend/src/test/java/io/muzoo/ssc/plogit/FlywayMigrationLifecycleTest.java` with synthetic PostgreSQL16 V1 plus intentionally invalid temp V2, assert Flyway exception, transactional DDL rollback, V1 user and history preserved. Full details [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-034).
+- **Expected / actual:** negative rejection codified; actual runtime test outcome pending Actions. Isolated execution lacks Maven/Docker/PG and historical CI predates this test. No false PASS claim.
+- **Paths:** JUnit test and tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. Canonical migrations and app auth/export DB untouched.
+- **Research / assumptions:** Postgres DDL transaction isolation to be validated experimentally; failure must not leave partial schema. No additional integration assumptions beyond provisional INT-001. Next JR-035 closure after CI.
+- **Git:** reviewed JR-034 numbered atomic commit, SHA available in branch history.
