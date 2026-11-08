@@ -509,3 +509,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Tests:** no new executed tests in spec step; planned CI bash scripts/ci-compose-smoke.sh with service health and bounded failure, plus existing security CI. Historical CI 42338792629 does not prove live Compose.
 - **Assumptions/research:** pinned Compose source and shipped health probes; no new external integration; INT-001 remains provisional. Docker unavailable locally. Next JR-038 test implementation.
 - **Git:** reviewed JR-037 numbered commit on work/plogit-phase-02.
+
+### 2026-11-08T10:01:36.241Z | Session 04 | JR-038 | IN REVIEW — CI live Compose test pending
+- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; positive Compose case reviewed by Builder Lead.
+- **Implementation:** add `scripts/ci-compose-smoke.sh` and isolated GitHub Actions `compose-smoke` job with synthetic env, three real container health checks, API + SPA curl, fake DB marker persisted through DB restart, ephemeral cleanup. Add compose-smoke as additional main deploy needs gate. See [evidence](SESSION-04-EVIDENCE.md#jr-038).
+- **Expected vs actual:** source test defined, *not yet executed* on Docker; client has no Docker/Maven/Postgres. Prior 42338792629 had no live stack and is not credited. Failure to be reconciled after new current-head CI.
+- **Changed paths:** .github/workflows/ci.yml, scripts/ci-compose-smoke.sh, STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. No runtime application business logic, auth/export, database migration or prod Compose alteration.
+- **Safety/assumptions:** no real secrets, CI-only isolated volumes, retained Trivy and SAST. DEC-2026-11-08-02; INT-001 provisional. Next JR-039 negative test.
+- **Git:** reviewed JR-038 numbered atomic pushed commit on work/plogit-phase-02.

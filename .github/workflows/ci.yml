@@ -256,9 +256,29 @@ jobs:
           '
           sh -n scripts/verify-https.sh
 
+  compose-smoke:
+    name: Compose - isolated full-stack health and failure probes
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_PROJECT_NAME: plogit-ci-\${{ github.run_id }}-\${{ github.run_attempt }}
+      POSTGRES_DB: plogit
+      POSTGRES_USER: plogit
+      POSTGRES_PASSWORD: synthetic-ci-only-postgres-password
+      APP_CORS_ORIGINS: http://localhost:5173
+      SEED_USER_EMAIL: ci-leader@invalid.test
+      SEED_USER_PASSWORD: synthetic-ci-only-seed-password
+      SEED_USER_NAME: CI Test Leader
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Start isolated development stack and verify liveness and persistence
+        run: bash scripts/ci-compose-smoke.sh
+      - name: Clean up isolated CI-only volumes and containers
+        if: always()
+        run: docker compose --profile app down --volumes --remove-orphans
+
   deploy:
     name: CD - Deploy to Production
-    needs: [backend, frontend, semgrep, trivy, proxy]
+    needs: [backend, frontend, semgrep, trivy, proxy, compose-smoke]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:

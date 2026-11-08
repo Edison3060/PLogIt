@@ -138,3 +138,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T09:59:28.818Z | Session 04 checkpoint JR-037
 - JR-036/037 DONE source inventory/Compose acceptance. JR-033–035 await real PG CI; JR-038 implementing ephemeral Compose smoke next. Decision DEC-2026-11-08-02 no production changes; draft PR #23 remains stacked, no main/CD.
+
+### 2026-11-08T10:01:36.241Z | Session 04 checkpoint JR-038
+- JR-038 IN REVIEW. Live Docker Compose CI job with synthetic env, real health/API/SPA and volume persistence added; current-head Actions execution pending. JR-039 negative env/DB offline next. PG JR-033–035 also awaiting CI. No main/CD; PR #23 remains stacked draft.
