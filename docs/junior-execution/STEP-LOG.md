@@ -524,3 +524,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Expected/actual:** missing password fails Compose before startup; PostgreSQL-isolated backend exits nonzero within 110s with connection error. Defined but **not yet executed** on Docker, no fabricated runtime pass. Local container lacks Docker. No source DB/schema, auth or unversioned export mutation.
 - **Safety/decision:** reversible credential preflight guards protect CI/production input, no secrets or live data. DEC-2026-11-08-02; real JudgeIt INT-001 provisional. Next JR-040 closure/CI reconciliation.
 - **Git:** reviewed JR-039 numbered atomic commit on work/plogit-phase-02.
+
+### 2026-11-08T10:03:59.773Z | Session 04 | JR-040 | IN REVIEW — waiting current-head runtime/security gate
+- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; reviewer Builder Lead; original Phase 02B Compose closure, [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-040).
+- **Compared JR-038/039:** positive Compose health, API, SPA, volume restart and negative missing environment/DB-disconnected startup codified. Actual latest-head CI still pending; leave status IN REVIEW until executed and security jobs inspected.
+- **Paths:** tracking STEP-REGISTER/STEP-LOG/SESSION-HANDOFF/SESSION-04-EVIDENCE only; source/test implementation already numbered JR-038/JR-039.
+- **Runtime evidence:** no local Docker; historical previous SHA runs cannot prove final positive/negative. CI status must be fetched and any failure retained. Phase 02 PR #23 remains draft stacked on draft #22; no main deploy or merge permitted. Outstanding DEC-11 production release, INT-001 real JudgeIt interoperability provisional.
+- **Git:** reviewed JR-040 numbered atomic commit on work/plogit-phase-02, last of exactly ten selected JR checkpoints. Any follow-up after final CI should be separately logged and cannot start JR-041.

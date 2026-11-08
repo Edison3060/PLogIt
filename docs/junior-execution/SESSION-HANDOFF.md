@@ -144,3 +144,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T10:02:44.824Z | Session 04 checkpoint JR-039
 - JR-039 IN REVIEW: required POSTGRES_PASSWORD Compose preflight and isolated no-DB backend negative CI added; CI project name expression corrected. JR-040 last assigned closeout next. JR-033–035/038–039 runtime verification awaiting GitHub Actions; #23 remains draft, no main/prod merge. Latest branch checkpoint JR-039.
+
+### 2026-11-08T10:03:59.773Z | Session 04 checkpoint JR-040 — all ten JRs assessed, CI reconciliation pending
+- JR-031/032/036/037 DONE inventory/spec; JR-033/034/035/038/039/040 IN REVIEW pending final actual PostgreSQL16, live Compose positive/negative and full security CI verification. Original 10 numbered commits pushed on work/plogit-phase-02 (latest JR-040 SHA in branch history), no unrelated JR-041 development. PR #23 draft on #22; main deploy/merge strictly withheld. Next: reconcile Actions logs, correct CI test-only problems if needed, append failures and close eligible rows; advance control session only if safe readiness is verified.
