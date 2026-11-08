@@ -469,3 +469,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Tests:** criteria/source-only; zero new runtime tests executed this JR. Prior CI 42338792629 historical not credited. Maven/Docker unavailable in isolated client; upcoming Actions must run actual test suite.
 - **Decision / assumptions:** disposable real Postgres fixture, preserve canonical migrations, no new JudgeIt assumptions (INT-001 provisional). Next JR-033.
 - **Git:** reviewed JR-032 numbered atomic commit on work/plogit-phase-02; SHA discoverable in branch history.
+
+### 2026-11-08T09:55:47.885Z | Session 04 | JR-033 | IN REVIEW — awaiting runtime verification
+- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; original positive PostgreSQL16/Flyway migration success task.
+- **Implementation:** add `backend/src/test/java/io/muzoo/ssc/plogit/FlywayMigrationLifecycleTest.java`, disposable real Postgres16 V1→V3 synthetic log+history test; full fixture/expectations at [evidence](SESSION-04-EVIDENCE.md#jr-033).
+- **Expected vs actual:** positive path code ready but no new executed test output yet. Source reviewed; isolated runner lacks Maven/Docker/Postgres, so no local success assertion. Actions on this branch must run `mvn -B clean verify` and return real result; inherited CI 42338792629 is not credited.
+- **Paths:** test + tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. No migrations, prod data, app auth or exports changed.
+- **Decision / future:** DEC-2026-11-08-01 isolated test-only lifecycle. No new downstream integration assumptions; INT-001 remains provisional. Next JR-034 separate negative fixture.
+- **Git:** JR-033 reviewed numbered atomic commit on work/plogit-phase-02; SHA in history.

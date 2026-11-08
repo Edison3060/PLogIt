@@ -123,3 +123,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T09:54:28.384Z | Session 04 checkpoint JR-032
 - JR-031/032 DONE (source inventory and PG16 acceptance spec); new DEC-2026-11-08-01 isolated Flyway clean/incremental/failed-DDL tests. Latest pushed JR-032 checkpoint on work/plogit-phase-02; JR-033 next. No application source, JSON, main merge, production CD, or real JudgeIt integration changed. Run claim retained in controller; PR #23 draft stacked on #22.
+
+### 2026-11-08T09:55:47.885Z | Session 04 checkpoint JR-033
+- JR-031/032 DONE; JR-033 IN REVIEW pending actual GitHub Actions new PostgreSQL16 Flyway lifecycle test; new synthetic positive test committed, no source schema change. Last pushed commit JR-033 on work/plogit-phase-02. Next JR-034 negative case. No main/prod activity, draft #22/#23 unchanged; controller claim retained.
