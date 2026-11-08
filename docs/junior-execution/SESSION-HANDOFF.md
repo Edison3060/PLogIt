@@ -132,3 +132,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T09:57:22.501Z | Session 04 checkpoint JR-035
 - JR-031/032 DONE; JR-033/034/035 IN REVIEW pending actual new PostgreSQL16 Maven CI tests and regression proof. No canonical schema or app behavior changes. JR-036 Compose inventory next; phase #23 remains draft and stacked, no main/CD. Last pushed JR-035 checkpoint.
+
+### 2026-11-08T09:58:17.086Z | Session 04 checkpoint JR-036
+- JR-036 DONE Compose/dev-prod health/source inventory; independent of pending PG16 CI (JR-033–035 still IN REVIEW). Backend /api/health is liveness not DB readiness; no implementation changed. Next JR-037 spec. Pushed numbered JR-036 commit on work/plogit-phase-02, no main/CD, #22/#23 drafts.

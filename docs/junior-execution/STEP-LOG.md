@@ -493,3 +493,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Tests:** no new executed local runtime test (Maven/Docker/PG unavailable). Planned `cd backend && mvn -B clean verify` in Actions; record exact observed result in append-only follow-up and update row if successful.
 - **Research/assumptions:** DEC-2026-11-08-01 reversible real-test approach. No real JudgeIt evidence; INT-001 provisional. Next JR-036 independent Compose inventory.
 - **Git:** reviewed JR-035 numbered atomic commit on work/plogit-phase-02; SHA discoverable in branch history.
+
+### 2026-11-08T09:58:17.086Z | Session 04 | JR-036 | DONE — Compose source inventory
+- **Transition:** NOT STARTED → IN PROGRESS → DONE; source-and-test mapping reviewed, no runtime modification.
+- **Observed / expected:** dev Postgres16 DB with persisted pgdata/attachments; app profile and chained health depends_on; prod DB port removed and backend/frontend loopback, TLS opt-in. Backend /api/health is simple liveness, not DB readiness. [Evidence](SESSION-04-EVIDENCE.md#jr-036).
+- **Changed files:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE only.
+- **Actual tests:** none executed this JR (inventory). Earlier CI image health config and proxy validation are not a live Compose-up test. Isolated client lacks Docker/Maven/PG; CI smoke to be introduced next.
+- **Research / assumption:** source and original Phase 02 roadmap only, no changed external facts; no new real JudgeIt integration, INT-001 remains provisional. Next JR-037 acceptance criteria.
+- **Git:** reviewed JR-036 numbered atomic commit pushed on work/plogit-phase-02.
