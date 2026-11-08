@@ -114,3 +114,33 @@ _No execution-session decisions have been recorded._
 - **Decision:** Follow latest owner-approved `main@0fce5181a2265af5b37a8621d0156eb2eace21f8` policy for safe stacked work after an unmerged phase: READY WITH PROVISIONAL INTEGRATION is compatible with pending mock E2E and safe blocked main merge. Preserve DEC-11 deployment approval requirement, leave Phase 01 PR draft, and base next session phase branch on unmerged safe Phase 01 HEAD with explicit stacked ancestry.
 - **Alternative rejected:** Block all safe subsequent work solely because real JudgeIt is unfinished or because main merge could deploy. This would contradict latest SESSION-PROTOCOL. Also rejected merging main unsafely or claiming phase PR accepted.
 - **Evidence:** GitHub two-parent merge of 4 main docs, no code changes; CI at merge SHA to check. Owner sign-off still required to *start* Session 03; current session stops.
+
+### 2026-11-07T04:28:46.764Z | DEC-2026-11-07-01 | JR-022,23,24 | Test-only Maven baseline hardening
+- **Decision:** preserve application POM (Java21/Boot4.1.1); require `mvn -B clean verify`, Java/Maven runtime reporting and a separate isolated unsupported-release rejection in GitHub Actions. No runtime/export code or production settings changes.
+- **Basis:** original Phase 02 JR-021..025 and source at 6426609e77b436e2804b9c65c9c3701134c54967; existing Phase 01 CI ran `mvn -B verify` (not clean). Local sandbox has JDK21 but no Maven/Docker; actual CI needed.
+- **Alternatives rejected:** upgrading Spring or using static file assertions as a claim of tests passed; bypassing Testcontainers or altering database connections to manufacture success. Reviewer: Builder Lead.
+
+### 2026-11-07T04:29:59.100Z | DEC-2026-11-07-02 | JR-027,028,029 | Exact LTS Node pin and isolated negative lock guard
+- **Current facts:** canonical lock resolves React18.3.1, Vite6.4.3, Vitest4.1.12, TypeScript5.9.3; Vitest lock engines include Node22; source CI used floating Node20. Node.js official archive https://nodejs.org/en/download/archive/v22.23.4 (checked 2026-11-07 UTC) lists v22.23.4, updated 2026-10-20; Node20 end-of-maintenance confirmed at https://nodejs.org/en/download/archive/v20.19.5.
+- **Decision:** pin GitHub Actions runtime to supported Node22.23.4 without package dependency refresh; add version reporting plus isolated malformed lock failure test. Rationale: repeatable, supported, safe, no application or JSON changes. Pass is contingent on fresh CI evidence.
+- **Rejected:** retain unsupported Node20 indefinitely; change package-lock to make a failing install appear green; upgrade React/Vite and auth/export unrelated to this verification. Reviewer Builder Lead.
+
+### DEC-2026-11-08-01 | ENGINEERING | JR-032 | Use isolated PostgreSQL16 Flyway lifecycle tests
+- **Date / owner:** 2026-11-08T09:54:28.384Z, Builder Lead (routine reversible test-only design); source at `32158d0db2c46f45f4fb82912f52316077fe264d`, original Phase 02 JR-031–035.
+- **Observed vs target:** canonical V1–V3 migration chain, Flyway migration and Hibernate schema validation already configured. New verification gap is an explicit V1→V3 data-preserving migration and transactional failed migration, not a feature deficit.
+- **Recommended selection:** JUnit + existing Testcontainers PostgreSQL16 + Flyway API, with SQL data completely synthetic and negative migration confined to a temporary filesystem directory. Do not change schema, prod data, UUID handling, role checks, audit, evidence or unversioned JSON. Both positive and negative tests required in Actions.
+- **Rejected alternatives / impact:** manually mutate real databases or edit V1/V2/V3 for a fixture (irreversible/unsafe), infer success solely from past green integration suite (does not show incremental failure case), or add extra migration tool versions (unnecessary dependency). Current isolated client lacks Maven/Docker, so executed GitHub CI will be the runtime acceptance source.
+- **Approval:** covered by owner preauthorization for safe reversible engineering; separate production release owner approval DEC-2026-11-06-11 remains pending.
+- **Verification / next:** JR-033 positive, JR-034 negative, JR-035 closure; existing CI and original app tests must run green.
+
+### DEC-2026-11-08-02 | ENGINEERING | JR-037 | Ephemeral Compose smoke and fail-closed required DB credential
+- **Date / owner:** 2026-11-08T09:59:28.818Z, Builder Lead (safe reversible scoped CI and validation); original JR-036–040 and canonical source.
+- **Observed vs target:** existing workflow checks image healthcheck metadata and prod config but does not boot dev backend+frontend+Postgres or reject empty password early. Backend /api/health provides liveness only; prod ports already safely restricted.
+- **Choice:** isolated Docker Compose v2 CI smoke with synthetic credentials, green service-health + reachable API/SPA; fail-fast `POSTGRES_PASSWORD` interpolation and disconnected-backend negative bounded test. Use named CI-only project and cleanup ephemeral resources. Preserve production compose, app APIs, auth, audit, JSON and volume semantics.
+- **Alternatives rejected:** trust image metadata instead of live service probes, access real deployed instance/DB, change public /api/health semantics, remove volumes in production, or disable security gates. Run the actual new job; no fabricated pass.
+- **Approval:** preauthorized routine engineering. Production main merge/CD still requires DEC-2026-11-06-11 approval, current-head green security and phase acceptance; no owner decision implied.
+
+### DEC-2026-11-08-03 | ENGINEERING RELEASE HOLD | JR-040 | Preserve scanner gate despite external HTTP 504
+- **Date:** 2026-11-08T10:12:14.837Z. **Observed:** identical executable JR-040 source `8fa9274e` has [full green push CI 42469824649](https://github.com/Edison3060/PLogIt/actions/runs/42469824649), including Trivy filesystem/backend/frontend image scans. The parallel PR run and current SHA `63bf726a7c59cdbc572d7be83719b15f07a18077` CI have upstream pinned scanner binary download HTTP 504 exit22 before scans even after bounded retries; app/DB/Compose/frontend/SAST/proxy pass.
+- **Recommended decision:** keep the exact pinned checksum-verified Trivy scan and fail-closed CI gates; keep draft phase PR unmerged and JR-040 IN REVIEW for current-head security. Retry when upstream artifact download recovers or separately review a verifiable immutable distribution; do not swap to unpinned asset, ignore findings, waive CI, or approve main production deployment.
+- **Trade-off:** independent Phase 03 work can safely continue in stacked branch, but no Phase 02 release/merge acceptance. Operator decision DEC-2026-11-06-11 for main CD still pending; no actual JudgeIt integration signoff.
