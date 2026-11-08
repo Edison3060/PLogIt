@@ -36,7 +36,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-028 | Reproduce React Vite toolchain success | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-028) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
 | JR-029 | Reject React Vite toolchain invalid operation | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-029) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
 | JR-030 | Close React Vite toolchain verification | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-030) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
-| JR-031 | Inventory PostgreSQL Flyway schema | 04 | NOT STARTED | — | — |
+| JR-031 | Inventory PostgreSQL Flyway schema | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-031) • canonical V1–V3, entities and Testcontainers PostgreSQL inventory | 2026-11-08T09:52:30.865Z |
 | JR-032 | Specify PostgreSQL Flyway schema acceptance | 04 | NOT STARTED | — | — |
 | JR-033 | Reproduce PostgreSQL Flyway schema success | 04 | NOT STARTED | — | — |
 | JR-034 | Reject PostgreSQL Flyway schema invalid operation | 04 | NOT STARTED | — | — |

@@ -117,3 +117,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 - **Next safe action:** after control/session-state pointer advances to READY Session 04, a separately started Builder Lead session will read control branch and execute only JR-031–JR-040 on same phase02 branch, verifying PostgreSQL/Flyway and Compose/healthchecks. Do not start those tasks in this session.
 - **Code/test caveat:** final evidence reconciliation is docs-only at a new SHA; `42338792629` tested the immediately preceding executable SHA `c3b5b562aaddba47b9d8f426418d6e2f343e5b1f`. Check any subsequent CI run independently before merging.
 - **Reviewer:** Builder Lead, no subagents. Phase: Handoff; READY WITH PROVISIONAL INTEGRATION for safe next session, not release readiness.
+
+### 2026-11-08T09:52:30.865Z | Session 04 checkpoint JR-031
+- Claimed controller run gpt6-session04-2026-11-08T09:49:36.610Z; JR-031 DONE canonical migration/entity/Testcontainers inventory only. Current reviewed branch checkpoint is JR-031 numbered commit, see branch history. JR-032 next. Isolated runner lacks Docker/Maven/PostgreSQL; GitHub CI planned for real tests. Phase PRs #22/#23 draft/unmerged, no main/CD or actual JudgeIt integration; INT-001 remains provisional.
