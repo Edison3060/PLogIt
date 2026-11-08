@@ -164,10 +164,10 @@ jobs:
           checksums="trivy_${version}_checksums.txt"
           release="https://github.com/aquasecurity/trivy/releases/download/v${version}"
 
-          curl -fsSL --retry 3 -o "$checksums" "$release/$checksums"
+          curl -fsSL --retry 10 --retry-all-errors --retry-delay 5 --retry-max-time 180 --connect-timeout 15 --max-time 60 -o "$checksums" "$release/$checksums"
           echo "885debc41b570179e81af560e5f393a66be29b9ff8c52915674f3eb2304c535d  $checksums" | sha256sum --check
 
-          curl -fsSL --retry 3 -o "$archive" "$release/$archive"
+          curl -fsSL --retry 10 --retry-all-errors --retry-delay 5 --retry-max-time 180 --connect-timeout 15 --max-time 60 -o "$archive" "$release/$archive"
           checksum_line="$(awk -v file="$archive" '$2 == file {print}' "$checksums")"
           test -n "$checksum_line"
           printf '%s\n' "$checksum_line" | sha256sum --check
