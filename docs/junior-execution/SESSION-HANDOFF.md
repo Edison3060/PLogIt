@@ -120,3 +120,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T09:52:30.865Z | Session 04 checkpoint JR-031
 - Claimed controller run gpt6-session04-2026-11-08T09:49:36.610Z; JR-031 DONE canonical migration/entity/Testcontainers inventory only. Current reviewed branch checkpoint is JR-031 numbered commit, see branch history. JR-032 next. Isolated runner lacks Docker/Maven/PostgreSQL; GitHub CI planned for real tests. Phase PRs #22/#23 draft/unmerged, no main/CD or actual JudgeIt integration; INT-001 remains provisional.
+
+### 2026-11-08T09:54:28.384Z | Session 04 checkpoint JR-032
+- JR-031/032 DONE (source inventory and PG16 acceptance spec); new DEC-2026-11-08-01 isolated Flyway clean/incremental/failed-DDL tests. Latest pushed JR-032 checkpoint on work/plogit-phase-02; JR-033 next. No application source, JSON, main merge, production CD, or real JudgeIt integration changed. Run claim retained in controller; PR #23 draft stacked on #22.

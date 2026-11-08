@@ -461,3 +461,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Executed tests:** none in JR-031 (read-only inspection). Prior CI 42338792629 is historical and not asserted as current; Docker, Maven and PostgreSQL CLI unavailable in current isolated runner. Clean/incremental/negative gates belong to JR-033–035.
 - **Research / assumptions:** canonical source and original Phase 02 roadmap, no external facts required, no real JudgeIt integration claimed. Future integration remains INT-001 provisional. Next JR-032 acceptance criteria.
 - **Git:** reviewed JR-031 numbered atomic push on `work/plogit-phase-02`; final SHA available at GitHub history (this entry is included in its own commit).
+
+### 2026-11-08T09:54:28.384Z | Session 04 | JR-032 | DONE — acceptance specification
+- **Transition:** NOT STARTED → IN PROGRESS → DONE; original JR-032, Builder Lead reviewer.
+- **Expected / actual:** acceptance criteria precisely define real PG16 isolated V1→V3 migration preserving synthetic log and failed V2 transactional DDL rollback. No runtime assertion yet. [Evidence](SESSION-04-EVIDENCE.md#jr-032) and DEC-2026-11-08-01.
+- **Paths:** STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE, DECISIONS; no code, migration, prod DB or JSON change.
+- **Tests:** criteria/source-only; zero new runtime tests executed this JR. Prior CI 42338792629 historical not credited. Maven/Docker unavailable in isolated client; upcoming Actions must run actual test suite.
+- **Decision / assumptions:** disposable real Postgres fixture, preserve canonical migrations, no new JudgeIt assumptions (INT-001 provisional). Next JR-033.
+- **Git:** reviewed JR-032 numbered atomic commit on work/plogit-phase-02; SHA discoverable in branch history.
