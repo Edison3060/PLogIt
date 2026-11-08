@@ -135,3 +135,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T09:58:17.086Z | Session 04 checkpoint JR-036
 - JR-036 DONE Compose/dev-prod health/source inventory; independent of pending PG16 CI (JR-033–035 still IN REVIEW). Backend /api/health is liveness not DB readiness; no implementation changed. Next JR-037 spec. Pushed numbered JR-036 commit on work/plogit-phase-02, no main/CD, #22/#23 drafts.
+
+### 2026-11-08T09:59:28.818Z | Session 04 checkpoint JR-037
+- JR-036/037 DONE source inventory/Compose acceptance. JR-033–035 await real PG CI; JR-038 implementing ephemeral Compose smoke next. Decision DEC-2026-11-08-02 no production changes; draft PR #23 remains stacked, no main/CD.

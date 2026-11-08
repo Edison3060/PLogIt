@@ -42,7 +42,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-034 | Reject PostgreSQL Flyway schema invalid operation | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-034) • synthetic failing Flyway V2 transactional rollback test committed; CI pending | 2026-11-08T09:56:44.795Z |
 | JR-035 | Close PostgreSQL Flyway schema verification | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-035) • positive/negative code reviewed, pending actual PG16 and regression CI | 2026-11-08T09:57:22.501Z |
 | JR-036 | Inventory Compose and healthchecks | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-036) • dev/prod profiles, volume/network, health probes, CI source map | 2026-11-08T09:58:17.086Z |
-| JR-037 | Specify Compose and healthchecks acceptance | 04 | NOT STARTED | — | — |
+| JR-037 | Specify Compose and healthchecks acceptance | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-037) • ephemeral Compose positive, missing-env and DB-offline negative gates | 2026-11-08T09:59:28.818Z |
 | JR-038 | Reproduce Compose and healthchecks success | 04 | NOT STARTED | — | — |
 | JR-039 | Reject Compose and healthchecks invalid operation | 04 | NOT STARTED | — | — |
 | JR-040 | Close Compose and healthchecks verification | 04 | NOT STARTED | — | — |

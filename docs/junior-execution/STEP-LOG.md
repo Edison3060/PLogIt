@@ -501,3 +501,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Actual tests:** none executed this JR (inventory). Earlier CI image health config and proxy validation are not a live Compose-up test. Isolated client lacks Docker/Maven/PG; CI smoke to be introduced next.
 - **Research / assumption:** source and original Phase 02 roadmap only, no changed external facts; no new real JudgeIt integration, INT-001 remains provisional. Next JR-037 acceptance criteria.
 - **Git:** reviewed JR-036 numbered atomic commit pushed on work/plogit-phase-02.
+
+### 2026-11-08T09:59:28.818Z | Session 04 | JR-037 | DONE — dev/prod Compose acceptance criteria
+- **Transition:** NOT STARTED → IN PROGRESS → DONE; reviewer Builder Lead.
+- **Expected vs actual:** specified isolated Compose start+health+API+SPA+persistence and negative missing DB credential/offline PostgreSQL exit. Code and runtime unchanged this JR, no tests executed. [Evidence](SESSION-04-EVIDENCE.md#jr-037), DEC-2026-11-08-02.
+- **Paths:** STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE, DECISIONS only. No runtime/app source changes.
+- **Tests:** no new executed tests in spec step; planned CI bash scripts/ci-compose-smoke.sh with service health and bounded failure, plus existing security CI. Historical CI 42338792629 does not prove live Compose.
+- **Assumptions/research:** pinned Compose source and shipped health probes; no new external integration; INT-001 remains provisional. Docker unavailable locally. Next JR-038 test implementation.
+- **Git:** reviewed JR-037 numbered commit on work/plogit-phase-02.

@@ -132,3 +132,10 @@ _No execution-session decisions have been recorded._
 - **Rejected alternatives / impact:** manually mutate real databases or edit V1/V2/V3 for a fixture (irreversible/unsafe), infer success solely from past green integration suite (does not show incremental failure case), or add extra migration tool versions (unnecessary dependency). Current isolated client lacks Maven/Docker, so executed GitHub CI will be the runtime acceptance source.
 - **Approval:** covered by owner preauthorization for safe reversible engineering; separate production release owner approval DEC-2026-11-06-11 remains pending.
 - **Verification / next:** JR-033 positive, JR-034 negative, JR-035 closure; existing CI and original app tests must run green.
+
+### DEC-2026-11-08-02 | ENGINEERING | JR-037 | Ephemeral Compose smoke and fail-closed required DB credential
+- **Date / owner:** 2026-11-08T09:59:28.818Z, Builder Lead (safe reversible scoped CI and validation); original JR-036–040 and canonical source.
+- **Observed vs target:** existing workflow checks image healthcheck metadata and prod config but does not boot dev backend+frontend+Postgres or reject empty password early. Backend /api/health provides liveness only; prod ports already safely restricted.
+- **Choice:** isolated Docker Compose v2 CI smoke with synthetic credentials, green service-health + reachable API/SPA; fail-fast `POSTGRES_PASSWORD` interpolation and disconnected-backend negative bounded test. Use named CI-only project and cleanup ephemeral resources. Preserve production compose, app APIs, auth, audit, JSON and volume semantics.
+- **Alternatives rejected:** trust image metadata instead of live service probes, access real deployed instance/DB, change public /api/health semantics, remove volumes in production, or disable security gates. Run the actual new job; no fabricated pass.
+- **Approval:** preauthorized routine engineering. Production main merge/CD still requires DEC-2026-11-06-11 approval, current-head green security and phase acceptance; no owner decision implied.
