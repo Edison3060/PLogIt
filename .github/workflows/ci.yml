@@ -260,7 +260,7 @@ jobs:
     name: Compose - isolated full-stack health and failure probes
     runs-on: ubuntu-latest
     env:
-      COMPOSE_PROJECT_NAME: plogit-ci-\${{ github.run_id }}-\${{ github.run_attempt }}
+      COMPOSE_PROJECT_NAME: plogit-ci-${{ github.run_id }}-${{ github.run_attempt }}
       POSTGRES_DB: plogit
       POSTGRES_USER: plogit
       POSTGRES_PASSWORD: synthetic-ci-only-postgres-password

@@ -517,3 +517,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Changed paths:** .github/workflows/ci.yml, scripts/ci-compose-smoke.sh, STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. No runtime application business logic, auth/export, database migration or prod Compose alteration.
 - **Safety/assumptions:** no real secrets, CI-only isolated volumes, retained Trivy and SAST. DEC-2026-11-08-02; INT-001 provisional. Next JR-039 negative test.
 - **Git:** reviewed JR-038 numbered atomic pushed commit on work/plogit-phase-02.
+
+### 2026-11-08T10:02:44.824Z | Session 04 | JR-039 | IN REVIEW — missing-env and DB-disconnected negative CI pending
+- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; reviewer Builder Lead.
+- **Changes:** require nonempty POSTGRES_PASSWORD in docker-compose.yml; add subprocess-without-password and Docker --network none negative startup checks to scripts/ci-compose-smoke.sh; correct CI project name GitHub expression; tracking STEP-REGISTER/STEP-LOG/SESSION-HANDOFF/SESSION-04-EVIDENCE. See [evidence](SESSION-04-EVIDENCE.md#jr-039).
+- **Expected/actual:** missing password fails Compose before startup; PostgreSQL-isolated backend exits nonzero within 110s with connection error. Defined but **not yet executed** on Docker, no fabricated runtime pass. Local container lacks Docker. No source DB/schema, auth or unversioned export mutation.
+- **Safety/decision:** reversible credential preflight guards protect CI/production input, no secrets or live data. DEC-2026-11-08-02; real JudgeIt INT-001 provisional. Next JR-040 closure/CI reconciliation.
+- **Git:** reviewed JR-039 numbered atomic commit on work/plogit-phase-02.

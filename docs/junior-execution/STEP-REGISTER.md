@@ -44,7 +44,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-036 | Inventory Compose and healthchecks | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-036) • dev/prod profiles, volume/network, health probes, CI source map | 2026-11-08T09:58:17.086Z |
 | JR-037 | Specify Compose and healthchecks acceptance | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-037) • ephemeral Compose positive, missing-env and DB-offline negative gates | 2026-11-08T09:59:28.818Z |
 | JR-038 | Reproduce Compose and healthchecks success | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-038) • added live CI Compose health/API/SPA/persistence smoke; real Actions pending | 2026-11-08T10:01:36.241Z |
-| JR-039 | Reject Compose and healthchecks invalid operation | 04 | NOT STARTED | — | — |
+| JR-039 | Reject Compose and healthchecks invalid operation | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-039) • missing DB password fail-fast and isolated offline backend exit harness; CI pending | 2026-11-08T10:02:44.824Z |
 | JR-040 | Close Compose and healthchecks verification | 04 | NOT STARTED | — | — |
 | JR-041 | Inventory Authentication session | 05 | NOT STARTED | — | — |
 | JR-042 | Specify Authentication session acceptance | 05 | NOT STARTED | — | — |

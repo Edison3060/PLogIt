@@ -32,3 +32,33 @@ test "$persisted" = 1
 test "$(docker inspect -f '{{.State.Health.Status}}' plogit-db)" = healthy
 curl -fsS --max-time 10 --retry 10 --retry-delay 2 --retry-connrefused http://127.0.0.1:8080/api/health | grep -Fq '"UP"'
 printf 'Compose PostgreSQL, backend/frontend health, API, SPA and volume-restart smoke passed.\n'
+
+negative_log="$(mktemp)"
+offline_log="$(mktemp)"
+trap 'rm -f "$negative_log" "$offline_log"' EXIT
+if env -u POSTGRES_PASSWORD docker compose --profile app config --quiet >"$negative_log" 2>&1; then
+    echo "Missing POSTGRES_PASSWORD unexpectedly passed Compose validation" >&2
+    exit 1
+fi
+grep -Fq "POSTGRES_PASSWORD" "$negative_log"
+
+backend_image="$(docker compose images -q backend)"
+test -n "$backend_image"
+set +e
+timeout 110 docker run --rm --network none \
+    -e SPRING_PROFILES_ACTIVE=prod \
+    -e SPRING_DATASOURCE_URL=jdbc:postgresql://127.0.0.1:5432/plogit \
+    -e SPRING_DATASOURCE_USERNAME="$POSTGRES_USER" \
+    -e SPRING_DATASOURCE_PASSWORD="$POSTGRES_PASSWORD" \
+    "$backend_image" >"$offline_log" 2>&1
+offline_status=$?
+set -e
+if [ "$offline_status" -eq 0 ] || [ "$offline_status" -eq 124 ]; then
+    echo "Database-disconnected backend must fail startup in bounded time; status=$offline_status" >&2
+    exit 1
+fi
+if ! grep -Eiq 'Connection refused|Failed to obtain|Unable to obtain|Could not obtain|PSQLException|Connection attempt failed' "$offline_log"; then
+    echo "Backend stopped without expected PostgreSQL connectivity diagnostic" >&2
+    exit 1
+fi
+printf 'Required DB credential and isolated unavailable-PostgreSQL startup both failed closed.\n'

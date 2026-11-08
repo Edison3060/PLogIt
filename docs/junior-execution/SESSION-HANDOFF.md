@@ -141,3 +141,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T10:01:36.241Z | Session 04 checkpoint JR-038
 - JR-038 IN REVIEW. Live Docker Compose CI job with synthetic env, real health/API/SPA and volume persistence added; current-head Actions execution pending. JR-039 negative env/DB offline next. PG JR-033–035 also awaiting CI. No main/CD; PR #23 remains stacked draft.
+
+### 2026-11-08T10:02:44.824Z | Session 04 checkpoint JR-039
+- JR-039 IN REVIEW: required POSTGRES_PASSWORD Compose preflight and isolated no-DB backend negative CI added; CI project name expression corrected. JR-040 last assigned closeout next. JR-033–035/038–039 runtime verification awaiting GitHub Actions; #23 remains draft, no main/prod merge. Latest branch checkpoint JR-039.
