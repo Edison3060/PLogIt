@@ -9,14 +9,14 @@ Only this per-app controller selects what a fresh Builder Lead session does next
 | Key | Value |
 |---|---|
 | NEXT_SESSION | 04 |
-| STATE | READY |
+| STATE | IN_PROGRESS |
 | LAST_ASSESSED_SESSION | 03 |
 | LAST_ASSESSED_JR_RANGE | JR-021–JR-030 |
 | CURRENT_TARGET_JR_RANGE | JR-031–JR-040 |
 | CURRENT_TARGET_PHASE_BRANCH | work/plogit-phase-02 |
 | LAST_PHASE_BRANCH | work/plogit-phase-02 |
-| CURRENT_RUN_OWNER | NONE |
-| LAST_UPDATE_UTC | 2026-11-07T04:35:10.967Z |
+| CURRENT_RUN_OWNER | gpt6-session04-2026-11-08T09:49:36.610Z |
+| LAST_UPDATE_UTC | 2026-11-08T09:49:36.610Z |
 | PENDING_PHASE_ACCEPTANCE | Phase 01 draft PR #22 and stacked Phase 02 draft PR #23 unmerged; main production CD authorization DEC-11 pending; real JudgeIt integration provisional; full Phase 02 gate awaits JR-031–040 |
 | AFTER_FINAL_SESSION | COMPLETE, no automatic wraparound |
 
@@ -52,3 +52,5 @@ Odd sessions start/resume one of the original twelve `work/plogit-phase-XX` bran
 
 
 - 2026-11-06: initialized for Session 03 after inspecting Session 02 per-JR registers and handoffs. No application JR status was changed by controller creation.
+
+- 2026-11-08T09:49:36.610Z: Session 04 JR-031–JR-040 claimed by gpt6-session04-2026-11-08T09:49:36.610Z; resume existing stacked work/plogit-phase-02 branch; no production deployment or main merge.
