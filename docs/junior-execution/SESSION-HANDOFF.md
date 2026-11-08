@@ -129,3 +129,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-08T09:56:44.795Z | Session 04 checkpoint JR-034
 - JR-031/032 DONE, JR-033/034 IN REVIEW until executed CI. Positive PG16 incremental and negative transactional migration tests are now in `FlywayMigrationLifecycleTest.java`. JR-035 closure next, possibly remains IN REVIEW until CI. No application schema/data changes, main merge/CD, or external integration acceptance. Latest branch checkpoint JR-034.
+
+### 2026-11-08T09:57:22.501Z | Session 04 checkpoint JR-035
+- JR-031/032 DONE; JR-033/034/035 IN REVIEW pending actual new PostgreSQL16 Maven CI tests and regression proof. No canonical schema or app behavior changes. JR-036 Compose inventory next; phase #23 remains draft and stacked, no main/CD. Last pushed JR-035 checkpoint.

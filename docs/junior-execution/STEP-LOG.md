@@ -485,3 +485,11 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Paths:** JUnit test and tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. Canonical migrations and app auth/export DB untouched.
 - **Research / assumptions:** Postgres DDL transaction isolation to be validated experimentally; failure must not leave partial schema. No additional integration assumptions beyond provisional INT-001. Next JR-035 closure after CI.
 - **Git:** reviewed JR-034 numbered atomic commit, SHA available in branch history.
+
+### 2026-11-08T09:57:22.501Z | Session 04 | JR-035 | IN REVIEW — pending clean positive + negative runtime closure
+- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; original closure task and reviewer Builder Lead. [Evidence](SESSION-04-EVIDENCE.md#jr-035).
+- **Expected vs observed:** JR-033 synthetic V1→V3 retention and JR-034 invalid V2 transactional rollback coded. Both still need executed Maven/PostgreSQL16 CI on the updated test. Existing 125 backend tests historically pass at c3b5b56, not evidence that new tests pass.
+- **Paths:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE only. No additional source changes or unsafe rollback.
+- **Tests:** no new executed local runtime test (Maven/Docker/PG unavailable). Planned `cd backend && mvn -B clean verify` in Actions; record exact observed result in append-only follow-up and update row if successful.
+- **Research/assumptions:** DEC-2026-11-08-01 reversible real-test approach. No real JudgeIt evidence; INT-001 provisional. Next JR-036 independent Compose inventory.
+- **Git:** reviewed JR-035 numbered atomic commit on work/plogit-phase-02; SHA discoverable in branch history.

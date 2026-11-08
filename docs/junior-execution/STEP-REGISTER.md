@@ -40,7 +40,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-032 | Specify PostgreSQL Flyway schema acceptance | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-032) • isolated PG16 clean/incremental/failed DDL criterion and DEC-2026-11-08-01 | 2026-11-08T09:54:28.384Z |
 | JR-033 | Reproduce PostgreSQL Flyway schema success | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-033) • positive PostgreSQL16 Testcontainers Flyway fixture committed, CI execution pending | 2026-11-08T09:55:47.885Z |
 | JR-034 | Reject PostgreSQL Flyway schema invalid operation | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-034) • synthetic failing Flyway V2 transactional rollback test committed; CI pending | 2026-11-08T09:56:44.795Z |
-| JR-035 | Close PostgreSQL Flyway schema verification | 04 | NOT STARTED | — | — |
+| JR-035 | Close PostgreSQL Flyway schema verification | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-035) • positive/negative code reviewed, pending actual PG16 and regression CI | 2026-11-08T09:57:22.501Z |
 | JR-036 | Inventory Compose and healthchecks | 04 | NOT STARTED | — | — |
 | JR-037 | Specify Compose and healthchecks acceptance | 04 | NOT STARTED | — | — |
 | JR-038 | Reproduce Compose and healthchecks success | 04 | NOT STARTED | — | — |
