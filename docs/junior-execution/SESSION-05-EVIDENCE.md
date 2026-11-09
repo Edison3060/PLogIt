@@ -13,3 +13,7 @@
 ## JR-043
 
 **Date:** 2026-11-09T18:28:11.863Z. **Status:** IN REVIEW until actual GitHub Actions. Implemented `AuthController.java` changeSessionId on existing unauthenticated HttpSession after successful credentials, preventing retention of pre-login session ID. New `AuthenticationSessionLifecycleIntegrationTest.java` positive scenario registration (202 and bcrypt), login (200), session ID rotated, authenticated /me (200), logout (200) and session invalidated; stale cookie test is provisional MockMvc-only denial. **Command planned:** `cd backend && mvn -B clean verify` in GitHub CI with isolated Testcontainers PostgreSQL16. **Observed:** unexecuted at checkpoint, CI required; no pass fabricated. Scope remains source + isolated tests, no production database or exporter behavior touched.
+
+## JR-044
+
+**Date:** 2026-11-09T18:29:15.078Z. **Status:** IN REVIEW. New isolated tests check wrong password (401, no session authentication attribute) and invalidated-session ID cookie denied for `GET /api/auth/me` (403). Expected no unauthorized mutation, no session restoration; observed only test source/fixture setup, **no execution in this connector runtime**. MockMvc cookie replay is weaker than a real HTTP container and is **not proof of wall-clock expiration**. Follow-up authentic ephemeral Compose cookie-jar probe or equivalent live HTTP test required. Existing auth/error-path security preserved; no production data touched.

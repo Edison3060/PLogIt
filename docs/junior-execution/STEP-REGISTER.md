@@ -49,7 +49,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-041 | Inventory Authentication session | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-041) • source/test inventory VERIFIED NO CHANGE at bf2c711c85d2 | 2026-11-09T18:25:50.156Z |
 | JR-042 | Specify Authentication session acceptance | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-042) • DEC-2026-11-09-01 • acceptance spec at 84fe75f898a9 | 2026-11-09T18:27:07.394Z |
 | JR-043 | Reproduce Authentication session success | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-043) • isolated lifecycle test added, CI execution pending | 2026-11-09T18:28:11.863Z |
-| JR-044 | Reject Authentication session invalid operation | 05 | NOT STARTED | — | — |
+| JR-044 | Reject Authentication session invalid operation | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-044) • wrong-password/stale-session tests written, runtime and real expiry pending | 2026-11-09T18:29:15.078Z |
 | JR-045 | Close Authentication session verification | 05 | NOT STARTED | — | — |
 | JR-046 | Inventory CSRF enforcement | 05 | NOT STARTED | — | — |
 | JR-047 | Specify CSRF enforcement acceptance | 05 | NOT STARTED | — | — |

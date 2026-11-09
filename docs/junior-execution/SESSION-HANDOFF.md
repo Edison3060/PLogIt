@@ -168,3 +168,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:28:11.863Z | Session 05 checkpoint JR-043
 - JR-041/042 DONE, JR-043 IN REVIEW pending actual CI. Focused manual-login session ID rotation and synthetic lifecycle test committed. Next JR-044 expiry/stale-cookie and wrong-password negative controls. Current push: JR-043 numbered commit in branch history; continue only selected ten JRs; release holds unchanged.
+
+### 2026-11-09T18:29:15.078Z | Session 05 checkpoint JR-044
+- JR-041/042 DONE. JR-043/044 IN REVIEW until real CI; stale-cookie expiry not proven by MockMvc alone. Two negative synthetic tests added, no application changes this JR. Latest pushed JR-044 checkpoint, next JR-045 auth closeout. Release gates unchanged.

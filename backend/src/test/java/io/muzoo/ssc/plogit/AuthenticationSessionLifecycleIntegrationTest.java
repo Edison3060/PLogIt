@@ -64,4 +64,29 @@ class AuthenticationSessionLifecycleIntegrationTest extends IntegrationTestBase 
         mockMvc.perform(get("/api/auth/me").cookie(new Cookie("JSESSIONID", authenticatedId)))
             .andExpect(status().isForbidden());
     }
+
+    @Test
+    void invalidCredentialsNeverCreateAuthenticatedContext() throws Exception {
+        createUser("session05-invalid@test.local");
+        MockHttpSession anonymousSession = new MockHttpSession();
+        mockMvc.perform(post("/api/auth/login")
+                .session(anonymousSession)
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"session05-invalid@test.local\",\"password\":\"incorrect\"}"))
+            .andExpect(status().isUnauthorized());
+        org.junit.jupiter.api.Assertions.assertNull(anonymousSession.getAttribute(
+            org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY));
+    }
+
+    @Test
+    void staleSessionCookieCannotAccessAuthenticatedRoute() throws Exception {
+        createUser("session05-stale@test.local");
+        MockHttpSession staleSession = new MockHttpSession();
+        String expiredSessionId = staleSession.getId();
+        staleSession.invalidate();
+        assertTrue(staleSession.isInvalid());
+        mockMvc.perform(get("/api/auth/me").cookie(new Cookie("JSESSIONID", expiredSessionId)))
+            .andExpect(status().isForbidden());
+    }
 }
