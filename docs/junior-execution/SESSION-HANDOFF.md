@@ -177,3 +177,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:31:12.541Z | Session 05 checkpoint JR-046
 - JR-046 DONE source/tests inventory; auth JR-043–045 remain IN REVIEW pending CI. CSRF exceptions on all three auth POST routes found; all other state mutations guarded by CookieCsrfTokenRepository/header. JR-047 spec and safe scoped correction next, no unsafe main change, #22/#23 drafts.
+
+### 2026-11-09T18:32:08.434Z | Session 05 checkpoint JR-047
+- CSRF JR-046/047 DONE source map + acceptance; DEC-2026-11-09-02 scoped safe tightening of three auth POST exemptions with preflight CSRF bootstrap. JR-043–045 await CI. Next JR-048 add source/client positive tests and real HTTP; release held.
