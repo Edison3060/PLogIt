@@ -165,3 +165,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:27:07.394Z | Session 05 checkpoint JR-042
 - JR-041 and JR-042 DONE inventory/spec; DEC-2026-11-09-01 chooses focused session fixation verification/fix. No executable tests yet. Last push: JR-042 evidence checkpoint at head in branch history. Next JR-043 positive lifecycle using isolated real CI before DONE; do not merge drafts or main.
+
+### 2026-11-09T18:28:11.863Z | Session 05 checkpoint JR-043
+- JR-041/042 DONE, JR-043 IN REVIEW pending actual CI. Focused manual-login session ID rotation and synthetic lifecycle test committed. Next JR-044 expiry/stale-cookie and wrong-password negative controls. Current push: JR-043 numbered commit in branch history; continue only selected ten JRs; release holds unchanged.
