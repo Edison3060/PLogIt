@@ -21,3 +21,7 @@
 ## JR-045
 
 **Date:** 2026-11-09T18:30:22.806Z. **Status:** IN REVIEW (runtime pending). New live isolated Compose probe `scripts/ci-auth-smoke.sh`, wired into `scripts/ci-compose-smoke.sh` after healthy backend/frontend. Uses only synthetic data and scratch cookie jar, checks registration 202, login 200, user me 200, logout 200 and replay of pre-logout JSESSIONID denied 403. Planned actual `bash scripts/ci-compose-smoke.sh` and Maven PG16 integration tests on GitHub Actions. **Observed:** script is committed, no successful execution recorded yet. Session expiration by elapsed idle timeout is not proven; phase auth closure remains IN REVIEW pending full current-branch CI, reviewer Builder Lead.
+
+## JR-046
+
+**Date:** 2026-11-09T18:31:12.541Z. **Status:** DONE, VERIFIED NO CHANGE (inventory). Canonical owner `backend/src/main/java/io/muzoo/ssc/plogit/config/SecurityConfig.java` defines Spring Security 7 filter, cookie token repository, request handler, and auth POST exemptions; `frontend/src/lib/api.ts` retrieves the XSRF-TOKEN cookie and supplies X-XSRF-TOKEN with credentials on mutating fetch. CSRF negative tests: `CsrfIntegrationTest.java` (log update/transition and engagement mutation deny), frontend `api.test.ts` (header, missing cookie behavior). **GAP:** login/register/logout are exempted from CSRF, inconsistent with original Phase 03 full mutating-route invariant and Spring Security guidance. No source change in this JR, no tests executed for inventory; reviewer Builder Lead. Next JR-047 acceptance/correction.

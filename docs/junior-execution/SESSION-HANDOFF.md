@@ -174,3 +174,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:30:22.806Z | Session 05 checkpoint JR-045
 - Authentication JR-041/042 DONE; JR-043/044/045 IN REVIEW until actual full backend/Compose CI. Real HTTP cookie-jar auth smoke added, including old JSESSIONID replay; wall-clock expiry still unverified. Latest JR-045 numbered push; next JR-046 CSRF inventory. Do not merge main.
+
+### 2026-11-09T18:31:12.541Z | Session 05 checkpoint JR-046
+- JR-046 DONE source/tests inventory; auth JR-043–045 remain IN REVIEW pending CI. CSRF exceptions on all three auth POST routes found; all other state mutations guarded by CookieCsrfTokenRepository/header. JR-047 spec and safe scoped correction next, no unsafe main change, #22/#23 drafts.
