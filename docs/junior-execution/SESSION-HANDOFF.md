@@ -186,3 +186,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:34:54.488Z | Session 05 checkpoint JR-049
 - All JR-041–049 have a numbered pushed commit; JR-043–045/048–049 remain IN REVIEW pending CI; JR-041/042/046/047 DONE source/spec. New CSRF negative tests check auth login/register/logout fail-closed and zero engagement mutation in real HTTP probe. Final JR-050 next; do not start Session 06 or merge main.
+
+### 2026-11-09T18:38:04.009Z | Session 05 JR-050 initial closeout / test correction
+- Ten JRs 041–050 individually assessed and pushed once JR-050 commit lands. 041/042/046/047 DONE source/spec; 043–045/048–050 IN REVIEW until new head CI. Run 42675291335 at 1f92076e: Maven 133 tests 5 old auth-rate-limit fixture failures due missing CSRF; frontend/Compose/Semgrep/proxy success. Corrected 12 old test POSTs with csrf() without weakening enforcement. Need fresh backend and all security CI. No production merge/deploy, #22/#23 draft, DEC-11 pending, INT-001 provisional. Next: inspect new-head Actions, update evidence and controller only when safe; never start Session06 in same chat.

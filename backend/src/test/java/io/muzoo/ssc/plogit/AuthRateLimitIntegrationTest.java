@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +35,7 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
     void loginLimitRejectsAttemptsEvenWithSpoofedForwardedAddress() throws Exception {
         createUser("login@test.local");
         for (int i = 0; i < 3; i++) {
-            mockMvc.perform(post("/api/auth/login")
+            mockMvc.perform(post("/api/auth/login").with(csrf())
                     .with(from("192.0.2.11"))
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
@@ -44,7 +45,7 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$.message").value("Invalid email or password"));
         }
 
-        String retryAfter = mockMvc.perform(post("/api/auth/login")
+        String retryAfter = mockMvc.perform(post("/api/auth/login").with(csrf())
                 .with(from("192.0.2.11"))
                 .header("X-Forwarded-For", "203.0.113.77")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -62,14 +63,14 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
     @Test
     void registrationIsLimitedBeforeParsingMalformedBodies() throws Exception {
         for (int i = 0; i < 2; i++) {
-            mockMvc.perform(post("/api/auth/register")
+            mockMvc.perform(post("/api/auth/register").with(csrf())
                     .with(from("192.0.2.12"))
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("{\"email\":"))
                 .andExpect(status().isBadRequest());
         }
 
-        mockMvc.perform(post("/api/auth/register")
+        mockMvc.perform(post("/api/auth/register").with(csrf())
                 .with(from("192.0.2.12"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
@@ -83,26 +84,26 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
     @Test
     void differentClientsAndEndpointsHaveIndependentLimits() throws Exception {
         for (int i = 0; i < 2; i++) {
-            mockMvc.perform(post("/api/auth/register")
+            mockMvc.perform(post("/api/auth/register").with(csrf())
                     .with(from("192.0.2.13"))
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("{\"email\":"))
                 .andExpect(status().isBadRequest());
         }
 
-        mockMvc.perform(post("/api/auth/register")
+        mockMvc.perform(post("/api/auth/register").with(csrf())
                 .with(from("192.0.2.13"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\":"))
             .andExpect(status().isTooManyRequests());
 
-        mockMvc.perform(post("/api/auth/register")
+        mockMvc.perform(post("/api/auth/register").with(csrf())
                 .with(from("192.0.2.14"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\":"))
             .andExpect(status().isBadRequest());
 
-        mockMvc.perform(post("/api/auth/login")
+        mockMvc.perform(post("/api/auth/login").with(csrf())
                 .with(from("192.0.2.13"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
@@ -117,7 +118,7 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
             {"email":"duplicate@test.local","password":"password123","displayName":"Example"}
             """;
 
-        String first = mockMvc.perform(post("/api/auth/register")
+        String first = mockMvc.perform(post("/api/auth/register").with(csrf())
                 .with(from("192.0.2.15"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
@@ -125,7 +126,7 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
             .andExpect(jsonPath("$.message").value("Registration request received. Please sign in"))
             .andReturn().getResponse().getContentAsString();
 
-        String second = mockMvc.perform(post("/api/auth/register")
+        String second = mockMvc.perform(post("/api/auth/register").with(csrf())
                 .with(from("192.0.2.15"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
@@ -142,7 +143,7 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
     void unknownEmailAndWrongPasswordReturnSameLoginError() throws Exception {
         createUser("known@test.local");
 
-        String unknown = mockMvc.perform(post("/api/auth/login")
+        String unknown = mockMvc.perform(post("/api/auth/login").with(csrf())
                 .with(from("192.0.2.16"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
@@ -151,7 +152,7 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
             .andExpect(status().isUnauthorized())
             .andReturn().getResponse().getContentAsString();
 
-        String incorrect = mockMvc.perform(post("/api/auth/login")
+        String incorrect = mockMvc.perform(post("/api/auth/login").with(csrf())
                 .with(from("192.0.2.16"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""

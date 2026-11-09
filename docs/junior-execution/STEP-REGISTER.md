@@ -55,7 +55,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-047 | Specify CSRF enforcement acceptance | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-047) • DEC-2026-11-09-02 all unsafe routes + bootstrap acceptance | 2026-11-09T18:32:08.434Z |
 | JR-048 | Reproduce CSRF enforcement success | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-048) • CSRF enforced, token bootstrap/positive CI tests added; execution pending | 2026-11-09T18:33:56.395Z |
 | JR-049 | Reject CSRF enforcement invalid operation | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-049) • missing/bad tokens deny auth and engagement, no mutation; CI pending | 2026-11-09T18:34:54.488Z |
-| JR-050 | Close CSRF enforcement verification | 05 | NOT STARTED | — | — |
+| JR-050 | Close CSRF enforcement verification | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-050) • CI 42675291335: 133 tests, 5 old fixture failures; CSRF fixture correction, new head CI pending | 2026-11-09T18:38:04.009Z |
 | JR-051 | Inventory Engagement membership boundary | 06 | NOT STARTED | — | — |
 | JR-052 | Specify Engagement membership boundary acceptance | 06 | NOT STARTED | — | — |
 | JR-053 | Reproduce Engagement membership boundary success | 06 | NOT STARTED | — | — |
