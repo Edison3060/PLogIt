@@ -37,6 +37,26 @@ engagement_status="$(curl -sS --max-time 10 -o "$scratch/engagement.json" -w '%{
 test "$engagement_status" = 200
 python3 -c 'import json,sys; assert json.load(open(sys.argv[1]))["name"] == "CI Session 05"' "$scratch/engagement.json"
 
+list_before="$(curl -fsS --max-time 10 -c "$jar" -b "$jar" "$base/engagements" | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))')"
+for token_mode in missing invalid; do
+    csrf_args=()
+    if [ "$token_mode" = invalid ]; then
+        csrf_args=(-H "X-XSRF-TOKEN: definitely-invalid-token")
+    fi
+    denied_status="$(curl -sS --max-time 10 -o "$scratch/denied-$token_mode.json" -w '%{http_code}' \
+        -c "$jar" -b "$jar" -H "Content-Type: application/json" "${csrf_args[@]}" \
+        -d '{"name":"Should Never Persist","description":"CSRF bypass attempt"}' \
+        "$base/engagements")"
+    test "$denied_status" = 403
+done
+list_after="$(curl -fsS --max-time 10 -c "$jar" -b "$jar" "$base/engagements" | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))')"
+test "$list_before" = "$list_after"
+
+denied_logout_status="$(curl -sS --max-time 10 -o "$scratch/denied-logout.json" -w '%{http_code}' \
+    -c "$jar" -b "$jar" -X POST "$base/auth/logout")"
+test "$denied_logout_status" = 403
+curl -fsS --max-time 10 -c "$jar" -b "$jar" "$base/auth/me" >"$scratch/still-authenticated.json"
+
 logout_status="$(curl -sS --max-time 10 -o "$scratch/logout.json" -w '%{http_code}' \
     -c "$jar" -b "$jar" -H "X-XSRF-TOKEN: $csrf" -X POST "$base/auth/logout")"
 test "$logout_status" = 200

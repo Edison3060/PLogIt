@@ -33,3 +33,7 @@
 ## JR-048
 
 **Date:** 2026-11-09T18:33:56.395Z. **Status:** IN REVIEW. SecurityConfig no longer exempts auth POSTs; apiFetch bootstraps XSRF cookie by safe /api/health GET, uses X-XSRF-TOKEN for every unsafe method and fails closed when cookie still missing. Vitest positive registration token bootstrap, real Compose authentic register/login/engagement creation with issued cookie and header added. Expected 202/200/200; observed source-only until actual CI, not a test pass. Compatibility caveat: external API clients must fetch token first. No unversioned JSON or production modifications.
+
+## JR-049
+
+**Date:** 2026-11-09T18:34:54.488Z. **Status:** IN REVIEW. `AuthCsrfIntegrationTest.java` isolated backend tests for registration missing/invalid token 403/no user, login missing token 403/no security context, logout missing/invalid token 403/session remains active, valid token logout accepted. Real Compose script additionally asserts engagement count unchanged after unauthenticated-token POSTs and rejects a no-token logout while preserving authenticated /me. Expected HTTP denial/no side effects; observed test source authored but CI runtime not yet confirmed. Existing `CsrfIntegrationTest` covers log/engagement negative cases, no policy bypass.

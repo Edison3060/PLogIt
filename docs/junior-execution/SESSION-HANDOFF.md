@@ -183,3 +183,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:33:56.395Z | Session 05 checkpoint JR-048
 - JR-048 IN REVIEW CI pending; three auth POST exemptions removed, frontend preflight and HTTP genuine-token engagement creation added. Auth JR-043–045 unverified. Next JR-049 deny and no mutation. Phase03 stacked, main untouched.
+
+### 2026-11-09T18:34:54.488Z | Session 05 checkpoint JR-049
+- All JR-041–049 have a numbered pushed commit; JR-043–045/048–049 remain IN REVIEW pending CI; JR-041/042/046/047 DONE source/spec. New CSRF negative tests check auth login/register/logout fail-closed and zero engagement mutation in real HTTP probe. Final JR-050 next; do not start Session 06 or merge main.
