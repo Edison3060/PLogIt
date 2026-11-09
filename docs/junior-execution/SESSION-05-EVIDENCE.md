@@ -17,3 +17,7 @@
 ## JR-044
 
 **Date:** 2026-11-09T18:29:15.078Z. **Status:** IN REVIEW. New isolated tests check wrong password (401, no session authentication attribute) and invalidated-session ID cookie denied for `GET /api/auth/me` (403). Expected no unauthorized mutation, no session restoration; observed only test source/fixture setup, **no execution in this connector runtime**. MockMvc cookie replay is weaker than a real HTTP container and is **not proof of wall-clock expiration**. Follow-up authentic ephemeral Compose cookie-jar probe or equivalent live HTTP test required. Existing auth/error-path security preserved; no production data touched.
+
+## JR-045
+
+**Date:** 2026-11-09T18:30:22.806Z. **Status:** IN REVIEW (runtime pending). New live isolated Compose probe `scripts/ci-auth-smoke.sh`, wired into `scripts/ci-compose-smoke.sh` after healthy backend/frontend. Uses only synthetic data and scratch cookie jar, checks registration 202, login 200, user me 200, logout 200 and replay of pre-logout JSESSIONID denied 403. Planned actual `bash scripts/ci-compose-smoke.sh` and Maven PG16 integration tests on GitHub Actions. **Observed:** script is committed, no successful execution recorded yet. Session expiration by elapsed idle timeout is not proven; phase auth closure remains IN REVIEW pending full current-branch CI, reviewer Builder Lead.

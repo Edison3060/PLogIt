@@ -171,3 +171,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:29:15.078Z | Session 05 checkpoint JR-044
 - JR-041/042 DONE. JR-043/044 IN REVIEW until real CI; stale-cookie expiry not proven by MockMvc alone. Two negative synthetic tests added, no application changes this JR. Latest pushed JR-044 checkpoint, next JR-045 auth closeout. Release gates unchanged.
+
+### 2026-11-09T18:30:22.806Z | Session 05 checkpoint JR-045
+- Authentication JR-041/042 DONE; JR-043/044/045 IN REVIEW until actual full backend/Compose CI. Real HTTP cookie-jar auth smoke added, including old JSESSIONID replay; wall-clock expiry still unverified. Latest JR-045 numbered push; next JR-046 CSRF inventory. Do not merge main.

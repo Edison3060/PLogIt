@@ -23,6 +23,8 @@ health="$(curl -fsS --max-time 10 --retry 10 --retry-delay 2 --retry-connrefused
 python3 -c 'import json,sys; result=json.loads(sys.argv[1]); assert result["status"] == "UP" and result["app"] == "plogit"' "$health"
 curl -fsS --max-time 10 --retry 10 --retry-delay 2 --retry-connrefused http://127.0.0.1:5173/ | grep -Fq '<div id="root"></div>'
 
+bash scripts/ci-auth-smoke.sh
+
 docker compose exec -T db psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1 \
     -c 'CREATE TABLE ci_persistence_probe (id INTEGER PRIMARY KEY); INSERT INTO ci_persistence_probe(id) VALUES(1);'
 docker compose stop db
