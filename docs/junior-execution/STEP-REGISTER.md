@@ -53,7 +53,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-045 | Close Authentication session verification | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-045) • lifecycle + real HTTP Compose probe added; CI/expiry acceptance pending | 2026-11-09T18:30:22.806Z |
 | JR-046 | Inventory CSRF enforcement | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-046) • live filter/SPA owner and exception map, no code change | 2026-11-09T18:31:12.541Z |
 | JR-047 | Specify CSRF enforcement acceptance | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-047) • DEC-2026-11-09-02 all unsafe routes + bootstrap acceptance | 2026-11-09T18:32:08.434Z |
-| JR-048 | Reproduce CSRF enforcement success | 05 | NOT STARTED | — | — |
+| JR-048 | Reproduce CSRF enforcement success | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-048) • CSRF enforced, token bootstrap/positive CI tests added; execution pending | 2026-11-09T18:33:56.395Z |
 | JR-049 | Reject CSRF enforcement invalid operation | 05 | NOT STARTED | — | — |
 | JR-050 | Close CSRF enforcement verification | 05 | NOT STARTED | — | — |
 | JR-051 | Inventory Engagement membership boundary | 06 | NOT STARTED | — | — |

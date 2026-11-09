@@ -30,6 +30,13 @@ test -n "$session_id"
 curl -fsS --max-time 10 -c "$jar" -b "$jar" "$base/auth/me" >"$scratch/me.json"
 python3 -c 'import json,sys; assert json.load(open(sys.argv[1]))["email"] == sys.argv[2]' "$scratch/me.json" "$user_email"
 
+engagement_status="$(curl -sS --max-time 10 -o "$scratch/engagement.json" -w '%{http_code}' \
+    -c "$jar" -b "$jar" -H "Content-Type: application/json" -H "X-XSRF-TOKEN: $csrf" \
+    -d '{"name":"CI Session 05","description":"CSRF protected synthetic engagement"}' \
+    "$base/engagements")"
+test "$engagement_status" = 200
+python3 -c 'import json,sys; assert json.load(open(sys.argv[1]))["name"] == "CI Session 05"' "$scratch/engagement.json"
+
 logout_status="$(curl -sS --max-time 10 -o "$scratch/logout.json" -w '%{http_code}' \
     -c "$jar" -b "$jar" -H "X-XSRF-TOKEN: $csrf" -X POST "$base/auth/logout")"
 test "$logout_status" = 200

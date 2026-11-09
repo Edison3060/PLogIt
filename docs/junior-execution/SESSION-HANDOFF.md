@@ -180,3 +180,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:32:08.434Z | Session 05 checkpoint JR-047
 - CSRF JR-046/047 DONE source map + acceptance; DEC-2026-11-09-02 scoped safe tightening of three auth POST exemptions with preflight CSRF bootstrap. JR-043–045 await CI. Next JR-048 add source/client positive tests and real HTTP; release held.
+
+### 2026-11-09T18:33:56.395Z | Session 05 checkpoint JR-048
+- JR-048 IN REVIEW CI pending; three auth POST exemptions removed, frontend preflight and HTTP genuine-token engagement creation added. Auth JR-043–045 unverified. Next JR-049 deny and no mutation. Phase03 stacked, main untouched.
