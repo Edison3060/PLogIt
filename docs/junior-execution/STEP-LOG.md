@@ -546,3 +546,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Changed files:** final STEP-REGISTER evidence text, STEP-LOG (append-only), SESSION-HANDOFF, SESSION-04-EVIDENCE, DECISIONS. No executable source modification at this follow-up; reviewed tracked records, PR #23 body/title updated for whole Phase 02 but remains DRAFT.
 - **Decisions/assumptions:** DEC-2026-11-08-01/02 implemented, DEC-2026-11-06-11 owner production gate pending. INT-001 actual JudgeIt cross-app still PROVISIONAL. Reasonable readiness **READY WITH PROVISIONAL INTEGRATION** for independent Session 05 only, despite draft Phase 02 merge hold. No new production integration claim.
 - **Next:** save controller on control/session-state from Session 04 to READY Session 05 JR-041–050, Phase 03 stacked on unmerged Phase 02 if safe. Stop; no JR-041 work.
+
+### 2026-11-09T18:25:50.156Z | Session 05 | JR-041 | DONE • VERIFIED NO CHANGE
+- Scope/why: inventory live authentication owner and current tests before changing production behavior. Before: NOT STARTED. Starting source SHA `bf2c711c85d20a227fa119dceacf1dc3c4ce4496`.
+- Paths inspected: AuthController, UserService, SecurityConfig, useAuth, frontend lib auth/api, AuthIntegrationTest, CsrfIntegrationTest, api.test.ts; evidence: `SESSION-05-EVIDENCE.md#jr-041`.
+- Expected / observed: register/login/logout/me and bcrypt/session hooks exist. Manual session establishment raises an unverified fixation-rotation question; logout is exempt from CSRF; do not infer tests from configuration alone.
+- Tests: not executed in this inventory JR (static GitHub source inspection only). Positive/negative auth and CSRF tests planned for JR-043/044/048/049, GitHub Actions on pushed branch.
+- Dependencies/decision: Phase 02 release scanner JR-040 IN REVIEW; main CD DEC-11 pending; JudgeIt INT-001 provisional. No API/export code or data changed. Reviewer: Builder Lead. Next JR-042 acceptance spec. Commit: JR-041 numbered checkpoint in branch history.

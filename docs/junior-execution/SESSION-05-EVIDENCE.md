@@ -1,0 +1,7 @@
+# Session 05: Identity and CSRF evidence (JR-041–JR-050)
+
+**Controller:** Session 05 claimed gpt6-session05-2026-11-09T18:23:43.099Z. **Working branch:** `work/plogit-phase-03` stacked on unmerged Phase 02 `bf2c711c85d20a227fa119dceacf1dc3c4ce4496`. Assessed by Builder Lead, no subagents. No production merge/deployment authorization.
+
+## JR-041
+
+**Date:** 2026-11-09T18:25:50.156Z. **Status:** DONE, VERIFIED NO CHANGE (inventory only). **Canonical code at starting SHA:** `bf2c711c85d20a227fa119dceacf1dc3c4ce4496`. Source owners: `backend/src/main/java/io/muzoo/ssc/plogit/web/AuthController.java` (register/login/logout/me), `UserService.java` (bcrypt password hash through `SecurityConfig.passwordEncoder`), `SecurityConfig.java` (server session IF_REQUIRED, migrateSession configured, maxSessions=1), `frontend/src/hooks/useAuth.ts`, `frontend/src/lib/auth.ts`, `frontend/src/lib/api.ts` (credentialed fetch, cookie CSRF header). Tests: `AuthIntegrationTest.java` (register, login, wrong password, authenticated/anonymous me), `CsrfIntegrationTest.java`, `frontend/src/lib/api.test.ts`. The implemented controller manually writes the security context to HttpSession; existing tests do not verify session-ID rotation or reuse of logged-out cookies. Audit/engagement/export out of scope; historical RES specs reference-only. Expected inventory of live owner and tests; observed owners and gaps as stated. Reviewer: Builder Lead. No tests executed at inventory checkpoint; future runtime JR-043/044 must supply fresh CI evidence.
