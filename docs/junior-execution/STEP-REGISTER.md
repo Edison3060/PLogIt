@@ -47,7 +47,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-039 | Reject Compose and healthchecks invalid operation | 04 | DONE | [Session 04 executed CI](https://github.com/Edison3060/PLogIt/actions/runs/42469824649) • missing DB password and disconnected startup rejection PASS | 2026-11-08T10:12:14.837Z |
 | JR-040 | Close Compose and healthchecks verification | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#session-04-final-release-gate-reconciliation) • functional CI PASS; final-head pinned Trivy downloads HTTP 504, PR/phase release IN REVIEW | 2026-11-08T10:12:14.837Z |
 | JR-041 | Inventory Authentication session | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-041) • source/test inventory VERIFIED NO CHANGE at bf2c711c85d2 | 2026-11-09T18:25:50.156Z |
-| JR-042 | Specify Authentication session acceptance | 05 | NOT STARTED | — | — |
+| JR-042 | Specify Authentication session acceptance | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-042) • DEC-2026-11-09-01 • acceptance spec at 84fe75f898a9 | 2026-11-09T18:27:07.394Z |
 | JR-043 | Reproduce Authentication session success | 05 | NOT STARTED | — | — |
 | JR-044 | Reject Authentication session invalid operation | 05 | NOT STARTED | — | — |
 | JR-045 | Close Authentication session verification | 05 | NOT STARTED | — | — |

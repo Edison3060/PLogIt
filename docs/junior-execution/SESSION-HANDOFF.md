@@ -162,3 +162,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-09T18:25:50.156Z | Session 05 checkpoint JR-041
 - Control run gpt6-session05-2026-11-09T18:23:43.099Z IN_PROGRESS; JR-041 DONE source/test inventory. Phase 03 stacked on Phase 02 bf2c711c85d20a227fa119dceacf1dc3c4ce4496; tracking/evidence only, no production release. Last pushed commit: this JR-041 checkpoint (resolve Git history). Next JR-042 authentication acceptance, then real CI positive/negative. Open: DEC-11, Phase 02 JR-040 security scanner, INT-001 provisional.
+
+### 2026-11-09T18:27:07.394Z | Session 05 checkpoint JR-042
+- JR-041 and JR-042 DONE inventory/spec; DEC-2026-11-09-01 chooses focused session fixation verification/fix. No executable tests yet. Last push: JR-042 evidence checkpoint at head in branch history. Next JR-043 positive lifecycle using isolated real CI before DONE; do not merge drafts or main.
