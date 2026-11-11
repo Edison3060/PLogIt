@@ -224,3 +224,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-11T12:41:23.619Z | Session 06 checkpoint JR-056
 - JR-056 DONE source/test inventory: login throttle per-IP only, no account-based cap; generic error/CSRF retained. JR-057 design then implementation/testing JRs-058/059. JR-053–055 runtime proof awaits CI. Production/main hold unchanged.
+
+### 2026-11-11T12:41:30.480Z | Session 06 checkpoint JR-057
+- JR-057 DONE specification DEC-2026-11-11-02: two login buckets (per-account hash across IPs, coarse per-IP), retain per-IP registration, generic errors and full CSRF. JR-058 implementation and positive normal throughput next, JR-059 negative account/other-user isolation. No release/merge yet.

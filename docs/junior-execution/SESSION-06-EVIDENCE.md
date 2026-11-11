@@ -25,3 +25,6 @@
 ## JR-056
 - Auth owner: `AuthRateLimitInterceptor.java`, `AuthRateLimitConfig.java`, `AuthController.java`, `AuthRateLimitIntegrationTest.java` on canonical Phase03. 20 login attempts/60s per remote IP (configurable), 5 registration attempts/600s per IP; in-memory 10,000 key ceiling; rejects X-Forwarded-For spoof. Generic 401/429 and duplicate-registration 202 already covered in existing tests.
 - Gap: no per-account key; same-IP unrelated client can be throttled by small bursts; targeted distributed attacks evade the single IP bucket. Inventory complete without code modifications. DONE source map, tests not executed.
+
+## JR-057
+- DEC-2026-11-11-02 acceptance: normal login throughput of two users sharing remote IP with valid CSRF; user key normalized+SHA-256 (no raw email retained in counters) limited to 3/60s in test (20/60s default), independent coarse remote-IP key at 30/60s in test (200/60s default), registration 2/600s test (5/600s default). Invalid burst → generic 429/Retry-After; unknown/wrong password generic 401, with no username echo or mutation. Normal other user on same IP must remain authenticated; spoofed XFF not accepted as IP proof. Process-local counters need distributed deployment review. Source spec only, tests pending.
