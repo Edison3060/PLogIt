@@ -209,3 +209,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-11T12:36:12.423Z | Session 06 checkpoint JR-051
 - Controller claimed Session06 (run gpt6-session06-2026-11-11T12:32:30.670Z). JR-051 DONE inventory based on canonical Phase03 source and existing integration tests; JR-052 spec next. Working branch work/plogit-phase-03 stacked on unmerged Phase02; source/test not changed; no main/CD/merge. Existing JR-044/045 elapsed-idle acceptance and INT-001 real downstream remain IN REVIEW/provisional.
+
+### 2026-11-11T12:37:44.197Z | Session 06 checkpoint JR-052
+- JR-051/052 DONE source/spec; DEC-2026-11-11-01 chooses targeted RBAC integration tests, not a policy/refactor. JR-053 positive test next; runtime validation pending. Existing Phase03 draft #24 release gates and main production hold unchanged.

@@ -9,3 +9,6 @@
 - Canonical owner: backend `service/{MembershipService,EngagementService}.java`, `web/EngagementController.java` and `EngagementAuthzIntegrationTest.java` at `c173e31e7fb9a6c6bbd3bebf2f9cf436139f8701`; current application code, not planning copy.
 - Active removed members excluded by `existsByEngagementAndUserAndRemovedAtIsNull` / `findByEngagementAndUserAndRemovedAtIsNull`. `assertMember` obscures engagement existence with 404; `assertLeader` distinguishes active nonleader via 403.
 - Test map: member GET 200; outsider 404; removed member GET/log/review denied; leader transfer 204 and nonleader transfer 403; no explicit multi-engagement write/no-mutation combined assertions or leader PUT positive. Verified source only, no executable tests in JR-051. Reviewer Builder Lead. DONE inventory.
+
+## JR-052
+- DEC-2026-11-11-01 acceptance: authenticated GET details by active member; leader-only PUT `{"description":"Updated under leader approval"}` with CSRF; outsider/removed 404, active member leader-action 403; persisted description and audit unchanged on denial. Original roles scoped to distinct engagement records. No source modification, no tests executed; DONE specification.
