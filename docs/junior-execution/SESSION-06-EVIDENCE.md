@@ -18,3 +18,6 @@
 
 ## JR-054
 - `crossEngagementWritesAndRemovedMembershipAreDeniedWithoutMutation`: first engagement leader is outsider to second engagement; GET/PUT there 404; own active MEMBER PUT 403; removed MEMBER own GET/PUT 404; descriptions unchanged, audit row count identical. All PUTs include CSRF to ensure the authorization layer is under test. Corrected JR-053 new JSON string literal escaping here. Test authored; CI pending. IN REVIEW.
+
+## JR-055
+- Closeout pending real execution: JR-053/054 test sources cover positive/negative membership boundary, persisted field and no-audit-mutation claims. No local Maven, Docker or PostgreSQL run yet; mark IN REVIEW until current-head GitHub CI executes and matches assertions. No unverified bug fix or release claim.
