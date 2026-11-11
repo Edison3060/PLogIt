@@ -66,7 +66,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-058 | Reproduce Auth abuse controls success | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-058) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
 | JR-059 | Reject Auth abuse controls invalid operation | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-059) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
 | JR-060 | Close Auth abuse controls verification | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-060) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-061 | Inventory Engagement create/list/detail | 07 | NOT STARTED | — | — |
+| JR-061 | Inventory Engagement create/list/detail | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-061) • verified inventory/spec | 2026-11-11T19:27:44.987Z |
 | JR-062 | Specify Engagement create/list/detail acceptance | 07 | NOT STARTED | — | — |
 | JR-063 | Reproduce Engagement create/list/detail success | 07 | NOT STARTED | — | — |
 | JR-064 | Reject Engagement create/list/detail invalid operation | 07 | NOT STARTED | — | — |
