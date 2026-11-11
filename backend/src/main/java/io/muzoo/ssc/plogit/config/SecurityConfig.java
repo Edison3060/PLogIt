@@ -71,7 +71,6 @@ public class SecurityConfig {
             .authenticationProvider(authenticationProvider)
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf
-                .ignoringRequestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/logout")
                 .csrfTokenRepository(csrfRepo)
                 .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
             )

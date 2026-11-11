@@ -159,3 +159,96 @@ The owner authorized **provisional, documented and replaceable integration assum
 - **Readiness:** READY WITH PROVISIONAL INTEGRATION **for independent development only**. Controller next should be **Session 05 JR-041–JR-050**, `work/plogit-phase-03` stacked on unmerged `work/plogit-phase-02`. Do not create next branch or start next JRs in Session 04. No production deployment. No owner decisions needed for safe isolated development; separate owner approval is mandatory to merge/deploy.
 - **Exact next safe action:** verify controller pointer has been atomically saved on `control/session-state`, then STOP. On newly initiated Session 05 read playbook/control/AGENTS/spec from authoritative branch, inspect actual previous phase and stack. For Phase 02 release, re-run full security CI after scanner CDN restoration; do not remove scanner gates.
 - **Reviewer:** Builder Lead, no subagents, work phases Intake → Strategy → Build → Refine → Handoff. Sign-off required at boundary; no promotion of provisional assumptions.
+
+### 2026-11-09T18:25:50.156Z | Session 05 checkpoint JR-041
+- Control run gpt6-session05-2026-11-09T18:23:43.099Z IN_PROGRESS; JR-041 DONE source/test inventory. Phase 03 stacked on Phase 02 bf2c711c85d20a227fa119dceacf1dc3c4ce4496; tracking/evidence only, no production release. Last pushed commit: this JR-041 checkpoint (resolve Git history). Next JR-042 authentication acceptance, then real CI positive/negative. Open: DEC-11, Phase 02 JR-040 security scanner, INT-001 provisional.
+
+### 2026-11-09T18:27:07.394Z | Session 05 checkpoint JR-042
+- JR-041 and JR-042 DONE inventory/spec; DEC-2026-11-09-01 chooses focused session fixation verification/fix. No executable tests yet. Last push: JR-042 evidence checkpoint at head in branch history. Next JR-043 positive lifecycle using isolated real CI before DONE; do not merge drafts or main.
+
+### 2026-11-09T18:28:11.863Z | Session 05 checkpoint JR-043
+- JR-041/042 DONE, JR-043 IN REVIEW pending actual CI. Focused manual-login session ID rotation and synthetic lifecycle test committed. Next JR-044 expiry/stale-cookie and wrong-password negative controls. Current push: JR-043 numbered commit in branch history; continue only selected ten JRs; release holds unchanged.
+
+### 2026-11-09T18:29:15.078Z | Session 05 checkpoint JR-044
+- JR-041/042 DONE. JR-043/044 IN REVIEW until real CI; stale-cookie expiry not proven by MockMvc alone. Two negative synthetic tests added, no application changes this JR. Latest pushed JR-044 checkpoint, next JR-045 auth closeout. Release gates unchanged.
+
+### 2026-11-09T18:30:22.806Z | Session 05 checkpoint JR-045
+- Authentication JR-041/042 DONE; JR-043/044/045 IN REVIEW until actual full backend/Compose CI. Real HTTP cookie-jar auth smoke added, including old JSESSIONID replay; wall-clock expiry still unverified. Latest JR-045 numbered push; next JR-046 CSRF inventory. Do not merge main.
+
+### 2026-11-09T18:31:12.541Z | Session 05 checkpoint JR-046
+- JR-046 DONE source/tests inventory; auth JR-043–045 remain IN REVIEW pending CI. CSRF exceptions on all three auth POST routes found; all other state mutations guarded by CookieCsrfTokenRepository/header. JR-047 spec and safe scoped correction next, no unsafe main change, #22/#23 drafts.
+
+### 2026-11-09T18:32:08.434Z | Session 05 checkpoint JR-047
+- CSRF JR-046/047 DONE source map + acceptance; DEC-2026-11-09-02 scoped safe tightening of three auth POST exemptions with preflight CSRF bootstrap. JR-043–045 await CI. Next JR-048 add source/client positive tests and real HTTP; release held.
+
+### 2026-11-09T18:33:56.395Z | Session 05 checkpoint JR-048
+- JR-048 IN REVIEW CI pending; three auth POST exemptions removed, frontend preflight and HTTP genuine-token engagement creation added. Auth JR-043–045 unverified. Next JR-049 deny and no mutation. Phase03 stacked, main untouched.
+
+### 2026-11-09T18:34:54.488Z | Session 05 checkpoint JR-049
+- All JR-041–049 have a numbered pushed commit; JR-043–045/048–049 remain IN REVIEW pending CI; JR-041/042/046/047 DONE source/spec. New CSRF negative tests check auth login/register/logout fail-closed and zero engagement mutation in real HTTP probe. Final JR-050 next; do not start Session 06 or merge main.
+
+### 2026-11-09T18:38:04.009Z | Session 05 JR-050 initial closeout / test correction
+- Ten JRs 041–050 individually assessed and pushed once JR-050 commit lands. 041/042/046/047 DONE source/spec; 043–045/048–050 IN REVIEW until new head CI. Run 42675291335 at 1f92076e: Maven 133 tests 5 old auth-rate-limit fixture failures due missing CSRF; frontend/Compose/Semgrep/proxy success. Corrected 12 old test POSTs with csrf() without weakening enforcement. Need fresh backend and all security CI. No production merge/deploy, #22/#23 draft, DEC-11 pending, INT-001 provisional. Next: inspect new-head Actions, update evidence and controller only when safe; never start Session06 in same chat.
+
+## Session 05 FINAL handoff — 2026-11-09T18:42:35.181Z
+- **Controller run:** gpt6-session05-2026-11-09T18:23:43.099Z claimed from READY 05; ten JRs JR-041–050 assessed, each individually numbered/pushed. All work `work/plogit-phase-03` stacked on unmerged Phase02 HEAD `bf2c711c85d20a227fa119dceacf1dc3c4ce4496`. [Draft PR #24](https://github.com/Edison3060/PLogIt/pull/24) base Phase02, never main. Final evidence-only follow-up SHA from branch history; executable SHA `9ba41623dab7319f5b9951d9fff68a75f91b07e8`.
+- **Statuses:** DONE JR-041,042,043,046,047,048,049,050 (8); IN REVIEW JR-044,045 (2), because elapsed idle-session expiry not tested (logout invalidation and stale/reused cookie **were** proven). No blocked local work. No JR-051 execution.
+- **Actual test evidence:** [CI 42675762958](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) at executable HEAD `9ba41623dab7319f5b9951d9fff68a75f91b07e8`: Maven133, frontend18, Compose real auth+CSRF positive/negative/no data mutation and DB failure probes, Semgrep, Trivy filesystem/backend/frontend images, proxy ALL PASS; CD SKIPPED. Historic run 42675291335 5/133 backend test failures due outdated fixtures corrected and preserved in log. Docs-only follow-up not itself executable-code test proof.
+- **Changes/risk:** existing manual login now rotates pre-auth session ID; auth register/login/logout POST require CSRF, browser helper obtains cookie via public /api/health; external direct REST clients must obtain CSRF token first. Explicit production compatibility/owner review required. Existing role scopes, logs, history/audit, privacy and unversioned JSON unaffected. No real JudgeIt integration acceptance; INT-001 provisional.
+- **Release:** PR #24/23/22 DRAFT UNMERGED, production main push CD permission DEC-11 PENDING. Phase02 JR-040 remained IN REVIEW for its own head scanner gate despite green current Phase03 run. Do not main merge/deploy.
+- **Readiness:** READY WITH PROVISIONAL INTEGRATION for independent Session 06 only, NOT Phase03 or production acceptance. Next Session 06 JR-051–JR-060 on SAME Phase03 branch, not within this chat. Recommended independent follow-up: test real elapsed session timeout and re-validate direct-API CSRF compatibility before phase acceptance. Owner may initiate next numbered session after control pointer persisted. Reviewer Builder Lead. Phase: Handoff.
+
+### Master Prompt sign-off (owner acceptance still pending)
+- [ ] Scope and rationale understood; all ten JR source/criteria reviewed
+- [ ] Inputs/errors/real server-side auth+CSRF checks validated, with idle expiry explicitly pending
+- [ ] No secrets, insecure bypasses, unapproved production operation or fake integration
+- [ ] Actual positive, negative, security and regression CI evidence with SHA recorded
+- [ ] Ten JR rows, append-only per-JR logs and handoff saved to phase branch
+- [ ] Owner separately authorizes any future main deployment and phase merge after gates
+- [ ] Owner may open a NEW Session 06 prompt; do not execute JR-051 in this one
+
+### 2026-11-11T12:36:12.423Z | Session 06 checkpoint JR-051
+- Controller claimed Session06 (run gpt6-session06-2026-11-11T12:32:30.670Z). JR-051 DONE inventory based on canonical Phase03 source and existing integration tests; JR-052 spec next. Working branch work/plogit-phase-03 stacked on unmerged Phase02; source/test not changed; no main/CD/merge. Existing JR-044/045 elapsed-idle acceptance and INT-001 real downstream remain IN REVIEW/provisional.
+
+### 2026-11-11T12:37:44.197Z | Session 06 checkpoint JR-052
+- JR-051/052 DONE source/spec; DEC-2026-11-11-01 chooses targeted RBAC integration tests, not a policy/refactor. JR-053 positive test next; runtime validation pending. Existing Phase03 draft #24 release gates and main production hold unchanged.
+
+### 2026-11-11T12:37:52.451Z | Session 06 checkpoint JR-053
+- JR-053 IN REVIEW until Maven/PG CI; positive member GET and leader-only PUT integration assertions pushed. JR-054 cross-engagement/removed/member mutation denial next. No service behavior change.
+
+### 2026-11-11T12:39:40.549Z | Session 06 checkpoint JR-054
+- Negative cross-engagement/member/removed-mutation and audit no-op test authored; JR-053 JSON literal correction included. JR-053/054 IN REVIEW pending executed PG/Maven. JR-055 close/reconcile next.
+
+### 2026-11-11T12:39:52.414Z | Session 06 checkpoint JR-055
+- JR-051/052 DONE, JR-053/054/055 IN REVIEW pending actual PG16 Maven and full CI. Positive and denied authorization tests pushed, no service logic changed. JR-056 auth-abuse owner inventory next.
+
+### 2026-11-11T12:41:23.619Z | Session 06 checkpoint JR-056
+- JR-056 DONE source/test inventory: login throttle per-IP only, no account-based cap; generic error/CSRF retained. JR-057 design then implementation/testing JRs-058/059. JR-053–055 runtime proof awaits CI. Production/main hold unchanged.
+
+### 2026-11-11T12:41:30.480Z | Session 06 checkpoint JR-057
+- JR-057 DONE specification DEC-2026-11-11-02: two login buckets (per-account hash across IPs, coarse per-IP), retain per-IP registration, generic errors and full CSRF. JR-058 implementation and positive normal throughput next, JR-059 negative account/other-user isolation. No release/merge yet.
+
+### 2026-11-11T12:42:50.297Z | Session 06 checkpoint JR-058
+- Auth login account-hash+coarse IP limits implemented on work branch, positive shared-IP two-account test added; JR-058 IN REVIEW pending CI; JR-059 negative burst tests next. Security response/CSRF/registration preserved, no main/CD/merge.
+
+### 2026-11-11T12:43:42.967Z | Session 06 checkpoint JR-059
+- Auth dual-bucket source and positive/negative integration tests pushed through JR-059; JR-058/059 IN REVIEW pending Actions. JR-060 closure and full CI reconcile next. Existing security/release hold and independent JSON export unchanged.
+
+### 2026-11-11T12:45:42.401Z | Session 06 checkpoint JR-060 — ten JR checkpoints pushed, reconciliation pending
+- All JR-051–060 individually assessed and pushed on work/plogit-phase-03. Inventory/spec JR-051/052/056/057 DONE; runtime JR-053/054/055/058/059/060 IN REVIEW until actual latest-head GitHub CI. JR-060 corrected earlier proposed 10× IP threshold to retain the deployed login IP cap 20/60s and add separately configured per-account cap 5/60s (3 in isolated tests), DEC-2026-11-11-03. Do not infer test passes or advance controller before reviewing run results; no production/main/PR merge, INT-001 remains provisional; existing JR-044/045 idle-time acceptance pending.
+
+## Session 06 FINAL handoff — 2026-11-11T12:51:34.102Z
+- **Controller:** claimed gpt6-session06-2026-11-11T12:32:30.670Z, authoritative `control/session-state` before final pointer update. Ten original Phase03B steps **JR-051–JR-060 DONE**, exactly ten JR-labeled commits on `work/plogit-phase-03` from `3fb29745d9f8` (JR-051) to executable `9a197a39eb6c` (JR-060); supplementary final docs-only reconcile commit separate. Previous ancestry phase03 stacks on unmerged phase02, draft [PR #24](https://github.com/Edison3060/PLogIt/pull/24) based on phase02 draft #23, which stacks on phase01 draft #22. None merged to main. No production CD.
+- **Source changes:** engagement leader/member authorization services **verified without modification**; four focused PostgreSQL16 regression tests added for permitted member detail/leader edit, forbidden cross-engagement/removed-member mutation (no DB/audit side effects), normal two-user same-IP login, distributed invalid same-account attempts with unrelated same-IP login allowed. AuthRateLimitInterceptor now uses SHA-256 normalized email account bucket default 5/60s in addition to **unchanged original per-IP 20/60s**; registration 5/600s per-IP unchanged, untrusted forwarded IP ignored. AuthController applies account limit before verification; generic errors+Retry-After, server auth/CSRF/session checks maintained. DEC-2026-11-11-01, -02 and corrective -03 document design and trade-offs. No unversioned JSON export, log history/audit, privacy or app-owned data contract changes.
+- **Executed tests:** source `9a197a39eb6c0945485f9f0b4c1192aefab9bb3c` [full push Actions run 43023154965](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) COMPLETED SUCCESS: **Maven 137/137** (Java21 PostgreSQL16/Testcontainers), **Vitest 18/18** plus frontend lint/build/negative lockfile, isolated real HTTP/Compose and DB failure tests, Semgrep, pinned Trivy filesystem/backend/frontend images and production-proxy validation **ALL PASS**; CD **SKIPPED**. The source was tested in GitHub Actions, **not local Maven/Docker**. Prior current-session cancelled jobs and JR-053 fixture correction are preserved in STEP-LOG; follow-up docs-only SHA not separately executable-code tested.
+- **Remaining holds:** Prior Session05 JR-044/045 **IN REVIEW** for wall-clock idle-session expiration, phase02 JR-040 phase-head scanner acceptance historically unresolved despite newer current source green scanner, phase03 draft #24 and earlier #22/#23 **unmerged**; owner DEC-2026-11-06-11 production CD/main-merge approval withheld; direct non-browser API CSRF bootstrap compatibility review; JudgeIt INT-001 actual real consumer/tenant/media evidence still **PROVISIONAL**. No claim of real cross-app interoperability or production release certification.
+- **Readiness:** **READY WITH PROVISIONAL INTEGRATION** for isolated next increments, not phase merge. Next controller-selected Session **07**, JR-061–JR-070, original Phase04(A) engagement/team workflow, should create/resume `work/plogit-phase-04` **stacked on latest unmerged Phase03 HEAD** after independently verifying new controller and current branch. Do not begin JR-061 in this Session06 chat. Any future PR merge requires accepted phase, CI/security, owner production CD decision; no deployment authorized.
+- **Reviewer:** Builder Lead (no subagents), performed 10 JR-source/spec/tests/record checkpoints and autonomous security review, phase Handoff. Independent evidence: STEP-REGISTER, append-only STEP-LOG, SESSION-06-EVIDENCE, DECISIONS and this handoff. Seek separate owner acceptance only at numbered-session boundary.
+
+### Master Prompt owner sign-off — Session 06
+- [ ] Confirm the exactly ten selected JR scopes/expected results and implemented dual-key auth design
+- [ ] Review full current SHA tests, positive/negative no-mutation security/authorization and retained per-IP limit
+- [ ] Confirm the documented deferred prior idle-session and provisional real JudgeIt integration gates
+- [ ] Check that all ten JR rows/logs/commits and docs-only evidence handoff remain visible and audit-preserving
+- [ ] Approve no production operation; separately decide future phase merge/CD only after all required release gates
+- [ ] Accept saved controller NEXT_SESSION=07 and initiate a separate chat before JR-061–070; STOP here

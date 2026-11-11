@@ -46,26 +46,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-038 | Reproduce Compose and healthchecks success | 04 | DONE | [Session 04 executed CI](https://github.com/Edison3060/PLogIt/actions/runs/42469824649) • actual Compose health/API/SPA/DB persistence PASS | 2026-11-08T10:12:14.837Z |
 | JR-039 | Reject Compose and healthchecks invalid operation | 04 | DONE | [Session 04 executed CI](https://github.com/Edison3060/PLogIt/actions/runs/42469824649) • missing DB password and disconnected startup rejection PASS | 2026-11-08T10:12:14.837Z |
 | JR-040 | Close Compose and healthchecks verification | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#session-04-final-release-gate-reconciliation) • functional CI PASS; final-head pinned Trivy downloads HTTP 504, PR/phase release IN REVIEW | 2026-11-08T10:12:14.837Z |
-| JR-041 | Inventory Authentication session | 05 | NOT STARTED | — | — |
-| JR-042 | Specify Authentication session acceptance | 05 | NOT STARTED | — | — |
-| JR-043 | Reproduce Authentication session success | 05 | NOT STARTED | — | — |
-| JR-044 | Reject Authentication session invalid operation | 05 | NOT STARTED | — | — |
-| JR-045 | Close Authentication session verification | 05 | NOT STARTED | — | — |
-| JR-046 | Inventory CSRF enforcement | 05 | NOT STARTED | — | — |
-| JR-047 | Specify CSRF enforcement acceptance | 05 | NOT STARTED | — | — |
-| JR-048 | Reproduce CSRF enforcement success | 05 | NOT STARTED | — | — |
-| JR-049 | Reject CSRF enforcement invalid operation | 05 | NOT STARTED | — | — |
-| JR-050 | Close CSRF enforcement verification | 05 | NOT STARTED | — | — |
-| JR-051 | Inventory Engagement membership boundary | 06 | NOT STARTED | — | — |
-| JR-052 | Specify Engagement membership boundary acceptance | 06 | NOT STARTED | — | — |
-| JR-053 | Reproduce Engagement membership boundary success | 06 | NOT STARTED | — | — |
-| JR-054 | Reject Engagement membership boundary invalid operation | 06 | NOT STARTED | — | — |
-| JR-055 | Close Engagement membership boundary verification | 06 | NOT STARTED | — | — |
-| JR-056 | Inventory Auth abuse controls | 06 | NOT STARTED | — | — |
-| JR-057 | Specify Auth abuse controls acceptance | 06 | NOT STARTED | — | — |
-| JR-058 | Reproduce Auth abuse controls success | 06 | NOT STARTED | — | — |
-| JR-059 | Reject Auth abuse controls invalid operation | 06 | NOT STARTED | — | — |
-| JR-060 | Close Auth abuse controls verification | 06 | NOT STARTED | — | — |
+| JR-041 | Inventory Authentication session | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-041) • source/test inventory VERIFIED NO CHANGE at bf2c711c85d2 | 2026-11-09T18:25:50.156Z |
+| JR-042 | Specify Authentication session acceptance | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-042) • DEC-2026-11-09-01 • acceptance spec at 84fe75f898a9 | 2026-11-09T18:27:07.394Z |
+| JR-043 | Reproduce Authentication session success | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-043) • [133 Maven + real Compose success](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) at 9ba41623dab7; session ID rotation verified | 2026-11-09T18:42:35.181Z |
+| JR-044 | Reject Authentication session invalid operation | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-044) • [stale/replayed logout cookie denied](https://github.com/Edison3060/PLogIt/actions/runs/42675762958); real elapsed idle timeout not exercised | 2026-11-09T18:42:35.181Z |
+| JR-045 | Close Authentication session verification | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-045) • [live login/logout/me/old cookie denial](https://github.com/Edison3060/PLogIt/actions/runs/42675762958); idle expiry acceptance pending | 2026-11-09T18:42:35.181Z |
+| JR-046 | Inventory CSRF enforcement | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-046) • live filter/SPA owner and exception map, no code change | 2026-11-09T18:31:12.541Z |
+| JR-047 | Specify CSRF enforcement acceptance | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-047) • DEC-2026-11-09-02 all unsafe routes + bootstrap acceptance | 2026-11-09T18:32:08.434Z |
+| JR-048 | Reproduce CSRF enforcement success | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-048) • [live CSRF HTTP+frontend CI](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) at 9ba41623dab7 | 2026-11-09T18:42:35.181Z |
+| JR-049 | Reject CSRF enforcement invalid operation | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-049) • [403 no-token/mismatch, no mutation CI](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) at 9ba41623dab7 | 2026-11-09T18:42:35.181Z |
+| JR-050 | Close CSRF enforcement verification | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-050) • [full green CI](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) after test fixture fix; release still gated | 2026-11-09T18:42:35.181Z |
+| JR-051 | Inventory Engagement membership boundary | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-051) • canonical membership/engagement source and integration test map, no code changed | 2026-11-11T12:36:12.423Z |
+| JR-052 | Specify Engagement membership boundary acceptance | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-052) • DEC-2026-11-11-01 server-only scoped acceptance | 2026-11-11T12:37:44.197Z |
+| JR-053 | Reproduce Engagement membership boundary success | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-053) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
+| JR-054 | Reject Engagement membership boundary invalid operation | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-054) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
+| JR-055 | Close Engagement membership boundary verification | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-055) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
+| JR-056 | Inventory Auth abuse controls | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-056) • IP-only interception and existing generic errors inventoried | 2026-11-11T12:41:23.619Z |
+| JR-057 | Specify Auth abuse controls acceptance | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-057) • DEC-2026-11-11-02 account+coarse IP acceptance | 2026-11-11T12:41:30.480Z |
+| JR-058 | Reproduce Auth abuse controls success | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-058) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
+| JR-059 | Reject Auth abuse controls invalid operation | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-059) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
+| JR-060 | Close Auth abuse controls verification | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-060) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
 | JR-061 | Inventory Engagement create/list/detail | 07 | NOT STARTED | — | — |
 | JR-062 | Specify Engagement create/list/detail acceptance | 07 | NOT STARTED | — | — |
 | JR-063 | Reproduce Engagement create/list/detail success | 07 | NOT STARTED | — | — |
