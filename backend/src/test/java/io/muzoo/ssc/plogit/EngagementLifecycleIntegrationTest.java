@@ -63,4 +63,58 @@ class EngagementLifecycleIntegrationTest extends IntegrationTestBase {
             .andExpect(jsonPath("$.members.length()").value(1))
             .andExpect(jsonPath("$.members[0].role").value("LEADER"));
     }
+
+    @Test
+    void invalidCreateAndUnauthorizedReadLeaveRecordsUnchanged() throws Exception {
+        User owner = createUser("lifecycle-owner@test.local");
+        User outsider = createUser("lifecycle-outsider@test.local");
+        Engagement engagement = createEngagement(owner);
+        long membersBefore = memberRepository.count();
+        long auditBefore = auditLogRepository.count();
+
+        mockMvc.perform(get("/api/engagements").with(asUser(outsider)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(0));
+        mockMvc.perform(get("/api/engagements/" + engagement.getId()).with(asUser(outsider)))
+            .andExpect(status().isNotFound());
+        mockMvc.perform(get("/api/engagements").with(asUser(owner)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(1));
+
+        mockMvc.perform(post("/api/engagements")
+                .with(asUser(outsider)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"name":"","description":"Invalid engagement"}
+                    """))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.message").value("Validation failed"));
+        mockMvc.perform(post("/api/engagements")
+                .with(asUser(outsider)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"name":"Missing description"}
+                    """))
+            .andExpect(status().isBadRequest());
+
+        mockMvc.perform(post("/api/engagements")
+                .with(asUser(outsider))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"name":"Missing CSRF","description":"Denied"}
+                    """))
+            .andExpect(status().isForbidden());
+        mockMvc.perform(post("/api/engagements")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"name":"Anonymous","description":"Denied"}
+                    """))
+            .andExpect(status().isForbidden());
+
+        assertEquals(1, engagementRepository.count());
+        assertEquals(membersBefore, memberRepository.count());
+        assertEquals(auditBefore, auditLogRepository.count());
+        assertEquals(owner.getId(), engagementRepository.findById(engagement.getId()).orElseThrow().getLeader().getId());
+    }
 }

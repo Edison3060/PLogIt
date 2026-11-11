@@ -16,3 +16,8 @@ Controller claim gpt6-session07-2026-11-11T19:22:26.929Z on control/session-stat
 - **Status:** IN REVIEW pending CI, 2026-11-11T19:29:21.475Z. **Test fixture:** `backend/src/test/java/io/muzoo/ssc/plogit/EngagementLifecycleIntegrationTest.java` / `creatorCanCreateListAndFetchSerializedEngagement`.
 - **Expected/actual:** Auth owner POST valid engagement, GET only own list and detail, serialized name/status/dates/LEADER/roster and persisted one engagement/one membership. Synthetic fixture in EngagementLifecycleIntegrationTest.java. Test source authored, runtime PENDING.
 - **Command:** `cd backend && mvn -B clean verify` (NOT EXECUTED at commit). No local Maven/Docker; CI later. **Reviewer:** Builder Lead.
+
+### JR-064
+- **Status:** IN REVIEW pending CI, 2026-11-11T19:29:30.949Z. **Test fixture:** `backend/src/test/java/io/muzoo/ssc/plogit/EngagementLifecycleIntegrationTest.java` / `invalidCreateAndUnauthorizedReadLeaveRecordsUnchanged`.
+- **Expected/actual:** Synthetic outsider GET list empty and GET detail 404; malformed/missing required create 400, missing CSRF and anonymous creation 403, no engagement/member/audit mutation. Duplicate valid engagement names are allowed by current product spec; roadmap duplicate-create rejection remains unverified, DEC-2026-11-11-04. Test source authored, runtime PENDING.
+- **Command:** `cd backend && mvn -B clean verify` (NOT EXECUTED at commit). No local Maven/Docker; CI later. **Reviewer:** Builder Lead.

@@ -258,3 +258,5 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Session 07 2026-11-11T19:27:53.576Z JR-062 DONE inventory/spec, no application change, tests not executed. Branch work/plogit-phase-04 stacked on ff2e2ba0; next JR-063 within selected JR-061–070. Prior phase PRs draft and unmerged, no main merge or production deploy, INT-001 provisional.
 
 - Session07 2026-11-11T19:29:21.475Z JR-063 IN REVIEW. Added `creatorCanCreateListAndFetchSerializedEngagement` in EngagementLifecycleIntegrationTest.java, executable CI pending; no application source changed. Next JR-064, selected JR-061–070. Phase04 stack, no main/CD, INT-001 provisional.
+
+- Session07 2026-11-11T19:29:30.949Z JR-064 IN REVIEW. Added `invalidCreateAndUnauthorizedReadLeaveRecordsUnchanged` in EngagementLifecycleIntegrationTest.java, executable CI pending; no application source changed. Next JR-065, selected JR-061–070. Phase04 stack, no main/CD, INT-001 provisional.
