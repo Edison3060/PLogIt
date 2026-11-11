@@ -66,16 +66,16 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-058 | Reproduce Auth abuse controls success | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-058) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
 | JR-059 | Reject Auth abuse controls invalid operation | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-059) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
 | JR-060 | Close Auth abuse controls verification | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-060) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-061 | Inventory Engagement create/list/detail | 07 | NOT STARTED | — | — |
-| JR-062 | Specify Engagement create/list/detail acceptance | 07 | NOT STARTED | — | — |
-| JR-063 | Reproduce Engagement create/list/detail success | 07 | NOT STARTED | — | — |
-| JR-064 | Reject Engagement create/list/detail invalid operation | 07 | NOT STARTED | — | — |
-| JR-065 | Close Engagement create/list/detail verification | 07 | NOT STARTED | — | — |
-| JR-066 | Inventory Join codes and membership | 07 | NOT STARTED | — | — |
-| JR-067 | Specify Join codes and membership acceptance | 07 | NOT STARTED | — | — |
-| JR-068 | Reproduce Join codes and membership success | 07 | NOT STARTED | — | — |
-| JR-069 | Reject Join codes and membership invalid operation | 07 | NOT STARTED | — | — |
-| JR-070 | Close Join codes and membership verification | 07 | NOT STARTED | — | — |
+| JR-061 | Inventory Engagement create/list/detail | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-061) • source inventory and original owners verified | 2026-11-11T19:41:55.565Z |
+| JR-062 | Specify Engagement create/list/detail acceptance | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-062) • create/list/detail request and authorization contract specified, DEC-04 | 2026-11-11T19:41:55.565Z |
+| JR-063 | Reproduce Engagement create/list/detail success | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-063) • create/list/detail positive API+DB test PASS (CI 141 Maven) • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-064 | Reject Engagement create/list/detail invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-064) • invalid/foreign/CSRF no-mutation tests PASS, duplicate-name rejection unapproved DEC-04 • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-065 | Close Engagement create/list/detail verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-065) • positive/negative CI PASS, original duplicate-valid-name criterion unresolved • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-066 | Inventory Join codes and membership | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-066) • join-code/membership source inventory verified | 2026-11-11T19:41:55.565Z |
+| JR-067 | Specify Join codes and membership acceptance | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-067) • join/revocation acceptance specified, expiry deferred DEC-05 | 2026-11-11T19:41:55.565Z |
+| JR-068 | Reproduce Join codes and membership success | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-068) • generate/redeem single MEMBER + roster positive test PASS (CI 141 Maven) • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-069 | Reject Join codes and membership invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-069) • revoked/unknown/replay no-mutation tests PASS, expiry deferred and concurrent race not tested • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-070 | Close Join codes and membership verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-070) • positive/negative CI PASS, original expiry/race closure still unverified • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
 | JR-071 | Inventory Scope and rules of engagement | 08 | NOT STARTED | — | — |
 | JR-072 | Specify Scope and rules of engagement acceptance | 08 | NOT STARTED | — | — |
 | JR-073 | Reproduce Scope and rules of engagement success | 08 | NOT STARTED | — | — |
