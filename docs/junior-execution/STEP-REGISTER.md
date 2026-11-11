@@ -61,7 +61,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-053 | Reproduce Engagement membership boundary success | 06 | IN REVIEW | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-053) • positive PG integration assertion authored; current-head CI pending | 2026-11-11T12:37:52.451Z |
 | JR-054 | Reject Engagement membership boundary invalid operation | 06 | IN REVIEW | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-054) • cross-engagement and removed-member denial assertions authored; CI pending | 2026-11-11T12:39:40.549Z |
 | JR-055 | Close Engagement membership boundary verification | 06 | IN REVIEW | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-055) • positive/negative PG tests pending execution | 2026-11-11T12:39:52.414Z |
-| JR-056 | Inventory Auth abuse controls | 06 | NOT STARTED | — | — |
+| JR-056 | Inventory Auth abuse controls | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-056) • IP-only interception and existing generic errors inventoried | 2026-11-11T12:41:23.619Z |
 | JR-057 | Specify Auth abuse controls acceptance | 06 | NOT STARTED | — | — |
 | JR-058 | Reproduce Auth abuse controls success | 06 | NOT STARTED | — | — |
 | JR-059 | Reject Auth abuse controls invalid operation | 06 | NOT STARTED | — | — |

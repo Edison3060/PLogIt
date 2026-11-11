@@ -21,3 +21,7 @@
 
 ## JR-055
 - Closeout pending real execution: JR-053/054 test sources cover positive/negative membership boundary, persisted field and no-audit-mutation claims. No local Maven, Docker or PostgreSQL run yet; mark IN REVIEW until current-head GitHub CI executes and matches assertions. No unverified bug fix or release claim.
+
+## JR-056
+- Auth owner: `AuthRateLimitInterceptor.java`, `AuthRateLimitConfig.java`, `AuthController.java`, `AuthRateLimitIntegrationTest.java` on canonical Phase03. 20 login attempts/60s per remote IP (configurable), 5 registration attempts/600s per IP; in-memory 10,000 key ceiling; rejects X-Forwarded-For spoof. Generic 401/429 and duplicate-registration 202 already covered in existing tests.
+- Gap: no per-account key; same-IP unrelated client can be throttled by small bursts; targeted distributed attacks evade the single IP bucket. Inventory complete without code modifications. DONE source map, tests not executed.

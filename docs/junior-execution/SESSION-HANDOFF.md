@@ -221,3 +221,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-11T12:39:52.414Z | Session 06 checkpoint JR-055
 - JR-051/052 DONE, JR-053/054/055 IN REVIEW pending actual PG16 Maven and full CI. Positive and denied authorization tests pushed, no service logic changed. JR-056 auth-abuse owner inventory next.
+
+### 2026-11-11T12:41:23.619Z | Session 06 checkpoint JR-056
+- JR-056 DONE source/test inventory: login throttle per-IP only, no account-based cap; generic error/CSRF retained. JR-057 design then implementation/testing JRs-058/059. JR-053–055 runtime proof awaits CI. Production/main hold unchanged.
