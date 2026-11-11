@@ -75,7 +75,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-067 | Specify Join codes and membership acceptance | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-067) • join flow and non-expiry acceptance specified | 2026-11-11T19:31:29.369Z |
 | JR-068 | Reproduce Join codes and membership success | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-068) • positive test authored, CI pending | 2026-11-11T19:32:38.898Z |
 | JR-069 | Reject Join codes and membership invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-069) • revocation/replay fixture pending CI; expiry deferred | 2026-11-11T19:33:43.644Z |
-| JR-070 | Close Join codes and membership verification | 07 | NOT STARTED | — | — |
+| JR-070 | Close Join codes and membership verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-070) • CI and expiration/race acceptance pending | 2026-11-11T19:34:51.719Z |
 | JR-071 | Inventory Scope and rules of engagement | 08 | NOT STARTED | — | — |
 | JR-072 | Specify Scope and rules of engagement acceptance | 08 | NOT STARTED | — | — |
 | JR-073 | Reproduce Scope and rules of engagement success | 08 | NOT STARTED | — | — |
