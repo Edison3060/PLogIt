@@ -262,3 +262,5 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Session07 2026-11-11T19:29:30.949Z JR-064 IN REVIEW. Added `invalidCreateAndUnauthorizedReadLeaveRecordsUnchanged` in EngagementLifecycleIntegrationTest.java, executable CI pending; no application source changed. Next JR-065, selected JR-061–070. Phase04 stack, no main/CD, INT-001 provisional.
 
 - Session07 2026-11-11T19:30:34.415Z JR-065 IN REVIEW. Close Engagement create/list/detail verification. CI for JR-063/064 pending, duplicate-create semantic review. Next JR-066 on Phase04 stack, no main merge/deploy.
+
+- Session07 2026-11-11T19:30:42.805Z JR-066 DONE. Inventory Join codes and membership. Join-code/membership source inventory verified; no expiry by approved product spec. Next JR-067 on Phase04 stack, no main merge/deploy.
