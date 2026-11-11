@@ -23,19 +23,20 @@ public class AuthRateLimitInterceptor implements HandlerInterceptor {
 
     private final Map<String, Window> attempts = new HashMap<>();
     private final int loginLimit;
-    private final int loginIpLimit;
+    private final int loginAccountLimit;
     private final int registerLimit;
 
     public AuthRateLimitInterceptor(
         @Value("${plogit.auth.rate-limit.login-attempts:20}") int loginLimit,
+        @Value("${plogit.auth.rate-limit.login-account-attempts:5}") int loginAccountLimit,
         @Value("${plogit.auth.rate-limit.registration-attempts:5}") int registerLimit
     ) {
-        if (loginLimit < 1 || registerLimit < 1) {
+        if (loginLimit < 1 || loginAccountLimit < 1 || registerLimit < 1) {
             throw new IllegalArgumentException("Authentication rate limits must be positive");
         }
         this.loginLimit = loginLimit;
-        // Coarse socket-IP cap still limits account rotation without a small shared-NAT lockout.
-        this.loginIpLimit = (int) Math.min(Integer.MAX_VALUE, (long) loginLimit * 10);
+        // Keep the existing per-IP quota unchanged; add a separately configurable account quota.
+        this.loginAccountLimit = loginAccountLimit;
         this.registerLimit = registerLimit;
     }
 
@@ -47,7 +48,7 @@ public class AuthRateLimitInterceptor implements HandlerInterceptor {
 
         String path = request.getRequestURI();
         if ("/api/auth/login".equals(path)) {
-            check("login-ip", request.getRemoteAddr(), loginIpLimit, LOGIN_WINDOW_MILLIS);
+            check("login-ip", request.getRemoteAddr(), loginLimit, LOGIN_WINDOW_MILLIS);
         } else if ("/api/auth/register".equals(path)) {
             check("register", request.getRemoteAddr(), registerLimit, REGISTER_WINDOW_MILLIS);
         }
@@ -60,7 +61,7 @@ public class AuthRateLimitInterceptor implements HandlerInterceptor {
         try {
             byte[] hash = MessageDigest.getInstance("SHA-256")
                 .digest(normalized.getBytes(StandardCharsets.UTF_8));
-            check("login-account", HexFormat.of().formatHex(hash), loginLimit, LOGIN_WINDOW_MILLIS);
+            check("login-account", HexFormat.of().formatHex(hash), loginAccountLimit, LOGIN_WINDOW_MILLIS);
         } catch (NoSuchAlgorithmException ex) {
             throw new IllegalStateException("Required SHA-256 provider unavailable", ex);
         }

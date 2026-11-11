@@ -65,7 +65,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-057 | Specify Auth abuse controls acceptance | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-057) • DEC-2026-11-11-02 account+coarse IP acceptance | 2026-11-11T12:41:30.480Z |
 | JR-058 | Reproduce Auth abuse controls success | 06 | IN REVIEW | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-058) • dual buckets implemented and normal login test authored, CI pending | 2026-11-11T12:42:50.297Z |
 | JR-059 | Reject Auth abuse controls invalid operation | 06 | IN REVIEW | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-059) • distributed burst/peer isolation negative tests authored, CI pending | 2026-11-11T12:43:42.967Z |
-| JR-060 | Close Auth abuse controls verification | 06 | NOT STARTED | — | — |
+| JR-060 | Close Auth abuse controls verification | 06 | IN REVIEW | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-060) • reviewed non-weakened IP quota + account limit; current-head CI required | 2026-11-11T12:45:42.401Z |
 | JR-061 | Inventory Engagement create/list/detail | 07 | NOT STARTED | — | — |
 | JR-062 | Specify Engagement create/list/detail acceptance | 07 | NOT STARTED | — | — |
 | JR-063 | Reproduce Engagement create/list/detail success | 07 | NOT STARTED | — | — |

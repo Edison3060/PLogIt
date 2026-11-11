@@ -34,3 +34,7 @@
 
 ## JR-059
 - `distributedBurstAgainstOneAccountDoesNotBlockUnrelatedSharedIpUser`: three POST /api/auth/login from 192.0.2.30/31/32 with wrong password for same seeded email → expected generic 401; 4th from .33 with spoofed forwarded IP and valid password → expected generic 429/Retry-After, no address in response; different seeded user authenticates from .30 → expected 200, DB user count remains 2. All requests include genuine MockMvc CSRF support; no browser/UI substitute for server auth. Test written; CI PENDING, IN REVIEW.
+
+## JR-060
+- Security review caught and corrected the JR-058 proposed IP quota expansion: **final implementation retains existing IP limit (default 20/60s, test 20), adds independent normalized SHA-256 account bucket (default 5/60s, test 3), leaves registration IP limit untouched (default 5/600s, test 2)**. DEC-2026-11-11-03 documents supersession of earlier 10× proposal; source commit JR-060 contains correction.
+- Positive/negative tests JR-058/059 cover shared IP unrelated account, distributed targeted failures and generic 429/Retry-After/no user mutation; original auth/registration and CSRF tests must still pass. At this checkpoint no current-head CI executed; **IN REVIEW**, no merge or release.

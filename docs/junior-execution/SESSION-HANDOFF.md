@@ -233,3 +233,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-11T12:43:42.967Z | Session 06 checkpoint JR-059
 - Auth dual-bucket source and positive/negative integration tests pushed through JR-059; JR-058/059 IN REVIEW pending Actions. JR-060 closure and full CI reconcile next. Existing security/release hold and independent JSON export unchanged.
+
+### 2026-11-11T12:45:42.401Z | Session 06 checkpoint JR-060 — ten JR checkpoints pushed, reconciliation pending
+- All JR-051–060 individually assessed and pushed on work/plogit-phase-03. Inventory/spec JR-051/052/056/057 DONE; runtime JR-053/054/055/058/059/060 IN REVIEW until actual latest-head GitHub CI. JR-060 corrected earlier proposed 10× IP threshold to retain the deployed login IP cap 20/60s and add separately configured per-account cap 5/60s (3 in isolated tests), DEC-2026-11-11-03. Do not infer test passes or advance controller before reviewing run results; no production/main/PR merge, INT-001 remains provisional; existing JR-044/045 idle-time acceptance pending.

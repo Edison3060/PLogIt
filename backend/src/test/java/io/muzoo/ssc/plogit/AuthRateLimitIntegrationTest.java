@@ -18,7 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(properties = {
-    "plogit.auth.rate-limit.login-attempts=3",
+    "plogit.auth.rate-limit.login-attempts=20",
+    "plogit.auth.rate-limit.login-account-attempts=3",
     "plogit.auth.rate-limit.registration-attempts=2"
 })
 @Import(PostgresTestConfig.class)
