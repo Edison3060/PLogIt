@@ -76,6 +76,40 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void distributedBurstAgainstOneAccountDoesNotBlockUnrelatedSharedIpUser() throws Exception {
+        createUser("targeted@test.local");
+        createUser("unrelated@test.local");
+
+        for (int i = 0; i < 3; i++) {
+            mockMvc.perform(post("/api/auth/login").with(csrf())
+                    .with(from("192.0.2." + (30 + i)))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("{\"email\":\"targeted@test.local\",\"password\":\"wrong-password\"}"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.message").value("Invalid email or password"));
+        }
+
+        String rejected = mockMvc.perform(post("/api/auth/login").with(csrf())
+                .with(from("192.0.2.33"))
+                .header("X-Forwarded-For", "198.51.100.99")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"targeted@test.local\",\"password\":\"password\"}"))
+            .andExpect(status().isTooManyRequests())
+            .andExpect(header().exists("Retry-After"))
+            .andExpect(jsonPath("$.message").value("Too many authentication requests. Try again later"))
+            .andReturn().getResponse().getContentAsString();
+        assertFalse(rejected.contains("targeted@test.local"));
+
+        mockMvc.perform(post("/api/auth/login").with(csrf())
+                .with(from("192.0.2.30"))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"unrelated@test.local\",\"password\":\"password\"}"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.email").value("unrelated@test.local"));
+        assertEquals(2, userRepository.count());
+    }
+
+    @Test
     void registrationIsLimitedBeforeParsingMalformedBodies() throws Exception {
         for (int i = 0; i < 2; i++) {
             mockMvc.perform(post("/api/auth/register").with(csrf())

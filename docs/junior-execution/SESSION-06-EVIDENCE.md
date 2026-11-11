@@ -31,3 +31,6 @@
 
 ## JR-058
 - Implementation `AuthRateLimitInterceptor.checkLoginAccount(email)` normalizes email to lowercase, SHA-256 hash for map key, enforces configured account quota across IPs. Existing servlet interceptor enforces coarse **socket-IP 10× configured login quota**, registration untouched; 429 generic. AuthController calls account check after valid request body before authentication/session mutation. Synthetic normal shared-IP users login with correct password and CSRF, expected 200 both, user count unchanged. No local run; CI PENDING, IN REVIEW.
+
+## JR-059
+- `distributedBurstAgainstOneAccountDoesNotBlockUnrelatedSharedIpUser`: three POST /api/auth/login from 192.0.2.30/31/32 with wrong password for same seeded email → expected generic 401; 4th from .33 with spoofed forwarded IP and valid password → expected generic 429/Retry-After, no address in response; different seeded user authenticates from .30 → expected 200, DB user count remains 2. All requests include genuine MockMvc CSRF support; no browser/UI substitute for server auth. Test written; CI PENDING, IN REVIEW.
