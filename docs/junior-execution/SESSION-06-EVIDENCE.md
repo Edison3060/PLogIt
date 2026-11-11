@@ -28,3 +28,6 @@
 
 ## JR-057
 - DEC-2026-11-11-02 acceptance: normal login throughput of two users sharing remote IP with valid CSRF; user key normalized+SHA-256 (no raw email retained in counters) limited to 3/60s in test (20/60s default), independent coarse remote-IP key at 30/60s in test (200/60s default), registration 2/600s test (5/600s default). Invalid burst → generic 429/Retry-After; unknown/wrong password generic 401, with no username echo or mutation. Normal other user on same IP must remain authenticated; spoofed XFF not accepted as IP proof. Process-local counters need distributed deployment review. Source spec only, tests pending.
+
+## JR-058
+- Implementation `AuthRateLimitInterceptor.checkLoginAccount(email)` normalizes email to lowercase, SHA-256 hash for map key, enforces configured account quota across IPs. Existing servlet interceptor enforces coarse **socket-IP 10× configured login quota**, registration untouched; 429 generic. AuthController calls account check after valid request body before authentication/session mutation. Synthetic normal shared-IP users login with correct password and CSRF, expected 200 both, user count unchanged. No local run; CI PENDING, IN REVIEW.

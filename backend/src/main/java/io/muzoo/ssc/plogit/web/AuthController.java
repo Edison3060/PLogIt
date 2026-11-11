@@ -1,6 +1,7 @@
 package io.muzoo.ssc.plogit.web;
 
 import io.muzoo.ssc.plogit.domain.User;
+import io.muzoo.ssc.plogit.security.AuthRateLimitInterceptor;
 import io.muzoo.ssc.plogit.security.AuthenticatedUser;
 import io.muzoo.ssc.plogit.security.CurrentUser;
 import io.muzoo.ssc.plogit.service.UserService;
@@ -32,10 +33,16 @@ public class AuthController {
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
+    private final AuthRateLimitInterceptor authRateLimitInterceptor;
 
-    public AuthController(UserService userService, AuthenticationManager authenticationManager) {
+    public AuthController(
+        UserService userService,
+        AuthenticationManager authenticationManager,
+        AuthRateLimitInterceptor authRateLimitInterceptor
+    ) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
+        this.authRateLimitInterceptor = authRateLimitInterceptor;
     }
 
     @PostMapping("/register")
@@ -57,6 +64,7 @@ public class AuthController {
         @Valid @RequestBody LoginRequest request,
         HttpServletRequest httpRequest
     ) {
+        authRateLimitInterceptor.checkLoginAccount(request.email());
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
             request.email(),
             request.password()

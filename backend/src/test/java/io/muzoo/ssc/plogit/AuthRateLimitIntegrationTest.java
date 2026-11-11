@@ -32,6 +32,21 @@ class AuthRateLimitIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void normalLoginsForIndependentUsersFromSharedAddressSucceed() throws Exception {
+        createUser("shared-one@test.local");
+        createUser("shared-two@test.local");
+        for (String email : new String[]{"shared-one@test.local", "shared-two@test.local"}) {
+            mockMvc.perform(post("/api/auth/login").with(csrf())
+                    .with(from("192.0.2.19"))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("{\"email\":\"" + email + "\",\"password\":\"password\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value(email));
+        }
+        assertEquals(2, userRepository.count());
+    }
+
+    @Test
     void loginLimitRejectsAttemptsEvenWithSpoofedForwardedAddress() throws Exception {
         createUser("login@test.local");
         for (int i = 0; i < 3; i++) {

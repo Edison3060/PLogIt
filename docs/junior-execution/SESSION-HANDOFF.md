@@ -227,3 +227,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-11T12:41:30.480Z | Session 06 checkpoint JR-057
 - JR-057 DONE specification DEC-2026-11-11-02: two login buckets (per-account hash across IPs, coarse per-IP), retain per-IP registration, generic errors and full CSRF. JR-058 implementation and positive normal throughput next, JR-059 negative account/other-user isolation. No release/merge yet.
+
+### 2026-11-11T12:42:50.297Z | Session 06 checkpoint JR-058
+- Auth login account-hash+coarse IP limits implemented on work branch, positive shared-IP two-account test added; JR-058 IN REVIEW pending CI; JR-059 negative burst tests next. Security response/CSRF/registration preserved, no main/CD/merge.
