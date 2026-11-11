@@ -58,7 +58,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-050 | Close CSRF enforcement verification | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-050) • [full green CI](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) after test fixture fix; release still gated | 2026-11-09T18:42:35.181Z |
 | JR-051 | Inventory Engagement membership boundary | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-051) • canonical membership/engagement source and integration test map, no code changed | 2026-11-11T12:36:12.423Z |
 | JR-052 | Specify Engagement membership boundary acceptance | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-052) • DEC-2026-11-11-01 server-only scoped acceptance | 2026-11-11T12:37:44.197Z |
-| JR-053 | Reproduce Engagement membership boundary success | 06 | NOT STARTED | — | — |
+| JR-053 | Reproduce Engagement membership boundary success | 06 | IN REVIEW | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-053) • positive PG integration assertion authored; current-head CI pending | 2026-11-11T12:37:52.451Z |
 | JR-054 | Reject Engagement membership boundary invalid operation | 06 | NOT STARTED | — | — |
 | JR-055 | Close Engagement membership boundary verification | 06 | NOT STARTED | — | — |
 | JR-056 | Inventory Auth abuse controls | 06 | NOT STARTED | — | — |

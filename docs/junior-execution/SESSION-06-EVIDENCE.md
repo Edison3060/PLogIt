@@ -12,3 +12,6 @@
 
 ## JR-052
 - DEC-2026-11-11-01 acceptance: authenticated GET details by active member; leader-only PUT `{"description":"Updated under leader approval"}` with CSRF; outsider/removed 404, active member leader-action 403; persisted description and audit unchanged on denial. Original roles scoped to distinct engagement records. No source modification, no tests executed; DONE specification.
+
+## JR-053
+- New test: `EngagementAuthzIntegrationTest.activeMemberCanReadAndLeaderCanUpdateSameEngagement`; synthetic leader/member records and isolated test DB; GET /api/engagements/{id} as member expects 200/MEMBER, PUT as leader with CSRF `{"description":"Updated under leader approval"}` expects 200/LEADER and matching database field. Auth/session/CSRF unchanged. Test written, execution PENDING; IN REVIEW.

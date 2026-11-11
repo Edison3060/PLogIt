@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -32,6 +33,30 @@ class EngagementAuthzIntegrationTest extends IntegrationTestBase {
 
     @Autowired
     private MembershipService membershipService;
+
+    @Test
+    void activeMemberCanReadAndLeaderCanUpdateSameEngagement() throws Exception {
+        User leader = createUser("scoped-leader@test.local");
+        User member = createUser("scoped-member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+
+        mockMvc.perform(get("/api/engagements/" + engagement.getId()).with(asUser(member)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.role").value("MEMBER"))
+            .andExpect(jsonPath("$.id").value(engagement.getId()));
+
+        mockMvc.perform(put("/api/engagements/" + engagement.getId())
+                .with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\\"description\\":\\"Updated under leader approval\\"}"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.role").value("LEADER"))
+            .andExpect(jsonPath("$.description").value("Updated under leader approval"));
+
+        assertEquals("Updated under leader approval",
+            engagementRepository.findById(engagement.getId()).orElseThrow().getDescription());
+    }
 
     @Test
     void memberCanViewEngagement() throws Exception {

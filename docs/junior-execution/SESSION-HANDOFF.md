@@ -212,3 +212,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 ### 2026-11-11T12:37:44.197Z | Session 06 checkpoint JR-052
 - JR-051/052 DONE source/spec; DEC-2026-11-11-01 chooses targeted RBAC integration tests, not a policy/refactor. JR-053 positive test next; runtime validation pending. Existing Phase03 draft #24 release gates and main production hold unchanged.
+
+### 2026-11-11T12:37:52.451Z | Session 06 checkpoint JR-053
+- JR-053 IN REVIEW until Maven/PG CI; positive member GET and leader-only PUT integration assertions pushed. JR-054 cross-engagement/removed/member mutation denial next. No service behavior change.
