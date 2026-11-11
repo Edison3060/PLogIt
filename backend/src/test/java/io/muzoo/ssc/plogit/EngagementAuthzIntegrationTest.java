@@ -49,13 +49,49 @@ class EngagementAuthzIntegrationTest extends IntegrationTestBase {
         mockMvc.perform(put("/api/engagements/" + engagement.getId())
                 .with(asUser(leader)).with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\\"description\\":\\"Updated under leader approval\\"}"))
+                .content("{\"description\":\"Updated under leader approval\"}"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.role").value("LEADER"))
             .andExpect(jsonPath("$.description").value("Updated under leader approval"));
 
         assertEquals("Updated under leader approval",
             engagementRepository.findById(engagement.getId()).orElseThrow().getDescription());
+    }
+
+    @Test
+    void crossEngagementWritesAndRemovedMembershipAreDeniedWithoutMutation() throws Exception {
+        User firstLeader = createUser("first-leader@test.local");
+        User secondLeader = createUser("second-leader@test.local");
+        User member = createUser("boundary-member@test.local");
+        Engagement first = createEngagement(firstLeader);
+        Engagement second = createEngagement(secondLeader);
+        EngagementMember membership = addMember(first, member, EngagementRole.MEMBER);
+        long auditsBefore = auditLogRepository.count();
+        String edit = "{\"description\":\"Unauthorized change\"}";
+
+        mockMvc.perform(get("/api/engagements/" + second.getId()).with(asUser(firstLeader)))
+            .andExpect(status().isNotFound());
+        mockMvc.perform(put("/api/engagements/" + second.getId())
+                .with(asUser(firstLeader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(edit))
+            .andExpect(status().isNotFound());
+        mockMvc.perform(put("/api/engagements/" + first.getId())
+                .with(asUser(member)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(edit))
+            .andExpect(status().isForbidden());
+
+        membership.setRemovedAt(Instant.now());
+        memberRepository.save(membership);
+        mockMvc.perform(get("/api/engagements/" + first.getId()).with(asUser(member)))
+            .andExpect(status().isNotFound());
+        mockMvc.perform(put("/api/engagements/" + first.getId())
+                .with(asUser(member)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(edit))
+            .andExpect(status().isNotFound());
+
+        assertEquals("test description", engagementRepository.findById(first.getId()).orElseThrow().getDescription());
+        assertEquals("test description", engagementRepository.findById(second.getId()).orElseThrow().getDescription());
+        assertEquals(auditsBefore, auditLogRepository.count());
     }
 
     @Test

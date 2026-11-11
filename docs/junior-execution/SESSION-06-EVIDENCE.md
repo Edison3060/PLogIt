@@ -15,3 +15,6 @@
 
 ## JR-053
 - New test: `EngagementAuthzIntegrationTest.activeMemberCanReadAndLeaderCanUpdateSameEngagement`; synthetic leader/member records and isolated test DB; GET /api/engagements/{id} as member expects 200/MEMBER, PUT as leader with CSRF `{"description":"Updated under leader approval"}` expects 200/LEADER and matching database field. Auth/session/CSRF unchanged. Test written, execution PENDING; IN REVIEW.
+
+## JR-054
+- `crossEngagementWritesAndRemovedMembershipAreDeniedWithoutMutation`: first engagement leader is outsider to second engagement; GET/PUT there 404; own active MEMBER PUT 403; removed MEMBER own GET/PUT 404; descriptions unchanged, audit row count identical. All PUTs include CSRF to ensure the authorization layer is under test. Corrected JR-053 new JSON string literal escaping here. Test authored; CI pending. IN REVIEW.
