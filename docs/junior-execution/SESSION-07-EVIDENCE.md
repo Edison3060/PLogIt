@@ -21,3 +21,7 @@ Controller claim gpt6-session07-2026-11-11T19:22:26.929Z on control/session-stat
 - **Status:** IN REVIEW pending CI, 2026-11-11T19:29:30.949Z. **Test fixture:** `backend/src/test/java/io/muzoo/ssc/plogit/EngagementLifecycleIntegrationTest.java` / `invalidCreateAndUnauthorizedReadLeaveRecordsUnchanged`.
 - **Expected/actual:** Synthetic outsider GET list empty and GET detail 404; malformed/missing required create 400, missing CSRF and anonymous creation 403, no engagement/member/audit mutation. Duplicate valid engagement names are allowed by current product spec; roadmap duplicate-create rejection remains unverified, DEC-2026-11-11-04. Test source authored, runtime PENDING.
 - **Command:** `cd backend && mvn -B clean verify` (NOT EXECUTED at commit). No local Maven/Docker; CI later. **Reviewer:** Builder Lead.
+
+### JR-065
+- **Status:** IN REVIEW (2026-11-11T19:30:34.415Z). **Expected/actual:** Compared JR-063 positive serialization/persisted-role fixture with JR-064 negative outsider, validation, CSRF and no-mutation fixture, both in EngagementLifecycleIntegrationTest.java. Actual Maven/PostgreSQL CI result not yet inspected. Source owner and product semantics unchanged; original duplicate valid create rejection ambiguous because names are intentionally nonunique (DEC-2026-11-11-04). Therefore not DONE; close only when executed tests pass and duplicate acceptance resolved. Reviewer Builder Lead.
+- **Tests:** Inspection only for this JR; actual CI pending at checkpoint; no claim of a runtime pass. Reviewer Builder Lead.

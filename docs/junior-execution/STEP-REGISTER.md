@@ -70,7 +70,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-062 | Specify Engagement create/list/detail acceptance | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-062) • verified inventory/spec | 2026-11-11T19:27:53.576Z |
 | JR-063 | Reproduce Engagement create/list/detail success | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-063) • test authored, CI pending | 2026-11-11T19:29:21.475Z |
 | JR-064 | Reject Engagement create/list/detail invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-064) • test authored, CI pending, duplicate-name policy debt | 2026-11-11T19:29:30.949Z |
-| JR-065 | Close Engagement create/list/detail verification | 07 | NOT STARTED | — | — |
+| JR-065 | Close Engagement create/list/detail verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-065) • CI and duplicate semantics pending | 2026-11-11T19:30:34.415Z |
 | JR-066 | Inventory Join codes and membership | 07 | NOT STARTED | — | — |
 | JR-067 | Specify Join codes and membership acceptance | 07 | NOT STARTED | — | — |
 | JR-068 | Reproduce Join codes and membership success | 07 | NOT STARTED | — | — |
