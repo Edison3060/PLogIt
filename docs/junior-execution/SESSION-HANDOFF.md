@@ -268,3 +268,5 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Session07 2026-11-11T19:31:29.369Z JR-067 DONE join-code acceptance specified. Product-approved v1 does NOT expire codes; JR-069 expired-code criterion remains review debt. DB unique member key; synthetic tests JR-068/069 next, CI pending. No main/production.
 
 - Session07 2026-11-11T19:32:38.898Z JR-068 IN REVIEW: positive code-generation/member-join regression authored at JoinCodeWorkflowIntegrationTest, runtime pending. Next JR-069 negative code revocation/replay, no source change or production.
+
+- Session07 2026-11-11T19:33:43.644Z JR-069 IN REVIEW. Negative join-code/replay/authorization regression added; pending CI. Expiration intentionally not implemented in v1 per product spec, concurrent race HTTP status not exercised. Next JR-070. No production/main changes.

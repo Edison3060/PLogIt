@@ -59,4 +59,74 @@ class JoinCodeWorkflowIntegrationTest extends IntegrationTestBase {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.members.length()").value(2));
     }
+
+    @Test
+    void revokedUnknownAndReplayedCodesCannotAddMembershipOrAudit() throws Exception {
+        User leader = createUser("join-denial-leader@test.local");
+        User existingMember = createUser("join-denial-member@test.local");
+        User joiner = createUser("join-denial-joiner@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, existingMember, EngagementRole.MEMBER);
+
+        mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/join-code")
+                .with(asUser(existingMember)).with(csrf()))
+            .andExpect(status().isForbidden());
+        mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/join-code")
+                .with(asUser(joiner)).with(csrf()))
+            .andExpect(status().isNotFound());
+
+        mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/join-code")
+                .with(asUser(leader)).with(csrf()))
+            .andExpect(status().isOk());
+        String oldCode = engagementRepository.findById(engagement.getId()).orElseThrow().getCurrentJoinCode();
+
+        mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/join-code")
+                .with(asUser(leader)).with(csrf()))
+            .andExpect(status().isOk());
+        String newCode = engagementRepository.findById(engagement.getId()).orElseThrow().getCurrentJoinCode();
+        assertNotNull(joinCodeRepository.findByCode(oldCode).orElseThrow().getRevokedAt());
+
+        long auditsBefore = auditLogRepository.count();
+
+        mockMvc.perform(post("/api/join")
+                .with(asUser(joiner)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"code\":\"" + oldCode + "\"}"))
+            .andExpect(status().isBadRequest());
+        mockMvc.perform(post("/api/join")
+                .with(asUser(joiner)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"code":"NOT-A-REAL-CODE"}
+                    """))
+            .andExpect(status().isBadRequest());
+        mockMvc.perform(post("/api/join")
+                .with(asUser(joiner))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"code\":\"" + newCode + "\"}"))
+            .andExpect(status().isForbidden());
+
+        assertEquals(2, memberRepository.findByEngagement(engagement).size());
+        assertEquals(auditsBefore, auditLogRepository.count());
+
+        mockMvc.perform(post("/api/join")
+                .with(asUser(joiner)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"code\":\"" + newCode + "\"}"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.role").value("MEMBER"));
+
+        long auditAfterJoin = auditLogRepository.count();
+        mockMvc.perform(post("/api/join")
+                .with(asUser(joiner)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"code\":\"" + newCode + "\"}"))
+            .andExpect(status().isConflict());
+
+        assertEquals(3, memberRepository.findByEngagement(engagement).size());
+        assertEquals(EngagementRole.MEMBER,
+            memberRepository.findByEngagementAndUser(engagement, joiner).orElseThrow().getRole());
+        assertEquals(auditAfterJoin, auditLogRepository.count());
+        assertEquals(auditsBefore + 1, auditAfterJoin);
+    }
 }

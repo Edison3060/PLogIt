@@ -39,3 +39,8 @@ Controller claim gpt6-session07-2026-11-11T19:22:26.929Z on control/session-stat
 - **Status:** IN REVIEW (2026-11-11T19:32:38.898Z). Fixture: `JoinCodeWorkflowIntegrationTest.generatedCodeCreatesExactlyOneMemberWithCorrectRole`.
 - **Expected/actual:** Auth leader with CSRF generates code, authentic second account redeems as role MEMBER, verifies single new membership with joinedVia=code, own engagement list and leader roster; isolated Testcontainers-backed MockMvc test authored, expected API shape and persisted count. Runtime NOT EXECUTED until GitHub CI; no application source change.
 - **Runtime:** `cd backend && mvn -B clean verify` not yet run. **Reviewer:** Builder Lead.
+
+### JR-069
+- **Status:** IN REVIEW 2026-11-11T19:33:43.644Z. Test `JoinCodeWorkflowIntegrationTest.revokedUnknownAndReplayedCodesCannotAddMembershipOrAudit`.
+- **Expected/actual:** Auth leader regenerated code; old code revoked and rejected 400, unknown 400, missing CSRF 403, active member code generation 403, outsider 404, current code join 200 MEMBER and same-account replay 409 with unchanged membership count/audit. Test code written in JoinCodeWorkflowIntegrationTest.revokedUnknownAndReplayedCodesCannotAddMembershipOrAudit, PostgreSQL16 CI not yet executed. Product v1 explicitly non-expiring so expired-code denial untestable by design; real concurrent race response also not yet proved. DEC-2026-11-11-05. No service/schema/export change.
+- **Runtime:** Not yet executed; pending `cd backend && mvn -B clean verify` (CI). Concurrent race and expiry separate acceptance debt; no false pass. Reviewer Builder Lead.
