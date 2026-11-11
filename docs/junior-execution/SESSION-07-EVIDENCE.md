@@ -11,3 +11,8 @@ Controller claim gpt6-session07-2026-11-11T19:22:26.929Z on control/session-stat
 - Status DONE as of 2026-11-11T19:27:53.576Z; reviewer Builder Lead.
 - Expected POST /api/engagements with name, description and optional dates yields 200 ACTIVE, LEADER role and exactly one creator membership; GET collection only active-member summaries, GET /{id} authorized detail/roster. Invalid body 400, missing CSRF 403, unauthenticated 403, outsider detail 404 and list excludes foreign record, all with no mutations. Product spec explicitly allows independently created engagements; no unique name or idempotency key. Therefore do not silently reject duplicate names although original JR-064 ambiguous duplicate-create asks for denial; flag that acceptance gap IN REVIEW pending separate product decision. Recommend focused test-only regression, DEC-2026-11-11-04. Reviewer Builder Lead.
 - Actual validation: source/doc inspection only, no runtime tests; no source modification. JR commit in branch history.
+
+### JR-063
+- **Status:** IN REVIEW pending CI, 2026-11-11T19:29:21.475Z. **Test fixture:** `backend/src/test/java/io/muzoo/ssc/plogit/EngagementLifecycleIntegrationTest.java` / `creatorCanCreateListAndFetchSerializedEngagement`.
+- **Expected/actual:** Auth owner POST valid engagement, GET only own list and detail, serialized name/status/dates/LEADER/roster and persisted one engagement/one membership. Synthetic fixture in EngagementLifecycleIntegrationTest.java. Test source authored, runtime PENDING.
+- **Command:** `cd backend && mvn -B clean verify` (NOT EXECUTED at commit). No local Maven/Docker; CI later. **Reviewer:** Builder Lead.
