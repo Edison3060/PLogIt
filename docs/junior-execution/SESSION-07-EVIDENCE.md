@@ -34,3 +34,8 @@ Controller claim gpt6-session07-2026-11-11T19:22:26.929Z on control/session-stat
 - **Status:** DONE, 2026-11-11T19:31:29.369Z; reviewer Builder Lead.
 - **Expected/actual:** Original JR-067 acceptance: leader with CSRF POST /api/engagements/{id}/join-code generates 200 {code,engagementId}, active nonleader 403, outsider 404. Authenticated POST /api/join {code} creates exactly one MEMBER role and roster/list record; regeneration revokes prior; bad/revoked 400 no mutation; existing active member replay 409 no duplicate; removed member rejoin preserves row. Existing engagement_user DB unique constraint protects duplicate persistence, but true concurrent race HTTP response still needs proof. PLogIt product spec Section 3 says v1 join codes do not expire, optional expiration postponed; no expiry field in JoinCode. Recommend tests of supported behavior without introducing unapproved expiration; original JR-069 expired-code criterion remains IN REVIEW pending product scope approval. Decision DEC-2026-11-11-05.
 - **Runtime:** no tests executed here. Next test fixtures JR-068/069, original expired-case deferred per product spec.
+
+### JR-068
+- **Status:** IN REVIEW (2026-11-11T19:32:38.898Z). Fixture: `JoinCodeWorkflowIntegrationTest.generatedCodeCreatesExactlyOneMemberWithCorrectRole`.
+- **Expected/actual:** Auth leader with CSRF generates code, authentic second account redeems as role MEMBER, verifies single new membership with joinedVia=code, own engagement list and leader roster; isolated Testcontainers-backed MockMvc test authored, expected API shape and persisted count. Runtime NOT EXECUTED until GitHub CI; no application source change.
+- **Runtime:** `cd backend && mvn -B clean verify` not yet run. **Reviewer:** Builder Lead.

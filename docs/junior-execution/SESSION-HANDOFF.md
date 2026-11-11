@@ -266,3 +266,5 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Session07 2026-11-11T19:30:42.805Z JR-066 DONE. Inventory Join codes and membership. Join-code/membership source inventory verified; no expiry by approved product spec. Next JR-067 on Phase04 stack, no main merge/deploy.
 
 - Session07 2026-11-11T19:31:29.369Z JR-067 DONE join-code acceptance specified. Product-approved v1 does NOT expire codes; JR-069 expired-code criterion remains review debt. DB unique member key; synthetic tests JR-068/069 next, CI pending. No main/production.
+
+- Session07 2026-11-11T19:32:38.898Z JR-068 IN REVIEW: positive code-generation/member-join regression authored at JoinCodeWorkflowIntegrationTest, runtime pending. Next JR-069 negative code revocation/replay, no source change or production.
