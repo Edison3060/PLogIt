@@ -206,3 +206,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 - [ ] Ten JR rows, append-only per-JR logs and handoff saved to phase branch
 - [ ] Owner separately authorizes any future main deployment and phase merge after gates
 - [ ] Owner may open a NEW Session 06 prompt; do not execute JR-051 in this one
+
+### 2026-11-11T12:36:12.423Z | Session 06 checkpoint JR-051
+- Controller claimed Session06 (run gpt6-session06-2026-11-11T12:32:30.670Z). JR-051 DONE inventory based on canonical Phase03 source and existing integration tests; JR-052 spec next. Working branch work/plogit-phase-03 stacked on unmerged Phase02; source/test not changed; no main/CD/merge. Existing JR-044/045 elapsed-idle acceptance and INT-001 real downstream remain IN REVIEW/provisional.
