@@ -1,3 +1,9 @@
+# Swarm-branch experiment precedence
+
+When checked out on the exact branch `Swarm`, `docs/swarm/SWARM-PLAYBOOK.md` and `docs/swarm/SWARM-CONTROL.md` govern session selection, native coordinator/worker/verifier delegation, and branch writes. This supersedes the solo-session instructions below that select `control/session-state` or require direct single-agent coding. The original app, security, evidence and release gates still apply. Never merge the Swarm experiment to main.
+
+---
+
 # PLogIt: bounded development session protocol
 
 ## Owner-approved autonomy, provisional cross-app progress, and readiness (current session policy)
