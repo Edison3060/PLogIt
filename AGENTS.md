@@ -1,3 +1,9 @@
+# Swarm branch override (applies ONLY when current Git branch is `Swarm`)
+
+On `Swarm`, first read `docs/swarm/SWARM-PLAYBOOK.md`, `docs/swarm/SWARM-CONTROL.md`, and `docs/swarm/START-PROMPT.md`. They override older solo Builder Lead rules that require `control/session-state` or `USE_SUBAGENTS: NO`. The native Antigravity `/swarm` coordinator assigns implementation to isolated workers, includes independent verification, integrates and pushes JR checkpoints exclusively to `Swarm`, and updates the separate Swarm controller. Never edit or merge to `main`, `control/session-state`, the legacy `work/*` branches, or sibling apps. Legacy controllers and phase PR acceptance remain untouched. Read the original product Rules to Follow and enforce security/test gates.
+
+---
+
 # PLogIt Builder Lead: always-read instructions
 
 **Model-agnostic:** The user chooses the Session Lead model outside the repository and optionally supplies SUBAGENT_MODEL for subagents. These instructions do not require a specific provider, model family, or coding platform.
