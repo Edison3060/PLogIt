@@ -1,283 +1,32 @@
 # PLogIt: self-contained latest session handoff
 
-## Session 02 CLOSED for JR evidence, 2026-11-06 UTC
+**Current status:** Not started. No JR execution is evidenced by these planning files. This is a handoff template that must be rewritten and pushed after **each JR checkpoint**, not only at the end of a session.
 
-**Phase 01 PR created:** [DRAFT #22](https://github.com/Edison3060/PLogIt/pull/22), head `3650337328c84b58706559e8b77709fd47f72dac` at PR creation, base `main`, **OPEN, NOT MERGED**. CI on this head began in [PR run 42227937371](https://github.com/Edison3060/PLogIt/actions/runs/42227937371) and [push run 42227865693](https://github.com/Edison3060/PLogIt/actions/runs/42227865693): backend, frontend, Semgrep and proxy jobs SUCCESS, Trivy still IN PROGRESS when inspected. This entry is a dated observation; the post-PR tracking commit itself requires new head CI before final phase acceptance. Release/merge remains BLOCKED pending DEC-2026-11-06-11 and all mandatory checks. No deployment performed.
-
-
-- **Verdict:** **READY WITH PROVISIONAL INTEGRATION** for safe next-session development only. All ten JR-011–020 source-baseline tasks DONE, VERIFIED NO APPLICATION CHANGE. JR-001–010 also DONE. The Phase 01 PR **remains unmerged**, not a release sign-off.
-- **Branch:** `work/plogit-phase-01`; ten JR-numbered pushed checkpoints `d4a40c2`, `67f2833`, `58f0dcd`, `469cf2e`, `550736f`, `e9da2e5`, `7a37643`, `db4610c`, `604c27a`, `cb92585`; JR-020 SHA `cb925857869aa48003a213308ccd3b3063ef08d9`. Safe post-JR two-parent merge reconciles newer main owner policy `0fce5181a2265af5b37a8621d0156eb2eace21f8`; resolve current branch HEAD for merge SHA.
-- **Executed evidence:** 33/33 structural UI/API checks, 7/7 synthetic decision register checks, 6/6 synthetic invalid-assumption checks. Pre-session phase CI [42212527183](https://github.com/Edison3060/PLogIt/actions/runs/42212527183) green (backend/frontend/SAST/Trivy/proxy, CD skipped); JR-020/current reconciliation head CI result must be inspected separately. No local Maven/browser/Postgres run.
-- **Real integrations:** `INTEGRATION-ASSUMPTIONS.md` INT-001 PROVISIONAL; mock bridge PR #21 OPEN, 12/12 mock tests PASS (run 42212049183), real JudgeIt ingestion/tenant mapping/evidence bytes **PENDING**. No producer schema change.
-- **Pending owner decisions:** DEC-06..10 product/tenant/privacy/stack priorities; DEC-11 production-safe `main` merge. Approved APT CVE hotfix is on phase branch; separate PR #20 OPEN. Merging to main can trigger production CD, so **DO NOT MERGE OR DEPLOY** without separate authorization and green current-head mandatory checks.
-- **Next exact step:** Open/keep Phase 01 **draft** PR, check head CI and document pending safety gate. Owner may start **SESSION_NUMBER: 03 (JR-021–JR-030)** in a NEW authorized session for independent safe local engineering; use `work/plogit-phase-02` with an explicit **stacked base from current `work/plogit-phase-01`** while Phase 01 PR remains unmerged, per updated SESSION-PROTOCOL. Do not mark Phase 01 accepted or deploy, and reconcile stacked ancestry after a safe eventual merge. STOP after Session 02.
-
-## Master Prompt sign-off (owner pending)
-
-- [ ] I understand what the source inventory and 10 JR checkpoints do.
-- [ ] I can explain chosen no-rebuild approach, 33/7/6 source/synthetic tests and their limits.
-- [ ] Real auth/CSRF/leader restrictions and errors remain enforced in existing code and test suite, not inferred from UI alone.
-- [ ] No secrets, insecure shortcuts, production deployment or fabricated external integration.
-- [ ] Ground truth, CI SHAs, failed/skipped/pending tests and decision log recorded.
-- [ ] All ten JR rows updated, commits pushed, handoff and INT-001 saved.
-- [ ] Owner accepts phase PR release hold and authorizes Session 03 separately.
-
-## Archived Session 01 handoff
-
-**Session 01 (Phase 01A) CLOSED, 2026-11-06 UTC.** Builder Lead executed directly (`USE_SUBAGENTS=NO`). Authorized scope JR-001–JR-010; **all 10 assessed DONE for their scoped acceptance, VERIFIED NO CHANGE**. Application source untouched. **No PR, merge or production deploy**. Session 02 requires new owner prompt.
-
-| Field | Complete handoff |
+| Field | Current value |
 |---|---|
-| Canonical source | `Edison3060/PLogIt`, starting main `852cfbaa6682de8e99895a63c09515ea659e4b94`; historical review `28aa1561cb59637e954a08caf2a2ed068178a9fb` |
-| GitHub phase branch | `work/plogit-phase-01`; ten JR-numbered checkpoints pushed, plus this JR-010 closure follow-up |
-| Last JR | JR-010 DONE for product boundary acceptance; overall CI exception logged, not concealed |
-| JR statuses | JR-001, 002, 003, 004, 005, 006, 007, 008, 009, 010: **DONE / VERIFIED NO CHANGE** |
-| Last fully reviewed pushed checkpoint before closeout | `ec8f789a95b7d48f17b478b1cb518f91a7bad126`; closeout commit advances HEAD; always inspect GitHub branch ref for current pushed SHA |
-| Source provenance | Canonical vs frozen RES snapshot `596f8a1ad0997f2cdacfcc859107f3b642e2e545`: 185/185 application Git blob matches, zero app divergence, six docs-only commits since 28aa156 |
-| Static source checks | 9/9 read-only contract assertions passed; no scoring/finding/ticket endpoints or fields introduced |
-| Actual runtime tests | GitHub Actions https://github.com/Edison3060/PLogIt/actions/runs/42206996982, `ec8f789a95b7d48f17b478b1cb518f91a7bad126`: `mvn -B verify` 125/125 PASS, `npm test` 18/18 PASS; frontend lint/build, Semgrep and proxy validation PASS |
-| **Failed CI check** | Trivy backend image scan FAIL (CVE-2026-109518, HIGH, Ubuntu 26.04 apt/libapt-pkg7.0 3.2.0; fixed 3.2.1ubuntu0.1). Frontend image vulnerability scans skipped. Overall workflow **FAILURE** |
-| Security decision | DEC-2026-11-06-03: focused hotfix implementation owner-approved and CI-green in [PR #20](https://github.com/Edison3060/PLogIt/pull/20); production release/merge **NOT authorized** |
-| Phase PR / merge | **None** in odd session; Phase 01B JR-011–020 and full green security/acceptance checks required before phase PR merge |
-| Source / data change | **Zero** application code, JSON schema, auth, tenancy, review-state, audit, or deployment modifications; only `docs/junior-execution/` tracking |
-| Work phase | Handoff / awaiting owner sign-off |
-| Exact next safe action | Stop. PR #20 may merge only after separately authorized safe deployment/release path. To start new development work, owner explicitly starts Session 02 at JR-011; reconcile hotfix branch into Phase 01 branch without production release |
-
-## Last-session work and decisions
-
-Read `AGENTS.md`, `planning/README.md`, all hot junior execution guidance, original Phase 01 roadmap, mirrored suite/product specs, Master Prompt, current backend/frontend source, tests and original RES archive. Confirmed 185 matching source blobs. Preserved the capture-first PLogIt boundary: members create activity logs, leader reviews/exports; JudgeIt owns findings and scoring, PatchIt remediation, GaugeIt metrics. Accepted no code changes under DEC-2026-11-06-01 and DEC-2026-11-06-02. Documented inherited HIGH APT CVE security failure under pending DEC-2026-11-06-03.
-
-## Handoff rules and repeatable test commands
-
-Run `cd backend && mvn -B verify` (CI: 125 passing) and `cd frontend && npm ci && npm run lint --if-present && npm run build && npm test` (CI: 18 passing), plus pinned-image build and `trivy image --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed plogit-backend:ci` (CI **FAILED**). Do not assume current local execution: these were run by GitHub Actions, not the disconnected sandbox. Do not claim JudgeIt ingest integration or self-contained attachment evidence. Keep JSON export APPROVED default/optional EXPORTED/attachmentFilenames and leader-only side effects. Check code and CI SHA before resuming. No merged phase; no production authorization.
-
-## Master Prompt session sign-off pending
-
-- [ ] I understand the changes and why the approach was selected.
-- [ ] Inputs validated, error paths and server-side controls checked.
-- [ ] No secrets, insecure shortcuts or unverified claims.
-- [ ] Actual tests, failed security gate and sources are recorded.
-- [ ] All ten JR rows assessed; log/decisions/handoff saved to GitHub.
-- [ ] Owner accepted the unresolved CVE decision path.
-- [ ] Owner approved beginning **Session 02** in a separate prompt.
-
-## Authorized post-session security fix (2026-11-06)
-
-Owner authorized the targeted correction of CVE-2026-109518 (not a new JR execution). Separate `fix/ubuntu-apt-cve-2026-109518` commit `5c5657aa0997a53a6926ebd03375f06d776f9bc1`, [PR #20](https://github.com/Edison3060/PLogIt/pull/20). **CI PASS** at [run 42208728367](https://github.com/Edison3060/PLogIt/actions/runs/42208728367): backend 125 tests, frontend 18, Semgrep, proxy, container image builds/healthchecks, Trivy backend and frontend image scans. The Dockerfile retains a pinned Temurin base and fail-closed APT 3.2.1ubuntu0.1 verification. The **main** branch still does not contain this fix; **PR is OPEN, unmerged**, because a main push may trigger automatic production CD and deployment authorization is withheld.
-
-**No JR-011 or Session 02 work was performed.** JR-001–JR-010 historical source-baseline evidence and statuses remain unchanged. Phase 01 branch has not imported the hotfix; in a future owner-authorized session, incorporate the security fix safely, re-run all checks and observe the main deployment gate before any merge. The post-session tracking checkpoint updates only this repository's execution docs.
-
-## Standing owner guidance: unbuilt downstream applications (2026-11-06)
-The owner authorized **provisional, documented and replaceable integration assumptions** when PLogIt implementation would otherwise stall waiting for JudgeIt, PatchIt or GaugeIt. Reference DEC-2026-11-06-04 and `docs/integrations/PROVISIONAL-SUITE-CONTRACTS.md`. Preserve the existing unversioned PLogIt export and role/privacy guarantees; implement consumer-side opt-in mapping and synthetic contract tests; never claim live cross-repo interoperability before the other apps exist. **Do not mark a future JR BLOCKED merely because another app is not built**, if local work with provisional adapters is possible. This instruction does not authorize Session 02 JR-011–020 or any production merge/deploy. Feature proof branch: `feat/plogit-provisional-handoff` (separate; user will merge later).
-
-## Provisional downstream integration proof and latest test evidence (2026-11-06)
-**Owner decision DEC-2026-11-06-04 is active.** Future PLogIt work must not halt just because JudgeIt/PatchIt/GaugeIt are unbuilt: choose documented, replaceable local interface assumptions and synthetic contract tests without inventing real remote connectivity. `docs/integrations/PROVISIONAL-SUITE-CONTRACTS.md` defines exact boundaries.
-
-**PLogIt → JudgeIt proof:** [PR #21](https://github.com/Edison3060/PLogIt/pull/21) (`feat/plogit-provisional-handoff`, head `ce4ab70c449b8e98b3b66b262769a508be8231c9`) changes ONLY integration tooling/fixture/tests and a dedicated CI job. [Actual GitHub CI 42212049183](https://github.com/Edison3060/PLogIt/actions/runs/42212049183) **SUCCESS** (12 bridge mock tests, backend 125, frontend 18, Semgrep, proxy, all Trivy gates). Real JudgeIt ingestion remains unverified and no network transfer exists. Original PLogIt export behavior unchanged.
-
-**Approved CVE fix now on Phase 01 development branch** `ff49cf0d359f4a226e08e6a6b9d16cab77fc5029` (and feature), same runtime Dockerfile blob as green [PR #20](https://github.com/Edison3060/PLogIt/pull/20). Previous historical notes saying the phase branch *did not yet* include the fix applied only before this dated update. **PR #20 and PR #21 remain OPEN/unmerged**, main remains unchanged, no deployment authorized. **Session 01 is CLOSED**: JR-001..010 DONE; Session 02 remains NOT STARTED pending owner session prompt. Review prior phase docs and current branch refs before any new work.
-
-## Session 03 progress, 2026-11-07T04:27:31.627Z (latest appended checkpoint)
-- Controller Session 03 IN_PROGRESS, run claim `gpt6-session03-2026-11-07T04:24:33.825Z`, JR-021 DONE. Phase branch `work/plogit-phase-02` stacked on Phase 01 `6426609e77b436e2804b9c65c9c3701134c54967`; this entry's commit is discoverable via JR-021 branch history.
-- Application unchanged. Prior baseline [CI 42228277341](https://github.com/Edison3060/PLogIt/actions/runs/42228277341) green. No Maven/Docker or checkout in this isolated tool runtime. Open Phase 01 draft PR #22, owner production release decision DEC-11, mock JudgeIt integration pending.
-- NEXT SAFE ACTION: JR-022 acceptance and baseline negative/positive gates; do not merge main or advance controller before JR-030.
-
-### 2026-11-07T04:28:46.764Z | Session 03 checkpoint JR-022
-- JR-022 DONE; Specify Maven and Spring baseline acceptance. Source baseline verified. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-023. No main merge/deploy.
-
-### 2026-11-07T04:28:53.122Z | Session 03 checkpoint JR-023
-- JR-023 IN REVIEW; Reproduce Maven and Spring baseline success. Required fresh Actions verification pending; preserve this status. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-024. No main merge/deploy.
-
-### 2026-11-07T04:28:58.243Z | Session 03 checkpoint JR-024
-- JR-024 IN REVIEW; Reject Maven and Spring baseline invalid operation. Required fresh Actions verification pending; preserve this status. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-025. No main merge/deploy.
-
-### 2026-11-07T04:29:04.630Z | Session 03 checkpoint JR-025
-- JR-025 IN REVIEW; Close Maven and Spring baseline verification. Required fresh Actions verification pending; preserve this status. Stacked Phase 02 branch, app unchanged. Latest pushed commit is this JR-labeled branch HEAD; next JR-026. No main merge/deploy.
-
-### 2026-11-07T04:29:59.100Z | Session 03 checkpoint JR-026
-- JR-026 DONE. Inventory React Vite toolchain. Source/criteria assessed. Source exports/auth unchanged. Latest pushed SHA from JR-026 branch history. Next JR-027. Main and CD remain untouched.
-
-### 2026-11-07T04:30:05.583Z | Session 03 checkpoint JR-027
-- JR-027 DONE. Specify React Vite toolchain acceptance. Source/criteria assessed. Source exports/auth unchanged. Latest pushed SHA from JR-027 branch history. Next JR-028. Main and CD remain untouched.
-
-### 2026-11-07T04:30:12.027Z | Session 03 checkpoint JR-028
-- JR-028 IN REVIEW. Reproduce React Vite toolchain success. Pending fresh Phase 02 CI; do not mark passed. Source exports/auth unchanged. Latest pushed SHA from JR-028 branch history. Next JR-029. Main and CD remain untouched.
-
-### 2026-11-07T04:30:20.879Z | Session 03 checkpoint JR-029
-- JR-029 IN REVIEW. Reject React Vite toolchain invalid operation. Pending fresh Phase 02 CI; do not mark passed. Source exports/auth unchanged. Latest pushed SHA from JR-029 branch history. Next JR-030. Main and CD remain untouched.
-
-### 2026-11-07T04:30:54.097Z | Session 03 checkpoint JR-030 (all ten assessed, runtime verification pending)
-- JR-021, JR-022, JR-026, JR-027 DONE source/spec; JR-023–025 and JR-028–030 IN REVIEW until fresh final-head GH Actions. Ten JR-numbered commits on `work/plogit-phase-02` stacked on 6426609e77b436e2804b9c65c9c3701134c54967, no source code/API/export changes. Final handoff must append exact CI and controller result before advance; no JR-031 work authorized now.
-- Phase 01 draft PR #22 remains unmerged and main production CD release decision DEC-11 remains PENDING. Mock JudgeIt integration unverified. Next safe action: fetch Phase 02 CI for current SHA, reconcile statuses, draft stacked PR base Phase 01, then controller readiness and STOP.
-
-## Session 03 final handoff — 2026-11-07T04:34:47.828Z
-- **Outcome:** JR-021–JR-030 all DONE for scoped original 02A acceptance; all ten independently numbered commits pushed. This session's final documentation-only follow-up reconciles earlier IN REVIEW checkpoints and is current `work/plogit-phase-02` branch HEAD; use [branch history](https://github.com/Edison3060/PLogIt/commits/work/plogit-phase-02) for final full SHA. Executable workflow tested at `c3b5b562aaddba47b9d8f426418d6e2f343e5b1f` with [green CI 42338792629](https://github.com/Edison3060/PLogIt/actions/runs/42338792629). Backend `mvn -B clean verify` 125/125 PASS on Java21, Maven3.9.15; invalid JDK21 `--release 22` guard passed; Node22.23.4 npm ci/lint/build/Vitest 18/18 PASS, corrupt copied lock rejection passed; Semgrep, Trivy filesystem/backend image/frontend image, proxy passed; CD skipped.
-- **Ancestry/PR:** `work/plogit-phase-02` based on unmerged `work/plogit-phase-01@6426609e77b436e2804b9c65c9c3701134c54967`; draft stacked PR #23 targets phase01, draft PR #22 targets main. Both unmerged; no deployment authorization, main unchanged. Phase 02B JR-031–JR-040 not started.
-- **Open blockers for release, not independent development:** owner sign-off of production CD safe gate (DEC-11), real JudgeIt consumer/identity/privacy/evidence agreement, acceptance and mandatory CI/security for full 20 JR Phase 02. No automatic promotion of provisional integration.
-- **Next safe action:** after control/session-state pointer advances to READY Session 04, a separately started Builder Lead session will read control branch and execute only JR-031–JR-040 on same phase02 branch, verifying PostgreSQL/Flyway and Compose/healthchecks. Do not start those tasks in this session.
-- **Code/test caveat:** final evidence reconciliation is docs-only at a new SHA; `42338792629` tested the immediately preceding executable SHA `c3b5b562aaddba47b9d8f426418d6e2f343e5b1f`. Check any subsequent CI run independently before merging.
-- **Reviewer:** Builder Lead, no subagents. Phase: Handoff; READY WITH PROVISIONAL INTEGRATION for safe next session, not release readiness.
-
-### 2026-11-08T09:52:30.865Z | Session 04 checkpoint JR-031
-- Claimed controller run gpt6-session04-2026-11-08T09:49:36.610Z; JR-031 DONE canonical migration/entity/Testcontainers inventory only. Current reviewed branch checkpoint is JR-031 numbered commit, see branch history. JR-032 next. Isolated runner lacks Docker/Maven/PostgreSQL; GitHub CI planned for real tests. Phase PRs #22/#23 draft/unmerged, no main/CD or actual JudgeIt integration; INT-001 remains provisional.
-
-### 2026-11-08T09:54:28.384Z | Session 04 checkpoint JR-032
-- JR-031/032 DONE (source inventory and PG16 acceptance spec); new DEC-2026-11-08-01 isolated Flyway clean/incremental/failed-DDL tests. Latest pushed JR-032 checkpoint on work/plogit-phase-02; JR-033 next. No application source, JSON, main merge, production CD, or real JudgeIt integration changed. Run claim retained in controller; PR #23 draft stacked on #22.
-
-### 2026-11-08T09:55:47.885Z | Session 04 checkpoint JR-033
-- JR-031/032 DONE; JR-033 IN REVIEW pending actual GitHub Actions new PostgreSQL16 Flyway lifecycle test; new synthetic positive test committed, no source schema change. Last pushed commit JR-033 on work/plogit-phase-02. Next JR-034 negative case. No main/prod activity, draft #22/#23 unchanged; controller claim retained.
-
-### 2026-11-08T09:56:44.795Z | Session 04 checkpoint JR-034
-- JR-031/032 DONE, JR-033/034 IN REVIEW until executed CI. Positive PG16 incremental and negative transactional migration tests are now in `FlywayMigrationLifecycleTest.java`. JR-035 closure next, possibly remains IN REVIEW until CI. No application schema/data changes, main merge/CD, or external integration acceptance. Latest branch checkpoint JR-034.
-
-### 2026-11-08T09:57:22.501Z | Session 04 checkpoint JR-035
-- JR-031/032 DONE; JR-033/034/035 IN REVIEW pending actual new PostgreSQL16 Maven CI tests and regression proof. No canonical schema or app behavior changes. JR-036 Compose inventory next; phase #23 remains draft and stacked, no main/CD. Last pushed JR-035 checkpoint.
-
-### 2026-11-08T09:58:17.086Z | Session 04 checkpoint JR-036
-- JR-036 DONE Compose/dev-prod health/source inventory; independent of pending PG16 CI (JR-033–035 still IN REVIEW). Backend /api/health is liveness not DB readiness; no implementation changed. Next JR-037 spec. Pushed numbered JR-036 commit on work/plogit-phase-02, no main/CD, #22/#23 drafts.
-
-### 2026-11-08T09:59:28.818Z | Session 04 checkpoint JR-037
-- JR-036/037 DONE source inventory/Compose acceptance. JR-033–035 await real PG CI; JR-038 implementing ephemeral Compose smoke next. Decision DEC-2026-11-08-02 no production changes; draft PR #23 remains stacked, no main/CD.
-
-### 2026-11-08T10:01:36.241Z | Session 04 checkpoint JR-038
-- JR-038 IN REVIEW. Live Docker Compose CI job with synthetic env, real health/API/SPA and volume persistence added; current-head Actions execution pending. JR-039 negative env/DB offline next. PG JR-033–035 also awaiting CI. No main/CD; PR #23 remains stacked draft.
-
-### 2026-11-08T10:02:44.824Z | Session 04 checkpoint JR-039
-- JR-039 IN REVIEW: required POSTGRES_PASSWORD Compose preflight and isolated no-DB backend negative CI added; CI project name expression corrected. JR-040 last assigned closeout next. JR-033–035/038–039 runtime verification awaiting GitHub Actions; #23 remains draft, no main/prod merge. Latest branch checkpoint JR-039.
-
-### 2026-11-08T10:03:59.773Z | Session 04 checkpoint JR-040 — all ten JRs assessed, CI reconciliation pending
-- JR-031/032/036/037 DONE inventory/spec; JR-033/034/035/038/039/040 IN REVIEW pending final actual PostgreSQL16, live Compose positive/negative and full security CI verification. Original 10 numbered commits pushed on work/plogit-phase-02 (latest JR-040 SHA in branch history), no unrelated JR-041 development. PR #23 draft on #22; main deploy/merge strictly withheld. Next: reconcile Actions logs, correct CI test-only problems if needed, append failures and close eligible rows; advance control session only if safe readiness is verified.
-
-### 2026-11-08T10:07:57.111Z | Session 04 JR-040 follow-up: real CI functional PASS; external Trivy fetch failure
-- [PR CI 42469827815](https://github.com/Edison3060/PLogIt/actions/runs/42469827815) at JR-040 source `8fa9274e240d835041b13ea94f099c69e5715a88`: Maven **127/127** with 2/2 new PostgreSQL migration tests, frontend 18/18, live Compose positive and both negative probes, Semgrep/proxy all PASS. Trivy **FAIL** installing pinned scanner due HTTP 504; its security scans NOT executed, CD SKIPPED. JR-033/034/035/038/039 now DONE; JR-040 IN REVIEW pending scanner gate. Narrow CI-only bounded curl retry resilience committed as follow-up; inspect fresh workflow after push. No main merge/deploy or JudgeIt cross-app acceptance. Controller Session 04 remains claimed until readiness/pointer reconciliation.
-
-## Session 04 FINAL handoff — 2026-11-08T10:12:14.837Z
-- **Controller run:** gpt6-session04-2026-11-08T09:49:36.610Z, selected only **JR-031–040**, ten individual reviewed/pushed numbered commits on `work/plogit-phase-02`, plus JR-040 CI retry/evidence-only follow-ups. Resolve latest phase branch SHA from GitHub history; source before final tracking-only commit `63bf726a7c59cdbc572d7be83719b15f07a18077`.
-- **JR statuses:** **DONE JR-031, 032, 033, 034, 035, 036, 037, 038, 039**; **IN REVIEW JR-040** because final-head mandatory security CI scanner download still fails external HTTP 504; all original ten tasks assessed. No BLOCKED local engineering, but Phase 02 PR **NOT ACCEPTED** for merge. Source migration/DB semantics and auth, logs, history, privacy, unversioned JSON preserved.
-- **Tests verified:** actual executable SHA `8fa9274e240d835041b13ea94f099c69e5715a88`, [full green push CI 42469824649](https://github.com/Edison3060/PLogIt/actions/runs/42469824649): 127 Maven tests incl 2 Flyway positive/negative, 18 frontend tests, real Compose healthy 3 services, reachability/persistence, missing password/disconnected backend fail closed, Trivy FS/2 image scans, Semgrep/proxy PASS, CD SKIPPED. **Current retry-only SHA `63bf726a7c59cdbc572d7be83719b15f07a18077`** [push 42470111362](https://github.com/Edison3060/PLogIt/actions/runs/42470111362) and [PR 42470115672](https://github.com/Edison3060/PLogIt/actions/runs/42470115672) all non-Trivy jobs PASS; Trivy asset download HTTP 504 exit22, scanner not run, CD skipped. Prior failures recorded without erasure.
-- **Outstanding:** PR #23 remains **DRAFT** stacked on Phase 01 PR #22 (also DRAFT) and not merged; production safety sign-off DEC-2026-11-06-11 pending; retry/reconcile current-head security scan and conduct required phase PR review before any accepted merge. JudgeIt INT-001 real contract/tenant/privacy/evidence unverified, no external integration accepted.
-- **Readiness:** READY WITH PROVISIONAL INTEGRATION **for independent development only**. Controller next should be **Session 05 JR-041–JR-050**, `work/plogit-phase-03` stacked on unmerged `work/plogit-phase-02`. Do not create next branch or start next JRs in Session 04. No production deployment. No owner decisions needed for safe isolated development; separate owner approval is mandatory to merge/deploy.
-- **Exact next safe action:** verify controller pointer has been atomically saved on `control/session-state`, then STOP. On newly initiated Session 05 read playbook/control/AGENTS/spec from authoritative branch, inspect actual previous phase and stack. For Phase 02 release, re-run full security CI after scanner CDN restoration; do not remove scanner gates.
-- **Reviewer:** Builder Lead, no subagents, work phases Intake → Strategy → Build → Refine → Handoff. Sign-off required at boundary; no promotion of provisional assumptions.
-
-### 2026-11-09T18:25:50.156Z | Session 05 checkpoint JR-041
-- Control run gpt6-session05-2026-11-09T18:23:43.099Z IN_PROGRESS; JR-041 DONE source/test inventory. Phase 03 stacked on Phase 02 bf2c711c85d20a227fa119dceacf1dc3c4ce4496; tracking/evidence only, no production release. Last pushed commit: this JR-041 checkpoint (resolve Git history). Next JR-042 authentication acceptance, then real CI positive/negative. Open: DEC-11, Phase 02 JR-040 security scanner, INT-001 provisional.
-
-### 2026-11-09T18:27:07.394Z | Session 05 checkpoint JR-042
-- JR-041 and JR-042 DONE inventory/spec; DEC-2026-11-09-01 chooses focused session fixation verification/fix. No executable tests yet. Last push: JR-042 evidence checkpoint at head in branch history. Next JR-043 positive lifecycle using isolated real CI before DONE; do not merge drafts or main.
-
-### 2026-11-09T18:28:11.863Z | Session 05 checkpoint JR-043
-- JR-041/042 DONE, JR-043 IN REVIEW pending actual CI. Focused manual-login session ID rotation and synthetic lifecycle test committed. Next JR-044 expiry/stale-cookie and wrong-password negative controls. Current push: JR-043 numbered commit in branch history; continue only selected ten JRs; release holds unchanged.
-
-### 2026-11-09T18:29:15.078Z | Session 05 checkpoint JR-044
-- JR-041/042 DONE. JR-043/044 IN REVIEW until real CI; stale-cookie expiry not proven by MockMvc alone. Two negative synthetic tests added, no application changes this JR. Latest pushed JR-044 checkpoint, next JR-045 auth closeout. Release gates unchanged.
-
-### 2026-11-09T18:30:22.806Z | Session 05 checkpoint JR-045
-- Authentication JR-041/042 DONE; JR-043/044/045 IN REVIEW until actual full backend/Compose CI. Real HTTP cookie-jar auth smoke added, including old JSESSIONID replay; wall-clock expiry still unverified. Latest JR-045 numbered push; next JR-046 CSRF inventory. Do not merge main.
-
-### 2026-11-09T18:31:12.541Z | Session 05 checkpoint JR-046
-- JR-046 DONE source/tests inventory; auth JR-043–045 remain IN REVIEW pending CI. CSRF exceptions on all three auth POST routes found; all other state mutations guarded by CookieCsrfTokenRepository/header. JR-047 spec and safe scoped correction next, no unsafe main change, #22/#23 drafts.
-
-### 2026-11-09T18:32:08.434Z | Session 05 checkpoint JR-047
-- CSRF JR-046/047 DONE source map + acceptance; DEC-2026-11-09-02 scoped safe tightening of three auth POST exemptions with preflight CSRF bootstrap. JR-043–045 await CI. Next JR-048 add source/client positive tests and real HTTP; release held.
-
-### 2026-11-09T18:33:56.395Z | Session 05 checkpoint JR-048
-- JR-048 IN REVIEW CI pending; three auth POST exemptions removed, frontend preflight and HTTP genuine-token engagement creation added. Auth JR-043–045 unverified. Next JR-049 deny and no mutation. Phase03 stacked, main untouched.
-
-### 2026-11-09T18:34:54.488Z | Session 05 checkpoint JR-049
-- All JR-041–049 have a numbered pushed commit; JR-043–045/048–049 remain IN REVIEW pending CI; JR-041/042/046/047 DONE source/spec. New CSRF negative tests check auth login/register/logout fail-closed and zero engagement mutation in real HTTP probe. Final JR-050 next; do not start Session 06 or merge main.
-
-### 2026-11-09T18:38:04.009Z | Session 05 JR-050 initial closeout / test correction
-- Ten JRs 041–050 individually assessed and pushed once JR-050 commit lands. 041/042/046/047 DONE source/spec; 043–045/048–050 IN REVIEW until new head CI. Run 42675291335 at 1f92076e: Maven 133 tests 5 old auth-rate-limit fixture failures due missing CSRF; frontend/Compose/Semgrep/proxy success. Corrected 12 old test POSTs with csrf() without weakening enforcement. Need fresh backend and all security CI. No production merge/deploy, #22/#23 draft, DEC-11 pending, INT-001 provisional. Next: inspect new-head Actions, update evidence and controller only when safe; never start Session06 in same chat.
-
-## Session 05 FINAL handoff — 2026-11-09T18:42:35.181Z
-- **Controller run:** gpt6-session05-2026-11-09T18:23:43.099Z claimed from READY 05; ten JRs JR-041–050 assessed, each individually numbered/pushed. All work `work/plogit-phase-03` stacked on unmerged Phase02 HEAD `bf2c711c85d20a227fa119dceacf1dc3c4ce4496`. [Draft PR #24](https://github.com/Edison3060/PLogIt/pull/24) base Phase02, never main. Final evidence-only follow-up SHA from branch history; executable SHA `9ba41623dab7319f5b9951d9fff68a75f91b07e8`.
-- **Statuses:** DONE JR-041,042,043,046,047,048,049,050 (8); IN REVIEW JR-044,045 (2), because elapsed idle-session expiry not tested (logout invalidation and stale/reused cookie **were** proven). No blocked local work. No JR-051 execution.
-- **Actual test evidence:** [CI 42675762958](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) at executable HEAD `9ba41623dab7319f5b9951d9fff68a75f91b07e8`: Maven133, frontend18, Compose real auth+CSRF positive/negative/no data mutation and DB failure probes, Semgrep, Trivy filesystem/backend/frontend images, proxy ALL PASS; CD SKIPPED. Historic run 42675291335 5/133 backend test failures due outdated fixtures corrected and preserved in log. Docs-only follow-up not itself executable-code test proof.
-- **Changes/risk:** existing manual login now rotates pre-auth session ID; auth register/login/logout POST require CSRF, browser helper obtains cookie via public /api/health; external direct REST clients must obtain CSRF token first. Explicit production compatibility/owner review required. Existing role scopes, logs, history/audit, privacy and unversioned JSON unaffected. No real JudgeIt integration acceptance; INT-001 provisional.
-- **Release:** PR #24/23/22 DRAFT UNMERGED, production main push CD permission DEC-11 PENDING. Phase02 JR-040 remained IN REVIEW for its own head scanner gate despite green current Phase03 run. Do not main merge/deploy.
-- **Readiness:** READY WITH PROVISIONAL INTEGRATION for independent Session 06 only, NOT Phase03 or production acceptance. Next Session 06 JR-051–JR-060 on SAME Phase03 branch, not within this chat. Recommended independent follow-up: test real elapsed session timeout and re-validate direct-API CSRF compatibility before phase acceptance. Owner may initiate next numbered session after control pointer persisted. Reviewer Builder Lead. Phase: Handoff.
-
-### Master Prompt sign-off (owner acceptance still pending)
-- [ ] Scope and rationale understood; all ten JR source/criteria reviewed
-- [ ] Inputs/errors/real server-side auth+CSRF checks validated, with idle expiry explicitly pending
-- [ ] No secrets, insecure bypasses, unapproved production operation or fake integration
-- [ ] Actual positive, negative, security and regression CI evidence with SHA recorded
-- [ ] Ten JR rows, append-only per-JR logs and handoff saved to phase branch
-- [ ] Owner separately authorizes any future main deployment and phase merge after gates
-- [ ] Owner may open a NEW Session 06 prompt; do not execute JR-051 in this one
-
-### 2026-11-11T12:36:12.423Z | Session 06 checkpoint JR-051
-- Controller claimed Session06 (run gpt6-session06-2026-11-11T12:32:30.670Z). JR-051 DONE inventory based on canonical Phase03 source and existing integration tests; JR-052 spec next. Working branch work/plogit-phase-03 stacked on unmerged Phase02; source/test not changed; no main/CD/merge. Existing JR-044/045 elapsed-idle acceptance and INT-001 real downstream remain IN REVIEW/provisional.
-
-### 2026-11-11T12:37:44.197Z | Session 06 checkpoint JR-052
-- JR-051/052 DONE source/spec; DEC-2026-11-11-01 chooses targeted RBAC integration tests, not a policy/refactor. JR-053 positive test next; runtime validation pending. Existing Phase03 draft #24 release gates and main production hold unchanged.
-
-### 2026-11-11T12:37:52.451Z | Session 06 checkpoint JR-053
-- JR-053 IN REVIEW until Maven/PG CI; positive member GET and leader-only PUT integration assertions pushed. JR-054 cross-engagement/removed/member mutation denial next. No service behavior change.
-
-### 2026-11-11T12:39:40.549Z | Session 06 checkpoint JR-054
-- Negative cross-engagement/member/removed-mutation and audit no-op test authored; JR-053 JSON literal correction included. JR-053/054 IN REVIEW pending executed PG/Maven. JR-055 close/reconcile next.
-
-### 2026-11-11T12:39:52.414Z | Session 06 checkpoint JR-055
-- JR-051/052 DONE, JR-053/054/055 IN REVIEW pending actual PG16 Maven and full CI. Positive and denied authorization tests pushed, no service logic changed. JR-056 auth-abuse owner inventory next.
-
-### 2026-11-11T12:41:23.619Z | Session 06 checkpoint JR-056
-- JR-056 DONE source/test inventory: login throttle per-IP only, no account-based cap; generic error/CSRF retained. JR-057 design then implementation/testing JRs-058/059. JR-053–055 runtime proof awaits CI. Production/main hold unchanged.
-
-### 2026-11-11T12:41:30.480Z | Session 06 checkpoint JR-057
-- JR-057 DONE specification DEC-2026-11-11-02: two login buckets (per-account hash across IPs, coarse per-IP), retain per-IP registration, generic errors and full CSRF. JR-058 implementation and positive normal throughput next, JR-059 negative account/other-user isolation. No release/merge yet.
-
-### 2026-11-11T12:42:50.297Z | Session 06 checkpoint JR-058
-- Auth login account-hash+coarse IP limits implemented on work branch, positive shared-IP two-account test added; JR-058 IN REVIEW pending CI; JR-059 negative burst tests next. Security response/CSRF/registration preserved, no main/CD/merge.
-
-### 2026-11-11T12:43:42.967Z | Session 06 checkpoint JR-059
-- Auth dual-bucket source and positive/negative integration tests pushed through JR-059; JR-058/059 IN REVIEW pending Actions. JR-060 closure and full CI reconcile next. Existing security/release hold and independent JSON export unchanged.
-
-### 2026-11-11T12:45:42.401Z | Session 06 checkpoint JR-060 — ten JR checkpoints pushed, reconciliation pending
-- All JR-051–060 individually assessed and pushed on work/plogit-phase-03. Inventory/spec JR-051/052/056/057 DONE; runtime JR-053/054/055/058/059/060 IN REVIEW until actual latest-head GitHub CI. JR-060 corrected earlier proposed 10× IP threshold to retain the deployed login IP cap 20/60s and add separately configured per-account cap 5/60s (3 in isolated tests), DEC-2026-11-11-03. Do not infer test passes or advance controller before reviewing run results; no production/main/PR merge, INT-001 remains provisional; existing JR-044/045 idle-time acceptance pending.
-
-## Session 06 FINAL handoff — 2026-11-11T12:51:34.102Z
-- **Controller:** claimed gpt6-session06-2026-11-11T12:32:30.670Z, authoritative `control/session-state` before final pointer update. Ten original Phase03B steps **JR-051–JR-060 DONE**, exactly ten JR-labeled commits on `work/plogit-phase-03` from `3fb29745d9f8` (JR-051) to executable `9a197a39eb6c` (JR-060); supplementary final docs-only reconcile commit separate. Previous ancestry phase03 stacks on unmerged phase02, draft [PR #24](https://github.com/Edison3060/PLogIt/pull/24) based on phase02 draft #23, which stacks on phase01 draft #22. None merged to main. No production CD.
-- **Source changes:** engagement leader/member authorization services **verified without modification**; four focused PostgreSQL16 regression tests added for permitted member detail/leader edit, forbidden cross-engagement/removed-member mutation (no DB/audit side effects), normal two-user same-IP login, distributed invalid same-account attempts with unrelated same-IP login allowed. AuthRateLimitInterceptor now uses SHA-256 normalized email account bucket default 5/60s in addition to **unchanged original per-IP 20/60s**; registration 5/600s per-IP unchanged, untrusted forwarded IP ignored. AuthController applies account limit before verification; generic errors+Retry-After, server auth/CSRF/session checks maintained. DEC-2026-11-11-01, -02 and corrective -03 document design and trade-offs. No unversioned JSON export, log history/audit, privacy or app-owned data contract changes.
-- **Executed tests:** source `9a197a39eb6c0945485f9f0b4c1192aefab9bb3c` [full push Actions run 43023154965](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) COMPLETED SUCCESS: **Maven 137/137** (Java21 PostgreSQL16/Testcontainers), **Vitest 18/18** plus frontend lint/build/negative lockfile, isolated real HTTP/Compose and DB failure tests, Semgrep, pinned Trivy filesystem/backend/frontend images and production-proxy validation **ALL PASS**; CD **SKIPPED**. The source was tested in GitHub Actions, **not local Maven/Docker**. Prior current-session cancelled jobs and JR-053 fixture correction are preserved in STEP-LOG; follow-up docs-only SHA not separately executable-code tested.
-- **Remaining holds:** Prior Session05 JR-044/045 **IN REVIEW** for wall-clock idle-session expiration, phase02 JR-040 phase-head scanner acceptance historically unresolved despite newer current source green scanner, phase03 draft #24 and earlier #22/#23 **unmerged**; owner DEC-2026-11-06-11 production CD/main-merge approval withheld; direct non-browser API CSRF bootstrap compatibility review; JudgeIt INT-001 actual real consumer/tenant/media evidence still **PROVISIONAL**. No claim of real cross-app interoperability or production release certification.
-- **Readiness:** **READY WITH PROVISIONAL INTEGRATION** for isolated next increments, not phase merge. Next controller-selected Session **07**, JR-061–JR-070, original Phase04(A) engagement/team workflow, should create/resume `work/plogit-phase-04` **stacked on latest unmerged Phase03 HEAD** after independently verifying new controller and current branch. Do not begin JR-061 in this Session06 chat. Any future PR merge requires accepted phase, CI/security, owner production CD decision; no deployment authorized.
-- **Reviewer:** Builder Lead (no subagents), performed 10 JR-source/spec/tests/record checkpoints and autonomous security review, phase Handoff. Independent evidence: STEP-REGISTER, append-only STEP-LOG, SESSION-06-EVIDENCE, DECISIONS and this handoff. Seek separate owner acceptance only at numbered-session boundary.
-
-### Master Prompt owner sign-off — Session 06
-- [ ] Confirm the exactly ten selected JR scopes/expected results and implemented dual-key auth design
-- [ ] Review full current SHA tests, positive/negative no-mutation security/authorization and retained per-IP limit
-- [ ] Confirm the documented deferred prior idle-session and provisional real JudgeIt integration gates
-- [ ] Check that all ten JR rows/logs/commits and docs-only evidence handoff remain visible and audit-preserving
-- [ ] Approve no production operation; separately decide future phase merge/CD only after all required release gates
-- [ ] Accept saved controller NEXT_SESSION=07 and initiate a separate chat before JR-061–070; STOP here
-
-- Session 07 2026-11-11T19:27:44.987Z JR-061 DONE inventory/spec, no application change, tests not executed. Branch work/plogit-phase-04 stacked on ff2e2ba0; next JR-062 within selected JR-061–070. Prior phase PRs draft and unmerged, no main merge or production deploy, INT-001 provisional.
-
-- Session 07 2026-11-11T19:27:53.576Z JR-062 DONE inventory/spec, no application change, tests not executed. Branch work/plogit-phase-04 stacked on ff2e2ba0; next JR-063 within selected JR-061–070. Prior phase PRs draft and unmerged, no main merge or production deploy, INT-001 provisional.
-
-- Session07 2026-11-11T19:29:21.475Z JR-063 IN REVIEW. Added `creatorCanCreateListAndFetchSerializedEngagement` in EngagementLifecycleIntegrationTest.java, executable CI pending; no application source changed. Next JR-064, selected JR-061–070. Phase04 stack, no main/CD, INT-001 provisional.
-
-- Session07 2026-11-11T19:29:30.949Z JR-064 IN REVIEW. Added `invalidCreateAndUnauthorizedReadLeaveRecordsUnchanged` in EngagementLifecycleIntegrationTest.java, executable CI pending; no application source changed. Next JR-065, selected JR-061–070. Phase04 stack, no main/CD, INT-001 provisional.
-
-- Session07 2026-11-11T19:30:34.415Z JR-065 IN REVIEW. Close Engagement create/list/detail verification. CI for JR-063/064 pending, duplicate-create semantic review. Next JR-066 on Phase04 stack, no main merge/deploy.
-
-- Session07 2026-11-11T19:30:42.805Z JR-066 DONE. Inventory Join codes and membership. Join-code/membership source inventory verified; no expiry by approved product spec. Next JR-067 on Phase04 stack, no main merge/deploy.
-
-- Session07 2026-11-11T19:31:29.369Z JR-067 DONE join-code acceptance specified. Product-approved v1 does NOT expire codes; JR-069 expired-code criterion remains review debt. DB unique member key; synthetic tests JR-068/069 next, CI pending. No main/production.
-
-- Session07 2026-11-11T19:32:38.898Z JR-068 IN REVIEW: positive code-generation/member-join regression authored at JoinCodeWorkflowIntegrationTest, runtime pending. Next JR-069 negative code revocation/replay, no source change or production.
-
-- Session07 2026-11-11T19:33:43.644Z JR-069 IN REVIEW. Negative join-code/replay/authorization regression added; pending CI. Expiration intentionally not implemented in v1 per product spec, concurrent race HTTP status not exercised. Next JR-070. No production/main changes.
-
-- Session07 2026-11-11T19:34:51.719Z JR-070 IN REVIEW. All selected JR-061–070 now assessed on Phase04 stack, four added Postgres MockMvc tests, full CI still pending. JR-064 duplicate-name/idempotency ambiguity, JR-069/070 deferred expired code and concurrent race safe-error debt. Next safe action: inspect full current-head Actions CI, resolve code failures, reclassify only proven cases, open draft stacked Phase04 PR if warranted, reconcile controller based on readiness; do not execute JR-071 in this chat. Phase 04 PR cannot be accepted at odd half-phase. Prior releases/DEC-11 held, no production.
-
-## Session 07 final handoff — 2026-11-11T19:41:55.565Z UTC
-- **Scope and stage:** Intake → Strategy → Build → Refine → Handoff complete for exactly JR-061–JR-070, no subagents. Canonical source on stacked `work/plogit-phase-04` based on Phase03 ff2e2ba0f3c1171363f12bdb9f6a362f83eacdca; 10 separately pushed JR commits 78ee26e7 → 67121c65; draft PR [#25](https://github.com/Edison3060/PLogIt/pull/25) based on unmerged Phase03, which stacks on Phase02/01. Phase04B not begun.
-- **Final statuses:** JR-061 DONE; JR-062 DONE; JR-063 DONE; JR-064 IN REVIEW; JR-065 IN REVIEW; JR-066 DONE; JR-067 DONE; JR-068 DONE; JR-069 IN REVIEW; JR-070 IN REVIEW.
-- **Real test evidence:** DONE JR-061/062/063/066/067/068 (6); IN REVIEW JR-064/065/069/070 (4); BLOCKED 0. Four added isolated PostgreSQL16 MockMvc cases executed, plus all pre-existing regressions: 141 Maven tests, zero failures/errors/skips; frontend Node22 build/lint 18/18 Vitest (5 files); live Compose PostgreSQL/backend/frontend + authenticated HTTP registration/login/session/logout/old-session replay, volume restart and DB-credential/unavailable-DB fail-closed; Semgrep, pinned Trivy 0.76.1 filesystem and backend/frontend image blocker checks, production proxy all SUCCESS. Exact executable source SHA 67121c654f63a5b56ab617743a61d2a51d6f6fa9 push CI https://github.com/Edison3060/PLogIt/actions/runs/43088545712 COMPLETED SUCCESS; CD SKIPPED. Original JR064 rejects 'duplicate valid create' absent any name uniqueness/idempotency requirement, product spec allows separate engagement creation: DEC-2026-11-11-04 leaves JR064/065 IN REVIEW. Original JR069 asks expired codes but approved v1 product explicitly non-expiring, optional expiry deferred: DEC-2026-11-11-05 leaves JR069/070 IN REVIEW, and an actual simultaneous same-user redemption with safe HTTP conflict has not been tested. Invalid requests, outsider access, revoked codes and sequential replay *did* pass isolated CI, without DB/audit mutation. No server, schema, auth, JSON export or other application source modified.
-- **Source and records:** New `backend/src/test/java/io/muzoo/ssc/plogit/EngagementLifecycleIntegrationTest.java` and `JoinCodeWorkflowIntegrationTest.java` (four tests, passing). No production Java service/schema/API/export behavior changed. Each JR had register row, append-only log, Session07 evidence, handoff and distinct pushed checkpoint; DEC-2026-11-11-04/05 record scope differences. Full executable CI at `67121c654f63a5b56ab617743a61d2a51d6f6fa9`, not the later docs-only reconciliation commit. Obtain latest branch SHA from GitHub at resume.
-- **Carry-forward acceptance debt:** JR064/065 duplicated valid-name rejection ambiguously differs from product spec, do not add uniqueness without decision; JR069/070 expired code intentionally not supported in v1 and simultaneous join race HTTP response unproven; no full Phase04 signoff until Session08 and protected gates. Prior JR040 phase scanner review, JR044/045 real idle session expiry, INT-001 real JudgeIt consumer provisional, direct-API CSRF compatibility release review, owner main-CD DEC-2026-11-06-11 pending. PRs #22/#23/#24/#25 draft unmerged, no production deployment or main merge.
-- **Readiness and exactly next assignment:** READY WITH PROVISIONAL INTEGRATION for independent development, not release; controller on `control/session-state` should save next `NEXT_SESSION=08`, `JR-071–JR-080`, `work/plogit-phase-04`, STATE READY and clear current claim. STOP now; owner may initiate separate Session08 only after controller advance confirmed. No JR071 started here. Reviewers Builder Lead only.
-- **Master Prompt sign-off pending:** Understand scope/decisions; validate positive/negative tests; confirm no secrets or weak permissions; confirm actual CI/current code source; all ten evidence rows saved; authorize next session via new chat without approving main merge or production deployment.
+| Current session | Not started |
+| Original 20-task phase | Not started |
+| Allowed JR range | None until SESSION_NUMBER is specified |
+| Last JR attempted / status | None |
+| Current branch and last pushed SHA | main / baseline; inspect GitHub for actual SHA |
+| Last accepted / merged phase and PR | None |
+| Next exact eligible JR | JR-001 |
+| Completed tasks in current session | None |
+| In progress / blocked tasks | None |
+| Owner decisions pending | Consult `DECISIONS.md` and suite `Suite - To Be Scoped.md` |
+| Tests run, result, fixture | None run by the planning synchronization |
+| Files / migrations / schemas changed | None by the execution process |
+| Current work phase | Intake pending user-selected session |
+| Next-session authorization | Owner must explicitly start a numbered session |
+
+## What a new session must do first
+
+Read `AGENTS.md`, `docs/junior-execution/SESSION-PROTOCOL.md`, `SESSION-INDEX.md`, `STEP-REGISTER.md`, `STEP-LOG.md`, `DECISIONS.md`, this file, and the selected original 20-task phase. Verify the authoritative branch, commits, CI status, and actual tests before resuming.
+
+## Last session summary
+
+_No session has started._
+
+## Exact next safe action
+
+Receive `SESSION_NUMBER` in the session prompt, verify prerequisites and start at the first unfinished task in that range.

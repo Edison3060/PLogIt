@@ -16,14 +16,10 @@ export async function apiFetch<T>(
 
   const method = (options.method || "GET").toUpperCase();
   if (method !== "GET" && method !== "HEAD") {
-    let csrf = getCsrfToken();
-    if (!csrf) {
-      const bootstrap = await fetch(`${API_BASE}/health`, { credentials: "include" });
-      if (!bootstrap.ok) throw new Error("Unable to initialize request protection");
-      csrf = getCsrfToken();
+    const csrf = getCsrfToken();
+    if (csrf) {
+      headers["X-XSRF-TOKEN"] = csrf;
     }
-    if (!csrf) throw new Error("CSRF token unavailable");
-    headers["X-XSRF-TOKEN"] = csrf;
   }
 
   const res = await fetch(`${API_BASE}${path}`, {

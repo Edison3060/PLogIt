@@ -1,6 +1,6 @@
-# Swarm-branch experiment precedence
+# Swarm-only precedence
 
-When checked out on the exact branch `Swarm`, `docs/swarm/SWARM-PLAYBOOK.md` and `docs/swarm/SWARM-CONTROL.md` govern session selection, native coordinator/worker/verifier delegation, and branch writes. This supersedes the solo-session instructions below that select `control/session-state` or require direct single-agent coding. The original app, security, evidence and release gates still apply. Never merge the Swarm experiment to main.
+If working on branch `Swarm`, ignore the legacy rule below that stops after ten JRs. The current source of execution truth is `docs/swarm/MISSION.md` and `docs/swarm/PROGRESS.md`, covering **all 240 JRs in one continuous run**. Original acceptance criteria, tests and security rules remain in effect; original solo GitHub session controller and phase-stop rules do not. GitHub writes only to `Swarm`, never main.
 
 ---
 

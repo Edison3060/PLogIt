@@ -6,76 +6,76 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 
 | JR | Exact task | Session | Status | Evidence / commit or PR | Last updated (UTC) |
 |---|---|---:|---|---|---|
-| JR-001 | Inventory Canonical source identity | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-001) • verified no change | 2026-11-06T10:56:32.144Z |
-| JR-002 | Specify Canonical source identity acceptance | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-002) • VERIFIED NO CHANGE | 2026-11-06T10:58:01.055Z |
-| JR-003 | Reproduce Canonical source identity success | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-003) • VERIFIED NO CHANGE | 2026-11-06T10:58:08.328Z |
-| JR-004 | Reject Canonical source identity invalid operation | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-004) • VERIFIED NO CHANGE | 2026-11-06T10:58:16.029Z |
-| JR-005 | Close Canonical source identity verification | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-005) • VERIFIED NO CHANGE | 2026-11-06T10:58:21.989Z |
-| JR-006 | Inventory Product role boundary | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-006) • VERIFIED NO CHANGE | 2026-11-06T11:00:11.032Z |
-| JR-007 | Specify Product role boundary acceptance | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-007) • VERIFIED NO CHANGE | 2026-11-06T11:00:17.485Z |
-| JR-008 | Reproduce Product role boundary success | 01 | DONE | [Run 42206996982](https://github.com/Edison3060/PLogIt/actions/runs/42206996982) • 125 backend + 18 frontend PASS; source verified, image-security issue separate | 2026-11-06T11:07:09.833Z |
-| JR-009 | Reject Product role boundary invalid operation | 01 | DONE | [Session 01 evidence](SESSION-01-EVIDENCE.md#jr-009) • VERIFIED NO CHANGE | 2026-11-06T11:00:37.872Z |
-| JR-010 | Close Product role boundary verification | 01 | DONE | [Run 42206996982](https://github.com/Edison3060/PLogIt/actions/runs/42206996982) • 125 backend + 18 frontend PASS; source verified, image-security issue separate | 2026-11-06T11:07:09.833Z |
-| JR-011 | Inventory Implemented API and UI inventory | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-011) • verified no application change | 2026-11-06T13:31:18.831Z |
-| JR-012 | Specify Implemented API and UI inventory acceptance | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-012) • verified no application change | 2026-11-06T13:31:34.340Z |
-| JR-013 | Reproduce Implemented API and UI inventory success | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-013) • verified no application change | 2026-11-06T13:31:41.622Z |
-| JR-014 | Reject Implemented API and UI inventory invalid operation | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-014) • verified no application change | 2026-11-06T13:31:52.396Z |
-| JR-015 | Close Implemented API and UI inventory verification | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-015) • verified no application change | 2026-11-06T13:34:22.725Z |
-| JR-016 | Inventory Open decisions and rebaseline | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-016) • verified no application change | 2026-11-06T13:34:31.327Z |
-| JR-017 | Specify Open decisions and rebaseline acceptance | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-017) • approval classifications verified, no app change | 2026-11-06T13:36:21.806Z |
-| JR-018 | Reproduce Open decisions and rebaseline success | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-018) • approval classifications verified, no app change | 2026-11-06T13:37:53.609Z |
-| JR-019 | Reject Open decisions and rebaseline invalid operation | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-019) • verified scoped evidence, no app change | 2026-11-06T13:39:55.966Z |
-| JR-020 | Close Open decisions and rebaseline verification | 02 | DONE | [Session 02 evidence](SESSION-02-EVIDENCE.md#jr-020) • verified scoped evidence, no app change | 2026-11-06T13:41:06.120Z |
-| JR-021 | Inventory Maven and Spring baseline | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-021) • canonical POM and 15 test classes inventoried, no application change | 2026-11-07T04:27:31.627Z |
-| JR-022 | Specify Maven and Spring baseline acceptance | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-022) • source-measured acceptance | 2026-11-07T04:28:46.764Z |
-| JR-023 | Reproduce Maven and Spring baseline success | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-023) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
-| JR-024 | Reject Maven and Spring baseline invalid operation | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-024) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
-| JR-025 | Close Maven and Spring baseline verification | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-025) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
-| JR-026 | Inventory React Vite toolchain | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-026) • source + resolved lock inventory/spec | 2026-11-07T04:29:59.100Z |
-| JR-027 | Specify React Vite toolchain acceptance | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-027) • source + resolved lock inventory/spec | 2026-11-07T04:30:05.583Z |
-| JR-028 | Reproduce React Vite toolchain success | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-028) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
-| JR-029 | Reject React Vite toolchain invalid operation | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-029) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
-| JR-030 | Close React Vite toolchain verification | 03 | DONE | [Session 03 evidence](SESSION-03-EVIDENCE.md#jr-030) • [125 Maven / 18 Vitest + negative and security CI](https://github.com/Edison3060/PLogIt/actions/runs/42338792629) at c3b5b56 | 2026-11-07T04:34:47.828Z |
-| JR-031 | Inventory PostgreSQL Flyway schema | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-031) • canonical V1–V3, entities and Testcontainers PostgreSQL inventory | 2026-11-08T09:52:30.865Z |
-| JR-032 | Specify PostgreSQL Flyway schema acceptance | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-032) • isolated PG16 clean/incremental/failed DDL criterion and DEC-2026-11-08-01 | 2026-11-08T09:54:28.384Z |
-| JR-033 | Reproduce PostgreSQL Flyway schema success | 04 | DONE | [Session 04 executed CI](https://github.com/Edison3060/PLogIt/actions/runs/42469824649) • PG16 incremental Flyway synthetic log retention PASS (127 Maven tests) | 2026-11-08T10:12:14.837Z |
-| JR-034 | Reject PostgreSQL Flyway schema invalid operation | 04 | DONE | [Session 04 executed CI](https://github.com/Edison3060/PLogIt/actions/runs/42469824649) • rejected invalid V2, transactional DDL rollback PASS | 2026-11-08T10:12:14.837Z |
-| JR-035 | Close PostgreSQL Flyway schema verification | 04 | DONE | [Session 04 executed CI](https://github.com/Edison3060/PLogIt/actions/runs/42469824649) • PG16 2/2, Maven regression 127/127; no migration changes | 2026-11-08T10:12:14.837Z |
-| JR-036 | Inventory Compose and healthchecks | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-036) • dev/prod profiles, volume/network, health probes, CI source map | 2026-11-08T09:58:17.086Z |
-| JR-037 | Specify Compose and healthchecks acceptance | 04 | DONE | [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-037) • ephemeral Compose positive, missing-env and DB-offline negative gates | 2026-11-08T09:59:28.818Z |
-| JR-038 | Reproduce Compose and healthchecks success | 04 | DONE | [Session 04 executed CI](https://github.com/Edison3060/PLogIt/actions/runs/42469824649) • actual Compose health/API/SPA/DB persistence PASS | 2026-11-08T10:12:14.837Z |
-| JR-039 | Reject Compose and healthchecks invalid operation | 04 | DONE | [Session 04 executed CI](https://github.com/Edison3060/PLogIt/actions/runs/42469824649) • missing DB password and disconnected startup rejection PASS | 2026-11-08T10:12:14.837Z |
-| JR-040 | Close Compose and healthchecks verification | 04 | IN REVIEW | [Session 04 evidence](SESSION-04-EVIDENCE.md#session-04-final-release-gate-reconciliation) • functional CI PASS; final-head pinned Trivy downloads HTTP 504, PR/phase release IN REVIEW | 2026-11-08T10:12:14.837Z |
-| JR-041 | Inventory Authentication session | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-041) • source/test inventory VERIFIED NO CHANGE at bf2c711c85d2 | 2026-11-09T18:25:50.156Z |
-| JR-042 | Specify Authentication session acceptance | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-042) • DEC-2026-11-09-01 • acceptance spec at 84fe75f898a9 | 2026-11-09T18:27:07.394Z |
-| JR-043 | Reproduce Authentication session success | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-043) • [133 Maven + real Compose success](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) at 9ba41623dab7; session ID rotation verified | 2026-11-09T18:42:35.181Z |
-| JR-044 | Reject Authentication session invalid operation | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-044) • [stale/replayed logout cookie denied](https://github.com/Edison3060/PLogIt/actions/runs/42675762958); real elapsed idle timeout not exercised | 2026-11-09T18:42:35.181Z |
-| JR-045 | Close Authentication session verification | 05 | IN REVIEW | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-045) • [live login/logout/me/old cookie denial](https://github.com/Edison3060/PLogIt/actions/runs/42675762958); idle expiry acceptance pending | 2026-11-09T18:42:35.181Z |
-| JR-046 | Inventory CSRF enforcement | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-046) • live filter/SPA owner and exception map, no code change | 2026-11-09T18:31:12.541Z |
-| JR-047 | Specify CSRF enforcement acceptance | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-047) • DEC-2026-11-09-02 all unsafe routes + bootstrap acceptance | 2026-11-09T18:32:08.434Z |
-| JR-048 | Reproduce CSRF enforcement success | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-048) • [live CSRF HTTP+frontend CI](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) at 9ba41623dab7 | 2026-11-09T18:42:35.181Z |
-| JR-049 | Reject CSRF enforcement invalid operation | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-049) • [403 no-token/mismatch, no mutation CI](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) at 9ba41623dab7 | 2026-11-09T18:42:35.181Z |
-| JR-050 | Close CSRF enforcement verification | 05 | DONE | [Session 05 evidence](SESSION-05-EVIDENCE.md#jr-050) • [full green CI](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) after test fixture fix; release still gated | 2026-11-09T18:42:35.181Z |
-| JR-051 | Inventory Engagement membership boundary | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-051) • canonical membership/engagement source and integration test map, no code changed | 2026-11-11T12:36:12.423Z |
-| JR-052 | Specify Engagement membership boundary acceptance | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-052) • DEC-2026-11-11-01 server-only scoped acceptance | 2026-11-11T12:37:44.197Z |
-| JR-053 | Reproduce Engagement membership boundary success | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-053) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-054 | Reject Engagement membership boundary invalid operation | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-054) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-055 | Close Engagement membership boundary verification | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-055) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-056 | Inventory Auth abuse controls | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-056) • IP-only interception and existing generic errors inventoried | 2026-11-11T12:41:23.619Z |
-| JR-057 | Specify Auth abuse controls acceptance | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-057) • DEC-2026-11-11-02 account+coarse IP acceptance | 2026-11-11T12:41:30.480Z |
-| JR-058 | Reproduce Auth abuse controls success | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-058) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-059 | Reject Auth abuse controls invalid operation | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-059) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-060 | Close Auth abuse controls verification | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-060) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-061 | Inventory Engagement create/list/detail | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-061) • source inventory and original owners verified | 2026-11-11T19:41:55.565Z |
-| JR-062 | Specify Engagement create/list/detail acceptance | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-062) • create/list/detail request and authorization contract specified, DEC-04 | 2026-11-11T19:41:55.565Z |
-| JR-063 | Reproduce Engagement create/list/detail success | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-063) • create/list/detail positive API+DB test PASS (CI 141 Maven) • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
-| JR-064 | Reject Engagement create/list/detail invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-064) • invalid/foreign/CSRF no-mutation tests PASS, duplicate-name rejection unapproved DEC-04 • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
-| JR-065 | Close Engagement create/list/detail verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-065) • positive/negative CI PASS, original duplicate-valid-name criterion unresolved • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
-| JR-066 | Inventory Join codes and membership | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-066) • join-code/membership source inventory verified | 2026-11-11T19:41:55.565Z |
-| JR-067 | Specify Join codes and membership acceptance | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-067) • join/revocation acceptance specified, expiry deferred DEC-05 | 2026-11-11T19:41:55.565Z |
-| JR-068 | Reproduce Join codes and membership success | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-068) • generate/redeem single MEMBER + roster positive test PASS (CI 141 Maven) • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
-| JR-069 | Reject Join codes and membership invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-069) • revoked/unknown/replay no-mutation tests PASS, expiry deferred and concurrent race not tested • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
-| JR-070 | Close Join codes and membership verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-070) • positive/negative CI PASS, original expiry/race closure still unverified • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-001 | Inventory Canonical source identity | 01 | NOT STARTED | — | — |
+| JR-002 | Specify Canonical source identity acceptance | 01 | NOT STARTED | — | — |
+| JR-003 | Reproduce Canonical source identity success | 01 | NOT STARTED | — | — |
+| JR-004 | Reject Canonical source identity invalid operation | 01 | NOT STARTED | — | — |
+| JR-005 | Close Canonical source identity verification | 01 | NOT STARTED | — | — |
+| JR-006 | Inventory Product role boundary | 01 | NOT STARTED | — | — |
+| JR-007 | Specify Product role boundary acceptance | 01 | NOT STARTED | — | — |
+| JR-008 | Reproduce Product role boundary success | 01 | NOT STARTED | — | — |
+| JR-009 | Reject Product role boundary invalid operation | 01 | NOT STARTED | — | — |
+| JR-010 | Close Product role boundary verification | 01 | NOT STARTED | — | — |
+| JR-011 | Inventory Implemented API and UI inventory | 02 | NOT STARTED | — | — |
+| JR-012 | Specify Implemented API and UI inventory acceptance | 02 | NOT STARTED | — | — |
+| JR-013 | Reproduce Implemented API and UI inventory success | 02 | NOT STARTED | — | — |
+| JR-014 | Reject Implemented API and UI inventory invalid operation | 02 | NOT STARTED | — | — |
+| JR-015 | Close Implemented API and UI inventory verification | 02 | NOT STARTED | — | — |
+| JR-016 | Inventory Open decisions and rebaseline | 02 | NOT STARTED | — | — |
+| JR-017 | Specify Open decisions and rebaseline acceptance | 02 | NOT STARTED | — | — |
+| JR-018 | Reproduce Open decisions and rebaseline success | 02 | NOT STARTED | — | — |
+| JR-019 | Reject Open decisions and rebaseline invalid operation | 02 | NOT STARTED | — | — |
+| JR-020 | Close Open decisions and rebaseline verification | 02 | NOT STARTED | — | — |
+| JR-021 | Inventory Maven and Spring baseline | 03 | NOT STARTED | — | — |
+| JR-022 | Specify Maven and Spring baseline acceptance | 03 | NOT STARTED | — | — |
+| JR-023 | Reproduce Maven and Spring baseline success | 03 | NOT STARTED | — | — |
+| JR-024 | Reject Maven and Spring baseline invalid operation | 03 | NOT STARTED | — | — |
+| JR-025 | Close Maven and Spring baseline verification | 03 | NOT STARTED | — | — |
+| JR-026 | Inventory React Vite toolchain | 03 | NOT STARTED | — | — |
+| JR-027 | Specify React Vite toolchain acceptance | 03 | NOT STARTED | — | — |
+| JR-028 | Reproduce React Vite toolchain success | 03 | NOT STARTED | — | — |
+| JR-029 | Reject React Vite toolchain invalid operation | 03 | NOT STARTED | — | — |
+| JR-030 | Close React Vite toolchain verification | 03 | NOT STARTED | — | — |
+| JR-031 | Inventory PostgreSQL Flyway schema | 04 | NOT STARTED | — | — |
+| JR-032 | Specify PostgreSQL Flyway schema acceptance | 04 | NOT STARTED | — | — |
+| JR-033 | Reproduce PostgreSQL Flyway schema success | 04 | NOT STARTED | — | — |
+| JR-034 | Reject PostgreSQL Flyway schema invalid operation | 04 | NOT STARTED | — | — |
+| JR-035 | Close PostgreSQL Flyway schema verification | 04 | NOT STARTED | — | — |
+| JR-036 | Inventory Compose and healthchecks | 04 | NOT STARTED | — | — |
+| JR-037 | Specify Compose and healthchecks acceptance | 04 | NOT STARTED | — | — |
+| JR-038 | Reproduce Compose and healthchecks success | 04 | NOT STARTED | — | — |
+| JR-039 | Reject Compose and healthchecks invalid operation | 04 | NOT STARTED | — | — |
+| JR-040 | Close Compose and healthchecks verification | 04 | NOT STARTED | — | — |
+| JR-041 | Inventory Authentication session | 05 | NOT STARTED | — | — |
+| JR-042 | Specify Authentication session acceptance | 05 | NOT STARTED | — | — |
+| JR-043 | Reproduce Authentication session success | 05 | NOT STARTED | — | — |
+| JR-044 | Reject Authentication session invalid operation | 05 | NOT STARTED | — | — |
+| JR-045 | Close Authentication session verification | 05 | NOT STARTED | — | — |
+| JR-046 | Inventory CSRF enforcement | 05 | NOT STARTED | — | — |
+| JR-047 | Specify CSRF enforcement acceptance | 05 | NOT STARTED | — | — |
+| JR-048 | Reproduce CSRF enforcement success | 05 | NOT STARTED | — | — |
+| JR-049 | Reject CSRF enforcement invalid operation | 05 | NOT STARTED | — | — |
+| JR-050 | Close CSRF enforcement verification | 05 | NOT STARTED | — | — |
+| JR-051 | Inventory Engagement membership boundary | 06 | NOT STARTED | — | — |
+| JR-052 | Specify Engagement membership boundary acceptance | 06 | NOT STARTED | — | — |
+| JR-053 | Reproduce Engagement membership boundary success | 06 | NOT STARTED | — | — |
+| JR-054 | Reject Engagement membership boundary invalid operation | 06 | NOT STARTED | — | — |
+| JR-055 | Close Engagement membership boundary verification | 06 | NOT STARTED | — | — |
+| JR-056 | Inventory Auth abuse controls | 06 | NOT STARTED | — | — |
+| JR-057 | Specify Auth abuse controls acceptance | 06 | NOT STARTED | — | — |
+| JR-058 | Reproduce Auth abuse controls success | 06 | NOT STARTED | — | — |
+| JR-059 | Reject Auth abuse controls invalid operation | 06 | NOT STARTED | — | — |
+| JR-060 | Close Auth abuse controls verification | 06 | NOT STARTED | — | — |
+| JR-061 | Inventory Engagement create/list/detail | 07 | NOT STARTED | — | — |
+| JR-062 | Specify Engagement create/list/detail acceptance | 07 | NOT STARTED | — | — |
+| JR-063 | Reproduce Engagement create/list/detail success | 07 | NOT STARTED | — | — |
+| JR-064 | Reject Engagement create/list/detail invalid operation | 07 | NOT STARTED | — | — |
+| JR-065 | Close Engagement create/list/detail verification | 07 | NOT STARTED | — | — |
+| JR-066 | Inventory Join codes and membership | 07 | NOT STARTED | — | — |
+| JR-067 | Specify Join codes and membership acceptance | 07 | NOT STARTED | — | — |
+| JR-068 | Reproduce Join codes and membership success | 07 | NOT STARTED | — | — |
+| JR-069 | Reject Join codes and membership invalid operation | 07 | NOT STARTED | — | — |
+| JR-070 | Close Join codes and membership verification | 07 | NOT STARTED | — | — |
 | JR-071 | Inventory Scope and rules of engagement | 08 | NOT STARTED | — | — |
 | JR-072 | Specify Scope and rules of engagement acceptance | 08 | NOT STARTED | — | — |
 | JR-073 | Reproduce Scope and rules of engagement success | 08 | NOT STARTED | — | — |

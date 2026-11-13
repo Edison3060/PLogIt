@@ -1,45 +1,23 @@
-# Swarm execution log
+# Continuous Swarm execution log
 
-This append-only log is for the experimental `Swarm` branch only. The coordinator is the sole writer. After every JR checkpoint, record the team, integration, verifier and Git evidence here and in the original STEP-LOG/STEP-REGISTER/HANDOFF files.
+This new independent execution starts from **JR-001**, not the previously completed solo-development sessions. Preserve entries in chronological order. Append a dated checkpoint after **each original JR**; do not erase failures or invent proof of completion.
 
-## Run header (copy per swarm session)
+## JR entry template
 
-### YYYY-MM-DDTHH:MM:SSZ | SESSION NN | RUN-ID
+### YYYY-MM-DDTHH:MM:SSZ | JR-XXX | DONE / IN REVIEW / BLOCKED
 
-- Repository and `Swarm` HEAD at claim:
-- Coordinator:
-- Worker A / owned JR range and exclusive paths:
-- Worker B / owned JR range and exclusive paths:
-- Verifier / independent checks:
-- Worker worktree or internal branch references:
-- App Master Prompt and phase source read:
-- Assumptions / decisions / cross-app debt:
-- Planned commands / acceptance gates:
-
-## JR checkpoint (copy after every JR)
-
-### YYYY-MM-DDTHH:MM:SSZ | SESSION NN | JR-XXX
-
-- Worker and files actually changed:
-- Coordinator integration and conflict resolution:
-- Verifier findings and request for fixes:
-- Tests executed, versions, command, exit code and expected versus observed:
-- Source URLs/date if web research materially affected implementation:
-- Status in STEP-REGISTER (DONE/IN REVIEW/BLOCKED) and why:
-- Provisional producer/consumer acceptance still pending:
-- Pushed commit SHA on `Swarm`:
-- Next safe JR:
-
-## Swarm sign-off
-
-- Ten selected JRs addressed and logged:
-- Final integrated HEAD and actual CI results:
-- Verifier's independent summary:
-- Open review, security, integration and PR/merge debt:
-- Readiness verdict and exact next session recorded in SWARM-CONTROL:
-- Main untouched, legacy controller untouched, no production deployment:
-- Master Prompt checklist and owner-facing next action:
+- Requirement and exact original phase:
+- Verified existing behavior or code/features implemented:
+- Source/test files changed:
+- Current decision, reasoning and risks:
+- Tests executed (commands, versions, fixtures, expected vs observed, exit codes):
+- Research sources/URLs/access dates (only if used):
+- Security, tenant, audit, privacy and contract validation:
+- Synthetic versus authentic producer evidence:
+- Unresolved blockers/reconciliation:
+- Local Git checkpoint / pushed Swarm SHA (if verified):
+- Next original JR to assess:
 
 ## Initial state
 
-2026-11-13: Initialized this log for the new `Swarm` development branch. No worker, verifier or JR implementation has run through this file yet.
+No original JR implementation or verification is recorded for this fresh Swarm baseline. See `docs/swarm/PROGRESS.md` and `docs/junior-execution/STEP-REGISTER.md` for the initial JR-001 pointer and all 240 NOT STARTED statuses.

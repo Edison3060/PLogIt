@@ -6,12 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.HexFormat;
-import java.util.Locale;
 import java.util.Map;
 
 @Component
@@ -23,20 +18,16 @@ public class AuthRateLimitInterceptor implements HandlerInterceptor {
 
     private final Map<String, Window> attempts = new HashMap<>();
     private final int loginLimit;
-    private final int loginAccountLimit;
     private final int registerLimit;
 
     public AuthRateLimitInterceptor(
         @Value("${plogit.auth.rate-limit.login-attempts:20}") int loginLimit,
-        @Value("${plogit.auth.rate-limit.login-account-attempts:5}") int loginAccountLimit,
         @Value("${plogit.auth.rate-limit.registration-attempts:5}") int registerLimit
     ) {
-        if (loginLimit < 1 || loginAccountLimit < 1 || registerLimit < 1) {
+        if (loginLimit < 1 || registerLimit < 1) {
             throw new IllegalArgumentException("Authentication rate limits must be positive");
         }
         this.loginLimit = loginLimit;
-        // Keep the existing per-IP quota unchanged; add a separately configurable account quota.
-        this.loginAccountLimit = loginAccountLimit;
         this.registerLimit = registerLimit;
     }
 
@@ -48,23 +39,11 @@ public class AuthRateLimitInterceptor implements HandlerInterceptor {
 
         String path = request.getRequestURI();
         if ("/api/auth/login".equals(path)) {
-            check("login-ip", request.getRemoteAddr(), loginLimit, LOGIN_WINDOW_MILLIS);
+            check("login", request.getRemoteAddr(), loginLimit, LOGIN_WINDOW_MILLIS);
         } else if ("/api/auth/register".equals(path)) {
             check("register", request.getRemoteAddr(), registerLimit, REGISTER_WINDOW_MILLIS);
         }
         return true;
-    }
-
-    /** Account attempts are counted across socket IPs, before credential verification. */
-    public void checkLoginAccount(String email) {
-        String normalized = email.strip().toLowerCase(Locale.ROOT);
-        try {
-            byte[] hash = MessageDigest.getInstance("SHA-256")
-                .digest(normalized.getBytes(StandardCharsets.UTF_8));
-            check("login-account", HexFormat.of().formatHex(hash), loginAccountLimit, LOGIN_WINDOW_MILLIS);
-        } catch (NoSuchAlgorithmException ex) {
-            throw new IllegalStateException("Required SHA-256 provider unavailable", ex);
-        }
     }
 
     private synchronized void check(String action, String address, int limit, long windowMillis) {

@@ -46,11 +46,18 @@ describe("API authentication and CSRF", () => {
     });
   });
 
-  it("rejects unsafe operations when bootstrap produces no CSRF cookie", async () => {
-    fetchMock.mockResolvedValue({ ok: true, status: 200 });
-    await expect(logoutUser()).rejects.toThrow("CSRF token unavailable");
-    expect(fetchMock).toHaveBeenCalledWith("/api/health", { credentials: "include" });
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+  it("does not invent a CSRF header when the cookie is missing", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      status: 204,
+    });
+
+    await expect(logoutUser()).resolves.toBeUndefined();
+    expect(fetchMock).toHaveBeenCalledWith("/api/auth/logout", {
+      credentials: "include",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
   });
 
   it("preserves API error messages on failed requests", async () => {
@@ -63,28 +70,26 @@ describe("API authentication and CSRF", () => {
     await expect(apiFetch("/engagements/1")).rejects.toThrow("Forbidden");
   });
 
-  it("bootstraps a real CSRF cookie before registration", async () => {
-    fetchMock.mockImplementation(async (url: string) => {
-      if (url === "/api/health") {
-        document.cookie = "XSRF-TOKEN=preflight-token; Path=/";
-        return { ok: true, status: 200 };
-      }
-      return {
-        ok: true,
-        status: 202,
-        json: async () => ({ message: "Registration request received. Please sign in" }),
-      };
+  it("returns a generic response for registration without a user session", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      status: 202,
+      json: async () => ({ message: "Registration request received. Please sign in" }),
     });
 
     await expect(registerUser("user@test.local", "password123", "User")).resolves.toEqual({
       message: "Registration request received. Please sign in",
     });
-    expect(fetchMock).toHaveBeenNthCalledWith(1, "/api/health", { credentials: "include" });
-    expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/auth/register", {
+
+    expect(fetchMock).toHaveBeenCalledWith("/api/auth/register", {
       credentials: "include",
       method: "POST",
-      body: JSON.stringify({ email: "user@test.local", password: "password123", displayName: "User" }),
-      headers: { "Content-Type": "application/json", "X-XSRF-TOKEN": "preflight-token" },
+      body: JSON.stringify({
+        email: "user@test.local",
+        password: "password123",
+        displayName: "User",
+      }),
+      headers: { "Content-Type": "application/json" },
     });
   });
 

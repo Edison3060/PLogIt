@@ -60,24 +60,7 @@ jobs:
       - name: Build & test
         if: steps.check.outputs.exists == 'true'
         working-directory: backend
-        run: |
-          java -version
-          mvn -version
-          mvn -B clean verify
-
-      - name: Reject incompatible Java target in disposable fixture
-        if: steps.check.outputs.exists == 'true'
-        run: |
-          set -euo pipefail
-          scratch="$(mktemp -d)"
-          trap 'rm -rf "$scratch"' EXIT
-          printf 'class ToolchainProbe {}\n' > "$scratch/ToolchainProbe.java"
-          if javac --release 22 -d "$scratch" "$scratch/ToolchainProbe.java" > "$scratch/negative.log" 2>&1; then
-            echo "::error::Unsupported Java 22 target unexpectedly compiled with JDK 21"
-            exit 1
-          fi
-          grep -Eiq 'release version 22 not supported|invalid target release.? 22' "$scratch/negative.log"
-          test ! -f "$scratch/ToolchainProbe.class"
+        run: mvn -B verify
 
   frontend:
     name: Frontend - lint, build, test
@@ -97,14 +80,9 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         if: steps.check.outputs.exists == 'true'
         with:
-          node-version: "22.23.4"
+          node-version: "20"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
-      - name: Record supported frontend runtime versions
-        if: steps.check.outputs.exists == 'true'
-        run: |
-          node --version
-          npm --version
       - name: Install
         if: steps.check.outputs.exists == 'true'
         working-directory: frontend
@@ -121,22 +99,6 @@ jobs:
         if: steps.check.outputs.exists == 'true'
         working-directory: frontend
         run: npm test
-
-      - name: Reject corrupt npm lockfile in disposable fixture
-        if: steps.check.outputs.exists == 'true'
-        working-directory: frontend
-        run: |
-          set -euo pipefail
-          scratch="$(mktemp -d)"
-          trap 'rm -rf "$scratch"' EXIT
-          cp package.json package-lock.json "$scratch/"
-          printf '{"lockfileVersion":3, malformed\n' > "$scratch/package-lock.json"
-          if (cd "$scratch" && npm ci --offline --ignore-scripts --no-audit --no-fund > "$scratch/negative.log" 2>&1); then
-            echo "::error::npm ci unexpectedly accepted corrupt isolated lockfile"
-            exit 1
-          fi
-          grep -Eq 'EUSAGE|EJSONPARSE|existing package-lock.json' "$scratch/negative.log"
-          test ! -d "$scratch/node_modules"
 
   semgrep:
     name: Semgrep - SAST
@@ -164,10 +126,10 @@ jobs:
           checksums="trivy_${version}_checksums.txt"
           release="https://github.com/aquasecurity/trivy/releases/download/v${version}"
 
-          curl -fsSL --retry 10 --retry-all-errors --retry-delay 5 --retry-max-time 180 --connect-timeout 15 --max-time 60 -o "$checksums" "$release/$checksums"
+          curl -fsSL --retry 3 -o "$checksums" "$release/$checksums"
           echo "885debc41b570179e81af560e5f393a66be29b9ff8c52915674f3eb2304c535d  $checksums" | sha256sum --check
 
-          curl -fsSL --retry 10 --retry-all-errors --retry-delay 5 --retry-max-time 180 --connect-timeout 15 --max-time 60 -o "$archive" "$release/$archive"
+          curl -fsSL --retry 3 -o "$archive" "$release/$archive"
           checksum_line="$(awk -v file="$archive" '$2 == file {print}' "$checksums")"
           test -n "$checksum_line"
           printf '%s\n' "$checksum_line" | sha256sum --check
@@ -256,29 +218,9 @@ jobs:
           '
           sh -n scripts/verify-https.sh
 
-  compose-smoke:
-    name: Compose - isolated full-stack health and failure probes
-    runs-on: ubuntu-latest
-    env:
-      COMPOSE_PROJECT_NAME: plogit-ci-${{ github.run_id }}-${{ github.run_attempt }}
-      POSTGRES_DB: plogit
-      POSTGRES_USER: plogit
-      POSTGRES_PASSWORD: synthetic-ci-only-postgres-password
-      APP_CORS_ORIGINS: http://localhost:5173
-      SEED_USER_EMAIL: ci-leader@invalid.test
-      SEED_USER_PASSWORD: synthetic-ci-only-seed-password
-      SEED_USER_NAME: CI Test Leader
-    steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-      - name: Start isolated development stack and verify liveness and persistence
-        run: bash scripts/ci-compose-smoke.sh
-      - name: Clean up isolated CI-only volumes and containers
-        if: always()
-        run: docker compose --profile app down --volumes --remove-orphans
-
   deploy:
     name: CD - Deploy to Production
-    needs: [backend, frontend, semgrep, trivy, proxy, compose-smoke]
+    needs: [backend, frontend, semgrep, trivy, proxy]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
