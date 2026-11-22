@@ -252,3 +252,88 @@ The owner authorized **provisional, documented and replaceable integration assum
 - [ ] Check that all ten JR rows/logs/commits and docs-only evidence handoff remain visible and audit-preserving
 - [ ] Approve no production operation; separately decide future phase merge/CD only after all required release gates
 - [ ] Accept saved controller NEXT_SESSION=07 and initiate a separate chat before JR-061–070; STOP here
+
+- Session 07 2026-11-11T19:27:44.987Z JR-061 DONE inventory/spec, no application change, tests not executed. Branch work/plogit-phase-04 stacked on ff2e2ba0; next JR-062 within selected JR-061–070. Prior phase PRs draft and unmerged, no main merge or production deploy, INT-001 provisional.
+
+- Session 07 2026-11-11T19:27:53.576Z JR-062 DONE inventory/spec, no application change, tests not executed. Branch work/plogit-phase-04 stacked on ff2e2ba0; next JR-063 within selected JR-061–070. Prior phase PRs draft and unmerged, no main merge or production deploy, INT-001 provisional.
+
+- Session07 2026-11-11T19:29:21.475Z JR-063 IN REVIEW. Added `creatorCanCreateListAndFetchSerializedEngagement` in EngagementLifecycleIntegrationTest.java, executable CI pending; no application source changed. Next JR-064, selected JR-061–070. Phase04 stack, no main/CD, INT-001 provisional.
+
+- Session07 2026-11-11T19:29:30.949Z JR-064 IN REVIEW. Added `invalidCreateAndUnauthorizedReadLeaveRecordsUnchanged` in EngagementLifecycleIntegrationTest.java, executable CI pending; no application source changed. Next JR-065, selected JR-061–070. Phase04 stack, no main/CD, INT-001 provisional.
+
+- Session07 2026-11-11T19:30:34.415Z JR-065 IN REVIEW. Close Engagement create/list/detail verification. CI for JR-063/064 pending, duplicate-create semantic review. Next JR-066 on Phase04 stack, no main merge/deploy.
+
+- Session07 2026-11-11T19:30:42.805Z JR-066 DONE. Inventory Join codes and membership. Join-code/membership source inventory verified; no expiry by approved product spec. Next JR-067 on Phase04 stack, no main merge/deploy.
+
+- Session07 2026-11-11T19:31:29.369Z JR-067 DONE join-code acceptance specified. Product-approved v1 does NOT expire codes; JR-069 expired-code criterion remains review debt. DB unique member key; synthetic tests JR-068/069 next, CI pending. No main/production.
+
+- Session07 2026-11-11T19:32:38.898Z JR-068 IN REVIEW: positive code-generation/member-join regression authored at JoinCodeWorkflowIntegrationTest, runtime pending. Next JR-069 negative code revocation/replay, no source change or production.
+
+- Session07 2026-11-11T19:33:43.644Z JR-069 IN REVIEW. Negative join-code/replay/authorization regression added; pending CI. Expiration intentionally not implemented in v1 per product spec, concurrent race HTTP status not exercised. Next JR-070. No production/main changes.
+
+- Session07 2026-11-11T19:34:51.719Z JR-070 IN REVIEW. All selected JR-061–070 now assessed on Phase04 stack, four added Postgres MockMvc tests, full CI still pending. JR-064 duplicate-name/idempotency ambiguity, JR-069/070 deferred expired code and concurrent race safe-error debt. Next safe action: inspect full current-head Actions CI, resolve code failures, reclassify only proven cases, open draft stacked Phase04 PR if warranted, reconcile controller based on readiness; do not execute JR-071 in this chat. Phase 04 PR cannot be accepted at odd half-phase. Prior releases/DEC-11 held, no production.
+
+## Session 07 final handoff — 2026-11-11T19:41:55.565Z UTC
+- **Scope and stage:** Intake → Strategy → Build → Refine → Handoff complete for exactly JR-061–JR-070, no subagents. Canonical source on stacked `work/plogit-phase-04` based on Phase03 ff2e2ba0f3c1171363f12bdb9f6a362f83eacdca; 10 separately pushed JR commits 78ee26e7 → 67121c65; draft PR [#25](https://github.com/Edison3060/PLogIt/pull/25) based on unmerged Phase03, which stacks on Phase02/01. Phase04B not begun.
+- **Final statuses:** JR-061 DONE; JR-062 DONE; JR-063 DONE; JR-064 IN REVIEW; JR-065 IN REVIEW; JR-066 DONE; JR-067 DONE; JR-068 DONE; JR-069 IN REVIEW; JR-070 IN REVIEW.
+- **Real test evidence:** DONE JR-061/062/063/066/067/068 (6); IN REVIEW JR-064/065/069/070 (4); BLOCKED 0. Four added isolated PostgreSQL16 MockMvc cases executed, plus all pre-existing regressions: 141 Maven tests, zero failures/errors/skips; frontend Node22 build/lint 18/18 Vitest (5 files); live Compose PostgreSQL/backend/frontend + authenticated HTTP registration/login/session/logout/old-session replay, volume restart and DB-credential/unavailable-DB fail-closed; Semgrep, pinned Trivy 0.76.1 filesystem and backend/frontend image blocker checks, production proxy all SUCCESS. Exact executable source SHA 67121c654f63a5b56ab617743a61d2a51d6f6fa9 push CI https://github.com/Edison3060/PLogIt/actions/runs/43088545712 COMPLETED SUCCESS; CD SKIPPED. Original JR064 rejects 'duplicate valid create' absent any name uniqueness/idempotency requirement, product spec allows separate engagement creation: DEC-2026-11-11-04 leaves JR064/065 IN REVIEW. Original JR069 asks expired codes but approved v1 product explicitly non-expiring, optional expiry deferred: DEC-2026-11-11-05 leaves JR069/070 IN REVIEW, and an actual simultaneous same-user redemption with safe HTTP conflict has not been tested. Invalid requests, outsider access, revoked codes and sequential replay *did* pass isolated CI, without DB/audit mutation. No server, schema, auth, JSON export or other application source modified.
+- **Source and records:** New `backend/src/test/java/io/muzoo/ssc/plogit/EngagementLifecycleIntegrationTest.java` and `JoinCodeWorkflowIntegrationTest.java` (four tests, passing). No production Java service/schema/API/export behavior changed. Each JR had register row, append-only log, Session07 evidence, handoff and distinct pushed checkpoint; DEC-2026-11-11-04/05 record scope differences. Full executable CI at `67121c654f63a5b56ab617743a61d2a51d6f6fa9`, not the later docs-only reconciliation commit. Obtain latest branch SHA from GitHub at resume.
+- **Carry-forward acceptance debt:** JR064/065 duplicated valid-name rejection ambiguously differs from product spec, do not add uniqueness without decision; JR069/070 expired code intentionally not supported in v1 and simultaneous join race HTTP response unproven; no full Phase04 signoff until Session08 and protected gates. Prior JR040 phase scanner review, JR044/045 real idle session expiry, INT-001 real JudgeIt consumer provisional, direct-API CSRF compatibility release review, owner main-CD DEC-2026-11-06-11 pending. PRs #22/#23/#24/#25 draft unmerged, no production deployment or main merge.
+- **Readiness and exactly next assignment:** READY WITH PROVISIONAL INTEGRATION for independent development, not release; controller on `control/session-state` should save next `NEXT_SESSION=08`, `JR-071–JR-080`, `work/plogit-phase-04`, STATE READY and clear current claim. STOP now; owner may initiate separate Session08 only after controller advance confirmed. No JR071 started here. Reviewers Builder Lead only.
+- **Master Prompt sign-off pending:** Understand scope/decisions; validate positive/negative tests; confirm no secrets or weak permissions; confirm actual CI/current code source; all ten evidence rows saved; authorize next session via new chat without approving main merge or production deployment.
+
+### 2026-11-22T06:01:34.866556+00:00 | Session08 checkpoint JR-071
+- JR-071: DONE. canonical scope editor, DTO, service and test inventory verified. Prior pushed head `e3e2f5ae8132df4988c615490f3676ec7fc739d9`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-072.
+
+### 2026-11-22T06:02:15.725480+00:00 | Session08 checkpoint JR-072
+- JR-072: DONE. scope request/denial contract and target validation debt specified in DEC-2026-11-22-01. Prior pushed head `695eaf1103bc46d1b901bd2bea14242ed855b827`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-073.
+
+### 2026-11-22T06:03:16.245404+00:00 | Session08 checkpoint JR-073
+- JR-073: IN REVIEW. scope/date persistence regression authored; actual CI pending. Prior pushed head `d4e2e2b65d68e05f082d58e6fc4148e1b3ee7ba6`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-074.
+
+### 2026-11-22T06:04:11.439002+00:00 | Session08 checkpoint JR-074
+- JR-074: IN REVIEW. denial tests authored; target strings unconstrained, DEC-2026-11-22-01. Prior pushed head `462483df1f0d15f6fa8648d3fed2a4cfc87eedd5`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-075.
+
+### 2026-11-22T06:04:38.859154+00:00 | Session08 checkpoint JR-075
+- JR-075: IN REVIEW. scope closure awaits CI and target denial acceptance; no behavior change. Prior pushed head `33a16cfec81e1938f47c49b7f055ad153e322ad8`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-076.
+
+### 2026-11-22T06:05:20.188347+00:00 | Session08 checkpoint JR-076
+- JR-076: DONE. canonical transactional transfer/remove and query-refresh inventory verified. Prior pushed head `52b68dae6da6be6a2aeca11ca90d174f22f9e1ac`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-077.
+
+### 2026-11-22T06:05:57.686385+00:00 | Session08 checkpoint JR-077
+- JR-077: DONE. team transfer/removal contract and canonical-role UX checks specified. Prior pushed head `0e05ece60c91d306217c5a12c6e7660a9d5d41e7`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-078.
+
+### 2026-11-22T06:07:13.633855+00:00 | Session08 checkpoint JR-078
+- JR-078: IN REVIEW. HTTP transfer/team/audit and QueryClient role refresh tests authored; CI pending. Prior pushed head `d8df05ca701df8f449536c3055f7fa8e59fc7f50`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-079.
+
+### 2026-11-22T06:07:59.935523+00:00 | Session08 checkpoint JR-079
+- JR-079: IN REVIEW. nonmember/stale removal and historical-log preservation tests authored; CI pending. Prior pushed head `b9934a0f7a26c4849dd58ea3cddcbacc1670986f`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-080.
+
+### 2026-11-22T06:08:26.927742+00:00 | Session08 checkpoint JR-080
+- JR-080: IN REVIEW. team verification closure awaits fresh runtime CI; phase release hold preserved. Prior pushed head `1d003faa9505afe9aeae894a07124461c9833c96`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next final CI/status reconciliation then controller readiness and STOP.
+
+## Latest Session08 FINAL handoff — 2026-11-22T06:12:16.664520+00:00
+- **Verdict:** READY WITH PROVISIONAL INTEGRATION for safe independent Session09, not Phase04 acceptance/release. Exactly JR-071–080 assessed, logged and pushed; no JR081 work. Eight DONE (071/072/073/076/077/078/079/080), two IN REVIEW (074/075) for malformed target-string rejection and target bounds/policy, DEC-2026-11-22-01. Runtime proves current invalid target strings accepted, not safe rejection; keep this visible. Scope/date persistence, all RoE bounded text/roles/CSRF and team transfer/old-new permissions/roster/audit/stale removal/history regressions passed. Server/application source, API/schema/auth/privacy and existing unversioned JSON exports unchanged.
+- **Exact executed CI:** [push 44992402664](https://github.com/Edison3060/PLogIt/actions/runs/44992402664), tested SHA `330683b38154608e5ffefdb0de81a01b421b1b19`. Full workflow SUCCESS: Java21.0.13/Maven3.9.15 `cd backend && mvn -B clean verify`: **146 tests, failures0/errors0/skipped0**, including ScopeRulesIntegrationTest3, TeamWorkflowIntegrationTest2 and pre-existing auth, CSRF, stale optimistic rollback, audit, export and Flyway regressions. Node22.23.4 `npm ci`, lint, build (Vite6.4.3), Vitest4.1.12 **19/19, six files**; corrupt lock/incompatible Java guards pass. Live isolated Compose authenticated HTTP registration/login/me/logout/replay, health/API/SPA, volume restart and DB/credential fail-closed probes pass. Semgrep, pinned Trivy0.76.1 filesystem and backend/frontend image blocking scans and proxy PASS. CD SKIPPED. These are synthetic local/CI fixtures, not production or real JudgeIt interoperability.
+- **Local supplementary execution:** Node24.22.3/npm11.19.1 `npm ci --ignore-scripts --no-audit --no-fund` exit0, `npm test` 19/19 exit0, `npm run lint` exit0, `npm run build` exit0; CI above uses standard npm ci and prescribed Node22. Local Maven/Docker unavailable, backend executed in Actions. Git diff --check exit0. No full browser screenshot/visual certification: frontend evidence is real QueryClient + mocked API jsdom DOM test. One initial shell push of control claim failed (no HTTPS credentials, exit128); connector persisted claim c3a72d9b with current file SHA and phase commits via create-tree/commit + expected-head ref lease. A sync helper was once invoked from frontend wrong path, then correctly from repo root; no source/state loss. Intermediate CI cancellations from later per-JR pushes are not passing evidence; final tested run above is separate.
+- **Commit checkpoints:** JR071 `695eaf1103bc`, JR072 `d4e2e2b65d68`, JR073 `462483df1f0d`, JR074 `33a16cfec81e`, JR075 `52b68dae6da6`, JR076 `0e05ece60c91`, JR077 `d8df05ca701d`, JR078 `b9934a0f7a26`, JR079 `1d003faa9505`, JR080 `330683b38154`. This reconciliation is tracking-only; discover final pushed SHA in JR080 history and do not misattribute completed CI to the later docs-only head.
+- **Full20 Phase04 gate:** NOT ACCEPTED. JR061/062/063/066/067/068 plus this session's eight DONE; JR064/065 independent-name duplicate rejection unapproved, JR069/070 non-expiring v1/true simultaneous join-race response unresolved, JR074/075 target policy denial/bounds unresolved. Preserve Phase02 JR040 original-head scanner acceptance, Phase03 JR044/045 elapsed idle timeout, direct-API CSRF compatibility release review, INT-001 real JudgeIt consumer PROVISIONAL, owner DEC-2026-11-06-11 main-CD authorization. #22/#23/#24/#25 DRAFT, UNMERGED; no main push or deployment.
+- **Handoff:** Phase04 branch remains stacked on unmerged Phase03 `ff2e2ba0f3c1171363f12bdb9f6a362f83eacdca`. Safe next assignment is **Session09 JR081–090**, future `work/plogit-phase-05` stacked on final Phase04 head; read latest control/playbook and original Phase05 tasks first. Independent log/audit tests can proceed without accepting Phase04 or changing scope rules. Persist this next pointer only on control/session-state, clear claim, STOP. No next-session implementation here. Reviewer Builder Lead, no subagents; Intake/Strategy/Build/Refine/Handoff completed for bounded Session08.
+
+### Master Prompt sign-off — owner pending
+- [ ] Understand changes and chosen verification approach.
+- [ ] Inputs, negative paths and server-owned controls reviewed.
+- [ ] No secrets, unsafe shortcuts or unverified release/integration claims.
+- [ ] Actual tests, limitations and source/CI SHAs reviewed.
+- [ ] All ten rows, append-only log and handoff saved to GitHub.
+- [ ] Accept handoff; next separately initiated session may begin, no release approval implied.

@@ -66,26 +66,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-058 | Reproduce Auth abuse controls success | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-058) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
 | JR-059 | Reject Auth abuse controls invalid operation | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-059) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
 | JR-060 | Close Auth abuse controls verification | 06 | DONE | [Session 06 evidence](SESSION-06-EVIDENCE.md#jr-060) • [full current-code CI 137 Maven + 18 Vitest, security/Compose](https://github.com/Edison3060/PLogIt/actions/runs/43023154965) PASS at 9a197a39eb6c | 2026-11-11T12:51:34.102Z |
-| JR-061 | Inventory Engagement create/list/detail | 07 | NOT STARTED | — | — |
-| JR-062 | Specify Engagement create/list/detail acceptance | 07 | NOT STARTED | — | — |
-| JR-063 | Reproduce Engagement create/list/detail success | 07 | NOT STARTED | — | — |
-| JR-064 | Reject Engagement create/list/detail invalid operation | 07 | NOT STARTED | — | — |
-| JR-065 | Close Engagement create/list/detail verification | 07 | NOT STARTED | — | — |
-| JR-066 | Inventory Join codes and membership | 07 | NOT STARTED | — | — |
-| JR-067 | Specify Join codes and membership acceptance | 07 | NOT STARTED | — | — |
-| JR-068 | Reproduce Join codes and membership success | 07 | NOT STARTED | — | — |
-| JR-069 | Reject Join codes and membership invalid operation | 07 | NOT STARTED | — | — |
-| JR-070 | Close Join codes and membership verification | 07 | NOT STARTED | — | — |
-| JR-071 | Inventory Scope and rules of engagement | 08 | NOT STARTED | — | — |
-| JR-072 | Specify Scope and rules of engagement acceptance | 08 | NOT STARTED | — | — |
-| JR-073 | Reproduce Scope and rules of engagement success | 08 | NOT STARTED | — | — |
-| JR-074 | Reject Scope and rules of engagement invalid operation | 08 | NOT STARTED | — | — |
-| JR-075 | Close Scope and rules of engagement verification | 08 | NOT STARTED | — | — |
-| JR-076 | Inventory Leadership transfer and team UX | 08 | NOT STARTED | — | — |
-| JR-077 | Specify Leadership transfer and team UX acceptance | 08 | NOT STARTED | — | — |
-| JR-078 | Reproduce Leadership transfer and team UX success | 08 | NOT STARTED | — | — |
-| JR-079 | Reject Leadership transfer and team UX invalid operation | 08 | NOT STARTED | — | — |
-| JR-080 | Close Leadership transfer and team UX verification | 08 | NOT STARTED | — | — |
+| JR-061 | Inventory Engagement create/list/detail | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-061) • source inventory and original owners verified | 2026-11-11T19:41:55.565Z |
+| JR-062 | Specify Engagement create/list/detail acceptance | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-062) • create/list/detail request and authorization contract specified, DEC-04 | 2026-11-11T19:41:55.565Z |
+| JR-063 | Reproduce Engagement create/list/detail success | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-063) • create/list/detail positive API+DB test PASS (CI 141 Maven) • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-064 | Reject Engagement create/list/detail invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-064) • invalid/foreign/CSRF no-mutation tests PASS, duplicate-name rejection unapproved DEC-04 • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-065 | Close Engagement create/list/detail verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-065) • positive/negative CI PASS, original duplicate-valid-name criterion unresolved • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-066 | Inventory Join codes and membership | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-066) • join-code/membership source inventory verified | 2026-11-11T19:41:55.565Z |
+| JR-067 | Specify Join codes and membership acceptance | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-067) • join/revocation acceptance specified, expiry deferred DEC-05 | 2026-11-11T19:41:55.565Z |
+| JR-068 | Reproduce Join codes and membership success | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-068) • generate/redeem single MEMBER + roster positive test PASS (CI 141 Maven) • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-069 | Reject Join codes and membership invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-069) • revoked/unknown/replay no-mutation tests PASS, expiry deferred and concurrent race not tested • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-070 | Close Join codes and membership verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-070) • positive/negative CI PASS, original expiry/race closure still unverified • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
+| JR-071 | Inventory Scope and rules of engagement | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-071) • canonical scope inventory verified • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-072 | Specify Scope and rules of engagement acceptance | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-072) • scope acceptance specified; DEC-2026-11-22-01 • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-073 | Reproduce Scope and rules of engagement success | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-073) • scope/date persistence and audit regression PASS • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-074 | Reject Scope and rules of engagement invalid operation | 08 | IN REVIEW | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-074) • supported denials PASS; malformed target accepted, validation policy/bounds unresolved • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-075 | Close Scope and rules of engagement verification | 08 | IN REVIEW | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-075) • scope closure retains original invalid-target validation gap • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-076 | Inventory Leadership transfer and team UX | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-076) • canonical transfer/remove/UI refresh inventory verified • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-077 | Specify Leadership transfer and team UX acceptance | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-077) • team transactional acceptance specified • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-078 | Reproduce Leadership transfer and team UX success | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-078) • HTTP roles/roster/audit and QueryClient refresh PASS • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-079 | Reject Leadership transfer and team UX invalid operation | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-079) • nonmember/stale removal denial, history preservation and rollback PASS • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
+| JR-080 | Close Leadership transfer and team UX verification | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-080) • team positive/negative/regression verification closed; separate phase gates held • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
 | JR-081 | Inventory Log authoring and edit rules | 09 | NOT STARTED | — | — |
 | JR-082 | Specify Log authoring and edit rules acceptance | 09 | NOT STARTED | — | — |
 | JR-083 | Reproduce Log authoring and edit rules success | 09 | NOT STARTED | — | — |
