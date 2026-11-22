@@ -716,3 +716,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Expected vs actual: leader ownership implemented; target validation criterion incomplete. Reviewer Builder Lead. Runtime NOT EXECUTED in this specification step. Plan new ScopeRulesIntegrationTest for positive persistence, role/CSRF/oversize negatives and explicit gap characterization under Java21/PostgreSQL16 CI. No owner decision required for tests; policy gap held IN REVIEW at closure.
 
 - Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-073.
+
+### 2026-11-22T06:03:16.245404+00:00 | Session 08 | JR-073 | IN REVIEW
+- Original: Reproduce Scope and rules of engagement success. Prior NOT STARTED → IN PROGRESS → IN REVIEW. Reviewer Builder Lead, no subagents. Source parent `d4e2e2b65d68e05f082d58e6fc4148e1b3ee7ba6`.
+- Added ScopeRulesIntegrationTest.leaderScopeRulesAndDatesPersistAcrossFreshMemberReadWithPrivateAudit: isolated synthetic leader PUT of three targets (IP/CIDR/domain), dates and all five RoE fields; independent member GET simulates refresh; DB dates/targets and single leader audit asserted with private emergency-contact value absent from audit metadata. Expected HTTP 200, LEADER then MEMBER, identical persisted values. This is backend refresh evidence, not a browser screenshot or full UI edit proof.
+- Actual result at checkpoint: test authored/reviewed, runtime NOT EXECUTED locally (Maven/Docker unavailable); Java21/PostgreSQL16 `cd backend && mvn -B clean verify` planned in GitHub CI. Preserve IN REVIEW until observed. No production source/JSON changes. Changed test plus register/log/handoff/Session08 evidence. Reviewer Builder Lead.
+
+- Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-074.

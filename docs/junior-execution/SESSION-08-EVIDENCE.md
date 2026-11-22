@@ -13,3 +13,9 @@ Status at checkpoint: DONE. Specify Scope and rules of engagement acceptance.
 - Specified exact leader PUT + member GET scope/RoE/date request and response, bounded text failures, missing CSRF 403, nonleader 403, outsider 404, no mutation and changedFields-only audit in DEC-2026-11-22-01. Existing product scope supports leader-managed IP/domain/CIDR targets. Actual target array has no validation; target grammar/limits are unresolved, so original invalid-target denial cannot be declared passing. Null dates leave existing dates intact. Recommended reversible test-only verification, no source-policy changes.
 - Expected vs actual: leader ownership implemented; target validation criterion incomplete. Reviewer Builder Lead. Runtime NOT EXECUTED in this specification step. Plan new ScopeRulesIntegrationTest for positive persistence, role/CSRF/oversize negatives and explicit gap characterization under Java21/PostgreSQL16 CI. No owner decision required for tests; policy gap held IN REVIEW at closure.
 
+
+## JR-073
+Status at checkpoint: IN REVIEW. Reproduce Scope and rules of engagement success.
+- Added ScopeRulesIntegrationTest.leaderScopeRulesAndDatesPersistAcrossFreshMemberReadWithPrivateAudit: isolated synthetic leader PUT of three targets (IP/CIDR/domain), dates and all five RoE fields; independent member GET simulates refresh; DB dates/targets and single leader audit asserted with private emergency-contact value absent from audit metadata. Expected HTTP 200, LEADER then MEMBER, identical persisted values. This is backend refresh evidence, not a browser screenshot or full UI edit proof.
+- Actual result at checkpoint: test authored/reviewed, runtime NOT EXECUTED locally (Maven/Docker unavailable); Java21/PostgreSQL16 `cd backend && mvn -B clean verify` planned in GitHub CI. Preserve IN REVIEW until observed. No production source/JSON changes. Changed test plus register/log/handoff/Session08 evidence. Reviewer Builder Lead.
+

@@ -289,3 +289,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-22T06:02:15.725480+00:00 | Session08 checkpoint JR-072
 - JR-072: DONE. scope request/denial contract and target validation debt specified in DEC-2026-11-22-01. Prior pushed head `695eaf1103bc46d1b901bd2bea14242ed855b827`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
 - Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-073.
+
+### 2026-11-22T06:03:16.245404+00:00 | Session08 checkpoint JR-073
+- JR-073: IN REVIEW. scope/date persistence regression authored; actual CI pending. Prior pushed head `d4e2e2b65d68e05f082d58e6fc4148e1b3ee7ba6`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-074.
