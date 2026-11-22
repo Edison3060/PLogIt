@@ -285,3 +285,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-22T06:01:34.866556+00:00 | Session08 checkpoint JR-071
 - JR-071: DONE. canonical scope editor, DTO, service and test inventory verified. Prior pushed head `e3e2f5ae8132df4988c615490f3676ec7fc739d9`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
 - Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-072.
+
+### 2026-11-22T06:02:15.725480+00:00 | Session08 checkpoint JR-072
+- JR-072: DONE. scope request/denial contract and target validation debt specified in DEC-2026-11-22-01. Prior pushed head `695eaf1103bc46d1b901bd2bea14242ed855b827`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-073.
