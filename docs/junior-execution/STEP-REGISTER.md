@@ -76,7 +76,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-068 | Reproduce Join codes and membership success | 07 | DONE | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-068) • generate/redeem single MEMBER + roster positive test PASS (CI 141 Maven) • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
 | JR-069 | Reject Join codes and membership invalid operation | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-069) • revoked/unknown/replay no-mutation tests PASS, expiry deferred and concurrent race not tested • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
 | JR-070 | Close Join codes and membership verification | 07 | IN REVIEW | [Session 07 evidence](SESSION-07-EVIDENCE.md#jr-070) • positive/negative CI PASS, original expiry/race closure still unverified • [full current-code CI](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) | 2026-11-11T19:41:55.565Z |
-| JR-071 | Inventory Scope and rules of engagement | 08 | NOT STARTED | — | — |
+| JR-071 | Inventory Scope and rules of engagement | 08 | DONE | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-071) • canonical scope editor, DTO, service and test inventory verified | 2026-11-22T06:01:34.866556+00:00 |
 | JR-072 | Specify Scope and rules of engagement acceptance | 08 | NOT STARTED | — | — |
 | JR-073 | Reproduce Scope and rules of engagement success | 08 | NOT STARTED | — | — |
 | JR-074 | Reject Scope and rules of engagement invalid operation | 08 | NOT STARTED | — | — |
