@@ -81,7 +81,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-073 | Reproduce Scope and rules of engagement success | 08 | IN REVIEW | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-073) • scope/date persistence regression authored; actual CI pending | 2026-11-22T06:03:16.245404+00:00 |
 | JR-074 | Reject Scope and rules of engagement invalid operation | 08 | IN REVIEW | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-074) • denial tests authored; target strings unconstrained, DEC-2026-11-22-01 | 2026-11-22T06:04:11.439002+00:00 |
 | JR-075 | Close Scope and rules of engagement verification | 08 | IN REVIEW | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-075) • scope closure awaits CI and target denial acceptance; no behavior change | 2026-11-22T06:04:38.859154+00:00 |
-| JR-076 | Inventory Leadership transfer and team UX | 08 | NOT STARTED | — | — |
+| JR-076 | Inventory Leadership transfer and team UX | 08 | DONE | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-076) • canonical transactional transfer/remove and query-refresh inventory verified | 2026-11-22T06:05:20.188347+00:00 |
 | JR-077 | Specify Leadership transfer and team UX acceptance | 08 | NOT STARTED | — | — |
 | JR-078 | Reproduce Leadership transfer and team UX success | 08 | NOT STARTED | — | — |
 | JR-079 | Reject Leadership transfer and team UX invalid operation | 08 | NOT STARTED | — | — |

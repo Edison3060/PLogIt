@@ -301,3 +301,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-22T06:04:38.859154+00:00 | Session08 checkpoint JR-075
 - JR-075: IN REVIEW. scope closure awaits CI and target denial acceptance; no behavior change. Prior pushed head `33a16cfec81e1938f47c49b7f055ad153e322ad8`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
 - Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-076.
+
+### 2026-11-22T06:05:20.188347+00:00 | Session08 checkpoint JR-076
+- JR-076: DONE. canonical transactional transfer/remove and query-refresh inventory verified. Prior pushed head `52b68dae6da6be6a2aeca11ca90d174f22f9e1ac`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-077.
