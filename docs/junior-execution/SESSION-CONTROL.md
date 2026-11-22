@@ -9,14 +9,14 @@ Only this per-app controller selects what a fresh Builder Lead session does next
 | Key | Value |
 |---|---|
 | NEXT_SESSION | 08 |
-| STATE | READY |
+| STATE | IN_PROGRESS |
 | LAST_ASSESSED_SESSION | 07 |
 | LAST_ASSESSED_JR_RANGE | JR-061–JR-070 |
 | CURRENT_TARGET_JR_RANGE | JR-071–JR-080 |
 | CURRENT_TARGET_PHASE_BRANCH | work/plogit-phase-04 |
 | LAST_PHASE_BRANCH | work/plogit-phase-04 |
-| CURRENT_RUN_OWNER | NONE |
-| LAST_UPDATE_UTC | 2026-11-11T19:43:00.437Z |
+| CURRENT_RUN_OWNER | builder-session08-2026-11-22T05:59:43.970562+00:00 |
+| LAST_UPDATE_UTC | 2026-11-22T05:59:43.970562+00:00 |
 | PENDING_PHASE_ACCEPTANCE | Phase01 draft #22, Phase02 draft #23, Phase03 draft #24 and stacked Phase04(A) draft #25 unmerged; Session07 JR-061/062/063/066/067/068 DONE, JR-064/065 valid duplicate-name rejection unapproved IN REVIEW (DEC-2026-11-11-04), JR-069/070 expiry intentionally deferred v1.1 and true join-race safe HTTP response unproven IN REVIEW (DEC-2026-11-11-05). Full executable Phase04 CI 43088545712 SUCCESS (141 Maven, 18 Vitest, Compose live HTTP, Semgrep, pinned Trivy fs/images, proxy) at 67121c65; final tracking-only head e3e2f5ae8132. Prior Phase02 JR040 scanner original phase-head gate IN REVIEW, Phase03 JR044/045 idle timeout IN REVIEW, direct-API CSRF compatibility release check, INT-001 real JudgeIt consumer PROVISIONAL, owner main production CD DEC-2026-11-06-11 pending. No phase merge/main push/deployment authorized |
 | AFTER_FINAL_SESSION | COMPLETE, no automatic wraparound |
 
@@ -68,3 +68,5 @@ Odd sessions start/resume one of the original twelve `work/plogit-phase-XX` bran
 - 2026-11-11T19:22:26.929Z: Session 07 JR-061–JR-070 claimed by gpt6-session07-2026-11-11T19:22:26.929Z; Phase 04 will stack on unmerged Phase 03 HEAD ff2e2ba0f3c1171363f12bdb9f6a362f83eacdca. No main merge or production deployment.
 
 - 2026-11-11T19:43:00.437Z: Session07 JR-061–JR-070 individually assessed and committed on stacked `work/plogit-phase-04` (JR061 `78ee26e7` through JR070 `67121c65`); final JR070 tracking-only evidence SHA `e3e2f5ae8132df4988c615490f3676ec7fc739d9`. Source tests [CI 43088545712](https://github.com/Edison3060/PLogIt/actions/runs/43088545712) COMPLETED SUCCESS on tested executable SHA `67121c654f63a5b56ab617743a61d2a51d6f6fa9`: 141 Maven/PostgreSQL16, frontend 18, live Compose HTTP including auth/CSRF, Semgrep, Trivy filesystem and both images, proxy PASS, CD SKIPPED. Six DONE (061/062/063/066/067/068); four IN REVIEW (064/065 unapproved duplicate valid-name rejection, 069/070 v1 deferred expiry and concurrent join safe error unproven); no false release signoff. Draft stacked Phase04 PR [#25](https://github.com/Edison3060/PLogIt/pull/25) unmerged, #22/#23/#24 also draft, no main merge/production. INT-001 JudgeIt PROVISIONAL, earlier JR040/044/045 and owner CD/CSRF release gates pending. Verdict **READY WITH PROVISIONAL INTEGRATION** for independent next **Session08 JR-071–JR-080** on same Phase04 branch, claim cleared. **STOP**; do not begin JR071 in this chat.
+
+- 2026-11-22T05:59:43.970562+00:00: Session08 JR-071–JR-080 claimed by builder-session08-2026-11-22T05:59:43.970562+00:00; existing Phase04 e3e2f5ae8132, no competing recent phase/control writes observed; no main merge or deployment.
