@@ -85,7 +85,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-077 | Specify Leadership transfer and team UX acceptance | 08 | DONE | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-077) • team transfer/removal contract and canonical-role UX checks specified | 2026-11-22T06:05:57.686385+00:00 |
 | JR-078 | Reproduce Leadership transfer and team UX success | 08 | IN REVIEW | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-078) • HTTP transfer/team/audit and QueryClient role refresh tests authored; CI pending | 2026-11-22T06:07:13.633855+00:00 |
 | JR-079 | Reject Leadership transfer and team UX invalid operation | 08 | IN REVIEW | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-079) • nonmember/stale removal and historical-log preservation tests authored; CI pending | 2026-11-22T06:07:59.935523+00:00 |
-| JR-080 | Close Leadership transfer and team UX verification | 08 | NOT STARTED | — | — |
+| JR-080 | Close Leadership transfer and team UX verification | 08 | IN REVIEW | [Session 08 evidence](SESSION-08-EVIDENCE.md#jr-080) • team verification closure awaits fresh runtime CI; phase release hold preserved | 2026-11-22T06:08:26.927742+00:00 |
 | JR-081 | Inventory Log authoring and edit rules | 09 | NOT STARTED | — | — |
 | JR-082 | Specify Log authoring and edit rules acceptance | 09 | NOT STARTED | — | — |
 | JR-083 | Reproduce Log authoring and edit rules success | 09 | NOT STARTED | — | — |

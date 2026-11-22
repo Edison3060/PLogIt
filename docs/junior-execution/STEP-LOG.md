@@ -765,3 +765,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Expected safe denials and no unintended side effects; actual test authored/reviewed, runtime NOT EXECUTED at checkpoint; PostgreSQL16 CI pending. Frontend prior role-refresh test remains pending. Production services/API/auth/export unchanged. IN REVIEW until actual runtime checks, reviewer Builder Lead.
 
 - Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-080.
+
+### 2026-11-22T06:08:26.927742+00:00 | Session 08 | JR-080 | IN REVIEW
+- Original: Close Leadership transfer and team UX verification. Prior NOT STARTED → IN PROGRESS → IN REVIEW. Reviewer Builder Lead, no subagents. Source parent `1d003faa9505afe9aeae894a07124461c9833c96`.
+- Compared new HTTP positive transfer/canonical-role/audit/removal/history test, nonmember/stale negative no-mutation test, real QueryClient/jsdom refreshed-team test and existing transactional optimistic-lock/audit rollback regressions. No production source modification necessary based on inspection; runtime outcome still pending. Keep JR078/079/080 IN REVIEW until Java21/PostgreSQL16 Maven and frontend runtime results observed. JR074/075 additionally remain open for malformed target-string/size validation policy even with green CI; prior Phase04 JR064/065/069/070 gates remain unaccepted. No phase merge or main push permitted.
+- Actual checks: `git diff --check` exit0; test source review and full20 original phase acceptance comparison. Local Maven/Docker unavailable; CI planned `mvn -B clean verify`, frontend npm ci/lint/build/Vitest, live Compose, Semgrep, pinned Trivy fs/images, proxy. Full CI must be inspected at exact executable SHA; never infer pass from authored tests or older green runs. Last of ten JR checkpoints, final reconciliation and controller advancement only next. Reviewer Builder Lead, no subagents.
+
+- Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: Session08 final evidence reconciliation only; STOP before JR-081.
