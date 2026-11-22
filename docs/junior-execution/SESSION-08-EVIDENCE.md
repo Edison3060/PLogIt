@@ -19,3 +19,9 @@ Status at checkpoint: IN REVIEW. Reproduce Scope and rules of engagement success
 - Added ScopeRulesIntegrationTest.leaderScopeRulesAndDatesPersistAcrossFreshMemberReadWithPrivateAudit: isolated synthetic leader PUT of three targets (IP/CIDR/domain), dates and all five RoE fields; independent member GET simulates refresh; DB dates/targets and single leader audit asserted with private emergency-contact value absent from audit metadata. Expected HTTP 200, LEADER then MEMBER, identical persisted values. This is backend refresh evidence, not a browser screenshot or full UI edit proof.
 - Actual result at checkpoint: test authored/reviewed, runtime NOT EXECUTED locally (Maven/Docker unavailable); Java21/PostgreSQL16 `cd backend && mvn -B clean verify` planned in GitHub CI. Preserve IN REVIEW until observed. No production source/JSON changes. Changed test plus register/log/handoff/Session08 evidence. Reviewer Builder Lead.
 
+
+## JR-074
+Status at checkpoint: IN REVIEW. Reject Scope and rules of engagement invalid operation.
+- Added nonleadersMalformedBodiesAndOversizedRulesCannotMutateScopeOrAudit: active member PUT 403, outsider 404, anonymous/missing CSRF 403; malformed target object and date 400; every bounded RoE field at limit+1 400 with named fieldErrors. Asserts persisted dates/targets/all RoE, membership count and audit count unchanged. Separate characterizesUnresolvedTargetSyntaxValidationGap deliberately expects current 200 for malformed/blank target strings and verifies persistence; this is evidence of a GAP, never invalid-target denial success. No production policy invented.
+- Test source reviewed; runtime NOT EXECUTED locally; pending Java21 PostgreSQL16 Actions `mvn -B clean verify`. Original JR074 remains IN REVIEW even if characterization passes; DEC-2026-11-22-01 target policy/size validation acceptance unresolved. No race claim or full UI screenshot. Changed ScopeRulesIntegrationTest and per-JR tracking. Reviewer Builder Lead.
+

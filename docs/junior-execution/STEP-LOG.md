@@ -723,3 +723,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Actual result at checkpoint: test authored/reviewed, runtime NOT EXECUTED locally (Maven/Docker unavailable); Java21/PostgreSQL16 `cd backend && mvn -B clean verify` planned in GitHub CI. Preserve IN REVIEW until observed. No production source/JSON changes. Changed test plus register/log/handoff/Session08 evidence. Reviewer Builder Lead.
 
 - Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-074.
+
+### 2026-11-22T06:04:11.439002+00:00 | Session 08 | JR-074 | IN REVIEW
+- Original: Reject Scope and rules of engagement invalid operation. Prior NOT STARTED → IN PROGRESS → IN REVIEW. Reviewer Builder Lead, no subagents. Source parent `462483df1f0d15f6fa8648d3fed2a4cfc87eedd5`.
+- Added nonleadersMalformedBodiesAndOversizedRulesCannotMutateScopeOrAudit: active member PUT 403, outsider 404, anonymous/missing CSRF 403; malformed target object and date 400; every bounded RoE field at limit+1 400 with named fieldErrors. Asserts persisted dates/targets/all RoE, membership count and audit count unchanged. Separate characterizesUnresolvedTargetSyntaxValidationGap deliberately expects current 200 for malformed/blank target strings and verifies persistence; this is evidence of a GAP, never invalid-target denial success. No production policy invented.
+- Test source reviewed; runtime NOT EXECUTED locally; pending Java21 PostgreSQL16 Actions `mvn -B clean verify`. Original JR074 remains IN REVIEW even if characterization passes; DEC-2026-11-22-01 target policy/size validation acceptance unresolved. No race claim or full UI screenshot. Changed ScopeRulesIntegrationTest and per-JR tracking. Reviewer Builder Lead.
+
+- Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-075.

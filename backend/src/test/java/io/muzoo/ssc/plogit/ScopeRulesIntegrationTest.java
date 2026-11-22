@@ -70,4 +70,67 @@ class ScopeRulesIntegrationTest extends IntegrationTestBase {
         assertTrue(audit.get(0).getMetadata().containsKey("changedFields"));
         assertFalse(audit.get(0).getMetadata().toString().contains("Synthetic security desk"));
     }
+
+    @Test
+    void nonleadersMalformedBodiesAndOversizedRulesCannotMutateScopeOrAudit() throws Exception {
+        User leader = createUser("rules-owner@test.local");
+        User member = createUser("rules-member@test.local");
+        User outsider = createUser("rules-outsider@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        String uri = "/api/engagements/" + engagement.getId();
+        long auditsBefore = auditLogRepository.count();
+        long membersBefore = memberRepository.count();
+        String valid = "{\"allowedHours\":\"unauthorized\",\"inScopeTargets\":[\"test.example\"]}";
+
+        mockMvc.perform(put(uri).with(asUser(member)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(valid))
+            .andExpect(status().isForbidden());
+        mockMvc.perform(put(uri).with(asUser(outsider)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(valid))
+            .andExpect(status().isNotFound());
+        mockMvc.perform(put(uri).with(asUser(leader))
+                .contentType(MediaType.APPLICATION_JSON).content(valid))
+            .andExpect(status().isForbidden());
+        mockMvc.perform(put(uri).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(valid))
+            .andExpect(status().isForbidden());
+        for (String body : List.of("{\"inScopeTargets\":{\"invalid\":true}}", "{\"startDate\":\"not-a-date\"}")) {
+            mockMvc.perform(put(uri).with(asUser(leader)).with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON).content(body))
+                .andExpect(status().isBadRequest());
+        }
+        for (String field : List.of("allowedHours", "allowedTechniques", "forbiddenTechniques", "emergencyContacts", "outOfScope")) {
+            int limit = field.equals("allowedHours") ? 1000 : 4000;
+            String body = "{\"" + field + "\":\"" + "x".repeat(limit + 1) + "\"}";
+            mockMvc.perform(put(uri).with(asUser(leader)).with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON).content(body))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.fieldErrors[0].field").value(field));
+        }
+        Engagement saved = engagementRepository.findById(engagement.getId()).orElseThrow();
+        assertEquals(engagement.getAllowedHours(), saved.getAllowedHours());
+        assertEquals(engagement.getAllowedTechniques(), saved.getAllowedTechniques());
+        assertEquals(engagement.getForbiddenTechniques(), saved.getForbiddenTechniques());
+        assertEquals(engagement.getEmergencyContacts(), saved.getEmergencyContacts());
+        assertEquals(engagement.getOutOfScope(), saved.getOutOfScope());
+        assertEquals(engagement.getInScopeTargets(), saved.getInScopeTargets());
+        assertEquals(engagement.getStartDate(), saved.getStartDate());
+        assertEquals(engagement.getDueDate(), saved.getDueDate());
+        assertEquals(auditsBefore, auditLogRepository.count());
+        assertEquals(membersBefore, memberRepository.count());
+    }
+
+    @Test
+    void characterizesUnresolvedTargetSyntaxValidationGap() throws Exception {
+        User leader = createUser("target-policy@test.local");
+        Engagement engagement = createEngagement(leader);
+        String uri = "/api/engagements/" + engagement.getId();
+
+        mockMvc.perform(put(uri).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"inScopeTargets\":[\"not a valid IP domain or CIDR !\",\"\"]}"))
+            .andExpect(status().isOk());
+        assertEquals(List.of("not a valid IP domain or CIDR !", ""),
+            engagementRepository.findById(engagement.getId()).orElseThrow().getInScopeTargets());
+    }
 }
