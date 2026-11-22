@@ -730,3 +730,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Test source reviewed; runtime NOT EXECUTED locally; pending Java21 PostgreSQL16 Actions `mvn -B clean verify`. Original JR074 remains IN REVIEW even if characterization passes; DEC-2026-11-22-01 target policy/size validation acceptance unresolved. No race claim or full UI screenshot. Changed ScopeRulesIntegrationTest and per-JR tracking. Reviewer Builder Lead.
 
 - Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-075.
+
+### 2026-11-22T06:04:38.859154+00:00 | Session 08 | JR-075 | IN REVIEW
+- Original: Close Scope and rules of engagement verification. Prior NOT STARTED → IN PROGRESS → IN REVIEW. Reviewer Builder Lead, no subagents. Source parent `33a16cfec81e1938f47c49b7f055ad153e322ad8`.
+- Compared positive scope/date refresh+DB audit fixture against role/CSRF/malformed-body/bounded-text failures and unchanged persistence. Existing ScopePanel rendering regression remains relevant. JR073 runtime pending, JR074 unresolved invalid target string acceptance demonstrated in source characterization; full original success+negative closure cannot be DONE. Preserve IN REVIEW under DEC-2026-11-22-01, test-only approach, no production rollback needed beyond reverting added tests/docs (append correction rather than erase evidence).
+- Actual checks: `git diff --check` exit0, source review. Maven/Docker unavailable locally; Java21/PostgreSQL16 CI result not yet complete, not represented as passing. Expected vs actual gap remains target grammar/bounds. Next independent leadership/team JRs eligible despite prior phase acceptance debt. Reviewer Builder Lead; tracking-only checkpoint.
+
+- Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-076.
