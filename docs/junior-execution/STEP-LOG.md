@@ -758,3 +758,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Expected above; actual source authored and reviewed, runtime NOT EXECUTED at checkpoint. Java21 PostgreSQL16 `mvn -B clean verify`, frontend `npm ci && npm run lint && npm run build && npm test` planned via Actions. No browser screenshot/full browser journey claimed; frontend is jsdom DOM regression. No production application behavior changed; IN REVIEW until actual runtime results. Reviewer Builder Lead.
 
 - Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-079.
+
+### 2026-11-22T06:07:59.935523+00:00 | Session 08 | JR-079 | IN REVIEW
+- Original: Reject Leadership transfer and team UX invalid operation. Prior NOT STARTED → IN PROGRESS → IN REVIEW. Reviewer Builder Lead, no subagents. Source parent `b9934a0f7a26c4849dd58ea3cddcbacc1670986f`.
+- Added TeamWorkflowIntegrationTest.nonmemberTransferAndStaleRemovalLeaveLeaderStateAndAuditIntact: real existing outsider target transfer404, self-leader removal400, member removal403, missing-CSRF403 with no audit; legitimate removal204 followed by stale repeat404 and removed-target transfer404; asserts unchanged leader FK/active role count, member role/removal timestamp, history row count, preserved authored DRAFT log, exactly one legitimate removal audit. Existing stale optimistic-lock rollback and failed-action audit tests retained. These are sequential stale requests, not a simultaneous concurrency test.
+- Expected safe denials and no unintended side effects; actual test authored/reviewed, runtime NOT EXECUTED at checkpoint; PostgreSQL16 CI pending. Frontend prior role-refresh test remains pending. Production services/API/auth/export unchanged. IN REVIEW until actual runtime checks, reviewer Builder Lead.
+
+- Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-080.

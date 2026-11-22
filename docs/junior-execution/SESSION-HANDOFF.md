@@ -313,3 +313,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-22T06:07:13.633855+00:00 | Session08 checkpoint JR-078
 - JR-078: IN REVIEW. HTTP transfer/team/audit and QueryClient role refresh tests authored; CI pending. Prior pushed head `d8df05ca701df8f449536c3055f7fa8e59fc7f50`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
 - Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-079.
+
+### 2026-11-22T06:07:59.935523+00:00 | Session08 checkpoint JR-079
+- JR-079: IN REVIEW. nonmember/stale removal and historical-log preservation tests authored; CI pending. Prior pushed head `b9934a0f7a26c4849dd58ea3cddcbacc1670986f`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-080.

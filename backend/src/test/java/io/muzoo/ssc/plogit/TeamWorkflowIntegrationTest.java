@@ -92,4 +92,52 @@ class TeamWorkflowIntegrationTest extends IntegrationTestBase {
         assertEquals(1, auditLogRepository.findByEngagementId(String.valueOf(saved.getId()), 200).stream()
             .filter(a -> a.getAction().equals("REMOVE_MEMBER")).count());
     }
+
+    @Test
+    void nonmemberTransferAndStaleRemovalLeaveLeaderStateAndAuditIntact() throws Exception {
+        User leader = createUser("stable-leader@test.local");
+        User member = createUser("removed-member@test.local");
+        User outsider = createUser("foreign-member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        var log = createLog(engagement, member, io.muzoo.ssc.plogit.domain.ReviewState.DRAFT);
+        String uri = "/api/engagements/" + engagement.getId();
+        long auditsBefore = auditLogRepository.count();
+        long membersBefore = memberRepository.count();
+
+        mockMvc.perform(post(uri + "/transfer-leadership").with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"newLeaderId\":" + outsider.getId() + "}"))
+            .andExpect(status().isNotFound());
+        mockMvc.perform(delete(uri + "/members/" + leader.getId()).with(asUser(leader)).with(csrf()))
+            .andExpect(status().isBadRequest());
+        mockMvc.perform(delete(uri + "/members/" + member.getId()).with(asUser(member)).with(csrf()))
+            .andExpect(status().isForbidden());
+        mockMvc.perform(delete(uri + "/members/" + member.getId()).with(asUser(leader)))
+            .andExpect(status().isForbidden());
+        assertEquals(auditsBefore, auditLogRepository.count());
+
+        mockMvc.perform(delete(uri + "/members/" + member.getId()).with(asUser(leader)).with(csrf()))
+            .andExpect(status().isNoContent());
+        var removedAt = memberRepository.findByEngagementAndUser(engagement, member).orElseThrow().getRemovedAt();
+        assertNotNull(removedAt);
+        mockMvc.perform(delete(uri + "/members/" + member.getId()).with(asUser(leader)).with(csrf()))
+            .andExpect(status().isNotFound());
+        mockMvc.perform(post(uri + "/transfer-leadership").with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"newLeaderId\":" + member.getId() + "}"))
+            .andExpect(status().isNotFound());
+        Engagement saved = engagementRepository.findById(engagement.getId()).orElseThrow();
+        assertEquals(leader.getId(), saved.getLeader().getId());
+        assertEquals(EngagementRole.LEADER, memberRepository.findByEngagementAndUser(saved, leader).orElseThrow().getRole());
+        assertEquals(EngagementRole.MEMBER, memberRepository.findByEngagementAndUser(saved, member).orElseThrow().getRole());
+        assertEquals(removedAt, memberRepository.findByEngagementAndUser(saved, member).orElseThrow().getRemovedAt());
+        assertEquals(1, memberRepository.findByEngagement(saved).stream()
+            .filter(m -> m.getRemovedAt() == null && m.getRole() == EngagementRole.LEADER).count());
+        assertEquals(membersBefore, memberRepository.count());
+        assertEquals(auditsBefore + 1, auditLogRepository.count());
+        assertEquals(member.getId(), logRepository.findById(log.getId()).orElseThrow().getAuthor().getId());
+        assertEquals(io.muzoo.ssc.plogit.domain.ReviewState.DRAFT,
+            logRepository.findById(log.getId()).orElseThrow().getReviewState());
+    }
 }
