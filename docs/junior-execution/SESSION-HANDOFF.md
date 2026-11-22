@@ -305,3 +305,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-22T06:05:20.188347+00:00 | Session08 checkpoint JR-076
 - JR-076: DONE. canonical transactional transfer/remove and query-refresh inventory verified. Prior pushed head `52b68dae6da6be6a2aeca11ca90d174f22f9e1ac`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
 - Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-077.
+
+### 2026-11-22T06:05:57.686385+00:00 | Session08 checkpoint JR-077
+- JR-077: DONE. team transfer/removal contract and canonical-role UX checks specified. Prior pushed head `0e05ece60c91d306217c5a12c6e7660a9d5d41e7`; new SHA in JR-numbered history. See SESSION-08-EVIDENCE.md and append-only STEP-LOG.
+- Preserve JR064/065/069/070, JR040/044/045, INT-001 provisional and DEC-11 release holds; #22–25 draft/unmerged. No main or production actions. Next JR-078.
