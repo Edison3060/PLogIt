@@ -751,3 +751,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Existing optimistic rollback tests required; add backend combined HTTP/DB tests plus frontend actual QueryClient role-refresh regression. No permission/API or product-policy change. Acceptance specification DONE, runtime NOT EXECUTED in this JR. Reviewer Builder Lead, no subagents. Next reproduce positive.
 
 - Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-078.
+
+### 2026-11-22T06:07:13.633855+00:00 | Session 08 | JR-078 | IN REVIEW
+- Original: Reproduce Leadership transfer and team UX success. Prior NOT STARTED → IN PROGRESS → IN REVIEW. Reviewer Builder Lead, no subagents. Source parent `d8df05ca701df8f449536c3055f7fa8e59fc7f50`.
+- Added TeamWorkflowIntegrationTest.transferRefreshesPermissionsRosterAndSingleAuditThenRemovalPreservesHistory: real PostgreSQL16 HTTP transfer204; fresh old/new detail MEMBER/LEADER, DB FK + one active leader, precise one transfer audit actor/IDs; old leader PUT/remove/transfer/audit403 with no mutation; new leader PUT200/remove204/audit200; removed member404, roster excludes member but historical membership row preserved. Added EngagementTeamWorkflow.test.tsx with real React Query client: successful transfer invalidates/refetches server role and removes old leader team controls. Synthetic API mock for frontend only, backend endpoints not mocked.
+- Expected above; actual source authored and reviewed, runtime NOT EXECUTED at checkpoint. Java21 PostgreSQL16 `mvn -B clean verify`, frontend `npm ci && npm run lint && npm run build && npm test` planned via Actions. No browser screenshot/full browser journey claimed; frontend is jsdom DOM regression. No production application behavior changed; IN REVIEW until actual runtime results. Reviewer Builder Lead.
+
+- Commit: this JR-numbered checkpoint in phase branch history; PR #25 draft, stacked on unmerged Phase03. No main merge/deployment. Next: JR-079.
