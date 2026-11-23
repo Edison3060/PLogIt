@@ -152,6 +152,67 @@ class LogVersioningIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void invalidActivityAndDeniedEditsLeaveContentAndHistoryIntact() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        User other = createUser("other@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        addMember(engagement, other, EngagementRole.MEMBER);
+
+        mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/logs")
+                .with(asUser(author))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(CREATE_BODY.replace("RECONNAISSANCE", "INVALID_ACTIVITY")))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.message").value("Malformed request body"));
+        assertEquals(0, logRepository.count());
+        assertEquals(0, versionRepository.count());
+        assertEquals(0, auditLogRepository.count());
+
+        UUID id = UUID.fromString(createLogViaApi(engagement, author));
+        LogEntry draft = logRepository.findById(id).orElseThrow();
+        String edit = """
+            {"title":"Changed title"}
+            """;
+
+        mockMvc.perform(put(logUri(id)).with(asUser(other)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(edit))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.message").value("You can only edit your own logs"));
+        LogEntry afterDeniedDraftEdit = logRepository.findById(id).orElseThrow();
+        assertEquals(ReviewState.DRAFT, afterDeniedDraftEdit.getReviewState());
+        assertEquals("Test log", afterDeniedDraftEdit.getTitle());
+        assertEquals(draft.getVersion(), afterDeniedDraftEdit.getVersion());
+        assertEquals(1, versionRepository.count());
+        assertEquals(0, auditLogRepository.count());
+
+        mockMvc.perform(post(logUri(id) + "/transition").with(asUser(author)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content("""
+                    {"action":"SUBMIT"}
+                    """))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.reviewState").value("SUBMITTED"));
+        LogEntry submitted = logRepository.findById(id).orElseThrow();
+
+        mockMvc.perform(put(logUri(id)).with(asUser(author)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(edit))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.message").value("Only draft logs can be edited"));
+        LogEntry afterDeniedSubmittedEdit = logRepository.findById(id).orElseThrow();
+        assertEquals(ReviewState.SUBMITTED, afterDeniedSubmittedEdit.getReviewState());
+        assertEquals("Test log", afterDeniedSubmittedEdit.getTitle());
+        assertEquals(submitted.getVersion(), afterDeniedSubmittedEdit.getVersion());
+        assertEquals(author.getId(), afterDeniedSubmittedEdit.getLastEditedById());
+        List<LogVersion> versions = versionRepository.findByLogOrderByVersionNumberAsc(afterDeniedSubmittedEdit);
+        assertEquals(1, versions.size());
+        assertEquals("Test log", versions.getFirst().getSnapshot().get("title"));
+        assertEquals(1, auditLogRepository.count());
+        assertEquals("SUBMIT", auditLogRepository.findAll().getFirst().getAction());
+    }
+
+    @Test
     void createProducesVersion1() throws Exception {
         User leader = createUser("leader@test.local");
         Engagement engagement = createEngagement(leader);

@@ -355,3 +355,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - IN REVIEW. Added integrated create, update, read and history assertions pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-083). Prior pushed checkpoint `eabadf6612010ea85a0ed726c8781b3a54882bd0`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Exercise invalid activity and denied edit side effects in JR-084.
+
+### 2026-11-23T02:03:52Z | Session 09 | JR-084
+
+- IN REVIEW. Added invalid activity and denied-edit checks with persisted side effects pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-084). Prior pushed checkpoint `30ae4dbba17ad276338a49f368a642796dc52af9`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Evaluate closure of authoring verification in JR-085 and reconcile both scenarios against final CI.

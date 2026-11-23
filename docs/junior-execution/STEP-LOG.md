@@ -802,3 +802,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-083). Changed `backend/src/test/java/io/muzoo/ssc/plogit/LogVersioningIntegrationTest.java`.
 - Git reference: previous pushed checkpoint `eabadf6612010ea85a0ed726c8781b3a54882bd0`. This checkpoint has a JR-083-numbered commit on `work/plogit-phase-05`.
 - Next: Exercise invalid activity and denied edit side effects in JR-084.
+
+### 2026-11-23T02:03:52Z | Session 09 | JR-084 | IN REVIEW
+
+- Assessment: Added invalid activity and denied-edit checks with persisted side effects pending CI. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-084). Changed `backend/src/test/java/io/muzoo/ssc/plogit/LogVersioningIntegrationTest.java`.
+- Git reference: previous pushed checkpoint `30ae4dbba17ad276338a49f368a642796dc52af9`. This checkpoint has a JR-084-numbered commit on `work/plogit-phase-05`.
+- Next: Evaluate closure of authoring verification in JR-085 and reconcile both scenarios against final CI.

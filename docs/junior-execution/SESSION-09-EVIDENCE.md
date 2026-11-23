@@ -17,3 +17,7 @@ Expected denials include HTTP 400 for invalid activity, 409 for an active non-au
 ## JR-083
 
 Added `LogVersioningIntegrationTest#authorCanCreateAndEditDraftWithStableIdentityAndOrderedSnapshots` using an active member and a synthetic `fixture.example` note. POST -> PUT -> GET detail -> GET history must retain the same UUID, author and engagement, keep DRAFT, preserve omitted fields, persist new Markdown and tags, and return exactly snapshots 1 and 2 with the original and updated values and authenticated editor. No screenshot is required for HTTP/backend checks. `git diff --check` exited 0. Local Maven and Docker are unavailable. PostgreSQL 16/Testcontainers runtime evidence is pending GitHub Actions.
+
+## JR-084
+
+Added `LogVersioningIntegrationTest#invalidActivityAndDeniedEditsLeaveContentAndHistoryIntact`. An unknown activity must yield 400 and write no log, snapshot or audit. An active non-author member's edit must yield 409 with no state, title, row-version, snapshot or audit mutation. After real author submission, an author edit must yield 409 and leave the log SUBMITTED, original content and editor intact, with exactly one original snapshot and one SUBMIT event. `git diff --check` exited 0. Runtime results pending GitHub Actions.
