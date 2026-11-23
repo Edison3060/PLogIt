@@ -29,3 +29,7 @@ JR-093's ordered success and JR-094's negative checks passed in [push CI 4509855
 ## JR-097
 
 `GET /api/engagements/{id}/logs?reviewState=SUBMITTED&search=...` should select only committed matching logs. `GET /api/logs/{id}/history` should render version ordinals, editor and snapshots. Authorized `POST /api/logs/{id}/transition` accepts `action` and optional `comment`. Author SUBMIT and leader APPROVE should each produce exactly one audit row with actor and old/new states. Denied/rolled-back approval must not change durable state or create audit. A stale approval error must not render an approved state optimistically. Next JR-098 exercises the actual board and PostgreSQL.
+
+## JR-098
+
+`ReviewTransitionIntegrationTest` and `AuditLogIntegrationTest` pass at `f331623749db0165cb31146b8118373859e7fb34` in [push CI 45098552729](https://github.com/Edison3060/PLogIt/actions/runs/45098552729). The baseline tests check committed author submission, leader approval and audit. The Chromium fixture exercises history, composed review queue/search filters, author submission and leader approval against the isolated local PostgreSQL-backed application. Browser results pending at this checkpoint. Clarification of JR-097: UI history shows version, time, title and result. Editor ID is verified in the history API and database. Next JR-099 adds a forced rollback assertion and verifies stale review behavior.
