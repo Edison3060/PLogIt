@@ -437,3 +437,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-23T14:01:47.918Z | Session 10 | JR-096
 
 - DONE. Mapped committed audit events and log board query owners. [Evidence](SESSION-10-EVIDENCE.md#jr-096). Prior phase head `f533ca42911b392c1238395834dc5baae58572c4`.
+
+### 2026-11-23T14:01:50.675Z | Session 10 | JR-097
+
+- DONE. Specified committed state, board filters, and audit acceptance. [Evidence](SESSION-10-EVIDENCE.md#jr-097). Prior phase head `da089837b5fecb721c30ee567f8bda1621a63605`.

@@ -25,3 +25,7 @@ JR-093's ordered success and JR-094's negative checks passed in [push CI 4509855
 ## JR-096
 
 `LogReviewService` updates state, then publishes `LogTransitionedEvent`. `AuditEventListener` persists at BEFORE_COMMIT in the same transaction; `AuditLogRepository` and engagement leader authorization govern reads. `LogBoard` sends scoped filters with React Query, and `LogDetail` renders current server state and ordered history. `useTransitionLog` invalidates board and detail queries on success and has no optimistic approval write. Existing `AuditLogIntegrationTest` and `ReviewTransitionIntegrationTest` cover stored transitions, membership, denials and replay. The product spec proposes additional filter dimensions and broader audit coverage. Canonical source map verified against `f331623749db0165cb31146b8118373859e7fb34`. Next JR-097 defines the exact board and rollback verification.
+
+## JR-097
+
+`GET /api/engagements/{id}/logs?reviewState=SUBMITTED&search=...` should select only committed matching logs. `GET /api/logs/{id}/history` should render version ordinals, editor and snapshots. Authorized `POST /api/logs/{id}/transition` accepts `action` and optional `comment`. Author SUBMIT and leader APPROVE should each produce exactly one audit row with actor and old/new states. Denied/rolled-back approval must not change durable state or create audit. A stale approval error must not render an approved state optimistically. Next JR-098 exercises the actual board and PostgreSQL.

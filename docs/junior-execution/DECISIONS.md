@@ -212,3 +212,9 @@ _No execution-session decisions have been recorded._
 - Actual: JPA detects overlapping stale transactions; current PATCH/PUT contract still accepts later-arriving saves from previously loaded clients because the update DTO has no expected revision. The edit endpoint is PUT.
 - Expected if product requires stale browser forms to be denied: the server atomically checks a caller-supplied revision and returns a safe conflict without changing current log, snapshots, or audit.
 - Recommended: define a backwards-compatible rollout for an explicit precondition, then enforce only after direct API caller compatibility is verified. Preserve the existing API and export shape pending that approval. Current transaction protection was verified in CI.
+
+### DEC-2026-11-23-04 — Verify current audit and board contracts
+
+- Owner: PLogIt product owner. Status: verification approved within Session 10. Any expansion requires product review.
+- Actual: Board shows search, activity type, outcome and review state including leader queue. The API also accepts author ID. Transactional review audit records include actor, transition states and engagement ID. Historical plans describe additional target/tag/date filters and broader audit events.
+- Recommended: verify current board and review-audit behavior with a synthetic workflow and forced rollback. Keep filter and audit policy scope unchanged in this session. JR-096 through JR-100.
