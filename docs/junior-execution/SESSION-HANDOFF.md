@@ -421,3 +421,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-23T14:00:14.097Z | Session 10 | JR-092
 
 - DONE. Specified snapshot ordering and stale-write acceptance. [Evidence](SESSION-10-EVIDENCE.md#jr-092). Prior phase head `ae625c2d97e6dc8a032dbf5c2f536ede9c1e2f86`.
+
+### 2026-11-23T14:01:10.029Z | Session 10 | JR-093
+
+- DONE. Verified two ordered, immutable snapshot values. [Evidence](SESSION-10-EVIDENCE.md#jr-093). Prior phase head `d45d5700a68b8fff2529423272e62c29b5d73269`.

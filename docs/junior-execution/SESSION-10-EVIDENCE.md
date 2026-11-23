@@ -9,3 +9,7 @@ At base `f331623749db0165cb31146b8118373859e7fb34`, `LogService.create/update` p
 ## JR-092
 
 Draft writes use authenticated `PUT /api/logs/{id}` with editable fields only, as defined by `LogUpdateRequest`. `GET /api/logs/{id}/history` returns ascending `versionNumber`, snapshot, editor and time. Two concurrent transactions loading the same JPA version should produce one durable update and one conflict, mapped to HTTP 409. A delayed browser save that reaches a new transaction after the winning save has committed supplies no expected version and can still succeed. A strict browser precondition would require an approved caller-compatibility decision. Preserve existing authorization and wire shape. Next JR-093 verifies the successful persistence fixture.
+
+## JR-093
+
+In [push CI 45098552729](https://github.com/Edison3060/PLogIt/actions/runs/45098552729) at `f331623749db0165cb31146b8118373859e7fb34`, `mvn -B clean verify` ran all ten `LogVersioningIntegrationTest` cases on PostgreSQL 16.16. `authorCanCreateAndEditDraftWithStableIdentityAndOrderedSnapshots` creates an authenticated synthetic draft with Markdown and tags, updates it, GETs history and reads persisted snapshots. Expected and observed sequence `[1, 2]`, stable actor/log identity, and distinct original and edited content. V3 and the separate duplicate-insert test protect unique ordinals. Next JR-094 verifies races and the stale-client limitation.
