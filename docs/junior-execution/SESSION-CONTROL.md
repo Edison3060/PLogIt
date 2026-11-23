@@ -9,14 +9,14 @@ Only this per-app controller selects what a fresh Builder Lead session does next
 | Key | Value |
 |---|---|
 | NEXT_SESSION | 10 |
-| STATE | READY |
+| STATE | IN_PROGRESS |
 | LAST_ASSESSED_SESSION | 09 |
 | LAST_ASSESSED_JR_RANGE | JR-081–JR-090 |
 | CURRENT_TARGET_JR_RANGE | JR-091–JR-100 |
 | CURRENT_TARGET_PHASE_BRANCH | work/plogit-phase-05 |
 | LAST_PHASE_BRANCH | work/plogit-phase-05 |
-| CURRENT_RUN_OWNER | NONE |
-| LAST_UPDATE_UTC | 2026-11-23T02:10:05Z |
+| CURRENT_RUN_OWNER | builder-session10-2026-11-23T13:59:06.908Z |
+| LAST_UPDATE_UTC | 2026-11-23T13:59:06.908Z |
 | PENDING_PHASE_ACCEPTANCE | Phase 01–05 draft PRs #22–26 unmerged. Session 09 all ten DONE; full push CI 45098257613 green at 7dfafc4189a5 (150 backend, 19 frontend, Compose, Semgrep, Trivy filesystem and both images, proxy; production CD skipped). Final evidence f331623749db. Preserve JR-064/065 duplicate-name policy, JR-069/070 v1 expiry and simultaneous join, JR-074/075 target validation, earlier JR-040 scanner acceptance, JR-044/045 idle expiry, direct-API CSRF release compatibility, INT-001 genuine JudgeIt PROVISIONAL, and owner main-CD DEC-2026-11-06-11 pending. DEC-2026-11-23-01/-02 record legacy log target/edit and comment policy differences. Phase 05B and the full Phase 05 gate remain pending. |
 | AFTER_FINAL_SESSION | COMPLETE, no automatic wraparound |
 
@@ -76,3 +76,5 @@ Odd sessions start/resume one of the original twelve `work/plogit-phase-XX` bran
 - 2026-11-23T02:00:26Z Session09 JR-081–JR-090 claimed by builder-session09-2026-11-23T02:00:26Z. Phase 05 will stack on Phase 04 `456d8487fc970b1dff829576f6dd9e5588dca67b` for independent verification. Prior acceptance remains pending.
 
 - 2026-11-23T02:10:05Z Session 09 JR-081–JR-090 all DONE, each with a numbered checkpoint and append-only evidence. [Full CI 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) passed at `7dfafc4189a53146222224798dc256b13e1b7167` (150 backend/PostgreSQL 16, 19 frontend, Compose, Semgrep, Trivy and proxy; production CD skipped). Final documentation-only handoff `f331623749db0165cb31146b8118373859e7fb34`. [PR #26](https://github.com/Edison3060/PLogIt/pull/26) remains draft, stacked on unmerged #25. Readiness **READY WITH PROVISIONAL INTEGRATION** for safe independent Session 10, JR-091–JR-100 on `work/plogit-phase-05`. Claim cleared. Phase acceptance, JudgeIt interoperability and production authorization remain pending. Session 10 has not begun.
+
+- 2026-11-23T13:59:06.908Z Session 10 JR-091–JR-100 claimed by builder-session10-2026-11-23T13:59:06.908Z. Resume stacked Phase 05 at `f331623749db0165cb31146b8118373859e7fb34`.
