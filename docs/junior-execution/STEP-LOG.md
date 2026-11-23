@@ -844,3 +844,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-089). Changed `backend/src/test/java/io/muzoo/ssc/plogit/ReviewTransitionIntegrationTest.java`.
 - Git reference: previous pushed checkpoint `bb2ac67cfae9adc050fa7031ea058a0712117766`. This checkpoint has a JR-089-numbered commit on `work/plogit-phase-05`.
 - Next: Review the state machine acceptance evidence and start the final CI run for JR-090.
+
+### 2026-11-23T02:06:08Z | Session 09 | JR-090 | IN REVIEW
+
+- Assessment: Review state closure awaits full CI and persisted side-effect assertions. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-090). Changed tracking files.
+- Git reference: previous pushed checkpoint `d3e10ea9970af21e3e6241eb2bc1b6e7cd604e8c`. This checkpoint has a JR-090-numbered commit on `work/plogit-phase-05`.
+- Next: Run and reconcile pinned Java/Node workflow checks on the pushed Phase 05 branch, then decide whether the controller can advance.

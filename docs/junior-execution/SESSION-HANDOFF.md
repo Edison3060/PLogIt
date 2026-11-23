@@ -391,3 +391,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - IN REVIEW. Added denial and replay assertions for persisted review state, history and audit pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-089). Prior pushed checkpoint `bb2ac67cfae9adc050fa7031ea058a0712117766`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Review the state machine acceptance evidence and start the final CI run for JR-090.
+
+### 2026-11-23T02:06:08Z | Session 09 | JR-090
+
+- IN REVIEW. Review state closure awaits full CI and persisted side-effect assertions. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-090). Prior pushed checkpoint `d3e10ea9970af21e3e6241eb2bc1b6e7cd604e8c`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Run and reconcile pinned Java/Node workflow checks on the pushed Phase 05 branch, then decide whether the controller can advance.
