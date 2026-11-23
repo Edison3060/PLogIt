@@ -385,3 +385,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - IN REVIEW. Added a single-log submit and approve sequence with committed audit assertions pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-088). Prior pushed checkpoint `baf4871005fa9b03c443c19847d75306cdf4d22e`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Verify denied review, rejection without comment, and duplicate approval in JR-089.
+
+### 2026-11-23T02:05:50Z | Session 09 | JR-089
+
+- IN REVIEW. Added denial and replay assertions for persisted review state, history and audit pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-089). Prior pushed checkpoint `bb2ac67cfae9adc050fa7031ea058a0712117766`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Review the state machine acceptance evidence and start the final CI run for JR-090.

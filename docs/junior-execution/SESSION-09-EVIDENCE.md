@@ -41,3 +41,7 @@ Product text describes comments only for rejection. The current DTO accepts opti
 ## JR-088
 
 Added `ReviewTransitionIntegrationTest#authorSubmissionAndLeaderApprovalCommitStateAndOneAuditEach` with a synthetic member-author, separate leader and DRAFT fixture. POST SUBMIT as author and POST APPROVE as leader should return 200. Fresh DB reads must observe each committed state. A new member GET must return APPROVED with the original author and content. Exactly one audit for each action must identify the correct actor, UUID and from/to state. `git diff --check` exited 0. Runtime evidence pending CI.
+
+## JR-089
+
+Added `ReviewTransitionIntegrationTest#deniedReviewAndDuplicateApprovalLeaveNoExtraWritesOrAudit`. Expected outcomes are nonleader APPROVE 403 and missing or whitespace-only REJECT comment 409. After denials a fresh DB read must retain SUBMITTED, the same row version, no rejection metadata, no snapshots and no audit. One eligible leader approval succeeds. A sequential approval retry from APPROVED must yield 409 with no row version change and exactly one committed APPROVE audit. This test covers a sequential retry. `git diff --check` exited 0. Runtime evidence pending CI.

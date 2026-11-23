@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -175,6 +176,62 @@ class ReviewTransitionIntegrationTest extends IntegrationTestBase {
                     {"action":"APPROVE"}
                     """))
             .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void deniedReviewAndDuplicateApprovalLeaveNoExtraWritesOrAudit() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        LogEntry submitted = createLog(engagement, author, ReviewState.SUBMITTED);
+        UUID id = submitted.getId();
+        String approve = """
+            {"action":"APPROVE"}
+            """;
+
+        mockMvc.perform(post(transitionUri(id)).with(asUser(author)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(approve))
+            .andExpect(status().isForbidden())
+            .andExpect(jsonPath("$.message").value("Only the leader can approve or reject a submitted log"));
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content("""
+                    {"action":"REJECT"}
+                    """))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.message").value("A rejection comment is required"));
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content("""
+                    {"action":"REJECT","comment":"   "}
+                    """))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.message").value("A rejection comment is required"));
+
+        LogEntry afterDenials = logRepository.findById(id).orElseThrow();
+        assertEquals(ReviewState.SUBMITTED, afterDenials.getReviewState());
+        assertEquals(submitted.getVersion(), afterDenials.getVersion());
+        assertNull(afterDenials.getRejectionComment());
+        assertNull(afterDenials.getRejectedAt());
+        assertNull(afterDenials.getRejectedById());
+        assertEquals(0, versionRepository.count());
+        assertEquals(0, auditLogRepository.count());
+
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(approve))
+            .andExpect(status().isOk());
+        LogEntry approved = logRepository.findById(id).orElseThrow();
+
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(approve))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.message").value("Approved logs can only be exported"));
+
+        LogEntry afterRetry = logRepository.findById(id).orElseThrow();
+        assertEquals(ReviewState.APPROVED, afterRetry.getReviewState());
+        assertEquals(approved.getVersion(), afterRetry.getVersion());
+        assertEquals(0, versionRepository.count());
+        assertEquals(1, auditLogRepository.count());
+        assertEquals("APPROVE", auditLogRepository.findAll().getFirst().getAction());
     }
 
     @Test

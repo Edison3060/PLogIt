@@ -837,3 +837,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-088). Changed `backend/src/test/java/io/muzoo/ssc/plogit/ReviewTransitionIntegrationTest.java`.
 - Git reference: previous pushed checkpoint `baf4871005fa9b03c443c19847d75306cdf4d22e`. This checkpoint has a JR-088-numbered commit on `work/plogit-phase-05`.
 - Next: Verify denied review, rejection without comment, and duplicate approval in JR-089.
+
+### 2026-11-23T02:05:50Z | Session 09 | JR-089 | IN REVIEW
+
+- Assessment: Added denial and replay assertions for persisted review state, history and audit pending CI. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-089). Changed `backend/src/test/java/io/muzoo/ssc/plogit/ReviewTransitionIntegrationTest.java`.
+- Git reference: previous pushed checkpoint `bb2ac67cfae9adc050fa7031ea058a0712117766`. This checkpoint has a JR-089-numbered commit on `work/plogit-phase-05`.
+- Next: Review the state machine acceptance evidence and start the final CI run for JR-090.
