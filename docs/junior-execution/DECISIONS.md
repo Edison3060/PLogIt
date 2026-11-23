@@ -205,3 +205,10 @@ _No execution-session decisions have been recorded._
 ### DEC-2026-11-23-02 | JR-087 | Review state acceptance and comment policy
 
 2026-11-23T02:04:46Z, Builder Lead. Verify existing role- and state-based transitions with fresh reads and exact audit counts. Rejection returns to DRAFT and is preserved in audit. The DTO and audit path also accept a supplied comment on other successful actions, while the product prose describes comments only on rejection. Retain the current API and audit history pending a separately scoped decision on rejecting or ignoring other comments. No state, authorization, export, or data migration is proposed.
+
+### DEC-2026-11-23-03 — Client revision precondition
+
+- Owner: PLogIt product owner. Status: pending contract decision. JR-092/094/095.
+- Actual: JPA detects overlapping stale transactions; current PATCH/PUT contract still accepts later-arriving saves from previously loaded clients because the update DTO has no expected revision. The edit endpoint is PUT.
+- Expected if product requires stale browser forms to be denied: the server atomically checks a caller-supplied revision and returns a safe conflict without changing current log, snapshots, or audit.
+- Recommended: define a backwards-compatible rollout for an explicit precondition, then enforce only after direct API caller compatibility is verified. Preserve the existing API and export shape pending that approval. Current transaction protection was verified in CI.

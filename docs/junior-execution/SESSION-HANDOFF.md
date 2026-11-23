@@ -425,3 +425,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-23T14:01:10.029Z | Session 10 | JR-093
 
 - DONE. Verified two ordered, immutable snapshot values. [Evidence](SESSION-10-EVIDENCE.md#jr-093). Prior phase head `d45d5700a68b8fff2529423272e62c29b5d73269`.
+
+### 2026-11-23T14:01:12.961Z | Session 10 | JR-094
+
+- IN REVIEW. Verified concurrent transaction denial and identified delayed stale browser saves. [Evidence](SESSION-10-EVIDENCE.md#jr-094). Prior phase head `a51dbe18659df8676b2854eec195ad5902d0b1e5`.

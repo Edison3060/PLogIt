@@ -879,3 +879,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Verified two ordered, immutable snapshot values.
 - [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-093). Prior phase head `d45d5700a68b8fff2529423272e62c29b5d73269`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:01:12.961Z | Session 10 | JR-094 | IN REVIEW
+
+- Verified concurrent transaction denial and identified delayed stale browser saves.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-094). Prior phase head `a51dbe18659df8676b2854eec195ad5902d0b1e5`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
