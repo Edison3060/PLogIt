@@ -349,3 +349,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - DONE. Specified the draft-only API and recorded historical policy discrepancies. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-082). Prior pushed checkpoint `d50fdc92091496c634e78fdae1306b9afb22c830`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Exercise creation, update, reread and version snapshots with a synthetic author in JR-083.
+
+### 2026-11-23T02:03:20Z | Session 09 | JR-083
+
+- IN REVIEW. Added integrated create, update, read and history assertions pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-083). Prior pushed checkpoint `eabadf6612010ea85a0ed726c8781b3a54882bd0`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Exercise invalid activity and denied edit side effects in JR-084.

@@ -1,5 +1,6 @@
 package io.muzoo.ssc.plogit;
 
+import com.jayway.jsonpath.JsonPath;
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.LogEntry;
@@ -76,6 +77,78 @@ class LogVersioningIntegrationTest extends IntegrationTestBase {
             .getResponse()
             .getContentAsString();
         return response.replaceAll(".*\"id\":\"([^\"]+)\".*", "$1");
+    }
+
+    @Test
+    void authorCanCreateAndEditDraftWithStableIdentityAndOrderedSnapshots() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+
+        String response = mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/logs")
+                .with(asUser(author))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {
+                      "activityType":"MANUAL_TESTING",
+                      "title":"Inventory note",
+                      "description":"**Initial observation**",
+                      "result":"Initial result",
+                      "target":"fixture.example",
+                      "outcome":"IN_PROGRESS",
+                      "tags":["initial","inventory"]
+                    }
+                    """))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.reviewState").value("DRAFT"))
+            .andReturn().getResponse().getContentAsString();
+        UUID id = UUID.fromString(JsonPath.<String>read(response, "$.id"));
+
+        mockMvc.perform(put(logUri(id))
+                .with(asUser(author))
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {
+                      "title":"Updated inventory note",
+                      "description":"**Updated observation**",
+                      "tags":["reviewed"]
+                    }
+                    """))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(id.toString()));
+
+        mockMvc.perform(get(logUri(id)).with(asUser(author)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(id.toString()))
+            .andExpect(jsonPath("$.authorId").value(author.getId().intValue()))
+            .andExpect(jsonPath("$.lastEditedById").value(author.getId().intValue()))
+            .andExpect(jsonPath("$.engagementId").value(engagement.getId().intValue()))
+            .andExpect(jsonPath("$.title").value("Updated inventory note"))
+            .andExpect(jsonPath("$.activityType").value("MANUAL_TESTING"))
+            .andExpect(jsonPath("$.description").value("**Updated observation**"))
+            .andExpect(jsonPath("$.result").value("Initial result"))
+            .andExpect(jsonPath("$.target").value("fixture.example"))
+            .andExpect(jsonPath("$.outcome").value("IN_PROGRESS"))
+            .andExpect(jsonPath("$.tags.length()").value(1))
+            .andExpect(jsonPath("$.tags[0]").value("reviewed"))
+            .andExpect(jsonPath("$.reviewState").value("DRAFT"));
+
+        mockMvc.perform(get(logUri(id) + "/history").with(asUser(author)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(2))
+            .andExpect(jsonPath("$[0].versionNumber").value(1))
+            .andExpect(jsonPath("$[0].editedById").value(author.getId().intValue()))
+            .andExpect(jsonPath("$[0].snapshot.title").value("Inventory note"))
+            .andExpect(jsonPath("$[0].snapshot.description").value("**Initial observation**"))
+            .andExpect(jsonPath("$[0].snapshot.tags[0]").value("initial"))
+            .andExpect(jsonPath("$[1].versionNumber").value(2))
+            .andExpect(jsonPath("$[1].editedById").value(author.getId().intValue()))
+            .andExpect(jsonPath("$[1].snapshot.title").value("Updated inventory note"))
+            .andExpect(jsonPath("$[1].snapshot.description").value("**Updated observation**"))
+            .andExpect(jsonPath("$[1].snapshot.tags[0]").value("reviewed"));
     }
 
     @Test

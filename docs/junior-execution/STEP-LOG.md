@@ -795,3 +795,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-082). Changed tracking files.
 - Git reference: previous pushed checkpoint `d50fdc92091496c634e78fdae1306b9afb22c830`. This checkpoint has a JR-082-numbered commit on `work/plogit-phase-05`.
 - Next: Exercise creation, update, reread and version snapshots with a synthetic author in JR-083.
+
+### 2026-11-23T02:03:20Z | Session 09 | JR-083 | IN REVIEW
+
+- Assessment: Added integrated create, update, read and history assertions pending CI. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-083). Changed `backend/src/test/java/io/muzoo/ssc/plogit/LogVersioningIntegrationTest.java`.
+- Git reference: previous pushed checkpoint `eabadf6612010ea85a0ed726c8781b3a54882bd0`. This checkpoint has a JR-083-numbered commit on `work/plogit-phase-05`.
+- Next: Exercise invalid activity and denied edit side effects in JR-084.

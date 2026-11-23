@@ -88,7 +88,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-080 | Close Leadership transfer and team UX verification | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-080) • team positive/negative/regression verification closed; separate phase gates held • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
 | JR-081 | Inventory Log authoring and edit rules | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-081) • Mapped live authoring, edit and snapshot owners | 2026-11-23T02:02:03Z |
 | JR-082 | Specify Log authoring and edit rules acceptance | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-082) • Specified the draft-only API and recorded historical policy discrepancies | 2026-11-23T02:02:24Z |
-| JR-083 | Reproduce Log authoring and edit rules success | 09 | NOT STARTED | — | — |
+| JR-083 | Reproduce Log authoring and edit rules success | 09 | IN REVIEW | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-083) • Added integrated create, update, read and history assertions pending CI | 2026-11-23T02:03:20Z |
 | JR-084 | Reject Log authoring and edit rules invalid operation | 09 | NOT STARTED | — | — |
 | JR-085 | Close Log authoring and edit rules verification | 09 | NOT STARTED | — | — |
 | JR-086 | Inventory Review state machine | 09 | NOT STARTED | — | — |
