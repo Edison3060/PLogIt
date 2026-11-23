@@ -92,7 +92,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-084 | Reject Log authoring and edit rules invalid operation | 09 | IN REVIEW | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-084) • Added invalid activity and denied-edit checks with persisted side effects pending CI | 2026-11-23T02:03:52Z |
 | JR-085 | Close Log authoring and edit rules verification | 09 | IN REVIEW | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-085) • Authoring closure awaits execution of positive and negative scenarios | 2026-11-23T02:04:10Z |
 | JR-086 | Inventory Review state machine | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-086) • Mapped canonical review states, authorization and audit owners | 2026-11-23T02:04:28Z |
-| JR-087 | Specify Review state machine acceptance | 09 | NOT STARTED | — | — |
+| JR-087 | Specify Review state machine acceptance | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-087) • Specified authenticated transition requests, states and side effects | 2026-11-23T02:04:46Z |
 | JR-088 | Reproduce Review state machine success | 09 | NOT STARTED | — | — |
 | JR-089 | Reject Review state machine invalid operation | 09 | NOT STARTED | — | — |
 | JR-090 | Close Review state machine verification | 09 | NOT STARTED | — | — |

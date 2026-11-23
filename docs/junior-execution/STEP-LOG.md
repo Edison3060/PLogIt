@@ -823,3 +823,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-086). Changed tracking files.
 - Git reference: previous pushed checkpoint `310cd05ee7bb15790c946a212056d522bfe93780`. This checkpoint has a JR-086-numbered commit on `work/plogit-phase-05`.
 - Next: Specify review requests, role rules and legacy discrepancies in JR-087.
+
+### 2026-11-23T02:04:46Z | Session 09 | JR-087 | DONE
+
+- Assessment: Specified authenticated transition requests, states and side effects. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-087). Changed tracking files.
+- Git reference: previous pushed checkpoint `54d347f0cfc8cb6ae2f0bf49ac2086e5c17fe475`. This checkpoint has a JR-087-numbered commit on `work/plogit-phase-05`.
+- Next: Verify author submission and a single committed leader approval in JR-088.

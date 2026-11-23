@@ -201,3 +201,7 @@ _No execution-session decisions have been recorded._
 ### DEC-2026-11-23-01 | JR-082 | Draft authoring contract and historical differences
 
 2026-11-23T02:02:24Z, Builder Lead. Use the canonical server-generated UUID and authenticated author/editor, enforce DRAFT-only edits for author or active leader, and verify immutable snapshots and denied updates with PostgreSQL-backed tests. Historic post-approval leader editing, client UUIDs, and scope-checked log targets would change the existing workflow or API. No such policy change is approved. Retain optional target text, subject to the existing input bound, and carry the scope decision under the earlier Phase 04 acceptance hold.
+
+### DEC-2026-11-23-02 | JR-087 | Review state acceptance and comment policy
+
+2026-11-23T02:04:46Z, Builder Lead. Verify existing role- and state-based transitions with fresh reads and exact audit counts. Rejection returns to DRAFT and is preserved in audit. The DTO and audit path also accept a supplied comment on other successful actions, while the product prose describes comments only on rejection. Retain the current API and audit history pending a separately scoped decision on rejecting or ignoring other comments. No state, authorization, export, or data migration is proposed.

@@ -373,3 +373,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - DONE. Mapped canonical review states, authorization and audit owners. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-086). Prior pushed checkpoint `310cd05ee7bb15790c946a212056d522bfe93780`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Specify review requests, role rules and legacy discrepancies in JR-087.
+
+### 2026-11-23T02:04:46Z | Session 09 | JR-087
+
+- DONE. Specified authenticated transition requests, states and side effects. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-087). Prior pushed checkpoint `54d347f0cfc8cb6ae2f0bf49ac2086e5c17fe475`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Verify author submission and a single committed leader approval in JR-088.
