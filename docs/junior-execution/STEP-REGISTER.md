@@ -104,7 +104,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-096 | Inventory Audit and log board | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-096) • Mapped committed audit events and log board query owners. | 2026-11-23T14:01:47.918Z |
 | JR-097 | Specify Audit and log board acceptance | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-097) • Specified committed state, board filters, and audit acceptance. | 2026-11-23T14:01:50.675Z |
 | JR-098 | Reproduce Audit and log board success | 10 | IN REVIEW | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-098) • Verified persisted review baseline and prepared isolated browser exercise. | 2026-11-23T14:04:03.221Z |
-| JR-099 | Reject Audit and log board invalid operation | 10 | NOT STARTED | — | — |
+| JR-099 | Reject Audit and log board invalid operation | 10 | IN REVIEW | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-099) • Added PostgreSQL coverage for a forced approval rollback. | 2026-11-23T14:04:06.461Z |
 | JR-100 | Close Audit and log board verification | 10 | NOT STARTED | — | — |
 | JR-101 | Inventory Exporter selection and side effects | 11 | NOT STARTED | — | — |
 | JR-102 | Specify Exporter selection and side effects acceptance | 11 | NOT STARTED | — | — |

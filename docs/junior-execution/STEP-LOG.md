@@ -904,3 +904,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Verified persisted review baseline and prepared isolated browser exercise.
 - [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-098). Prior phase head `f3075abdeb637725bda0a793a1db6ddf759d44f0`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:04:06.461Z | Session 10 | JR-099 | IN REVIEW
+
+- Added PostgreSQL coverage for a forced approval rollback.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-099). Prior phase head `84f00762179f4467403309cb73484fe33e916608`. Tracking files and backend/src/test/java/io/muzoo/ssc/plogit/AuditLogIntegrationTest.java recorded. Reviewer: Builder Lead.

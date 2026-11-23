@@ -33,3 +33,7 @@ JR-093's ordered success and JR-094's negative checks passed in [push CI 4509855
 ## JR-098
 
 `ReviewTransitionIntegrationTest` and `AuditLogIntegrationTest` pass at `f331623749db0165cb31146b8118373859e7fb34` in [push CI 45098552729](https://github.com/Edison3060/PLogIt/actions/runs/45098552729). The baseline tests check committed author submission, leader approval and audit. The Chromium fixture exercises history, composed review queue/search filters, author submission and leader approval against the isolated local PostgreSQL-backed application. Browser results pending at this checkpoint. Clarification of JR-097: UI history shows version, time, title and result. Editor ID is verified in the history API and database. Next JR-099 adds a forced rollback assertion and verifies stale review behavior.
+
+## JR-099
+
+`AuditLogIntegrationTest.rolledBackApprovalLeavesSubmittedStateAndNoAudit` executes leader approval from SUBMITTED inside a real managed transaction, observes transient APPROVED, flushes the update, and marks the outer transaction for rollback. Expected durable SUBMITTED and an empty audit list. New test execution pending CI. Baseline `deniedReviewAndDuplicateApprovalLeaveNoExtraWritesOrAudit` passed; Chromium stale-click scenario is pending. Next JR-100 reconciles browser and CI before phase disposition.

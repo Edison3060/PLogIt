@@ -445,3 +445,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-23T14:04:03.221Z | Session 10 | JR-098
 
 - IN REVIEW. Verified persisted review baseline and prepared isolated browser exercise. [Evidence](SESSION-10-EVIDENCE.md#jr-098). Prior phase head `f3075abdeb637725bda0a793a1db6ddf759d44f0`.
+
+### 2026-11-23T14:04:06.461Z | Session 10 | JR-099
+
+- IN REVIEW. Added PostgreSQL coverage for a forced approval rollback. [Evidence](SESSION-10-EVIDENCE.md#jr-099). Prior phase head `84f00762179f4467403309cb73484fe33e916608`.

@@ -4,17 +4,21 @@ import io.muzoo.ssc.plogit.domain.AuditLog;
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.LogEntry;
+import io.muzoo.ssc.plogit.domain.ReviewAction;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
+import io.muzoo.ssc.plogit.service.LogReviewService;
+import io.muzoo.ssc.plogit.service.MembershipService;
 import io.muzoo.ssc.plogit.support.IntegrationTestBase;
 import io.muzoo.ssc.plogit.support.PostgresTestConfig;
-import io.muzoo.ssc.plogit.service.MembershipService;
+import io.muzoo.ssc.plogit.web.dto.TransitionRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
 
@@ -36,6 +40,12 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
 
     @Autowired
     private MembershipService membershipService;
+
+    @Autowired
+    private LogReviewService logReviewService;
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
 
     private List<AuditLog> auditFor(Engagement engagement) {
         return auditLogRepository.findByEngagementId(String.valueOf(engagement.getId()), 200);
@@ -370,6 +380,24 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
         assertThrows(OptimisticLockingFailureException.class, () ->
             membershipService.transferLeadership(stale, leader, member.getId()));
 
+        assertTrue(auditFor(engagement).isEmpty());
+    }
+
+    @Test
+    void rolledBackApprovalLeavesSubmittedStateAndNoAudit() {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.SUBMITTED);
+
+        transactionTemplate.executeWithoutResult(status -> {
+            assertEquals(ReviewState.APPROVED, logReviewService.transition(
+                log.getId(), new TransitionRequest(ReviewAction.APPROVE, null), leader
+            ).reviewState());
+            logRepository.flush();
+            status.setRollbackOnly();
+        });
+
+        assertEquals(ReviewState.SUBMITTED, logRepository.findById(log.getId()).orElseThrow().getReviewState());
         assertTrue(auditFor(engagement).isEmpty());
     }
 
