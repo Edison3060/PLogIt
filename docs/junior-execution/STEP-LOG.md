@@ -909,3 +909,16 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Added PostgreSQL coverage for a forced approval rollback.
 - [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-099). Prior phase head `84f00762179f4467403309cb73484fe33e916608`. Tracking files and backend/src/test/java/io/muzoo/ssc/plogit/AuditLogIntegrationTest.java recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:09:55.372Z | Session 10 | JR-098 | DONE
+
+- Chromium and PostgreSQL verified history, filters, submission, and approval. [Executed evidence](SESSION-10-EVIDENCE.md#reconciliation). Reviewer: Builder Lead.
+
+### 2026-11-23T14:09:55.372Z | Session 10 | JR-099 | DONE
+
+- Forced rollback, member denial, and stale review produced no orphan audit or phantom approval. [Executed evidence](SESSION-10-EVIDENCE.md#reconciliation). Reviewer: Builder Lead.
+
+### 2026-11-23T14:09:55.376Z | Session 10 | JR-100 | DONE
+
+- Closed browser and transactional audit verification while Phase 05 acceptance remains open.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-100). Prior phase head `1064cf0ff89743886d520dbb7b09fc62bcd599a3`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
