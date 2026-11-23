@@ -809,3 +809,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-084). Changed `backend/src/test/java/io/muzoo/ssc/plogit/LogVersioningIntegrationTest.java`.
 - Git reference: previous pushed checkpoint `30ae4dbba17ad276338a49f368a642796dc52af9`. This checkpoint has a JR-084-numbered commit on `work/plogit-phase-05`.
 - Next: Evaluate closure of authoring verification in JR-085 and reconcile both scenarios against final CI.
+
+### 2026-11-23T02:04:10Z | Session 09 | JR-085 | IN REVIEW
+
+- Assessment: Authoring closure awaits execution of positive and negative scenarios. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-085). Changed tracking files.
+- Git reference: previous pushed checkpoint `795fe3d6d83b823076906ab4af3349d2d0002798`. This checkpoint has a JR-085-numbered commit on `work/plogit-phase-05`.
+- Next: Inventory the review state machine in JR-086. Reconcile authoring verification after PostgreSQL 16 CI.

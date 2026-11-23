@@ -21,3 +21,7 @@ Added `LogVersioningIntegrationTest#authorCanCreateAndEditDraftWithStableIdentit
 ## JR-084
 
 Added `LogVersioningIntegrationTest#invalidActivityAndDeniedEditsLeaveContentAndHistoryIntact`. An unknown activity must yield 400 and write no log, snapshot or audit. An active non-author member's edit must yield 409 with no state, title, row-version, snapshot or audit mutation. After real author submission, an author edit must yield 409 and leave the log SUBMITTED, original content and editor intact, with exactly one original snapshot and one SUBMIT event. `git diff --check` exited 0. Runtime results pending GitHub Actions.
+
+## JR-085
+
+The JR-083 and JR-084 tests exercise the create/edit/reread/history path and the invalid activity, other member draft edit and post-submit denial paths. Reviewed both test diffs and the DTO, controller, membership, persistence and version boundaries. No production code correction is proposed. If the tests pass, the authoring result will be verified with no application behavior change. The test-only changes can be reverted independently. Phase 04 acceptance and potential changes to log-target scope checks or approved-log editing are separate open decisions. Reviewer: Builder Lead. Runtime and regression sign-off remain pending.

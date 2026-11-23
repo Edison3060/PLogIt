@@ -361,3 +361,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - IN REVIEW. Added invalid activity and denied-edit checks with persisted side effects pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-084). Prior pushed checkpoint `30ae4dbba17ad276338a49f368a642796dc52af9`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Evaluate closure of authoring verification in JR-085 and reconcile both scenarios against final CI.
+
+### 2026-11-23T02:04:10Z | Session 09 | JR-085
+
+- IN REVIEW. Authoring closure awaits execution of positive and negative scenarios. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-085). Prior pushed checkpoint `795fe3d6d83b823076906ab4af3349d2d0002798`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Inventory the review state machine in JR-086. Reconcile authoring verification after PostgreSQL 16 CI.
