@@ -86,7 +86,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-078 | Reproduce Leadership transfer and team UX success | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-078) • HTTP roles/roster/audit and QueryClient refresh PASS • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
 | JR-079 | Reject Leadership transfer and team UX invalid operation | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-079) • nonmember/stale removal denial, history preservation and rollback PASS • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
 | JR-080 | Close Leadership transfer and team UX verification | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-080) • team positive/negative/regression verification closed; separate phase gates held • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
-| JR-081 | Inventory Log authoring and edit rules | 09 | NOT STARTED | — | — |
+| JR-081 | Inventory Log authoring and edit rules | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-081) • Mapped live authoring, edit and snapshot owners | 2026-11-23T02:02:03Z |
 | JR-082 | Specify Log authoring and edit rules acceptance | 09 | NOT STARTED | — | — |
 | JR-083 | Reproduce Log authoring and edit rules success | 09 | NOT STARTED | — | — |
 | JR-084 | Reject Log authoring and edit rules invalid operation | 09 | NOT STARTED | — | — |

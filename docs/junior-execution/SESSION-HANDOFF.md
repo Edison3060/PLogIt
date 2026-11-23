@@ -337,3 +337,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - [ ] Actual tests, limitations and source/CI SHAs reviewed.
 - [ ] All ten rows, append-only log and handoff saved to GitHub.
 - [ ] Accept handoff; next separately initiated session may begin, no release approval implied.
+
+### 2026-11-23T02:02:03Z | Session 09 | JR-081
+
+- DONE. Mapped live authoring, edit and snapshot owners. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-081). Prior pushed checkpoint `456d8487fc970b1dff829576f6dd9e5588dca67b`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Specify the supported authoring contract and record differences from the historical product text in JR-082.
