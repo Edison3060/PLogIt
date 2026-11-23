@@ -38,7 +38,7 @@ JR-093's ordered success and JR-094's negative checks passed in [push CI 4509855
 
 `AuditLogIntegrationTest.rolledBackApprovalLeavesSubmittedStateAndNoAudit` executes leader approval from SUBMITTED inside a real managed transaction, observes transient APPROVED, flushes the update, and marks the outer transaction for rollback. Expected durable SUBMITTED and an empty audit list. New test execution pending CI. Baseline `deniedReviewAndDuplicateApprovalLeaveNoExtraWritesOrAudit` passed; Chromium stale-click scenario is pending. Next JR-100 reconciles browser and CI before phase disposition.
 
-### Reconciliation
+## JR-100
 
 Initial assessment and final reconciliation confirm the positive and negative audit cases. Reviewer: Builder Lead.
 

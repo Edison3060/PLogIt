@@ -209,7 +209,7 @@ _No execution-session decisions have been recorded._
 ### DEC-2026-11-23-03 — Client revision precondition
 
 - Owner: PLogIt product owner. Status: pending contract decision. JR-092/094/095.
-- Actual: JPA detects overlapping stale transactions; current PATCH/PUT contract still accepts later-arriving saves from previously loaded clients because the update DTO has no expected revision. The edit endpoint is PUT.
+- Actual: JPA detects overlapping stale transactions; current PUT contract accepts later-arriving saves from previously loaded clients because the update DTO has no expected revision. Session 10 reproduced HTTP 200 and a third snapshot after two sessions loaded the first version.
 - Expected if product requires stale browser forms to be denied: the server atomically checks a caller-supplied revision and returns a safe conflict without changing current log, snapshots, or audit.
 - Recommended: define a backwards-compatible rollout for an explicit precondition, then enforce only after direct API caller compatibility is verified. Preserve the existing API and export shape pending that approval. Current transaction protection was verified in CI.
 
