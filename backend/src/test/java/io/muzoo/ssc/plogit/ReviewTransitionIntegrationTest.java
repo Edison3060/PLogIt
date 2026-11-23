@@ -1,5 +1,6 @@
 package io.muzoo.ssc.plogit;
 
+import io.muzoo.ssc.plogit.domain.AuditLog;
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.LogEntry;
@@ -12,9 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 
+import java.util.List;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,6 +50,56 @@ class ReviewTransitionIntegrationTest extends IntegrationTestBase {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.reviewState").value("SUBMITTED"))
             .andExpect(jsonPath("$.rejectionComment").doesNotExist());
+    }
+
+    @Test
+    void authorSubmissionAndLeaderApprovalCommitStateAndOneAuditEach() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        LogEntry draft = createLog(engagement, author, ReviewState.DRAFT);
+        UUID id = draft.getId();
+
+        mockMvc.perform(post(transitionUri(id)).with(asUser(author)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"action":"SUBMIT"}
+                    """))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.reviewState").value("SUBMITTED"));
+        assertEquals(ReviewState.SUBMITTED, logRepository.findById(id).orElseThrow().getReviewState());
+
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"action":"APPROVE"}
+                    """))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.reviewState").value("APPROVED"));
+
+        mockMvc.perform(get(logUri(id)).with(asUser(author)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(id.toString()))
+            .andExpect(jsonPath("$.authorId").value(author.getId().intValue()))
+            .andExpect(jsonPath("$.title").value("Test log"))
+            .andExpect(jsonPath("$.reviewState").value("APPROVED"));
+        assertEquals(ReviewState.APPROVED, logRepository.findById(id).orElseThrow().getReviewState());
+
+        List<AuditLog> audits = auditLogRepository.findByEngagementId(engagement.getId().toString(), 10);
+        assertEquals(2, audits.size());
+        AuditLog submission = audits.stream().filter(audit -> "SUBMIT".equals(audit.getAction()))
+            .findFirst().orElseThrow();
+        AuditLog approval = audits.stream().filter(audit -> "APPROVE".equals(audit.getAction()))
+            .findFirst().orElseThrow();
+        assertEquals(author.getId(), submission.getActorId());
+        assertEquals(id.toString(), submission.getTargetId());
+        assertEquals("DRAFT", submission.getMetadata().get("fromState"));
+        assertEquals("SUBMITTED", submission.getMetadata().get("toState"));
+        assertEquals(leader.getId(), approval.getActorId());
+        assertEquals(id.toString(), approval.getTargetId());
+        assertEquals("SUBMITTED", approval.getMetadata().get("fromState"));
+        assertEquals("APPROVED", approval.getMetadata().get("toState"));
     }
 
     @Test
@@ -121,6 +176,62 @@ class ReviewTransitionIntegrationTest extends IntegrationTestBase {
                     {"action":"APPROVE"}
                     """))
             .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void deniedReviewAndDuplicateApprovalLeaveNoExtraWritesOrAudit() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        LogEntry submitted = createLog(engagement, author, ReviewState.SUBMITTED);
+        UUID id = submitted.getId();
+        String approve = """
+            {"action":"APPROVE"}
+            """;
+
+        mockMvc.perform(post(transitionUri(id)).with(asUser(author)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(approve))
+            .andExpect(status().isForbidden())
+            .andExpect(jsonPath("$.message").value("Only the leader can approve or reject a submitted log"));
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content("""
+                    {"action":"REJECT"}
+                    """))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.message").value("A rejection comment is required"));
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content("""
+                    {"action":"REJECT","comment":"   "}
+                    """))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.message").value("A rejection comment is required"));
+
+        LogEntry afterDenials = logRepository.findById(id).orElseThrow();
+        assertEquals(ReviewState.SUBMITTED, afterDenials.getReviewState());
+        assertEquals(submitted.getVersion(), afterDenials.getVersion());
+        assertNull(afterDenials.getRejectionComment());
+        assertNull(afterDenials.getRejectedAt());
+        assertNull(afterDenials.getRejectedById());
+        assertEquals(0, versionRepository.count());
+        assertEquals(0, auditLogRepository.count());
+
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(approve))
+            .andExpect(status().isOk());
+        LogEntry approved = logRepository.findById(id).orElseThrow();
+
+        mockMvc.perform(post(transitionUri(id)).with(asUser(leader)).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(approve))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.message").value("Approved logs can only be exported"));
+
+        LogEntry afterRetry = logRepository.findById(id).orElseThrow();
+        assertEquals(ReviewState.APPROVED, afterRetry.getReviewState());
+        assertEquals(approved.getVersion(), afterRetry.getVersion());
+        assertEquals(0, versionRepository.count());
+        assertEquals(1, auditLogRepository.count());
+        assertEquals("APPROVE", auditLogRepository.findAll().getFirst().getAction());
     }
 
     @Test

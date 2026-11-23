@@ -197,3 +197,24 @@ _No execution-session decisions have been recorded._
 - Builder Lead, 2026-11-22. Keep existing server-owned active-membership roles. POST /api/engagements/{id}/transfer-leadership {newLeaderId: positive user ID} with leader+CSRF returns204 for active member; fresh old/new GETs show MEMBER/LEADER, DB leader FK and exactly one active LEADER agree, one TRANSFER_LEADERSHIP audit contains old/new IDs. Old leader loses PUT/remove/transfer/audit privileges; new leader gains them. DELETE /{id}/members/{userId} by leader returns204 and preserves historical member/log rows while removing roster visibility and read privileges.
 - Negatives: nonmember/removed target404, member/old leader403, missingCSRF403, malformed/nonpositive target400, stale repeated removal404, self-leader removal400, no unauthorized mutation/audit. Existing stale optimistic-lock transfer rollback and audit rollback tests remain mandatory regressions. Sequential stale requests are not evidence of genuinely simultaneous races; do not make that claim.
 - UI: EngagementDetail.tsx refetches canonical engagement after mutation; role derives from response; TeamPanel hides controls for MEMBER. Add real QueryClient/jsdom role refresh regression alongside PostgreSQL16 MockMvc/DB/audit tests. DOM automation is not production/browser deployment evidence. No source behavior/API/schema/export changes; rollback added tests only, retain historical logs. All current-head CI/security/phase release gates remain mandatory. Prior Phase04 validation/expiry/duplicate-name and release debts are unchanged.
+
+### DEC-2026-11-23-01 | JR-082 | Draft authoring contract and historical differences
+
+2026-11-23T02:02:24Z, Builder Lead. Use the canonical server-generated UUID and authenticated author/editor, enforce DRAFT-only edits for author or active leader, and verify immutable snapshots and denied updates with PostgreSQL-backed tests. Historic post-approval leader editing, client UUIDs, and scope-checked log targets would change the existing workflow or API. No such policy change is approved. Retain optional target text, subject to the existing input bound, and carry the scope decision under the earlier Phase 04 acceptance hold.
+
+### DEC-2026-11-23-02 | JR-087 | Review state acceptance and comment policy
+
+2026-11-23T02:04:46Z, Builder Lead. Verify existing role- and state-based transitions with fresh reads and exact audit counts. Rejection returns to DRAFT and is preserved in audit. The DTO and audit path also accept a supplied comment on other successful actions, while the product prose describes comments only on rejection. Retain the current API and audit history pending a separately scoped decision on rejecting or ignoring other comments. No state, authorization, export, or data migration is proposed.
+
+### DEC-2026-11-23-03 — Client revision precondition
+
+- Owner: PLogIt product owner. Status: pending contract decision. JR-092/094/095.
+- Actual: JPA detects overlapping stale transactions; current PUT contract accepts later-arriving saves from previously loaded clients because the update DTO has no expected revision. Session 10 reproduced HTTP 200 and a third snapshot after two sessions loaded the first version.
+- Expected if product requires stale browser forms to be denied: the server atomically checks a caller-supplied revision and returns a safe conflict without changing current log, snapshots, or audit.
+- Recommended: define a backwards-compatible rollout for an explicit precondition, then enforce only after direct API caller compatibility is verified. Preserve the existing API and export shape pending that approval. Current transaction protection was verified in CI.
+
+### DEC-2026-11-23-04 — Verify current audit and board contracts
+
+- Owner: PLogIt product owner. Status: verification approved within Session 10. Any expansion requires product review.
+- Actual: Board shows search, activity type, outcome and review state including leader queue. The API also accepts author ID. Transactional review audit records include actor, transition states and engagement ID. Historical plans describe additional target/tag/date filters and broader audit events.
+- Recommended: verify current board and review-audit behavior with a synthetic workflow and forced rollback. Keep filter and audit policy scope unchanged in this session. JR-096 through JR-100.

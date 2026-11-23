@@ -781,3 +781,144 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Commit checkpoints:** JR071 `695eaf1103bc`, JR072 `d4e2e2b65d68`, JR073 `462483df1f0d`, JR074 `33a16cfec81e`, JR075 `52b68dae6da6`, JR076 `0e05ece60c91`, JR077 `d8df05ca701d`, JR078 `b9934a0f7a26`, JR079 `1d003faa9505`, JR080 `330683b38154`. This reconciliation is tracking-only; discover final pushed SHA in JR080 history and do not misattribute completed CI to the later docs-only head.
 - **Full20 Phase04 gate:** NOT ACCEPTED. JR061/062/063/066/067/068 plus this session's eight DONE; JR064/065 independent-name duplicate rejection unapproved, JR069/070 non-expiring v1/true simultaneous join-race response unresolved, JR074/075 target policy denial/bounds unresolved. Preserve Phase02 JR040 original-head scanner acceptance, Phase03 JR044/045 elapsed idle timeout, direct-API CSRF compatibility release review, INT-001 real JudgeIt consumer PROVISIONAL, owner DEC-2026-11-06-11 main-CD authorization. #22/#23/#24/#25 DRAFT, UNMERGED; no main push or deployment.
 - **Handoff:** Phase04 branch remains stacked on unmerged Phase03 `ff2e2ba0f3c1171363f12bdb9f6a362f83eacdca`. Safe next assignment is **Session09 JR081–090**, future `work/plogit-phase-05` stacked on final Phase04 head; read latest control/playbook and original Phase05 tasks first. Independent log/audit tests can proceed without accepting Phase04 or changing scope rules. Persist this next pointer only on control/session-state, clear claim, STOP. No next-session implementation here. Reviewer Builder Lead, no subagents; Intake/Strategy/Build/Refine/Handoff completed for bounded Session08.
+
+### 2026-11-23T02:02:03Z | Session 09 | JR-081 | DONE
+
+- Assessment: Mapped live authoring, edit and snapshot owners. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-081). Changed tracking files.
+- Git reference: previous pushed checkpoint `456d8487fc970b1dff829576f6dd9e5588dca67b`. This checkpoint has a JR-081-numbered commit on `work/plogit-phase-05`.
+- Next: Specify the supported authoring contract and record differences from the historical product text in JR-082.
+
+### 2026-11-23T02:02:24Z | Session 09 | JR-082 | DONE
+
+- Assessment: Specified the draft-only API and recorded historical policy discrepancies. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-082). Changed tracking files.
+- Git reference: previous pushed checkpoint `d50fdc92091496c634e78fdae1306b9afb22c830`. This checkpoint has a JR-082-numbered commit on `work/plogit-phase-05`.
+- Next: Exercise creation, update, reread and version snapshots with a synthetic author in JR-083.
+
+### 2026-11-23T02:03:20Z | Session 09 | JR-083 | IN REVIEW
+
+- Assessment: Added integrated create, update, read and history assertions pending CI. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-083). Changed `backend/src/test/java/io/muzoo/ssc/plogit/LogVersioningIntegrationTest.java`.
+- Git reference: previous pushed checkpoint `eabadf6612010ea85a0ed726c8781b3a54882bd0`. This checkpoint has a JR-083-numbered commit on `work/plogit-phase-05`.
+- Next: Exercise invalid activity and denied edit side effects in JR-084.
+
+### 2026-11-23T02:03:52Z | Session 09 | JR-084 | IN REVIEW
+
+- Assessment: Added invalid activity and denied-edit checks with persisted side effects pending CI. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-084). Changed `backend/src/test/java/io/muzoo/ssc/plogit/LogVersioningIntegrationTest.java`.
+- Git reference: previous pushed checkpoint `30ae4dbba17ad276338a49f368a642796dc52af9`. This checkpoint has a JR-084-numbered commit on `work/plogit-phase-05`.
+- Next: Evaluate closure of authoring verification in JR-085 and reconcile both scenarios against final CI.
+
+### 2026-11-23T02:04:10Z | Session 09 | JR-085 | IN REVIEW
+
+- Assessment: Authoring closure awaits execution of positive and negative scenarios. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-085). Changed tracking files.
+- Git reference: previous pushed checkpoint `795fe3d6d83b823076906ab4af3349d2d0002798`. This checkpoint has a JR-085-numbered commit on `work/plogit-phase-05`.
+- Next: Inventory the review state machine in JR-086. Reconcile authoring verification after PostgreSQL 16 CI.
+
+### 2026-11-23T02:04:28Z | Session 09 | JR-086 | DONE
+
+- Assessment: Mapped canonical review states, authorization and audit owners. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-086). Changed tracking files.
+- Git reference: previous pushed checkpoint `310cd05ee7bb15790c946a212056d522bfe93780`. This checkpoint has a JR-086-numbered commit on `work/plogit-phase-05`.
+- Next: Specify review requests, role rules and legacy discrepancies in JR-087.
+
+### 2026-11-23T02:04:46Z | Session 09 | JR-087 | DONE
+
+- Assessment: Specified authenticated transition requests, states and side effects. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-087). Changed tracking files.
+- Git reference: previous pushed checkpoint `54d347f0cfc8cb6ae2f0bf49ac2086e5c17fe475`. This checkpoint has a JR-087-numbered commit on `work/plogit-phase-05`.
+- Next: Verify author submission and a single committed leader approval in JR-088.
+
+### 2026-11-23T02:05:20Z | Session 09 | JR-088 | IN REVIEW
+
+- Assessment: Added a single-log submit and approve sequence with committed audit assertions pending CI. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-088). Changed `backend/src/test/java/io/muzoo/ssc/plogit/ReviewTransitionIntegrationTest.java`.
+- Git reference: previous pushed checkpoint `baf4871005fa9b03c443c19847d75306cdf4d22e`. This checkpoint has a JR-088-numbered commit on `work/plogit-phase-05`.
+- Next: Verify denied review, rejection without comment, and duplicate approval in JR-089.
+
+### 2026-11-23T02:05:50Z | Session 09 | JR-089 | IN REVIEW
+
+- Assessment: Added denial and replay assertions for persisted review state, history and audit pending CI. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-089). Changed `backend/src/test/java/io/muzoo/ssc/plogit/ReviewTransitionIntegrationTest.java`.
+- Git reference: previous pushed checkpoint `bb2ac67cfae9adc050fa7031ea058a0712117766`. This checkpoint has a JR-089-numbered commit on `work/plogit-phase-05`.
+- Next: Review the state machine acceptance evidence and start the final CI run for JR-090.
+
+### 2026-11-23T02:06:08Z | Session 09 | JR-090 | IN REVIEW
+
+- Assessment: Review state closure awaits full CI and persisted side-effect assertions. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-090). Changed tracking files.
+- Git reference: previous pushed checkpoint `d3e10ea9970af21e3e6241eb2bc1b6e7cd604e8c`. This checkpoint has a JR-090-numbered commit on `work/plogit-phase-05`.
+- Next: Run and reconcile pinned Java/Node workflow checks on the pushed Phase 05 branch, then decide whether the controller can advance.
+
+### 2026-11-23T02:09:13Z | Session 09 | Final CI reconciliation
+
+- JR-083: DONE. PASS: server-assigned UUID, author and engagement stayed stable, edited Markdown/tags reread, and snapshots 1 and 2 retained their values and editor.
+- JR-084: DONE. PASS: invalid activity 400, non-author and post-submit edits 409, with no unintended changes to rows, snapshots or audit.
+- JR-085: DONE. Verified authoring with no application behavior change. Positive, negative and regression checks passed.
+- JR-088: DONE. PASS: author submission and leader approval committed with one audit each, and detail reread preserved author and content.
+- JR-089: DONE. PASS: nonleader approval 403, missing or blank rejection comment 409, and repeated approval 409 with no extra writes.
+- JR-090: DONE. Verified review states with no application behavior change. Positive, negative and regression checks passed.
+- [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) completed successfully at source/test SHA `7dfafc4189a53146222224798dc256b13e1b7167`. Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16 ran `mvn -B clean verify`: 150 passed, zero failures, errors or skips, including 10 log versioning and 21 review transition tests. Node 22.23.4 `npm ci`, lint, build and Vitest passed (19 tests in six files). The invalid Java and corrupt lockfile fixture guards passed. Live isolated Compose health, persistence, authentication/replay and fail-closed probes passed. Semgrep, pinned Trivy filesystem and both image blocking scans, and proxy validation passed. Production CD was skipped. Local Node 24.22.3/npm 11.19.1 `npm ci --ignore-scripts --no-audit --no-fund`, `npm test` (19 tests in six files), `npm run lint` and `npm run build` also exited 0. Local Maven and Docker were unavailable. Earlier superseded pushes were cancelled and supply no acceptance evidence.
+- Checkpoints: JR-081 `d50fdc920914`, JR-082 `eabadf661201`, JR-083 `30ae4dbba17a`, JR-084 `795fe3d6d83b`, JR-085 `310cd05ee7bb`, JR-086 `54d347f0cfc8`, JR-087 `baf4871005fa`, JR-088 `bb2ac67cfae9`, JR-089 `d3e10ea9970a`, JR-090 `7dfafc4189a5`. Phase 05 is stacked on unmerged Phase 04, as tracked by [draft PR #26](https://github.com/Edison3060/PLogIt/pull/26). PRs #22–#26 remain draft and unmerged.
+- Release and phase acceptance remain open. Phase 04 duplicate-name policy (JR-064/065), v1 expiry and simultaneous join (JR-069/070), and target validation (JR-074/075) remain in review. Retain earlier JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, direct-API CSRF compatibility, real JudgeIt interoperability (INT-001 PROVISIONAL), and the owner CD decision DEC-2026-11-06-11. DEC-2026-11-23-01/-02 record historical product differences on draft/approved edits, UUID generation, target scope checks and review comments. The first-half closure does not accept the full Phase 05 gate.
+- Reviewer: Builder Lead. Owner sign-off pending. After the controller advances, the next separately initiated session is Session 10, JR-091–JR-100, on the same stacked Phase 05 branch. Begin with versioning and concurrency, then audit and log board. Read control state, Phase 05B acceptance, this handoff and current source first. Session 09 stops at JR-090.
+
+### 2026-11-23T14:00:05.042Z | Session 10 | JR-091 | DONE
+
+- Mapped snapshot storage and lock ownership.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-091). Prior phase head `f331623749db0165cb31146b8118373859e7fb34`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:00:14.097Z | Session 10 | JR-092 | DONE
+
+- Specified snapshot ordering and stale-write acceptance.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-092). Prior phase head `ae625c2d97e6dc8a032dbf5c2f536ede9c1e2f86`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:01:10.029Z | Session 10 | JR-093 | DONE
+
+- Verified two ordered, immutable snapshot values.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-093). Prior phase head `d45d5700a68b8fff2529423272e62c29b5d73269`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:01:12.961Z | Session 10 | JR-094 | IN REVIEW
+
+- Verified concurrent transaction denial and identified delayed stale browser saves.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-094). Prior phase head `a51dbe18659df8676b2854eec195ad5902d0b1e5`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:01:15.804Z | Session 10 | JR-095 | IN REVIEW
+
+- Closed transaction-level verification with browser save policy pending.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-095). Prior phase head `a53c6c9097b67fe7f0c88eb4e6ab3b04e086a8e1`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:01:47.918Z | Session 10 | JR-096 | DONE
+
+- Mapped committed audit events and log board query owners.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-096). Prior phase head `f533ca42911b392c1238395834dc5baae58572c4`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:01:50.675Z | Session 10 | JR-097 | DONE
+
+- Specified committed state, board filters, and audit acceptance.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-097). Prior phase head `da089837b5fecb721c30ee567f8bda1621a63605`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:04:03.221Z | Session 10 | JR-098 | IN REVIEW
+
+- Verified persisted review baseline and prepared isolated browser exercise.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-098). Prior phase head `f3075abdeb637725bda0a793a1db6ddf759d44f0`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:04:06.461Z | Session 10 | JR-099 | IN REVIEW
+
+- Added PostgreSQL coverage for a forced approval rollback.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-099). Prior phase head `84f00762179f4467403309cb73484fe33e916608`. Tracking files and backend/src/test/java/io/muzoo/ssc/plogit/AuditLogIntegrationTest.java recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:09:55.372Z | Session 10 | JR-098 | DONE
+
+- Chromium and PostgreSQL verified history, filters, submission, and approval. [Executed evidence](SESSION-10-EVIDENCE.md#reconciliation). Reviewer: Builder Lead.
+
+### 2026-11-23T14:09:55.372Z | Session 10 | JR-099 | DONE
+
+- Forced rollback, member denial, and stale review produced no orphan audit or phantom approval. [Executed evidence](SESSION-10-EVIDENCE.md#reconciliation). Reviewer: Builder Lead.
+
+### 2026-11-23T14:09:55.376Z | Session 10 | JR-100 | DONE
+
+- Closed browser and transactional audit verification while Phase 05 acceptance remains open.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-100). Prior phase head `1064cf0ff89743886d520dbb7b09fc62bcd599a3`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.

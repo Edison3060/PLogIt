@@ -337,3 +337,126 @@ The owner authorized **provisional, documented and replaceable integration assum
 - [ ] Actual tests, limitations and source/CI SHAs reviewed.
 - [ ] All ten rows, append-only log and handoff saved to GitHub.
 - [ ] Accept handoff; next separately initiated session may begin, no release approval implied.
+
+### 2026-11-23T02:02:03Z | Session 09 | JR-081
+
+- DONE. Mapped live authoring, edit and snapshot owners. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-081). Prior pushed checkpoint `456d8487fc970b1dff829576f6dd9e5588dca67b`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Specify the supported authoring contract and record differences from the historical product text in JR-082.
+
+### 2026-11-23T02:02:24Z | Session 09 | JR-082
+
+- DONE. Specified the draft-only API and recorded historical policy discrepancies. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-082). Prior pushed checkpoint `d50fdc92091496c634e78fdae1306b9afb22c830`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Exercise creation, update, reread and version snapshots with a synthetic author in JR-083.
+
+### 2026-11-23T02:03:20Z | Session 09 | JR-083
+
+- IN REVIEW. Added integrated create, update, read and history assertions pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-083). Prior pushed checkpoint `eabadf6612010ea85a0ed726c8781b3a54882bd0`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Exercise invalid activity and denied edit side effects in JR-084.
+
+### 2026-11-23T02:03:52Z | Session 09 | JR-084
+
+- IN REVIEW. Added invalid activity and denied-edit checks with persisted side effects pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-084). Prior pushed checkpoint `30ae4dbba17ad276338a49f368a642796dc52af9`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Evaluate closure of authoring verification in JR-085 and reconcile both scenarios against final CI.
+
+### 2026-11-23T02:04:10Z | Session 09 | JR-085
+
+- IN REVIEW. Authoring closure awaits execution of positive and negative scenarios. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-085). Prior pushed checkpoint `795fe3d6d83b823076906ab4af3349d2d0002798`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Inventory the review state machine in JR-086. Reconcile authoring verification after PostgreSQL 16 CI.
+
+### 2026-11-23T02:04:28Z | Session 09 | JR-086
+
+- DONE. Mapped canonical review states, authorization and audit owners. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-086). Prior pushed checkpoint `310cd05ee7bb15790c946a212056d522bfe93780`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Specify review requests, role rules and legacy discrepancies in JR-087.
+
+### 2026-11-23T02:04:46Z | Session 09 | JR-087
+
+- DONE. Specified authenticated transition requests, states and side effects. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-087). Prior pushed checkpoint `54d347f0cfc8cb6ae2f0bf49ac2086e5c17fe475`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Verify author submission and a single committed leader approval in JR-088.
+
+### 2026-11-23T02:05:20Z | Session 09 | JR-088
+
+- IN REVIEW. Added a single-log submit and approve sequence with committed audit assertions pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-088). Prior pushed checkpoint `baf4871005fa9b03c443c19847d75306cdf4d22e`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Verify denied review, rejection without comment, and duplicate approval in JR-089.
+
+### 2026-11-23T02:05:50Z | Session 09 | JR-089
+
+- IN REVIEW. Added denial and replay assertions for persisted review state, history and audit pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-089). Prior pushed checkpoint `bb2ac67cfae9adc050fa7031ea058a0712117766`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Review the state machine acceptance evidence and start the final CI run for JR-090.
+
+### 2026-11-23T02:06:08Z | Session 09 | JR-090
+
+- IN REVIEW. Review state closure awaits full CI and persisted side-effect assertions. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-090). Prior pushed checkpoint `d3e10ea9970af21e3e6241eb2bc1b6e7cd604e8c`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Run and reconcile pinned Java/Node workflow checks on the pushed Phase 05 branch, then decide whether the controller can advance.
+
+## Session 09 final handoff | 2026-11-23T02:09:13Z
+
+- **READY WITH PROVISIONAL INTEGRATION.** All ten JRs are DONE after execution and review. Four backend regression tests were added in `LogVersioningIntegrationTest` and `ReviewTransitionIntegrationTest`. The tracked diff changes only those tests and session documentation. Application code, authentication and authorization, privacy, engagement logs, audit and evidence history, and unversioned JSON exports retain their existing behavior. No production deployment or main branch modification occurred.
+- [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) completed successfully at source/test SHA `7dfafc4189a53146222224798dc256b13e1b7167`. Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16 ran `mvn -B clean verify`: 150 passed, zero failures, errors or skips, including 10 log versioning and 21 review transition tests. Node 22.23.4 `npm ci`, lint, build and Vitest passed (19 tests in six files). The invalid Java and corrupt lockfile fixture guards passed. Live isolated Compose health, persistence, authentication/replay and fail-closed probes passed. Semgrep, pinned Trivy filesystem and both image blocking scans, and proxy validation passed. Production CD was skipped. Local Node 24.22.3/npm 11.19.1 `npm ci --ignore-scripts --no-audit --no-fund`, `npm test` (19 tests in six files), `npm run lint` and `npm run build` also exited 0. Local Maven and Docker were unavailable. Earlier superseded pushes were cancelled and supply no acceptance evidence.
+- Phase 05 is stacked on unmerged Phase 04, as tracked by [draft PR #26](https://github.com/Edison3060/PLogIt/pull/26). PRs #22–#26 remain draft and unmerged. Checkpoints: JR-081 `d50fdc920914`, JR-082 `eabadf661201`, JR-083 `30ae4dbba17a`, JR-084 `795fe3d6d83b`, JR-085 `310cd05ee7bb`, JR-086 `54d347f0cfc8`, JR-087 `baf4871005fa`, JR-088 `bb2ac67cfae9`, JR-089 `d3e10ea9970a`, JR-090 `7dfafc4189a5`. This reconciliation changes documentation only.
+- Release and phase acceptance remain open. Phase 04 duplicate-name policy (JR-064/065), v1 expiry and simultaneous join (JR-069/070), and target validation (JR-074/075) remain in review. Retain earlier JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, direct-API CSRF compatibility, real JudgeIt interoperability (INT-001 PROVISIONAL), and the owner CD decision DEC-2026-11-06-11. DEC-2026-11-23-01/-02 record historical product differences on draft/approved edits, UUID generation, target scope checks and review comments. The first-half closure does not accept the full Phase 05 gate.
+- After the controller advances, the next separately initiated session is Session 10, JR-091–JR-100, on the same stacked Phase 05 branch. Begin with versioning and concurrency, then audit and log board. Read control state, Phase 05B acceptance, this handoff and current source first. Session 09 stops at JR-090.
+
+### Owner sign-off
+
+- [ ] Review verification scope and rationale.
+- [ ] Review input validation, error responses and server-side enforcement.
+- [ ] Review secret handling, evidence and release limits.
+- [ ] Review the executed tests, source SHA, register, log and handoff.
+- [ ] Accept the bounded handoff for Session 10.
+
+### 2026-11-23T14:00:05.042Z | Session 10 | JR-091
+
+- DONE. Mapped snapshot storage and lock ownership. [Evidence](SESSION-10-EVIDENCE.md#jr-091). Prior phase head `f331623749db0165cb31146b8118373859e7fb34`.
+
+### 2026-11-23T14:00:14.097Z | Session 10 | JR-092
+
+- DONE. Specified snapshot ordering and stale-write acceptance. [Evidence](SESSION-10-EVIDENCE.md#jr-092). Prior phase head `ae625c2d97e6dc8a032dbf5c2f536ede9c1e2f86`.
+
+### 2026-11-23T14:01:10.029Z | Session 10 | JR-093
+
+- DONE. Verified two ordered, immutable snapshot values. [Evidence](SESSION-10-EVIDENCE.md#jr-093). Prior phase head `d45d5700a68b8fff2529423272e62c29b5d73269`.
+
+### 2026-11-23T14:01:12.961Z | Session 10 | JR-094
+
+- IN REVIEW. Verified concurrent transaction denial and identified delayed stale browser saves. [Evidence](SESSION-10-EVIDENCE.md#jr-094). Prior phase head `a51dbe18659df8676b2854eec195ad5902d0b1e5`.
+
+### 2026-11-23T14:01:15.804Z | Session 10 | JR-095
+
+- IN REVIEW. Closed transaction-level verification with browser save policy pending. [Evidence](SESSION-10-EVIDENCE.md#jr-095). Prior phase head `a53c6c9097b67fe7f0c88eb4e6ab3b04e086a8e1`.
+
+### 2026-11-23T14:01:47.918Z | Session 10 | JR-096
+
+- DONE. Mapped committed audit events and log board query owners. [Evidence](SESSION-10-EVIDENCE.md#jr-096). Prior phase head `f533ca42911b392c1238395834dc5baae58572c4`.
+
+### 2026-11-23T14:01:50.675Z | Session 10 | JR-097
+
+- DONE. Specified committed state, board filters, and audit acceptance. [Evidence](SESSION-10-EVIDENCE.md#jr-097). Prior phase head `da089837b5fecb721c30ee567f8bda1621a63605`.
+
+### 2026-11-23T14:04:03.221Z | Session 10 | JR-098
+
+- IN REVIEW. Verified persisted review baseline and prepared isolated browser exercise. [Evidence](SESSION-10-EVIDENCE.md#jr-098). Prior phase head `f3075abdeb637725bda0a793a1db6ddf759d44f0`.
+
+### 2026-11-23T14:04:06.461Z | Session 10 | JR-099
+
+- IN REVIEW. Added PostgreSQL coverage for a forced approval rollback. [Evidence](SESSION-10-EVIDENCE.md#jr-099). Prior phase head `84f00762179f4467403309cb73484fe33e916608`.
+
+## Session 10 handoff | 2026-11-23T14:09:55.372Z
+
+- Session 10 readiness: **READY WITH PROVISIONAL INTEGRATION** for safe independent development. JR-091–093 and JR-096–100 DONE. JR-094/095 IN REVIEW, DEC-2026-11-23-03. The delayed edit issue affects drafts. Session 11 begins with exporter selection and legacy JSON compatibility and can use isolated, seeded approved logs.
+- Executable/test head `1064cf0ff89743886d520dbb7b09fc62bcd599a3`. [Push CI](https://github.com/Edison3060/PLogIt/actions/runs/45190233070) passed. Phase 05 is stacked on unmerged Phase 04 in [draft PR #26](https://github.com/Edison3060/PLogIt/pull/26). Phase 05 product acceptance remains open. Prior policy/expiry/concurrent join/target validation, JR-040 scanner acceptance, JR-044/045 idle timeout, CSRF API compatibility, INT-001 JudgeIt and owner DEC-2026-11-06-11 production authorization remain open.
+- Next separately initiated Session 11, JR-101–JR-110, target `work/plogit-phase-06` stacked from final Phase 05 while unmerged. Start by reading control, Phase 06A and the existing exporter source. Keep current unversioned JSON and independently verify a versioned provisional adapter only as scoped. Session 10 stops at JR-100.
+
+### 2026-11-23T14:09:55.376Z | Session 10 | JR-100
+
+- DONE. Closed browser and transactional audit verification while Phase 05 acceptance remains open. [Evidence](SESSION-10-EVIDENCE.md#jr-100). Prior phase head `1064cf0ff89743886d520dbb7b09fc62bcd599a3`.
+- Final JR-100 reconciliation checkpoint `c658d7b10ffe4c0f6e128b58d5b1c805ea773edb` contains the verified browser and SQL results, the ten-step disposition, and screenshots. This follow-up changes documentation only.

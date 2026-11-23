@@ -86,26 +86,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-078 | Reproduce Leadership transfer and team UX success | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-078) • HTTP roles/roster/audit and QueryClient refresh PASS • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
 | JR-079 | Reject Leadership transfer and team UX invalid operation | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-079) • nonmember/stale removal denial, history preservation and rollback PASS • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
 | JR-080 | Close Leadership transfer and team UX verification | 08 | DONE | [Session08 evidence](SESSION-08-EVIDENCE.md#jr-080) • team positive/negative/regression verification closed; separate phase gates held • [CI146/19 PASS](https://github.com/Edison3060/PLogIt/actions/runs/44992402664) | 2026-11-22T06:12:16.664520+00:00 |
-| JR-081 | Inventory Log authoring and edit rules | 09 | NOT STARTED | — | — |
-| JR-082 | Specify Log authoring and edit rules acceptance | 09 | NOT STARTED | — | — |
-| JR-083 | Reproduce Log authoring and edit rules success | 09 | NOT STARTED | — | — |
-| JR-084 | Reject Log authoring and edit rules invalid operation | 09 | NOT STARTED | — | — |
-| JR-085 | Close Log authoring and edit rules verification | 09 | NOT STARTED | — | — |
-| JR-086 | Inventory Review state machine | 09 | NOT STARTED | — | — |
-| JR-087 | Specify Review state machine acceptance | 09 | NOT STARTED | — | — |
-| JR-088 | Reproduce Review state machine success | 09 | NOT STARTED | — | — |
-| JR-089 | Reject Review state machine invalid operation | 09 | NOT STARTED | — | — |
-| JR-090 | Close Review state machine verification | 09 | NOT STARTED | — | — |
-| JR-091 | Inventory Versioning and concurrency | 10 | NOT STARTED | — | — |
-| JR-092 | Specify Versioning and concurrency acceptance | 10 | NOT STARTED | — | — |
-| JR-093 | Reproduce Versioning and concurrency success | 10 | NOT STARTED | — | — |
-| JR-094 | Reject Versioning and concurrency invalid operation | 10 | NOT STARTED | — | — |
-| JR-095 | Close Versioning and concurrency verification | 10 | NOT STARTED | — | — |
-| JR-096 | Inventory Audit and log board | 10 | NOT STARTED | — | — |
-| JR-097 | Specify Audit and log board acceptance | 10 | NOT STARTED | — | — |
-| JR-098 | Reproduce Audit and log board success | 10 | NOT STARTED | — | — |
-| JR-099 | Reject Audit and log board invalid operation | 10 | NOT STARTED | — | — |
-| JR-100 | Close Audit and log board verification | 10 | NOT STARTED | — | — |
+| JR-081 | Inventory Log authoring and edit rules | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-081) • Mapped live authoring, edit and snapshot owners | 2026-11-23T02:02:03Z |
+| JR-082 | Specify Log authoring and edit rules acceptance | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-082) • Specified the draft-only API and recorded historical policy discrepancies | 2026-11-23T02:02:24Z |
+| JR-083 | Reproduce Log authoring and edit rules success | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-083) • PASS: server-assigned UUID, author and engagement stayed stable, edited Markdown/tags reread, and snapshots 1 and 2 retained their values and editor • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
+| JR-084 | Reject Log authoring and edit rules invalid operation | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-084) • PASS: invalid activity 400, non-author and post-submit edits 409, with no unintended changes to rows, snapshots or audit • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
+| JR-085 | Close Log authoring and edit rules verification | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-085) • Verified authoring with no application behavior change. Positive, negative and regression checks passed • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
+| JR-086 | Inventory Review state machine | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-086) • Mapped canonical review states, authorization and audit owners | 2026-11-23T02:04:28Z |
+| JR-087 | Specify Review state machine acceptance | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-087) • Specified authenticated transition requests, states and side effects | 2026-11-23T02:04:46Z |
+| JR-088 | Reproduce Review state machine success | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-088) • PASS: author submission and leader approval committed with one audit each, and detail reread preserved author and content • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
+| JR-089 | Reject Review state machine invalid operation | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-089) • PASS: nonleader approval 403, missing or blank rejection comment 409, and repeated approval 409 with no extra writes • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
+| JR-090 | Close Review state machine verification | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-090) • Verified review states with no application behavior change. Positive, negative and regression checks passed • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
+| JR-091 | Inventory Versioning and concurrency | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-091) • Mapped snapshot storage and lock ownership. | 2026-11-23T14:00:05.042Z |
+| JR-092 | Specify Versioning and concurrency acceptance | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-092) • Specified snapshot ordering and stale-write acceptance. | 2026-11-23T14:00:14.097Z |
+| JR-093 | Reproduce Versioning and concurrency success | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-093) • Verified two ordered, immutable snapshot values. | 2026-11-23T14:01:10.029Z |
+| JR-094 | Reject Versioning and concurrency invalid operation | 10 | IN REVIEW | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-094) • Verified concurrent transaction denial and identified delayed stale browser saves. | 2026-11-23T14:01:12.961Z |
+| JR-095 | Close Versioning and concurrency verification | 10 | IN REVIEW | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-095) • Closed transaction-level verification with browser save policy pending. | 2026-11-23T14:01:15.804Z |
+| JR-096 | Inventory Audit and log board | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-096) • Mapped committed audit events and log board query owners. | 2026-11-23T14:01:47.918Z |
+| JR-097 | Specify Audit and log board acceptance | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-097) • Specified committed state, board filters, and audit acceptance. | 2026-11-23T14:01:50.675Z |
+| JR-098 | Reproduce Audit and log board success | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#reconciliation) • Chromium and PostgreSQL verified history, filters, submission, and approval. | 2026-11-23T14:09:55.372Z |
+| JR-099 | Reject Audit and log board invalid operation | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#reconciliation) • Forced rollback, member denial, and stale review produced no orphan audit or phantom approval. | 2026-11-23T14:09:55.372Z |
+| JR-100 | Close Audit and log board verification | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-100) • Closed browser and transactional audit verification while Phase 05 acceptance remains open. | 2026-11-23T14:09:55.376Z |
 | JR-101 | Inventory Exporter selection and side effects | 11 | NOT STARTED | — | — |
 | JR-102 | Specify Exporter selection and side effects acceptance | 11 | NOT STARTED | — | — |
 | JR-103 | Reproduce Exporter selection and side effects success | 11 | NOT STARTED | — | — |
