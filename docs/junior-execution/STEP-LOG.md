@@ -869,3 +869,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Mapped snapshot storage and lock ownership.
 - [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-091). Prior phase head `f331623749db0165cb31146b8118373859e7fb34`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:00:14.097Z | Session 10 | JR-092 | DONE
+
+- Specified snapshot ordering and stale-write acceptance.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-092). Prior phase head `ae625c2d97e6dc8a032dbf5c2f536ede9c1e2f86`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.

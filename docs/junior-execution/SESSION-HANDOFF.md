@@ -417,3 +417,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-23T14:00:05.042Z | Session 10 | JR-091
 
 - DONE. Mapped snapshot storage and lock ownership. [Evidence](SESSION-10-EVIDENCE.md#jr-091). Prior phase head `f331623749db0165cb31146b8118373859e7fb34`.
+
+### 2026-11-23T14:00:14.097Z | Session 10 | JR-092
+
+- DONE. Specified snapshot ordering and stale-write acceptance. [Evidence](SESSION-10-EVIDENCE.md#jr-092). Prior phase head `ae625c2d97e6dc8a032dbf5c2f536ede9c1e2f86`.
