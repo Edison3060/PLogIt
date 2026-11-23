@@ -9,14 +9,14 @@ Only this per-app controller selects what a fresh Builder Lead session does next
 | Key | Value |
 |---|---|
 | NEXT_SESSION | 09 |
-| STATE | READY |
+| STATE | IN_PROGRESS |
 | LAST_ASSESSED_SESSION | 08 |
 | LAST_ASSESSED_JR_RANGE | JR-071–JR-080 |
 | CURRENT_TARGET_JR_RANGE | JR-081–JR-090 |
 | CURRENT_TARGET_PHASE_BRANCH | work/plogit-phase-05 |
 | LAST_PHASE_BRANCH | work/plogit-phase-04 |
-| CURRENT_RUN_OWNER | NONE |
-| LAST_UPDATE_UTC | 2026-11-22T06:13:09Z |
+| CURRENT_RUN_OWNER | builder-session09-2026-11-23T02:00:26Z |
+| LAST_UPDATE_UTC | 2026-11-23T02:00:26Z |
 | PENDING_PHASE_ACCEPTANCE | Phase01–04 draft PRs #22–25 unmerged; Session08 eight DONE (071/072/073/076/077/078/079/080), JR074/075 invalid target strings accepted and target policy/bounds unresolved IN REVIEW DEC-2026-11-22-01. Full CI 44992402664 SUCCESS at 330683b38154 (146 Maven/PostgreSQL16,19 Vitest,Compose,Semgrep,Trivy fs/images,proxy); final docs-only head 456d8487fc97. Preserve JR064/065 duplicate-name policy, JR069/070 non-expiring v1/concurrent join response, earlier JR040 scanner phase-head acceptance, JR044/045 idle timeout, direct-API CSRF release compatibility, INT-001 genuine JudgeIt PROVISIONAL, owner main-CD DEC-2026-11-06-11 pending. No phase acceptance/main merge/deployment authorized |
 | AFTER_FINAL_SESSION | COMPLETE, no automatic wraparound |
 
@@ -72,3 +72,5 @@ Odd sessions start/resume one of the original twelve `work/plogit-phase-XX` bran
 - 2026-11-22T05:59:43.970562+00:00: Session08 JR-071–JR-080 claimed by builder-session08-2026-11-22T05:59:43.970562+00:00; existing Phase04 e3e2f5ae8132, no competing recent phase/control writes observed; no main merge or deployment.
 
 - 2026-11-22T06:13:09Z: Session08 JR071–080 independently assessed and ten numbered checkpoints pushed on existing stacked work/plogit-phase-04; JR071 695eaf1103bc through JR080 tested executable-code head 330683b38154608e5ffefdb0de81a01b421b1b19, final tracking-only 456d8487fc970b1dff829576f6dd9e5588dca67b. [Full green CI44992402664](https://github.com/Edison3060/PLogIt/actions/runs/44992402664):146 Maven/PostgreSQL16,19 frontend,live Compose,Semgrep,pinned Trivy fs+images,proxy PASS; CD SKIPPED. DONE071/072/073/076/077/078/079/080; IN REVIEW074/075 because malformed target strings accepted and validation policy/bounds unresolved, DEC-2026-11-22-01. Five backend + one frontend tests added, no production application/API/schema/auth/privacy/JSON changes. Phase04 full20 NOT ACCEPTED; preserve prior policy/expiry/concurrent join and release debts. PR25 draft updated, #22–25 unmerged, no main push/deploy. Readiness READY WITH PROVISIONAL INTEGRATION for independent Session09 JR081–090 only, future work/plogit-phase-05 must stack on final unmerged Phase04. Advance exactly one, claim cleared; STOP, no JR081 begun.
+
+- 2026-11-23T02:00:26Z Session09 JR-081–JR-090 claimed by builder-session09-2026-11-23T02:00:26Z. Phase 05 will stack on Phase 04 `456d8487fc970b1dff829576f6dd9e5588dca67b` for independent verification. Prior acceptance remains pending.
