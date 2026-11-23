@@ -884,3 +884,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Verified concurrent transaction denial and identified delayed stale browser saves.
 - [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-094). Prior phase head `a51dbe18659df8676b2854eec195ad5902d0b1e5`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:01:15.804Z | Session 10 | JR-095 | IN REVIEW
+
+- Closed transaction-level verification with browser save policy pending.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-095). Prior phase head `a53c6c9097b67fe7f0c88eb4e6ab3b04e086a8e1`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.

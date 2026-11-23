@@ -429,3 +429,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 ### 2026-11-23T14:01:12.961Z | Session 10 | JR-094
 
 - IN REVIEW. Verified concurrent transaction denial and identified delayed stale browser saves. [Evidence](SESSION-10-EVIDENCE.md#jr-094). Prior phase head `a51dbe18659df8676b2854eec195ad5902d0b1e5`.
+
+### 2026-11-23T14:01:15.804Z | Session 10 | JR-095
+
+- IN REVIEW. Closed transaction-level verification with browser save policy pending. [Evidence](SESSION-10-EVIDENCE.md#jr-095). Prior phase head `a53c6c9097b67fe7f0c88eb4e6ab3b04e086a8e1`.

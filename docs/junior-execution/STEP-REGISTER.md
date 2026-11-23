@@ -100,7 +100,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-092 | Specify Versioning and concurrency acceptance | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-092) • Specified snapshot ordering and stale-write acceptance. | 2026-11-23T14:00:14.097Z |
 | JR-093 | Reproduce Versioning and concurrency success | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-093) • Verified two ordered, immutable snapshot values. | 2026-11-23T14:01:10.029Z |
 | JR-094 | Reject Versioning and concurrency invalid operation | 10 | IN REVIEW | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-094) • Verified concurrent transaction denial and identified delayed stale browser saves. | 2026-11-23T14:01:12.961Z |
-| JR-095 | Close Versioning and concurrency verification | 10 | NOT STARTED | — | — |
+| JR-095 | Close Versioning and concurrency verification | 10 | IN REVIEW | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-095) • Closed transaction-level verification with browser save policy pending. | 2026-11-23T14:01:15.804Z |
 | JR-096 | Inventory Audit and log board | 10 | NOT STARTED | — | — |
 | JR-097 | Specify Audit and log board acceptance | 10 | NOT STARTED | — | — |
 | JR-098 | Reproduce Audit and log board success | 10 | NOT STARTED | — | — |

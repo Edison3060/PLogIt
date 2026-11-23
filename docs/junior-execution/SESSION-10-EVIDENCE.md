@@ -17,3 +17,7 @@ In [push CI 45098552729](https://github.com/Edison3060/PLogIt/actions/runs/45098
 ## JR-094
 
 In [push CI 45098552729](https://github.com/Edison3060/PLogIt/actions/runs/45098552729) at `f331623749db0165cb31146b8118373859e7fb34`, `concurrentEditsOnlySnapshotCommittedChanges` starts two PostgreSQL transactions that preload the same draft and release together. Exactly one optimistic lock failure, ordered versions `[1, 2]`, and the second snapshot matching the durable title passed. Parallel snapshots produce `[1, 2, 3]`. A duplicate insert fails and leaves one snapshot. Nonmembers cannot read history. `OptimisticLockingIntegrationTest` (2/2) verifies HTTP 409 mapping separately from the service-level race. The update DTO and client send no revision precondition, so a stale screen saving after the winner commits is outside that guarantee. JR-094 stays in review for strict client-side staleness acceptance; see the decision ledger. Next JR-095 records closure status.
+
+## JR-095
+
+JR-093's ordered success and JR-094's negative checks passed in [push CI 45098552729](https://github.com/Edison3060/PLogIt/actions/runs/45098552729) at `f331623749db0165cb31146b8118373859e7fb34`, with 150 total backend tests, zero failures/errors/skips. Builder Lead reviewed both fixtures and the safe HTTP error mapping. Leave full stale-client closure in review under DEC-2026-11-23-03. No production or compatibility behavior changed, so there is no application rollback. Next JR-096 inventories audit and board ownership.
