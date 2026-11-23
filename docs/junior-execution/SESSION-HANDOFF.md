@@ -379,3 +379,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - DONE. Specified authenticated transition requests, states and side effects. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-087). Prior pushed checkpoint `54d347f0cfc8cb6ae2f0bf49ac2086e5c17fe475`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Verify author submission and a single committed leader approval in JR-088.
+
+### 2026-11-23T02:05:20Z | Session 09 | JR-088
+
+- IN REVIEW. Added a single-log submit and approve sequence with committed audit assertions pending CI. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-088). Prior pushed checkpoint `baf4871005fa9b03c443c19847d75306cdf4d22e`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Verify denied review, rejection without comment, and duplicate approval in JR-089.
