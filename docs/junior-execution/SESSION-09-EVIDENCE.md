@@ -25,3 +25,9 @@ Added `LogVersioningIntegrationTest#invalidActivityAndDeniedEditsLeaveContentAnd
 ## JR-085
 
 The JR-083 and JR-084 tests exercise the create/edit/reread/history path and the invalid activity, other member draft edit and post-submit denial paths. Reviewed both test diffs and the DTO, controller, membership, persistence and version boundaries. No production code correction is proposed. If the tests pass, the authoring result will be verified with no application behavior change. The test-only changes can be reverted independently. Phase 04 acceptance and potential changes to log-target scope checks or approved-log editing are separate open decisions. Reviewer: Builder Lead. Runtime and regression sign-off remain pending.
+
+## JR-086
+
+At `456d8487fc970b1dff829576f6dd9e5588dca67b`, `LogController.transition` delegates to transactional `LogReviewService.transition`. The service requires active engagement membership and derives author/leader from persisted data. `ReviewStates` dispatches to `DraftState`, `SubmittedState`, `ApprovedState` or `ExportedState`. DRAFT accepts SUBMIT from author or leader. SUBMITTED accepts leader APPROVE or REJECT, with nonblank comment on rejection. Rejection returns to DRAFT and records the reviewer, comment and time. Resubmission clears those fields. `AuditEventListener` writes transition events before commit in the same transaction. `LogVersionService` tracks content revisions, while transitions use audit events.
+
+`ReviewTransitionIntegrationTest` maps routes, role and state eligibility, rejection and retry. `AuditLogIntegrationTest` maps audit evidence. `BadRequestIntegrationTest` and `CsrfIntegrationTest` cover request guards. This is a source-only inventory. Historical diagrams and copied code are references. No production or test source change at this checkpoint.

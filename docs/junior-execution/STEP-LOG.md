@@ -816,3 +816,10 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-085). Changed tracking files.
 - Git reference: previous pushed checkpoint `795fe3d6d83b823076906ab4af3349d2d0002798`. This checkpoint has a JR-085-numbered commit on `work/plogit-phase-05`.
 - Next: Inventory the review state machine in JR-086. Reconcile authoring verification after PostgreSQL 16 CI.
+
+### 2026-11-23T02:04:28Z | Session 09 | JR-086 | DONE
+
+- Assessment: Mapped canonical review states, authorization and audit owners. Entry marked IN PROGRESS from NOT STARTED. Reviewer: Builder Lead.
+- Evidence and rationale: [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-086). Changed tracking files.
+- Git reference: previous pushed checkpoint `310cd05ee7bb15790c946a212056d522bfe93780`. This checkpoint has a JR-086-numbered commit on `work/plogit-phase-05`.
+- Next: Specify review requests, role rules and legacy discrepancies in JR-087.

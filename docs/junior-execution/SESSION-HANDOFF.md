@@ -367,3 +367,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - IN REVIEW. Authoring closure awaits execution of positive and negative scenarios. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-085). Prior pushed checkpoint `795fe3d6d83b823076906ab4af3349d2d0002798`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Inventory the review state machine in JR-086. Reconcile authoring verification after PostgreSQL 16 CI.
+
+### 2026-11-23T02:04:28Z | Session 09 | JR-086
+
+- DONE. Mapped canonical review states, authorization and audit owners. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-086). Prior pushed checkpoint `310cd05ee7bb15790c946a212056d522bfe93780`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Specify review requests, role rules and legacy discrepancies in JR-087.
