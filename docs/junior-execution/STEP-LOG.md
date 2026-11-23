@@ -889,3 +889,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Closed transaction-level verification with browser save policy pending.
 - [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-095). Prior phase head `a53c6c9097b67fe7f0c88eb4e6ab3b04e086a8e1`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.
+
+### 2026-11-23T14:01:47.918Z | Session 10 | JR-096 | DONE
+
+- Mapped committed audit events and log board query owners.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-096). Prior phase head `f533ca42911b392c1238395834dc5baae58572c4`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.

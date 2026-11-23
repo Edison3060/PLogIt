@@ -21,3 +21,7 @@ In [push CI 45098552729](https://github.com/Edison3060/PLogIt/actions/runs/45098
 ## JR-095
 
 JR-093's ordered success and JR-094's negative checks passed in [push CI 45098552729](https://github.com/Edison3060/PLogIt/actions/runs/45098552729) at `f331623749db0165cb31146b8118373859e7fb34`, with 150 total backend tests, zero failures/errors/skips. Builder Lead reviewed both fixtures and the safe HTTP error mapping. Leave full stale-client closure in review under DEC-2026-11-23-03. No production or compatibility behavior changed, so there is no application rollback. Next JR-096 inventories audit and board ownership.
+
+## JR-096
+
+`LogReviewService` updates state, then publishes `LogTransitionedEvent`. `AuditEventListener` persists at BEFORE_COMMIT in the same transaction; `AuditLogRepository` and engagement leader authorization govern reads. `LogBoard` sends scoped filters with React Query, and `LogDetail` renders current server state and ordered history. `useTransitionLog` invalidates board and detail queries on success and has no optimistic approval write. Existing `AuditLogIntegrationTest` and `ReviewTransitionIntegrationTest` cover stored transitions, membership, denials and replay. The product spec proposes additional filter dimensions and broader audit coverage. Canonical source map verified against `f331623749db0165cb31146b8118373859e7fb34`. Next JR-097 defines the exact board and rollback verification.
