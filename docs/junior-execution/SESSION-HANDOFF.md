@@ -343,3 +343,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - DONE. Mapped live authoring, edit and snapshot owners. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-081). Prior pushed checkpoint `456d8487fc970b1dff829576f6dd9e5588dca67b`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Specify the supported authoring contract and record differences from the historical product text in JR-082.
+
+### 2026-11-23T02:02:24Z | Session 09 | JR-082
+
+- DONE. Specified the draft-only API and recorded historical policy discrepancies. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-082). Prior pushed checkpoint `d50fdc92091496c634e78fdae1306b9afb22c830`.
+- Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
+- Next: Exercise creation, update, reread and version snapshots with a synthetic author in JR-083.
