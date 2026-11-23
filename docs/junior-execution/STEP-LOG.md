@@ -864,3 +864,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - Checkpoints: JR-081 `d50fdc920914`, JR-082 `eabadf661201`, JR-083 `30ae4dbba17a`, JR-084 `795fe3d6d83b`, JR-085 `310cd05ee7bb`, JR-086 `54d347f0cfc8`, JR-087 `baf4871005fa`, JR-088 `bb2ac67cfae9`, JR-089 `d3e10ea9970a`, JR-090 `7dfafc4189a5`. Phase 05 is stacked on unmerged Phase 04, as tracked by [draft PR #26](https://github.com/Edison3060/PLogIt/pull/26). PRs #22–#26 remain draft and unmerged.
 - Release and phase acceptance remain open. Phase 04 duplicate-name policy (JR-064/065), v1 expiry and simultaneous join (JR-069/070), and target validation (JR-074/075) remain in review. Retain earlier JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, direct-API CSRF compatibility, real JudgeIt interoperability (INT-001 PROVISIONAL), and the owner CD decision DEC-2026-11-06-11. DEC-2026-11-23-01/-02 record historical product differences on draft/approved edits, UUID generation, target scope checks and review comments. The first-half closure does not accept the full Phase 05 gate.
 - Reviewer: Builder Lead. Owner sign-off pending. After the controller advances, the next separately initiated session is Session 10, JR-091–JR-100, on the same stacked Phase 05 branch. Begin with versioning and concurrency, then audit and log board. Read control state, Phase 05B acceptance, this handoff and current source first. Session 09 stops at JR-090.
+
+### 2026-11-23T14:00:05.042Z | Session 10 | JR-091 | DONE
+
+- Mapped snapshot storage and lock ownership.
+- [Expected and observed evidence](SESSION-10-EVIDENCE.md#jr-091). Prior phase head `f331623749db0165cb31146b8118373859e7fb34`. Tracking files and the session evidence file recorded. Reviewer: Builder Lead.

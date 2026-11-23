@@ -96,7 +96,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-088 | Reproduce Review state machine success | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-088) • PASS: author submission and leader approval committed with one audit each, and detail reread preserved author and content • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
 | JR-089 | Reject Review state machine invalid operation | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-089) • PASS: nonleader approval 403, missing or blank rejection comment 409, and repeated approval 409 with no extra writes • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
 | JR-090 | Close Review state machine verification | 09 | DONE | [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-090) • Verified review states with no application behavior change. Positive, negative and regression checks passed • [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) | 2026-11-23T02:09:13Z |
-| JR-091 | Inventory Versioning and concurrency | 10 | NOT STARTED | — | — |
+| JR-091 | Inventory Versioning and concurrency | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-091) • Mapped snapshot storage and lock ownership. | 2026-11-23T14:00:05.042Z |
 | JR-092 | Specify Versioning and concurrency acceptance | 10 | NOT STARTED | — | — |
 | JR-093 | Reproduce Versioning and concurrency success | 10 | NOT STARTED | — | — |
 | JR-094 | Reject Versioning and concurrency invalid operation | 10 | NOT STARTED | — | — |

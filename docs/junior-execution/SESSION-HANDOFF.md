@@ -413,3 +413,7 @@ The owner authorized **provisional, documented and replaceable integration assum
 - [ ] Review secret handling, evidence and release limits.
 - [ ] Review the executed tests, source SHA, register, log and handoff.
 - [ ] Accept the bounded handoff for Session 10.
+
+### 2026-11-23T14:00:05.042Z | Session 10 | JR-091
+
+- DONE. Mapped snapshot storage and lock ownership. [Evidence](SESSION-10-EVIDENCE.md#jr-091). Prior phase head `f331623749db0165cb31146b8118373859e7fb34`.
