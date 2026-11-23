@@ -397,3 +397,19 @@ The owner authorized **provisional, documented and replaceable integration assum
 - IN REVIEW. Review state closure awaits full CI and persisted side-effect assertions. See [Session 09 evidence](SESSION-09-EVIDENCE.md#jr-090). Prior pushed checkpoint `d3e10ea9970af21e3e6241eb2bc1b6e7cd604e8c`.
 - Phase 05 stacks on unmerged Phase 04. Earlier acceptance, INT-001 and DEC-2026-11-06-11 release gates remain open.
 - Next: Run and reconcile pinned Java/Node workflow checks on the pushed Phase 05 branch, then decide whether the controller can advance.
+
+## Session 09 final handoff | 2026-11-23T02:09:13Z
+
+- **READY WITH PROVISIONAL INTEGRATION.** All ten JRs are DONE after execution and review. Four backend regression tests were added in `LogVersioningIntegrationTest` and `ReviewTransitionIntegrationTest`. The tracked diff changes only those tests and session documentation. Application code, authentication and authorization, privacy, engagement logs, audit and evidence history, and unversioned JSON exports retain their existing behavior. No production deployment or main branch modification occurred.
+- [GitHub Actions 45098257613](https://github.com/Edison3060/PLogIt/actions/runs/45098257613) completed successfully at source/test SHA `7dfafc4189a53146222224798dc256b13e1b7167`. Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16 ran `mvn -B clean verify`: 150 passed, zero failures, errors or skips, including 10 log versioning and 21 review transition tests. Node 22.23.4 `npm ci`, lint, build and Vitest passed (19 tests in six files). The invalid Java and corrupt lockfile fixture guards passed. Live isolated Compose health, persistence, authentication/replay and fail-closed probes passed. Semgrep, pinned Trivy filesystem and both image blocking scans, and proxy validation passed. Production CD was skipped. Local Node 24.22.3/npm 11.19.1 `npm ci --ignore-scripts --no-audit --no-fund`, `npm test` (19 tests in six files), `npm run lint` and `npm run build` also exited 0. Local Maven and Docker were unavailable. Earlier superseded pushes were cancelled and supply no acceptance evidence.
+- Phase 05 is stacked on unmerged Phase 04, as tracked by [draft PR #26](https://github.com/Edison3060/PLogIt/pull/26). PRs #22–#26 remain draft and unmerged. Checkpoints: JR-081 `d50fdc920914`, JR-082 `eabadf661201`, JR-083 `30ae4dbba17a`, JR-084 `795fe3d6d83b`, JR-085 `310cd05ee7bb`, JR-086 `54d347f0cfc8`, JR-087 `baf4871005fa`, JR-088 `bb2ac67cfae9`, JR-089 `d3e10ea9970a`, JR-090 `7dfafc4189a5`. This reconciliation changes documentation only.
+- Release and phase acceptance remain open. Phase 04 duplicate-name policy (JR-064/065), v1 expiry and simultaneous join (JR-069/070), and target validation (JR-074/075) remain in review. Retain earlier JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, direct-API CSRF compatibility, real JudgeIt interoperability (INT-001 PROVISIONAL), and the owner CD decision DEC-2026-11-06-11. DEC-2026-11-23-01/-02 record historical product differences on draft/approved edits, UUID generation, target scope checks and review comments. The first-half closure does not accept the full Phase 05 gate.
+- After the controller advances, the next separately initiated session is Session 10, JR-091–JR-100, on the same stacked Phase 05 branch. Begin with versioning and concurrency, then audit and log board. Read control state, Phase 05B acceptance, this handoff and current source first. Session 09 stops at JR-090.
+
+### Owner sign-off
+
+- [ ] Review verification scope and rationale.
+- [ ] Review input validation, error responses and server-side enforcement.
+- [ ] Review secret handling, evidence and release limits.
+- [ ] Review the executed tests, source SHA, register, log and handoff.
+- [ ] Accept the bounded handoff for Session 10.
