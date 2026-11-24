@@ -1028,3 +1028,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Reproduced the exact serializer fixture incompatibility
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-118). Prior phase head `083328a2025a048b899453e144a80e59ea2fb569`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:11:17.641Z | Session 12 | JR-119 | IN REVIEW
+
+- Verified unknown-version and duplicate-record denials in the real reader
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-119). Prior phase head `e596d2f56586a2bdc7c38a0305922cd927f19ebc`. Builder Lead reviewed this checkpoint.

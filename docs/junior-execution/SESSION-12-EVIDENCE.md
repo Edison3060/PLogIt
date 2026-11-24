@@ -33,3 +33,7 @@ DEC-2026-11-24-05 records the owner decision for a possible versioned format. Th
 ## JR-118
 
 The PLogIt fixture produced by Spring JSON during Session 11 still fails with INVALID_TARGETS at the real JudgeIt parser. The same bytes are accepted unchanged as an inner payload by PLogIt's provisional wrapper. The parser accepts a diagnostic fixture with array-valued lists and preserves the UUID, omitted count and missing-media warning. This conditional parse result leaves the exact legacy handoff criterion unmet. New schema and fixtures remain unapproved under DEC-2026-11-24-05. An authenticated disposable PostgreSQL test is being prepared with the original bytes and the diagnostic inputs.
+
+## JR-119
+
+The unmodified JudgeIt parser rejected schemaVersion=999 as UNSUPPORTED_PRODUCER_VERSION and duplicate source UUIDs as DUPLICATE_LOG_ID. A repeated parse of identical bytes returned the same file SHA and UUID. The separate provisional wrapper's 12 Python tests passed, including deterministic scoped import keys and simulated idempotent replay. Parsing and mock replay provide no transaction proof. The real controller and journal replay test is pending in isolated PostgreSQL. The exact producer artifact still fails earlier on nullable optional collections.

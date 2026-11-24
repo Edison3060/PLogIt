@@ -557,3 +557,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - IN REVIEW. Reproduced the exact serializer fixture incompatibility [Evidence](SESSION-12-EVIDENCE.md#jr-118). Prior checkpoint `083328a2025a048b899453e144a80e59ea2fb569`.
 - Continue with JR-119 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:11:17.641Z | Session 12 | JR-119
+
+- IN REVIEW. Verified unknown-version and duplicate-record denials in the real reader [Evidence](SESSION-12-EVIDENCE.md#jr-119). Prior checkpoint `e596d2f56586a2bdc7c38a0305922cd927f19ebc`.
+- Continue with JR-120 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
