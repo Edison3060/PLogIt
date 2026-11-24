@@ -972,3 +972,19 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Closed local wire characterization and retained JudgeIt compatibility review.
 - [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-110). Prior phase head `002fd3a92a71aa02fc6ee2b8b73bd915d690a849`. Reviewer is the Builder Lead.
+
+### 2026-11-24T02:17:09.733Z | Session 11 | JR-103 | DONE
+
+- Exact selection and committed audit passed for default and re-export. [Executed evidence](SESSION-11-EVIDENCE.md#reconciliation). Reviewer is the Builder Lead.
+
+### 2026-11-24T02:17:09.733Z | Session 11 | JR-104 | DONE
+
+- Denied member and outsider responses and empty leader export passed. [Executed evidence](SESSION-11-EVIDENCE.md#reconciliation). Reviewer is the Builder Lead.
+
+### 2026-11-24T02:17:09.733Z | Session 11 | JR-105 | DONE
+
+- Closed scoped selection verification across success and negative paths. [Executed evidence](SESSION-11-EVIDENCE.md#reconciliation). Reviewer is the Builder Lead.
+
+### 2026-11-24T02:17:09.733Z | Session 11 | JR-108 | DONE
+
+- Production serializer matched the generated fixture with the configured mapper. [Executed evidence](SESSION-11-EVIDENCE.md#reconciliation). Reviewer is the Builder Lead.
