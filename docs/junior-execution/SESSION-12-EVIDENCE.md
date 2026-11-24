@@ -29,3 +29,7 @@ The active PLogIt branch at `12b7fd7b33a297227597219910603e558803fa8d` has `back
 ## JR-117
 
 DEC-2026-11-24-05 records the owner decision for a possible versioned format. The existing export and existing consumer compatibility need dedicated evidence. Maintain the same one-way offline file boundary and independent databases. Approval must cover envelope, export ID, hash semantics, media packaging, source namespace, receipt dedupe and revision policy.
+
+## JR-118
+
+The PLogIt fixture produced by Spring JSON during Session 11 still fails with INVALID_TARGETS at the real JudgeIt parser. The same bytes are accepted unchanged as an inner payload by PLogIt's provisional wrapper. The parser accepts a diagnostic fixture with array-valued lists and preserves the UUID, omitted count and missing-media warning. This conditional parse result leaves the exact legacy handoff criterion unmet. New schema and fixtures remain unapproved under DEC-2026-11-24-05. An authenticated disposable PostgreSQL test is being prepared with the original bytes and the diagnostic inputs.

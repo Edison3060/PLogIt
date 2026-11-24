@@ -1023,3 +1023,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Recorded producer compatibility and approval requirements
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-117). Prior phase head `57263dc331e8b92c7646862d5aa6a86b9e6176c4`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:10:13.317Z | Session 12 | JR-118 | IN REVIEW
+
+- Reproduced the exact serializer fixture incompatibility
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-118). Prior phase head `083328a2025a048b899453e144a80e59ea2fb569`. Builder Lead reviewed this checkpoint.
