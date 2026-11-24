@@ -9,3 +9,7 @@ The controller handling POST /api/engagements/{id}/export calls transactional Ex
 ## JR-102
 
 DEC-2026-11-24-01 records acceptance. Send JSON {"format":"JSON","includeExported":false} or omit the optional flag. A valid active leader with authentication and CSRF receives a downloadable JSON report with APPROVED entries, with EXPORTED entries added when true. Report states are from before mutation. A new export persists APPROVED → EXPORTED and audit. Re-export leaves state EXPORTED and adds audit. An empty eligible set still produces a report and an aggregate audit event with logCount=0. An active member gets 403 and an outsider gets 404. Neither gets report data or export side effects. Changing permissions, selection, empty behavior or audit semantics requires product approval. The prescribed cases will be run on an isolated fixture.
+
+## JR-103
+
+The PostgreSQL-backed ExportIntegrationTest.jsonExportSelectsExactLogsAndCommitsAudit seeds DRAFT, SUBMITTED, APPROVED and EXPORTED plus another engagement's APPROVED log. The two authenticated MockMvc POSTs expect only the original APPROVED UUID by default, then two EXPORTED UUIDs in creation order with includeExported=true. Fresh reads assert all five persisted states and exact per-log plus aggregate audit effects. This test is ready for the Phase 06 CI run. Local Maven 3.9.11 failed at model resolution with DNS for repo.maven.apache.org before tests started. No runtime pass is claimed at entry.
