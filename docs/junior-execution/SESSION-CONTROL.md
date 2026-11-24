@@ -8,16 +8,16 @@ Only this per-app controller selects what a fresh Builder Lead session does next
 
 | Key | Value |
 |---|---|
-| NEXT_SESSION | 11 |
-| STATE | IN_PROGRESS |
-| LAST_ASSESSED_SESSION | 10 |
-| LAST_ASSESSED_JR_RANGE | JR-091–JR-100 |
-| CURRENT_TARGET_JR_RANGE | JR-101–JR-110 |
+| NEXT_SESSION | 12 |
+| STATE | READY |
+| LAST_ASSESSED_SESSION | 11 |
+| LAST_ASSESSED_JR_RANGE | JR-101–JR-110 |
+| CURRENT_TARGET_JR_RANGE | JR-111–JR-120 |
 | CURRENT_TARGET_PHASE_BRANCH | work/plogit-phase-06 |
-| LAST_PHASE_BRANCH | work/plogit-phase-05 |
-| CURRENT_RUN_OWNER | builder-session11-2026-11-24T02:02:57.283Z-h29qk9 |
-| LAST_UPDATE_UTC | 2026-11-24T02:02:57.283Z |
-| PENDING_PHASE_ACCEPTANCE | Phase 01–05 draft PRs #22–26 unmerged. Session 10 JR-094/095 IN REVIEW for delayed stale draft save (DEC-2026-11-23-03); eight DONE. Green full push CI 45190233070 at 1064cf0ff897, isolated Chromium and PostgreSQL proof; final evidence 9efcae1ecccb. Preserve Phase 04 duplicate-name, v1 expiry/concurrent join, target validation, JR-040 scanner acceptance, JR-044/045 idle timeout, direct API CSRF compatibility, INT-001 JudgeIt interoperability, and owner CD DEC-2026-11-06-11. Phase 05 acceptance open. |
+| LAST_PHASE_BRANCH | work/plogit-phase-06 |
+| CURRENT_RUN_OWNER | NONE |
+| LAST_UPDATE_UTC | 2026-11-24T02:17:39.853Z |
+| PENDING_PHASE_ACCEPTANCE | Phase 06 draft PR #27 is stacked on #26 and remains unmerged. Session 11 JR-109/110 IN REVIEW for JudgeIt legacy-reader nullable lists and authenticated tenant-scoped handoff proof (INT-001, DEC-2026-11-24-03). Phase 06 acceptance open. Phase 01–05 draft PRs #22–26 unmerged. Session 10 JR-094/095 IN REVIEW for delayed stale draft save (DEC-2026-11-23-03); eight DONE. Green full push CI 45190233070 at 1064cf0ff897, isolated Chromium and PostgreSQL proof; final evidence 9efcae1ecccb. Preserve Phase 04 duplicate-name, v1 expiry/concurrent join, target validation, JR-040 scanner acceptance, JR-044/045 idle timeout, direct API CSRF compatibility, INT-001 JudgeIt interoperability, and owner CD DEC-2026-11-06-11. Phase 05 acceptance open. |
 | AFTER_FINAL_SESSION | COMPLETE, no automatic wraparound |
 
 ## Verified baseline when this controller was created
@@ -82,3 +82,5 @@ Odd sessions start/resume one of the original twelve `work/plogit-phase-XX` bran
 - 2026-11-23T14:11:00.974Z Session 10 JR-091–JR-100 assessed and pushed on stacked `work/plogit-phase-05`; final evidence `9efcae1ecccb9dbe8895e7d88a20253dbbace3db`. Eight DONE. JR-094/095 IN REVIEW because a delayed draft client can still update after another save despite verified overlap protection. [CI 45190233070](https://github.com/Edison3060/PLogIt/actions/runs/45190233070) passed 151 backend, 19 frontend, Compose, Semgrep, Trivy filesystem and both images, proxy; CD skipped. Isolated Chromium and PostgreSQL verified history, filters, submission, approval and stale review denial. [PR #26](https://github.com/Edison3060/PLogIt/pull/26) draft and unmerged. **READY WITH PROVISIONAL INTEGRATION** for Session 11 JR-101–JR-110 only. Stack future `work/plogit-phase-06` atop the final Phase 05 branch while unmerged. Claim cleared; stop after JR-100.
 
 - 2026-11-24T02:02:57.283Z: Session 11 JR-101–JR-110 claimed by builder-session11-2026-11-24T02:02:57.283Z-h29qk9. Phase 06 will stack on unmerged Phase 05 at `9efcae1ecccb9dbe8895e7d88a20253dbbace3db` for independent export verification. Phase 05 acceptance remains open.
+
+- 2026-11-24T02:17:39.853Z: Session 11 JR-101–JR-110 individually assessed and pushed on stacked `work/plogit-phase-06`. Eight DONE (JR-101–108), JR-109/110 IN REVIEW. Exact tested head `c51498335a90702b2dc3c44587c2d10dc67704b9`, final tracking `12b7fd7b33a297227597219910603e558803fa8d`. [CI 45310715443](https://github.com/Edison3060/PLogIt/actions/runs/45310715443) Java 21 and PostgreSQL 16.16 passed all 155 Maven tests including 16 export tests. Frontend passed 19 tests. Compose, Semgrep, Trivy filesystem and both images, and proxy validation passed. Production CD was skipped. The actual JudgeIt parser rejected nullable scope targets and tags from the current serializer. INT-001 remains provisional. [Draft PR #27](https://github.com/Edison3060/PLogIt/pull/27) remains unmerged. **READY WITH PROVISIONAL INTEGRATION** for safe independent Session 12 JR-111–JR-120 on the same branch. Claim cleared. No JR-111 work began.
