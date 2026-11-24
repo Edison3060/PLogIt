@@ -1,18 +1,39 @@
 package io.muzoo.ssc.plogit;
 
+import io.muzoo.ssc.plogit.domain.AuditLog;
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.LogEntry;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
+import io.muzoo.ssc.plogit.service.export.EngagementReportData;
+import io.muzoo.ssc.plogit.service.export.JsonReportStrategy;
+import io.muzoo.ssc.plogit.service.export.ReportOutput;
 import io.muzoo.ssc.plogit.support.IntegrationTestBase;
 import io.muzoo.ssc.plogit.support.PostgresTestConfig;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.web.servlet.ResultActions;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
+
+import java.io.InputStream;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -21,6 +42,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Import(PostgresTestConfig.class)
 class ExportIntegrationTest extends IntegrationTestBase {
+
+    @Autowired
+    private JsonMapper jsonMapper;
+
+    @Autowired
+    private JsonReportStrategy jsonReportStrategy;
 
     private String exportUri(Long id) {
         return "/api/engagements/" + id + "/export";
@@ -45,6 +72,193 @@ class ExportIntegrationTest extends IntegrationTestBase {
 
         LogEntry reloaded = logRepository.findById(log.getId()).orElseThrow();
         org.junit.jupiter.api.Assertions.assertEquals(ReviewState.EXPORTED, reloaded.getReviewState());
+    }
+
+    @Test
+    void jsonExportSelectsExactLogsAndCommitsAudit() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry draft = createLog(engagement, leader, ReviewState.DRAFT);
+        LogEntry submitted = createLog(engagement, leader, ReviewState.SUBMITTED);
+        LogEntry approved = createLog(engagement, leader, ReviewState.APPROVED);
+        LogEntry exported = createLog(engagement, leader, ReviewState.EXPORTED);
+        Engagement otherEngagement = createEngagement(leader);
+        LogEntry unrelated = createLog(otherEngagement, leader, ReviewState.APPROVED);
+
+        JsonNode first = jsonResponse(exportJson(engagement, leader, "{\"format\":\"JSON\"}"));
+        assertEquals(4, first.path("totalLogCount").asInt());
+        assertEquals(List.of(approved.getId().toString()), exportedIds(first));
+        assertEquals("APPROVED", first.path("logs").get(0).path("reviewState").asText());
+        assertEquals(ReviewState.EXPORTED, persistedState(approved));
+        assertExportAudit(engagement, leader, List.of(approved), false, 0);
+        AuditLog firstTransition = auditLogRepository.findAll().stream()
+            .filter(event -> event.getAction().equals("EXPORT")).findFirst().orElseThrow();
+        assertEquals("APPROVED", firstTransition.getMetadata().get("fromState"));
+
+        long lastAuditId = auditLogRepository.findAll().stream().mapToLong(AuditLog::getId).max().orElseThrow();
+        JsonNode repeated = jsonResponse(exportJson(engagement, leader,
+            "{\"format\":\"JSON\",\"includeExported\":true}"));
+        assertEquals(4, repeated.path("totalLogCount").asInt());
+        assertEquals(List.of(approved.getId().toString(), exported.getId().toString()), exportedIds(repeated));
+        assertEquals("EXPORTED", repeated.path("logs").get(0).path("reviewState").asText());
+        assertEquals("EXPORTED", repeated.path("logs").get(1).path("reviewState").asText());
+        assertEquals(ReviewState.DRAFT, persistedState(draft));
+        assertEquals(ReviewState.SUBMITTED, persistedState(submitted));
+        assertEquals(ReviewState.EXPORTED, persistedState(approved));
+        assertEquals(ReviewState.EXPORTED, persistedState(exported));
+        assertEquals(ReviewState.APPROVED, persistedState(unrelated));
+        assertExportAudit(engagement, leader, List.of(approved, exported), true, lastAuditId);
+        assertTrue(auditLogRepository.findAll().stream().filter(event -> event.getId() > lastAuditId && event.getAction().equals("EXPORT"))
+            .allMatch(event -> event.getMetadata().get("fromState").equals("EXPORTED")));
+    }
+
+    @Test
+    void jsonExportIncludesOnlySelectedAttachmentNames() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry approved = createLog(engagement, leader, ReviewState.DRAFT);
+        LogEntry draft = createLog(engagement, leader, ReviewState.DRAFT);
+        LogEntry submitted = createLog(engagement, leader, ReviewState.SUBMITTED);
+        LogEntry previouslyExported = createLog(engagement, leader, ReviewState.EXPORTED);
+        String imageBase64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a6ioAAAAASUVORK5CYII=";
+        byte[] image = Base64.getDecoder().decode(imageBase64);
+        for (LogEntry log : List.of(approved, draft)) {
+            String filename = log.equals(approved) ? "selected.png" : "excluded-draft.png";
+            mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                    .file(new MockMultipartFile("file", filename, MediaType.IMAGE_PNG_VALUE, image))
+                    .with(asUser(leader))
+                    .with(csrf()))
+                .andExpect(status().isOk());
+        }
+        approved.setReviewState(ReviewState.APPROVED);
+        logRepository.saveAndFlush(approved);
+
+        JsonNode report = jsonResponse(exportJson(engagement, leader, "{\"format\":\"JSON\"}"));
+        assertEquals(4, report.path("totalLogCount").asInt());
+        assertEquals(List.of(approved.getId().toString()), exportedIds(report));
+        JsonNode exported = report.path("logs").get(0);
+        assertEquals(jsonMapper.readTree("[\"selected.png\"]"), exported.path("attachmentFilenames"));
+        assertFalse(report.has("schemaVersion"));
+        assertFalse(report.has("evidenceManifest"));
+        for (String field : List.of("attachments", "attachmentBytes", "attachmentHashes", "contentHash", "evidenceManifest")) {
+            assertFalse(exported.has(field), field);
+        }
+        assertFalse(report.toString().contains(imageBase64));
+        assertFalse(report.toString().contains("excluded-draft.png"));
+        assertEquals(ReviewState.DRAFT, persistedState(draft));
+        assertEquals(ReviewState.SUBMITTED, persistedState(submitted));
+        assertEquals(ReviewState.EXPORTED, persistedState(previouslyExported));
+        assertEquals(ReviewState.EXPORTED, persistedState(approved));
+    }
+
+    @Test
+    void memberDenialDoesNotDiscloseOrMutateEligibleLogs() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        User outsider = createUser("outsider@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        LogEntry approved = createLog(engagement, leader, ReviewState.APPROVED);
+        String request = "{\"format\":\"JSON\"}";
+
+        String memberBody = exportJson(engagement, member, request)
+            .andExpect(status().isForbidden()).andExpect(header().doesNotExist("Content-Disposition"))
+            .andReturn().getResponse().getContentAsString();
+        String outsiderBody = exportJson(engagement, outsider, request)
+            .andExpect(status().isNotFound()).andExpect(header().doesNotExist("Content-Disposition"))
+            .andReturn().getResponse().getContentAsString();
+
+        for (String body : List.of(memberBody, outsiderBody)) {
+            assertFalse(body.contains(engagement.getName()));
+            assertFalse(body.contains(approved.getId().toString()));
+            assertFalse(body.contains(leader.getEmail()));
+        }
+        assertEquals(ReviewState.APPROVED, persistedState(approved));
+        assertEquals(0, auditLogRepository.count());
+    }
+
+    @Test
+    void emptyJsonExportRecordsOnlyTheAggregateAudit() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry submitted = createLog(engagement, leader, ReviewState.SUBMITTED);
+
+        JsonNode report = jsonResponse(exportJson(engagement, leader, "{\"format\":\"JSON\"}"));
+        assertEquals(1, report.path("totalLogCount").asInt());
+        assertTrue(report.path("logs").isArray());
+        assertTrue(report.path("logs").isEmpty());
+        assertEquals(ReviewState.SUBMITTED, persistedState(submitted));
+        assertExportAudit(engagement, leader, List.of(), false, 0);
+    }
+
+    @Test
+    void jsonSerializerMatchesLegacyFixture() throws Exception {
+        ReportOutput output = jsonReportStrategy.generate(legacyReportData());
+        assertEquals("application/json", output.contentType());
+        assertEquals("Synthetic_Engagement-evidence.json", output.filename());
+        try (InputStream fixture = getClass().getResourceAsStream("/exports/legacy-evidence.json")) {
+            assertEquals(jsonMapper.readTree(fixture), jsonMapper.readTree(output.content()));
+        }
+    }
+
+    static EngagementReportData legacyReportData() {
+        EngagementReportData.LogReportEntry log = new EngagementReportData.LogReportEntry(
+            "00000000-0000-4000-8000-000000000001", Instant.parse("2026-11-01T12:00:00Z"),
+            "Synthetic Lead", "RECONNAISSANCE", "Synthetic activity",
+            "**Raw** Markdown", "<strong>Raw</strong> Markdown", "Observed *text*", "<em>text</em>",
+            "example.invalid", null, "IN_PROGRESS", "APPROVED", null,
+            null, null, List.of(new EngagementReportData.ImageAttachment("sample.png", "image/png", new byte[]{1, 2, 3})));
+        return new EngagementReportData(
+            42L, "Synthetic Engagement", "Synthetic fixture", LocalDate.parse("2026-11-01"), null,
+            "Synthetic Lead", List.of(new EngagementReportData.MemberInfo("lead@example.invalid", "Synthetic Lead", "LEADER")),
+            null, null, null, null, null, null, Instant.parse("2026-11-01T13:00:00Z"), 2, List.of(log)
+        );
+    }
+
+    private ResultActions exportJson(Engagement engagement, User user, String request) throws Exception {
+        return mockMvc.perform(post(exportUri(engagement.getId()))
+            .with(asUser(user)).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(request));
+    }
+
+    private JsonNode jsonResponse(ResultActions response) throws Exception {
+        return jsonMapper.readTree(response.andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(header().exists("Content-Disposition"))
+            .andReturn().getResponse().getContentAsByteArray());
+    }
+
+    private List<String> exportedIds(JsonNode report) {
+        List<String> ids = new ArrayList<>();
+        for (JsonNode log : report.path("logs")) {
+            ids.add(log.path("id").asText());
+        }
+        return ids;
+    }
+
+    private ReviewState persistedState(LogEntry log) {
+        return logRepository.findById(log.getId()).orElseThrow().getReviewState();
+    }
+
+    private void assertExportAudit(Engagement engagement, User leader, List<LogEntry> exported, boolean includeExported, long afterId) {
+        List<AuditLog> audit = auditLogRepository.findAll().stream().filter(event -> event.getId() > afterId).toList();
+        assertEquals(exported.size() + 1, audit.size());
+        assertTrue(audit.stream().allMatch(event -> event.getActorId().equals(leader.getId())));
+        AuditLog aggregate = audit.stream().filter(event -> event.getAction().equals("EXPORT_ENGAGEMENT"))
+            .findFirst().orElseThrow();
+        assertEquals("ENGAGEMENT", aggregate.getTargetType());
+        assertEquals(engagement.getId().toString(), aggregate.getTargetId());
+        assertEquals("JSON", aggregate.getMetadata().get("format"));
+        assertEquals(exported.size(), ((Number) aggregate.getMetadata().get("logCount")).intValue());
+        assertEquals(includeExported, aggregate.getMetadata().get("includeExported"));
+
+        for (LogEntry log : exported) {
+            AuditLog transition = audit.stream()
+                .filter(event -> event.getAction().equals("EXPORT") && event.getTargetId().equals(log.getId().toString()))
+                .findFirst().orElseThrow();
+            assertEquals("LOG", transition.getTargetType());
+            assertEquals(engagement.getId().longValue(), ((Number) transition.getMetadata().get("engagementId")).longValue());
+            assertEquals("EXPORTED", transition.getMetadata().get("toState"));
+        }
     }
 
     @Test

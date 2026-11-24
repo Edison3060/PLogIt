@@ -460,3 +460,118 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - DONE. Closed browser and transactional audit verification while Phase 05 acceptance remains open. [Evidence](SESSION-10-EVIDENCE.md#jr-100). Prior phase head `1064cf0ff89743886d520dbb7b09fc62bcd599a3`.
 - Final JR-100 reconciliation checkpoint `c658d7b10ffe4c0f6e128b58d5b1c805ea773edb` contains the verified browser and SQL results, the ten-step disposition, and screenshots. This follow-up changes documentation only.
+
+### 2026-11-24T02:04:15.791Z | Session 11 | JR-101
+
+- DONE. Mapped the live exporter, state selection and audit owners. [Evidence](SESSION-11-EVIDENCE.md#jr-101). Prior pushed head `9efcae1ecccb9dbe8895e7d88a20253dbbace3db`.
+- Next 102. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:04:33.121Z | Session 11 | JR-102
+
+- DONE. Recorded accepted selection, denial, empty and audit semantics. [Evidence](SESSION-11-EVIDENCE.md#jr-102). Prior pushed head `c607fd98dc08d7a331351ac15e3e297d54503ab0`.
+- Next 103. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:05:51.693Z | Session 11 | JR-103
+
+- IN REVIEW. Added mixed-state JSON export and audit regression. [Evidence](SESSION-11-EVIDENCE.md#jr-103). Prior pushed head `05b80b85a3eb2340c5c66f9833d2acf3ae60cbb5`.
+- Next 104. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:06:36.355Z | Session 11 | JR-104
+
+- IN REVIEW. Added member and outsider denial plus empty selection tests. [Evidence](SESSION-11-EVIDENCE.md#jr-104). Prior pushed head `1862e3defb6b8f75037b173859ecbb26943a7ae8`.
+- Next 105. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:06:47.006Z | Session 11 | JR-105
+
+- IN REVIEW. Reviewed selection and denial coverage pending runtime CI. [Evidence](SESSION-11-EVIDENCE.md#jr-105). Prior pushed head `ab194844b37915912fbceb187feadf30e7d4d14b`.
+- Next 106. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:07:12.466Z | Session 11 | JR-106
+
+- DONE. Mapped the legacy JSON serializer and identified nullable fields. [Evidence](SESSION-11-EVIDENCE.md#jr-106). Prior pushed head `22d08777b052d507afd0a3f5c6d951247c7dc359`.
+- Next 107. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:07:32.053Z | Session 11 | JR-107
+
+- DONE. Specified the observed legacy contract and compatibility approval boundary. [Evidence](SESSION-11-EVIDENCE.md#jr-107). Prior pushed head `085d71d9f92ed7d669a0eaeb72dfcbe3a8ca9c67`.
+- Next 108. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:09:38.529Z | Session 11 | JR-108
+
+- IN REVIEW. Added deterministic serializer fixture for the unversioned wire format. [Evidence](SESSION-11-EVIDENCE.md#jr-108). Prior pushed head `0476228b3691b6e8a1e630d0f6c2516d3341cdd7`.
+- Next 109. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:12:30.263Z | Session 11 | JR-109
+
+- IN REVIEW. Verified reader denials and reproduced its nullable-list incompatibility. [Evidence](SESSION-11-EVIDENCE.md#jr-109). Prior pushed head `1b6092a6aa6877a78f2d8c146009154bc8ddf4e6`.
+- Next 110. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:12:50.749Z | Session 11 | JR-110
+
+- IN REVIEW. Closed local wire characterization and retained JudgeIt compatibility review. [Evidence](SESSION-11-EVIDENCE.md#jr-110). Prior pushed head `002fd3a92a71aa02fc6ee2b8b73bd915d690a849`.
+- Reconcile exact-head test evidence and the controller before closing. Session 12 is outside this run.
+
+## Session 11 final handoff | 2026-11-24T02:17:09.733Z
+
+- Session 11 readiness is **READY WITH PROVISIONAL INTEGRATION**. JR-101–108 DONE. JR-109/110 IN REVIEW because the real JudgeIt reader rejects nullable lists emitted by PLogIt. Full Phase 06, prior stacked phases, tenant-scoped persistence and replay, and production authorization remain open.
+- Tested head `c51498335a90702b2dc3c44587c2d10dc67704b9`. Java 21 and PostgreSQL 16.16 passed all 155 Maven tests including 16 export tests. Frontend passed 19 tests. Compose, Semgrep, Trivy filesystem and both images, and proxy validation passed. Production CD was skipped. [CI](https://github.com/Edison3060/PLogIt/actions/runs/45310715443). [Draft PR #27](https://github.com/Edison3060/PLogIt/pull/27) stacks on unmerged Phase 05 PR #26. JR-numbered checkpoints: JR-101 `c607fd98dc08`, JR-102 `05b80b85a3eb`, JR-103 `1862e3defb6b`, JR-104 `ab194844b379`, JR-105 `22d08777b052`, JR-106 `085d71d9f92e`, JR-107 `0476228b3691`, JR-108 `1b6092a6aa68`, JR-109 `002fd3a92a71`, JR-110 `c51498335a90`. The final reconciliation changes tracking only.
+- Carry all previous open acceptance issues, including DEC-2026-11-23-03, JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, Phase 04 product policy and direct API CSRF compatibility. Keep INT-001 provisional and DEC-2026-11-06-11 pending.
+- Once the controller has advanced, the next separately authorized Session 12 is JR-111–JR-120 on the same Phase 06 branch. Read the Phase 06B evidence completeness and versioning tasks, verify the current implementation, and keep new versioned behavior gated. Session 11 stops at JR-110.
+
+### 2026-11-24T14:04:34.286Z | Session 12 | JR-111
+
+- DONE. Mapped filename-only JSON, record selection and privacy boundaries [Evidence](SESSION-12-EVIDENCE.md#jr-111). Prior checkpoint `12b7fd7b33a297227597219910603e558803fa8d`.
+- Continue with JR-112 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:05:06.012Z | Session 12 | JR-112
+
+- DONE. Recorded the evidence limits and privacy acceptance criteria [Evidence](SESSION-12-EVIDENCE.md#jr-112). Prior checkpoint `d71585e0b43551689dd0bf9584d1b4ca161052f4`.
+- Continue with JR-113 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:06:22.756Z | Session 12 | JR-113
+
+- IN REVIEW. Added an authenticated filename-only export regression [Evidence](SESSION-12-EVIDENCE.md#jr-113). Prior checkpoint `597aa2be2617aa1f826c1b9b9110756973db36b4`.
+- Continue with JR-114 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:07:22.041Z | Session 12 | JR-114
+
+- IN REVIEW. Verified changed filenames remain unverified in JudgeIt staging [Evidence](SESSION-12-EVIDENCE.md#jr-114). Prior checkpoint `af2b6b6a763a2ad2901fe67c82f1721f1b0e2b0d`.
+- Continue with JR-115 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:07:59.697Z | Session 12 | JR-115
+
+- IN REVIEW. Reconciled the producer privacy checks and receiver evidence caveat [Evidence](SESSION-12-EVIDENCE.md#jr-115). Prior checkpoint `7e6e1b8ef392c81b6535f6ab7339dec042cb0f34`.
+- Continue with JR-116 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:08:35.006Z | Session 12 | JR-116
+
+- DONE. Inventoried the legacy reader, proposed envelope and existing bridge [Evidence](SESSION-12-EVIDENCE.md#jr-116). Prior checkpoint `ca7e39ed1eccae2c55161c259bcad88ac5f7da6b`.
+- Continue with JR-117 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:09:12.124Z | Session 12 | JR-117
+
+- DONE. Recorded producer compatibility and approval requirements [Evidence](SESSION-12-EVIDENCE.md#jr-117). Prior checkpoint `57263dc331e8b92c7646862d5aa6a86b9e6176c4`.
+- Continue with JR-118 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:10:13.317Z | Session 12 | JR-118
+
+- IN REVIEW. Reproduced the exact serializer fixture incompatibility [Evidence](SESSION-12-EVIDENCE.md#jr-118). Prior checkpoint `083328a2025a048b899453e144a80e59ea2fb569`.
+- Continue with JR-119 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:11:17.641Z | Session 12 | JR-119
+
+- IN REVIEW. Verified unknown-version and duplicate-record denials in the real reader [Evidence](SESSION-12-EVIDENCE.md#jr-119). Prior checkpoint `e596d2f56586a2bdc7c38a0305922cd927f19ebc`.
+- Continue with JR-120 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:12:05.215Z | Session 12 | JR-120
+
+- IN REVIEW. Recorded Phase 06 compatibility and release gates [Evidence](SESSION-12-EVIDENCE.md#jr-120). Prior checkpoint `f8106376cd5b8fc74216af87f8cb9af5dff42bb0`.
+- Reconcile Session 12 tests and Phase 06 gates before changing the controller. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+## Session 12 final handoff | 2026-11-24T14:15:51.787Z
+
+- JR-111–117 and JR-119 DONE. JR-118 and JR-120 IN REVIEW for exact legacy compatibility and version approval. Earlier JR-109/110 remain IN REVIEW. PLogIt CI 45411481575 at `0234a6a492e2542e9f29b2eb9ca5cff649eb4291` used Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16. Backend `mvn -B clean verify` passed 156 tests with zero failures, errors or skips, including 17 export, 15 audit and 15 attachment tests. Frontend Node 22.23.4 passed lint, build and 19 tests. Compose health and failure probes, Semgrep, Trivy filesystem and both image gates, and production proxy checks passed. Production CD was skipped.
+- Verified the actual JudgeIt controller and PostgreSQL journal for accepted diagnostic bytes, missing-media indication, scoped replay and denial without persistence. The exact source export still fails. See [Session 12 evidence](SESSION-12-EVIDENCE.md). JR-111 `d71585e0b435`, JR-112 `597aa2be2617`, JR-113 `af2b6b6a763a`, JR-114 `7e6e1b8ef392`, JR-115 `ca7e39ed1ecc`, JR-116 `57263dc331e8`, JR-117 `083328a2025a`, JR-118 `e596d2f56586`, JR-119 `f8106376cd5b`, JR-120 `0234a6a492e2`. The reconciliation commit changes tracking only.
+- Keep INT-001 provisional. Preserve existing disclosure, selection and unversioned exports. Phase 05 stale-draft DEC-2026-11-23-03, JR-040 scanner acceptance, JR-044/045 elapsed idle time, Phase 04 policy and direct API CSRF compatibility remain open. PR #27 stays draft above #26, with #22–#26 still unmerged. DEC-2026-11-06-11 production authorization remains pending.
+- **READY WITH PROVISIONAL INTEGRATION** for safe independent Session 13, JR-121–JR-130. Start `work/plogit-phase-07` from the latest Phase 06 tracking head while PR #27 remains unmerged. Stop at JR-120.
+- Owner sign-off remains pending for the session review and release decisions.

@@ -218,3 +218,23 @@ _No execution-session decisions have been recorded._
 - Owner: PLogIt product owner. Status: verification approved within Session 10. Any expansion requires product review.
 - Actual: Board shows search, activity type, outcome and review state including leader queue. The API also accepts author ID. Transactional review audit records include actor, transition states and engagement ID. Historical plans describe additional target/tag/date filters and broader audit events.
 - Recommended: verify current board and review-audit behavior with a synthetic workflow and forced rollback. Keep filter and audit policy scope unchanged in this session. JR-096 through JR-100.
+
+### DEC-2026-11-24-01 | JR-102 | Export selection and audit
+
+2026-11-24 UTC. Owner is the PLogIt product owner. Scoped verification approved. Preserve the leader-only POST, approved-by-default selection, optional prior exports, pre-transition report states and per-log plus aggregate audit. An empty selection returns a report and aggregate audit. Changing these behaviors requires product and privacy review. The Builder Lead will verify the existing behavior with synthetic engagement data.
+
+### DEC-2026-11-24-02 | JR-107 | Preserve the legacy wire contract
+
+2026-11-24 UTC. Owner is the PLogIt product owner. Verification and a synthetic fixture are within scope. Keep the producer unchanged and treat consumer validation as provisional. Confirm current nullability and identifier types from runtime output. Any producer shape or privacy change and any formal consumer contract approval remain owner decisions. The suite's proposed envelope does not describe the existing export.
+
+### DEC-2026-11-24-03 | JR-109/110 | Optional list mismatch in JudgeIt
+
+2026-11-24 UTC. Status pending JudgeIt contract review. Owner is the JudgeIt product owner for the consumer and the PLogIt product owner for any producer change. The captured producer emits null for unset inScopeTargets and tags. The consumer refuses those values. Recommend a JudgeIt-owned compatibility rule which treats null as absent for indexing while retaining the original evidence and source identity. Producer-side normalization would change existing wire values and requires separate approval. No sibling changes were made.
+
+### DEC-2026-11-24-04 | JR-112 | Legacy evidence privacy and completeness
+
+2026-11-24 UTC. The PLogIt owner owns any change to disclosure, redaction, approval state selection or attachment packaging. This session verifies the existing leader-only JSON request. The response exposes active-member contact metadata, raw selected logs, scope and rules of engagement, along with an overall log count. Draft and submitted log content and attachments are excluded. Previously exported details require explicit opt-in. Selected media is represented by filename references. A receiver must surface missing media and omitted records. Keep those limits visible and verify them in isolated tests. No product policy change was approved.
+
+### DEC-2026-11-24-05 | JR-117–120 | Versioned evidence-pack policy
+
+2026-11-24 UTC. Status pending joint PLogIt and JudgeIt owner approval. Current PLogIt emits an unversioned engagement object and still allows nullable scope targets and tags. The draft suite envelope proposes schemaVersion, exportId, payload, producer metadata and an optional manifest. Before introducing a separately selected format, approve attachment bytes and package policy, hashing and canonicalization, issuer and tenant binding, import idempotency and revision conflict behavior. First establish the unchanged legacy contract at the real receiver, including legacy null and original evidence retention. Keep the offline file transfer and app-owned databases. The existing PR #21 adapter is an opt-in local prototype and carries no approval for a producer wire change or for JudgeIt to ingest its envelope.

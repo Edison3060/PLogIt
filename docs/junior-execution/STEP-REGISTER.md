@@ -106,26 +106,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-098 | Reproduce Audit and log board success | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#reconciliation) • Chromium and PostgreSQL verified history, filters, submission, and approval. | 2026-11-23T14:09:55.372Z |
 | JR-099 | Reject Audit and log board invalid operation | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#reconciliation) • Forced rollback, member denial, and stale review produced no orphan audit or phantom approval. | 2026-11-23T14:09:55.372Z |
 | JR-100 | Close Audit and log board verification | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-100) • Closed browser and transactional audit verification while Phase 05 acceptance remains open. | 2026-11-23T14:09:55.376Z |
-| JR-101 | Inventory Exporter selection and side effects | 11 | NOT STARTED | — | — |
-| JR-102 | Specify Exporter selection and side effects acceptance | 11 | NOT STARTED | — | — |
-| JR-103 | Reproduce Exporter selection and side effects success | 11 | NOT STARTED | — | — |
-| JR-104 | Reject Exporter selection and side effects invalid operation | 11 | NOT STARTED | — | — |
-| JR-105 | Close Exporter selection and side effects verification | 11 | NOT STARTED | — | — |
-| JR-106 | Inventory Legacy JSON wire format | 11 | NOT STARTED | — | — |
-| JR-107 | Specify Legacy JSON wire format acceptance | 11 | NOT STARTED | — | — |
-| JR-108 | Reproduce Legacy JSON wire format success | 11 | NOT STARTED | — | — |
-| JR-109 | Reject Legacy JSON wire format invalid operation | 11 | NOT STARTED | — | — |
-| JR-110 | Close Legacy JSON wire format verification | 11 | NOT STARTED | — | — |
-| JR-111 | Inventory Evidence completeness and privacy | 12 | NOT STARTED | — | — |
-| JR-112 | Specify Evidence completeness and privacy acceptance | 12 | NOT STARTED | — | — |
-| JR-113 | Reproduce Evidence completeness and privacy success | 12 | NOT STARTED | — | — |
-| JR-114 | Reject Evidence completeness and privacy invalid operation | 12 | NOT STARTED | — | — |
-| JR-115 | Close Evidence completeness and privacy verification | 12 | NOT STARTED | — | — |
-| JR-116 | Inventory Versioned contract decision and compatibility | 12 | NOT STARTED | — | — |
-| JR-117 | Specify Versioned contract decision and compatibility acceptance | 12 | NOT STARTED | — | — |
-| JR-118 | Reproduce Versioned contract decision and compatibility success | 12 | NOT STARTED | — | — |
-| JR-119 | Reject Versioned contract decision and compatibility invalid operation | 12 | NOT STARTED | — | — |
-| JR-120 | Close Versioned contract decision and compatibility verification | 12 | NOT STARTED | — | — |
+| JR-101 | Inventory Exporter selection and side effects | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-101) • Mapped the live exporter, state selection and audit owners. | 2026-11-24 |
+| JR-102 | Specify Exporter selection and side effects acceptance | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-102) • Recorded accepted selection, denial, empty and audit semantics. | 2026-11-24 |
+| JR-103 | Reproduce Exporter selection and side effects success | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-103) • Verified in the [session reconciliation](SESSION-11-EVIDENCE.md#reconciliation). | 2026-11-24 |
+| JR-104 | Reject Exporter selection and side effects invalid operation | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-104) • Verified in the [session reconciliation](SESSION-11-EVIDENCE.md#reconciliation). | 2026-11-24 |
+| JR-105 | Close Exporter selection and side effects verification | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-105) • Verified in the [session reconciliation](SESSION-11-EVIDENCE.md#reconciliation). | 2026-11-24 |
+| JR-106 | Inventory Legacy JSON wire format | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-106) • Mapped the legacy JSON serializer and identified nullable fields. | 2026-11-24 |
+| JR-107 | Specify Legacy JSON wire format acceptance | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-107) • Specified the observed legacy contract and compatibility approval boundary. | 2026-11-24 |
+| JR-108 | Reproduce Legacy JSON wire format success | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-108) • Verified in the [session reconciliation](SESSION-11-EVIDENCE.md#reconciliation). | 2026-11-24 |
+| JR-109 | Reject Legacy JSON wire format invalid operation | 11 | IN REVIEW | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-109) • Verified reader denials and reproduced its nullable-list incompatibility. | 2026-11-24 |
+| JR-110 | Close Legacy JSON wire format verification | 11 | IN REVIEW | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-110) • Closed local wire characterization and retained JudgeIt compatibility review. | 2026-11-24 |
+| JR-111 | Inventory Evidence completeness and privacy | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-111) |
+| JR-112 | Specify Evidence completeness and privacy acceptance | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-112) |
+| JR-113 | Reproduce Evidence completeness and privacy success | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-113) |
+| JR-114 | Reject Evidence completeness and privacy invalid operation | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-114) |
+| JR-115 | Close Evidence completeness and privacy verification | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-115) |
+| JR-116 | Inventory Versioned contract decision and compatibility | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-116) |
+| JR-117 | Specify Versioned contract decision and compatibility acceptance | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-117) |
+| JR-118 | Reproduce Versioned contract decision and compatibility success | 12 | IN REVIEW | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-118) |
+| JR-119 | Reject Versioned contract decision and compatibility invalid operation | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-119) |
+| JR-120 | Close Versioned contract decision and compatibility verification | 12 | IN REVIEW | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-120) |
 | JR-121 | Inventory Image upload validation | 13 | NOT STARTED | — | — |
 | JR-122 | Specify Image upload validation acceptance | 13 | NOT STARTED | — | — |
 | JR-123 | Reproduce Image upload validation success | 13 | NOT STARTED | — | — |
