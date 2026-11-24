@@ -1,0 +1,65 @@
+{
+  "engagementId": 42,
+  "engagementName": "Synthetic Lab Engagement",
+  "description": "synthetic fixture — no customer data",
+  "startDate": "2026-11-01",
+  "dueDate": "2026-11-30",
+  "leaderName": "Example Lead",
+  "members": [
+    {
+      "email": "lead@example.invalid",
+      "displayName": "Example Lead",
+      "role": "LEADER"
+    }
+  ],
+  "inScopeTargets": [
+    "example.invalid"
+  ],
+  "allowedHours": "test window",
+  "allowedTechniques": "lab only",
+  "forbiddenTechniques": "destructive",
+  "emergencyContacts": "synthetic",
+  "outOfScope": "production",
+  "exportedAt": "2026-11-06T10:00:00Z",
+  "totalLogCount": 3,
+  "logs": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "createdAt": "2026-11-05T00:00:00Z",
+      "authorName": "Example Lead",
+      "activityType": "MANUAL",
+      "title": "Synthetic approved activity",
+      "description": "Test markdown",
+      "result": "No issue scored",
+      "target": "example.invalid",
+      "toolUsed": "test tool",
+      "outcome": "SUCCESS",
+      "reviewState": "APPROVED",
+      "tags": [
+        "synthetic"
+      ],
+      "codeBlock": "",
+      "codeLanguage": "",
+      "attachmentFilenames": [
+        "screenshot.png"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "createdAt": "2026-11-05T01:00:00Z",
+      "authorName": "Example Lead",
+      "activityType": "MANUAL",
+      "title": "Synthetic previously exported activity",
+      "description": "Test markdown",
+      "result": "Observation",
+      "target": "example.invalid",
+      "toolUsed": "test tool",
+      "outcome": "SUCCESS",
+      "reviewState": "EXPORTED",
+      "tags": [],
+      "codeBlock": "",
+      "codeLanguage": "",
+      "attachmentFilenames": []
+    }
+  ]
+}

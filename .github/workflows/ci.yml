@@ -36,6 +36,14 @@ permissions:
   contents: read
 
 jobs:
+  provisional-handoff:
+    name: Provisional PLogIt - JudgeIt file bridge tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Run offline bridge validation and negative tests
+        run: python3 -m unittest discover -s tools/integrations/tests -p 'test_*.py' -v
+
   backend:
     name: Backend - Maven build & tests
     runs-on: ubuntu-latest
