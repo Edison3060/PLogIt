@@ -547,3 +547,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - DONE. Inventoried the legacy reader, proposed envelope and existing bridge [Evidence](SESSION-12-EVIDENCE.md#jr-116). Prior checkpoint `ca7e39ed1eccae2c55161c259bcad88ac5f7da6b`.
 - Continue with JR-117 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:09:12.124Z | Session 12 | JR-117
+
+- DONE. Recorded producer compatibility and approval requirements [Evidence](SESSION-12-EVIDENCE.md#jr-117). Prior checkpoint `57263dc331e8b92c7646862d5aa6a86b9e6176c4`.
+- Continue with JR-118 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.

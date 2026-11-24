@@ -1018,3 +1018,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Inventoried the legacy reader, proposed envelope and existing bridge
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-116). Prior phase head `ca7e39ed1eccae2c55161c259bcad88ac5f7da6b`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:09:12.124Z | Session 12 | JR-117 | DONE
+
+- Recorded producer compatibility and approval requirements
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-117). Prior phase head `57263dc331e8b92c7646862d5aa6a86b9e6176c4`. Builder Lead reviewed this checkpoint.

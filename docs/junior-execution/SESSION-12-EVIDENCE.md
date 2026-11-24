@@ -25,3 +25,7 @@ The serializer fixture and mixed states in Session 11 passed CI 45310715443. Ses
 ## JR-116
 
 The active PLogIt branch at `12b7fd7b33a297227597219910603e558803fa8d` has `backend/src/test/resources/exports/legacy-evidence.json` and the suite research proposal. No approved `evidence-pack-v2.schema.json` exists on the Phase 06 branch. JudgeIt Phase 06 owns `contracts/plogit-legacy-v0.schema.json` (blob `0ffd04007ee3b3e5413f2a87e1c249af609f52a6`), `fixtures/plogit-empty.json` and `fixtures/plogit-multilog.json`, the Java parser, upload controller and import journal. The old reader rejects a producer schemaVersion and requires arrays for scope targets and tags. The distinct opt-in PLogIt bridge at `ce4ab70c449b8e98b3b66b262769a508be8231c9` remains provisional in PR #21. Current reads show the adapter is a private file wrapper. It leaves producer payload values intact and adds a canonical payload hash, namespace-scoped import key and unverified filename marker. No app code changed during inventory.
+
+## JR-117
+
+DEC-2026-11-24-05 records the owner decision for a possible versioned format. The existing export and existing consumer compatibility need dedicated evidence. Maintain the same one-way offline file boundary and independent databases. Approval must cover envelope, export ID, hash semantics, media packaging, source namespace, receipt dedupe and revision policy.
