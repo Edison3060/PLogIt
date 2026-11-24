@@ -998,3 +998,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Recorded the evidence limits and privacy acceptance criteria
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-112). Prior phase head `d71585e0b43551689dd0bf9584d1b4ca161052f4`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:06:22.756Z | Session 12 | JR-113 | IN REVIEW
+
+- Added an authenticated filename-only export regression
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-113). Prior phase head `597aa2be2617aa1f826c1b9b9110756973db36b4`. Builder Lead reviewed this checkpoint.

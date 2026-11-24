@@ -527,3 +527,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - DONE. Recorded the evidence limits and privacy acceptance criteria [Evidence](SESSION-12-EVIDENCE.md#jr-112). Prior checkpoint `d71585e0b43551689dd0bf9584d1b4ca161052f4`.
 - Continue with JR-113 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:06:22.756Z | Session 12 | JR-113
+
+- IN REVIEW. Added an authenticated filename-only export regression [Evidence](SESSION-12-EVIDENCE.md#jr-113). Prior checkpoint `597aa2be2617aa1f826c1b9b9110756973db36b4`.
+- Continue with JR-114 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.

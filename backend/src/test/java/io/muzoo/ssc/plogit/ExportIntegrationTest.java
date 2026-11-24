@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.ResultActions;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.json.JsonMapper;
@@ -24,6 +25,7 @@ import java.io.InputStream;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -107,6 +110,45 @@ class ExportIntegrationTest extends IntegrationTestBase {
         assertExportAudit(engagement, leader, List.of(approved, exported), true, lastAuditId);
         assertTrue(auditLogRepository.findAll().stream().filter(event -> event.getId() > lastAuditId && event.getAction().equals("EXPORT"))
             .allMatch(event -> event.getMetadata().get("fromState").equals("EXPORTED")));
+    }
+
+    @Test
+    void jsonExportIncludesOnlySelectedAttachmentNames() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry approved = createLog(engagement, leader, ReviewState.DRAFT);
+        LogEntry draft = createLog(engagement, leader, ReviewState.DRAFT);
+        LogEntry submitted = createLog(engagement, leader, ReviewState.SUBMITTED);
+        LogEntry previouslyExported = createLog(engagement, leader, ReviewState.EXPORTED);
+        String imageBase64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a6ioAAAAASUVORK5CYII=";
+        byte[] image = Base64.getDecoder().decode(imageBase64);
+        for (LogEntry log : List.of(approved, draft)) {
+            String filename = log.equals(approved) ? "selected.png" : "excluded-draft.png";
+            mockMvc.perform(multipart("/api/logs/" + log.getId() + "/attachments")
+                    .file(new MockMultipartFile("file", filename, MediaType.IMAGE_PNG_VALUE, image))
+                    .with(asUser(leader))
+                    .with(csrf()))
+                .andExpect(status().isOk());
+        }
+        approved.setReviewState(ReviewState.APPROVED);
+        logRepository.saveAndFlush(approved);
+
+        JsonNode report = jsonResponse(exportJson(engagement, leader, "{\"format\":\"JSON\"}"));
+        assertEquals(4, report.path("totalLogCount").asInt());
+        assertEquals(List.of(approved.getId().toString()), exportedIds(report));
+        JsonNode exported = report.path("logs").get(0);
+        assertEquals(jsonMapper.readTree("[\"selected.png\"]"), exported.path("attachmentFilenames"));
+        assertFalse(report.has("schemaVersion"));
+        assertFalse(report.has("evidenceManifest"));
+        for (String field : List.of("attachments", "attachmentBytes", "attachmentHashes", "contentHash", "evidenceManifest")) {
+            assertFalse(exported.has(field), field);
+        }
+        assertFalse(report.toString().contains(imageBase64));
+        assertFalse(report.toString().contains("excluded-draft.png"));
+        assertEquals(ReviewState.DRAFT, persistedState(draft));
+        assertEquals(ReviewState.SUBMITTED, persistedState(submitted));
+        assertEquals(ReviewState.EXPORTED, persistedState(previouslyExported));
+        assertEquals(ReviewState.EXPORTED, persistedState(approved));
     }
 
     @Test
