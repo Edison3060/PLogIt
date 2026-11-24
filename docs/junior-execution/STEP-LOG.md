@@ -988,3 +988,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-24T02:17:09.733Z | Session 11 | JR-108 | DONE
 
 - Production serializer matched the generated fixture with the configured mapper. [Executed evidence](SESSION-11-EVIDENCE.md#reconciliation). Reviewer is the Builder Lead.
+
+### 2026-11-24T14:04:34.286Z | Session 12 | JR-111 | DONE
+
+- Mapped filename-only JSON, record selection and privacy boundaries
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-111). Prior phase head `12b7fd7b33a297227597219910603e558803fa8d`. Builder Lead reviewed this checkpoint.

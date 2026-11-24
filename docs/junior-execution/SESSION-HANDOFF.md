@@ -517,3 +517,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Tested head `c51498335a90702b2dc3c44587c2d10dc67704b9`. Java 21 and PostgreSQL 16.16 passed all 155 Maven tests including 16 export tests. Frontend passed 19 tests. Compose, Semgrep, Trivy filesystem and both images, and proxy validation passed. Production CD was skipped. [CI](https://github.com/Edison3060/PLogIt/actions/runs/45310715443). [Draft PR #27](https://github.com/Edison3060/PLogIt/pull/27) stacks on unmerged Phase 05 PR #26. JR-numbered checkpoints: JR-101 `c607fd98dc08`, JR-102 `05b80b85a3eb`, JR-103 `1862e3defb6b`, JR-104 `ab194844b379`, JR-105 `22d08777b052`, JR-106 `085d71d9f92e`, JR-107 `0476228b3691`, JR-108 `1b6092a6aa68`, JR-109 `002fd3a92a71`, JR-110 `c51498335a90`. The final reconciliation changes tracking only.
 - Carry all previous open acceptance issues, including DEC-2026-11-23-03, JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, Phase 04 product policy and direct API CSRF compatibility. Keep INT-001 provisional and DEC-2026-11-06-11 pending.
 - Once the controller has advanced, the next separately authorized Session 12 is JR-111–JR-120 on the same Phase 06 branch. Read the Phase 06B evidence completeness and versioning tasks, verify the current implementation, and keep new versioned behavior gated. Session 11 stops at JR-110.
+
+### 2026-11-24T14:04:34.286Z | Session 12 | JR-111
+
+- DONE. Mapped filename-only JSON, record selection and privacy boundaries [Evidence](SESSION-12-EVIDENCE.md#jr-111). Prior checkpoint `12b7fd7b33a297227597219910603e558803fa8d`.
+- Continue with JR-112 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
