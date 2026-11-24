@@ -962,3 +962,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Added deterministic serializer fixture for the unversioned wire format.
 - [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-108). Prior phase head `0476228b3691b6e8a1e630d0f6c2516d3341cdd7`. Reviewer is the Builder Lead.
+
+### 2026-11-24T02:12:30.263Z | Session 11 | JR-109 | IN REVIEW
+
+- Verified reader denials and reproduced its nullable-list incompatibility.
+- [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-109). Prior phase head `1b6092a6aa6877a78f2d8c146009154bc8ddf4e6`. Reviewer is the Builder Lead.

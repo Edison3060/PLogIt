@@ -1,42 +1,38 @@
 {
-  "engagementId": 42,
-  "engagementName": "Synthetic Engagement",
-  "description": "Synthetic fixture",
-  "startDate": "2026-11-01",
-  "dueDate": null,
-  "leaderName": "Synthetic Lead",
-  "members": [
-    {
-      "email": "lead@example.invalid",
-      "displayName": "Synthetic Lead",
-      "role": "LEADER"
-    }
-  ],
-  "inScopeTargets": null,
-  "allowedHours": null,
-  "allowedTechniques": null,
-  "forbiddenTechniques": null,
-  "emergencyContacts": null,
-  "outOfScope": null,
-  "exportedAt": "2026-11-01T13:00:00Z",
-  "totalLogCount": 2,
-  "logs": [
-    {
-      "id": "00000000-0000-4000-8000-000000000001",
-      "createdAt": "2026-11-01T12:00:00Z",
-      "authorName": "Synthetic Lead",
-      "activityType": "RECONNAISSANCE",
-      "title": "Synthetic activity",
-      "description": "**Raw** Markdown",
-      "result": "Observed *text*",
-      "target": "example.invalid",
-      "toolUsed": null,
-      "outcome": "IN_PROGRESS",
-      "reviewState": "APPROVED",
-      "tags": null,
-      "codeBlock": null,
-      "codeLanguage": null,
-      "attachmentFilenames": ["sample.png"]
-    }
-  ]
+  "engagementId" : 42,
+  "engagementName" : "Synthetic Engagement",
+  "description" : "Synthetic fixture",
+  "startDate" : "2026-11-01",
+  "dueDate" : null,
+  "leaderName" : "Synthetic Lead",
+  "members" : [ {
+    "email" : "lead@example.invalid",
+    "displayName" : "Synthetic Lead",
+    "role" : "LEADER"
+  } ],
+  "inScopeTargets" : null,
+  "allowedHours" : null,
+  "allowedTechniques" : null,
+  "forbiddenTechniques" : null,
+  "emergencyContacts" : null,
+  "outOfScope" : null,
+  "exportedAt" : "2026-11-01T13:00:00Z",
+  "totalLogCount" : 2,
+  "logs" : [ {
+    "id" : "00000000-0000-4000-8000-000000000001",
+    "createdAt" : "2026-11-01T12:00:00Z",
+    "authorName" : "Synthetic Lead",
+    "activityType" : "RECONNAISSANCE",
+    "title" : "Synthetic activity",
+    "description" : "**Raw** Markdown",
+    "result" : "Observed *text*",
+    "target" : "example.invalid",
+    "toolUsed" : null,
+    "outcome" : "IN_PROGRESS",
+    "reviewState" : "APPROVED",
+    "tags" : null,
+    "codeBlock" : null,
+    "codeLanguage" : null,
+    "attachmentFilenames" : [ "sample.png" ]
+  } ]
 }

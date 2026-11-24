@@ -33,3 +33,19 @@ DEC-2026-11-24-02 records legacy acceptance. The wire object uses a numeric loca
 ## JR-108
 
 ExportIntegrationTest.jsonSerializerMatchesLegacyFixture sends fixed synthetic EngagementReportData to the production JsonReportStrategy with the Spring-configured JsonMapper. The test compares every parsed JSON field with backend/src/test/resources/exports/legacy-evidence.json, including numeric engagement ID/count, calendar date, UTC instants, member metadata, Markdown, explicit nulls and a filename-only attachment. The test feeds internal HTML and synthetic image bytes to the producer model to distinguish them from wire fields. Full runtime match is pending. No JSON endpoint, production serializer or schema change.
+
+## JR-109
+
+On OpenJDK 21.0.13 with the PLogIt Maven-resolved Jackson 3.1.7 jars, compiled the unmodified [JudgeIt Java reader](https://github.com/Edison3060/JudgeIt/blob/work/judgeit-phase-06/backend/src/main/java/io/muzoo/ssc/judgeit/ingest/LegacyPLogItParser.java) (blob `994df722a4d0da16d2676fbc606ff6d1eaa892a1`) and a local harness with javac -cp <Jackson jars> -d <classes>, then ran java -cp <classes and jars> ReaderCheck <serializer-output>. The harness invoked LegacyPLogItParser.stage(byte[]) without HTTP or database publication.
+
+| Input | Expected and observed |
+|---|---|
+| Exact Spring serializer bytes with inScopeTargets=null and tags=null | INVALID_TARGETS |
+| Only inScopeTargets changed to [] in a synthetic variant | INVALID_TAGS |
+| Both lists changed to [] in a diagnostic variant | One selected, one omitted, original UUID, sample.png and missingAttachmentBytes=true |
+| Diagnostic variant with id=invalid-uuid | INVALID_LOG_ID |
+| Diagnostic variant with schemaVersion=999 | UNSUPPORTED_PRODUCER_VERSION |
+| Top-level array | INVALID_ENVELOPE |
+| Diagnostic variant with logs={} | INVALID_LOG_COUNT |
+
+The exact generated file is now stored at backend/src/test/resources/exports/legacy-evidence.json (SHA-256 bd07afa8df0b18a2b40ecd32863835c4e573732e58a70711a328908a14254e9c). The separate provisional bridge from PR #21 passed all 12 unit tests via python3 -m unittest discover -s tools/integrations/tests -p 'test_*.py' -v, and wrapped the actual serializer bytes as plogit-judgeit-provisional/0.1 with unchanged payload and source UUID. This is not the JudgeIt production contract. Keep INT-001 provisional. A JudgeIt-owned change to accept optional null arrays while preserving original evidence bytes is recommended for review. Authentication, authorized tenant publication, database/audit behavior and replay were not tested across apps in this session.
