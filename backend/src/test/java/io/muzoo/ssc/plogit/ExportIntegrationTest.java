@@ -98,6 +98,46 @@ class ExportIntegrationTest extends IntegrationTestBase {
             .allMatch(event -> event.getMetadata().get("fromState").equals("EXPORTED")));
     }
 
+    @Test
+    void memberDenialDoesNotDiscloseOrMutateEligibleLogs() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        User outsider = createUser("outsider@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        LogEntry approved = createLog(engagement, leader, ReviewState.APPROVED);
+        String request = "{\"format\":\"JSON\"}";
+
+        String memberBody = exportJson(engagement, member, request)
+            .andExpect(status().isForbidden()).andExpect(header().doesNotExist("Content-Disposition"))
+            .andReturn().getResponse().getContentAsString();
+        String outsiderBody = exportJson(engagement, outsider, request)
+            .andExpect(status().isNotFound()).andExpect(header().doesNotExist("Content-Disposition"))
+            .andReturn().getResponse().getContentAsString();
+
+        for (String body : List.of(memberBody, outsiderBody)) {
+            assertFalse(body.contains(engagement.getName()));
+            assertFalse(body.contains(approved.getId().toString()));
+            assertFalse(body.contains(leader.getEmail()));
+        }
+        assertEquals(ReviewState.APPROVED, persistedState(approved));
+        assertEquals(0, auditLogRepository.count());
+    }
+
+    @Test
+    void emptyJsonExportRecordsOnlyTheAggregateAudit() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry submitted = createLog(engagement, leader, ReviewState.SUBMITTED);
+
+        JsonNode report = jsonResponse(exportJson(engagement, leader, "{\"format\":\"JSON\"}"));
+        assertEquals(1, report.path("totalLogCount").asInt());
+        assertTrue(report.path("logs").isArray());
+        assertTrue(report.path("logs").isEmpty());
+        assertEquals(ReviewState.SUBMITTED, persistedState(submitted));
+        assertExportAudit(engagement, leader, List.of(), false, 0);
+    }
+
     private ResultActions exportJson(Engagement engagement, User user, String request) throws Exception {
         return mockMvc.perform(post(exportUri(engagement.getId()))
             .with(asUser(user)).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(request));

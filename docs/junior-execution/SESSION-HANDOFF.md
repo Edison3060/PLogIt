@@ -475,3 +475,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - IN REVIEW. Added mixed-state JSON export and audit regression. [Evidence](SESSION-11-EVIDENCE.md#jr-103). Prior pushed head `05b80b85a3eb2340c5c66f9833d2acf3ae60cbb5`.
 - Next 104. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:06:36.355Z | Session 11 | JR-104
+
+- IN REVIEW. Added member and outsider denial plus empty selection tests. [Evidence](SESSION-11-EVIDENCE.md#jr-104). Prior pushed head `1862e3defb6b8f75037b173859ecbb26943a7ae8`.
+- Next 105. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.

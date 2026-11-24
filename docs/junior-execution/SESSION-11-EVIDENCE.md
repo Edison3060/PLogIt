@@ -13,3 +13,7 @@ DEC-2026-11-24-01 records acceptance. Send JSON {"format":"JSON","includeExporte
 ## JR-103
 
 The PostgreSQL-backed ExportIntegrationTest.jsonExportSelectsExactLogsAndCommitsAudit seeds DRAFT, SUBMITTED, APPROVED and EXPORTED plus another engagement's APPROVED log. The two authenticated MockMvc POSTs expect only the original APPROVED UUID by default, then two EXPORTED UUIDs in creation order with includeExported=true. Fresh reads assert all five persisted states and exact per-log plus aggregate audit effects. This test is ready for the Phase 06 CI run. Local Maven 3.9.11 failed at model resolution with DNS for repo.maven.apache.org before tests started. No runtime pass is claimed at entry.
+
+## JR-104
+
+ExportIntegrationTest.memberDenialDoesNotDiscloseOrMutateEligibleLogs checks HTTP 403 and 404, no download header or leaked log UUID/engagement/leader, unchanged APPROVED state and zero audit. ExportIntegrationTest.emptyJsonExportRecordsOnlyTheAggregateAudit checks an engagement with only SUBMITTED data returns HTTP 200 and a zero-entry report, no review-state write, and exactly one aggregate audit. PostgreSQL-backed execution is pending after local dependency resolution failed.

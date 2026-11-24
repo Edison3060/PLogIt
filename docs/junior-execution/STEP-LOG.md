@@ -937,3 +937,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Added mixed-state JSON export and audit regression.
 - [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-103). Prior phase head `05b80b85a3eb2340c5c66f9833d2acf3ae60cbb5`. Reviewer is the Builder Lead.
+
+### 2026-11-24T02:06:36.355Z | Session 11 | JR-104 | IN REVIEW
+
+- Added member and outsider denial plus empty selection tests.
+- [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-104). Prior phase head `1862e3defb6b8f75037b173859ecbb26943a7ae8`. Reviewer is the Builder Lead.
