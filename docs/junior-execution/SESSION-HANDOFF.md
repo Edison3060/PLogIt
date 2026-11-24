@@ -490,3 +490,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - DONE. Mapped the legacy JSON serializer and identified nullable fields. [Evidence](SESSION-11-EVIDENCE.md#jr-106). Prior pushed head `22d08777b052d507afd0a3f5c6d951247c7dc359`.
 - Next 107. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:07:32.053Z | Session 11 | JR-107
+
+- DONE. Specified the observed legacy contract and compatibility approval boundary. [Evidence](SESSION-11-EVIDENCE.md#jr-107). Prior pushed head `085d71d9f92ed7d669a0eaeb72dfcbe3a8ca9c67`.
+- Next 108. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.

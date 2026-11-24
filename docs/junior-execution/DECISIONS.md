@@ -222,3 +222,7 @@ _No execution-session decisions have been recorded._
 ### DEC-2026-11-24-01 | JR-102 | Export selection and audit
 
 2026-11-24 UTC. Owner is the PLogIt product owner. Scoped verification approved. Preserve the leader-only POST, approved-by-default selection, optional prior exports, pre-transition report states and per-log plus aggregate audit. An empty selection returns a report and aggregate audit. Changing these behaviors requires product and privacy review. The Builder Lead will verify the existing behavior with synthetic engagement data.
+
+### DEC-2026-11-24-02 | JR-107 | Preserve the legacy wire contract
+
+2026-11-24 UTC. Owner is the PLogIt product owner. Verification and a synthetic fixture are within scope. Keep the producer unchanged and treat consumer validation as provisional. Confirm current nullability and identifier types from runtime output. Any producer shape or privacy change and any formal consumer contract approval remain owner decisions. The suite's proposed envelope does not describe the existing export.
