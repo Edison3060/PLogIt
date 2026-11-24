@@ -562,3 +562,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - IN REVIEW. Verified unknown-version and duplicate-record denials in the real reader [Evidence](SESSION-12-EVIDENCE.md#jr-119). Prior checkpoint `e596d2f56586a2bdc7c38a0305922cd927f19ebc`.
 - Continue with JR-120 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:12:05.215Z | Session 12 | JR-120
+
+- IN REVIEW. Recorded Phase 06 compatibility and release gates [Evidence](SESSION-12-EVIDENCE.md#jr-120). Prior checkpoint `f8106376cd5b8fc74216af87f8cb9af5dff42bb0`.
+- Reconcile Session 12 tests and Phase 06 gates before changing the controller. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.

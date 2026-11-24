@@ -37,3 +37,7 @@ The PLogIt fixture produced by Spring JSON during Session 11 still fails with IN
 ## JR-119
 
 The unmodified JudgeIt parser rejected schemaVersion=999 as UNSUPPORTED_PRODUCER_VERSION and duplicate source UUIDs as DUPLICATE_LOG_ID. A repeated parse of identical bytes returned the same file SHA and UUID. The separate provisional wrapper's 12 Python tests passed, including deterministic scoped import keys and simulated idempotent replay. Parsing and mock replay provide no transaction proof. The real controller and journal replay test is pending in isolated PostgreSQL. The exact producer artifact still fails earlier on nullable optional collections.
+
+## JR-120
+
+The exact old serializer fixture stays incompatible with the JudgeIt reader. Phase 06 cannot be accepted while legacy compatibility, the distinct optional future version approval and prior stacked phase acceptance remain open. Keep the current producer bytes and consumer provenance intact. Confirm current full CI, record local positive and negative evidence, and preserve DEC-2026-11-06-11. Any rollback of Session 12's code diff is test-only and requires no application data or migration rollback.

@@ -1033,3 +1033,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Verified unknown-version and duplicate-record denials in the real reader
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-119). Prior phase head `e596d2f56586a2bdc7c38a0305922cd927f19ebc`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:12:05.215Z | Session 12 | JR-120 | IN REVIEW
+
+- Recorded Phase 06 compatibility and release gates
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-120). Prior phase head `f8106376cd5b8fc74216af87f8cb9af5dff42bb0`. Builder Lead reviewed this checkpoint.
