@@ -21,3 +21,7 @@ ExportIntegrationTest.memberDenialDoesNotDiscloseOrMutateEligibleLogs checks HTT
 ## JR-105
 
 Source review confirms authorization before log lookup and output generation before mutations. The focused diff adds only MockMvc/PostgreSQL regressions. The outward API, state machine and transaction boundaries retain the baseline implementation. Reconcile JR-103/104 and this closure with the backend Maven job at the final executable SHA. If fixture expectations fail, inspect current behavior before altering an existing API. Reviewer is the Builder Lead. Phase 05 and owner release approvals remain open.
+
+## JR-106
+
+JsonReportStrategy and EngagementReportData at baseline `9efcae1ecccb9dbe8895e7d88a20253dbbace3db` own the unversioned record. The Boot JsonMapper determines physical date and null representation. ExportService converts persisted UUIDs with toString(), forwards raw source Markdown, and supplies internal rendered HTML and image bytes only to the report data model. The JSON strategy selects names only. ExportIntegrationTest previously checked the MIME and download header without a full payload assertion. Suite handoff research correctly maps the fields, but the product spec's historical PDF emphasis and the proposed versioned JSON envelope have no effect on this serializer. JudgeIt's provisional consumer schema requires array-valued inScopeTargets and tags and the producer model can pass null for either. The fixture will establish actual wire behavior. Reviewer is the Builder Lead.

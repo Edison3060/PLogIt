@@ -947,3 +947,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Reviewed selection and denial coverage pending runtime CI.
 - [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-105). Prior phase head `ab194844b37915912fbceb187feadf30e7d4d14b`. Reviewer is the Builder Lead.
+
+### 2026-11-24T02:07:12.466Z | Session 11 | JR-106 | DONE
+
+- Mapped the legacy JSON serializer and identified nullable fields.
+- [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-106). Prior phase head `22d08777b052d507afd0a3f5c6d951247c7dc359`. Reviewer is the Builder Lead.
