@@ -567,3 +567,11 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - IN REVIEW. Recorded Phase 06 compatibility and release gates [Evidence](SESSION-12-EVIDENCE.md#jr-120). Prior checkpoint `f8106376cd5b8fc74216af87f8cb9af5dff42bb0`.
 - Reconcile Session 12 tests and Phase 06 gates before changing the controller. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+## Session 12 final handoff | 2026-11-24T14:15:51.787Z
+
+- JR-111–117 and JR-119 DONE. JR-118 and JR-120 IN REVIEW for exact legacy compatibility and version approval. Earlier JR-109/110 remain IN REVIEW. PLogIt CI 45411481575 at `0234a6a492e2542e9f29b2eb9ca5cff649eb4291` used Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16. Backend `mvn -B clean verify` passed 156 tests with zero failures, errors or skips, including 17 export, 15 audit and 15 attachment tests. Frontend Node 22.23.4 passed lint, build and 19 tests. Compose health and failure probes, Semgrep, Trivy filesystem and both image gates, and production proxy checks passed. Production CD was skipped.
+- Verified the actual JudgeIt controller and PostgreSQL journal for accepted diagnostic bytes, missing-media indication, scoped replay and denial without persistence. The exact source export still fails. See [Session 12 evidence](SESSION-12-EVIDENCE.md). JR-111 `d71585e0b435`, JR-112 `597aa2be2617`, JR-113 `af2b6b6a763a`, JR-114 `7e6e1b8ef392`, JR-115 `ca7e39ed1ecc`, JR-116 `57263dc331e8`, JR-117 `083328a2025a`, JR-118 `e596d2f56586`, JR-119 `f8106376cd5b`, JR-120 `0234a6a492e2`. The reconciliation commit changes tracking only.
+- Keep INT-001 provisional. Preserve existing disclosure, selection and unversioned exports. Phase 05 stale-draft DEC-2026-11-23-03, JR-040 scanner acceptance, JR-044/045 elapsed idle time, Phase 04 policy and direct API CSRF compatibility remain open. PR #27 stays draft above #26, with #22–#26 still unmerged. DEC-2026-11-06-11 production authorization remains pending.
+- **READY WITH PROVISIONAL INTEGRATION** for safe independent Session 13, JR-121–JR-130. Start `work/plogit-phase-07` from the latest Phase 06 tracking head while PR #27 remains unmerged. Stop at JR-120.
+- Owner sign-off remains pending for the session review and release decisions.

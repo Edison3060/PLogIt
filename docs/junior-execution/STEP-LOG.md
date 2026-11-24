@@ -1038,3 +1038,19 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Recorded Phase 06 compatibility and release gates
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-120). Prior phase head `f8106376cd5b8fc74216af87f8cb9af5dff42bb0`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:15:51.787Z | Session 12 | JR-113 | DONE
+
+- Authenticated multipart JSON regression passed in PostgreSQL-backed CI. One of four logs and the selected attachment filename were emitted. [Reconciliation](SESSION-12-EVIDENCE.md#reconciliation). Builder Lead reviewed the results.
+
+### 2026-11-24T14:15:51.787Z | Session 12 | JR-114 | DONE
+
+- JudgeIt retained the missing-media flag and denied a later filename revision and unsupported attachment claim without altering evidence or audit. [Reconciliation](SESSION-12-EVIDENCE.md#reconciliation). Builder Lead reviewed the results.
+
+### 2026-11-24T14:15:51.787Z | Session 12 | JR-115 | DONE
+
+- Reconciled the current export regression, authorization and audit checks, plus isolated JudgeIt persistence. Existing legacy evidence limitations are documented. [Reconciliation](SESSION-12-EVIDENCE.md#reconciliation). Builder Lead reviewed the results.
+
+### 2026-11-24T14:15:51.787Z | Session 12 | JR-119 | DONE
+
+- Real JudgeIt persistence denied unknown versions and duplicate log UUIDs with zero writes. Compatible diagnostic replay reused the batch and recorded two attempts. [Reconciliation](SESSION-12-EVIDENCE.md#reconciliation). Builder Lead reviewed the results.
