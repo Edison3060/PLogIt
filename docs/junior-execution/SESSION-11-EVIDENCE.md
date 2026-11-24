@@ -29,3 +29,7 @@ JsonReportStrategy and EngagementReportData at baseline `9efcae1ecccb9dbe8895e7d
 ## JR-107
 
 DEC-2026-11-24-02 records legacy acceptance. The wire object uses a numeric local engagement ID, text metadata, calendar dates, ISO UTC instants, member details, total log count and a logs array. Each selected record carries a string UUID, raw description and result Markdown, review state and attachmentFilenames. Optional values must follow the serializer, including possible null for scoped targets and tags. The payload has no schemaVersion, media bytes or hashing claims. Keep the unversioned producer intact and compare any legacy reader with producer-derived evidence. New schema, idempotency, tenant or media policy needs separate approval.
+
+## JR-108
+
+ExportIntegrationTest.jsonSerializerMatchesLegacyFixture sends fixed synthetic EngagementReportData to the production JsonReportStrategy with the Spring-configured JsonMapper. The test compares every parsed JSON field with backend/src/test/resources/exports/legacy-evidence.json, including numeric engagement ID/count, calendar date, UTC instants, member metadata, Markdown, explicit nulls and a filename-only attachment. The test feeds internal HTML and synthetic image bytes to the producer model to distinguish them from wire fields. Full runtime match is pending. No JSON endpoint, production serializer or schema change.

@@ -6,6 +6,9 @@ import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.LogEntry;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
+import io.muzoo.ssc.plogit.service.export.EngagementReportData;
+import io.muzoo.ssc.plogit.service.export.JsonReportStrategy;
+import io.muzoo.ssc.plogit.service.export.ReportOutput;
 import io.muzoo.ssc.plogit.support.IntegrationTestBase;
 import io.muzoo.ssc.plogit.support.PostgresTestConfig;
 import org.junit.jupiter.api.Test;
@@ -17,10 +20,15 @@ import org.springframework.test.web.servlet.ResultActions;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.json.JsonMapper;
 
+import java.io.InputStream;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -34,6 +42,9 @@ class ExportIntegrationTest extends IntegrationTestBase {
 
     @Autowired
     private JsonMapper jsonMapper;
+
+    @Autowired
+    private JsonReportStrategy jsonReportStrategy;
 
     private String exportUri(Long id) {
         return "/api/engagements/" + id + "/export";
@@ -136,6 +147,30 @@ class ExportIntegrationTest extends IntegrationTestBase {
         assertTrue(report.path("logs").isEmpty());
         assertEquals(ReviewState.SUBMITTED, persistedState(submitted));
         assertExportAudit(engagement, leader, List.of(), false, 0);
+    }
+
+    @Test
+    void jsonSerializerMatchesLegacyFixture() throws Exception {
+        ReportOutput output = jsonReportStrategy.generate(legacyReportData());
+        assertEquals("application/json", output.contentType());
+        assertEquals("Synthetic_Engagement-evidence.json", output.filename());
+        try (InputStream fixture = getClass().getResourceAsStream("/exports/legacy-evidence.json")) {
+            assertEquals(jsonMapper.readTree(fixture), jsonMapper.readTree(output.content()));
+        }
+    }
+
+    static EngagementReportData legacyReportData() {
+        EngagementReportData.LogReportEntry log = new EngagementReportData.LogReportEntry(
+            "00000000-0000-4000-8000-000000000001", Instant.parse("2026-11-01T12:00:00Z"),
+            "Synthetic Lead", "RECONNAISSANCE", "Synthetic activity",
+            "**Raw** Markdown", "<strong>Raw</strong> Markdown", "Observed *text*", "<em>text</em>",
+            "example.invalid", null, "IN_PROGRESS", "APPROVED", null,
+            null, null, List.of(new EngagementReportData.ImageAttachment("sample.png", "image/png", new byte[]{1, 2, 3})));
+        return new EngagementReportData(
+            42L, "Synthetic Engagement", "Synthetic fixture", LocalDate.parse("2026-11-01"), null,
+            "Synthetic Lead", List.of(new EngagementReportData.MemberInfo("lead@example.invalid", "Synthetic Lead", "LEADER")),
+            null, null, null, null, null, null, Instant.parse("2026-11-01T13:00:00Z"), 2, List.of(log)
+        );
     }
 
     private ResultActions exportJson(Engagement engagement, User user, String request) throws Exception {

@@ -495,3 +495,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - DONE. Specified the observed legacy contract and compatibility approval boundary. [Evidence](SESSION-11-EVIDENCE.md#jr-107). Prior pushed head `085d71d9f92ed7d669a0eaeb72dfcbe3a8ca9c67`.
 - Next 108. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:09:38.529Z | Session 11 | JR-108
+
+- IN REVIEW. Added deterministic serializer fixture for the unversioned wire format. [Evidence](SESSION-11-EVIDENCE.md#jr-108). Prior pushed head `0476228b3691b6e8a1e630d0f6c2516d3341cdd7`.
+- Next 109. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.

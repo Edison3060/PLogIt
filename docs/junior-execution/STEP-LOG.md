@@ -957,3 +957,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Specified the observed legacy contract and compatibility approval boundary.
 - [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-107). Prior phase head `085d71d9f92ed7d669a0eaeb72dfcbe3a8ca9c67`. Reviewer is the Builder Lead.
+
+### 2026-11-24T02:09:38.529Z | Session 11 | JR-108 | IN REVIEW
+
+- Added deterministic serializer fixture for the unversioned wire format.
+- [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-108). Prior phase head `0476228b3691b6e8a1e630d0f6c2516d3341cdd7`. Reviewer is the Builder Lead.

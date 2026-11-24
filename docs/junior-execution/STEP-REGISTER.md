@@ -113,7 +113,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-105 | Close Exporter selection and side effects verification | 11 | IN REVIEW | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-105) • Reviewed selection and denial coverage pending runtime CI. | 2026-11-24 |
 | JR-106 | Inventory Legacy JSON wire format | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-106) • Mapped the legacy JSON serializer and identified nullable fields. | 2026-11-24 |
 | JR-107 | Specify Legacy JSON wire format acceptance | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-107) • Specified the observed legacy contract and compatibility approval boundary. | 2026-11-24 |
-| JR-108 | Reproduce Legacy JSON wire format success | 11 | NOT STARTED | — | — |
+| JR-108 | Reproduce Legacy JSON wire format success | 11 | IN REVIEW | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-108) • Added deterministic serializer fixture for the unversioned wire format. | 2026-11-24 |
 | JR-109 | Reject Legacy JSON wire format invalid operation | 11 | NOT STARTED | — | — |
 | JR-110 | Close Legacy JSON wire format verification | 11 | NOT STARTED | — | — |
 | JR-111 | Inventory Evidence completeness and privacy | 12 | NOT STARTED | — | — |
