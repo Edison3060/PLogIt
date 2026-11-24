@@ -117,7 +117,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-109 | Reject Legacy JSON wire format invalid operation | 11 | IN REVIEW | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-109) • Verified reader denials and reproduced its nullable-list incompatibility. | 2026-11-24 |
 | JR-110 | Close Legacy JSON wire format verification | 11 | IN REVIEW | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-110) • Closed local wire characterization and retained JudgeIt compatibility review. | 2026-11-24 |
 | JR-111 | Inventory Evidence completeness and privacy | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-111) |
-| JR-112 | Specify Evidence completeness and privacy acceptance | 12 | NOT STARTED | — | — |
+| JR-112 | Specify Evidence completeness and privacy acceptance | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-112) |
 | JR-113 | Reproduce Evidence completeness and privacy success | 12 | NOT STARTED | — | — |
 | JR-114 | Reject Evidence completeness and privacy invalid operation | 12 | NOT STARTED | — | — |
 | JR-115 | Close Evidence completeness and privacy verification | 12 | NOT STARTED | — | — |

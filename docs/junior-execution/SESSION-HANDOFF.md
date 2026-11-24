@@ -522,3 +522,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - DONE. Mapped filename-only JSON, record selection and privacy boundaries [Evidence](SESSION-12-EVIDENCE.md#jr-111). Prior checkpoint `12b7fd7b33a297227597219910603e558803fa8d`.
 - Continue with JR-112 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:05:06.012Z | Session 12 | JR-112
+
+- DONE. Recorded the evidence limits and privacy acceptance criteria [Evidence](SESSION-12-EVIDENCE.md#jr-112). Prior checkpoint `d71585e0b43551689dd0bf9584d1b4ca161052f4`.
+- Continue with JR-113 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.

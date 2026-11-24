@@ -230,3 +230,7 @@ _No execution-session decisions have been recorded._
 ### DEC-2026-11-24-03 | JR-109/110 | Optional list mismatch in JudgeIt
 
 2026-11-24 UTC. Status pending JudgeIt contract review. Owner is the JudgeIt product owner for the consumer and the PLogIt product owner for any producer change. The captured producer emits null for unset inScopeTargets and tags. The consumer refuses those values. Recommend a JudgeIt-owned compatibility rule which treats null as absent for indexing while retaining the original evidence and source identity. Producer-side normalization would change existing wire values and requires separate approval. No sibling changes were made.
+
+### DEC-2026-11-24-04 | JR-112 | Legacy evidence privacy and completeness
+
+2026-11-24 UTC. The PLogIt owner owns any change to disclosure, redaction, approval state selection or attachment packaging. This session verifies the existing leader-only JSON request. The response exposes active-member contact metadata, raw selected logs, scope and rules of engagement, along with an overall log count. Draft and submitted log content and attachments are excluded. Previously exported details require explicit opt-in. Selected media is represented by filename references. A receiver must surface missing media and omitted records. Keep those limits visible and verify them in isolated tests. No product policy change was approved.
