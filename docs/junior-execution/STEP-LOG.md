@@ -1008,3 +1008,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Verified changed filenames remain unverified in JudgeIt staging
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-114). Prior phase head `af2b6b6a763a2ad2901fe67c82f1721f1b0e2b0d`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:07:59.697Z | Session 12 | JR-115 | IN REVIEW
+
+- Reconciled the producer privacy checks and receiver evidence caveat
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-115). Prior phase head `7e6e1b8ef392c81b6535f6ab7339dec042cb0f34`. Builder Lead reviewed this checkpoint.

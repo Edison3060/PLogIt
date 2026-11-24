@@ -120,7 +120,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-112 | Specify Evidence completeness and privacy acceptance | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-112) |
 | JR-113 | Reproduce Evidence completeness and privacy success | 12 | IN REVIEW | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-113) |
 | JR-114 | Reject Evidence completeness and privacy invalid operation | 12 | IN REVIEW | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-114) |
-| JR-115 | Close Evidence completeness and privacy verification | 12 | NOT STARTED | — | — |
+| JR-115 | Close Evidence completeness and privacy verification | 12 | IN REVIEW | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-115) |
 | JR-116 | Inventory Versioned contract decision and compatibility | 12 | NOT STARTED | — | — |
 | JR-117 | Specify Versioned contract decision and compatibility acceptance | 12 | NOT STARTED | — | — |
 | JR-118 | Reproduce Versioned contract decision and compatibility success | 12 | NOT STARTED | — | — |

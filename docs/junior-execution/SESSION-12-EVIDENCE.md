@@ -17,3 +17,7 @@ The new `ExportIntegrationTest.jsonExportIncludesOnlySelectedAttachmentNames` up
 ## JR-114
 
 With Java 21.0.13 and Jackson 3.1.7, compiled the byte-matched JudgeIt legacy parser (`994df722a4d0da16d2676fbc606ff6d1eaa892a1`) and invoked `stage(byte[])`. Base fixture SHA `bd07afa8df0b18a2b40ecd32863835c4e573732e58a70711a328908a14254e9c` returned INVALID_TARGETS. For a staging-only diagnostic, set optional scope targets and tags to arrays. Both `sample.png` and a plain altered label `renamed.png` preserved the source UUID, 1 selected and 1 omitted, and explicitly yielded `missingAttachmentBytes=true`. The file SHA changed. A synthetic per-log attachmentHashes claim returned UNSUPPORTED_ATTACHMENT_CLAIM. This stage has no publication or authorization effects. The endpoint and persisted receipt still require direct evidence before closure.
+
+## JR-115
+
+The serializer fixture and mixed states in Session 11 passed CI 45310715443. Session 12 added an endpoint multipart regression for selected and excluded attachment names, with current runtime evidence pending. The real reader staging test retained the missing-media signal and rejected unsupported claims. Its synthetic diagnostic uses array-valued optional lists. Close the locally testable criteria once export, audit and consumer persistence evidence are reconciled. The nullable-list issue remains independently tracked under JR-109/110 and INT-001.
