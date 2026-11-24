@@ -942,3 +942,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Added member and outsider denial plus empty selection tests.
 - [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-104). Prior phase head `1862e3defb6b8f75037b173859ecbb26943a7ae8`. Reviewer is the Builder Lead.
+
+### 2026-11-24T02:06:47.006Z | Session 11 | JR-105 | IN REVIEW
+
+- Reviewed selection and denial coverage pending runtime CI.
+- [Expected and observed evidence](SESSION-11-EVIDENCE.md#jr-105). Prior phase head `ab194844b37915912fbceb187feadf30e7d4d14b`. Reviewer is the Builder Lead.

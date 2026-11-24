@@ -480,3 +480,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - IN REVIEW. Added member and outsider denial plus empty selection tests. [Evidence](SESSION-11-EVIDENCE.md#jr-104). Prior pushed head `1862e3defb6b8f75037b173859ecbb26943a7ae8`.
 - Next 105. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.
+
+### 2026-11-24T02:06:47.006Z | Session 11 | JR-105
+
+- IN REVIEW. Reviewed selection and denial coverage pending runtime CI. [Evidence](SESSION-11-EVIDENCE.md#jr-105). Prior pushed head `ab194844b37915912fbceb187feadf30e7d4d14b`.
+- Next 106. Phase 06 is stacked on unmerged Phase 05 at `9efcae1ecccb`. Phase 05 and release acceptance remain open.

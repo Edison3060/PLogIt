@@ -17,3 +17,7 @@ The PostgreSQL-backed ExportIntegrationTest.jsonExportSelectsExactLogsAndCommits
 ## JR-104
 
 ExportIntegrationTest.memberDenialDoesNotDiscloseOrMutateEligibleLogs checks HTTP 403 and 404, no download header or leaked log UUID/engagement/leader, unchanged APPROVED state and zero audit. ExportIntegrationTest.emptyJsonExportRecordsOnlyTheAggregateAudit checks an engagement with only SUBMITTED data returns HTTP 200 and a zero-entry report, no review-state write, and exactly one aggregate audit. PostgreSQL-backed execution is pending after local dependency resolution failed.
+
+## JR-105
+
+Source review confirms authorization before log lookup and output generation before mutations. The focused diff adds only MockMvc/PostgreSQL regressions. The outward API, state machine and transaction boundaries retain the baseline implementation. Reconcile JR-103/104 and this closure with the backend Maven job at the final executable SHA. If fixture expectations fail, inspect current behavior before altering an existing API. Reviewer is the Builder Lead. Phase 05 and owner release approvals remain open.
