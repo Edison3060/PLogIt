@@ -1003,3 +1003,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Added an authenticated filename-only export regression
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-113). Prior phase head `597aa2be2617aa1f826c1b9b9110756973db36b4`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:07:22.041Z | Session 12 | JR-114 | IN REVIEW
+
+- Verified changed filenames remain unverified in JudgeIt staging
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-114). Prior phase head `af2b6b6a763a2ad2901fe67c82f1721f1b0e2b0d`. Builder Lead reviewed this checkpoint.

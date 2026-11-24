@@ -532,3 +532,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - IN REVIEW. Added an authenticated filename-only export regression [Evidence](SESSION-12-EVIDENCE.md#jr-113). Prior checkpoint `597aa2be2617aa1f826c1b9b9110756973db36b4`.
 - Continue with JR-114 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:07:22.041Z | Session 12 | JR-114
+
+- IN REVIEW. Verified changed filenames remain unverified in JudgeIt staging [Evidence](SESSION-12-EVIDENCE.md#jr-114). Prior checkpoint `af2b6b6a763a2ad2901fe67c82f1721f1b0e2b0d`.
+- Continue with JR-115 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
