@@ -1013,3 +1013,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Reconciled the producer privacy checks and receiver evidence caveat
 - [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-115). Prior phase head `7e6e1b8ef392c81b6535f6ab7339dec042cb0f34`. Builder Lead reviewed this checkpoint.
+
+### 2026-11-24T14:08:35.006Z | Session 12 | JR-116 | DONE
+
+- Inventoried the legacy reader, proposed envelope and existing bridge
+- [Expected and observed evidence](SESSION-12-EVIDENCE.md#jr-116). Prior phase head `ca7e39ed1eccae2c55161c259bcad88ac5f7da6b`. Builder Lead reviewed this checkpoint.

@@ -21,3 +21,7 @@ With Java 21.0.13 and Jackson 3.1.7, compiled the byte-matched JudgeIt legacy pa
 ## JR-115
 
 The serializer fixture and mixed states in Session 11 passed CI 45310715443. Session 12 added an endpoint multipart regression for selected and excluded attachment names, with current runtime evidence pending. The real reader staging test retained the missing-media signal and rejected unsupported claims. Its synthetic diagnostic uses array-valued optional lists. Close the locally testable criteria once export, audit and consumer persistence evidence are reconciled. The nullable-list issue remains independently tracked under JR-109/110 and INT-001.
+
+## JR-116
+
+The active PLogIt branch at `12b7fd7b33a297227597219910603e558803fa8d` has `backend/src/test/resources/exports/legacy-evidence.json` and the suite research proposal. No approved `evidence-pack-v2.schema.json` exists on the Phase 06 branch. JudgeIt Phase 06 owns `contracts/plogit-legacy-v0.schema.json` (blob `0ffd04007ee3b3e5413f2a87e1c249af609f52a6`), `fixtures/plogit-empty.json` and `fixtures/plogit-multilog.json`, the Java parser, upload controller and import journal. The old reader rejects a producer schemaVersion and requires arrays for scope targets and tags. The distinct opt-in PLogIt bridge at `ce4ab70c449b8e98b3b66b262769a508be8231c9` remains provisional in PR #21. Current reads show the adapter is a private file wrapper. It leaves producer payload values intact and adds a canonical payload hash, namespace-scoped import key and unverified filename marker. No app code changed during inventory.

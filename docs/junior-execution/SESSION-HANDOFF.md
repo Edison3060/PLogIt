@@ -542,3 +542,8 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - IN REVIEW. Reconciled the producer privacy checks and receiver evidence caveat [Evidence](SESSION-12-EVIDENCE.md#jr-115). Prior checkpoint `7e6e1b8ef392c81b6535f6ab7339dec042cb0f34`.
 - Continue with JR-116 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
+
+### 2026-11-24T14:08:35.006Z | Session 12 | JR-116
+
+- DONE. Inventoried the legacy reader, proposed envelope and existing bridge [Evidence](SESSION-12-EVIDENCE.md#jr-116). Prior checkpoint `ca7e39ed1eccae2c55161c259bcad88ac5f7da6b`.
+- Continue with JR-117 within Session 12. INT-001 provisional. PR #27 remains stacked and in draft. DEC-2026-11-06-11 remains pending.
