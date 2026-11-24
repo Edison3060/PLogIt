@@ -107,7 +107,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-099 | Reject Audit and log board invalid operation | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#reconciliation) • Forced rollback, member denial, and stale review produced no orphan audit or phantom approval. | 2026-11-23T14:09:55.372Z |
 | JR-100 | Close Audit and log board verification | 10 | DONE | [Session 10 evidence](SESSION-10-EVIDENCE.md#jr-100) • Closed browser and transactional audit verification while Phase 05 acceptance remains open. | 2026-11-23T14:09:55.376Z |
 | JR-101 | Inventory Exporter selection and side effects | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-101) • Mapped the live exporter, state selection and audit owners. | 2026-11-24 |
-| JR-102 | Specify Exporter selection and side effects acceptance | 11 | NOT STARTED | — | — |
+| JR-102 | Specify Exporter selection and side effects acceptance | 11 | DONE | [Session 11 evidence](SESSION-11-EVIDENCE.md#jr-102) • Recorded accepted selection, denial, empty and audit semantics. | 2026-11-24 |
 | JR-103 | Reproduce Exporter selection and side effects success | 11 | NOT STARTED | — | — |
 | JR-104 | Reject Exporter selection and side effects invalid operation | 11 | NOT STARTED | — | — |
 | JR-105 | Close Exporter selection and side effects verification | 11 | NOT STARTED | — | — |

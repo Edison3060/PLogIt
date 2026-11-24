@@ -218,3 +218,7 @@ _No execution-session decisions have been recorded._
 - Owner: PLogIt product owner. Status: verification approved within Session 10. Any expansion requires product review.
 - Actual: Board shows search, activity type, outcome and review state including leader queue. The API also accepts author ID. Transactional review audit records include actor, transition states and engagement ID. Historical plans describe additional target/tag/date filters and broader audit events.
 - Recommended: verify current board and review-audit behavior with a synthetic workflow and forced rollback. Keep filter and audit policy scope unchanged in this session. JR-096 through JR-100.
+
+### DEC-2026-11-24-01 | JR-102 | Export selection and audit
+
+2026-11-24 UTC. Owner is the PLogIt product owner. Scoped verification approved. Preserve the leader-only POST, approved-by-default selection, optional prior exports, pre-transition report states and per-log plus aggregate audit. An empty selection returns a report and aggregate audit. Changing these behaviors requires product and privacy review. The Builder Lead will verify the existing behavior with synthetic engagement data.
