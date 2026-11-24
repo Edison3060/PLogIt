@@ -226,3 +226,7 @@ _No execution-session decisions have been recorded._
 ### DEC-2026-11-24-02 | JR-107 | Preserve the legacy wire contract
 
 2026-11-24 UTC. Owner is the PLogIt product owner. Verification and a synthetic fixture are within scope. Keep the producer unchanged and treat consumer validation as provisional. Confirm current nullability and identifier types from runtime output. Any producer shape or privacy change and any formal consumer contract approval remain owner decisions. The suite's proposed envelope does not describe the existing export.
+
+### DEC-2026-11-24-03 | JR-109/110 | Optional list mismatch in JudgeIt
+
+2026-11-24 UTC. Status pending JudgeIt contract review. Owner is the JudgeIt product owner for the consumer and the PLogIt product owner for any producer change. The captured producer emits null for unset inScopeTargets and tags. The consumer refuses those values. Recommend a JudgeIt-owned compatibility rule which treats null as absent for indexing while retaining the original evidence and source identity. Producer-side normalization would change existing wire values and requires separate approval. No sibling changes were made.
