@@ -41,3 +41,8 @@ Phase 07 stacks on the unmerged Phase 06 head `b0ad327368e4c2276d81e85cb9310eddc
 ## JR-128
 
 **IN REVIEW.** Expected the author to upload, list and retrieve the exact attachment under the correct log UUID and numeric ID. `AttachmentIntegrationTest.authorCanReadAttachmentFromOwnLogDirectory` creates a leader and separate active member who authors the draft. It checks that the database path's parent matches the engagement/log directory, the file exists, listing returns the same ID and protected GET returns the original bytes. Exact-head PostgreSQL-backed CI pending.
+
+
+## JR-129
+
+**IN REVIEW.** `AttachmentService.readFile` now validates a normalized relative path directly under the record's engagement/log, requires a regular file at its resolved location without symlinks beneath the configured root, and opens the final file without following links. It is shared by authorized downloads and PDF image reads. The expected safe response for an invalid location is 404. Regression cases exercise an ID scoped to another engagement visible to the same user, a deleted metadata row with retained synthetic bytes, and an alias whose target is a synthetic fixture within the same log directory. Stored display-name policy remains open in DEC-2026-11-25-02. The 413 smoke script's original executable bit was restored. CI pending.

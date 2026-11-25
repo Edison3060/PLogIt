@@ -16,7 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.LinkOption;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -141,16 +145,24 @@ public class AttachmentService {
     }
 
     private AttachmentFile readFile(Attachment attachment) {
-        Path path = storageDir.resolve(attachment.getStoragePath());
-        if (!Files.exists(path)) {
-            throw new NotFoundException("File not found on disk");
-        }
         try {
-            return new AttachmentFile(
-                attachment.getFilename(),
-                attachment.getMimeType(),
-                Files.readAllBytes(path)
-            );
+            Path relativePath = Path.of(attachment.getStoragePath());
+            LogEntry log = attachment.getLog();
+            Path logDir = Path.of(log.getEngagement().getId().toString(), log.getId().toString());
+            if (!relativePath.equals(relativePath.normalize()) || !logDir.equals(relativePath.getParent())) {
+                throw new NotFoundException("File not found on disk");
+            }
+
+            Path path = storageDir.toRealPath().resolve(relativePath);
+            if (!path.equals(path.toRealPath()) || !Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)) {
+                throw new NotFoundException("File not found on disk");
+            }
+
+            try (InputStream content = Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS)) {
+                return new AttachmentFile(attachment.getFilename(), attachment.getMimeType(), content.readAllBytes());
+            }
+        } catch (InvalidPathException | NoSuchFileException e) {
+            throw new NotFoundException("File not found on disk");
         } catch (IOException e) {
             throw new ConflictException("Could not read file");
         }

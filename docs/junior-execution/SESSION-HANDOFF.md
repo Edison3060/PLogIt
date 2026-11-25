@@ -623,3 +623,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Added a scoped attachment read for a non-leader log author [Evidence](SESSION-13-EVIDENCE.md#jr-128). Prior pushed head `fc3e0eef166c0761d372d6dc289e59897e84ed96`.
 - Continue with JR-129 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:09:44+00:00 | Session 13 | JR-129
+
+- **IN REVIEW.** Bound attachment reads to their own log directory and added denial regressions [Evidence](SESSION-13-EVIDENCE.md#jr-129). Prior pushed head `13098352f08bce18e0792499e933dbcc1b5cfbe4`.
+- Continue with JR-130 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
