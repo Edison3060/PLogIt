@@ -110,4 +110,16 @@ describe("LogDetail HTML rendering", () => {
     expect(screen.getByRole("link", { name: "Guide" })).toHaveAttribute("href", "https://example.com/guide");
   });
 
+  it("displays markup-shaped code and its language as literal text", () => {
+    const { container } = renderLog({
+      ...log,
+      codeLanguage: "<em>plain</em>",
+      codeBlock: "<sample>literal code</sample>",
+    });
+
+    expect(screen.getByText("Code (<em>plain</em>)")).toBeInTheDocument();
+    expect(container.querySelector("pre code")).toHaveTextContent("<sample>literal code</sample>");
+    expect(container.querySelector("em, sample")).toBeNull();
+  });
+
 });

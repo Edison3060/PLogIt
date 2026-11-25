@@ -1165,3 +1165,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-25T14:04:26Z | Session 14 | JR-133 | IN REVIEW
 
 - Verified the frontend renders fenced code and an HTTPS link. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-133). Prior pushed head `350bdb5605804accc805213875f98e65f3a4be3f`. Builder Lead reviewed.
+
+
+### 2026-11-25T14:04:55Z | Session 14 | JR-134 | IN REVIEW
+
+- Verified literal code-language rendering in the log detail. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-134). Prior pushed head `e7c992adec63c2431090f0c5a69dc6cd93276e65`. Builder Lead reviewed.

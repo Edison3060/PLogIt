@@ -25,3 +25,11 @@ Authorized log detail requests must provide separately rendered descriptionHtml 
 Verified the frontend renders fenced code and an HTTPS link.
 
 Frontend focused command npm test -- --run src/pages/LogDetail.test.tsx exited 0 with 3 tests passed on Node 24.22.3 and Vitest 4.1.12. The component fixture uses already-sanitized HTML. The new PostgreSQL-backed LogAuthzIntegrationTest.detailRendersStoredFencedCodeAndSafeLinks asserts HTTP 200, unchanged raw fields, pre/code markup and the canonical HTTPS anchor at GET /api/logs/{uuid}. Backend execution is pending CI. The local Maven attempt stopped during dependency resolution before running tests.
+
+## JR-134
+
+2026-11-25T14:04:55Z · **IN REVIEW** · Prior branch head `e7c992adec63c2431090f0c5a69dc6cd93276e65`
+
+Verified literal code-language rendering in the log detail.
+
+The focused Vitest run passed four tests, including markup-shaped but inert strings in codeLanguage and codeBlock. The test requires their visible literal text and absence of corresponding elements. The existing frontend regression also verifies empty sanitized output never falls back to raw markup. Backend denial coverage uses the existing MarkdownSanitizationTest and LogAuthzIntegrationTest from the phase branch. Await direct CI evidence for both suites.

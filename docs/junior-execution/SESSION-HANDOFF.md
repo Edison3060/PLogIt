@@ -664,3 +664,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Verified the frontend renders fenced code and an HTTPS link. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-133). Prior pushed head `350bdb5605804accc805213875f98e65f3a4be3f`.
 - Continue with JR-134 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:04:55Z | Session 14 | JR-134
+
+- **IN REVIEW.** Verified literal code-language rendering in the log detail. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-134). Prior pushed head `e7c992adec63c2431090f0c5a69dc6cd93276e65`.
+- Continue with JR-135 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
