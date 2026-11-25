@@ -133,7 +133,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-125 | Close Image upload validation verification | 13 | IN REVIEW | [Evidence](SESSION-13-EVIDENCE.md#jr-125) | 2026-11-25 |
 | JR-126 | Inventory Attachment isolation and paths | 13 | DONE | [Evidence](SESSION-13-EVIDENCE.md#jr-126) | 2026-11-25 |
 | JR-127 | Specify Attachment isolation and paths acceptance | 13 | DONE | [Evidence](SESSION-13-EVIDENCE.md#jr-127) | 2026-11-25 |
-| JR-128 | Reproduce Attachment isolation and paths success | 13 | NOT STARTED | — | — |
+| JR-128 | Reproduce Attachment isolation and paths success | 13 | IN REVIEW | [Evidence](SESSION-13-EVIDENCE.md#jr-128) | 2026-11-25 |
 | JR-129 | Reject Attachment isolation and paths invalid operation | 13 | NOT STARTED | — | — |
 | JR-130 | Close Attachment isolation and paths verification | 13 | NOT STARTED | — | — |
 | JR-131 | Inventory Markdown and code-block sanitization | 14 | NOT STARTED | — | — |

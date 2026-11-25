@@ -36,3 +36,8 @@ Phase 07 stacks on the unmerged Phase 06 head `b0ad327368e4c2276d81e85cb9310eddc
 ## JR-127
 
 **DONE.** Expected route identifiers are a log UUID and numeric attachment ID. Active engagement membership and matching log are required for reads. Filesystem reads should also require the metadata path to identify a regular file directly under that record's engagement/log directory. The original filename currently survives as display metadata while storage uses a sanitized UUID-prefixed leaf. The original exercise requires path-like names to be rejected. The PLogIt owner owns acceptance of a narrower filename policy. DEC-2026-11-25-02 preserves existing display/JSON names and authorizes the focused runtime storage containment correction under existing isolation rules.
+
+
+## JR-128
+
+**IN REVIEW.** Expected the author to upload, list and retrieve the exact attachment under the correct log UUID and numeric ID. `AttachmentIntegrationTest.authorCanReadAttachmentFromOwnLogDirectory` creates a leader and separate active member who authors the draft. It checks that the database path's parent matches the engagement/log directory, the file exists, listing returns the same ID and protected GET returns the original bytes. Exact-head PostgreSQL-backed CI pending.

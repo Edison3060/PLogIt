@@ -1096,3 +1096,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Recorded storage isolation criteria and the filename policy decision
 - [Evidence](SESSION-13-EVIDENCE.md#jr-127). Prior pushed head `4b2b0f0265cac607894cb3e067f737d797997584`. Builder Lead reviewed the checkpoint.
+
+
+### 2026-11-25T02:09:06+00:00 | Session 13 | JR-128 | IN REVIEW
+
+- Added a scoped attachment read for a non-leader log author
+- [Evidence](SESSION-13-EVIDENCE.md#jr-128). Prior pushed head `fc3e0eef166c0761d372d6dc289e59897e84ed96`. Builder Lead reviewed the checkpoint.
