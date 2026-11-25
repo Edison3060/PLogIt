@@ -254,3 +254,8 @@ Builder Lead selected source-based verification of the existing parser and sanit
 ### DEC-2026-11-25-04 | JR-137/138/139/140 | Pending PDF and evidence lifecycle policy
 
 Preserve the verified leader-only local export and existing archive semantics while testing with synthetic records. The PLogIt owner should approve aggregate PDF limits and capacity targets, an explicit sensitive field policy, and backup access and retention evidence before Phase 07 acceptance. Keep DEC-2026-11-06-09 open for cross-app transfer. Neither silent content removal nor destructive expiry is authorized. The current branch provides per-upload limits and export auditing. It has no identified aggregate render budget or field-level redaction configuration. [Acceptance evidence](SESSION-14-EVIDENCE.md#jr-137).
+
+
+### DEC-2026-11-25-05 | JR-133/135 | Preserve preformatted code
+
+Initial PostgreSQL-backed CI showed the HTML sanitizer stripped the pre wrapper from a legitimate code fence. Restore that element with an element-only policy, retaining the existing sanitizer policies. The follow-up scoped GET, sanitizer suite, frontend and PDF regressions passed. Raw evidence remains the source for existing exports. The correction can be reverted independently if needed. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation).

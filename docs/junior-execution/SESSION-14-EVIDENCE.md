@@ -89,3 +89,64 @@ Session 14 modifies test coverage and tracking only. Frontend lint, build and al
 Preserved fenced code layout through the existing sanitizer.
 
 Push CI 45630535101 at 643a9198cf1c1f27781edf5dc6d0ec31b539c753 ran 165 tests with one failure. HTML contained the code text and a code element, with the pre element missing. The authoring and sanitizer accept the original text and escape its punctuation. The render policy now explicitly allows the pre element without extra attributes. The positive assertion uses an ordinary fenced statement and requires its full pre/code wrapper. The existing sanitizer denials and raw persistence assertions remain in place. Fix rollback is the inverse of this source patch, followed by re-verification. Fresh full CI is required.
+
+## Reconciliation
+
+[Full push CI](https://github.com/Edison3060/PLogIt/actions/runs/45630981676) at `4845d5d44f3af937c929626fc48d5a490df82193`: Java 21.0.13 and Maven 3.9.15 ran `mvn -B clean verify` against isolated PostgreSQL 16.16. All 165 tests passed with zero failures, errors or skips, including 18 export, 22 attachment, 12 log authorization and 8 sanitizer tests. Node 22.23.4 passed lint, build and all 21 Vitest tests. Compose, Semgrep, pinned Trivy dependency/secret and image checks, and production proxy validation passed. Production CD was skipped.
+
+[Initial push CI](https://github.com/Edison3060/PLogIt/actions/runs/45630535101) ran 165 backend tests with one failure in the new fenced-code test. The description contained a code tag but lacked its preformatted wrapper. The correction allows the pre element with no added attributes, preserving the existing sanitizer and evidence fields. The direct Java check also produced the expected pre/code markup. Local Maven initially failed dependency resolution; compiling under an extracted JDK 21.0.13.1 succeeded for 97 production and 24 test sources, then local Surefire dependency resolution failed. Test counts above are from GitHub CI.
+
+For JR-138, a separate, disposable Java 21.0.13.1 renderer process ran a synthetic one-log, no-image fixture with `java -Xms16m -Xmx64m -XX:+UseSerialGC --class-path "$PLOGIT_COMPILED_CLASSES_AND_DEPENDENCIES" PdfMemoryProbe.java`. With a configured maximum of 64,880,640 bytes, it produced a readable 5,594-byte PDF across three pages and exited 0. Pool peaks after measuring the render were 44,761,088 bytes tenured, 17,891,328 Eden and 2,228,224 survivor. Pool peaks are independent, and the probe excludes the HTTP and database layers. It is not an aggregate PDF size or memory guarantee. The PostgreSQL-backed export test separately verifies the response, state transition and scoped audit.
+
+### Synthetic renderer probe
+
+```java
+import io.muzoo.ssc.plogit.service.MarkdownService;
+import io.muzoo.ssc.plogit.service.export.EngagementReportData;
+import io.muzoo.ssc.plogit.service.export.EngagementReportData.LogReportEntry;
+import io.muzoo.ssc.plogit.service.export.PdfReportStrategy;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryType;
+import java.time.Instant;
+import java.util.List;
+import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.text.PDFTextStripper;
+
+class PdfMemoryProbe {
+    public static void main(String[] args) throws Exception {
+        var pools = ManagementFactory.getMemoryPoolMXBeans().stream()
+            .filter(pool -> pool.getType() == MemoryType.HEAP).toList();
+        pools.forEach(pool -> pool.resetPeakUsage());
+        var timestamp = Instant.parse("2026-11-25T00:00:00Z");
+        var markdown = "**Evidence summary**";
+        var rendered = new MarkdownService().render(markdown);
+        var entry = new LogReportEntry("fixture", timestamp, "Test Lead", "RECONNAISSANCE",
+            "Approved evidence", markdown, rendered, null, null, null, null,
+            "IN_PROGRESS", "APPROVED", List.of(), "<sample>literal code</sample>", "<em>plain</em>", List.of());
+        var data = new EngagementReportData(1L, "Test Engagement", "", null, null, "Test Lead",
+            List.of(), List.of(), null, null, null, null, null, timestamp, 1, List.of(entry));
+        byte[] pdf = new PdfReportStrategy().generate(data).content();
+        for (var pool : pools) {
+            System.out.printf("%s pool peak bytes: %d%n", pool.getName(), pool.getPeakUsage().getUsed());
+        }
+        System.out.printf("Configured maximum heap bytes: %d%n", Runtime.getRuntime().maxMemory());
+        try (var document = Loader.loadPDF(pdf)) {
+            String text = new PDFTextStripper().getText(document);
+            for (String expected : List.of("Evidence summary", "<sample>literal code</sample>", "<em>plain</em>")) {
+                if (!text.contains(expected)) {
+                    throw new AssertionError("Missing text: " + expected);
+                }
+            }
+            System.out.printf("Generated %d bytes across %d pages%n", pdf.length, document.getNumberOfPages());
+        }
+    }
+}
+```
+
+## JR-140
+
+2026-11-25T14:13:07Z · **IN REVIEW** · Prior branch head `4845d5d44f3af937c929626fc48d5a490df82193`
+
+Reconciled the Session 14 tests and recorded readiness for independent work.
+
+JR-131–137 are DONE. JR-138–140 remain IN REVIEW. See [executed checks and the renderer memory sample](#reconciliation). The full Phase 07 acceptance gate remains open for DEC-2026-11-25-04 (aggregate PDF size and server memory, sensitive fields, backup access and retention), JR-124/125 (complete image validation), and JR-129/130 (strict path-like display-name policy). INT-001 remains provisional and the exact legacy JudgeIt nullable-list incompatibility remains open. Phase 07 [draft PR #28](https://github.com/Edison3060/PLogIt/pull/28) stays stacked on unmerged #27. Production authorization remains pending. **READY WITH PROVISIONAL INTEGRATION** for independent Session 15 only.

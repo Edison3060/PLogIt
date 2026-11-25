@@ -1205,3 +1205,33 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-25T14:09:20Z | Session 14 | JR-133 | IN REVIEW
 
 - Preserved fenced code layout through the existing sanitizer. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-133). Prior pushed head `643a9198cf1c1f27781edf5dc6d0ec31b539c753`. Builder Lead reviewed.
+
+
+### 2026-11-25T14:13:07Z | Session 14 | JR-133 | DONE
+
+- Verified the scoped GET response preserves raw evidence, formatted fenced code and the safe link after the element-only fix. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation). Tested head `4845d5d44f3af937c929626fc48d5a490df82193`.
+
+
+### 2026-11-25T14:13:07Z | Session 14 | JR-134 | DONE
+
+- The existing sanitizer suite and log authorization suite passed. The frontend also displays code and its language literally and leaves empty sanitized fields empty. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation). Tested head `4845d5d44f3af937c929626fc48d5a490df82193`.
+
+
+### 2026-11-25T14:13:07Z | Session 14 | JR-135 | DONE
+
+- Reconciled positive Markdown rendering and existing denial tests on the corrective head. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation). Tested head `4845d5d44f3af937c929626fc48d5a490df82193`.
+
+
+### 2026-11-25T14:13:07Z | Session 14 | JR-138 | IN REVIEW
+
+- PDF content, selection and export audit passed. A one-record renderer probe completed under a fixed 64 MiB JVM cap. Aggregate server-side memory bounds remain open. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation). Tested head `4845d5d44f3af937c929626fc48d5a490df82193`.
+
+
+### 2026-11-25T14:13:07Z | Session 14 | JR-139 | IN REVIEW
+
+- PDF member and outsider denial and existing attachment authorization passed. Large report rejection and sensitive-field policy remain open. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation). Tested head `4845d5d44f3af937c929626fc48d5a490df82193`.
+
+
+### 2026-11-25T14:13:07Z | Session 14 | JR-140 | IN REVIEW
+
+- Reconciled the Session 14 tests and recorded readiness for independent work. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140). Prior pushed head `4845d5d44f3af937c929626fc48d5a490df82193`. Builder Lead reviewed.
