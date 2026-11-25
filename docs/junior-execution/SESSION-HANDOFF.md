@@ -652,3 +652,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Traced raw Markdown storage and the sanitized rendering paths. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-131). Prior pushed head `ea6e640ed93db112e761bc3445a47b2392456532`.
 - Continue with JR-132 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:03:22Z | Session 14 | JR-132
+
+- **DONE.** Recorded the Markdown and code rendering acceptance criteria. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-132). Prior pushed head `f8775f1bb34ad47480b8ba5497cac7fc16717c1a`.
+- Continue with JR-133 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.

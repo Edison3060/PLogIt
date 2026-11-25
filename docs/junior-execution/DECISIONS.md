@@ -244,3 +244,8 @@ _No execution-session decisions have been recorded._
 
 
 ### DEC-2026-11-25-02 | JR-127/129/130 | Attachment path containment and filename policy\n\nEnforce the existing storage boundary at the shared reader for download and PDF paths. Keep uploaded bytes, generated storage names, roles, public filename metadata and legacy JSON shape. Attachment rows that reference an invalid path must fail closed. Preserve original filename metadata and keep strict path-like display-name rejection open for the PLogIt owner. Deployment and existing phase gates retain their prior status. [Session evidence](SESSION-13-EVIDENCE.md#jr-127).
+
+
+### DEC-2026-11-25-03 | JR-132 | Verify the existing Markdown boundary
+
+Builder Lead selected source-based verification of the existing parser and sanitizer, authorized log detail, and literal code-language presentation. The Product Spec §8 specifies an allowlist. Keep raw Markdown and legacy JSON as evidence and exercise rendered output separately. Owner review is required for a change to allowed external media or evidence-handling policy. [Acceptance evidence](SESSION-14-EVIDENCE.md#jr-132).
