@@ -33,3 +33,11 @@ Frontend focused command npm test -- --run src/pages/LogDetail.test.tsx exited 0
 Verified literal code-language rendering in the log detail.
 
 The focused Vitest run passed four tests, including markup-shaped but inert strings in codeLanguage and codeBlock. The test requires their visible literal text and absence of corresponding elements. The existing frontend regression also verifies empty sanitized output never falls back to raw markup. Backend denial coverage uses the existing MarkdownSanitizationTest and LogAuthzIntegrationTest from the phase branch. Await direct CI evidence for both suites.
+
+## JR-135
+
+2026-11-25T14:05:00Z · **IN REVIEW** · Prior branch head `f5a1a031df8b56d6a67b52a10dddfe79ef2b5c36`
+
+Reviewed the Markdown regressions and retained the existing renderer.
+
+The positive component result and literal rendering denial check pass. The server-side acceptance depends on PostgreSQL-backed GET, the existing sanitizer suite and scoped log authorization on the current branch. No renderer, sanitizer or raw evidence formats were changed. Reverting the two test-only checkpoints removes the added assertions without changing runtime behavior.

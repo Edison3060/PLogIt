@@ -140,7 +140,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-132 | Specify Markdown and code-block sanitization acceptance | 14 | DONE | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-132) | 2026-11-25 |
 | JR-133 | Reproduce Markdown and code-block sanitization success | 14 | IN REVIEW | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-133) | 2026-11-25 |
 | JR-134 | Reject Markdown and code-block sanitization invalid operation | 14 | IN REVIEW | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-134) | 2026-11-25 |
-| JR-135 | Close Markdown and code-block sanitization verification | 14 | NOT STARTED | — | — |
+| JR-135 | Close Markdown and code-block sanitization verification | 14 | IN REVIEW | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-135) | 2026-11-25 |
 | JR-136 | Inventory Retention, exports and sensitive data | 14 | NOT STARTED | — | — |
 | JR-137 | Specify Retention, exports and sensitive data acceptance | 14 | NOT STARTED | — | — |
 | JR-138 | Reproduce Retention, exports and sensitive data success | 14 | NOT STARTED | — | — |
