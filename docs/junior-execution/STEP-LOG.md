@@ -1054,3 +1054,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-24T14:15:51.787Z | Session 12 | JR-119 | DONE
 
 - Real JudgeIt persistence denied unknown versions and duplicate log UUIDs with zero writes. Compatible diagnostic replay reused the batch and recorded two attempts. [Reconciliation](SESSION-12-EVIDENCE.md#reconciliation). Builder Lead reviewed the results.
+
+
+### 2026-11-25T02:05:15+00:00 | Session 13 | JR-121 | DONE
+
+- Mapped the live image upload validation and existing coverage
+- [Evidence](SESSION-13-EVIDENCE.md#jr-121). Prior pushed head `b0ad327368e4c2276d81e85cb9310eddc2ec4de7`. Builder Lead reviewed the checkpoint.

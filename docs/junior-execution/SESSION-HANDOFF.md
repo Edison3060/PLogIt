@@ -575,3 +575,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Keep INT-001 provisional. Preserve existing disclosure, selection and unversioned exports. Phase 05 stale-draft DEC-2026-11-23-03, JR-040 scanner acceptance, JR-044/045 elapsed idle time, Phase 04 policy and direct API CSRF compatibility remain open. PR #27 stays draft above #26, with #22–#26 still unmerged. DEC-2026-11-06-11 production authorization remains pending.
 - **READY WITH PROVISIONAL INTEGRATION** for safe independent Session 13, JR-121–JR-130. Start `work/plogit-phase-07` from the latest Phase 06 tracking head while PR #27 remains unmerged. Stop at JR-120.
 - Owner sign-off remains pending for the session review and release decisions.
+
+
+### 2026-11-25T02:05:15+00:00 | Session 13 | JR-121
+
+- **DONE.** Mapped the live image upload validation and existing coverage [Evidence](SESSION-13-EVIDENCE.md#jr-121). Prior pushed head `b0ad327368e4c2276d81e85cb9310eddc2ec4de7`.
+- Continue with JR-122 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
