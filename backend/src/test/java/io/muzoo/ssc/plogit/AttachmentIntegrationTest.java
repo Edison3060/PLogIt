@@ -1,21 +1,37 @@
 package io.muzoo.ssc.plogit;
 
+import com.jayway.jsonpath.JsonPath;
+import io.muzoo.ssc.plogit.domain.Attachment;
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.EngagementMember;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
 import io.muzoo.ssc.plogit.domain.LogEntry;
 import io.muzoo.ssc.plogit.domain.ReviewState;
 import io.muzoo.ssc.plogit.domain.User;
+import io.muzoo.ssc.plogit.repository.AttachmentRepository;
 import io.muzoo.ssc.plogit.support.IntegrationTestBase;
 import io.muzoo.ssc.plogit.support.PostgresTestConfig;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
+import java.util.Base64;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
@@ -26,6 +42,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(properties = "plogit.storage.dir=/tmp/plogit-test-attachments")
 @Import(PostgresTestConfig.class)
 class AttachmentIntegrationTest extends IntegrationTestBase {
+
+    @Autowired
+    private AttachmentRepository attachmentRepository;
+
+    @Value("${plogit.storage.dir}")
+    private Path storageDir;
 
     private MockMultipartFile pngFile() {
         byte[] png = new byte[]{
@@ -40,6 +62,124 @@ class AttachmentIntegrationTest extends IntegrationTestBase {
 
     private MockMultipartFile textFile() {
         return new MockMultipartFile("file", "malware.txt", MediaType.TEXT_PLAIN_VALUE, "not an image".getBytes());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"png", "jpeg", "gif", "webp"})
+    void acceptedImageRoundTripsWithDetectedType(String format) throws Exception {
+        User leader = createUser("leader@test.local");
+        LogEntry log = createLog(createEngagement(leader), leader, ReviewState.DRAFT);
+        String uri = logUri(log.getId()) + "/attachments";
+        byte[] image = imageFixture(format);
+        String mime = "image/" + format;
+        MockMultipartFile file = new MockMultipartFile("file", "evidence.bin", MediaType.APPLICATION_OCTET_STREAM_VALUE, image);
+
+        String response = mockMvc.perform(multipart(uri).file(file).with(asUser(leader)).with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.filename").value("evidence.bin"))
+            .andExpect(jsonPath("$.mimeType").value(mime))
+            .andExpect(jsonPath("$.size").value(image.length))
+            .andReturn().getResponse().getContentAsString();
+        Number id = JsonPath.read(response, "$.id");
+
+        mockMvc.perform(get(uri + "/" + id).with(asUser(leader)))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(mime))
+            .andExpect(content().bytes(image));
+    }
+
+    private byte[] imageFixture(String format) throws IOException {
+        if ("webp".equals(format)) {
+            return Base64.getDecoder().decode("UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAdQinpUof+BiOh/AAA=");
+        }
+        BufferedImage image = new BufferedImage(2, 2, BufferedImage.TYPE_INT_RGB);
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        assertTrue(ImageIO.write(image, format, output), "Missing test image encoder for " + format);
+        return output.toByteArray();
+    }
+
+    @Test
+    void authorCanReadAttachmentFromOwnLogDirectory() throws Exception {
+        User leader = createUser("leader@test.local");
+        User author = createUser("author@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, author, EngagementRole.MEMBER);
+        LogEntry log = createLog(engagement, author, ReviewState.DRAFT);
+        String uri = logUri(log.getId()) + "/attachments";
+        byte[] image = imageFixture("png");
+        MockMultipartFile file = new MockMultipartFile("file", "owner.png", MediaType.IMAGE_PNG_VALUE, image);
+
+        String response = mockMvc.perform(multipart(uri).file(file).with(asUser(author)).with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.logId").value(log.getId().toString()))
+            .andReturn().getResponse().getContentAsString();
+        Number id = JsonPath.read(response, "$.id");
+        Attachment row = attachmentRepository.findById(id.longValue()).orElseThrow();
+        Path expectedDir = storageDir.resolve(engagement.getId().toString()).resolve(log.getId().toString());
+        Path storedFile = storageDir.resolve(row.getStoragePath());
+        assertEquals(expectedDir, storedFile.getParent());
+        assertTrue(Files.isRegularFile(storedFile));
+
+        mockMvc.perform(get(uri).with(asUser(author)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].id").value(id));
+        mockMvc.perform(get(uri + "/" + id).with(asUser(author)))
+            .andExpect(status().isOk())
+            .andExpect(content().bytes(image));
+    }
+
+    @Test
+    void foreignLogAndDeletedAttachmentReturnNotFoundWithoutChangingEvidence() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.DRAFT);
+        LogEntry foreignLog = createLog(createEngagement(leader), leader, ReviewState.DRAFT);
+        String uri = logUri(log.getId()) + "/attachments";
+        byte[] bytes = imageFixture("png");
+        MockMultipartFile file = new MockMultipartFile("file", "retained.png", MediaType.IMAGE_PNG_VALUE, bytes);
+        String response = mockMvc.perform(multipart(uri).file(file).with(asUser(leader)).with(csrf()))
+            .andExpect(status().isOk())
+            .andReturn().getResponse().getContentAsString();
+        Number id = JsonPath.read(response, "$.id");
+        Attachment row = attachmentRepository.findById(id.longValue()).orElseThrow();
+        Path storedFile = storageDir.resolve(row.getStoragePath());
+
+        mockMvc.perform(get(logUri(foreignLog.getId()) + "/attachments/" + id).with(asUser(leader)))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.message").value("Attachment not found"));
+        assertTrue(attachmentRepository.existsById(id.longValue()));
+        assertEquals(bytes.length, Files.size(storedFile));
+
+        attachmentRepository.deleteById(id.longValue());
+        mockMvc.perform(get(uri + "/" + id).with(asUser(leader)))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.message").value("Attachment not found"));
+        assertTrue(Files.isRegularFile(storedFile));
+    }
+
+    @Test
+    void downloadRejectsSymbolicLinkWithinTheLogDirectory() throws Exception {
+        User leader = createUser("leader@test.local");
+        LogEntry log = createLog(createEngagement(leader), leader, ReviewState.DRAFT);
+        String uri = logUri(log.getId()) + "/attachments";
+        String response = mockMvc.perform(multipart(uri).file(pngFile()).with(asUser(leader)).with(csrf()))
+            .andExpect(status().isOk())
+            .andReturn().getResponse().getContentAsString();
+        Number id = JsonPath.read(response, "$.id");
+        Attachment row = attachmentRepository.findById(id.longValue()).orElseThrow();
+        Path storedFile = storageDir.resolve(row.getStoragePath());
+        Path alias = Files.createSymbolicLink(storedFile.resolveSibling("alias.png"), storedFile.getFileName());
+        try {
+            row.setStoragePath(storageDir.relativize(alias).toString());
+            attachmentRepository.saveAndFlush(row);
+
+            mockMvc.perform(get(uri + "/" + id).with(asUser(leader)))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("File not found on disk"));
+            assertTrue(Files.isRegularFile(storedFile));
+        } finally {
+            Files.deleteIfExists(alias);
+        }
     }
 
     @Test

@@ -238,3 +238,24 @@ _No execution-session decisions have been recorded._
 ### DEC-2026-11-24-05 | JR-117–120 | Versioned evidence-pack policy
 
 2026-11-24 UTC. Status pending joint PLogIt and JudgeIt owner approval. Current PLogIt emits an unversioned engagement object and still allows nullable scope targets and tags. The draft suite envelope proposes schemaVersion, exportId, payload, producer metadata and an optional manifest. Before introducing a separately selected format, approve attachment bytes and package policy, hashing and canonicalization, issuer and tenant binding, import idempotency and revision conflict behavior. First establish the unchanged legacy contract at the real receiver, including legacy null and original evidence retention. Keep the offline file transfer and app-owned databases. The existing PR #21 adapter is an opt-in local prototype and carries no approval for a producer wire change or for JudgeIt to ingest its envelope.
+
+
+### DEC-2026-11-25-01 | JR-122/124/125 | Image validation policy\n\nRetain the four existing byte-detected types and servlet limits. A complete-image integrity guarantee needs a tested decoder policy for all four formats, bounded dimensions and compatibility with stored evidence. Preserve raw evidence bytes. Re-encoding or newly rejecting detectable legacy inputs requires PLogIt owner acceptance. [Session evidence](SESSION-13-EVIDENCE.md#jr-122).
+
+
+### DEC-2026-11-25-02 | JR-127/129/130 | Attachment path containment and filename policy\n\nEnforce the existing storage boundary at the shared reader for download and PDF paths. Keep uploaded bytes, generated storage names, roles, public filename metadata and legacy JSON shape. Attachment rows that reference an invalid path must fail closed. Preserve original filename metadata and keep strict path-like display-name rejection open for the PLogIt owner. Deployment and existing phase gates retain their prior status. [Session evidence](SESSION-13-EVIDENCE.md#jr-127).
+
+
+### DEC-2026-11-25-03 | JR-132 | Verify the existing Markdown boundary
+
+Builder Lead selected source-based verification of the existing parser and sanitizer, authorized log detail, and literal code-language presentation. The Product Spec §8 specifies an allowlist. Keep raw Markdown and legacy JSON as evidence and exercise rendered output separately. Owner review is required for a change to allowed external media or evidence-handling policy. [Acceptance evidence](SESSION-14-EVIDENCE.md#jr-132).
+
+
+### DEC-2026-11-25-04 | JR-137/138/139/140 | Pending PDF and evidence lifecycle policy
+
+Preserve the verified leader-only local export and existing archive semantics while testing with synthetic records. The PLogIt owner should approve aggregate PDF limits and capacity targets, an explicit sensitive field policy, and backup access and retention evidence before Phase 07 acceptance. Keep DEC-2026-11-06-09 open for cross-app transfer. Neither silent content removal nor destructive expiry is authorized. The current branch provides per-upload limits and export auditing. It has no identified aggregate render budget or field-level redaction configuration. [Acceptance evidence](SESSION-14-EVIDENCE.md#jr-137).
+
+
+### DEC-2026-11-25-05 | JR-133/135 | Preserve preformatted code
+
+Initial PostgreSQL-backed CI showed the HTML sanitizer stripped the pre wrapper from a legitimate code fence. Restore that element with an element-only policy, retaining the existing sanitizer policies. The follow-up scoped GET, sanitizer suite, frontend and PDF regressions passed. Raw evidence remains the source for existing exports. The correction can be reverted independently if needed. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation).

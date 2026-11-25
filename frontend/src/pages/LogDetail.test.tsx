@@ -98,4 +98,28 @@ describe("LogDetail HTML rendering", () => {
     expect(screen.getByText("Sanitized description")).toBeInTheDocument();
     expect(screen.getByText("Sanitized result")).toBeInTheDocument();
   });
+
+  it("displays fenced code and a documentation link from sanitized HTML", () => {
+    const { container } = renderLog({
+      ...log,
+      descriptionHtml: '<pre><code>const count = 2;</code></pre>',
+      resultHtml: '<p><a href="https://example.com/guide">Guide</a></p>',
+    });
+
+    expect(container.querySelector(".prose pre code")).toHaveTextContent("const count = 2;");
+    expect(screen.getByRole("link", { name: "Guide" })).toHaveAttribute("href", "https://example.com/guide");
+  });
+
+  it("displays markup-shaped code and its language as literal text", () => {
+    const { container } = renderLog({
+      ...log,
+      codeLanguage: "<em>plain</em>",
+      codeBlock: "<sample>literal code</sample>",
+    });
+
+    expect(screen.getByText("Code (<em>plain</em>)")).toBeInTheDocument();
+    expect(container.querySelector("pre code")).toHaveTextContent("<sample>literal code</sample>");
+    expect(container.querySelector("em, sample")).toBeNull();
+  });
+
 });

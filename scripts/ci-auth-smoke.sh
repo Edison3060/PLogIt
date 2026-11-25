@@ -37,6 +37,43 @@ engagement_status="$(curl -sS --max-time 10 -o "$scratch/engagement.json" -w '%{
 test "$engagement_status" = 200
 python3 -c 'import json,sys; assert json.load(open(sys.argv[1]))["name"] == "CI Session 05"' "$scratch/engagement.json"
 
+engagement_id="$(python3 -c 'import json,sys; print(int(json.load(open(sys.argv[1]))["id"]))' "$scratch/engagement.json")"
+curl -fsS --max-time 10 -b "$jar" -H "Content-Type: application/json" -H "X-XSRF-TOKEN: $csrf" \
+    -d '{"activityType":"RECONNAISSANCE","title":"Synthetic attachment limit","description":"Test image size limit","result":"Synthetic only","outcome":"IN_PROGRESS"}' \
+    "$base/engagements/$engagement_id/logs" >"$scratch/log.json"
+log_id="$(python3 -c 'import json,sys,uuid; print(uuid.UUID(json.load(open(sys.argv[1]))["id"]))' "$scratch/log.json")"
+attachment_url="$base/logs/$log_id/attachments"
+python3 - "$scratch" <<'PY'
+import base64
+from pathlib import Path
+import sys
+
+root = Path(sys.argv[1])
+image = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zk9sAAAAASUVORK5CYII=")
+(root / "oversize.png").write_bytes(image + bytes(10 * 1024 * 1024 + 1 - len(image)))
+(root / "invalid.png").write_bytes(b"synthetic non-image fixture")
+PY
+
+for fixture in oversize invalid; do
+    attachment_status="$(curl -sS --max-time 25 -o "$scratch/$fixture.json" -w '%{http_code}' \
+        -b "$jar" -H "X-XSRF-TOKEN: $csrf" \
+        -F "file=@$scratch/$fixture.png;type=image/png" "$attachment_url")"
+    expected_status=409
+    if [ "$fixture" = oversize ]; then
+        expected_status=413
+    fi
+    if [ "$attachment_status" != "$expected_status" ]; then
+        printf 'Synthetic %s upload returned %s, expected %s\n' "$fixture" "$attachment_status" "$expected_status" >&2
+        exit 1
+    fi
+    python3 -c 'import json,sys; assert json.load(open(sys.argv[1]))["status"] == int(sys.argv[2])' \
+        "$scratch/$fixture.json" "$expected_status"
+    curl -fsS --max-time 10 -b "$jar" "$attachment_url" |
+        python3 -c 'import json,sys; assert json.load(sys.stdin) == []'
+    docker compose exec -T backend test ! -e "/data/attachments/$engagement_id/$log_id"
+done
+printf 'Real HTTP invalid and oversized uploads rejected without attachment rows or files.\n'
+
 list_before="$(curl -fsS --max-time 10 -c "$jar" -b "$jar" "$base/engagements" | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))')"
 for token_mode in missing invalid; do
     csrf_args=()

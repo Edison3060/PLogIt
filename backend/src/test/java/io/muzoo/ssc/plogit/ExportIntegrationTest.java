@@ -11,6 +11,9 @@ import io.muzoo.ssc.plogit.service.export.JsonReportStrategy;
 import io.muzoo.ssc.plogit.service.export.ReportOutput;
 import io.muzoo.ssc.plogit.support.IntegrationTestBase;
 import io.muzoo.ssc.plogit.support.PostgresTestConfig;
+import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -85,18 +88,18 @@ class ExportIntegrationTest extends IntegrationTestBase {
         Engagement otherEngagement = createEngagement(leader);
         LogEntry unrelated = createLog(otherEngagement, leader, ReviewState.APPROVED);
 
-        JsonNode first = jsonResponse(exportJson(engagement, leader, "{\"format\":\"JSON\"}"));
+        JsonNode first = jsonResponse(requestExport(engagement, leader, "{\"format\":\"JSON\"}"));
         assertEquals(4, first.path("totalLogCount").asInt());
         assertEquals(List.of(approved.getId().toString()), exportedIds(first));
         assertEquals("APPROVED", first.path("logs").get(0).path("reviewState").asText());
         assertEquals(ReviewState.EXPORTED, persistedState(approved));
-        assertExportAudit(engagement, leader, List.of(approved), false, 0);
+        assertExportAudit(engagement, leader, List.of(approved), false, 0, "JSON");
         AuditLog firstTransition = auditLogRepository.findAll().stream()
             .filter(event -> event.getAction().equals("EXPORT")).findFirst().orElseThrow();
         assertEquals("APPROVED", firstTransition.getMetadata().get("fromState"));
 
         long lastAuditId = auditLogRepository.findAll().stream().mapToLong(AuditLog::getId).max().orElseThrow();
-        JsonNode repeated = jsonResponse(exportJson(engagement, leader,
+        JsonNode repeated = jsonResponse(requestExport(engagement, leader,
             "{\"format\":\"JSON\",\"includeExported\":true}"));
         assertEquals(4, repeated.path("totalLogCount").asInt());
         assertEquals(List.of(approved.getId().toString(), exported.getId().toString()), exportedIds(repeated));
@@ -107,7 +110,7 @@ class ExportIntegrationTest extends IntegrationTestBase {
         assertEquals(ReviewState.EXPORTED, persistedState(approved));
         assertEquals(ReviewState.EXPORTED, persistedState(exported));
         assertEquals(ReviewState.APPROVED, persistedState(unrelated));
-        assertExportAudit(engagement, leader, List.of(approved, exported), true, lastAuditId);
+        assertExportAudit(engagement, leader, List.of(approved, exported), true, lastAuditId, "JSON");
         assertTrue(auditLogRepository.findAll().stream().filter(event -> event.getId() > lastAuditId && event.getAction().equals("EXPORT"))
             .allMatch(event -> event.getMetadata().get("fromState").equals("EXPORTED")));
     }
@@ -133,7 +136,7 @@ class ExportIntegrationTest extends IntegrationTestBase {
         approved.setReviewState(ReviewState.APPROVED);
         logRepository.saveAndFlush(approved);
 
-        JsonNode report = jsonResponse(exportJson(engagement, leader, "{\"format\":\"JSON\"}"));
+        JsonNode report = jsonResponse(requestExport(engagement, leader, "{\"format\":\"JSON\"}"));
         assertEquals(4, report.path("totalLogCount").asInt());
         assertEquals(List.of(approved.getId().toString()), exportedIds(report));
         JsonNode exported = report.path("logs").get(0);
@@ -161,10 +164,10 @@ class ExportIntegrationTest extends IntegrationTestBase {
         LogEntry approved = createLog(engagement, leader, ReviewState.APPROVED);
         String request = "{\"format\":\"JSON\"}";
 
-        String memberBody = exportJson(engagement, member, request)
+        String memberBody = requestExport(engagement, member, request)
             .andExpect(status().isForbidden()).andExpect(header().doesNotExist("Content-Disposition"))
             .andReturn().getResponse().getContentAsString();
-        String outsiderBody = exportJson(engagement, outsider, request)
+        String outsiderBody = requestExport(engagement, outsider, request)
             .andExpect(status().isNotFound()).andExpect(header().doesNotExist("Content-Disposition"))
             .andReturn().getResponse().getContentAsString();
 
@@ -178,17 +181,47 @@ class ExportIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void pdfDenialsLeaveEvidenceAndAuditUnchanged() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        User outsider = createUser("outsider@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        LogEntry approved = createLog(engagement, leader, ReviewState.APPROVED);
+        approved.setTitle("Private evidence marker");
+        logRepository.saveAndFlush(approved);
+        String request = "{\"format\":\"PDF\"}";
+
+        String memberBody = requestExport(engagement, member, request)
+            .andExpect(status().isForbidden())
+            .andExpect(header().doesNotExist("Content-Disposition"))
+            .andReturn().getResponse().getContentAsString();
+        String outsiderBody = requestExport(engagement, outsider, request)
+            .andExpect(status().isNotFound())
+            .andExpect(header().doesNotExist("Content-Disposition"))
+            .andReturn().getResponse().getContentAsString();
+
+        for (String body : List.of(memberBody, outsiderBody)) {
+            assertFalse(body.contains(approved.getTitle()));
+            assertFalse(body.contains(leader.getEmail()));
+            assertFalse(body.startsWith("%PDF"));
+        }
+        assertEquals(ReviewState.APPROVED, persistedState(approved));
+        assertEquals(0, auditLogRepository.count());
+    }
+
+    @Test
     void emptyJsonExportRecordsOnlyTheAggregateAudit() throws Exception {
         User leader = createUser("leader@test.local");
         Engagement engagement = createEngagement(leader);
         LogEntry submitted = createLog(engagement, leader, ReviewState.SUBMITTED);
 
-        JsonNode report = jsonResponse(exportJson(engagement, leader, "{\"format\":\"JSON\"}"));
+        JsonNode report = jsonResponse(requestExport(engagement, leader, "{\"format\":\"JSON\"}"));
         assertEquals(1, report.path("totalLogCount").asInt());
         assertTrue(report.path("logs").isArray());
         assertTrue(report.path("logs").isEmpty());
         assertEquals(ReviewState.SUBMITTED, persistedState(submitted));
-        assertExportAudit(engagement, leader, List.of(), false, 0);
+        assertExportAudit(engagement, leader, List.of(), false, 0, "JSON");
     }
 
     @Test
@@ -215,7 +248,7 @@ class ExportIntegrationTest extends IntegrationTestBase {
         );
     }
 
-    private ResultActions exportJson(Engagement engagement, User user, String request) throws Exception {
+    private ResultActions requestExport(Engagement engagement, User user, String request) throws Exception {
         return mockMvc.perform(post(exportUri(engagement.getId()))
             .with(asUser(user)).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(request));
     }
@@ -239,7 +272,7 @@ class ExportIntegrationTest extends IntegrationTestBase {
         return logRepository.findById(log.getId()).orElseThrow().getReviewState();
     }
 
-    private void assertExportAudit(Engagement engagement, User leader, List<LogEntry> exported, boolean includeExported, long afterId) {
+    private void assertExportAudit(Engagement engagement, User leader, List<LogEntry> exported, boolean includeExported, long afterId, String format) {
         List<AuditLog> audit = auditLogRepository.findAll().stream().filter(event -> event.getId() > afterId).toList();
         assertEquals(exported.size() + 1, audit.size());
         assertTrue(audit.stream().allMatch(event -> event.getActorId().equals(leader.getId())));
@@ -247,7 +280,7 @@ class ExportIntegrationTest extends IntegrationTestBase {
             .findFirst().orElseThrow();
         assertEquals("ENGAGEMENT", aggregate.getTargetType());
         assertEquals(engagement.getId().toString(), aggregate.getTargetId());
-        assertEquals("JSON", aggregate.getMetadata().get("format"));
+        assertEquals(format, aggregate.getMetadata().get("format"));
         assertEquals(exported.size(), ((Number) aggregate.getMetadata().get("logCount")).intValue());
         assertEquals(includeExported, aggregate.getMetadata().get("includeExported"));
 
@@ -280,28 +313,46 @@ class ExportIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
-    void leaderCanExportPdf() throws Exception {
-        User leader = createUser("leader@test.local");
+    void leaderCanExportPdfWithSelectedEvidenceAndMinimalAudit() throws Exception {
+        User leader = createUser("leader-account@test.local");
+        leader.setDisplayName("Test Lead");
+        userRepository.saveAndFlush(leader);
         Engagement engagement = createEngagement(leader);
-        createLog(engagement, leader, ReviewState.APPROVED);
+        LogEntry approved = createLog(engagement, leader, ReviewState.APPROVED);
+        approved.setTitle("Approved evidence");
+        approved.setDescription("**Evidence summary**");
+        approved.setCodeBlock("<sample>literal code</sample>");
+        approved.setCodeLanguage("<em>plain</em>");
+        logRepository.saveAndFlush(approved);
+        LogEntry draft = createLog(engagement, leader, ReviewState.DRAFT);
+        draft.setTitle("Private draft marker");
+        logRepository.saveAndFlush(draft);
+        Engagement otherEngagement = createEngagement(leader);
+        LogEntry unrelated = createLog(otherEngagement, leader, ReviewState.APPROVED);
+        unrelated.setTitle("Different engagement marker");
+        logRepository.saveAndFlush(unrelated);
 
-        byte[] pdf = mockMvc.perform(post(exportUri(engagement.getId()))
-                .with(asUser(leader))
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("""
-                    {"format":"PDF"}
-                    """))
+        byte[] pdf = requestExport(engagement, leader, "{\"format\":\"PDF\"}")
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/pdf"))
             .andExpect(header().string("Content-Disposition", org.hamcrest.Matchers.containsString(".pdf")))
             .andReturn().getResponse().getContentAsByteArray();
 
-        org.junit.jupiter.api.Assertions.assertTrue(pdf.length > 1000, "PDF should be non-empty");
-        org.junit.jupiter.api.Assertions.assertEquals(0x25, pdf[0]);
-        org.junit.jupiter.api.Assertions.assertEquals(0x50, pdf[1]);
-        org.junit.jupiter.api.Assertions.assertEquals(0x44, pdf[2]);
-        org.junit.jupiter.api.Assertions.assertEquals(0x46, pdf[3]);
+        try (PDDocument document = Loader.loadPDF(pdf)) {
+            String report = new PDFTextStripper().getText(document);
+            assertTrue(report.contains("Approved evidence"));
+            assertTrue(report.contains("Evidence summary"));
+            assertTrue(report.contains("Test Lead"));
+            assertTrue(report.contains("<sample>literal code</sample>"));
+            assertTrue(report.contains("<em>plain</em>"));
+            assertFalse(report.contains("Private draft marker"));
+            assertFalse(report.contains("Different engagement marker"));
+            assertFalse(report.contains(leader.getEmail()));
+        }
+        assertEquals(ReviewState.EXPORTED, persistedState(approved));
+        assertEquals(ReviewState.DRAFT, persistedState(draft));
+        assertEquals(ReviewState.APPROVED, persistedState(unrelated));
+        assertExportAudit(engagement, leader, List.of(approved), false, 0, "PDF");
     }
 
     @Test

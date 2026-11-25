@@ -73,3 +73,11 @@ After every JR involving another app, append/update the relevant entry and refer
 The exact unversioned PLogIt synthetic artifact continues to fail with INVALID_TARGETS. A diagnostic copy with array-valued scope targets and tags preserves source UUID, counts and the missing-media flag. A modified filename stays a reference. The parser denies a per-log hash claim, unsupported producer version and repeated source UUID in a single file. The opt-in PR #21 file wrapper still passes its fixture checks and does not stand in for JudgeIt. See [Session 12 evidence](SESSION-12-EVIDENCE.md) and DEC-2026-11-24-05. Confirm the exact producer file through the authorized consumer after a JudgeIt-owned nullable-list rule and retain original provenance. Approval of any future versioned envelope, media packaging, namespace and idempotency policy remains open.
 
 Session 12 direct PostgreSQL verification closed the scoped diagnostic replay and denial checks. The exact source file still fails before persistence and a compatible diagnostic copy does not resolve the actual contract. Maintain INT-001 provisional and DEC-2026-11-24-05 pending. See [reconciliation](SESSION-12-EVIDENCE.md#reconciliation).
+
+
+### INT-001 | PROVISIONAL | Session 13 attachment boundary\n\nThe attachment file reader and HTTP size error are internal to PLogIt. The unversioned export still emits original attachment filenames, and attachment bytes remain local to PLogIt. The existing JudgeIt nullable-list mismatch and versioning decisions remain open. Future stricter upload filename rules must account for legacy consumers and preserved evidence metadata. [Session 13 evidence](SESSION-13-EVIDENCE.md#jr-130).
+
+
+### INT-001 | PROVISIONAL | Session 14 PDF and disclosure boundary
+
+PDF is a local auditor evidence pack and does not establish JudgeIt compatibility. Keep legacy producer JSON, offline file transfer and the receiver nullable-list debt as recorded in Session 12. Transfer consent, redaction, backup and retention still require the relevant owners' policy. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-137).

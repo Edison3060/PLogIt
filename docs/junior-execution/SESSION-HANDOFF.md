@@ -575,3 +575,146 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Keep INT-001 provisional. Preserve existing disclosure, selection and unversioned exports. Phase 05 stale-draft DEC-2026-11-23-03, JR-040 scanner acceptance, JR-044/045 elapsed idle time, Phase 04 policy and direct API CSRF compatibility remain open. PR #27 stays draft above #26, with #22–#26 still unmerged. DEC-2026-11-06-11 production authorization remains pending.
 - **READY WITH PROVISIONAL INTEGRATION** for safe independent Session 13, JR-121–JR-130. Start `work/plogit-phase-07` from the latest Phase 06 tracking head while PR #27 remains unmerged. Stop at JR-120.
 - Owner sign-off remains pending for the session review and release decisions.
+
+
+### 2026-11-25T02:05:15+00:00 | Session 13 | JR-121
+
+- **DONE.** Mapped the live image upload validation and existing coverage [Evidence](SESSION-13-EVIDENCE.md#jr-121). Prior pushed head `b0ad327368e4c2276d81e85cb9310eddc2ec4de7`.
+- Continue with JR-122 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:05:42+00:00 | Session 13 | JR-122
+
+- **DONE.** Recorded the media acceptance boundary and current size limits [Evidence](SESSION-13-EVIDENCE.md#jr-122). Prior pushed head `cad6411e4e976d3c36216b7a547d8f1e6fd97e07`.
+- Continue with JR-123 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:06:36+00:00 | Session 13 | JR-123
+
+- **IN REVIEW.** Added four authorized image round-trip cases [Evidence](SESSION-13-EVIDENCE.md#jr-123). Prior pushed head `8669972b660a25488da6f8246427e8e00e5efa1d`.
+- Continue with JR-124 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:07:29+00:00 | Session 13 | JR-124
+
+- **IN REVIEW.** Added live multipart size and invalid-media checks with a safe 413 response [Evidence](SESSION-13-EVIDENCE.md#jr-124). Prior pushed head `a75b1eea7b6878e3f60e6272d71f90518f6d8b2d`.
+- Continue with JR-125 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:08:05+00:00 | Session 13 | JR-125
+
+- **IN REVIEW.** Reconciled media acceptance with the signature-only validation boundary [Evidence](SESSION-13-EVIDENCE.md#jr-125). Prior pushed head `f7dce45e9761a4c7d34299659a9d17c5c6ab039b`.
+- Continue with JR-126 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:08:18+00:00 | Session 13 | JR-126
+
+- **DONE.** Traced attachment authorization, metadata scope and the shared filesystem read [Evidence](SESSION-13-EVIDENCE.md#jr-126). Prior pushed head `3f2831f6a6d49b42ad00110a1dfa995f758cc3d8`.
+- Continue with JR-127 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:08:35+00:00 | Session 13 | JR-127
+
+- **DONE.** Recorded storage isolation criteria and the filename policy decision [Evidence](SESSION-13-EVIDENCE.md#jr-127). Prior pushed head `4b2b0f0265cac607894cb3e067f737d797997584`.
+- Continue with JR-128 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:09:06+00:00 | Session 13 | JR-128
+
+- **IN REVIEW.** Added a scoped attachment read for a non-leader log author [Evidence](SESSION-13-EVIDENCE.md#jr-128). Prior pushed head `fc3e0eef166c0761d372d6dc289e59897e84ed96`.
+- Continue with JR-129 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:09:44+00:00 | Session 13 | JR-129
+
+- **IN REVIEW.** Bound attachment reads to their own log directory and added denial regressions [Evidence](SESSION-13-EVIDENCE.md#jr-129). Prior pushed head `13098352f08bce18e0792499e933dbcc1b5cfbe4`.
+- Continue with JR-130 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:10:09+00:00 | Session 13 | JR-130
+
+- **IN REVIEW.** Reviewed attachment containment, regression coverage and remaining acceptance [Evidence](SESSION-13-EVIDENCE.md#jr-130). Prior pushed head `5bfcdf76b898fe91ea7c9597f24bbe26a6c3e184`.
+- Reconcile CI and session readiness before updating the controller. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+## Session 13 final handoff | 2026-11-25T02:13:46+00:00
+
+- **READY WITH PROVISIONAL INTEGRATION** for independent Session 14. JR-121–123 and JR-126–128 DONE. JR-124/125 and JR-129/130 IN REVIEW for full-image validation and strict filename acceptance. [Draft PR #28](https://github.com/Edison3060/PLogIt/pull/28) remains open above Phase 06 PR #27.
+
+- [Push CI 45531027378](https://github.com/Edison3060/PLogIt/actions/runs/45531027378) at `569390e4a5f3820ea4b882e33fe3a554bfe38985` used Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16. `mvn -B clean verify` passed 163 backend tests, including 22 attachment tests, with zero failures, errors or skips. Node 22.23.4 passed frontend lint, build and all 19 tests. Compose passed live authenticated 409/413 checks and verified no metadata or disk directory for either denied upload. Semgrep, Trivy filesystem and image gates, and production proxy checks passed. Production CD was skipped. Local checks passed for Bash syntax, WebP fixture decode and `git diff --check`. Local Maven and PostgreSQL were unavailable. [Session 13 evidence](SESSION-13-EVIDENCE.md#reconciliation). JR-121 `cad6411e4e97`, JR-122 `8669972b660a`, JR-123 `a75b1eea7b68`, JR-124 `f7dce45e9761`, JR-125 `3f2831f6a6d4`, JR-126 `4b2b0f0265ca`, JR-127 `fc3e0eef166c`, JR-128 `13098352f08b`, JR-129 `5bfcdf76b898`, JR-130 `569390e4a5f3`. This closeout changes tracking only.
+
+- Keep INT-001 provisional and the exact JudgeIt nullable-list incompatibility and approval for future envelope open. Carry forward stale-draft, Phase 04 policy, elapsed idle time, scanner acceptance, direct API CSRF and production DEC-2026-11-06-11.
+
+- After the controller advances, the next separately initiated session is Session 14, JR-131–JR-140 on the same Phase 07 branch. Start by verifying canonical Markdown and PDF evidence behavior. Stop this run at JR-130.
+
+
+### 2026-11-25T14:03:09Z | Session 14 | JR-131
+
+- **DONE.** Traced raw Markdown storage and the sanitized rendering paths. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-131). Prior pushed head `ea6e640ed93db112e761bc3445a47b2392456532`.
+- Continue with JR-132 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:03:22Z | Session 14 | JR-132
+
+- **DONE.** Recorded the Markdown and code rendering acceptance criteria. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-132). Prior pushed head `f8775f1bb34ad47480b8ba5497cac7fc16717c1a`.
+- Continue with JR-133 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:04:26Z | Session 14 | JR-133
+
+- **IN REVIEW.** Verified the frontend renders fenced code and an HTTPS link. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-133). Prior pushed head `350bdb5605804accc805213875f98e65f3a4be3f`.
+- Continue with JR-134 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:04:55Z | Session 14 | JR-134
+
+- **IN REVIEW.** Verified literal code-language rendering in the log detail. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-134). Prior pushed head `e7c992adec63c2431090f0c5a69dc6cd93276e65`.
+- Continue with JR-135 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:05:00Z | Session 14 | JR-135
+
+- **IN REVIEW.** Reviewed the Markdown regressions and retained the existing renderer. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-135). Prior pushed head `f5a1a031df8b56d6a67b52a10dddfe79ef2b5c36`.
+- Continue with JR-136 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:05:05Z | Session 14 | JR-136
+
+- **DONE.** Mapped PDF generation, audit and evidence retention ownership. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-136). Prior pushed head `e4de006093477359b5332c82849d177f467b8b15`.
+- Continue with JR-137 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:05:21Z | Session 14 | JR-137
+
+- **DONE.** Recorded PDF, PII, retention and backup acceptance boundaries. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-137). Prior pushed head `74c5dbc33da771c513f48951c8c0da80172e7325`.
+- Continue with JR-138 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:06:15Z | Session 14 | JR-138
+
+- **IN REVIEW.** Added PDF content, selection and audit assertions for synthetic evidence. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-138). Prior pushed head `12ae06f14525f2daf55a850135fc9065b766f110`.
+- Continue with JR-139 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:06:34Z | Session 14 | JR-139
+
+- **IN REVIEW.** Added PDF denial coverage for members and outsiders. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-139). Prior pushed head `9ed51ae1cd49da6f3a4a2b9bb0918481aee2d36b`.
+- Continue with JR-140 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:06:50Z | Session 14 | JR-140
+
+- **IN REVIEW.** Reviewed the Phase 07 exit gate and retained draft status. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140). Prior pushed head `3e5f1d62d9f5615266caf817358a1cc3e4f43f3b`.
+- Reconcile the exact-head suite and record readiness only after verifying the ten pushed checkpoints. The next session is outside this run.
+
+
+### 2026-11-25T14:09:20Z | Session 14 | JR-133
+
+- **IN REVIEW.** Preserved fenced code layout through the existing sanitizer. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-133). Prior pushed head `643a9198cf1c1f27781edf5dc6d0ec31b539c753`.
+- Reconcile all ten already recorded JR checkpoints with the rerun at this corrective head. Remaining PDF policy and prior phase gates stay open.
+
+
+### 2026-11-25T14:13:07Z | Session 14 | JR-140
+
+- **IN REVIEW.** Reconciled the Session 14 tests and recorded readiness for independent work. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140). Prior pushed head `4845d5d44f3af937c929626fc48d5a490df82193`.
+- Session 14 is assessed. JR-131–137 DONE and JR-138–140 IN REVIEW. [Full push CI](https://github.com/Edison3060/PLogIt/actions/runs/45630981676) passed at executable head `4845d5d44f3af937c929626fc48d5a490df82193` with 165 backend tests, 21 frontend tests and all non-CD gates. This closeout is tracking only. Once the controller advances, separately initiated Session 15 is JR-141–JR-150 on future work/plogit-phase-08, stacked above the latest Phase 07 while PR #28 remains a draft. Keep Phase 07 and inherited decisions open, especially INT-001 and DEC-2026-11-06-11. Stop after JR-140.

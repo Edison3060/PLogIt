@@ -12,11 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -31,6 +33,26 @@ class LogAuthzIntegrationTest extends IntegrationTestBase {
 
         mockMvc.perform(get(logUri(log.getId())).with(asUser(leader)))
             .andExpect(status().isOk());
+    }
+
+    @Test
+    void detailRendersStoredFencedCodeAndSafeLinks() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.DRAFT);
+        String description = "```java\nreturn 2;\n```";
+        String result = "[Guide](https://example.com/guide)";
+        log.setDescription(description);
+        log.setResult(result);
+        logRepository.saveAndFlush(log);
+
+        mockMvc.perform(get(logUri(log.getId())).with(asUser(leader)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.description").value(description))
+            .andExpect(jsonPath("$.result").value(result))
+            .andExpect(jsonPath("$.descriptionHtml").value(containsString("<pre><code>return 2;\n</code></pre>")))
+            .andExpect(jsonPath("$.resultHtml").value(containsString("href=\"https://example.com/guide\"")))
+            .andExpect(jsonPath("$.resultHtml").value(containsString(">Guide</a>")));
     }
 
     @Test

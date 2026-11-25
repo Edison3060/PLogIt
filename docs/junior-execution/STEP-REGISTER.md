@@ -126,26 +126,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-118 | Reproduce Versioned contract decision and compatibility success | 12 | IN REVIEW | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-118) |
 | JR-119 | Reject Versioned contract decision and compatibility invalid operation | 12 | DONE | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-119) |
 | JR-120 | Close Versioned contract decision and compatibility verification | 12 | IN REVIEW | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-120) |
-| JR-121 | Inventory Image upload validation | 13 | NOT STARTED | — | — |
-| JR-122 | Specify Image upload validation acceptance | 13 | NOT STARTED | — | — |
-| JR-123 | Reproduce Image upload validation success | 13 | NOT STARTED | — | — |
-| JR-124 | Reject Image upload validation invalid operation | 13 | NOT STARTED | — | — |
-| JR-125 | Close Image upload validation verification | 13 | NOT STARTED | — | — |
-| JR-126 | Inventory Attachment isolation and paths | 13 | NOT STARTED | — | — |
-| JR-127 | Specify Attachment isolation and paths acceptance | 13 | NOT STARTED | — | — |
-| JR-128 | Reproduce Attachment isolation and paths success | 13 | NOT STARTED | — | — |
-| JR-129 | Reject Attachment isolation and paths invalid operation | 13 | NOT STARTED | — | — |
-| JR-130 | Close Attachment isolation and paths verification | 13 | NOT STARTED | — | — |
-| JR-131 | Inventory Markdown and code-block sanitization | 14 | NOT STARTED | — | — |
-| JR-132 | Specify Markdown and code-block sanitization acceptance | 14 | NOT STARTED | — | — |
-| JR-133 | Reproduce Markdown and code-block sanitization success | 14 | NOT STARTED | — | — |
-| JR-134 | Reject Markdown and code-block sanitization invalid operation | 14 | NOT STARTED | — | — |
-| JR-135 | Close Markdown and code-block sanitization verification | 14 | NOT STARTED | — | — |
-| JR-136 | Inventory Retention, exports and sensitive data | 14 | NOT STARTED | — | — |
-| JR-137 | Specify Retention, exports and sensitive data acceptance | 14 | NOT STARTED | — | — |
-| JR-138 | Reproduce Retention, exports and sensitive data success | 14 | NOT STARTED | — | — |
-| JR-139 | Reject Retention, exports and sensitive data invalid operation | 14 | NOT STARTED | — | — |
-| JR-140 | Close Retention, exports and sensitive data verification | 14 | NOT STARTED | — | — |
+| JR-121 | Inventory Image upload validation | 13 | DONE | [Evidence](SESSION-13-EVIDENCE.md#jr-121) | 2026-11-25 |
+| JR-122 | Specify Image upload validation acceptance | 13 | DONE | [Evidence](SESSION-13-EVIDENCE.md#jr-122) | 2026-11-25 |
+| JR-123 | Reproduce Image upload validation success | 13 | DONE | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
+| JR-124 | Reject Image upload validation invalid operation | 13 | IN REVIEW | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
+| JR-125 | Close Image upload validation verification | 13 | IN REVIEW | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
+| JR-126 | Inventory Attachment isolation and paths | 13 | DONE | [Evidence](SESSION-13-EVIDENCE.md#jr-126) | 2026-11-25 |
+| JR-127 | Specify Attachment isolation and paths acceptance | 13 | DONE | [Evidence](SESSION-13-EVIDENCE.md#jr-127) | 2026-11-25 |
+| JR-128 | Reproduce Attachment isolation and paths success | 13 | DONE | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
+| JR-129 | Reject Attachment isolation and paths invalid operation | 13 | IN REVIEW | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
+| JR-130 | Close Attachment isolation and paths verification | 13 | IN REVIEW | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
+| JR-131 | Inventory Markdown and code-block sanitization | 14 | DONE | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-131) | 2026-11-25 |
+| JR-132 | Specify Markdown and code-block sanitization acceptance | 14 | DONE | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-132) | 2026-11-25 |
+| JR-133 | Reproduce Markdown and code-block sanitization success | 14 | DONE | [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation) | 2026-11-25 |
+| JR-134 | Reject Markdown and code-block sanitization invalid operation | 14 | DONE | [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation) | 2026-11-25 |
+| JR-135 | Close Markdown and code-block sanitization verification | 14 | DONE | [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation) | 2026-11-25 |
+| JR-136 | Inventory Retention, exports and sensitive data | 14 | DONE | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-136) | 2026-11-25 |
+| JR-137 | Specify Retention, exports and sensitive data acceptance | 14 | DONE | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-137) | 2026-11-25 |
+| JR-138 | Reproduce Retention, exports and sensitive data success | 14 | IN REVIEW | [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation) | 2026-11-25 |
+| JR-139 | Reject Retention, exports and sensitive data invalid operation | 14 | IN REVIEW | [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation) | 2026-11-25 |
+| JR-140 | Close Retention, exports and sensitive data verification | 14 | IN REVIEW | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140) | 2026-11-25 |
 | JR-141 | Inventory Navigation and sessions | 15 | NOT STARTED | — | — |
 | JR-142 | Specify Navigation and sessions acceptance | 15 | NOT STARTED | — | — |
 | JR-143 | Reproduce Navigation and sessions success | 15 | NOT STARTED | — | — |
