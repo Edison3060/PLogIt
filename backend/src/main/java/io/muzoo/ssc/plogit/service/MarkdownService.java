@@ -3,11 +3,20 @@ package io.muzoo.ssc.plogit.service;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.owasp.html.HtmlPolicyBuilder;
+import org.owasp.html.PolicyFactory;
 import org.owasp.html.Sanitizers;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MarkdownService {
+
+    private static final PolicyFactory HTML_POLICY = Sanitizers.FORMATTING
+        .and(Sanitizers.BLOCKS)
+        .and(Sanitizers.LINKS)
+        .and(Sanitizers.IMAGES)
+        .and(Sanitizers.TABLES)
+        .and(new HtmlPolicyBuilder().allowElements("pre").toFactory());
 
     private final Parser parser;
     private final HtmlRenderer renderer;
@@ -23,15 +32,6 @@ public class MarkdownService {
             return "";
         }
         String rawHtml = renderer.render(parser.parse(markdown));
-        return sanitize(rawHtml);
-    }
-
-    private String sanitize(String html) {
-        return Sanitizers.FORMATTING
-            .and(Sanitizers.BLOCKS)
-            .and(Sanitizers.LINKS)
-            .and(Sanitizers.IMAGES)
-            .and(Sanitizers.TABLES)
-            .sanitize(html);
+        return HTML_POLICY.sanitize(rawHtml);
     }
 }

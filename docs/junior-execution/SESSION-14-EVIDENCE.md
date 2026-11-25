@@ -81,3 +81,11 @@ Expected HTTP 403 for an active nonleader and 404 for an outsider, with no PDF r
 Reviewed the Phase 07 exit gate and retained draft status.
 
 Session 14 modifies test coverage and tracking only. Frontend lint, build and all 21 tests passed locally with Node 24.22.3. git diff --check passed. Await exact-head GitHub CI for backend, isolated Compose, Semgrep, Trivy and proxy. Owner gate DEC-2026-11-25-04 remains open for aggregate PDF size and memory, sensitive-field policy and verified backup access and retention. Earlier JR-124/125 and JR-129/130 and the Phase 06 JudgeIt prerequisites remain open. Keep draft PR #28 stacked on #27. Rollback of the added test coverage requires reverting test-only changes; evidence history is append-only.
+
+## JR-133
+
+2026-11-25T14:09:20Z · **IN REVIEW** · Prior branch head `643a9198cf1c1f27781edf5dc6d0ec31b539c753`
+
+Preserved fenced code layout through the existing sanitizer.
+
+Push CI 45630535101 at 643a9198cf1c1f27781edf5dc6d0ec31b539c753 ran 165 tests with one failure. HTML contained the code text and a code element, with the pre element missing. The authoring and sanitizer accept the original text and escape its punctuation. The render policy now explicitly allows the pre element without extra attributes. The positive assertion uses an ordinary fenced statement and requires its full pre/code wrapper. The existing sanitizer denials and raw persistence assertions remain in place. Fix rollback is the inverse of this source patch, followed by re-verification. Fresh full CI is required.

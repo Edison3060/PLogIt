@@ -706,3 +706,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Reviewed the Phase 07 exit gate and retained draft status. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140). Prior pushed head `3e5f1d62d9f5615266caf817358a1cc3e4f43f3b`.
 - Reconcile the exact-head suite and record readiness only after verifying the ten pushed checkpoints. The next session is outside this run.
+
+
+### 2026-11-25T14:09:20Z | Session 14 | JR-133
+
+- **IN REVIEW.** Preserved fenced code layout through the existing sanitizer. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-133). Prior pushed head `643a9198cf1c1f27781edf5dc6d0ec31b539c753`.
+- Reconcile all ten already recorded JR checkpoints with the rerun at this corrective head. Remaining PDF policy and prior phase gates stay open.

@@ -40,7 +40,7 @@ class LogAuthzIntegrationTest extends IntegrationTestBase {
         User leader = createUser("leader@test.local");
         Engagement engagement = createEngagement(leader);
         LogEntry log = createLog(engagement, leader, ReviewState.DRAFT);
-        String description = "```java\nint count = 2;\n```";
+        String description = "```java\nreturn 2;\n```";
         String result = "[Guide](https://example.com/guide)";
         log.setDescription(description);
         log.setResult(result);
@@ -50,8 +50,7 @@ class LogAuthzIntegrationTest extends IntegrationTestBase {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.description").value(description))
             .andExpect(jsonPath("$.result").value(result))
-            .andExpect(jsonPath("$.descriptionHtml").value(containsString("<pre><code")))
-            .andExpect(jsonPath("$.descriptionHtml").value(containsString("int count = 2;")))
+            .andExpect(jsonPath("$.descriptionHtml").value(containsString("<pre><code>return 2;\n</code></pre>")))
             .andExpect(jsonPath("$.resultHtml").value(containsString("href=\"https://example.com/guide\"")))
             .andExpect(jsonPath("$.resultHtml").value(containsString(">Guide</a>")));
     }
