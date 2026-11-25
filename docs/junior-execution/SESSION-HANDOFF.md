@@ -581,3 +581,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Mapped the live image upload validation and existing coverage [Evidence](SESSION-13-EVIDENCE.md#jr-121). Prior pushed head `b0ad327368e4c2276d81e85cb9310eddc2ec4de7`.
 - Continue with JR-122 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:05:42+00:00 | Session 13 | JR-122
+
+- **DONE.** Recorded the media acceptance boundary and current size limits [Evidence](SESSION-13-EVIDENCE.md#jr-122). Prior pushed head `cad6411e4e976d3c36216b7a547d8f1e6fd97e07`.
+- Continue with JR-123 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
