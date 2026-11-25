@@ -136,7 +136,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-128 | Reproduce Attachment isolation and paths success | 13 | DONE | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
 | JR-129 | Reject Attachment isolation and paths invalid operation | 13 | IN REVIEW | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
 | JR-130 | Close Attachment isolation and paths verification | 13 | IN REVIEW | [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation) | 2026-11-25T02:13:46+00:00 |
-| JR-131 | Inventory Markdown and code-block sanitization | 14 | NOT STARTED | — | — |
+| JR-131 | Inventory Markdown and code-block sanitization | 14 | DONE | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-131) | 2026-11-25 |
 | JR-132 | Specify Markdown and code-block sanitization acceptance | 14 | NOT STARTED | — | — |
 | JR-133 | Reproduce Markdown and code-block sanitization success | 14 | NOT STARTED | — | — |
 | JR-134 | Reject Markdown and code-block sanitization invalid operation | 14 | NOT STARTED | — | — |

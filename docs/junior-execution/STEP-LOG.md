@@ -1150,3 +1150,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - The shared path guard and regressions passed. DEC-2026-11-25-02 still governs filename policy and Phase 07 acceptance remains open.
 - [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation). Builder Lead reviewed the executed coverage at `569390e4a5f3820ea4b882e33fe3a554bfe38985`.
+
+
+### 2026-11-25T14:03:09Z | Session 14 | JR-131 | DONE
+
+- Traced raw Markdown storage and the sanitized rendering paths. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-131). Prior pushed head `ea6e640ed93db112e761bc3445a47b2392456532`. Builder Lead reviewed.

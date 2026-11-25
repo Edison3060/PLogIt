@@ -646,3 +646,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Keep INT-001 provisional and the exact JudgeIt nullable-list incompatibility and approval for future envelope open. Carry forward stale-draft, Phase 04 policy, elapsed idle time, scanner acceptance, direct API CSRF and production DEC-2026-11-06-11.
 
 - After the controller advances, the next separately initiated session is Session 14, JR-131–JR-140 on the same Phase 07 branch. Start by verifying canonical Markdown and PDF evidence behavior. Stop this run at JR-130.
+
+
+### 2026-11-25T14:03:09Z | Session 14 | JR-131
+
+- **DONE.** Traced raw Markdown storage and the sanitized rendering paths. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-131). Prior pushed head `ea6e640ed93db112e761bc3445a47b2392456532`.
+- Continue with JR-132 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
