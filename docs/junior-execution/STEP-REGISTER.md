@@ -128,7 +128,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-120 | Close Versioned contract decision and compatibility verification | 12 | IN REVIEW | 2026-11-24 | [Session 12 evidence](SESSION-12-EVIDENCE.md#jr-120) |
 | JR-121 | Inventory Image upload validation | 13 | DONE | [Evidence](SESSION-13-EVIDENCE.md#jr-121) | 2026-11-25 |
 | JR-122 | Specify Image upload validation acceptance | 13 | DONE | [Evidence](SESSION-13-EVIDENCE.md#jr-122) | 2026-11-25 |
-| JR-123 | Reproduce Image upload validation success | 13 | NOT STARTED | — | — |
+| JR-123 | Reproduce Image upload validation success | 13 | IN REVIEW | [Evidence](SESSION-13-EVIDENCE.md#jr-123) | 2026-11-25 |
 | JR-124 | Reject Image upload validation invalid operation | 13 | NOT STARTED | — | — |
 | JR-125 | Close Image upload validation verification | 13 | NOT STARTED | — | — |
 | JR-126 | Inventory Attachment isolation and paths | 13 | NOT STARTED | — | — |

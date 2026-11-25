@@ -587,3 +587,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Recorded the media acceptance boundary and current size limits [Evidence](SESSION-13-EVIDENCE.md#jr-122). Prior pushed head `cad6411e4e976d3c36216b7a547d8f1e6fd97e07`.
 - Continue with JR-123 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:06:36+00:00 | Session 13 | JR-123
+
+- **IN REVIEW.** Added four authorized image round-trip cases [Evidence](SESSION-13-EVIDENCE.md#jr-123). Prior pushed head `8669972b660a25488da6f8246427e8e00e5efa1d`.
+- Continue with JR-124 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.

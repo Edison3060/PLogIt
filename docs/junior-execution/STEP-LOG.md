@@ -1066,3 +1066,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Recorded the media acceptance boundary and current size limits
 - [Evidence](SESSION-13-EVIDENCE.md#jr-122). Prior pushed head `cad6411e4e976d3c36216b7a547d8f1e6fd97e07`. Builder Lead reviewed the checkpoint.
+
+
+### 2026-11-25T02:06:36+00:00 | Session 13 | JR-123 | IN REVIEW
+
+- Added four authorized image round-trip cases
+- [Evidence](SESSION-13-EVIDENCE.md#jr-123). Prior pushed head `8669972b660a25488da6f8246427e8e00e5efa1d`. Builder Lead reviewed the checkpoint.

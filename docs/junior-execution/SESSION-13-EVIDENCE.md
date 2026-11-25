@@ -11,3 +11,8 @@ Phase 07 stacks on the unmerged Phase 06 head `b0ad327368e4c2276d81e85cb9310eddc
 ## JR-122
 
 **DONE.** Expected an authenticated, CSRF-protected multipart `file` for a draft owned by the caller or within their leader scope. The servlet caps are 10 MiB per file and 25 MiB per request. Tika ignores the client MIME and filename for type detection and permits PNG, JPEG, GIF and WebP. It identifies type without proving that the whole image decodes. Both the product spec section 9 and the roadmap require byte-based validation. Preserve original evidence bytes and legacy metadata while full-image validation, pixel limits and format handling await explicit acceptance. The PLogIt owner owns that decision. OWASP File Upload Cheat Sheet, checked 2026-11-25, supports layered type detection, filename handling, size limits and isolated storage. https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+
+## JR-123
+
+**IN REVIEW.** Expected a successful upload and byte-for-byte authenticated retrieval of synthetic PNG, JPEG, GIF and WebP. `AttachmentIntegrationTest.acceptedImageRoundTripsWithDetectedType` uses Java ImageIO for PNG/JPEG/GIF and one lossless single-pixel WebP fixture generated with Pillow 13.0.0. POST `/api/logs/{logId}/attachments` uses a neutral filename and Content-Type. GET `/api/logs/{logId}/attachments/{id}` asserts the detected MIME and exact bytes. PostgreSQL-backed CI execution is pending.

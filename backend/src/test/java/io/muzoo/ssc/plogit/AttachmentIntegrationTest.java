@@ -1,5 +1,6 @@
 package io.muzoo.ssc.plogit;
 
+import com.jayway.jsonpath.JsonPath;
 import io.muzoo.ssc.plogit.domain.Engagement;
 import io.muzoo.ssc.plogit.domain.EngagementMember;
 import io.muzoo.ssc.plogit.domain.EngagementRole;
@@ -9,13 +10,21 @@ import io.muzoo.ssc.plogit.domain.User;
 import io.muzoo.ssc.plogit.support.IntegrationTestBase;
 import io.muzoo.ssc.plogit.support.PostgresTestConfig;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.Instant;
+import java.util.Base64;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
@@ -40,6 +49,40 @@ class AttachmentIntegrationTest extends IntegrationTestBase {
 
     private MockMultipartFile textFile() {
         return new MockMultipartFile("file", "malware.txt", MediaType.TEXT_PLAIN_VALUE, "not an image".getBytes());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"png", "jpeg", "gif", "webp"})
+    void acceptedImageRoundTripsWithDetectedType(String format) throws Exception {
+        User leader = createUser("leader@test.local");
+        LogEntry log = createLog(createEngagement(leader), leader, ReviewState.DRAFT);
+        String uri = logUri(log.getId()) + "/attachments";
+        byte[] image = imageFixture(format);
+        String mime = "image/" + format;
+        MockMultipartFile file = new MockMultipartFile("file", "evidence.bin", MediaType.APPLICATION_OCTET_STREAM_VALUE, image);
+
+        String response = mockMvc.perform(multipart(uri).file(file).with(asUser(leader)).with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.filename").value("evidence.bin"))
+            .andExpect(jsonPath("$.mimeType").value(mime))
+            .andExpect(jsonPath("$.size").value(image.length))
+            .andReturn().getResponse().getContentAsString();
+        Number id = JsonPath.read(response, "$.id");
+
+        mockMvc.perform(get(uri + "/" + id).with(asUser(leader)))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(mime))
+            .andExpect(content().bytes(image));
+    }
+
+    private byte[] imageFixture(String format) throws IOException {
+        if ("webp".equals(format)) {
+            return Base64.getDecoder().decode("UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAdQinpUof+BiOh/AAA=");
+        }
+        BufferedImage image = new BufferedImage(2, 2, BufferedImage.TYPE_INT_RGB);
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        assertTrue(ImageIO.write(image, format, output), "Missing test image encoder for " + format);
+        return output.toByteArray();
     }
 
     @Test
