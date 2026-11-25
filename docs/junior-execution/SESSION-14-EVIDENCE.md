@@ -73,3 +73,11 @@ The test exercises the real PDF endpoint on PostgreSQL with an approved record, 
 Added PDF denial coverage for members and outsiders.
 
 Expected HTTP 403 for an active nonleader and 404 for an outsider, with no PDF response, sensitive marker or account email, approved-state transition, or audit write. The new Spring MVC/PostgreSQL test exercises those conditions and existing AttachmentIntegrationTest covers scoped download denials. Oversized aggregate reports have no identified application-level rejection threshold. Free-text and emergency-contact redaction remain policy questions. Large-report rejection and the complete disclosure gate remain open; no large-resource run was performed.
+
+## JR-140
+
+2026-11-25T14:06:50Z · **IN REVIEW** · Prior branch head `3e5f1d62d9f5615266caf817358a1cc3e4f43f3b`
+
+Reviewed the Phase 07 exit gate and retained draft status.
+
+Session 14 modifies test coverage and tracking only. Frontend lint, build and all 21 tests passed locally with Node 24.22.3. git diff --check passed. Await exact-head GitHub CI for backend, isolated Compose, Semgrep, Trivy and proxy. Owner gate DEC-2026-11-25-04 remains open for aggregate PDF size and memory, sensitive-field policy and verified backup access and retention. Earlier JR-124/125 and JR-129/130 and the Phase 06 JudgeIt prerequisites remain open. Keep draft PR #28 stacked on #27. Rollback of the added test coverage requires reverting test-only changes; evidence history is append-only.

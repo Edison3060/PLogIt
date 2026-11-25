@@ -1195,3 +1195,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-25T14:06:34Z | Session 14 | JR-139 | IN REVIEW
 
 - Added PDF denial coverage for members and outsiders. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-139). Prior pushed head `9ed51ae1cd49da6f3a4a2b9bb0918481aee2d36b`. Builder Lead reviewed.
+
+
+### 2026-11-25T14:06:50Z | Session 14 | JR-140 | IN REVIEW
+
+- Reviewed the Phase 07 exit gate and retained draft status. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140). Prior pushed head `3e5f1d62d9f5615266caf817358a1cc3e4f43f3b`. Builder Lead reviewed.
