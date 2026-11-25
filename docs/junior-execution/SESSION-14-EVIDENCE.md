@@ -49,3 +49,11 @@ The positive component result and literal rendering denial check pass. The serve
 Mapped PDF generation, audit and evidence retention ownership.
 
 ExportService checks leader access and selects eligible log states, loads report data, calls PdfReportStrategy and transitions after generation. The PDF strategy emits an auditor evidence pack with display names, emergency contacts, rendered content and selected images, using an in-memory byte array. Attachment traffic has per-file and request caps. The product spec describes read-only archival. DEC-2026-11-06-09 leaves transfer classification, retention and access open. Existing ExportIntegrationTest tests PDF signatures and JSON state and audit; AttachmentIntegrationTest checks scoped bytes. An aggregate PDF budget, binding redaction policy and verified backup access policy were not found in the owners inspected.
+
+## JR-137
+
+2026-11-25T14:05:21Z · **DONE** · Prior branch head `74c5dbc33da771c513f48951c8c0da80172e7325`
+
+Recorded PDF, PII, retention and backup acceptance boundaries.
+
+Request POST /api/engagements/{id}/export with JSON format PDF and optional includeExported. Expect an active leader to receive only eligible same-engagement evidence and a minimal export audit. A member and outsider must fail without a file, state change, audit side effect or disclosure. Current documented multipart caps are 10 MB per file and 25 MB per request. Those limits do not bound accumulated evidence size or renderer heap. A complete phase gate requires an explicit budget and failure response, field-level disclosure policy (including emergency contacts and free text), archive retention and authorized backup evidence.

@@ -76,3 +76,8 @@ Session 12 direct PostgreSQL verification closed the scoped diagnostic replay an
 
 
 ### INT-001 | PROVISIONAL | Session 13 attachment boundary\n\nThe attachment file reader and HTTP size error are internal to PLogIt. The unversioned export still emits original attachment filenames, and attachment bytes remain local to PLogIt. The existing JudgeIt nullable-list mismatch and versioning decisions remain open. Future stricter upload filename rules must account for legacy consumers and preserved evidence metadata. [Session 13 evidence](SESSION-13-EVIDENCE.md#jr-130).
+
+
+### INT-001 | PROVISIONAL | Session 14 PDF and disclosure boundary
+
+PDF is a local auditor evidence pack and does not establish JudgeIt compatibility. Keep legacy producer JSON, offline file transfer and the receiver nullable-list debt as recorded in Session 12. Transfer consent, redaction, backup and retention still require the relevant owners' policy. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-137).

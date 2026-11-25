@@ -682,3 +682,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Mapped PDF generation, audit and evidence retention ownership. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-136). Prior pushed head `e4de006093477359b5332c82849d177f467b8b15`.
 - Continue with JR-137 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:05:21Z | Session 14 | JR-137
+
+- **DONE.** Recorded PDF, PII, retention and backup acceptance boundaries. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-137). Prior pushed head `74c5dbc33da771c513f48951c8c0da80172e7325`.
+- Continue with JR-138 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.

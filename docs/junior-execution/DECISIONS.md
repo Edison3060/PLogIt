@@ -249,3 +249,8 @@ _No execution-session decisions have been recorded._
 ### DEC-2026-11-25-03 | JR-132 | Verify the existing Markdown boundary
 
 Builder Lead selected source-based verification of the existing parser and sanitizer, authorized log detail, and literal code-language presentation. The Product Spec §8 specifies an allowlist. Keep raw Markdown and legacy JSON as evidence and exercise rendered output separately. Owner review is required for a change to allowed external media or evidence-handling policy. [Acceptance evidence](SESSION-14-EVIDENCE.md#jr-132).
+
+
+### DEC-2026-11-25-04 | JR-137/138/139/140 | Pending PDF and evidence lifecycle policy
+
+Preserve the verified leader-only local export and existing archive semantics while testing with synthetic records. The PLogIt owner should approve aggregate PDF limits and capacity targets, an explicit sensitive field policy, and backup access and retention evidence before Phase 07 acceptance. Keep DEC-2026-11-06-09 open for cross-app transfer. Neither silent content removal nor destructive expiry is authorized. The current branch provides per-upload limits and export auditing. It has no identified aggregate render budget or field-level redaction configuration. [Acceptance evidence](SESSION-14-EVIDENCE.md#jr-137).
