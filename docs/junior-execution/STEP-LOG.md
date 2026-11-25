@@ -1084,3 +1084,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Reconciled media acceptance with the signature-only validation boundary
 - [Evidence](SESSION-13-EVIDENCE.md#jr-125). Prior pushed head `f7dce45e9761a4c7d34299659a9d17c5c6ab039b`. Builder Lead reviewed the checkpoint.
+
+
+### 2026-11-25T02:08:18+00:00 | Session 13 | JR-126 | DONE
+
+- Traced attachment authorization, metadata scope and the shared filesystem read
+- [Evidence](SESSION-13-EVIDENCE.md#jr-126). Prior pushed head `3f2831f6a6d49b42ad00110a1dfa995f758cc3d8`. Builder Lead reviewed the checkpoint.

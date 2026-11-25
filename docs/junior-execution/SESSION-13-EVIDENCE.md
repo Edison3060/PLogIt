@@ -26,3 +26,8 @@ Phase 07 stacks on the unmerged Phase 06 head `b0ad327368e4c2276d81e85cb9310eddc
 ## JR-125
 
 **IN REVIEW.** The positive suite checks full synthetic image round trips. The negative suite checks non-image content, the existing disguised-script rejection and the 10 MiB servlet limit. CI must execute both. Signature recognition is narrower than full decoding and original evidence bytes remain intact. Keep strict malformed-image rejection and pixel limits in DEC-2026-11-25-01 for owner approval. The only production change for JR-121–125 is the explicit size-error response. Rollback is a normal revert of that handler change on the phase branch.
+
+
+## JR-126
+
+**DONE.** Expected a map of both metadata and file owners. At baseline `b0ad327368e4c2276d81e85cb9310eddc2ec4de7`, `AttachmentController` exposes authenticated upload/list/download routes. `AttachmentService` verifies active engagement membership and binds the attachment row to the supplied log; uploads generate a UUID-prefixed leaf below the engagement/log directory. The saved filename is display metadata. `AttachmentService.readFile` resolves persisted storage paths without checking their scope at baseline, including for PDF images. Existing `AttachmentIntegrationTest` covers removed and foreign members and `ExportIntegrationTest` preserves filename-only legacy JSON. The roadmap is reference acceptance, while canonical backend code owns live behavior. No application code changed in this JR.
