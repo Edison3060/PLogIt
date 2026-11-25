@@ -635,3 +635,14 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Reviewed attachment containment, regression coverage and remaining acceptance [Evidence](SESSION-13-EVIDENCE.md#jr-130). Prior pushed head `5bfcdf76b898fe91ea7c9597f24bbe26a6c3e184`.
 - Reconcile CI and session readiness before updating the controller. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+## Session 13 final handoff | 2026-11-25T02:13:46+00:00
+
+- **READY WITH PROVISIONAL INTEGRATION** for independent Session 14. JR-121–123 and JR-126–128 DONE. JR-124/125 and JR-129/130 IN REVIEW for full-image validation and strict filename acceptance. [Draft PR #28](https://github.com/Edison3060/PLogIt/pull/28) remains open above Phase 06 PR #27.
+
+- [Push CI 45531027378](https://github.com/Edison3060/PLogIt/actions/runs/45531027378) at `569390e4a5f3820ea4b882e33fe3a554bfe38985` used Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16. `mvn -B clean verify` passed 163 backend tests, including 22 attachment tests, with zero failures, errors or skips. Node 22.23.4 passed frontend lint, build and all 19 tests. Compose passed live authenticated 409/413 checks and verified no metadata or disk directory for either denied upload. Semgrep, Trivy filesystem and image gates, and production proxy checks passed. Production CD was skipped. Local checks passed for Bash syntax, WebP fixture decode and `git diff --check`. Local Maven and PostgreSQL were unavailable. [Session 13 evidence](SESSION-13-EVIDENCE.md#reconciliation). JR-121 `cad6411e4e97`, JR-122 `8669972b660a`, JR-123 `a75b1eea7b68`, JR-124 `f7dce45e9761`, JR-125 `3f2831f6a6d4`, JR-126 `4b2b0f0265ca`, JR-127 `fc3e0eef166c`, JR-128 `13098352f08b`, JR-129 `5bfcdf76b898`, JR-130 `569390e4a5f3`. This closeout changes tracking only.
+
+- Keep INT-001 provisional and the exact JudgeIt nullable-list incompatibility and approval for future envelope open. Carry forward stale-draft, Phase 04 policy, elapsed idle time, scanner acceptance, direct API CSRF and production DEC-2026-11-06-11.
+
+- After the controller advances, the next separately initiated session is Session 14, JR-131–JR-140 on the same Phase 07 branch. Start by verifying canonical Markdown and PDF evidence behavior. Stop this run at JR-130.

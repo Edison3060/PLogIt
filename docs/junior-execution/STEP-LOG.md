@@ -1114,3 +1114,39 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Reviewed attachment containment, regression coverage and remaining acceptance
 - [Evidence](SESSION-13-EVIDENCE.md#jr-130). Prior pushed head `5bfcdf76b898fe91ea7c9597f24bbe26a6c3e184`. Builder Lead reviewed the checkpoint.
+
+
+### 2026-11-25T02:13:46+00:00 | Session 13 | JR-123 | DONE
+
+- All four complete fixtures returned their detected MIME type and byte-identical content.
+- [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation). Builder Lead reviewed the executed coverage at `569390e4a5f3820ea4b882e33fe3a554bfe38985`.
+
+
+### 2026-11-25T02:13:46+00:00 | Session 13 | JR-124 | IN REVIEW
+
+- Disguised script and non-image bytes were denied. Real HTTP returned 413 for a file over the cap; invalid bytes returned 409. Both live denials left the list empty and no log storage directory. Complete malformed-image rejection remains open.
+- [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation). Builder Lead reviewed the executed coverage at `569390e4a5f3820ea4b882e33fe3a554bfe38985`.
+
+
+### 2026-11-25T02:13:46+00:00 | Session 13 | JR-125 | IN REVIEW
+
+- Round trips and denial regressions passed. Strict malformed-image acceptance remains open under DEC-2026-11-25-01.
+- [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation). Builder Lead reviewed the executed coverage at `569390e4a5f3820ea4b882e33fe3a554bfe38985`.
+
+
+### 2026-11-25T02:13:46+00:00 | Session 13 | JR-128 | DONE
+
+- A non-leader author uploaded and listed the attachment and retrieved the original bytes under the scoped ID. The row mapped to a regular file in the expected directory.
+- [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation). Builder Lead reviewed the executed coverage at `569390e4a5f3820ea4b882e33fe3a554bfe38985`.
+
+
+### 2026-11-25T02:13:46+00:00 | Session 13 | JR-129 | IN REVIEW
+
+- Mismatched engagement scope, deleted metadata and an in-directory symbolic link returned 404. Strict path-like display-name rejection remains open.
+- [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation). Builder Lead reviewed the executed coverage at `569390e4a5f3820ea4b882e33fe3a554bfe38985`.
+
+
+### 2026-11-25T02:13:46+00:00 | Session 13 | JR-130 | IN REVIEW
+
+- The shared path guard and regressions passed. DEC-2026-11-25-02 still governs filename policy and Phase 07 acceptance remains open.
+- [Executed evidence](SESSION-13-EVIDENCE.md#reconciliation). Builder Lead reviewed the executed coverage at `569390e4a5f3820ea4b882e33fe3a554bfe38985`.
