@@ -1185,3 +1185,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-25T14:05:21Z | Session 14 | JR-137 | DONE
 
 - Recorded PDF, PII, retention and backup acceptance boundaries. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-137). Prior pushed head `74c5dbc33da771c513f48951c8c0da80172e7325`. Builder Lead reviewed.
+
+
+### 2026-11-25T14:06:15Z | Session 14 | JR-138 | IN REVIEW
+
+- Added PDF content, selection and audit assertions for synthetic evidence. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-138). Prior pushed head `12ae06f14525f2daf55a850135fc9065b766f110`. Builder Lead reviewed.

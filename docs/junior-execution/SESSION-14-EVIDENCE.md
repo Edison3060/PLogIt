@@ -57,3 +57,11 @@ ExportService checks leader access and selects eligible log states, loads report
 Recorded PDF, PII, retention and backup acceptance boundaries.
 
 Request POST /api/engagements/{id}/export with JSON format PDF and optional includeExported. Expect an active leader to receive only eligible same-engagement evidence and a minimal export audit. A member and outsider must fail without a file, state change, audit side effect or disclosure. Current documented multipart caps are 10 MB per file and 25 MB per request. Those limits do not bound accumulated evidence size or renderer heap. A complete phase gate requires an explicit budget and failure response, field-level disclosure policy (including emergency contacts and free text), archive retention and authorized backup evidence.
+
+## JR-138
+
+2026-11-25T14:06:15Z · **IN REVIEW** · Prior branch head `12ae06f14525f2daf55a850135fc9065b766f110`
+
+Added PDF content, selection and audit assertions for synthetic evidence.
+
+The test exercises the real PDF endpoint on PostgreSQL with an approved record, a draft and a separate engagement. PDFBox parses the bytes to verify rendered evidence, literal code and language, display name, exclusion of private draft and cross-engagement content, and exclusion of the account email. The approved record must transition and persist only the expected export and transition audit. The published OpenHTMLtoPDF 1.1.40 POM declares PDFBox 3.0.3. The Apache PDFBox 3 migration guide (https://pdfbox.apache.org/3.0/migration.html, consulted 2026-11-25) documents the Loader API used in this test. CI is pending. A small fixture cannot establish a general memory ceiling, and the renderer has no aggregate budget. That criterion remains open under DEC-2026-11-25-04.
