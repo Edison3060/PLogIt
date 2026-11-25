@@ -694,3 +694,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Added PDF content, selection and audit assertions for synthetic evidence. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-138). Prior pushed head `12ae06f14525f2daf55a850135fc9065b766f110`.
 - Continue with JR-139 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.
+
+
+### 2026-11-25T14:06:34Z | Session 14 | JR-139
+
+- **IN REVIEW.** Added PDF denial coverage for members and outsiders. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-139). Prior pushed head `9ed51ae1cd49da6f3a4a2b9bb0918481aee2d36b`.
+- Continue with JR-140 on Phase 07. Draft PR #28, INT-001 and production authorization remain open.

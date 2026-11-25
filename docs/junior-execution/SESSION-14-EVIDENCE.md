@@ -65,3 +65,11 @@ Request POST /api/engagements/{id}/export with JSON format PDF and optional incl
 Added PDF content, selection and audit assertions for synthetic evidence.
 
 The test exercises the real PDF endpoint on PostgreSQL with an approved record, a draft and a separate engagement. PDFBox parses the bytes to verify rendered evidence, literal code and language, display name, exclusion of private draft and cross-engagement content, and exclusion of the account email. The approved record must transition and persist only the expected export and transition audit. The published OpenHTMLtoPDF 1.1.40 POM declares PDFBox 3.0.3. The Apache PDFBox 3 migration guide (https://pdfbox.apache.org/3.0/migration.html, consulted 2026-11-25) documents the Loader API used in this test. CI is pending. A small fixture cannot establish a general memory ceiling, and the renderer has no aggregate budget. That criterion remains open under DEC-2026-11-25-04.
+
+## JR-139
+
+2026-11-25T14:06:34Z · **IN REVIEW** · Prior branch head `9ed51ae1cd49da6f3a4a2b9bb0918481aee2d36b`
+
+Added PDF denial coverage for members and outsiders.
+
+Expected HTTP 403 for an active nonleader and 404 for an outsider, with no PDF response, sensitive marker or account email, approved-state transition, or audit write. The new Spring MVC/PostgreSQL test exercises those conditions and existing AttachmentIntegrationTest covers scoped download denials. Oversized aggregate reports have no identified application-level rejection threshold. Free-text and emergency-contact redaction remain policy questions. Large-report rejection and the complete disclosure gate remain open; no large-resource run was performed.

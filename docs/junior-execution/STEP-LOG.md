@@ -1190,3 +1190,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-25T14:06:15Z | Session 14 | JR-138 | IN REVIEW
 
 - Added PDF content, selection and audit assertions for synthetic evidence. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-138). Prior pushed head `12ae06f14525f2daf55a850135fc9065b766f110`. Builder Lead reviewed.
+
+
+### 2026-11-25T14:06:34Z | Session 14 | JR-139 | IN REVIEW
+
+- Added PDF denial coverage for members and outsiders. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-139). Prior pushed head `9ed51ae1cd49da6f3a4a2b9bb0918481aee2d36b`. Builder Lead reviewed.

@@ -181,6 +181,36 @@ class ExportIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void pdfDenialsLeaveEvidenceAndAuditUnchanged() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        User outsider = createUser("outsider@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        LogEntry approved = createLog(engagement, leader, ReviewState.APPROVED);
+        approved.setTitle("Private evidence marker");
+        logRepository.saveAndFlush(approved);
+        String request = "{\"format\":\"PDF\"}";
+
+        String memberBody = requestExport(engagement, member, request)
+            .andExpect(status().isForbidden())
+            .andExpect(header().doesNotExist("Content-Disposition"))
+            .andReturn().getResponse().getContentAsString();
+        String outsiderBody = requestExport(engagement, outsider, request)
+            .andExpect(status().isNotFound())
+            .andExpect(header().doesNotExist("Content-Disposition"))
+            .andReturn().getResponse().getContentAsString();
+
+        for (String body : List.of(memberBody, outsiderBody)) {
+            assertFalse(body.contains(approved.getTitle()));
+            assertFalse(body.contains(leader.getEmail()));
+            assertFalse(body.startsWith("%PDF"));
+        }
+        assertEquals(ReviewState.APPROVED, persistedState(approved));
+        assertEquals(0, auditLogRepository.count());
+    }
+
+    @Test
     void emptyJsonExportRecordsOnlyTheAggregateAudit() throws Exception {
         User leader = createUser("leader@test.local");
         Engagement engagement = createEngagement(leader);
