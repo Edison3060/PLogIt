@@ -98,4 +98,16 @@ describe("LogDetail HTML rendering", () => {
     expect(screen.getByText("Sanitized description")).toBeInTheDocument();
     expect(screen.getByText("Sanitized result")).toBeInTheDocument();
   });
+
+  it("displays fenced code and a documentation link from sanitized HTML", () => {
+    const { container } = renderLog({
+      ...log,
+      descriptionHtml: '<pre><code>const count = 2;</code></pre>',
+      resultHtml: '<p><a href="https://example.com/guide">Guide</a></p>',
+    });
+
+    expect(container.querySelector(".prose pre code")).toHaveTextContent("const count = 2;");
+    expect(screen.getByRole("link", { name: "Guide" })).toHaveAttribute("href", "https://example.com/guide");
+  });
+
 });
