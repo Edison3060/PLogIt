@@ -611,3 +611,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Traced attachment authorization, metadata scope and the shared filesystem read [Evidence](SESSION-13-EVIDENCE.md#jr-126). Prior pushed head `3f2831f6a6d49b42ad00110a1dfa995f758cc3d8`.
 - Continue with JR-127 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:08:35+00:00 | Session 13 | JR-127
+
+- **DONE.** Recorded storage isolation criteria and the filename policy decision [Evidence](SESSION-13-EVIDENCE.md#jr-127). Prior pushed head `4b2b0f0265cac607894cb3e067f737d797997584`.
+- Continue with JR-128 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.

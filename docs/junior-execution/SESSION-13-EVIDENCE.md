@@ -31,3 +31,8 @@ Phase 07 stacks on the unmerged Phase 06 head `b0ad327368e4c2276d81e85cb9310eddc
 ## JR-126
 
 **DONE.** Expected a map of both metadata and file owners. At baseline `b0ad327368e4c2276d81e85cb9310eddc2ec4de7`, `AttachmentController` exposes authenticated upload/list/download routes. `AttachmentService` verifies active engagement membership and binds the attachment row to the supplied log; uploads generate a UUID-prefixed leaf below the engagement/log directory. The saved filename is display metadata. `AttachmentService.readFile` resolves persisted storage paths without checking their scope at baseline, including for PDF images. Existing `AttachmentIntegrationTest` covers removed and foreign members and `ExportIntegrationTest` preserves filename-only legacy JSON. The roadmap is reference acceptance, while canonical backend code owns live behavior. No application code changed in this JR.
+
+
+## JR-127
+
+**DONE.** Expected route identifiers are a log UUID and numeric attachment ID. Active engagement membership and matching log are required for reads. Filesystem reads should also require the metadata path to identify a regular file directly under that record's engagement/log directory. The original filename currently survives as display metadata while storage uses a sanitized UUID-prefixed leaf. The original exercise requires path-like names to be rejected. The PLogIt owner owns acceptance of a narrower filename policy. DEC-2026-11-25-02 preserves existing display/JSON names and authorizes the focused runtime storage containment correction under existing isolation rules.

@@ -241,3 +241,6 @@ _No execution-session decisions have been recorded._
 
 
 ### DEC-2026-11-25-01 | JR-122/124/125 | Image validation policy\n\nRetain the four existing byte-detected types and servlet limits. A complete-image integrity guarantee needs a tested decoder policy for all four formats, bounded dimensions and compatibility with stored evidence. Preserve raw evidence bytes. Re-encoding or newly rejecting detectable legacy inputs requires PLogIt owner acceptance. [Session evidence](SESSION-13-EVIDENCE.md#jr-122).
+
+
+### DEC-2026-11-25-02 | JR-127/129/130 | Attachment path containment and filename policy\n\nEnforce the existing storage boundary at the shared reader for download and PDF paths. Keep uploaded bytes, generated storage names, roles, public filename metadata and legacy JSON shape. Attachment rows that reference an invalid path must fail closed. Preserve original filename metadata and keep strict path-like display-name rejection open for the PLogIt owner. Deployment and existing phase gates retain their prior status. [Session evidence](SESSION-13-EVIDENCE.md#jr-127).
