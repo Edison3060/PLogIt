@@ -1175,3 +1175,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-25T14:05:00Z | Session 14 | JR-135 | IN REVIEW
 
 - Reviewed the Markdown regressions and retained the existing renderer. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-135). Prior pushed head `f5a1a031df8b56d6a67b52a10dddfe79ef2b5c36`. Builder Lead reviewed.
+
+
+### 2026-11-25T14:05:05Z | Session 14 | JR-136 | DONE
+
+- Mapped PDF generation, audit and evidence retention ownership. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-136). Prior pushed head `e4de006093477359b5332c82849d177f467b8b15`. Builder Lead reviewed.

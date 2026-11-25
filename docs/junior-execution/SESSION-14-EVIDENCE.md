@@ -41,3 +41,11 @@ The focused Vitest run passed four tests, including markup-shaped but inert stri
 Reviewed the Markdown regressions and retained the existing renderer.
 
 The positive component result and literal rendering denial check pass. The server-side acceptance depends on PostgreSQL-backed GET, the existing sanitizer suite and scoped log authorization on the current branch. No renderer, sanitizer or raw evidence formats were changed. Reverting the two test-only checkpoints removes the added assertions without changing runtime behavior.
+
+## JR-136
+
+2026-11-25T14:05:05Z · **DONE** · Prior branch head `e4de006093477359b5332c82849d177f467b8b15`
+
+Mapped PDF generation, audit and evidence retention ownership.
+
+ExportService checks leader access and selects eligible log states, loads report data, calls PdfReportStrategy and transitions after generation. The PDF strategy emits an auditor evidence pack with display names, emergency contacts, rendered content and selected images, using an in-memory byte array. Attachment traffic has per-file and request caps. The product spec describes read-only archival. DEC-2026-11-06-09 leaves transfer classification, retention and access open. Existing ExportIntegrationTest tests PDF signatures and JSON state and audit; AttachmentIntegrationTest checks scoped bytes. An aggregate PDF budget, binding redaction policy and verified backup access policy were not found in the owners inspected.
