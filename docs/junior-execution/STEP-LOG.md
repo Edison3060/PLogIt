@@ -1078,3 +1078,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Added live multipart size and invalid-media checks with a safe 413 response
 - [Evidence](SESSION-13-EVIDENCE.md#jr-124). Prior pushed head `a75b1eea7b6878e3f60e6272d71f90518f6d8b2d`. Builder Lead reviewed the checkpoint.
+
+
+### 2026-11-25T02:08:05+00:00 | Session 13 | JR-125 | IN REVIEW
+
+- Reconciled media acceptance with the signature-only validation boundary
+- [Evidence](SESSION-13-EVIDENCE.md#jr-125). Prior pushed head `f7dce45e9761a4c7d34299659a9d17c5c6ab039b`. Builder Lead reviewed the checkpoint.

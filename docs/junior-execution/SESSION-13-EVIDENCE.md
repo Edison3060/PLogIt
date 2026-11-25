@@ -21,3 +21,8 @@ Phase 07 stacks on the unmerged Phase 06 head `b0ad327368e4c2276d81e85cb9310eddc
 ## JR-124
 
 **IN REVIEW.** Expected 409 for non-image bytes and 413 for multipart file size above the configured limit, with no metadata or file. The existing PostgreSQL test covers disguised script rejection. `scripts/ci-auth-smoke.sh` checks a declared PNG containing inert text and a 10 MiB plus one byte file over authenticated, CSRF-protected HTTP. It also asserts an empty attachment list and no per-log storage directory. `GlobalExceptionHandler` now returns a fixed 413 response for multipart size exceptions before the generic handler. `bash -n scripts/ci-auth-smoke.sh` passed. Full-image structural validation remains a separate policy gap because type recognition does not guarantee complete decoding. CI pending.
+
+
+## JR-125
+
+**IN REVIEW.** The positive suite checks full synthetic image round trips. The negative suite checks non-image content, the existing disguised-script rejection and the 10 MiB servlet limit. CI must execute both. Signature recognition is narrower than full decoding and original evidence bytes remain intact. Keep strict malformed-image rejection and pixel limits in DEC-2026-11-25-01 for owner approval. The only production change for JR-121–125 is the explicit size-error response. Rollback is a normal revert of that handler change on the phase branch.
