@@ -16,3 +16,8 @@ Phase 07 stacks on the unmerged Phase 06 head `b0ad327368e4c2276d81e85cb9310eddc
 ## JR-123
 
 **IN REVIEW.** Expected a successful upload and byte-for-byte authenticated retrieval of synthetic PNG, JPEG, GIF and WebP. `AttachmentIntegrationTest.acceptedImageRoundTripsWithDetectedType` uses Java ImageIO for PNG/JPEG/GIF and one lossless single-pixel WebP fixture generated with Pillow 13.0.0. POST `/api/logs/{logId}/attachments` uses a neutral filename and Content-Type. GET `/api/logs/{logId}/attachments/{id}` asserts the detected MIME and exact bytes. PostgreSQL-backed CI execution is pending.
+
+
+## JR-124
+
+**IN REVIEW.** Expected 409 for non-image bytes and 413 for multipart file size above the configured limit, with no metadata or file. The existing PostgreSQL test covers disguised script rejection. `scripts/ci-auth-smoke.sh` checks a declared PNG containing inert text and a 10 MiB plus one byte file over authenticated, CSRF-protected HTTP. It also asserts an empty attachment list and no per-log storage directory. `GlobalExceptionHandler` now returns a fixed 413 response for multipart size exceptions before the generic handler. `bash -n scripts/ci-auth-smoke.sh` passed. Full-image structural validation remains a separate policy gap because type recognition does not guarantee complete decoding. CI pending.

@@ -593,3 +593,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Added four authorized image round-trip cases [Evidence](SESSION-13-EVIDENCE.md#jr-123). Prior pushed head `8669972b660a25488da6f8246427e8e00e5efa1d`.
 - Continue with JR-124 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:07:29+00:00 | Session 13 | JR-124
+
+- **IN REVIEW.** Added live multipart size and invalid-media checks with a safe 413 response [Evidence](SESSION-13-EVIDENCE.md#jr-124). Prior pushed head `a75b1eea7b6878e3f60e6272d71f90518f6d8b2d`.
+- Continue with JR-125 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
