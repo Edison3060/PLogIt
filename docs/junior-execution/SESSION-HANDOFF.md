@@ -629,3 +629,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Bound attachment reads to their own log directory and added denial regressions [Evidence](SESSION-13-EVIDENCE.md#jr-129). Prior pushed head `13098352f08bce18e0792499e933dbcc1b5cfbe4`.
 - Continue with JR-130 in Session 13. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.
+
+
+### 2026-11-25T02:10:09+00:00 | Session 13 | JR-130
+
+- **IN REVIEW.** Reviewed attachment containment, regression coverage and remaining acceptance [Evidence](SESSION-13-EVIDENCE.md#jr-130). Prior pushed head `5bfcdf76b898fe91ea7c9597f24bbe26a6c3e184`.
+- Reconcile CI and session readiness before updating the controller. Phase 07 stacks on draft Phase 06 PR #27. INT-001 and production authorization remain open.

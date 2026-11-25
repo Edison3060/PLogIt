@@ -1108,3 +1108,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Bound attachment reads to their own log directory and added denial regressions
 - [Evidence](SESSION-13-EVIDENCE.md#jr-129). Prior pushed head `13098352f08bce18e0792499e933dbcc1b5cfbe4`. Builder Lead reviewed the checkpoint.
+
+
+### 2026-11-25T02:10:09+00:00 | Session 13 | JR-130 | IN REVIEW
+
+- Reviewed attachment containment, regression coverage and remaining acceptance
+- [Evidence](SESSION-13-EVIDENCE.md#jr-130). Prior pushed head `5bfcdf76b898fe91ea7c9597f24bbe26a6c3e184`. Builder Lead reviewed the checkpoint.

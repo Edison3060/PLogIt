@@ -46,3 +46,8 @@ Phase 07 stacks on the unmerged Phase 06 head `b0ad327368e4c2276d81e85cb9310eddc
 ## JR-129
 
 **IN REVIEW.** `AttachmentService.readFile` now validates a normalized relative path directly under the record's engagement/log, requires a regular file at its resolved location without symlinks beneath the configured root, and opens the final file without following links. It is shared by authorized downloads and PDF image reads. The expected safe response for an invalid location is 404. Regression cases exercise an ID scoped to another engagement visible to the same user, a deleted metadata row with retained synthetic bytes, and an alias whose target is a synthetic fixture within the same log directory. Stored display-name policy remains open in DEC-2026-11-25-02. The 413 smoke script's original executable bit was restored. CI pending.
+
+
+## JR-130
+
+**IN REVIEW.** The scoped author read, foreign attachment denial, deleted-row denial and same-log link denial are covered in `AttachmentIntegrationTest`. The shared reader preserves valid generated paths and evidence bytes. The private storage volume must remain writable only by the application and trusted infrastructure. The acceptance requirement to reject path-like display names remains open under DEC-2026-11-25-02 because changing original filename metadata can affect existing JSON consumers. The PLogIt owner retains this policy decision. Rollback is a normal revert of the focused path-validation commit. Run the full PostgreSQL, frontend, Compose and security gates before controller reconciliation.
