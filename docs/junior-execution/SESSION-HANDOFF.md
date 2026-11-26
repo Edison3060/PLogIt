@@ -778,3 +778,12 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Reviewed both engagement outcomes and constrained browser destinations. [Evidence](SESSION-15-EVIDENCE.md#jr-150). Previous head `3f8ba15f76534cc35253b26db78cb985c760cf7e`.
 - Reconcile elapsed expiry, corrected browser fixture and exact-head GitHub CI. Stop at JR-150 after the controller closeout.
+
+
+## Session 15 final handoff | 2026-11-26T02:24:15Z
+
+- **READY WITH PROVISIONAL INTEGRATION** for independent Session 16, JR-151–JR-160 on `work/plogit-phase-08`. All ten Session 15 JRs are DONE for this increment. Keep [PR #29](https://github.com/Edison3060/PLogIt/pull/29) draft above unmerged Phase 07 PR #28. Phase 08 exit acceptance follows the second increment.
+- [Exact executable-head CI](https://github.com/Edison3060/PLogIt/actions/runs/45741730012) passed at `23f7e9096bdddd1cb6b39aec5caedd3e1062047f`. Browser and test evidence is in [Session 15](SESSION-15-EVIDENCE.md#reconciliation). This follow-up changes tracking only.
+- Checkpoint SHAs in JR order: JR-141 `6a32d3469204`, JR-142 `d39017bb1bd8`, JR-143 `5bfc42d90452`, JR-144 `8428786d27b8`, JR-145 `543b0e7188b7`, JR-146 `c86476a23d1c`, JR-147 `910d3bdbd8a9`, JR-148 `6a01f1e1cb43`, JR-149 `3f8ba15f7653`, JR-150 `23f7e9096bdd`.
+- Local elapsed expiry used a one-minute test-only setting. The existing deployment configuration and the historical Phase 03 review are outside this increment. Keep JudgeIt INT-001 nullable-list interoperability, Phase 07 policy and evidence gates, prior stacked acceptance and DEC-2026-11-06-11 open.
+- After verifying the controller update, separately initiate Session 16 at JR-151. Start by reading the active branch and reviewing the original log-form and review-UI requirements. Stop this session at JR-150.

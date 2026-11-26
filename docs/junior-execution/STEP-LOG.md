@@ -1285,3 +1285,18 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T02:20:10Z | Session 15 | JR-150 | IN REVIEW
 
 - Reviewed both engagement outcomes and constrained browser destinations. [Evidence](SESSION-15-EVIDENCE.md#jr-150). Previous head `3f8ba15f76534cc35253b26db78cb985c760cf7e`. Reviewed by Builder Lead.
+
+
+### 2026-11-26T02:24:15Z | Session 15 | JR-144 | DONE
+
+- Retested elapsed timeout on the built preview with 65 quiet seconds and the original browser cookie, confirmed denied access and retained state. [Executed evidence](SESSION-15-EVIDENCE.md#reconciliation). Tested `23f7e9096bdddd1cb6b39aec5caedd3e1062047f`. Builder Lead reviewed.
+
+
+### 2026-11-26T02:24:15Z | Session 15 | JR-145 | DONE
+
+- Reconciled desktop/mobile navigation, keyboard focus, logout replay and elapsed-session expiry. [Executed evidence](SESSION-15-EVIDENCE.md#reconciliation). Tested `23f7e9096bdddd1cb6b39aec5caedd3e1062047f`. Builder Lead reviewed.
+
+
+### 2026-11-26T02:24:15Z | Session 15 | JR-150 | DONE
+
+- Reconciled engagement success and denial after the harness URL correction and full CI. [Executed evidence](SESSION-15-EVIDENCE.md#reconciliation). Tested `23f7e9096bdddd1cb6b39aec5caedd3e1062047f`. Builder Lead reviewed.
