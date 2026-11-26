@@ -1,5 +1,5 @@
-Warning: truncated output (original token count: 48965)
-Total output lines: 1347
+Warning: truncated output (original token count: 49354)
+Total output lines: 1372
 
 # PLogIt: append-only JR execution log
 
@@ -463,12 +463,7 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Changed files:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF and new SESSION-04-EVIDENCE only.
 - **Executed tests:** none in JR-031 (read-only inspection). Prior CI 42338792629 is historical and not asserted as current; Docker, Maven and PostgreSQL CLI unavailable in current isolated runner. Clean/incremental/negative gates belong to JR-033–035.
 - **Research / assumptions:** canonical source and original Phase 02 roadmap, no external facts required, no real JudgeIt integration claimed. Future integration remains INT-001 provisional. Next JR-032 acceptance criteria.
-- **Git:** reviewed JR-031 numbered atomic pus…8965 tokens truncated…nt, duplicate registration and generic credentials.
-- Expected per-account/IP abuse defense vs observed IP-only: a few invalid attempts from shared IP can block unrelated legitimate account, and attempts against one account from varied addresses evade limiter. No source change for this inventory task. Tests: inspected existing Java tests and guard implementation, not executed here; `cd backend && mvn -B clean verify` planned via GitHub CI. Changed register/log/handoff/evidence. Reviewer Builder Lead, no subagents. Next JR-057 scoped accepted design; existing JR-053–055 remain IN REVIEW pending CI; no main/production.
-
-### 2026-11-11T12:41:30.480Z | Session 06 | JR-057 | DONE • AUTH ABUSE ACCEPTANCE SPEC
-- Compared existing IP-only interceptor and per-IP spoof/registration/error tests to original Phase03 user/IP invariant. Decision DEC-2026-11-11-02 selects a reversible two-bucket login correction: account hash attempt limit at 3 in test config (20 default), coarse remote-IP limit 30 in test config (200 default) per 60s; registration unchanged. Expected valid CSRF + JSON email/password, 200 for unrelated legitimate user from shared IP, generic 401 for unknown/incorrect, generic 429+Retry-After for offending account, no unauthorized DB mutation, neither account presence nor email echoed.
-- Source owner AuthRateLimitInterceptor, AuthController; tests AuthRateLimitIntegrationTest + full regression. No implementation or Maven test execution in JR-057, only source-grounded spec and OWASP primary guidance checked 2026-11-11 (URLs and design in DEC). Changed register/log/evidence/handoff/decisions. Reviewer Builder Lead. Next JR-058 positive implementation/test, JR-059 negative, JR-060 closure; phase draft PRs/DEC-11 remain gated.
+- **Git:** reviewed JR-031 numbered atomic pus…9354 tokens truncated… design in DEC). Changed register/log/evidence/handoff/decisions. Reviewer Builder Lead. Next JR-058 positive implementation/test, JR-059 negative, JR-060 closure; phase draft PRs/DEC-11 remain gated.
 
 ### 2026-11-11T12:42:50.297Z | Session 06 | JR-058 | IN REVIEW • DUAL-BUCKET LOGIN GUARD AND POSITIVE TEST AUTHORED
 - Based on DEC-2026-11-11-02, implement per-account SHA-256 normalized email bucket with existing login configured quota across remote IPs, plus coarse true socket IP 10× quota as separate interceptor guard (both 60s; in-memory bounded). Controller enforces account limit before authentication; no response distinguishing known from unknown email, existing generic 401/429+Retry-After and registration IP guard preserved. No reliance on untrusted X-Forwarded-For. Tradeoff: 20/60s per account and 200/60s coarse IP default; no durable multi-node synchronization; document release follow-up.
@@ -1177,3 +1172,28 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T14:14:06Z | Session 16 | JR-159 | DONE
 
 - Keep denied downloads inside the modal and correct contrast. [Evidence](SESSION-16-EVIDENCE.md#jr-159). Checkpoint parent `3bf789d7dfbb4656bedc71780387f21a1a907bad`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:16:35Z | Session 16 | JR-153 | DONE
+
+- Verified the live keyboard lifecycle through rejection and approval. The stored Markdown rendered and the approval was audited. [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160). Tested source `782e0800cf444275222ac85caef2acc8db823e76`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:16:35Z | Session 16 | JR-154 | DONE
+
+- Verified member approval 403 with identical audit and stale edit 409 with retained local text and unchanged stored title and history. [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160). Tested source `782e0800cf444275222ac85caef2acc8db823e76`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:16:35Z | Session 16 | JR-155 | DONE
+
+- Reviewed the real keyboard and server results with the PostgreSQL authorization, concurrent versioning and audit regressions. [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160). Tested source `782e0800cf444275222ac85caef2acc8db823e76`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:16:35Z | Session 16 | JR-158 | DONE
+
+- Verified all three downloaded files, modal reflow, keyboard operation and both themes after correcting the dark token and download evidence capture. [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160). Tested source `782e0800cf444275222ac85caef2acc8db823e76`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:18:27Z | Session 16 | JR-160 | DONE
+
+- Reconcile Phase 08 browser, regression and CI evidence. [Evidence](SESSION-16-EVIDENCE.md#jr-160). Checkpoint parent `782e0800cf444275222ac85caef2acc8db823e76`. Builder Lead reviewed.

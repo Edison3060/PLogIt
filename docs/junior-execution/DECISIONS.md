@@ -284,3 +284,8 @@ The Builder Lead selected real browser checks with synthetic author and leader a
 ### DEC-2026-11-26-05 | JR-157 | Export dialog accessibility and disclosure
 
 Use a native modal dialog and browser keyboard checks to verify opening, focus confinement, Escape and focus return. Test reflow at 320 CSS pixels and normal text contrast of at least 4.5:1 for the dialog controls and explanatory text. Clarify inclusion and attachment references using the current backend contract. The PLogIt owner holds approval for changing visibility, export formats, inclusion, audit, retention or the existing JSON contract. Scope and sources are in [JR-157](SESSION-16-EVIDENCE.md#jr-157).
+
+
+### DEC-2026-11-26-06 | JR-160 | Preserve the current log and export contracts
+
+The mirrored Product Spec describes additional board filters, leader edits after approval, and customized PDF filters and sort. This phase verified the implemented flow. The server permits edits only in DRAFT, uses the existing board filter set, and applies approved plus optional previously exported inclusion rather than a custom export query. Keep the tested server rules. The product owner must approve any of those separate changes. Keep DEC-2026-11-23-03 for delayed writes to a still-DRAFT log and DEC-2026-11-25-04 for Phase 07 PDF capacity, disclosure and lifecycle policy.

@@ -841,3 +841,17 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Keep denied downloads inside the modal and correct contrast. [Evidence](SESSION-16-EVIDENCE.md#jr-159). Checkpoint parent `3bf789d7dfbb4656bedc71780387f21a1a907bad`.
 - Continue with JR-160 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+## Session 16 closeout | 2026-11-26
+
+- **READY WITH PROVISIONAL INTEGRATION** for independent Session 17, JR-161–JR-170. Begin with the controller, then stack Phase 09 on the final Phase 08 head while PR #29 remains unmerged. JR-161 has not begun.
+- Session 16 JR-151–JR-160 are DONE. Browser and CI evidence is in [Session 16](SESSION-16-EVIDENCE.md#jr-160). The executable source was `782e0800cf444275222ac85caef2acc8db823e76`. This closeout changes tracking only.
+- JR checkpoint SHAs in order through JR-159 are `61b2ccbac9ec`, `54980e713291`, `a7d1fdd6887b`, `3515bc295c81`, `e9fd6a8ebb51`, `5fc781ae8365`, `4ff16372dd1b`, `3bf789d7dfbb` and `782e0800cf44`. The final tracking commit is the numbered JR-160 checkpoint.
+- Keep [PR #29](https://github.com/Edison3060/PLogIt/pull/29) draft above Phase 07 [PR #28](https://github.com/Edison3060/PLogIt/pull/28). Phase 08 met its local browser usability check. Phase 07 acceptance, Phase 08 merge, JudgeIt INT-001, and production authorization remain pending. DEC-2026-11-23-03 covers delayed writes to still-DRAFT records. DEC-2026-11-25-04 covers Phase 07 PDF capacity, disclosure, backup and retention. DEC-2026-11-06-11 continues to gate production approval.
+
+
+### 2026-11-26T14:18:27Z | Session 16 | JR-160
+
+- **DONE.** Reconcile Phase 08 browser, regression and CI evidence. [Evidence](SESSION-16-EVIDENCE.md#jr-160). Checkpoint parent `782e0800cf444275222ac85caef2acc8db823e76`.
+- Reconcile the ten checkpoints and controller before the next session. Phase 07 acceptance, INT-001 and production authorization remain pending.
