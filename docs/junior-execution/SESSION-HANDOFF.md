@@ -799,3 +799,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Define log workflow and keyboard acceptance. [Evidence](SESSION-16-EVIDENCE.md#jr-152). Checkpoint parent `61b2ccbac9ecf89ba156fa8c9647501da924fd37`.
 - Continue with JR-153 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:06:06Z | Session 16 | JR-153
+
+- **IN REVIEW.** Make log titles reachable by keyboard and add the live browser journey. [Evidence](SESSION-16-EVIDENCE.md#jr-153). Checkpoint parent `54980e713291d831bd7b45e587a9012b6b7ab2a3`.
+- Continue with JR-154 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.

@@ -158,7 +158,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-150 | Close Engagement pages verification | 15 | DONE | [Final evidence](SESSION-15-EVIDENCE.md#reconciliation) | 2026-11-26T02:24:15Z |
 | JR-151 | Inventory Log forms and review UI | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-151) | 2026-11-26T14:02:11Z |
 | JR-152 | Specify Log forms and review UI acceptance | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-152) | 2026-11-26T14:02:44Z |
-| JR-153 | Reproduce Log forms and review UI success | 16 | NOT STARTED | — | — |
+| JR-153 | Reproduce Log forms and review UI success | 16 | IN REVIEW | [Evidence](SESSION-16-EVIDENCE.md#jr-153) | 2026-11-26T14:06:06Z |
 | JR-154 | Reject Log forms and review UI invalid operation | 16 | NOT STARTED | — | — |
 | JR-155 | Close Log forms and review UI verification | 16 | NOT STARTED | — | — |
 | JR-156 | Inventory Themes, devices and exports | 16 | NOT STARTED | — | — |
