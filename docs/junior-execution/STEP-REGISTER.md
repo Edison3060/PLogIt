@@ -161,7 +161,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-153 | Reproduce Log forms and review UI success | 16 | IN REVIEW | [Evidence](SESSION-16-EVIDENCE.md#jr-153) | 2026-11-26T14:06:06Z |
 | JR-154 | Reject Log forms and review UI invalid operation | 16 | IN REVIEW | [Evidence](SESSION-16-EVIDENCE.md#jr-154) | 2026-11-26T14:08:06Z |
 | JR-155 | Close Log forms and review UI verification | 16 | IN REVIEW | [Evidence](SESSION-16-EVIDENCE.md#jr-155) | 2026-11-26T14:08:11Z |
-| JR-156 | Inventory Themes, devices and exports | 16 | NOT STARTED | — | — |
+| JR-156 | Inventory Themes, devices and exports | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-156) | 2026-11-26T14:08:42Z |
 | JR-157 | Specify Themes, devices and exports acceptance | 16 | NOT STARTED | — | — |
 | JR-158 | Reproduce Themes, devices and exports success | 16 | NOT STARTED | — | — |
 | JR-159 | Reject Themes, devices and exports invalid operation | 16 | NOT STARTED | — | — |

@@ -31,3 +31,9 @@ Builder Lead reviewed. Checkpoint parent `a7d1fdd6887bce85ff5bc723d7f9074daff3f0
 Review boundary: draft editor and board fixes are confined to the frontend and reversible via JR-153 and JR-154. Lint, build, 25 Vitest tests and Node syntax passed. Browser authorization, version history and keyboard evidence require the corrected fixture run. The existing delayed stale DRAFT-to-DRAFT overwrite from Session 10 is independently tracked and remains in review.
 
 Builder Lead reviewed. Checkpoint parent `3515bc295c81bda8330fb58a91bb2339d2ad5228`.
+
+## JR-156
+
+At baseline 1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3, `tailwind.config.js`, `styles.css`, `main.tsx`, `lib/theme.ts` and `Settings.tsx` own current palette and preference. `EngagementDetail.tsx` owns the leader-only entry, call and browser download. `ExportDialog.tsx` owns format and inclusion controls. `EngagementController`, `ExportService` and report strategies own formats, membership, filenames, content and mutation. `ExportIntegrationTest` covers exact legacy JSON, each format, inclusion and denial. Source-confirmed UI gaps include a plain overlay without modal focus, unnamed dismiss, and format selection conveyed only visually. Mirrored Product Spec and Suite Master Spec provide intended behavior. No application files changed for inventory.
+
+Builder Lead reviewed. Checkpoint parent `e9fd6a8ebb51bcfb642934c0d96a74184174bdf5`.

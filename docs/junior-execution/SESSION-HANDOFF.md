@@ -817,3 +817,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Record the log workflow closeout and outstanding browser proof. [Evidence](SESSION-16-EVIDENCE.md#jr-155). Checkpoint parent `3515bc295c81bda8330fb58a91bb2339d2ad5228`.
 - Continue with JR-156 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:08:42Z | Session 16 | JR-156
+
+- **DONE.** Map theme, responsive layout and export ownership. [Evidence](SESSION-16-EVIDENCE.md#jr-156). Checkpoint parent `e9fd6a8ebb51bcfb642934c0d96a74184174bdf5`.
+- Continue with JR-157 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.

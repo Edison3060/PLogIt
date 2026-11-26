@@ -1,5 +1,5 @@
-Warning: truncated output (original token count: 48714)
-Total output lines: 1327
+Warning: truncated output (original token count: 48774)
+Total output lines: 1332
 
 # PLogIt: append-only JR execution log
 
@@ -463,7 +463,7 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Changed files:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF and new SESSION-04-EVIDENCE only.
 - **Executed tests:** none in JR-031 (read-only inspection). Prior CI 42338792629 is historical and not asserted as current; Docker, Maven and PostgreSQL CLI unavailable in current isolated runner. Clean/incremental/negative gates belong to JR-033–035.
 - **Research / assumptions:** canonical source and original Phase 02 roadmap, no external facts required, no real JudgeIt integration claimed. Future integration remains INT-001 provisional. Next JR-032 acceptance criteria.
-- **Git:** reviewed JR-031 numbered atomic pus…8714 tokens truncated…ed; only isolated PostgreSQL16 integration tests authored. Exact source on current phase branch; runtime evidence not yet available, so cannot mark DONE. Expected `cd backend && mvn -B clean verify` with frontend/Compose/SAST/Trivy/proxy gates; actual result PENDING. Changed: STEP-REGISTER, STEP-LOG, SESSION-06-EVIDENCE, SESSION-HANDOFF. Reviewer Builder Lead. No main merge/CD; phase 03 PR #24 still draft.
+- **Git:** reviewed JR-031 numbered atomic pus…8774 tokens truncated…gates; actual result PENDING. Changed: STEP-REGISTER, STEP-LOG, SESSION-06-EVIDENCE, SESSION-HANDOFF. Reviewer Builder Lead. No main merge/CD; phase 03 PR #24 still draft.
 
 ### 2026-11-11T12:41:23.619Z | Session 06 | JR-056 | DONE • AUTH ABUSE SOURCE/TEST INVENTORY
 - Canonical `security/AuthRateLimitInterceptor.java` and `config/AuthRateLimitConfig.java` intercept login/register POST before controllers, keyed **remote IP only**, ignoring X-Forwarded-For; synchronized bounded 10,000-entry map, login 20/60s, registration 5/600s default. AuthController authenticates; GlobalExceptionHandler returns generic 401 and 429/Retry-After; duplicate registration generic 202. `AuthRateLimitIntegrationTest` covers invalid bursts, forwarded spoof, independent IP/endpoint, duplicate registration and generic credentials.
@@ -1160,3 +1160,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T14:08:11Z | Session 16 | JR-155 | IN REVIEW
 
 - Record the log workflow closeout and outstanding browser proof. [Evidence](SESSION-16-EVIDENCE.md#jr-155). Checkpoint parent `3515bc295c81bda8330fb58a91bb2339d2ad5228`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:08:42Z | Session 16 | JR-156 | DONE
+
+- Map theme, responsive layout and export ownership. [Evidence](SESSION-16-EVIDENCE.md#jr-156). Checkpoint parent `e9fd6a8ebb51bcfb642934c0d96a74184174bdf5`. Builder Lead reviewed.
