@@ -772,3 +772,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Verified denial and corrected engagement error feedback. [Evidence](SESSION-15-EVIDENCE.md#jr-149). Previous head `6a01f1e1cb43d2541d2940198f9fd49ade5d3fde`.
 - Continue with JR-150 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:20:10Z | Session 15 | JR-150
+
+- **IN REVIEW.** Reviewed both engagement outcomes and constrained browser destinations. [Evidence](SESSION-15-EVIDENCE.md#jr-150). Previous head `3f8ba15f76534cc35253b26db78cb985c760cf7e`.
+- Reconcile elapsed expiry, corrected browser fixture and exact-head GitHub CI. Stop at JR-150 after the controller closeout.

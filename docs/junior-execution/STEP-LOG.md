@@ -1280,3 +1280,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T02:17:56Z | Session 15 | JR-149 | DONE
 
 - Verified denial and corrected engagement error feedback. [Evidence](SESSION-15-EVIDENCE.md#jr-149). Previous head `6a01f1e1cb43d2541d2940198f9fd49ade5d3fde`. Reviewed by Builder Lead.
+
+
+### 2026-11-26T02:20:10Z | Session 15 | JR-150 | IN REVIEW
+
+- Reviewed both engagement outcomes and constrained browser destinations. [Evidence](SESSION-15-EVIDENCE.md#jr-150). Previous head `3f8ba15f76534cc35253b26db78cb985c760cf7e`. Reviewed by Builder Lead.

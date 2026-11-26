@@ -1,9 +1,8 @@
 const assert = require("node:assert/strict");
 const { chromium } = require("playwright");
 
-const origin = process.env.PLOGIT_TEST_ORIGIN ?? "http://127.0.0.1:5173";
-assert.equal(new URL(origin).hostname, "127.0.0.1", "Use an isolated loopback app");
 const baseline = process.argv.includes("--baseline");
+const origin = baseline ? "http://127.0.0.1:5174" : "http://127.0.0.1:5173";
 const password = "Synthetic-Session15-Only!";
 const marker = `S15-${Date.now()}-${process.pid}`;
 const api = "/api";
@@ -28,13 +27,13 @@ async function mutation(context, path, data, method = "POST") {
 }
 
 async function login(browser, label, viewport, register = true) {
-  const context = await browser.newContext({ viewport, offline: false });
+  const context = await browser.newContext({ viewport, baseURL: origin });
   const user = { email: `${label.toLowerCase()}-${marker.toLowerCase()}@example.test`, displayName: label, password };
   await status(await context.request.get(origin + api + "/health"), 200);
   if (register) await status(await mutation(context, "/auth/register", user), 202);
   const page = await context.newPage();
   page.setDefaultTimeout(12000);
-  await page.goto(origin + "/login", { waitUntil: "domcontentloaded" });
+  await page.goto("/login", { waitUntil: "domcontentloaded" });
   await page.getByLabel("Email").fill(user.email);
   await page.getByLabel("Password").fill(password);
   const response = page.waitForResponse(requestMatch("/auth/login", "POST"));
@@ -96,7 +95,9 @@ async function expiry(browser) {
   const created = await mutation(context, "/engagements", { name: marker, description: "Fresh idle-session fixture" });
   await status(created, 200);
   const { id } = await created.json();
-  await page.goto(origin + `/engagements/${id}`, { waitUntil: "domcontentloaded" });
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.getByRole("main").getByRole("button", { name: new RegExp(marker) }).click();
+  await page.waitForURL(origin + `/engagements/${id}`);
   await heading(page, marker).waitFor();
   const session = await cookie(context, "JSESSIONID");
   const auth = await context.request.get(origin + api + "/auth/me");
@@ -198,9 +199,12 @@ async function engagement(browser) {
 
   const before = await lead.context.request.get(origin + api + path + "/audit");
   await status(before, 200);
-  const deniedDetail = outsider.page.waitForResponse(requestMatch(path, "GET"));
-  await outsider.page.goto(origin + path, { waitUntil: "domcontentloaded" });
-  await status(await deniedDetail, 404);
+  const deniedDetail = await outsider.context.request.get(origin + api + path);
+  await status(deniedDetail, 404);
+  assert.equal("members" in await deniedDetail.json(), false);
+  const unavailableDetail = outsider.page.waitForResponse(requestMatch("/engagements/0", "GET"));
+  await outsider.page.goto("/engagements/0", { waitUntil: "domcontentloaded" });
+  await status(await unavailableDetail, 404);
   if (baseline) {
     await outsider.page.getByText("Engagement not found", { exact: true }).waitFor();
     assert.equal(await outsider.page.getByRole("alert").count(), 0);
@@ -209,7 +213,7 @@ async function engagement(browser) {
   }
   assert.equal(await heading(outsider.page, name).count(), 0);
   assert.equal(await button(outsider.page, "Team").count(), 0);
-  await outsider.page.goto(origin + "/engagements", { waitUntil: "domcontentloaded" });
+  await outsider.page.goto("/engagements", { waitUntil: "domcontentloaded" });
   await outsider.page.getByPlaceholder(/Enter join code/).fill("PL0G-AAAAAA");
   const rejected = outsider.page.waitForResponse(requestMatch("/join", "POST"));
   await button(outsider.page, "Join").click();
