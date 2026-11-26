@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useLogs } from "../hooks/useLogs";
 import { useEngagements } from "../hooks/useEngagements";
 import {
@@ -184,9 +184,11 @@ export default function LogBoard() {
                   {data.items.map((log) => (
                     <tr
                       key={log.id}
-                      onClick={() =>
-                        navigate(`/engagements/${engagementId}/logs/${log.id}`)
-                      }
+                      onClick={(event) => {
+                        if (!(event.target instanceof Element) || !event.target.closest("a")) {
+                          navigate(`/engagements/${engagementId}/logs/${log.id}`);
+                        }
+                      }}
                       className="hover:bg-bg-inset cursor-pointer transition-colors"
                     >
                       <td className="px-4 py-3 text-text-muted text-xs font-mono whitespace-nowrap">
@@ -196,7 +198,12 @@ export default function LogBoard() {
                         {log.authorDisplayName}
                       </td>
                       <td className="px-4 py-3 text-text-strong text-sm font-medium">
-                        {log.title}
+                        <Link
+                          to={`/engagements/${engagementId}/logs/${log.id}`}
+                          className="rounded-sm underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                        >
+                          {log.title}
+                        </Link>
                       </td>
                       <td className="px-4 py-3 text-text-body text-sm">
                         {formatActivityType(log.activityType)}

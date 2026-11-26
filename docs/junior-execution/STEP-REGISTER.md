@@ -146,26 +146,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-138 | Reproduce Retention, exports and sensitive data success | 14 | IN REVIEW | [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation) | 2026-11-25 |
 | JR-139 | Reject Retention, exports and sensitive data invalid operation | 14 | IN REVIEW | [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation) | 2026-11-25 |
 | JR-140 | Close Retention, exports and sensitive data verification | 14 | IN REVIEW | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140) | 2026-11-25 |
-| JR-141 | Inventory Navigation and sessions | 15 | NOT STARTED | — | — |
-| JR-142 | Specify Navigation and sessions acceptance | 15 | NOT STARTED | — | — |
-| JR-143 | Reproduce Navigation and sessions success | 15 | NOT STARTED | — | — |
-| JR-144 | Reject Navigation and sessions invalid operation | 15 | NOT STARTED | — | — |
-| JR-145 | Close Navigation and sessions verification | 15 | NOT STARTED | — | — |
-| JR-146 | Inventory Engagement pages | 15 | NOT STARTED | — | — |
-| JR-147 | Specify Engagement pages acceptance | 15 | NOT STARTED | — | — |
-| JR-148 | Reproduce Engagement pages success | 15 | NOT STARTED | — | — |
-| JR-149 | Reject Engagement pages invalid operation | 15 | NOT STARTED | — | — |
-| JR-150 | Close Engagement pages verification | 15 | NOT STARTED | — | — |
-| JR-151 | Inventory Log forms and review UI | 16 | NOT STARTED | — | — |
-| JR-152 | Specify Log forms and review UI acceptance | 16 | NOT STARTED | — | — |
-| JR-153 | Reproduce Log forms and review UI success | 16 | NOT STARTED | — | — |
-| JR-154 | Reject Log forms and review UI invalid operation | 16 | NOT STARTED | — | — |
-| JR-155 | Close Log forms and review UI verification | 16 | NOT STARTED | — | — |
-| JR-156 | Inventory Themes, devices and exports | 16 | NOT STARTED | — | — |
-| JR-157 | Specify Themes, devices and exports acceptance | 16 | NOT STARTED | — | — |
-| JR-158 | Reproduce Themes, devices and exports success | 16 | NOT STARTED | — | — |
-| JR-159 | Reject Themes, devices and exports invalid operation | 16 | NOT STARTED | — | — |
-| JR-160 | Close Themes, devices and exports verification | 16 | NOT STARTED | — | — |
+| JR-141 | Inventory Navigation and sessions | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-141) | 2026-11-26 |
+| JR-142 | Specify Navigation and sessions acceptance | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-142) | 2026-11-26 |
+| JR-143 | Reproduce Navigation and sessions success | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-143) | 2026-11-26 |
+| JR-144 | Reject Navigation and sessions invalid operation | 15 | DONE | [Final evidence](SESSION-15-EVIDENCE.md#reconciliation) | 2026-11-26T02:24:15Z |
+| JR-145 | Close Navigation and sessions verification | 15 | DONE | [Final evidence](SESSION-15-EVIDENCE.md#reconciliation) | 2026-11-26T02:24:15Z |
+| JR-146 | Inventory Engagement pages | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-146) | 2026-11-26 |
+| JR-147 | Specify Engagement pages acceptance | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-147) | 2026-11-26 |
+| JR-148 | Reproduce Engagement pages success | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-148) | 2026-11-26 |
+| JR-149 | Reject Engagement pages invalid operation | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-149) | 2026-11-26 |
+| JR-150 | Close Engagement pages verification | 15 | DONE | [Final evidence](SESSION-15-EVIDENCE.md#reconciliation) | 2026-11-26T02:24:15Z |
+| JR-151 | Inventory Log forms and review UI | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-151) | 2026-11-26T14:02:11Z |
+| JR-152 | Specify Log forms and review UI acceptance | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-152) | 2026-11-26T14:02:44Z |
+| JR-153 | Reproduce Log forms and review UI success | 16 | DONE | [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160) | 2026-11-26T14:16:35Z |
+| JR-154 | Reject Log forms and review UI invalid operation | 16 | DONE | [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160) | 2026-11-26T14:16:35Z |
+| JR-155 | Close Log forms and review UI verification | 16 | DONE | [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160) | 2026-11-26T14:16:35Z |
+| JR-156 | Inventory Themes, devices and exports | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-156) | 2026-11-26T14:08:42Z |
+| JR-157 | Specify Themes, devices and exports acceptance | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-157) | 2026-11-26T14:08:47Z |
+| JR-158 | Reproduce Themes, devices and exports success | 16 | DONE | [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160) | 2026-11-26T14:16:35Z |
+| JR-159 | Reject Themes, devices and exports invalid operation | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-159) | 2026-11-26T14:14:06Z |
+| JR-160 | Close Themes, devices and exports verification | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-160) | 2026-11-26T14:18:27Z |
 | JR-161 | Inventory Schema integrity constraints | 17 | NOT STARTED | — | — |
 | JR-162 | Specify Schema integrity constraints acceptance | 17 | NOT STARTED | — | — |
 | JR-163 | Reproduce Schema integrity constraints success | 17 | NOT STARTED | — | — |

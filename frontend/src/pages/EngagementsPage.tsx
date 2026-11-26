@@ -10,7 +10,7 @@ const inputClass =
   "bg-bg-canvas border border-border-default rounded-lg px-3 py-2.5 text-text-strong focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors";
 
 export default function EngagementsPage() {
-  const { data: engagements, isLoading } = useEngagements();
+  const { data: engagements, isLoading, isError } = useEngagements();
   const createEng = useCreateEngagement();
   const joinEng = useJoinEngagement();
   const navigate = useNavigate();
@@ -133,6 +133,7 @@ export default function EngagementsPage() {
           <div className="relative flex-1">
             <input
               type="text"
+              aria-label="Join code"
               value={joinCode}
               onChange={(e) => setJoinCode(e.target.value)}
               placeholder="Enter join code (e.g. PL0G-XXXXXX)"
@@ -155,34 +156,38 @@ export default function EngagementsPage() {
       </div>
 
       {success && (
-        <div className="bg-success-soft border border-success/30 text-success px-4 py-3 rounded-lg mb-6 flex items-center gap-2 text-sm font-medium">
+        <div role="status" className="bg-success-soft border border-success/30 text-success px-4 py-3 rounded-lg mb-6 flex items-center gap-2 text-sm font-medium">
           <i className="fa-solid fa-circle-check"></i>
           {success}
         </div>
       )}
 
-      {error && (
-        <div className="bg-danger-soft border border-danger/30 text-danger px-4 py-3 rounded-lg mb-6 flex items-center gap-2 text-sm font-medium">
-          <i className="fa-solid fa-circle-exclamation"></i>
-          {error}
-        </div>
-      )}
+      <div role="alert" aria-atomic="true">
+        {error && (
+          <div className="bg-danger-soft border border-danger/30 text-danger px-4 py-3 rounded-lg mb-6 flex items-center gap-2 text-sm font-medium">
+            <i className="fa-solid fa-circle-exclamation"></i>
+            {error}
+          </div>
+        )}
+      </div>
 
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-text-strong flex items-center gap-2">
           <i className="fa-solid fa-folder text-text-muted"></i>
           All Engagements
-          {engagements && engagements.length > 0 && (
+          {!isError && engagements && engagements.length > 0 && (
             <span className="text-text-muted text-sm font-normal">({engagements.length})</span>
           )}
         </h2>
       </div>
 
       {isLoading ? (
-        <div className="text-center py-16 text-text-muted">
+        <div role="status" className="text-center py-16 text-text-muted">
           <i className="fa-solid fa-circle-notch fa-spin text-3xl mb-3"></i>
           <p>Loading engagements...</p>
         </div>
+      ) : isError ? (
+        <p role="alert" className="text-center py-16 text-danger">Unable to load engagements</p>
       ) : engagements && engagements.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {engagements.map((eng) => (

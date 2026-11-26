@@ -1,0 +1,71 @@
+# Session 16 evidence
+
+Builder Lead reviewed the work directly on Phase 08, stacked on unmerged Phase 07 at `7727c1a82d42794e9955ae3baae0cc7475361526`. [Draft PR #29](https://github.com/Edison3060/PLogIt/pull/29).
+
+## JR-151
+
+At canonical `1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3`, `LogForm.tsx` owns draft fields and mutations, `LogBoard.tsx` owns paginated filters and the leader review queue, and `LogDetail.tsx` owns submit/review controls, sanitized HTML, attachments and version history. `hooks/useLogs.ts` connects these pages to `lib/logs.ts`. `LogController`, `LogService`, `LogReviewService` and the state machine enforce permissions and persist evidence. Existing `LogDetail.test.tsx`, `LogAuthzIntegrationTest`, `LogVersioningIntegrationTest` and `AuditLogIntegrationTest` cover presentation and server boundaries. Source inspection confirmed the journey is implemented. The board uses click-only table rows, so keyboard access needs browser verification and a focused fix. The mirrored Product Spec describes intended roles and lifecycle. No application files changed for inventory.
+
+Builder Lead reviewed. Checkpoint parent `1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3`.
+
+## JR-152
+
+Existing POST `/api/engagements/:id/logs` takes activityType, title, description, result and optional draft metadata and returns a DRAFT log. PUT `/api/logs/:id` edits drafts only. POST `/api/logs/:id/transition` takes `{action,comment?}`. Author or leader can submit DRAFT; leader alone can approve or reject SUBMITTED; REJECT requires a reason and returns DRAFT. Existing board query filters include activityType, outcome, reviewState and search. Detail displays server-sanitized Markdown and history. Expect Tab and Enter to open each log, role gates to remain enforced by the server, and errors to keep typed text. Existing UI opening of board rows requires a pointer. DEC-2026-11-26-04 approves scoped frontend corrections and reserves any API, role or evidence semantics change for the PLogIt owner.
+
+Builder Lead reviewed. Checkpoint parent `61b2ccbac9ecf89ba156fa8c9647501da924fd37`.
+
+## JR-153
+
+The board now offers a native focusable link per log and retains pointer row navigation. The synthetic browser harness drives create, submit, review queue and approval using Tab and Enter, checking returned states, rendered Markdown and audit. `npm run lint && npm run build && npm test` exited 0 with 25 tests; `node --check scripts/verify-log-export-journeys.cjs` and `git diff --check` exited 0. Chromium 151.0.7922.34 loaded the built preview sign-in shell. The PostgreSQL-backed browser journey is pending the isolated application build. Revert this checkpoint’s source changes to roll back the link.
+
+Builder Lead reviewed. Checkpoint parent `54980e713291d831bd7b45e587a9012b6b7ab2a3`.
+
+## JR-154
+
+The editor now waits for its first record and initializes once per log. Background query updates can no longer rehydrate over locally typed text. An update failure stays on the page and uses an alert region. The review error also has an alert and the rejection comment has an accessible name. The browser harness now checks member approval 403 and a concurrent submit followed by stale edit 409, requiring unchanged history and retained typed text. Lint, build and 25 Vitest cases passed. An initial isolated database startup failed because log redirection populated the empty database directory before initdb. The corrected browser rerun is pending. Existing same-state delayed-write risk remains DEC-2026-11-23-03.
+
+Builder Lead reviewed. Checkpoint parent `a7d1fdd6887bce85ff5bc723d7f9074daff3f058`.
+
+## JR-155
+
+Review boundary: draft editor and board fixes are confined to the frontend and reversible via JR-153 and JR-154. Lint, build, 25 Vitest tests and Node syntax passed. Browser authorization, version history and keyboard evidence require the corrected fixture run. The existing delayed stale DRAFT-to-DRAFT overwrite from Session 10 is independently tracked and remains in review.
+
+Builder Lead reviewed. Checkpoint parent `3515bc295c81bda8330fb58a91bb2339d2ad5228`.
+
+## JR-156
+
+At baseline 1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3, `tailwind.config.js`, `styles.css`, `main.tsx`, `lib/theme.ts` and `Settings.tsx` own current palette and preference. `EngagementDetail.tsx` owns the leader-only entry, call and browser download. `ExportDialog.tsx` owns format and inclusion controls. `EngagementController`, `ExportService` and report strategies own formats, membership, filenames, content and mutation. `ExportIntegrationTest` covers exact legacy JSON, each format, inclusion and denial. Source-confirmed UI gaps include a plain overlay without modal focus, unnamed dismiss, and format selection conveyed only visually. Mirrored Product Spec and Suite Master Spec provide intended behavior. No application files changed for inventory.
+
+Builder Lead reviewed. Checkpoint parent `e9fd6a8ebb51bcfb642934c0d96a74184174bdf5`.
+
+## JR-157
+
+Expected leader POST /api/engagements/:id/export with `{format: PDF|JSON|CSV, includeExported: boolean}` and an attachment response. Default includes APPROVED only. Opt-in adds previously EXPORTED. DRAFT and SUBMITTED are excluded. PDF can render images. JSON carries raw Markdown and filename references, not image files. Export records an audit and marks newly included approved logs EXPORTED. The backend owns member denial. Verify a named modal, keyboard reachability and focus return, 320 CSS pixel reflow, sampled 4.5:1 normal text contrast, correct descriptions, three downloads and a failed download with no success or audit mutation. W3C WCAG 2.2 and Understanding Reflow and Focus Not Obscured were consulted 2026-11-26: https://www.w3.org/TR/WCAG22/ , https://www.w3.org/WAI/WCAG22/Understanding/reflow , https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum . These are scoped checks and do not establish conformance. See DEC-2026-11-26-05.
+
+Builder Lead reviewed. Checkpoint parent `5fc781ae8365c9c2f260581fc706b7292bca8e4b`.
+
+## JR-158
+
+Replaced the overlay with a named native modal. It provides a named close button, explicit selected format, keyboard focus and Escape return. The browser now exercises real downloads at 320px for light and dark themes. On Chromium 151 and PostgreSQL 16.12, light modal reflow, focus confinement and Escape return passed. Dark-mode contrast assertion stopped the initial run before all downloads. Lint, build and 25 Vitest tests were run. Contrast diagnostic and final three-format rerun remain pending. The standalone dialog change can be reverted independently.
+
+Builder Lead reviewed. Checkpoint parent `4ff16372dd1b3c3926c4a9bc10487de924b52dda`.
+
+## JR-159
+
+Dark-mode diagnosis identified missing compiled text color utilities, leaving native dialog copy black on its dark inset. Explicit existing CSS color tokens fixed the sampled minimum to 6.90:1 in light and 11.85:1 in dark. Chromium 151.0.7922.34 and Spring Boot/PostgreSQL 16.12 fixture S16-1795702422644 passed a 320px main/modal overflow check, focused outline, Tab containment and focus return. A real leadership transfer after opening the dialog produced HTTP 403. The modal exposed a scoped alert with no download, success text, extra audit event or evidence-state change. Inclusion and format text describe current backend behavior. PDF temporarily returned an empty DevTools response-body capture despite a successful download; the fixture now examines downloaded bytes directly and all formats passed. Lint, build, 25 Vitest tests, syntax and diff checks passed. Rollback is limited to these presentation changes.
+
+Builder Lead reviewed. Checkpoint parent `3bf789d7dfbb4656bedc71780387f21a1a907bad`.
+
+## JR-160
+
+Final executable head `782e0800cf444275222ac85caef2acc8db823e76` matched all six modified source and browser-test blobs on GitHub. [GitHub PR CI](https://github.com/Edison3060/PLogIt/actions/runs/45836953811) passed `mvn -B clean verify` (165 tests, 0 failures, errors or skips, PostgreSQL 16.16), lint, build, frontend tests, live Compose probes, Semgrep, Trivy filesystem and both image scans, and proxy validation. Production CD was skipped.
+
+Locally, `npm run lint && npm run build && npm test` exited 0 (25 Vitest cases). `node --check scripts/verify-log-export-journeys.cjs` and `git diff --check` exited 0. An independent Maven run used a scratch-only PostgreSQL connection substitution for Testcontainers and omitted the two container-specific Flyway cases. All 163 remaining tests passed on PostgreSQL 16.12; an earlier attempt before database startup failed and was discarded as verification, with failure recorded here. CI reran all 165 using the repository configuration.
+
+On Chromium 151.0.7922.34, Playwright 1.62.1, Corretto Java 21.0.13.1, Spring Boot and PostgreSQL 16.12, fixture S16-1795702422644 passed keyboard create, open, submit, review filter, reject with feedback, resubmit and approve. The author lacked review controls. Member approval returned 403 with identical audit. Concurrent submit followed by stale edit returned 409 with retained browser text and unchanged stored title/history. Rendered Markdown, review state and audit were checked. The 320x640 modal had no horizontal overflow, a visible keyboard outline, confined focus and Escape restored the opener. Sampled contrast minima were 6.90:1 light and 11.85:1 dark. PDF, unversioned JSON and CSV actually downloaded and had their expected payloads and state. A subsequent leadership transfer caused a stale UI download to return 403. The error appeared inside the modal and the download count, audit and stored states were unchanged. No screen reader was exercised.
+
+To reproduce, run the backend with a disposable PostgreSQL database on loopback and start the built Vite preview on 127.0.0.1:5173. Install Playwright separately and expose it through Node's module path. Run `node scripts/verify-log-export-journeys.cjs` from the repository root. Set PLOGIT_CHROMIUM for an installed Chromium executable and PLOGIT_TEST_CASE=logs for log-only checks. An isolated repeat of the existing Session 15 harness, using separate Chromium processes for each browser context in the restricted workspace, also passed 1280 and 390 pixel navigation, expired-session reload, create/join/scope/roster and authorization denial at fixture S15-1795702472757-144.
+
+Rollback is available by reverting the application portions of JR-153 `a7d1fdd6887b`, JR-154 `3515bc295c81`, JR-158 `3bf789d7dfbb` and JR-159 `782e0800cf44` in reverse order. No separate release or interoperability approval was inferred. Actual browser usability evidence meets the scoped Phase 08 checks. Phase 07 acceptance and production authorization still gate merge, and INT-001 retains the JudgeIt nullable-list reconciliation. Preserve delayed same-state draft write policy and the Phase 07 PDF, sensitive-field and retention decisions.
+
+Builder Lead reviewed. Checkpoint parent `782e0800cf444275222ac85caef2acc8db823e76`.

@@ -71,4 +71,10 @@ describe("engagement detail panels", () => {
 
     expect(screen.getByText("Leader #1 → #2")).toBeTruthy();
   });
+
+  it("announces a failed audit read without presenting it as empty", () => {
+    render(<AuditPanel auditLog={undefined} isLoading={false} isError />);
+
+    expect(screen.getByRole("alert")).toHaveTextContent("Unable to load audit history");
+  });
 });

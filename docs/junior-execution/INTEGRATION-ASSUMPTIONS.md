@@ -81,3 +81,8 @@ Session 12 direct PostgreSQL verification closed the scoped diagnostic replay an
 ### INT-001 | PROVISIONAL | Session 14 PDF and disclosure boundary
 
 PDF is a local auditor evidence pack and does not establish JudgeIt compatibility. Keep legacy producer JSON, offline file transfer and the receiver nullable-list debt as recorded in Session 12. Transfer consent, redaction, backup and retention still require the relevant owners' policy. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-137).
+
+
+### INT-001 | PROVISIONAL | Session 16 export presentation
+
+The browser exercised existing local PDF, CSV and unversioned JSON export on synthetic records. JSON disclosure now explains raw Markdown and attachment filenames. The browser did not transfer files to JudgeIt. The exact producer nullable-list mismatch and authorized consumer reconciliation remain open. See [Session 16 evidence](SESSION-16-EVIDENCE.md#jr-160).

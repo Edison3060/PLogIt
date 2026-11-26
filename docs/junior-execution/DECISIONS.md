@@ -259,3 +259,33 @@ Preserve the verified leader-only local export and existing archive semantics wh
 ### DEC-2026-11-25-05 | JR-133/135 | Preserve preformatted code
 
 Initial PostgreSQL-backed CI showed the HTML sanitizer stripped the pre wrapper from a legitimate code fence. Restore that element with an element-only policy, retaining the existing sanitizer policies. The follow-up scoped GET, sanitizer suite, frontend and PDF regressions passed. Raw evidence remains the source for existing exports. The correction can be reverted independently if needed. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation).
+
+
+### DEC-2026-11-26-01 | JR-142 | Session and route acceptance
+
+PLogIt product owner owns any change to expiry policy, membership, or redirect expectations. Builder Lead selected real browser and HTTP verification of the existing contract, with a short idle timeout confined to the local test instance. Verification includes keyboard navigation and the mobile sidebar. Existing session and CSRF controls remain authoritative.
+
+
+### DEC-2026-11-26-02 | JR-143 | Mobile keyboard navigation
+
+Builder Lead selected a named disclosure with expanded state, closed-sidebar visibility, predictable focus on repeat keyboard use and Escape restoration. This presentation-only change implements the existing responsive navigation. [JR-143 evidence](SESSION-15-EVIDENCE.md#jr-143).
+
+
+### DEC-2026-11-26-03 | JR-147/149 | Distinguish loading, denial and empty results
+
+Use explicit pending, error and success feedback for engagement reads and writes. Keep denied detail generic and preserve the existing server-side role, scope and membership policies. The PLogIt owner must approve any contract or disclosure change. W3C WAI WCAG Technique ARIA19, accessed 2026-11-26, informed the persistent alert for join and create errors. Actual screen-reader testing remains separate. https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19.
+
+
+### DEC-2026-11-26-04 | JR-152 | Log workflow and keyboard acceptance
+
+The Builder Lead selected real browser checks with synthetic author and leader accounts, paired with PostgreSQL regression tests. Use an ordinary link to open a log by keyboard and keep the normal row pointer action. Treat failed saves as errors and keep unsaved form values in the current page. The PLogIt owner holds approval for any change to review roles, draft conflict semantics, evidence storage or export contracts. The exact test scope is in [JR-152](SESSION-16-EVIDENCE.md#jr-152).
+
+
+### DEC-2026-11-26-05 | JR-157 | Export dialog accessibility and disclosure
+
+Use a native modal dialog and browser keyboard checks to verify opening, focus confinement, Escape and focus return. Test reflow at 320 CSS pixels and normal text contrast of at least 4.5:1 for the dialog controls and explanatory text. Clarify inclusion and attachment references using the current backend contract. The PLogIt owner holds approval for changing visibility, export formats, inclusion, audit, retention or the existing JSON contract. Scope and sources are in [JR-157](SESSION-16-EVIDENCE.md#jr-157).
+
+
+### DEC-2026-11-26-06 | JR-160 | Preserve the current log and export contracts
+
+The mirrored Product Spec describes additional board filters, leader edits after approval, and customized PDF filters and sort. This phase verified the implemented flow. The server permits edits only in DRAFT, uses the existing board filter set, and applies approved plus optional previously exported inclusion rather than a custom export query. Keep the tested server rules. The product owner must approve any of those separate changes. Keep DEC-2026-11-23-03 for delayed writes to a still-DRAFT log and DEC-2026-11-25-04 for Phase 07 PDF capacity, disclosure and lifecycle policy.

@@ -4,7 +4,7 @@ import { useEngagements } from "../hooks/useEngagements";
 
 export default function Dashboard() {
   const { data: user } = useCurrentUser();
-  const { data: engagements, isLoading } = useEngagements();
+  const { data: engagements, isLoading, isError } = useEngagements();
   const navigate = useNavigate();
 
   return (
@@ -31,17 +31,19 @@ export default function Dashboard() {
         <h2 className="text-lg font-semibold text-text-strong flex items-center gap-2">
           <i className="fa-solid fa-folder text-text-muted"></i>
           Active Engagements
-          {engagements && engagements.length > 0 && (
+          {!isError && engagements && engagements.length > 0 && (
             <span className="text-text-muted text-sm font-normal">({engagements.length})</span>
           )}
         </h2>
       </div>
 
       {isLoading ? (
-        <div className="text-center py-16 text-text-muted">
+        <div role="status" className="text-center py-16 text-text-muted">
           <i className="fa-solid fa-circle-notch fa-spin text-3xl mb-3"></i>
           <p>Loading engagements...</p>
         </div>
+      ) : isError ? (
+        <p role="alert" className="text-center py-16 text-danger">Unable to load engagements</p>
       ) : engagements && engagements.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {engagements.map((eng) => (

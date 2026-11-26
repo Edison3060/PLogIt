@@ -718,3 +718,140 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Reconciled the Session 14 tests and recorded readiness for independent work. [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140). Prior pushed head `4845d5d44f3af937c929626fc48d5a490df82193`.
 - Session 14 is assessed. JR-131–137 DONE and JR-138–140 IN REVIEW. [Full push CI](https://github.com/Edison3060/PLogIt/actions/runs/45630981676) passed at executable head `4845d5d44f3af937c929626fc48d5a490df82193` with 165 backend tests, 21 frontend tests and all non-CD gates. This closeout is tracking only. Once the controller advances, separately initiated Session 15 is JR-141–JR-150 on future work/plogit-phase-08, stacked above the latest Phase 07 while PR #28 remains a draft. Keep Phase 07 and inherited decisions open, especially INT-001 and DEC-2026-11-06-11. Stop after JR-140.
+
+
+### 2026-11-26T02:06:36Z | Session 15 | JR-141
+
+- **DONE.** Mapped the implemented route and session owners. [Evidence](SESSION-15-EVIDENCE.md#jr-141). Previous head `7727c1a82d42794e9955ae3baae0cc7475361526`.
+- Continue with JR-142 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:06:41Z | Session 15 | JR-142
+
+- **DONE.** Recorded session and navigation acceptance. [Evidence](SESSION-15-EVIDENCE.md#jr-142). Previous head `6a32d34692042bc8a8bd16a173222b0c97bcabe5`.
+- Continue with JR-143 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:15:09Z | Session 15 | JR-143
+
+- **DONE.** Verified and corrected keyboard navigation at both widths. [Evidence](SESSION-15-EVIDENCE.md#jr-143). Previous head `d39017bb1bd8b4ac0f78593cab7fbd7eefd58bf1`.
+- Continue with JR-144 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:27Z | Session 15 | JR-144
+
+- **IN REVIEW.** Recorded the first elapsed-session reload result. [Evidence](SESSION-15-EVIDENCE.md#jr-144). Previous head `5bfc42d9045285d01ae91cf419d0ed7011a0d05f`.
+- Continue with JR-145 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:31Z | Session 15 | JR-145
+
+- **IN REVIEW.** Reviewed navigation and isolated elapsed-expiry evidence. [Evidence](SESSION-15-EVIDENCE.md#jr-145). Previous head `8428786d27b8eee114da37d7e2bd79cb5f40a0cc`.
+- Continue with JR-146 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:35Z | Session 15 | JR-146
+
+- **DONE.** Mapped the engagement pages and server owners. [Evidence](SESSION-15-EVIDENCE.md#jr-146). Previous head `543b0e7188b74954110bd2b02672b0b61d53bcf7`.
+- Continue with JR-147 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:50Z | Session 15 | JR-147
+
+- **DONE.** Recorded engagement state and permission acceptance. [Evidence](SESSION-15-EVIDENCE.md#jr-147). Previous head `c86476a23d1c0cd68d14e0728b2767e4af31b4ad`.
+- Continue with JR-148 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:54Z | Session 15 | JR-148
+
+- **DONE.** Verified create, join, scope and team after refresh. [Evidence](SESSION-15-EVIDENCE.md#jr-148). Previous head `910d3bdbd8a99e45a31ed341ce2595beb1be0adc`.
+- Continue with JR-149 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:17:56Z | Session 15 | JR-149
+
+- **DONE.** Verified denial and corrected engagement error feedback. [Evidence](SESSION-15-EVIDENCE.md#jr-149). Previous head `6a01f1e1cb43d2541d2940198f9fd49ade5d3fde`.
+- Continue with JR-150 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:20:10Z | Session 15 | JR-150
+
+- **IN REVIEW.** Reviewed both engagement outcomes and constrained browser destinations. [Evidence](SESSION-15-EVIDENCE.md#jr-150). Previous head `3f8ba15f76534cc35253b26db78cb985c760cf7e`.
+- Reconcile elapsed expiry, corrected browser fixture and exact-head GitHub CI. Stop at JR-150 after the controller closeout.
+
+
+## Session 15 final handoff | 2026-11-26T02:24:15Z
+
+- **READY WITH PROVISIONAL INTEGRATION** for independent Session 16, JR-151–JR-160 on `work/plogit-phase-08`. All ten Session 15 JRs are DONE for this increment. Keep [PR #29](https://github.com/Edison3060/PLogIt/pull/29) draft above unmerged Phase 07 PR #28. Phase 08 exit acceptance follows the second increment.
+- [Exact executable-head CI](https://github.com/Edison3060/PLogIt/actions/runs/45741730012) passed at `23f7e9096bdddd1cb6b39aec5caedd3e1062047f`. Browser and test evidence is in [Session 15](SESSION-15-EVIDENCE.md#reconciliation). This follow-up changes tracking only.
+- Checkpoint SHAs in JR order: JR-141 `6a32d3469204`, JR-142 `d39017bb1bd8`, JR-143 `5bfc42d90452`, JR-144 `8428786d27b8`, JR-145 `543b0e7188b7`, JR-146 `c86476a23d1c`, JR-147 `910d3bdbd8a9`, JR-148 `6a01f1e1cb43`, JR-149 `3f8ba15f7653`, JR-150 `23f7e9096bdd`.
+- Local elapsed expiry used a one-minute test-only setting. The existing deployment configuration and the historical Phase 03 review are outside this increment. Keep JudgeIt INT-001 nullable-list interoperability, Phase 07 policy and evidence gates, prior stacked acceptance and DEC-2026-11-06-11 open.
+- After verifying the controller update, separately initiate Session 16 at JR-151. Start by reading the active branch and reviewing the original log-form and review-UI requirements. Stop this session at JR-150.
+
+
+### 2026-11-26T14:02:11Z | Session 16 | JR-151
+
+- **DONE.** Map canonical log form, board and review UI. [Evidence](SESSION-16-EVIDENCE.md#jr-151). Checkpoint parent `1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3`.
+- Continue with JR-152 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:02:44Z | Session 16 | JR-152
+
+- **DONE.** Define log workflow and keyboard acceptance. [Evidence](SESSION-16-EVIDENCE.md#jr-152). Checkpoint parent `61b2ccbac9ecf89ba156fa8c9647501da924fd37`.
+- Continue with JR-153 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:06:06Z | Session 16 | JR-153
+
+- **IN REVIEW.** Make log titles reachable by keyboard and add the live browser journey. [Evidence](SESSION-16-EVIDENCE.md#jr-153). Checkpoint parent `54980e713291d831bd7b45e587a9012b6b7ab2a3`.
+- Continue with JR-154 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:08:06Z | Session 16 | JR-154
+
+- **IN REVIEW.** Keep unsaved form text visible after a rejected update. [Evidence](SESSION-16-EVIDENCE.md#jr-154). Checkpoint parent `a7d1fdd6887bce85ff5bc723d7f9074daff3f058`.
+- Continue with JR-155 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:08:11Z | Session 16 | JR-155
+
+- **IN REVIEW.** Record the log workflow closeout and outstanding browser proof. [Evidence](SESSION-16-EVIDENCE.md#jr-155). Checkpoint parent `3515bc295c81bda8330fb58a91bb2339d2ad5228`.
+- Continue with JR-156 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:08:42Z | Session 16 | JR-156
+
+- **DONE.** Map theme, responsive layout and export ownership. [Evidence](SESSION-16-EVIDENCE.md#jr-156). Checkpoint parent `e9fd6a8ebb51bcfb642934c0d96a74184174bdf5`.
+- Continue with JR-157 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:08:47Z | Session 16 | JR-157
+
+- **DONE.** Define export dialog focus, reflow, format and access acceptance. [Evidence](SESSION-16-EVIDENCE.md#jr-157). Checkpoint parent `5fc781ae8365c9c2f260581fc706b7292bca8e4b`.
+- Continue with JR-158 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:11:51Z | Session 16 | JR-158
+
+- **IN REVIEW.** Implement a keyboard-operable export dialog and exercise the live flow. [Evidence](SESSION-16-EVIDENCE.md#jr-158). Checkpoint parent `4ff16372dd1b3c3926c4a9bc10487de924b52dda`.
+- Continue with JR-159 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:14:06Z | Session 16 | JR-159
+
+- **DONE.** Keep denied downloads inside the modal and correct contrast. [Evidence](SESSION-16-EVIDENCE.md#jr-159). Checkpoint parent `3bf789d7dfbb4656bedc71780387f21a1a907bad`.
+- Continue with JR-160 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+## Session 16 closeout | 2026-11-26
+
+- **READY WITH PROVISIONAL INTEGRATION** for independent Session 17, JR-161–JR-170. Begin with the controller, then stack Phase 09 on the final Phase 08 head while PR #29 remains unmerged. JR-161 has not begun.
+- Session 16 JR-151–JR-160 are DONE. Browser and CI evidence is in [Session 16](SESSION-16-EVIDENCE.md#jr-160). The executable source was `782e0800cf444275222ac85caef2acc8db823e76`. This closeout changes tracking only.
+- JR checkpoint SHAs in order through JR-159 are `61b2ccbac9ec`, `54980e713291`, `a7d1fdd6887b`, `3515bc295c81`, `e9fd6a8ebb51`, `5fc781ae8365`, `4ff16372dd1b`, `3bf789d7dfbb` and `782e0800cf44`. The final tracking commit is the numbered JR-160 checkpoint.
+- Keep [PR #29](https://github.com/Edison3060/PLogIt/pull/29) draft above Phase 07 [PR #28](https://github.com/Edison3060/PLogIt/pull/28). Phase 08 met its local browser usability check. Phase 07 acceptance, Phase 08 merge, JudgeIt INT-001, and production authorization remain pending. DEC-2026-11-23-03 covers delayed writes to still-DRAFT records. DEC-2026-11-25-04 covers Phase 07 PDF capacity, disclosure, backup and retention. DEC-2026-11-06-11 continues to gate production approval.
+
+
+### 2026-11-26T14:18:27Z | Session 16 | JR-160
+
+- **DONE.** Reconcile Phase 08 browser, regression and CI evidence. [Evidence](SESSION-16-EVIDENCE.md#jr-160). Checkpoint parent `782e0800cf444275222ac85caef2acc8db823e76`.
+- Reconcile the ten checkpoints and controller before the next session. Phase 07 acceptance, INT-001 and production authorization remain pending.

@@ -4,18 +4,21 @@ import { formatEnum } from "../../lib/logs";
 interface AuditPanelProps {
   auditLog: AuditLogEntry[] | undefined;
   isLoading: boolean;
+  isError?: boolean;
 }
 
-export default function AuditPanel({ auditLog, isLoading }: AuditPanelProps) {
+export default function AuditPanel({ auditLog, isLoading, isError }: AuditPanelProps) {
   return (
             <div className="bg-bg-card rounded-xl border border-border-default shadow-sm p-6">
               <h2 className="font-semibold text-text-strong mb-4 flex items-center gap-2">
                 <i className="fa-solid fa-shield-halved text-text-muted"></i> Audit log
               </h2>
               {isLoading ? (
-                <div className="flex items-center gap-2 text-text-muted text-sm">
+                <div role="status" className="flex items-center gap-2 text-text-muted text-sm">
                   <i className="fa-solid fa-circle-notch fa-spin"></i> Loading...
                 </div>
+              ) : isError ? (
+                <p role="alert" className="text-danger text-sm">Unable to load audit history</p>
               ) : auditLog && auditLog.length > 0 ? (
                 <ul className="divide-y divide-border-subtle">
                   {auditLog.map((entry) => (
