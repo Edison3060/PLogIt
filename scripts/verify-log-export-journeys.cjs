@@ -1,4 +1,5 @@
 const assert = require("node:assert/strict");
+const { readFile } = require("node:fs/promises");
 const { chromium } = require("playwright");
 
 const origin = "http://127.0.0.1:5173";
@@ -195,7 +196,7 @@ async function checkDialog(dialog) {
   return measurements.minimum.contrast.toFixed(2);
 }
 
-async function exportJourney({ leader, path, logPath, title }) {
+async function exportJourney({ leader, author, path, logPath, racePath, title }) {
   const { page } = leader;
   await page.setViewportSize({ width: 320, height: 640 });
   await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -205,6 +206,9 @@ async function exportJourney({ leader, path, logPath, title }) {
   const dialog = page.getByRole("dialog", { name: "Export evidence pack" });
   await dialog.waitFor();
   assert.equal(await dialog.getByRole("button", { name: "Close export dialog" }).evaluate((node) => node === document.activeElement), true);
+  assert.ok(await dialog.getByRole("button", { name: "Close export dialog" }).evaluate((node) => getComputedStyle(node).outlineStyle === "solid"));
+  assert.equal(await page.getByRole("main", { includeHidden: true }).evaluate((node) => node.scrollWidth - node.clientWidth), 0);
+  await dialog.getByText(/Draft and submitted logs are excluded/).waitFor();
   const lightContrast = await checkDialog(dialog);
   for (let i = 0; i < 12; i += 1) {
     await page.keyboard.press("Tab");
@@ -243,14 +247,32 @@ async function exportJourney({ leader, path, logPath, title }) {
     assert.ok(download.suggestedFilename().endsWith("." + format.toLowerCase()));
     assert.ok((await response.headerValue("content-type")).startsWith(mimeTypes[format]));
     assert.deepEqual(response.request().postDataJSON(), { format, includeExported: format !== "PDF" });
-    const body = await response.body();
+    const body = await readFile(await download.path());
     if (format === "PDF") assert.equal(body.subarray(0, 5).toString(), "%PDF-");
     else if (format === "JSON") assert.ok(JSON.parse(body.toString()).logs.some((log) => log.title === title));
     else assert.ok(body.toString().includes(title));
     await dialog.waitFor({ state: "hidden" });
     assert.equal((await (await status(await request(leader.context, logPath), 200)).json()).reviewState, "EXPORTED");
-    console.log(`${marker} JR-158: ${format} download, unversioned contents and EXPORTED state verified. Dialog minimum sampled contrast light ${lightContrast}:1, dark ${darkContrast}:1.`);
+    console.log(`${marker} JR-158: ${format} download and EXPORTED state verified. Dialog minimum sampled contrast light ${lightContrast}:1, dark ${darkContrast}:1.`);
   }
+
+  const authorId = (await (await status(await request(author.context, "/auth/me"), 200)).json()).id;
+  await keyboardActivate(page, opener);
+  await dialog.waitFor();
+  await status(await request(leader.context, path + "/transfer-leadership", "POST", { newLeaderId: authorId }), 204);
+  const auditBefore = await (await status(await request(author.context, path + "/audit"), 200)).json();
+  let downloads = 0;
+  page.on("download", () => { downloads += 1; });
+  const denied = watch(page, path + "/export", "POST");
+  await keyboardActivate(page, dialog.getByRole("button", { name: "Download CSV", exact: true }));
+  await status(await denied, 403);
+  await dialog.getByRole("alert").filter({ hasText: "Only engagement leaders can perform this action" }).waitFor();
+  assert.equal(downloads, 0);
+  assert.equal(await page.getByText(/^Exported CSV/).count(), 0);
+  assert.deepEqual(await (await status(await request(author.context, path + "/audit"), 200)).json(), auditBefore);
+  assert.equal((await (await status(await request(author.context, logPath), 200)).json()).reviewState, "EXPORTED");
+  assert.equal((await (await status(await request(author.context, racePath), 200)).json()).reviewState, "SUBMITTED");
+  console.log(`${marker} JR-159: stale leader download denied with 403, modal announced error, no download or extra audit, evidence states retained.`);
 }
 
 (async () => {

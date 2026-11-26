@@ -164,7 +164,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-156 | Inventory Themes, devices and exports | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-156) | 2026-11-26T14:08:42Z |
 | JR-157 | Specify Themes, devices and exports acceptance | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-157) | 2026-11-26T14:08:47Z |
 | JR-158 | Reproduce Themes, devices and exports success | 16 | IN REVIEW | [Evidence](SESSION-16-EVIDENCE.md#jr-158) | 2026-11-26T14:11:51Z |
-| JR-159 | Reject Themes, devices and exports invalid operation | 16 | NOT STARTED | — | — |
+| JR-159 | Reject Themes, devices and exports invalid operation | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-159) | 2026-11-26T14:14:06Z |
 | JR-160 | Close Themes, devices and exports verification | 16 | NOT STARTED | — | — |
 | JR-161 | Inventory Schema integrity constraints | 17 | NOT STARTED | — | — |
 | JR-162 | Specify Schema integrity constraints acceptance | 17 | NOT STARTED | — | — |

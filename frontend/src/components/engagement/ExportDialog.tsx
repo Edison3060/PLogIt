@@ -5,6 +5,7 @@ interface ExportDialogProps {
   exportFormat: ExportFormat;
   includeExported: boolean;
   exporting: boolean;
+  error: string;
   onClose: () => void;
   onFormatChange: (format: ExportFormat) => void;
   onIncludeExportedChange: (include: boolean) => void;
@@ -20,7 +21,7 @@ const formats: { id: ExportFormat; icon: string; description: string }[] = [
 const focusClass = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-strong";
 
 export default function ExportDialog({
-  exportFormat, includeExported, exporting, onClose, onFormatChange, onIncludeExportedChange, onExport,
+  exportFormat, includeExported, exporting, error, onClose, onFormatChange, onIncludeExportedChange, onExport,
 }: ExportDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -48,7 +49,7 @@ export default function ExportDialog({
       onClick={(event) => {
         if (event.target === event.currentTarget && !exporting) onClose();
       }}
-      className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-xl border border-border-default bg-bg-canvas p-0 text-text-body shadow-lg backdrop:bg-black/50"
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-xl border border-border-default bg-bg-canvas p-0 text-[color:var(--text-body)] shadow-lg backdrop:bg-black/50"
     >
       <div className="p-4 sm:p-6">
         <div className="mb-4 flex items-center justify-between gap-3">
@@ -88,7 +89,7 @@ export default function ExportDialog({
                 </button>
               ))}
             </div>
-            <p className="mt-2 text-sm text-text-body">
+            <p className="mt-2 text-sm text-[color:var(--text-body)]">
               {formats.find(({ id }) => id === exportFormat)?.description}
             </p>
           </fieldset>
@@ -101,16 +102,20 @@ export default function ExportDialog({
               disabled={exporting}
               className={`mt-1 ${focusClass}`}
             />
-            <span className="text-sm text-text-body">
+            <span className="text-sm text-[color:var(--text-body)]">
               Include already-exported logs
-              <span className="block">Default: approved logs only. Tick to re-include logs from a prior export.</span>
+              <span className="block">Approved logs are included by default. Draft and submitted logs are excluded.</span>
             </span>
           </label>
 
-          <p className="flex items-start gap-2 rounded-lg border border-border-default bg-bg-inset p-3 text-sm text-text-body">
+          <p className="flex items-start gap-2 rounded-lg border border-border-default bg-bg-inset p-3 text-sm text-[color:var(--text-body)]">
             <i className="fa-solid fa-triangle-exclamation mt-0.5" aria-hidden="true"></i>
-            Exporting marks included logs as EXPORTED (immutable). This is recorded in the audit trail.
+            Export marks newly included approved logs as exported and records the export in the audit trail.
           </p>
+
+          <div role="alert">
+            {error && <p className="rounded-lg border border-border-default bg-bg-inset p-3 text-sm text-text-strong">{error}</p>}
+          </div>
 
           <div className="flex flex-wrap justify-end gap-2">
             <button
@@ -125,7 +130,7 @@ export default function ExportDialog({
               type="button"
               onClick={onExport}
               disabled={exporting}
-              className={`rounded-lg bg-text-strong px-3 py-2 text-sm font-medium text-bg-canvas hover:bg-text-body disabled:opacity-50 ${focusClass}`}
+              className={`rounded-lg bg-text-strong px-3 py-2 text-sm font-medium text-bg-canvas hover:bg-[color:var(--text-body)] disabled:opacity-50 ${focusClass}`}
             >
               {exporting ? "Generating..." : `Download ${exportFormat}`}
             </button>

@@ -1,5 +1,5 @@
-Warning: truncated output (original token count: 48903)
-Total output lines: 1342
+Warning: truncated output (original token count: 48965)
+Total output lines: 1347
 
 # PLogIt: append-only JR execution log
 
@@ -463,7 +463,7 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Changed files:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF and new SESSION-04-EVIDENCE only.
 - **Executed tests:** none in JR-031 (read-only inspection). Prior CI 42338792629 is historical and not asserted as current; Docker, Maven and PostgreSQL CLI unavailable in current isolated runner. Clean/incremental/negative gates belong to JR-033–035.
 - **Research / assumptions:** canonical source and original Phase 02 roadmap, no external facts required, no real JudgeIt integration claimed. Future integration remains INT-001 provisional. Next JR-032 acceptance criteria.
-- **Git:** reviewed JR-031 numbered atomic pus…8903 tokens truncated…istration 5/600s default. AuthController authenticates; GlobalExceptionHandler returns generic 401 and 429/Retry-After; duplicate registration generic 202. `AuthRateLimitIntegrationTest` covers invalid bursts, forwarded spoof, independent IP/endpoint, duplicate registration and generic credentials.
+- **Git:** reviewed JR-031 numbered atomic pus…8965 tokens truncated…nt, duplicate registration and generic credentials.
 - Expected per-account/IP abuse defense vs observed IP-only: a few invalid attempts from shared IP can block unrelated legitimate account, and attempts against one account from varied addresses evade limiter. No source change for this inventory task. Tests: inspected existing Java tests and guard implementation, not executed here; `cd backend && mvn -B clean verify` planned via GitHub CI. Changed register/log/handoff/evidence. Reviewer Builder Lead, no subagents. Next JR-057 scoped accepted design; existing JR-053–055 remain IN REVIEW pending CI; no main/production.
 
 ### 2026-11-11T12:41:30.480Z | Session 06 | JR-057 | DONE • AUTH ABUSE ACCEPTANCE SPEC
@@ -1172,3 +1172,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T14:11:51Z | Session 16 | JR-158 | IN REVIEW
 
 - Implement a keyboard-operable export dialog and exercise the live flow. [Evidence](SESSION-16-EVIDENCE.md#jr-158). Checkpoint parent `4ff16372dd1b3c3926c4a9bc10487de924b52dda`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:14:06Z | Session 16 | JR-159 | DONE
+
+- Keep denied downloads inside the modal and correct contrast. [Evidence](SESSION-16-EVIDENCE.md#jr-159). Checkpoint parent `3bf789d7dfbb4656bedc71780387f21a1a907bad`. Builder Lead reviewed.

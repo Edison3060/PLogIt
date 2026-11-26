@@ -835,3 +835,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Implement a keyboard-operable export dialog and exercise the live flow. [Evidence](SESSION-16-EVIDENCE.md#jr-158). Checkpoint parent `4ff16372dd1b3c3926c4a9bc10487de924b52dda`.
 - Continue with JR-159 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:14:06Z | Session 16 | JR-159
+
+- **DONE.** Keep denied downloads inside the modal and correct contrast. [Evidence](SESSION-16-EVIDENCE.md#jr-159). Checkpoint parent `3bf789d7dfbb4656bedc71780387f21a1a907bad`.
+- Continue with JR-160 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.

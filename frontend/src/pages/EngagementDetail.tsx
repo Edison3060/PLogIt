@@ -36,6 +36,7 @@ export default function EngagementDetailPage() {
   const [exportFormat, setExportFormat] = useState<ExportFormat>("PDF");
   const [includeExported, setIncludeExported] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState("");
 
   const { data: engagement, isLoading, isError } = useQuery({
     queryKey: ["engagement", id],
@@ -106,7 +107,8 @@ export default function EngagementDetailPage() {
   };
 
   const handleExport = async () => {
-    setError("");
+    setExportError("");
+    setSuccess("");
     setExporting(true);
     try {
       const { blob, filename } = await exportEngagement(
@@ -128,7 +130,7 @@ export default function EngagementDetailPage() {
       queryClient.invalidateQueries({ queryKey: ["engagement", id] });
       queryClient.invalidateQueries({ queryKey: ["audit", engagementId] });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Export failed");
+      setExportError(err instanceof Error ? err.message : "Export failed");
     } finally {
       setExporting(false);
     }
@@ -210,7 +212,7 @@ export default function EngagementDetailPage() {
             {isLeader ? "You are the leader" : "You are a member"}
           </p>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
           {isLeader && (
             <>
               <button
@@ -221,7 +223,10 @@ export default function EngagementDetailPage() {
                 Join code
               </button>
               <button
-                onClick={() => setShowExport(true)}
+                onClick={() => {
+                  setExportError("");
+                  setShowExport(true);
+                }}
                 className="bg-bg-card border border-border-default rounded-lg px-3 py-2 text-sm hover:bg-bg-inset flex items-center gap-2 transition-colors"
               >
                 <i className="fa-solid fa-file-export text-success"></i>
@@ -348,7 +353,7 @@ export default function EngagementDetailPage() {
       )}
 
       {showExport && (
-        <ExportDialog exportFormat={exportFormat} includeExported={includeExported} exporting={exporting}
+        <ExportDialog exportFormat={exportFormat} includeExported={includeExported} exporting={exporting} error={exportError}
           onClose={() => setShowExport(false)} onFormatChange={setExportFormat}
           onIncludeExportedChange={setIncludeExported} onExport={handleExport} />
       )}

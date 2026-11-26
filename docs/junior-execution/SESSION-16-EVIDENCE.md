@@ -49,3 +49,9 @@ Builder Lead reviewed. Checkpoint parent `5fc781ae8365c9c2f260581fc706b7292bca8e
 Replaced the overlay with a named native modal. It provides a named close button, explicit selected format, keyboard focus and Escape return. The browser now exercises real downloads at 320px for light and dark themes. On Chromium 151 and PostgreSQL 16.12, light modal reflow, focus confinement and Escape return passed. Dark-mode contrast assertion stopped the initial run before all downloads. Lint, build and 25 Vitest tests were run. Contrast diagnostic and final three-format rerun remain pending. The standalone dialog change can be reverted independently.
 
 Builder Lead reviewed. Checkpoint parent `4ff16372dd1b3c3926c4a9bc10487de924b52dda`.
+
+## JR-159
+
+Dark-mode diagnosis identified missing compiled text color utilities, leaving native dialog copy black on its dark inset. Explicit existing CSS color tokens fixed the sampled minimum to 6.90:1 in light and 11.85:1 in dark. Chromium 151.0.7922.34 and Spring Boot/PostgreSQL 16.12 fixture S16-1795702422644 passed a 320px main/modal overflow check, focused outline, Tab containment and focus return. A real leadership transfer after opening the dialog produced HTTP 403. The modal exposed a scoped alert with no download, success text, extra audit event or evidence-state change. Inclusion and format text describe current backend behavior. PDF temporarily returned an empty DevTools response-body capture despite a successful download; the fixture now examines downloaded bytes directly and all formats passed. Lint, build, 25 Vitest tests, syntax and diff checks passed. Rollback is limited to these presentation changes.
+
+Builder Lead reviewed. Checkpoint parent `3bf789d7dfbb4656bedc71780387f21a1a907bad`.
