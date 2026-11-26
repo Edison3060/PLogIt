@@ -787,3 +787,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 - Checkpoint SHAs in JR order: JR-141 `6a32d3469204`, JR-142 `d39017bb1bd8`, JR-143 `5bfc42d90452`, JR-144 `8428786d27b8`, JR-145 `543b0e7188b7`, JR-146 `c86476a23d1c`, JR-147 `910d3bdbd8a9`, JR-148 `6a01f1e1cb43`, JR-149 `3f8ba15f7653`, JR-150 `23f7e9096bdd`.
 - Local elapsed expiry used a one-minute test-only setting. The existing deployment configuration and the historical Phase 03 review are outside this increment. Keep JudgeIt INT-001 nullable-list interoperability, Phase 07 policy and evidence gates, prior stacked acceptance and DEC-2026-11-06-11 open.
 - After verifying the controller update, separately initiate Session 16 at JR-151. Start by reading the active branch and reviewing the original log-form and review-UI requirements. Stop this session at JR-150.
+
+
+### 2026-11-26T14:02:11Z | Session 16 | JR-151
+
+- **DONE.** Map canonical log form, board and review UI. [Evidence](SESSION-16-EVIDENCE.md#jr-151). Checkpoint parent `1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3`.
+- Continue with JR-152 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.

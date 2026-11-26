@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 48464)
+Total output lines: 1307
+
 # PLogIt: append-only JR execution log
 
 This file is a **per-step evidence ledger**, not a summary. Begin with no completed work. After **every** JR checkpoint, append a new entry following the template. Never backfill a fake PASS, delete old outcomes, or mark a historical implementation as verified without current tests.
@@ -460,171 +463,7 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Changed files:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF and new SESSION-04-EVIDENCE only.
 - **Executed tests:** none in JR-031 (read-only inspection). Prior CI 42338792629 is historical and not asserted as current; Docker, Maven and PostgreSQL CLI unavailable in current isolated runner. Clean/incremental/negative gates belong to JR-033–035.
 - **Research / assumptions:** canonical source and original Phase 02 roadmap, no external facts required, no real JudgeIt integration claimed. Future integration remains INT-001 provisional. Next JR-032 acceptance criteria.
-- **Git:** reviewed JR-031 numbered atomic push on `work/plogit-phase-02`; final SHA available at GitHub history (this entry is included in its own commit).
-
-### 2026-11-08T09:54:28.384Z | Session 04 | JR-032 | DONE — acceptance specification
-- **Transition:** NOT STARTED → IN PROGRESS → DONE; original JR-032, Builder Lead reviewer.
-- **Expected / actual:** acceptance criteria precisely define real PG16 isolated V1→V3 migration preserving synthetic log and failed V2 transactional DDL rollback. No runtime assertion yet. [Evidence](SESSION-04-EVIDENCE.md#jr-032) and DEC-2026-11-08-01.
-- **Paths:** STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE, DECISIONS; no code, migration, prod DB or JSON change.
-- **Tests:** criteria/source-only; zero new runtime tests executed this JR. Prior CI 42338792629 historical not credited. Maven/Docker unavailable in isolated client; upcoming Actions must run actual test suite.
-- **Decision / assumptions:** disposable real Postgres fixture, preserve canonical migrations, no new JudgeIt assumptions (INT-001 provisional). Next JR-033.
-- **Git:** reviewed JR-032 numbered atomic commit on work/plogit-phase-02; SHA discoverable in branch history.
-
-### 2026-11-08T09:55:47.885Z | Session 04 | JR-033 | IN REVIEW — awaiting runtime verification
-- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; original positive PostgreSQL16/Flyway migration success task.
-- **Implementation:** add `backend/src/test/java/io/muzoo/ssc/plogit/FlywayMigrationLifecycleTest.java`, disposable real Postgres16 V1→V3 synthetic log+history test; full fixture/expectations at [evidence](SESSION-04-EVIDENCE.md#jr-033).
-- **Expected vs actual:** positive path code ready but no new executed test output yet. Source reviewed; isolated runner lacks Maven/Docker/Postgres, so no local success assertion. Actions on this branch must run `mvn -B clean verify` and return real result; inherited CI 42338792629 is not credited.
-- **Paths:** test + tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. No migrations, prod data, app auth or exports changed.
-- **Decision / future:** DEC-2026-11-08-01 isolated test-only lifecycle. No new downstream integration assumptions; INT-001 remains provisional. Next JR-034 separate negative fixture.
-- **Git:** JR-033 reviewed numbered atomic commit on work/plogit-phase-02; SHA in history.
-
-### 2026-11-08T09:56:44.795Z | Session 04 | JR-034 | IN REVIEW — awaiting actual negative test execution
-- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; negative PostgreSQL16/Flyway task reviewed by Builder Lead.
-- **Implementation:** extend `backend/src/test/java/io/muzoo/ssc/plogit/FlywayMigrationLifecycleTest.java` with synthetic PostgreSQL16 V1 plus intentionally invalid temp V2, assert Flyway exception, transactional DDL rollback, V1 user and history preserved. Full details [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-034).
-- **Expected / actual:** negative rejection codified; actual runtime test outcome pending Actions. Isolated execution lacks Maven/Docker/PG and historical CI predates this test. No false PASS claim.
-- **Paths:** JUnit test and tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. Canonical migrations and app auth/export DB untouched.
-- **Research / assumptions:** Postgres DDL transaction isolation to be validated experimentally; failure must not leave partial schema. No additional integration assumptions beyond provisional INT-001. Next JR-035 closure after CI.
-- **Git:** reviewed JR-034 numbered atomic commit, SHA available in branch history.
-
-### 2026-11-08T09:57:22.501Z | Session 04 | JR-035 | IN REVIEW — pending clean positive + negative runtime closure
-- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; original closure task and reviewer Builder Lead. [Evidence](SESSION-04-EVIDENCE.md#jr-035).
-- **Expected vs observed:** JR-033 synthetic V1→V3 retention and JR-034 invalid V2 transactional rollback coded. Both still need executed Maven/PostgreSQL16 CI on the updated test. Existing 125 backend tests historically pass at c3b5b56, not evidence that new tests pass.
-- **Paths:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE only. No additional source changes or unsafe rollback.
-- **Tests:** no new executed local runtime test (Maven/Docker/PG unavailable). Planned `cd backend && mvn -B clean verify` in Actions; record exact observed result in append-only follow-up and update row if successful.
-- **Research/assumptions:** DEC-2026-11-08-01 reversible real-test approach. No real JudgeIt evidence; INT-001 provisional. Next JR-036 independent Compose inventory.
-- **Git:** reviewed JR-035 numbered atomic commit on work/plogit-phase-02; SHA discoverable in branch history.
-
-### 2026-11-08T09:58:17.086Z | Session 04 | JR-036 | DONE — Compose source inventory
-- **Transition:** NOT STARTED → IN PROGRESS → DONE; source-and-test mapping reviewed, no runtime modification.
-- **Observed / expected:** dev Postgres16 DB with persisted pgdata/attachments; app profile and chained health depends_on; prod DB port removed and backend/frontend loopback, TLS opt-in. Backend /api/health is simple liveness, not DB readiness. [Evidence](SESSION-04-EVIDENCE.md#jr-036).
-- **Changed files:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE only.
-- **Actual tests:** none executed this JR (inventory). Earlier CI image health config and proxy validation are not a live Compose-up test. Isolated client lacks Docker/Maven/PG; CI smoke to be introduced next.
-- **Research / assumption:** source and original Phase 02 roadmap only, no changed external facts; no new real JudgeIt integration, INT-001 remains provisional. Next JR-037 acceptance criteria.
-- **Git:** reviewed JR-036 numbered atomic commit pushed on work/plogit-phase-02.
-
-### 2026-11-08T09:59:28.818Z | Session 04 | JR-037 | DONE — dev/prod Compose acceptance criteria
-- **Transition:** NOT STARTED → IN PROGRESS → DONE; reviewer Builder Lead.
-- **Expected vs actual:** specified isolated Compose start+health+API+SPA+persistence and negative missing DB credential/offline PostgreSQL exit. Code and runtime unchanged this JR, no tests executed. [Evidence](SESSION-04-EVIDENCE.md#jr-037), DEC-2026-11-08-02.
-- **Paths:** STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE, DECISIONS only. No runtime/app source changes.
-- **Tests:** no new executed tests in spec step; planned CI bash scripts/ci-compose-smoke.sh with service health and bounded failure, plus existing security CI. Historical CI 42338792629 does not prove live Compose.
-- **Assumptions/research:** pinned Compose source and shipped health probes; no new external integration; INT-001 remains provisional. Docker unavailable locally. Next JR-038 test implementation.
-- **Git:** reviewed JR-037 numbered commit on work/plogit-phase-02.
-
-### 2026-11-08T10:01:36.241Z | Session 04 | JR-038 | IN REVIEW — CI live Compose test pending
-- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; positive Compose case reviewed by Builder Lead.
-- **Implementation:** add `scripts/ci-compose-smoke.sh` and isolated GitHub Actions `compose-smoke` job with synthetic env, three real container health checks, API + SPA curl, fake DB marker persisted through DB restart, ephemeral cleanup. Add compose-smoke as additional main deploy needs gate. See [evidence](SESSION-04-EVIDENCE.md#jr-038).
-- **Expected vs actual:** source test defined, *not yet executed* on Docker; client has no Docker/Maven/Postgres. Prior 42338792629 had no live stack and is not credited. Failure to be reconciled after new current-head CI.
-- **Changed paths:** .github/workflows/ci.yml, scripts/ci-compose-smoke.sh, STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-04-EVIDENCE. No runtime application business logic, auth/export, database migration or prod Compose alteration.
-- **Safety/assumptions:** no real secrets, CI-only isolated volumes, retained Trivy and SAST. DEC-2026-11-08-02; INT-001 provisional. Next JR-039 negative test.
-- **Git:** reviewed JR-038 numbered atomic pushed commit on work/plogit-phase-02.
-
-### 2026-11-08T10:02:44.824Z | Session 04 | JR-039 | IN REVIEW — missing-env and DB-disconnected negative CI pending
-- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; reviewer Builder Lead.
-- **Changes:** require nonempty POSTGRES_PASSWORD in docker-compose.yml; add subprocess-without-password and Docker --network none negative startup checks to scripts/ci-compose-smoke.sh; correct CI project name GitHub expression; tracking STEP-REGISTER/STEP-LOG/SESSION-HANDOFF/SESSION-04-EVIDENCE. See [evidence](SESSION-04-EVIDENCE.md#jr-039).
-- **Expected/actual:** missing password fails Compose before startup; PostgreSQL-isolated backend exits nonzero within 110s with connection error. Defined but **not yet executed** on Docker, no fabricated runtime pass. Local container lacks Docker. No source DB/schema, auth or unversioned export mutation.
-- **Safety/decision:** reversible credential preflight guards protect CI/production input, no secrets or live data. DEC-2026-11-08-02; real JudgeIt INT-001 provisional. Next JR-040 closure/CI reconciliation.
-- **Git:** reviewed JR-039 numbered atomic commit on work/plogit-phase-02.
-
-### 2026-11-08T10:03:59.773Z | Session 04 | JR-040 | IN REVIEW — waiting current-head runtime/security gate
-- **Transition:** NOT STARTED → IN PROGRESS → IN REVIEW; reviewer Builder Lead; original Phase 02B Compose closure, [Session 04 evidence](SESSION-04-EVIDENCE.md#jr-040).
-- **Compared JR-038/039:** positive Compose health, API, SPA, volume restart and negative missing environment/DB-disconnected startup codified. Actual latest-head CI still pending; leave status IN REVIEW until executed and security jobs inspected.
-- **Paths:** tracking STEP-REGISTER/STEP-LOG/SESSION-HANDOFF/SESSION-04-EVIDENCE only; source/test implementation already numbered JR-038/JR-039.
-- **Runtime evidence:** no local Docker; historical previous SHA runs cannot prove final positive/negative. CI status must be fetched and any failure retained. Phase 02 PR #23 remains draft stacked on draft #22; no main deploy or merge permitted. Outstanding DEC-11 production release, INT-001 real JudgeIt interoperability provisional.
-- **Git:** reviewed JR-040 numbered atomic commit on work/plogit-phase-02, last of exactly ten selected JR checkpoints. Any follow-up after final CI should be separately logged and cannot start JR-041.
-
-### 2026-11-08T10:07:57.111Z | Session 04 JR-033/034/035/038/039 | FOLLOW-UP: executed functional CI verification
-- **Transition:** JR-033, JR-034, JR-035, JR-038, JR-039 IN REVIEW → DONE after executed [run 42469827815](https://github.com/Edison3060/PLogIt/actions/runs/42469827815) at code SHA `8fa9274e240d835041b13ea94f099c69e5715a88`.
-- **Expected / actual:** PostgreSQL16 V1→V3 synthetic row survival / invalid V2 transactional rollback tests passed **2/2**; all Maven 127 tests passed; Compose full-stack live health/API/SPA, pgdata persistence and both fail-closed missing-env/isolated-offline Postgres cases passed. Frontend 18/18 Vitest, Semgrep/proxy passed. No application schema or service change.
-- **Failure preserved:** Trivy release download 504/exhausted curl retries, exit 22 in job 128697835312; scanner not run, phase/release security gate NOT passed, JR-040 remains IN REVIEW. Deploy job skipped. See [Session 04 evidence](SESSION-04-EVIDENCE.md#session-04-post-jr-functional-ci-reconciliation).
-- **Changed files:** tracking STEP-REGISTER/STEP-LOG/SESSION-HANDOFF/SESSION-04-EVIDENCE and narrow .github/workflows/ci.yml pinned Trivy download resiliency. Prior JR-specific failures and provisional cross-app debt retained.
-- **Next:** re-run all mandatory CI with bounded pin-preserving network retries, inspect actual scanner report and record failure/success. Keep #23 draft, do not merge to main or deploy.
-
-### 2026-11-08T10:12:14.837Z | Session 04 | JR-040 | FINAL FOLLOW-UP — functional/security evidence discrepancy, phase gate remains IN REVIEW
-- **Reviewer and transition:** Builder Lead. JR-031–039 are DONE; JR-040 remains **IN REVIEW** (not falsely DONE or BLOCKED) because current-head security PR gate incomplete. Original acceptance: compare Compose positive and negative real evidence and phase regression; both functional modes actually passed.
-- **Positive/negative and regression:** [push CI 42469824649](https://github.com/Edison3060/PLogIt/actions/runs/42469824649), executable SHA `8fa9274e240d835041b13ea94f099c69e5715a88`, overall **SUCCESS**: Maven 127/127 (Flyway2/2), Vitest18/18, Compose full-stack/DB volume persistence plus missing password and DB offline fail-closed, Semgrep, Trivy FS + both runtime images and proxy PASS; CD SKIPPED. Same-code [PR CI 42469827815](https://github.com/Edison3060/PLogIt/actions/runs/42469827815) fails upstream scanner download HTTP 504, not application tests.
-- **Latest head and failure:** `63bf726a7c59cdbc572d7be83719b15f07a18077` adds only checksum-pinned bounded Trivy fetch retries and docs; [push CI 42470111362](https://github.com/Edison3060/PLogIt/actions/runs/42470111362) and [PR CI 42470115672](https://github.com/Edison3060/PLogIt/actions/runs/42470115672) all app/Compose/SAST/proxy jobs SUCCESS, Trivy CLI archive HTTP **504** even after 10 retries, exit **22** before scans; CD SKIPPED. No scanner relaxation; release not permitted.
-- **Changed files:** final STEP-REGISTER evidence text, STEP-LOG (append-only), SESSION-HANDOFF, SESSION-04-EVIDENCE, DECISIONS. No executable source modification at this follow-up; reviewed tracked records, PR #23 body/title updated for whole Phase 02 but remains DRAFT.
-- **Decisions/assumptions:** DEC-2026-11-08-01/02 implemented, DEC-2026-11-06-11 owner production gate pending. INT-001 actual JudgeIt cross-app still PROVISIONAL. Reasonable readiness **READY WITH PROVISIONAL INTEGRATION** for independent Session 05 only, despite draft Phase 02 merge hold. No new production integration claim.
-- **Next:** save controller on control/session-state from Session 04 to READY Session 05 JR-041–050, Phase 03 stacked on unmerged Phase 02 if safe. Stop; no JR-041 work.
-
-### 2026-11-09T18:25:50.156Z | Session 05 | JR-041 | DONE • VERIFIED NO CHANGE
-- Scope/why: inventory live authentication owner and current tests before changing production behavior. Before: NOT STARTED. Starting source SHA `bf2c711c85d20a227fa119dceacf1dc3c4ce4496`.
-- Paths inspected: AuthController, UserService, SecurityConfig, useAuth, frontend lib auth/api, AuthIntegrationTest, CsrfIntegrationTest, api.test.ts; evidence: `SESSION-05-EVIDENCE.md#jr-041`.
-- Expected / observed: register/login/logout/me and bcrypt/session hooks exist. Manual session establishment raises an unverified fixation-rotation question; logout is exempt from CSRF; do not infer tests from configuration alone.
-- Tests: not executed in this inventory JR (static GitHub source inspection only). Positive/negative auth and CSRF tests planned for JR-043/044/048/049, GitHub Actions on pushed branch.
-- Dependencies/decision: Phase 02 release scanner JR-040 IN REVIEW; main CD DEC-11 pending; JudgeIt INT-001 provisional. No API/export code or data changed. Reviewer: Builder Lead. Next JR-042 acceptance spec. Commit: JR-041 numbered checkpoint in branch history.
-
-### 2026-11-09T18:27:07.394Z | Session 05 | JR-042 | DONE • ACCEPTANCE SPEC
-- Source/status: preceding JR-041 inventory at 84fe75f898a9b0e371f6e18c723d8010f017deaa; original Phase 03 JR-042; previously NOT STARTED. Code unchanged at this checkpoint.
-- Expected: `POST /api/auth/register` valid email/password(8–100)/display name <=100 returns generic 202 and persists unique bcrypt hash; `POST /api/auth/login` correct credentials creates cookie-backed authenticated session, rotates any pre-login session ID; `GET /api/auth/me` requires active authenticated session; `POST /api/auth/logout` invalidates it; expired/reused logged-out cookie must not restore access. Wrong password denied with safe response. Server controls, not UI state, decide.
-- Observed: BCrypt/UserService and route checks present. Manual authentication in AuthController leaves session-ID rotation unproven; logout implementation invalidates session, but no lifecycle regression tests. Safe scoped remediation/tests recommended in DEC-2026-11-09-01.
-- Tests: not executed at specification checkpoint. Planned: fresh PostgreSQL16 Testcontainers Maven integration auth positive/negative and regression CI at branch SHA; exact commands `cd backend && mvn -B clean verify`, frontend `npm ci && npm run lint --if-present && npm run build && npm test` in GH Actions, plus other security jobs. Reviewer: Builder Lead. No external integration claim.
-- Sources consulted 2026-11-09 UTC: https://docs.spring.io/spring-security/reference/servlet/authentication/session-management.html (custom authentication requires explicit persistence/strategy care), https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html (CSRF login/logout guidance). Next JR-043 positive scenario.
-
-### 2026-11-09T18:28:11.863Z | Session 05 | JR-043 | IN REVIEW • IMPLEMENTED, CI PENDING
-- Before: NOT STARTED; basis JR-041/042, manual session handling on source SHA da3f3b4b8f7f54d3719d9e71de662d365a1c0358. Expected synthetic registration → bcrypt hash → login → pre-login session ID rotation → authenticated /me → logout invalidates session. New `AuthenticationSessionLifecycleIntegrationTest` added, test user and password synthetic; no external server/data used.
-- Changed: `AuthController.java` explicit changeSessionId for existing pre-login HttpSession; new isolated PG16/Testcontainers integration test, `STEP-REGISTER`, `STEP-LOG`, `SESSION-HANDOFF`, `SESSION-05-EVIDENCE`. Existing unversioned exports, audit, role scopes, API shapes unchanged.
-- Expected vs observed: static inspection confirms code and assertions are present, but **not executed** in this disconnected runner; no local Maven, PostgreSQL or Docker checkout. GitHub CI on branch must execute `mvn -B clean verify` and all security/frontend jobs; preserve IN REVIEW until actual result. Next JR-044 negative auth/safe error, then CI reconciliation.
-- Reference: DEC-2026-11-09-01, https://docs.spring.io/spring-security/reference/servlet/authentication/session-management.html (2026-11-09). Reviewer Builder Lead; no subagents, no production PR merge/deploy. JR-043 commit discoverable in branch history.
-
-### 2026-11-09T18:29:15.078Z | Session 05 | JR-044 | IN REVIEW • AUTH NEGATIVE TESTS WRITTEN
-- Before NOT STARTED. Synthetic wrong password must return HTTP 401 with no authenticated security context and stale/invalidated JSESSIONID must be denied on `GET /api/auth/me` (Spring Security currently responds 403 to anonymous access). Added tests to `AuthenticationSessionLifecycleIntegrationTest.java`. Expected zero unauthorized writes/session restoration.
-- Observed: code-level assertions added, **not yet executed**; MockMvc does not establish that a raw replayed cookie maps to the expired live container session. Actual HTTP cookie-replay/expiry behavior requires integration CI and a real-session smoke check; keep IN REVIEW and do not infer expiration coverage from MockMvc.
-- Tests planned: `mvn -B clean verify` PG16/MockMvc and live Compose auth smoke; status must stay IN REVIEW until evidence. Scope: tests, register/log/handoff/evidence; no production/session policy weakening, no source/export behavior changes. Reviewer Builder Lead. Next JR-045 reconcile or carry verification debt.
-
-### 2026-11-09T18:30:22.806Z | Session 05 | JR-045 | IN REVIEW • AUTH CLOSEOUT AWAITS CI
-- Comparison JR-043/044: static tests now cover registration hash/login/me/logout, wrong-password and stale-cookie; real HTTP integration gap addressed by new `scripts/ci-auth-smoke.sh` invoked from existing isolated Compose job. Positive register(202)/login(200)/me(200)/logout(200) and stale JSESSIONID replay(403), synthetic user only. Session-ID pre-login rotation tested in MockMvc; real elapsed-time expiry remains separately unproven.
-- Changed: scripts/ci-auth-smoke.sh, scripts/ci-compose-smoke.sh, docs register/log/handoff/evidence. No app route, tenant, audit, JSON or production Compose change. Expected application CI positive/negative and all security gates; observed tests **not yet run on this pushed SHA**. Cannot close DONE until actual Actions; retained IN REVIEW.
-- Commands planned: CI bash scripts/ci-compose-smoke.sh (calls new HTTP probe), cd backend && mvn -B clean verify; Node CI and security scans. Failure details must be appended without erasure, reviewer Builder Lead. Next JR-046 CSRF inventory. Main CD/PR #22/#23 draft holds; INT-001 provisional.
-
-### 2026-11-09T18:31:12.541Z | Session 05 | JR-046 | DONE • CSRF INVENTORY VERIFIED NO CHANGE
-- Before NOT STARTED. Source at 7c8328ba3d502dbda4d2db337996e48c0c09127e; inspected `SecurityConfig.securityFilterChain`, CookieCsrfTokenRepository.withHttpOnlyFalse, CsrfTokenRequestAttributeHandler and request filter forced token issuance; frontend `apiFetch` includes credentialed cookies and `X-XSRF-TOKEN` on non-GET/HEAD when cookie present; tests `CsrfIntegrationTest`, `AuthIntegrationTest` and `frontend/src/lib/api.test.ts`.
-- Observed: real backend CSRF filter guards engagement/log PUT/POST/DELETE including exports and role-mutating endpoints, but current `.ignoringRequestMatchers` **exempts POST /api/auth/login, /api/auth/register, /api/auth/logout**. This is a genuine gap against Phase 03 all-mutating-endpoints invariant; the logout exemption permits cross-site logout and login CSRF is a recognized risk. Existing tests exercise negative protected routes but not actual cookie-token bootstrap across auth endpoints; no code modified in inventory.
-- Expected source+tests map with reviewer; observed gap explicitly recorded in `SESSION-05-EVIDENCE.md#jr-046`. Planned JR-047/048/049 focused migration: remove exemption and bootstrap via public safe GET, then test real HTTP positive/negative with frontend/regression. Source refs and security guidance https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html checked 2026-11-09 UTC. Reviewer Builder Lead; DEC-11 main release pending, INT-001 provisional.
-
-### 2026-11-09T18:32:08.434Z | Session 05 | JR-047 | DONE • CSRF ACCEPTANCE DECISION
-- Starting state NOT STARTED. Compared original Phase 03 all-mutating-endpoints rule to canonical `SecurityConfig.java`, `frontend/src/lib/api.ts`, CSRF cookie/HTTP tests at 28f48c321ecade547826277d3362af431d31072a. Root difference is auth POST exemptions.
-- Expected request/data shape: safe `GET /api/health` may issue `XSRF-TOKEN` cookie without authentication; mutating `POST /api/auth/register` and `/login` continue existing JSON shapes, `POST /api/auth/logout` no body, and all tenant/log mutations retain existing APIs. Every unsafe HTTP request must send cookie plus `X-XSRF-TOKEN` header. No/mismatch token ⇒ 403 before controller side effects; preflight failure/no cookie ⇒ client does not POST. Existing login/register/logout response formats unchanged. Non-API callbacks and unversioned JSON untouched.
-- Approval/owner: DEC-2026-11-09-02 selects scoped reversible security tightening for branch-only changes under playbook preauthorization; public clients will need safe GET preflight, so release/main merge still owner-gated, not silently promoted. No data migration/production action. Planned JR-048 positive real HTTP and frontend tests; JR-049 negative/zero-mutation; JR-050 gate closure. Status DONE for spec only, not runtime.
-- Sources: https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html (reviewed 2026-11-09 UTC), source/test inventory JR-046. Reviewer Builder Lead.
-
-### 2026-11-09T18:33:56.395Z | Session 05 | JR-048 | IN REVIEW • CSRF POSITIVE WORK
-- Before NOT STARTED. Implemented scoped DEC-2026-11-09-02 change: remove three auth POST CSRF exemptions and require cookie+X-XSRF-TOKEN for all unsafe API requests, with browser GET /api/health token bootstrap and client fail-closed on absent cookie. Existing JSON/API response shapes, engagement/leader checks, audit and legacy exports untouched.
-- Changed: SecurityConfig.java, frontend api.ts/api.test.ts, scripts/ci-auth-smoke.sh, register/log/handoff/evidence. Vitest positive bootstrap registration and missing-cookie rejection; real ephemeral Compose positive register/login/protected engagement POST with issued cookie/token (200 expected), no production writes. Direct external POST clients must bootstrap token: release compatibility note and DEC-02.
-- Expected/actual: source/test code authored, **not yet executed**. Required actual GitHub Actions Maven/PG16, frontend lint/build/Vitest, Compose, SAST/Trivy and proxy; IN REVIEW. Next JR-049 negative missing/mismatched tokens + zero mutation. Reviewer Builder Lead; no main merge/deploy.
-
-### 2026-11-09T18:34:54.488Z | Session 05 | JR-049 | IN REVIEW • CSRF NEGATIVE/NO-MUTATION TESTS
-- Before NOT STARTED. New `AuthCsrfIntegrationTest` isolated PG16/MockMvc cases: registration missing/invalid token ⇒ 403 and user absent; login missing token ⇒ 403 and no stored auth context; logout missing/invalid token ⇒ 403, authenticated session remains usable until valid-token logout. Existing `CsrfIntegrationTest` protects log/engagement/export and asserts no mutation.
-- Extended real Compose `scripts/ci-auth-smoke.sh` with cookie-authenticated engagement POST missing/mismatched token (403 each), GET engagement count identical before/after, logout without token (403) and /me stays authenticated. Positive token POST remains in JR-048, valid logout/old cookie replay remains in JR-045.
-- Expected server-side 403, no unintended transaction or session invalidation, safe errors; observed tests authored, **not yet executed** on current SHA. Await actual PostgreSQL16 Maven, Compose and full security CI. Preserves authentication roles/privacy/JSON. No production/CD or other-app writes. Reviewer Builder Lead. Next JR-050 close/reconcile evidence.
-
-### 2026-11-09T18:38:04.009Z | Session 05 | JR-050 | IN REVIEW • REAL CI FAILURE & CORRECTION
-- Initial test evidence: [Actions 42675291335](https://github.com/Edison3060/PLogIt/actions/runs/42675291335) source SHA `1f92076eb004fcf7ee59c67271c2944b7b418d8f`: `cd backend && mvn -B clean verify` **133 tests; 5 failures**, Maven exit 1. All five failures in preexisting `AuthRateLimitIntegrationTest`, which sent login/register requests without new required csrf token; expected 202/401/400 but got 403. New AuthCsrfIntegrationTest passed 3/3; new lifecycle tests had no listed failure. Frontend lint/build/Vitest SUCCESS, Compose isolated full-stack real auth/CSRF positive and negative probe SUCCESS, Semgrep and proxy SUCCESS, Trivy pending at observation. Failed run preserved.
-- Correction: `AuthRateLimitIntegrationTest.java` adds `.with(csrf())` on all **12** auth POST requests; rate limits, response/error assertions, server CSRF requirement unchanged. Separate missing/invalid-token negative tests remain. No app runtime/export/audit code change this JR. Expected next SHA Maven pass, not yet run; original JR-050 closure remains IN REVIEW until confirmed. Reviewer Builder Lead.
-- Exact tests: GitHub Actions Java21/Maven clean verify PostgreSQL16, Node22 npm ci/lint/build/Vitest, live Compose, Semgrep, pinned Trivy, proxy. DEC-2026-11-09-02 preflight compatibility issue and release gate DEC-11 remain. No production merge/deploy; next action inspect corrected SHA CI and reconcile. Commit discoverable in branch history.
-
-### 2026-11-09T18:42:35.181Z | Session 05 | JR-043–050 VERIFIED CI RECONCILIATION (post-JR-050 evidence follow-up)
-- **Actual source SHA:** `9ba41623dab7319f5b9951d9fff68a75f91b07e8` on `work/plogit-phase-03`; [push CI 42675762958](https://github.com/Edison3060/PLogIt/actions/runs/42675762958) overall **SUCCESS**. `cd backend && mvn -B clean verify` 133/133 tests PASS (Java21, PostgreSQL16/Testcontainers), `cd frontend && npm ci && npm run lint --if-present && npm run build && npm test` 18/18 Vitest PASS; isolated live Docker Compose startup/DB persistence, HTTP registration/login/authenticated engagement create, missing/mismatch CSRF 403, no engagement mutation, logout no-token 403, valid logout and replayed cookie 403, disconnected database/missing password fail-closed PASS; Semgrep PASS, pinned checksum verified Trivy filesystem+backend/frontend image scans PASS, proxy PASS. CD **SKIPPED** (non-main).
-- **Prior failure preserved:** at `1f92076eb004fcf7ee59c67271c2944b7b418d8f` [run 42675291335](https://github.com/Edison3060/PLogIt/actions/runs/42675291335) Maven 133 tests with 5 old auth-rate-limit fixture failures (403 after CSRF enforcement); corrected 12 fixture requests with csrf() in JR-050; successful rerun above. This correction did not bypass CSRF or rate limits.
-- **JR reconcilation:** JR-041,042,043,046,047,048,049,050 DONE. JR-044 and JR-045 **IN REVIEW** solely because authentic wall-clock idle-session expiration was NOT simulated/observed; explicit logout invalidation and old-session cookie replay were genuinely verified. No invented expired-time claim. These two are not blocking independent new-phase authz work but remain release acceptance debt.
-- **PR:** [DRAFT #24](https://github.com/Edison3060/PLogIt/pull/24) targeting unmerged Phase 02, which targets unmerged Phase 01. Phase 03B JR-051–060 unstarted; PR NOT accepted/mergeable for release based on this first-half session. DEC-2026-11-06-11 separate production CD permission pending; Phase 02 JR-040 current-head scanner gate and INT-001 real JudgeIt integration still pending. New direct API clients must GET CSRF cookie before register/login/logout; owner release compatibility review outstanding. No main merge/deploy.
-- **Reviewer:** Builder Lead, no subagents. Commands above executed by GitHub Actions, NOT local. Source/test/hand-off facts reconciled; signed off only eligible scoped criteria. Next safe action after controller READY: separate new Session 06 JR-051–060 on same branch; continue idle-expiration verification and phase security/review gates independently. This follow-up changes tracking only, thus CI above belongs to immediately preceding executable SHA; do not claim the docs-only follow-up itself was tested.
-
-### 2026-11-11T12:36:12.423Z | Session 06 | JR-051 | DONE • VERIFIED NO CHANGE INVENTORY
-- Source baseline: `work/plogit-phase-03@c173e31e7fb9a6c6bbd3bebf2f9cf436139f8701`, `MembershipService.java` isMember/isLeader/assertMember/assertLeader ignore removed memberships, `EngagementService.java` uses server guard before detail, update, audit, member-only list and leader-only mutations; `EngagementController.java` routes GET/PUT/DELETE/transfer through services. Canonical `EngagementAuthzIntegrationTest.java` already verifies member detail, nonmember 404, removed 404, leader transfer and nonleader 403.
-- Expected vs observed: engagement-scoped role checks are implemented; extra negative cross-engagement PUT and no-side-effects regression and positive leader PUT are not yet explicit in this test owner. This is inventory, not acceptance/executed test proof; no source was changed. Reviewer Builder Lead, no subagents.
-- Changed paths: STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-06-EVIDENCE. Tests in this JR: code inspection only; Maven not run. Planned GH CI `cd backend && mvn -B clean verify` and all workflow gates after JR-053/054. Next JR-052 acceptance spec; release PRs #22/#23/#24 DRAFT, no main merge/prod, INT-001 remains provisional.
-
-### 2026-11-11T12:37:44.197Z | Session 06 | JR-052 | DONE • ENGAGEMENT ACCEPTANCE SPEC
-- Reviewed exact Phase03 original JR-052, canonical MembershipService, EngagementService, UpdateEngagementRequest and EngagementController at work/plogit-phase-03. Expected leader/member role isolation for *each* engagement, active membership only, outsider/removed 404, active nonleader 403, accepted leader PUT with valid CSRF and field validation; all unauthorized calls must leave persisted fields and audit unchanged.
-- Actual source already implements these guards and preserves engagement ID/role internally; missing explicit cross-engagement negative/no-side-effects integration proof, not a license to alter policy. Dated approved routine decision DEC-2026-11-11-01 adds focused tests without production changes. No Maven executed in this spec step; planned `cd backend && mvn -B clean verify` GitHub CI. Paths: STEP-REGISTER, STEP-LOG, SESSION-HANDOFF, SESSION-06-EVIDENCE, DECISIONS. Expected vs actual source mapped; reviewer Builder Lead. Next JR-053.
-
-### 2026-11-11T12:37:52.451Z | Session 06 | JR-053 | IN REVIEW • POSITIVE ENGAGEMENT TEST AUTHORED
-- Source/test baseline after JR-052. Added isolated `EngagementAuthzIntegrationTest.activeMemberCanReadAndLeaderCanUpdateSameEngagement`: synthetic leader/member, member GET role MEMBER 200, leader PUT description with CSRF 200 and role LEADER, persisted description confirmed. Intended API same session + valid CSRF, no export/log/auth/policy changes.
-- Expected vs observed: test source assertion present, runtime **not yet executed**; no false PASS. Changed: EngagementAuthzIntegrationTest, register, log, evidence, handoff. Planned GitHub Actions Java21 PostgreSQL16 `cd backend && mvn -B clean verify`, frontend and scanner/security CI. Reviewer Builder Lead; next JR-054 negative/no-mutation assertions, then rerun both; IN REVIEW until actual result.
-
-### 2026-11-11T12:39:40.549Z | Session 06 | JR-054 | IN REVIEW • NEGATIVE RBAC TESTS AUTHORED
-- Expected: cross-engagement GET/PUT by unrelated leader 404, own engagement PUT by member 403, removed member GET/PUT 404, no unauthorized description changes or audit events. Wrote `crossEngagementWritesAndRemovedMembershipAreDeniedWithoutMutation` in EngagementAuthzIntegrationTest with synthetic two leaders, member, two engagements and persisted count assertions. Corrected new JR-053 JSON string escaping before CI; this test/code correction is explicitly recorded.
+- **Git:** reviewed JR-031 numbered atomic pus…8464 tokens truncated…t events. Wrote `crossEngagementWritesAndRemovedMembershipAreDeniedWithoutMutation` in EngagementAuthzIntegrationTest with synthetic two leaders, member, two engagements and persisted count assertions. Corrected new JR-053 JSON string escaping before CI; this test/code correction is explicitly recorded.
 - Observed: source assertions present but Maven/PostgreSQL runtime not yet executed, therefore IN REVIEW. Changes: EngagementAuthzIntegrationTest.java, register, log, evidence, handoff. Planned GitHub Actions `cd backend && mvn -B clean verify`; no production, external data or other-app writes. Source service permissions unchanged. Reviewer Builder Lead, next JR-055 closure.
 
 ### 2026-11-11T12:39:52.414Z | Session 06 | JR-055 | IN REVIEW • MEMBERSHIP CLOSEOUT AWAITS CI
@@ -1300,3 +1139,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T02:24:15Z | Session 15 | JR-150 | DONE
 
 - Reconciled engagement success and denial after the harness URL correction and full CI. [Executed evidence](SESSION-15-EVIDENCE.md#reconciliation). Tested `23f7e9096bdddd1cb6b39aec5caedd3e1062047f`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:02:11Z | Session 16 | JR-151 | DONE
+
+- Map canonical log form, board and review UI. [Evidence](SESSION-16-EVIDENCE.md#jr-151). Checkpoint parent `1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3`. Builder Lead reviewed.
