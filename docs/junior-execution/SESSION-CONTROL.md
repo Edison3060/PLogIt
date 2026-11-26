@@ -8,16 +8,16 @@ Only this per-app controller selects what a fresh Builder Lead session does next
 
 | Key | Value |
 |---|---|
-| NEXT_SESSION | 15 |
-| STATE | IN_PROGRESS |
-| LAST_ASSESSED_SESSION | 14 |
-| LAST_ASSESSED_JR_RANGE | JR-131–JR-140 |
-| CURRENT_TARGET_JR_RANGE | JR-141–JR-150 |
+| NEXT_SESSION | 16 |
+| STATE | READY |
+| LAST_ASSESSED_SESSION | 15 |
+| LAST_ASSESSED_JR_RANGE | JR-141–JR-150 |
+| CURRENT_TARGET_JR_RANGE | JR-151–JR-160 |
 | CURRENT_TARGET_PHASE_BRANCH | work/plogit-phase-08 |
-| LAST_PHASE_BRANCH | work/plogit-phase-07 |
-| CURRENT_RUN_OWNER | builder-session15-2026-11-26T02:05:05.270Z-th1bu0 |
-| LAST_UPDATE_UTC | 2026-11-26T02:05:05.270Z |
-| PENDING_PHASE_ACCEPTANCE | Session 14 JR-131–137 DONE. JR-138–140 IN REVIEW for aggregate PDF size and server memory, sensitive-field policy, backup access and retention (DEC-2026-11-25-04). Phase 08 must stack on final Phase 07 while #28 is unmerged. Phase 07 draft PR #28 stacks on unmerged #27. JR-124/125 and JR-129/130 IN REVIEW for complete image validation and strict path-like display-name rejection (DEC-2026-11-25-01/02). Session 13 six DONE. Phase 06 draft PR #27 remains stacked on unmerged #26. JR-109/110, JR-118/120 IN REVIEW for exact legacy nullable-list compatibility (INT-001, DEC-2026-11-24-03) and approval of a future envelope (DEC-2026-11-24-05). Isolated JudgeIt controller/PostgreSQL coverage passed for scoped diagnostic replay, unknown version, duplicate UUID, filename revision conflict and missing-media caveat. Session 12 eight DONE. Phase 01–05 draft PRs #22–26 remain unmerged. Preserve JR-094/095 delayed stale draft save (DEC-2026-11-23-03), Phase 04 duplicate-name, v1 expiry/concurrent join and target validation, JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, direct API CSRF compatibility and owner CD DEC-2026-11-06-11. |
+| LAST_PHASE_BRANCH | work/plogit-phase-08 |
+| CURRENT_RUN_OWNER | NONE |
+| LAST_UPDATE_UTC | 2026-11-26T02:24:48Z |
+| PENDING_PHASE_ACCEPTANCE | Session 15 JR-141–150 DONE. Phase 08 draft PR #29 stacks on unmerged #28 and remains pending its Session 16 exit gate. Local elapsed expiry verified with a one-minute test profile. Session 14 JR-131–137 DONE. JR-138–140 IN REVIEW for aggregate PDF size and server memory, sensitive-field policy, backup access and retention (DEC-2026-11-25-04). Phase 07 draft PR #28 stacks on unmerged #27. JR-124/125 and JR-129/130 IN REVIEW for complete image validation and strict path-like display-name rejection (DEC-2026-11-25-01/02). Session 13 six DONE. Phase 06 draft PR #27 remains stacked on unmerged #26. JR-109/110, JR-118/120 IN REVIEW for exact legacy nullable-list compatibility (INT-001, DEC-2026-11-24-03) and approval of a future envelope (DEC-2026-11-24-05). Isolated JudgeIt controller/PostgreSQL coverage passed for scoped diagnostic replay, unknown version, duplicate UUID, filename revision conflict and missing-media caveat. Session 12 eight DONE. Phase 01–05 draft PRs #22–26 remain unmerged. Preserve JR-094/095 delayed stale draft save (DEC-2026-11-23-03), Phase 04 duplicate-name, v1 expiry/concurrent join and target validation, JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, direct API CSRF compatibility and owner CD DEC-2026-11-06-11. |
 | AFTER_FINAL_SESSION | COMPLETE, no automatic wraparound |
 
 ## Verified baseline when this controller was created
@@ -98,3 +98,5 @@ Odd sessions start/resume one of the original twelve `work/plogit-phase-XX` bran
 - 2026-11-25T14:13:47Z: Session 14 JR-131–JR-140 assessed and pushed to `work/plogit-phase-07`. JR-131–137 DONE. JR-138–140 IN REVIEW. [Full push CI 45630981676](https://github.com/Edison3060/PLogIt/actions/runs/45630981676) at `4845d5d44f3af937c929626fc48d5a490df82193` passed 165 backend tests with PostgreSQL 16.16, 21 frontend tests, Compose, Semgrep, Trivy and proxy. Production CD skipped. Final tracking head `7727c1a82d42794e9955ae3baae0cc7475361526`. [PR #28](https://github.com/Edison3060/PLogIt/pull/28) remains draft, stacked on unmerged #27. **READY WITH PROVISIONAL INTEGRATION** for independently initiated Session 15 JR-141–JR-150. Stack `work/plogit-phase-08` on the final Phase 07 head while unmerged. Claim cleared. No JR-141 work began.
 
 - 2026-11-26T02:05:05.270Z: Session 15 JR-141–JR-150 claimed by builder-session15-2026-11-26T02:05:05.270Z-th1bu0. Phase 08 will stack on unmerged Phase 07 at `7727c1a82d42794e9955ae3baae0cc7475361526`. Prior acceptance and production authorization remain pending.
+
+- 2026-11-26T02:24:48Z: Session 15 JR-141–JR-150 assessed DONE with ten pushed checkpoints and final tracking head `1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3`. [Full push CI 45741730012](https://github.com/Edison3060/PLogIt/actions/runs/45741730012) passed at `23f7e9096bdddd1cb6b39aec5caedd3e1062047f` (165 Maven tests with PostgreSQL 16.16, 25 frontend tests, Compose, Semgrep, Trivy and proxy). Production CD skipped. Chromium verified desktop and mobile navigation, elapsed idle expiry, and create/join/scope/team and denial against real PostgreSQL. [PR #29](https://github.com/Edison3060/PLogIt/pull/29) remains draft above unmerged Phase 07 PR #28. **READY WITH PROVISIONAL INTEGRATION** for independent Session 16 JR-151–JR-160 on the same branch. Claim cleared. No JR-151 work began.
