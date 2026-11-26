@@ -766,3 +766,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Verified create, join, scope and team after refresh. [Evidence](SESSION-15-EVIDENCE.md#jr-148). Previous head `910d3bdbd8a99e45a31ed341ce2595beb1be0adc`.
 - Continue with JR-149 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:17:56Z | Session 15 | JR-149
+
+- **DONE.** Verified denial and corrected engagement error feedback. [Evidence](SESSION-15-EVIDENCE.md#jr-149). Previous head `6a01f1e1cb43d2541d2940198f9fd49ade5d3fde`.
+- Continue with JR-150 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.

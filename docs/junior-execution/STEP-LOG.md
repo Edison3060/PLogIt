@@ -1275,3 +1275,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T02:16:54Z | Session 15 | JR-148 | DONE
 
 - Verified create, join, scope and team after refresh. [Evidence](SESSION-15-EVIDENCE.md#jr-148). Previous head `910d3bdbd8a99e45a31ed341ce2595beb1be0adc`. Reviewed by Builder Lead.
+
+
+### 2026-11-26T02:17:56Z | Session 15 | JR-149 | DONE
+
+- Verified denial and corrected engagement error feedback. [Evidence](SESSION-15-EVIDENCE.md#jr-149). Previous head `6a01f1e1cb43d2541d2940198f9fd49ade5d3fde`. Reviewed by Builder Lead.

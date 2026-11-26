@@ -154,7 +154,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-146 | Inventory Engagement pages | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-146) | 2026-11-26 |
 | JR-147 | Specify Engagement pages acceptance | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-147) | 2026-11-26 |
 | JR-148 | Reproduce Engagement pages success | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-148) | 2026-11-26 |
-| JR-149 | Reject Engagement pages invalid operation | 15 | NOT STARTED | — | — |
+| JR-149 | Reject Engagement pages invalid operation | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-149) | 2026-11-26 |
 | JR-150 | Close Engagement pages verification | 15 | NOT STARTED | — | — |
 | JR-151 | Inventory Log forms and review UI | 16 | NOT STARTED | — | — |
 | JR-152 | Specify Log forms and review UI acceptance | 16 | NOT STARTED | — | — |

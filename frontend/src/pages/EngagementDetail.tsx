@@ -37,7 +37,7 @@ export default function EngagementDetailPage() {
   const [includeExported, setIncludeExported] = useState(false);
   const [exporting, setExporting] = useState(false);
 
-  const { data: engagement, isLoading } = useQuery({
+  const { data: engagement, isLoading, isError } = useQuery({
     queryKey: ["engagement", id],
     queryFn: () => fetchEngagement(Number(id)),
     enabled: !!id,
@@ -45,8 +45,8 @@ export default function EngagementDetailPage() {
 
   const engagementId = engagement?.id;
   const isLeaderDerived = engagement?.role === "LEADER";
-  const { data: auditLog, isLoading: auditLoading } = useAuditLog(
-    isLeaderDerived ? engagementId : undefined
+  const { data: auditLog, isLoading: auditLoading, isError: auditError } = useAuditLog(
+    isLeaderDerived && !isError ? engagementId : undefined
   );
 
   const [editName, setEditName] = useState("");
@@ -168,19 +168,19 @@ export default function EngagementDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="max-w-6xl mx-auto p-8 text-center text-text-muted">
+      <div role="status" className="max-w-6xl mx-auto p-8 text-center text-text-muted">
         <i className="fa-solid fa-circle-notch fa-spin text-3xl mb-3"></i>
         <p>Loading...</p>
       </div>
     );
   }
 
-  if (!engagement) {
+  if (isError || !engagement) {
     return (
       <div className="max-w-6xl mx-auto p-8">
         <div className="bg-bg-card border border-dashed border-border-default rounded-xl p-12 text-center">
           <i className="fa-solid fa-folder-open text-text-faint text-3xl mb-3"></i>
-          <p className="text-text-muted">Engagement not found</p>
+          <p role="alert" className="text-text-muted">Engagement not found</p>
         </div>
       </div>
     );
@@ -240,21 +240,21 @@ export default function EngagementDetailPage() {
       </div>
 
       {copied && (
-        <div className="flex items-center gap-2 text-success bg-success-soft border border-success/30 rounded-lg p-3 mb-4 text-sm font-medium">
+        <div role="status" className="flex items-center gap-2 text-success bg-success-soft border border-success/30 rounded-lg p-3 mb-4 text-sm font-medium">
           <i className="fa-solid fa-circle-check"></i>
           <span>Join code copied to clipboard!</span>
         </div>
       )}
 
       {success && (
-        <div className="flex items-center gap-2 text-success bg-success-soft border border-success/30 rounded-lg p-3 mb-4 text-sm font-medium">
+        <div role="status" className="flex items-center gap-2 text-success bg-success-soft border border-success/30 rounded-lg p-3 mb-4 text-sm font-medium">
           <i className="fa-solid fa-circle-check"></i>
           <span>{success}</span>
         </div>
       )}
 
       {error && (
-        <div className="flex items-center gap-2 text-danger bg-danger-soft border border-danger/30 rounded-lg p-3 mb-4 text-sm font-medium">
+        <div role="alert" className="flex items-center gap-2 text-danger bg-danger-soft border border-danger/30 rounded-lg p-3 mb-4 text-sm font-medium">
           <i className="fa-solid fa-circle-exclamation"></i>
           <span>{error}</span>
         </div>
@@ -265,6 +265,7 @@ export default function EngagementDetailPage() {
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
+            aria-pressed={tab === t.id}
             className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               tab === t.id
                 ? "border-primary text-primary"
@@ -341,7 +342,7 @@ export default function EngagementDetailPage() {
           )}
 
           {tab === "audit" && isLeader && (
-            <AuditPanel auditLog={auditLog} isLoading={auditLoading} />
+            <AuditPanel auditLog={auditLog} isLoading={auditLoading} isError={auditError} />
           )}
         </>
       )}
