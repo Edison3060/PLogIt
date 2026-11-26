@@ -754,3 +754,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Mapped the engagement pages and server owners. [Evidence](SESSION-15-EVIDENCE.md#jr-146). Previous head `543b0e7188b74954110bd2b02672b0b61d53bcf7`.
 - Continue with JR-147 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:50Z | Session 15 | JR-147
+
+- **DONE.** Recorded engagement state and permission acceptance. [Evidence](SESSION-15-EVIDENCE.md#jr-147). Previous head `c86476a23d1c0cd68d14e0728b2767e4af31b4ad`.
+- Continue with JR-148 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.

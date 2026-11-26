@@ -152,7 +152,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-144 | Reject Navigation and sessions invalid operation | 15 | IN REVIEW | [Evidence](SESSION-15-EVIDENCE.md#jr-144) | 2026-11-26 |
 | JR-145 | Close Navigation and sessions verification | 15 | IN REVIEW | [Evidence](SESSION-15-EVIDENCE.md#jr-145) | 2026-11-26 |
 | JR-146 | Inventory Engagement pages | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-146) | 2026-11-26 |
-| JR-147 | Specify Engagement pages acceptance | 15 | NOT STARTED | — | — |
+| JR-147 | Specify Engagement pages acceptance | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-147) | 2026-11-26 |
 | JR-148 | Reproduce Engagement pages success | 15 | NOT STARTED | — | — |
 | JR-149 | Reject Engagement pages invalid operation | 15 | NOT STARTED | — | — |
 | JR-150 | Close Engagement pages verification | 15 | NOT STARTED | — | — |

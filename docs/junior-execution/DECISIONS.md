@@ -269,3 +269,8 @@ PLogIt product owner owns any change to expiry policy, membership, or redirect e
 ### DEC-2026-11-26-02 | JR-143 | Mobile keyboard navigation
 
 Builder Lead selected a named disclosure with expanded state, closed-sidebar visibility, predictable focus on repeat keyboard use and Escape restoration. This presentation-only change implements the existing responsive navigation. [JR-143 evidence](SESSION-15-EVIDENCE.md#jr-143).
+
+
+### DEC-2026-11-26-03 | JR-147/149 | Distinguish loading, denial and empty results
+
+Use explicit pending, error and success feedback for engagement reads and writes. Keep denied detail generic and preserve the existing server-side role, scope and membership policies. The PLogIt owner must approve any contract or disclosure change. W3C WAI WCAG Technique ARIA19, accessed 2026-11-26, informed the persistent alert for join and create errors. Actual screen-reader testing remains separate. https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19.
