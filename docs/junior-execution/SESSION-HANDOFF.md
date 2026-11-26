@@ -829,3 +829,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Define export dialog focus, reflow, format and access acceptance. [Evidence](SESSION-16-EVIDENCE.md#jr-157). Checkpoint parent `5fc781ae8365c9c2f260581fc706b7292bca8e4b`.
 - Continue with JR-158 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:11:51Z | Session 16 | JR-158
+
+- **IN REVIEW.** Implement a keyboard-operable export dialog and exercise the live flow. [Evidence](SESSION-16-EVIDENCE.md#jr-158). Checkpoint parent `4ff16372dd1b3c3926c4a9bc10487de924b52dda`.
+- Continue with JR-159 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.

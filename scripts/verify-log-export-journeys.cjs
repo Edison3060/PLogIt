@@ -5,7 +5,7 @@ const origin = "http://127.0.0.1:5173";
 const marker = `S16-${Date.now()}`;
 const password = "Synthetic-Session16-Only!";
 const button = (page, name) => page.getByRole("button", { name, exact: true });
-const heading = (page, name) => page.getByRole("heading", { name, exact: true });
+const heading = (page, name) => page.getByRole("main").getByRole("heading", { name, exact: true });
 const watch = (page, path, method) => page.waitForResponse((response) =>
   new URL(response.url()).pathname === "/api" + path && response.request().method() === method
 );
@@ -37,9 +37,9 @@ async function signIn(browser, name, viewport) {
   return { context, page };
 }
 
-async function fixture(browser, viewport) {
-  const leader = await signIn(browser, "ReviewLeader", viewport);
-  const author = await signIn(browser, "DraftAuthor", viewport);
+async function fixture(browsers, viewport) {
+  const leader = await signIn(browsers[0], "ReviewLeader", viewport);
+  const author = await signIn(browsers[1], "DraftAuthor", viewport);
   const name = `${marker} journey`;
   const created = await status(await request(leader.context, "/engagements", "POST", {
     name, description: "Synthetic browser verification",
@@ -76,8 +76,8 @@ async function keyboardActivate(page, control) {
   await page.keyboard.press("Enter");
 }
 
-async function logJourney(browser) {
-  const { leader, author, path } = await fixture(browser, { width: 1280, height: 800 });
+async function logJourney(browsers) {
+  const { leader, author, path } = await fixture(browsers, { width: 1280, height: 800 });
   const { page } = author;
   const title = `${marker} keyboard draft`;
   await openBoard(page);
@@ -156,19 +156,117 @@ async function logJourney(browser) {
   assert.equal(kept.reviewState, "SUBMITTED");
   assert.deepEqual(await (await status(await request(leader.context, racePath + "/history"), 200)).json(), raceHistory);
   console.log(`${marker} JR-154: member approval denied with 403 and unchanged audit. Concurrent submit blocked stale edit with 409. Browser text, stored title and version history retained.`);
-  await Promise.all([leader.context.close(), author.context.close()]);
+  return { leader, author, path, logPath, racePath, title };
+}
+
+async function checkDialog(dialog) {
+  const measurements = await dialog.evaluate((element) => {
+    const toLuminance = (color) => {
+      const rgb = color.match(/[0-9.]+/g).slice(0, 3).map(Number);
+      const [r, g, b] = rgb.map((component) => {
+        const value = component / 255;
+        return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+      });
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const controls = [...element.querySelectorAll("h2, button, fieldset p, label span, p")];
+    const contrasts = controls.map((control) => {
+      let background = control;
+      while (getComputedStyle(background).backgroundColor === "rgba(0, 0, 0, 0)") {
+        background = background.parentElement;
+      }
+      const foreground = getComputedStyle(control).color;
+      const surfaceColor = getComputedStyle(background).backgroundColor;
+      const text = toLuminance(foreground);
+      const surface = toLuminance(surfaceColor);
+      return {
+        contrast: (Math.max(text, surface) + 0.05) / (Math.min(text, surface) + 0.05),
+        label: control.textContent.trim(), foreground, surfaceColor,
+      };
+    });
+    const bounds = element.getBoundingClientRect();
+    contrasts.sort((a, b) => a.contrast - b.contrast);
+    return { left: bounds.left, right: bounds.right, width: innerWidth, overflow: element.scrollWidth - element.clientWidth, minimum: contrasts[0] };
+  });
+  assert.equal(measurements.width, 320);
+  assert.ok(measurements.left >= 0 && measurements.right <= 320, JSON.stringify(measurements));
+  assert.equal(measurements.overflow, 0);
+  assert.ok(measurements.minimum.contrast >= 4.5, JSON.stringify(measurements));
+  return measurements.minimum.contrast.toFixed(2);
+}
+
+async function exportJourney({ leader, path, logPath, title }) {
+  const { page } = leader;
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("main").getByRole("button", { name: new RegExp(marker) }).press("Enter");
+  const opener = button(page, "Export");
+  await keyboardActivate(page, opener);
+  const dialog = page.getByRole("dialog", { name: "Export evidence pack" });
+  await dialog.waitFor();
+  assert.equal(await dialog.getByRole("button", { name: "Close export dialog" }).evaluate((node) => node === document.activeElement), true);
+  const lightContrast = await checkDialog(dialog);
+  for (let i = 0; i < 12; i += 1) {
+    await page.keyboard.press("Tab");
+    assert.ok(await dialog.evaluate((node) => document.activeElement === document.body || node.contains(document.activeElement)));
+  }
+  await page.keyboard.press("Escape");
+  await dialog.waitFor({ state: "hidden" });
+  assert.ok(await opener.evaluate((node) => node === document.activeElement));
+
+  await page.goto("/settings", { waitUntil: "domcontentloaded" });
+  await button(page, "Dark Mode").press("Enter");
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  assert.equal(await page.locator("html").evaluate((node) => node.classList.contains("dark")), true);
+  await page.getByRole("main").getByRole("button", { name: new RegExp(marker) }).press("Enter");
+
+  const mimeTypes = { PDF: "application/pdf", JSON: "application/json", CSV: "text/csv" };
+  for (const format of ["PDF", "JSON", "CSV"]) {
+    await keyboardActivate(page, opener);
+    await dialog.waitFor();
+    const darkContrast = await checkDialog(dialog);
+    await keyboardActivate(page, dialog.getByRole("button", { name: format, exact: true }));
+    assert.equal(await dialog.getByRole("button", { name: format, exact: true }).getAttribute("aria-pressed"), "true");
+    if (format !== "PDF") {
+      const include = dialog.getByRole("checkbox", { name: /Include already-exported/ });
+      if (!(await include.isChecked())) {
+        await tabTo(page, include);
+        await page.keyboard.press("Space");
+      }
+    }
+    const result = watch(page, path + "/export", "POST");
+    const downloadEvent = page.waitForEvent("download");
+    await keyboardActivate(page, dialog.getByRole("button", { name: `Download ${format}`, exact: true }));
+    const response = await status(await result, 200);
+    const download = await downloadEvent;
+    assert.equal(await download.failure(), null);
+    assert.ok(download.suggestedFilename().endsWith("." + format.toLowerCase()));
+    assert.ok((await response.headerValue("content-type")).startsWith(mimeTypes[format]));
+    assert.deepEqual(response.request().postDataJSON(), { format, includeExported: format !== "PDF" });
+    const body = await response.body();
+    if (format === "PDF") assert.equal(body.subarray(0, 5).toString(), "%PDF-");
+    else if (format === "JSON") assert.ok(JSON.parse(body.toString()).logs.some((log) => log.title === title));
+    else assert.ok(body.toString().includes(title));
+    await dialog.waitFor({ state: "hidden" });
+    assert.equal((await (await status(await request(leader.context, logPath), 200)).json()).reviewState, "EXPORTED");
+    console.log(`${marker} JR-158: ${format} download, unversioned contents and EXPORTED state verified. Dialog minimum sampled contrast light ${lightContrast}:1, dark ${darkContrast}:1.`);
+  }
 }
 
 (async () => {
-  const browser = await chromium.launch({
-    executablePath: process.env.PLOGIT_CHROMIUM,
-    args: ["--no-sandbox", "--disable-dev-shm-usage", "--no-zygote", "--single-process"],
-  });
+  const browsers = [];
   try {
-    console.log(`Chromium ${browser.version()}`);
-    await logJourney(browser);
+    for (let i = 0; i < 2; i += 1) {
+      browsers.push(await chromium.launch({
+        executablePath: process.env.PLOGIT_CHROMIUM,
+        args: ["--no-sandbox", "--disable-dev-shm-usage", ...(process.env.PLOGIT_SINGLE_PROCESS ? ["--no-zygote", "--single-process"] : [])],
+      }));
+    }
+    console.log(`Chromium ${browsers[0].version()}`);
+    const fixtureData = await logJourney(browsers);
+    if (process.env.PLOGIT_TEST_CASE !== "logs") await exportJourney(fixtureData);
   } finally {
-    await browser.close();
+    await Promise.all(browsers.map((browser) => browser.close()));
   }
 })().catch((error) => {
   console.error(error);

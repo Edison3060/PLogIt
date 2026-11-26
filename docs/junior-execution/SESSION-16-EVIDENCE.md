@@ -43,3 +43,9 @@ Builder Lead reviewed. Checkpoint parent `e9fd6a8ebb51bcfb642934c0d96a74184174bd
 Expected leader POST /api/engagements/:id/export with `{format: PDF|JSON|CSV, includeExported: boolean}` and an attachment response. Default includes APPROVED only. Opt-in adds previously EXPORTED. DRAFT and SUBMITTED are excluded. PDF can render images. JSON carries raw Markdown and filename references, not image files. Export records an audit and marks newly included approved logs EXPORTED. The backend owns member denial. Verify a named modal, keyboard reachability and focus return, 320 CSS pixel reflow, sampled 4.5:1 normal text contrast, correct descriptions, three downloads and a failed download with no success or audit mutation. W3C WCAG 2.2 and Understanding Reflow and Focus Not Obscured were consulted 2026-11-26: https://www.w3.org/TR/WCAG22/ , https://www.w3.org/WAI/WCAG22/Understanding/reflow , https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum . These are scoped checks and do not establish conformance. See DEC-2026-11-26-05.
 
 Builder Lead reviewed. Checkpoint parent `5fc781ae8365c9c2f260581fc706b7292bca8e4b`.
+
+## JR-158
+
+Replaced the overlay with a named native modal. It provides a named close button, explicit selected format, keyboard focus and Escape return. The browser now exercises real downloads at 320px for light and dark themes. On Chromium 151 and PostgreSQL 16.12, light modal reflow, focus confinement and Escape return passed. Dark-mode contrast assertion stopped the initial run before all downloads. Lint, build and 25 Vitest tests were run. Contrast diagnostic and final three-format rerun remain pending. The standalone dialog change can be reverted independently.
+
+Builder Lead reviewed. Checkpoint parent `4ff16372dd1b3c3926c4a9bc10487de924b52dda`.
