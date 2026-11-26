@@ -748,3 +748,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Reviewed navigation and isolated elapsed-expiry evidence. [Evidence](SESSION-15-EVIDENCE.md#jr-145). Previous head `8428786d27b8eee114da37d7e2bd79cb5f40a0cc`.
 - Continue with JR-146 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:35Z | Session 15 | JR-146
+
+- **DONE.** Mapped the engagement pages and server owners. [Evidence](SESSION-15-EVIDENCE.md#jr-146). Previous head `543b0e7188b74954110bd2b02672b0b61d53bcf7`.
+- Continue with JR-147 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.

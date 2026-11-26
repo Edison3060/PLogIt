@@ -21,3 +21,7 @@ Prior status NOT STARTED. Juxtaposed the existing revoked-cookie replay (403) an
 ## JR-145
 
 Prior status NOT STARTED. Desktop and mobile navigation, real logout, replay denial, and keyboard disclosure passed at JR-143. `AppShell.tsx` is independently reversible using commit `5bfc42d9045285d01ae91cf419d0ed7011a0d05f`. `npm run lint && npm run build && npm test` passed (24 tests) with the local Session 15 changes. Elapsed expiry is pending the JR-144 rerun. Builder Lead reviewed. Track the inherited expiry decision separately from Phase 08 acceptance.
+
+## JR-146
+
+Prior status NOT STARTED. At canonical source baseline `7727c1a82d42794e9955ae3baae0cc7475361526`, `Dashboard.tsx` and `EngagementsPage.tsx` use `useEngagements`, `useCreateEngagement` and `useJoinEngagement`. `EngagementDetail.tsx` owns role-aware page state and passes response data to Overview, Scope, Team and Audit. `EngagementController`, `JoinController`, `EngagementService`, `JoinCodeService` and `MembershipService` own the real writes and permissions. Existing `EngagementPanels.test.tsx`, `EngagementTeamWorkflow.test.tsx`, `EngagementAuthzIntegrationTest` and `EngagementLifecycleIntegrationTest` cover component delegation, canonical role refresh and server lifecycle. Product Spec §6 describes planned journeys; the verified UI places create/join on Manage Engagements. Baseline browser proved the workflow is implemented. No application code changed in this checkpoint.
