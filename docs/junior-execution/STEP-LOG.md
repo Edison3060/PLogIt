@@ -1,5 +1,5 @@
-Warning: truncated output (original token count: 48464)
-Total output lines: 1307
+Warning: truncated output (original token count: 48522)
+Total output lines: 1312
 
 # PLogIt: append-only JR execution log
 
@@ -463,7 +463,7 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Changed files:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF and new SESSION-04-EVIDENCE only.
 - **Executed tests:** none in JR-031 (read-only inspection). Prior CI 42338792629 is historical and not asserted as current; Docker, Maven and PostgreSQL CLI unavailable in current isolated runner. Clean/incremental/negative gates belong to JR-033–035.
 - **Research / assumptions:** canonical source and original Phase 02 roadmap, no external facts required, no real JudgeIt integration claimed. Future integration remains INT-001 provisional. Next JR-032 acceptance criteria.
-- **Git:** reviewed JR-031 numbered atomic pus…8464 tokens truncated…t events. Wrote `crossEngagementWritesAndRemovedMembershipAreDeniedWithoutMutation` in EngagementAuthzIntegrationTest with synthetic two leaders, member, two engagements and persisted count assertions. Corrected new JR-053 JSON string escaping before CI; this test/code correction is explicitly recorded.
+- **Git:** reviewed JR-031 numbered atomic pus…8522 tokens truncated…ng escaping before CI; this test/code correction is explicitly recorded.
 - Observed: source assertions present but Maven/PostgreSQL runtime not yet executed, therefore IN REVIEW. Changes: EngagementAuthzIntegrationTest.java, register, log, evidence, handoff. Planned GitHub Actions `cd backend && mvn -B clean verify`; no production, external data or other-app writes. Source service permissions unchanged. Reviewer Builder Lead, next JR-055 closure.
 
 ### 2026-11-11T12:39:52.414Z | Session 06 | JR-055 | IN REVIEW • MEMBERSHIP CLOSEOUT AWAITS CI
@@ -1144,3 +1144,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T14:02:11Z | Session 16 | JR-151 | DONE
 
 - Map canonical log form, board and review UI. [Evidence](SESSION-16-EVIDENCE.md#jr-151). Checkpoint parent `1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:02:44Z | Session 16 | JR-152 | DONE
+
+- Define log workflow and keyboard acceptance. [Evidence](SESSION-16-EVIDENCE.md#jr-152). Checkpoint parent `61b2ccbac9ecf89ba156fa8c9647501da924fd37`. Builder Lead reviewed.

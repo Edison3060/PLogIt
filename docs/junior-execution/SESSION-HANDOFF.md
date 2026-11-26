@@ -793,3 +793,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Map canonical log form, board and review UI. [Evidence](SESSION-16-EVIDENCE.md#jr-151). Checkpoint parent `1df6666d5c36e3cfa62bc9ef40f833e1bbe1cdf3`.
 - Continue with JR-152 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:02:44Z | Session 16 | JR-152
+
+- **DONE.** Define log workflow and keyboard acceptance. [Evidence](SESSION-16-EVIDENCE.md#jr-152). Checkpoint parent `61b2ccbac9ecf89ba156fa8c9647501da924fd37`.
+- Continue with JR-153 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.

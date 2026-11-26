@@ -274,3 +274,8 @@ Builder Lead selected a named disclosure with expanded state, closed-sidebar vis
 ### DEC-2026-11-26-03 | JR-147/149 | Distinguish loading, denial and empty results
 
 Use explicit pending, error and success feedback for engagement reads and writes. Keep denied detail generic and preserve the existing server-side role, scope and membership policies. The PLogIt owner must approve any contract or disclosure change. W3C WAI WCAG Technique ARIA19, accessed 2026-11-26, informed the persistent alert for join and create errors. Actual screen-reader testing remains separate. https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19.
+
+
+### DEC-2026-11-26-04 | JR-152 | Log workflow and keyboard acceptance
+
+The Builder Lead selected real browser checks with synthetic author and leader accounts, paired with PostgreSQL regression tests. Use an ordinary link to open a log by keyboard and keep the normal row pointer action. Treat failed saves as errors and keep unsaved form values in the current page. The PLogIt owner holds approval for any change to review roles, draft conflict semantics, evidence storage or export contracts. The exact test scope is in [JR-152](SESSION-16-EVIDENCE.md#jr-152).
