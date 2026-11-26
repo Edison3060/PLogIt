@@ -29,3 +29,7 @@ Prior status NOT STARTED. At canonical source baseline `7727c1a82d42794e9955ae3b
 ## JR-147
 
 Prior status NOT STARTED. Expected empty list only after successful `GET /api/engagements` returning `[]`. `POST /api/engagements` accepts `{name,description}` and identifies creator role LEADER. Leader issues a code via `POST /api/engagements/:id/join-code`, and `POST /api/join` accepts `{code}` and establishes MEMBER. `GET /api/engagements/:id` provides scope and active member roster to members. The leader-only Audit tab uses its own endpoint, and an outsider receives 404. At baseline a failed list/audit read fell through to empty display, and visual denials lacked an alert role. Builder Lead authorized scoped frontend presentation changes. Server authorization, evidence and data contracts are retained.
+
+## JR-148
+
+Prior status NOT STARTED. Chromium 158 against real Spring Boot/PostgreSQL at 390×844. Baseline fixture `S15-1795659331643` and corrected fixture `S15-1795659331601` passed. Browser created the engagement (200, LEADER), updated `scope.example.test` (200), issued the join code (200), redeemed as a second user (200, MEMBER), and reloaded. Scope still showed the target and Team showed both users. Edit and Audit controls were absent for the member. All writes used the normal CSRF-protected HTTP handlers. No application code changed in this checkpoint. The repeatable harness is included in the JR-149 checkpoint.

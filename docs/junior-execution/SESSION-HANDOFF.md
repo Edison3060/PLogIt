@@ -760,3 +760,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Recorded engagement state and permission acceptance. [Evidence](SESSION-15-EVIDENCE.md#jr-147). Previous head `c86476a23d1c0cd68d14e0728b2767e4af31b4ad`.
 - Continue with JR-148 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:54Z | Session 15 | JR-148
+
+- **DONE.** Verified create, join, scope and team after refresh. [Evidence](SESSION-15-EVIDENCE.md#jr-148). Previous head `910d3bdbd8a99e45a31ed341ce2595beb1be0adc`.
+- Continue with JR-149 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
