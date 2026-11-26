@@ -25,3 +25,9 @@ Builder Lead reviewed. Checkpoint parent `54980e713291d831bd7b45e587a9012b6b7ab2
 The editor now waits for its first record and initializes once per log. Background query updates can no longer rehydrate over locally typed text. An update failure stays on the page and uses an alert region. The review error also has an alert and the rejection comment has an accessible name. The browser harness now checks member approval 403 and a concurrent submit followed by stale edit 409, requiring unchanged history and retained typed text. Lint, build and 25 Vitest cases passed. An initial isolated database startup failed because log redirection populated the empty database directory before initdb. The corrected browser rerun is pending. Existing same-state delayed-write risk remains DEC-2026-11-23-03.
 
 Builder Lead reviewed. Checkpoint parent `a7d1fdd6887bce85ff5bc723d7f9074daff3f058`.
+
+## JR-155
+
+Review boundary: draft editor and board fixes are confined to the frontend and reversible via JR-153 and JR-154. Lint, build, 25 Vitest tests and Node syntax passed. Browser authorization, version history and keyboard evidence require the corrected fixture run. The existing delayed stale DRAFT-to-DRAFT overwrite from Session 10 is independently tracked and remains in review.
+
+Builder Lead reviewed. Checkpoint parent `3515bc295c81bda8330fb58a91bb2339d2ad5228`.

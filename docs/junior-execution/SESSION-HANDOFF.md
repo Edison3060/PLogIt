@@ -811,3 +811,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Keep unsaved form text visible after a rejected update. [Evidence](SESSION-16-EVIDENCE.md#jr-154). Checkpoint parent `a7d1fdd6887bce85ff5bc723d7f9074daff3f058`.
 - Continue with JR-155 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:08:11Z | Session 16 | JR-155
+
+- **IN REVIEW.** Record the log workflow closeout and outstanding browser proof. [Evidence](SESSION-16-EVIDENCE.md#jr-155). Checkpoint parent `3515bc295c81bda8330fb58a91bb2339d2ad5228`.
+- Continue with JR-156 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
