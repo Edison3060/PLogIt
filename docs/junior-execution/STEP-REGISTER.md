@@ -148,7 +148,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-140 | Close Retention, exports and sensitive data verification | 14 | IN REVIEW | [Session 14 evidence](SESSION-14-EVIDENCE.md#jr-140) | 2026-11-25 |
 | JR-141 | Inventory Navigation and sessions | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-141) | 2026-11-26 |
 | JR-142 | Specify Navigation and sessions acceptance | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-142) | 2026-11-26 |
-| JR-143 | Reproduce Navigation and sessions success | 15 | NOT STARTED | — | — |
+| JR-143 | Reproduce Navigation and sessions success | 15 | DONE | [Evidence](SESSION-15-EVIDENCE.md#jr-143) | 2026-11-26 |
 | JR-144 | Reject Navigation and sessions invalid operation | 15 | NOT STARTED | — | — |
 | JR-145 | Close Navigation and sessions verification | 15 | NOT STARTED | — | — |
 | JR-146 | Inventory Engagement pages | 15 | NOT STARTED | — | — |

@@ -264,3 +264,8 @@ Initial PostgreSQL-backed CI showed the HTML sanitizer stripped the pre wrapper 
 ### DEC-2026-11-26-01 | JR-142 | Session and route acceptance
 
 PLogIt product owner owns any change to expiry policy, membership, or redirect expectations. Builder Lead selected real browser and HTTP verification of the existing contract, with a short idle timeout confined to the local test instance. Verification includes keyboard navigation and the mobile sidebar. Existing session and CSRF controls remain authoritative.
+
+
+### DEC-2026-11-26-02 | JR-143 | Mobile keyboard navigation
+
+Builder Lead selected a named disclosure with expanded state, closed-sidebar visibility, predictable focus on repeat keyboard use and Escape restoration. This presentation-only change implements the existing responsive navigation. [JR-143 evidence](SESSION-15-EVIDENCE.md#jr-143).

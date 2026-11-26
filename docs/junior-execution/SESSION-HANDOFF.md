@@ -730,3 +730,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Recorded session and navigation acceptance. [Evidence](SESSION-15-EVIDENCE.md#jr-142). Previous head `6a32d34692042bc8a8bd16a173222b0c97bcabe5`.
 - Continue with JR-143 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:15:09Z | Session 15 | JR-143
+
+- **DONE.** Verified and corrected keyboard navigation at both widths. [Evidence](SESSION-15-EVIDENCE.md#jr-143). Previous head `d39017bb1bd8b4ac0f78593cab7fbd7eefd58bf1`.
+- Continue with JR-144 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
