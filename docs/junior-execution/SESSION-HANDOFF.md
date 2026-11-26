@@ -742,3 +742,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Recorded the first elapsed-session reload result. [Evidence](SESSION-15-EVIDENCE.md#jr-144). Previous head `5bfc42d9045285d01ae91cf419d0ed7011a0d05f`.
 - Continue with JR-145 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.
+
+
+### 2026-11-26T02:16:31Z | Session 15 | JR-145
+
+- **IN REVIEW.** Reviewed navigation and isolated elapsed-expiry evidence. [Evidence](SESSION-15-EVIDENCE.md#jr-145). Previous head `8428786d27b8eee114da37d7e2bd79cb5f40a0cc`.
+- Continue with JR-146 on Phase 08, stacked on unmerged Phase 07 #28. Prior policy and release gates remain open.

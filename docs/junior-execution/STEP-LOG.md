@@ -1255,3 +1255,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T02:16:27Z | Session 15 | JR-144 | IN REVIEW
 
 - Recorded the first elapsed-session reload result. [Evidence](SESSION-15-EVIDENCE.md#jr-144). Previous head `5bfc42d9045285d01ae91cf419d0ed7011a0d05f`. Reviewed by Builder Lead.
+
+
+### 2026-11-26T02:16:31Z | Session 15 | JR-145 | IN REVIEW
+
+- Reviewed navigation and isolated elapsed-expiry evidence. [Evidence](SESSION-15-EVIDENCE.md#jr-145). Previous head `8428786d27b8eee114da37d7e2bd79cb5f40a0cc`. Reviewed by Builder Lead.

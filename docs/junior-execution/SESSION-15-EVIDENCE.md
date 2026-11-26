@@ -17,3 +17,7 @@ Prior status NOT STARTED. Expected signed-in dashboard → engagement → Activi
 ## JR-144
 
 Prior status NOT STARTED. Juxtaposed the existing revoked-cookie replay (403) and real elapsed-session reload. Chromium 158.0.8127.0 against the isolated app, fixture `S15-1795659260293`, retained the original browser cookie after 65 seconds, but `/api/auth/me` returned 200 on initial reload where 403 was expected. This run did not establish server-side expiry. Investigate the effective Tomcat session window and rerun. No session, authorization, or cookie code changed.
+
+## JR-145
+
+Prior status NOT STARTED. Desktop and mobile navigation, real logout, replay denial, and keyboard disclosure passed at JR-143. `AppShell.tsx` is independently reversible using commit `5bfc42d9045285d01ae91cf419d0ed7011a0d05f`. `npm run lint && npm run build && npm test` passed (24 tests) with the local Session 15 changes. Elapsed expiry is pending the JR-144 rerun. Builder Lead reviewed. Track the inherited expiry decision separately from Phase 08 acceptance.
