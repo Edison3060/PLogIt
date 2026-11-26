@@ -259,3 +259,8 @@ Preserve the verified leader-only local export and existing archive semantics wh
 ### DEC-2026-11-25-05 | JR-133/135 | Preserve preformatted code
 
 Initial PostgreSQL-backed CI showed the HTML sanitizer stripped the pre wrapper from a legitimate code fence. Restore that element with an element-only policy, retaining the existing sanitizer policies. The follow-up scoped GET, sanitizer suite, frontend and PDF regressions passed. Raw evidence remains the source for existing exports. The correction can be reverted independently if needed. [Executed evidence](SESSION-14-EVIDENCE.md#reconciliation).
+
+
+### DEC-2026-11-26-01 | JR-142 | Session and route acceptance
+
+PLogIt product owner owns any change to expiry policy, membership, or redirect expectations. Builder Lead selected real browser and HTTP verification of the existing contract, with a short idle timeout confined to the local test instance. Verification includes keyboard navigation and the mobile sidebar. Existing session and CSRF controls remain authoritative.
