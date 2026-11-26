@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLog, useCreateLog, useUpdateLog } from "../hooks/useLogs";
 import {
@@ -6,6 +6,7 @@ import {
   OUTCOMES,
   formatActivityType,
   formatEnum,
+  type LogDetail,
   type LogFormData,
 } from "../lib/logs";
 
@@ -29,34 +30,39 @@ const selectClass = `${inputClass} cursor-pointer`;
 
 export default function LogForm() {
   const { id, logId } = useParams<{ id: string; logId: string }>();
+  const { data: existingLog, isPending } = useLog(logId);
+
+  if (logId && !existingLog) {
+    return isPending
+      ? <p role="status" className="p-6 text-text-muted">Loading log...</p>
+      : <p role="alert" className="p-6 text-danger">Unable to load this log.</p>;
+  }
+
+  return <LogEditor key={logId ?? `new-${id}`} engagementId={Number(id)} existingLog={existingLog} />;
+}
+
+function LogEditor({ engagementId, existingLog }: { engagementId: number; existingLog?: LogDetail }) {
   const navigate = useNavigate();
-  const engagementId = Number(id);
+  const logId = existingLog?.id;
   const isEdit = !!logId;
 
-  const { data: existingLog } = useLog(logId);
   const createMut = useCreateLog(engagementId);
   const updateMut = useUpdateLog(engagementId);
 
-  const [form, setForm] = useState<LogFormData>(EMPTY_FORM);
+  const [form, setForm] = useState<LogFormData>(() => existingLog ? {
+    activityType: existingLog.activityType,
+    title: existingLog.title,
+    description: existingLog.description,
+    result: existingLog.result,
+    target: existingLog.target ?? "",
+    toolUsed: existingLog.toolUsed ?? "",
+    outcome: existingLog.outcome,
+    tags: existingLog.tags ?? [],
+    codeBlock: existingLog.codeBlock ?? "",
+    codeLanguage: existingLog.codeLanguage ?? "",
+  } : EMPTY_FORM);
   const [tagInput, setTagInput] = useState("");
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (isEdit && existingLog) {
-      setForm({
-        activityType: existingLog.activityType,
-        title: existingLog.title,
-        description: existingLog.description,
-        result: existingLog.result,
-        target: existingLog.target || "",
-        toolUsed: existingLog.toolUsed || "",
-        outcome: existingLog.outcome,
-        tags: existingLog.tags || [],
-        codeBlock: existingLog.codeBlock || "",
-        codeLanguage: existingLog.codeLanguage || "",
-      });
-    }
-  }, [isEdit, existingLog]);
 
   const setField = <K extends keyof LogFormData>(
     key: K,
@@ -110,12 +116,12 @@ export default function LogForm() {
         </p>
       </div>
 
-      {error && (
-        <div className="bg-danger-soft border border-danger/30 text-danger px-4 py-3 rounded-lg mb-4 flex items-center gap-2 text-sm font-medium">
+      <div role="alert">
+        {error && <div className="bg-danger-soft border border-danger/30 text-danger px-4 py-3 rounded-lg mb-4 flex items-center gap-2 text-sm font-medium">
           <i className="fa-solid fa-circle-exclamation"></i>
           {error}
-        </div>
-      )}
+        </div>}
+      </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div className="bg-bg-card border border-border-default rounded-xl shadow-sm p-5 flex flex-col gap-4">

@@ -101,12 +101,29 @@ async function logJourney(browser) {
   const submitted = watch(page, logPath + "/transition", "POST");
   await keyboardActivate(page, button(page, "Submit for review"));
   assert.equal((await (await status(await submitted, 200)).json()).reviewState, "SUBMITTED");
+  await page.getByText("Submitted", { exact: true }).waitFor();
   assert.equal(await button(page, "Approve").count(), 0);
+  assert.equal(await button(page, "Reject").count(), 0);
+  const auditBeforeDenial = await (await status(await request(leader.context, path + "/audit"), 200)).json();
+  await status(await request(author.context, logPath + "/transition", "POST", { action: "APPROVE" }), 403);
+  assert.deepEqual(await (await status(await request(leader.context, path + "/audit"), 200)).json(), auditBeforeDenial);
 
   await openBoard(leader.page);
   await keyboardActivate(leader.page, button(leader.page, "Review Queue"));
   await keyboardActivate(leader.page, leader.page.getByRole("link", { name: title, exact: true }));
   await heading(leader.page, title).waitFor();
+  await keyboardActivate(leader.page, button(leader.page, "Reject"));
+  await tabTo(leader.page, leader.page.getByLabel("Rejection comment"));
+  await leader.page.keyboard.insertText("Please expand the synthetic evidence.");
+  const rejection = watch(leader.page, logPath + "/transition", "POST");
+  await keyboardActivate(leader.page, button(leader.page, "Send back to draft"));
+  assert.equal((await (await status(await rejection, 200)).json()).reviewState, "DRAFT");
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.getByText("Please expand the synthetic evidence.", { exact: true }).waitFor();
+  const resubmitted = watch(page, logPath + "/transition", "POST");
+  await keyboardActivate(page, button(page, "Submit for review"));
+  assert.equal((await (await status(await resubmitted, 200)).json()).reviewState, "SUBMITTED");
+  await leader.page.reload({ waitUntil: "domcontentloaded" });
   const approval = watch(leader.page, logPath + "/transition", "POST");
   await keyboardActivate(leader.page, button(leader.page, "Approve"));
   assert.equal((await (await status(await approval, 200)).json()).reviewState, "APPROVED");
@@ -114,7 +131,31 @@ async function logJourney(browser) {
   const audit = await (await status(await request(leader.context, path + "/audit"), 200)).json();
   assert.ok(JSON.stringify(audit).includes(draft.id));
   assert.ok(JSON.stringify(audit).includes("APPROVE"));
-  console.log(`${marker} JR-153: Tab/Enter create, open, submit, filter and approve passed. Server returned DRAFT → SUBMITTED → APPROVED. Rendered Markdown and approval audit verified.`);
+  console.log(`${marker} JR-153: Tab/Enter create, open, submit, filter, reject, resubmit and approve passed. Rendered Markdown and approval audit verified.`);
+
+  const raceTitle = `${marker} concurrent review`;
+  const race = await (await status(await request(author.context, path + "/logs", "POST", {
+    title: raceTitle, activityType: "RECONNAISSANCE", description: "Stored draft", result: "Synthetic result", outcome: "IN_PROGRESS",
+  }), 200)).json();
+  await page.goBack({ waitUntil: "domcontentloaded" });
+  await heading(page, "Activity Logs").waitFor();
+  await keyboardActivate(page, page.getByRole("link", { name: raceTitle, exact: true }));
+  await keyboardActivate(page, button(page, "Edit"));
+  const editedTitle = "Unsaved draft text";
+  await page.getByLabel("Title *").fill(editedTitle);
+  const racePath = `/logs/${race.id}`;
+  const raceHistory = await (await status(await request(leader.context, racePath + "/history"), 200)).json();
+  await status(await request(leader.context, racePath + "/transition", "POST", { action: "SUBMIT" }), 200);
+  const collided = watch(page, racePath, "PUT");
+  await keyboardActivate(page, button(page, "Save changes"));
+  await status(await collided, 409);
+  await page.getByRole("alert").filter({ hasText: "Only draft logs can be edited" }).waitFor();
+  assert.equal(await page.getByLabel("Title *").inputValue(), editedTitle);
+  const kept = await (await status(await request(leader.context, racePath), 200)).json();
+  assert.equal(kept.title, raceTitle);
+  assert.equal(kept.reviewState, "SUBMITTED");
+  assert.deepEqual(await (await status(await request(leader.context, racePath + "/history"), 200)).json(), raceHistory);
+  console.log(`${marker} JR-154: member approval denied with 403 and unchanged audit. Concurrent submit blocked stale edit with 409. Browser text, stored title and version history retained.`);
   await Promise.all([leader.context.close(), author.context.close()]);
 }
 

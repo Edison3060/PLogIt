@@ -19,3 +19,9 @@ Builder Lead reviewed. Checkpoint parent `61b2ccbac9ecf89ba156fa8c9647501da924fd
 The board now offers a native focusable link per log and retains pointer row navigation. The synthetic browser harness drives create, submit, review queue and approval using Tab and Enter, checking returned states, rendered Markdown and audit. `npm run lint && npm run build && npm test` exited 0 with 25 tests; `node --check scripts/verify-log-export-journeys.cjs` and `git diff --check` exited 0. Chromium 151.0.7922.34 loaded the built preview sign-in shell. The PostgreSQL-backed browser journey is pending the isolated application build. Revert this checkpoint’s source changes to roll back the link.
 
 Builder Lead reviewed. Checkpoint parent `54980e713291d831bd7b45e587a9012b6b7ab2a3`.
+
+## JR-154
+
+The editor now waits for its first record and initializes once per log. Background query updates can no longer rehydrate over locally typed text. An update failure stays on the page and uses an alert region. The review error also has an alert and the rejection comment has an accessible name. The browser harness now checks member approval 403 and a concurrent submit followed by stale edit 409, requiring unchanged history and retained typed text. Lint, build and 25 Vitest cases passed. An initial isolated database startup failed because log redirection populated the empty database directory before initdb. The corrected browser rerun is pending. Existing same-state delayed-write risk remains DEC-2026-11-23-03.
+
+Builder Lead reviewed. Checkpoint parent `a7d1fdd6887bce85ff5bc723d7f9074daff3f058`.

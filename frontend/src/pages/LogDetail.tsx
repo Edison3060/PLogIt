@@ -164,11 +164,11 @@ export default function LogDetailPage() {
         </div>
       </div>
 
-      {error && (
-        <div className="bg-danger-soft border border-danger/30 text-danger rounded-lg p-3 mb-4 text-sm flex items-center gap-2 font-medium">
+      <div role="alert">
+        {error && <div className="bg-danger-soft border border-danger/30 text-danger rounded-lg p-3 mb-4 text-sm flex items-center gap-2 font-medium">
           <i className="fa-solid fa-circle-exclamation"></i> {error}
-        </div>
-      )}
+        </div>}
+      </div>
 
       {log.rejectionComment && (
         <div className="bg-danger-soft border border-danger/30 rounded-xl p-4 mb-4">
@@ -226,6 +226,7 @@ export default function LogDetailPage() {
             comment (required)
           </h3>
           <textarea
+            aria-label="Rejection comment"
             value={rejectComment}
             onChange={(e) => setRejectComment(e.target.value)}
             rows={3}

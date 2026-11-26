@@ -805,3 +805,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Make log titles reachable by keyboard and add the live browser journey. [Evidence](SESSION-16-EVIDENCE.md#jr-153). Checkpoint parent `54980e713291d831bd7b45e587a9012b6b7ab2a3`.
 - Continue with JR-154 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:08:06Z | Session 16 | JR-154
+
+- **IN REVIEW.** Keep unsaved form text visible after a rejected update. [Evidence](SESSION-16-EVIDENCE.md#jr-154). Checkpoint parent `a7d1fdd6887bce85ff5bc723d7f9074daff3f058`.
+- Continue with JR-155 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
