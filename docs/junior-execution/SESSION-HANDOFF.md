@@ -823,3 +823,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Map theme, responsive layout and export ownership. [Evidence](SESSION-16-EVIDENCE.md#jr-156). Checkpoint parent `e9fd6a8ebb51bcfb642934c0d96a74184174bdf5`.
 - Continue with JR-157 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-26T14:08:47Z | Session 16 | JR-157
+
+- **DONE.** Define export dialog focus, reflow, format and access acceptance. [Evidence](SESSION-16-EVIDENCE.md#jr-157). Checkpoint parent `5fc781ae8365c9c2f260581fc706b7292bca8e4b`.
+- Continue with JR-158 on the same branch. Phase 07 acceptance, INT-001 and production authorization remain pending.

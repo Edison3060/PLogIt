@@ -279,3 +279,8 @@ Use explicit pending, error and success feedback for engagement reads and writes
 ### DEC-2026-11-26-04 | JR-152 | Log workflow and keyboard acceptance
 
 The Builder Lead selected real browser checks with synthetic author and leader accounts, paired with PostgreSQL regression tests. Use an ordinary link to open a log by keyboard and keep the normal row pointer action. Treat failed saves as errors and keep unsaved form values in the current page. The PLogIt owner holds approval for any change to review roles, draft conflict semantics, evidence storage or export contracts. The exact test scope is in [JR-152](SESSION-16-EVIDENCE.md#jr-152).
+
+
+### DEC-2026-11-26-05 | JR-157 | Export dialog accessibility and disclosure
+
+Use a native modal dialog and browser keyboard checks to verify opening, focus confinement, Escape and focus return. Test reflow at 320 CSS pixels and normal text contrast of at least 4.5:1 for the dialog controls and explanatory text. Clarify inclusion and attachment references using the current backend contract. The PLogIt owner holds approval for changing visibility, export formats, inclusion, audit, retention or the existing JSON contract. Scope and sources are in [JR-157](SESSION-16-EVIDENCE.md#jr-157).

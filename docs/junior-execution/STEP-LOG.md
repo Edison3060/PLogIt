@@ -1,5 +1,5 @@
-Warning: truncated output (original token count: 48774)
-Total output lines: 1332
+Warning: truncated output (original token count: 48837)
+Total output lines: 1337
 
 # PLogIt: append-only JR execution log
 
@@ -463,9 +463,7 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 - **Changed files:** tracking STEP-REGISTER, STEP-LOG, SESSION-HANDOFF and new SESSION-04-EVIDENCE only.
 - **Executed tests:** none in JR-031 (read-only inspection). Prior CI 42338792629 is historical and not asserted as current; Docker, Maven and PostgreSQL CLI unavailable in current isolated runner. Clean/incremental/negative gates belong to JR-033–035.
 - **Research / assumptions:** canonical source and original Phase 02 roadmap, no external facts required, no real JudgeIt integration claimed. Future integration remains INT-001 provisional. Next JR-032 acceptance criteria.
-- **Git:** reviewed JR-031 numbered atomic pus…8774 tokens truncated…gates; actual result PENDING. Changed: STEP-REGISTER, STEP-LOG, SESSION-06-EVIDENCE, SESSION-HANDOFF. Reviewer Builder Lead. No main merge/CD; phase 03 PR #24 still draft.
-
-### 2026-11-11T12:41:23.619Z | Session 06 | JR-056 | DONE • AUTH ABUSE SOURCE/TEST INVENTORY
+- **Git:** reviewed JR-031 numbered atomic pus…8837 tokens truncated…TEST INVENTORY
 - Canonical `security/AuthRateLimitInterceptor.java` and `config/AuthRateLimitConfig.java` intercept login/register POST before controllers, keyed **remote IP only**, ignoring X-Forwarded-For; synchronized bounded 10,000-entry map, login 20/60s, registration 5/600s default. AuthController authenticates; GlobalExceptionHandler returns generic 401 and 429/Retry-After; duplicate registration generic 202. `AuthRateLimitIntegrationTest` covers invalid bursts, forwarded spoof, independent IP/endpoint, duplicate registration and generic credentials.
 - Expected per-account/IP abuse defense vs observed IP-only: a few invalid attempts from shared IP can block unrelated legitimate account, and attempts against one account from varied addresses evade limiter. No source change for this inventory task. Tests: inspected existing Java tests and guard implementation, not executed here; `cd backend && mvn -B clean verify` planned via GitHub CI. Changed register/log/handoff/evidence. Reviewer Builder Lead, no subagents. Next JR-057 scoped accepted design; existing JR-053–055 remain IN REVIEW pending CI; no main/production.
 
@@ -1165,3 +1163,8 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T14:08:42Z | Session 16 | JR-156 | DONE
 
 - Map theme, responsive layout and export ownership. [Evidence](SESSION-16-EVIDENCE.md#jr-156). Checkpoint parent `e9fd6a8ebb51bcfb642934c0d96a74184174bdf5`. Builder Lead reviewed.
+
+
+### 2026-11-26T14:08:47Z | Session 16 | JR-157 | DONE
+
+- Define export dialog focus, reflow, format and access acceptance. [Evidence](SESSION-16-EVIDENCE.md#jr-157). Checkpoint parent `5fc781ae8365c9c2f260581fc706b7292bca8e4b`. Builder Lead reviewed.
