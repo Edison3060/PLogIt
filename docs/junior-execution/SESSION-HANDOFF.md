@@ -867,3 +867,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Record database acceptance and enum policy gap. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-162). Checkpoint parent `c9dac553310aa842fcb6c2a04e768a8e5b48a3b1`.
 - Continue with JR-163 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:03:47Z | Session 17 | JR-163
+
+- **IN REVIEW.** Exercise clean and seeded Flyway migration paths. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-163). Checkpoint parent `efb04e1155e62e1fab1b0b78fa96ee08f18b58f9`.
+- Continue with JR-164 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
