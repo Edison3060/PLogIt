@@ -1215,3 +1215,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Exercise clean and seeded Flyway migration paths. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-163). Checkpoint parent `efb04e1155e62e1fab1b0b78fa96ee08f18b58f9`. Builder Lead reviewed.
 - Continue with JR-164 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:12Z | Session 17 | JR-164 | IN REVIEW
+
+- Verify PostgreSQL duplicate and foreign-key rollback. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-164). Checkpoint parent `13c712e0fc3668b7a12ee9cee5dc2c37a10a51e6`. Builder Lead reviewed.
+- Continue with JR-165 on this branch. INT-001 and production authorization remain pending.

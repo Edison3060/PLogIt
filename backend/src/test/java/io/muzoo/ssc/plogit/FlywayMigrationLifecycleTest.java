@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -126,6 +127,55 @@ class FlywayMigrationLifecycleTest {
                 Files.deleteIfExists(directory);
             }
         }
+    }
+
+    @Test
+    void duplicateAndForeignKeyViolationsRollBackPriorWrites() throws Exception {
+        try (PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:16-alpine")) {
+            postgres.start();
+            migrate(postgres, "classpath:db/migration");
+            execute(postgres, """
+                INSERT INTO users (id, email, password_hash, display_name)
+                VALUES (41, 'constraints@invalid.test', 'synthetic', 'Original');
+                INSERT INTO engagements (id, name, description, status, leader_id)
+                VALUES (41, 'Synthetic', 'Constraint fixture', 'ACTIVE', 41);
+                INSERT INTO engagement_members (engagement_id, user_id, role, joined_via)
+                VALUES (41, 41, 'LEADER', 'synthetic');
+                """);
+
+            assertRejectedAndRolledBack(postgres, "23505", """
+                INSERT INTO engagement_members (engagement_id, user_id, role, joined_via)
+                VALUES (41, 41, 'MEMBER', 'synthetic')
+                """);
+            assertRejectedAndRolledBack(postgres, "23503", """
+                INSERT INTO engagement_members (engagement_id, user_id, role, joined_via)
+                VALUES (41, 42, 'MEMBER', 'synthetic')
+                """);
+
+            assertEquals(1, queryCount(postgres, "SELECT count(*) FROM engagement_members"));
+            assertEquals(1, queryCount(postgres, """
+                SELECT count(*) FROM engagement_members
+                WHERE engagement_id = 41 AND user_id = 41 AND role = 'LEADER'
+                """));
+        }
+    }
+
+    private static void assertRejectedAndRolledBack(
+        PostgreSQLContainer postgres, String expectedSqlState, String invalidWrite
+    ) throws Exception {
+        try (Connection connection = DriverManager.getConnection(
+                postgres.getJdbcUrl(), postgres.getUsername(), postgres.getPassword());
+             Statement statement = connection.createStatement()) {
+            connection.setAutoCommit(false);
+            assertEquals(1, statement.executeUpdate("UPDATE users SET display_name = 'Partial' WHERE id = 41"));
+            SQLException failure = assertThrows(SQLException.class, () -> statement.executeUpdate(invalidWrite));
+            assertEquals(expectedSqlState, failure.getSQLState());
+            SQLException aborted = assertThrows(SQLException.class, () -> statement.executeQuery("SELECT 1"));
+            assertEquals("25P02", aborted.getSQLState());
+            connection.rollback();
+        }
+        assertEquals(1, queryCount(postgres,
+            "SELECT count(*) FROM users WHERE id = 41 AND display_name = 'Original'"));
     }
 
     private static void assertCanonicalConstraints(PostgreSQLContainer postgres) throws Exception {

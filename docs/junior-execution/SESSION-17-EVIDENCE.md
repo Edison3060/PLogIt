@@ -13,3 +13,7 @@ Expected on empty and seeded V1-to-V3 databases are valid engagement/user member
 ## JR-163
 
 Added `cleanDatabaseAppliesCanonicalMigrationsAndEnforcesDeclaredSchema` and extended `cleanV1ThenIncrementalV2V3PreservesSyntheticLogAndSnapshot` in `FlywayMigrationLifecycleTest`. Expect migration versions 1–3, six validated foreign keys, two unique constraints and the unchanged seeded leadership, log, and JSON snapshot. The existing Maven verification job executes these Testcontainers tests in PostgreSQL 16. Local `git diff --check` passed. Maven and Docker are unavailable locally. Runtime results pending GitHub CI. Reviewer is the Builder Lead.
+
+## JR-164
+
+Added `duplicateAndForeignKeyViolationsRollBackPriorWrites`: PostgreSQL is expected to return `23505` for a repeated membership pair and `23503` for a non-existent user. Each transaction first updates a synthetic user. Both failure cases must reach `25P02`, then roll back and preserve the prior user and exact membership. SQL fixture runs on a disposable server. HTTP active membership denial is covered separately by `TeamWorkflowIntegrationTest` and `JoinCodeWorkflowIntegrationTest`. Local `git diff --check` passed. Test execution is pending GitHub CI. Reviewer is the Builder Lead.
