@@ -300,3 +300,8 @@ The mirrored Product Spec describes additional board filters, leader edits after
 ### DEC-2026-11-27-03 | JR-172/JR-175 | Paired evidence recovery
 
 Require a writer-quiesced checkpoint containing a PostgreSQL custom-format dump and separate attachment archive, with private checksums and restore into a fresh isolated target. Compare engagement, log, version, attachment and audit records and image bytes. Missing media, a failed restore or an incompatible application schema must stop any promotion. The source currently provisions separate volumes. The PLogIt owner and deployment operator own production backup access, encryption, retention, RPO/RTO and cutover; those decisions remain open. This session authorizes a disposable drill.
+
+
+### DEC-2026-11-27-04 | JR-177/JR-178/JR-180 | Liveness and incident diagnostics
+
+Preserve the public /api/health liveness payload. Verify PostgreSQL and storage using authenticated bounded operations, restart in dependency order, and check the logs and external responses for seeded credential and payload values. An operator readiness design should expose only dependency state to an approved audience, with generated opaque correlation IDs and allowlisted diagnostic fields. The deployment operator and PLogIt owner own production exposure, log access/retention, and response policy. This branch tests the existing endpoint and includes a deployment-independent runbook.

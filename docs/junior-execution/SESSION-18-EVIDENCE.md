@@ -25,3 +25,7 @@ Paired restore acceptance depends on fresh CI for JR-173/174 and operational sig
 ## JR-176
 
 Reviewed `HealthController.java`, `GlobalExceptionHandler.java`, the backend Dockerfile, Compose, README and the existing Compose smoke at the Phase 09 base. The public endpoint returns process liveness only. Compose exposes PostgreSQL container health and gates backend startup. HTTP 500 uses a generic response, with no application correlation ID or matching structured incident record. The README describes deployment and probes; a recovery and triage procedure is incomplete. The deployment operator owns recovery and backend maintainers own application diagnostics.
+
+## JR-177
+
+Preserve the public /api/health liveness payload. Verify PostgreSQL and storage using authenticated bounded operations, restart in dependency order, and check the logs and external responses for seeded credential and payload values. An operator readiness design should expose only dependency state to an approved audience, with generated opaque correlation IDs and allowlisted diagnostic fields. The deployment operator and PLogIt owner own production exposure, log access/retention, and response policy. This branch tests the existing endpoint and includes a deployment-independent runbook.
