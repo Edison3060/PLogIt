@@ -17,7 +17,8 @@ RUN set -eu; \
     dpkg --compare-versions "$(dpkg-query -W -f='${Version}' libapt-pkg7.0)" ge '3.2.1ubuntu0.1'; \
     apt-get clean; \
     rm -rf /var/lib/apt/lists/*
-RUN useradd -r -u 1001 -g root plogit
+RUN useradd -r -u 1001 -g root plogit \
+    && install -d -m 0750 -o plogit -g root /data/attachments
 WORKDIR /app
 COPY --from=build /workspace/target/*.jar /app/app.jar
 EXPOSE 8080

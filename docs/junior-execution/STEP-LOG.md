@@ -1335,3 +1335,10 @@ The original transactional success and denial evidence both passed. VERIFIED NO 
 - **Task / result:** Specify Health, logging and incident recovery acceptance. IN PROGRESS → DONE. Preserve the public /api/health liveness payload. Verify PostgreSQL and storage using authenticated bounded operations, restart in dependency order, and check the logs and external responses for seeded credential and payload values. An operator readiness design should expose only dependency state to an approved audience, with generated opaque correlation IDs and allowlisted diagnostic fields. The deployment operator and PLogIt owner own production exposure, log access/retention, and response policy. This branch tests the existing endpoint and includes a deployment-independent runbook.
 - **GitHub / review:** Builder Lead reviewed. This JR-177 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `48903fc4911286b6e7e29e6433f0e04b4be3d53d`.
 - **Next:** Verify restart and fault behavior in JR-178 and JR-179.
+
+
+### 2026-11-27T14:08:41Z | Session 18 | JR-178 | IN REVIEW
+
+- **Task / result:** Reproduce Health, logging and incident recovery success. IN PROGRESS → IN REVIEW. Extended the Compose drill to restart the backend, verify DB-container health and public liveness separately, deny the old session, log in, and compare the authenticated download with the original PNG. Added the isolated recovery runbook. The backend image now creates the attachment mountpoint owned by the existing runtime UID for new named volumes. It does not alter existing volumes. Rollback is reverting the Dockerfile change. No endpoint or JSON changes. Shell syntax and diff whitespace passed. Real restart and image tests are pending fresh CI. The baseline lacks a redacted correlation ID.
+- **GitHub / review:** Builder Lead reviewed. This JR-178 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `82c5fdb9c88ef5febfeffe5f2f3384a564306006`.
+- **Next:** Verify fault behavior for JR-179 and reconcile CI.

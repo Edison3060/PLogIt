@@ -29,3 +29,7 @@ Reviewed `HealthController.java`, `GlobalExceptionHandler.java`, the backend Doc
 ## JR-177
 
 Preserve the public /api/health liveness payload. Verify PostgreSQL and storage using authenticated bounded operations, restart in dependency order, and check the logs and external responses for seeded credential and payload values. An operator readiness design should expose only dependency state to an approved audience, with generated opaque correlation IDs and allowlisted diagnostic fields. The deployment operator and PLogIt owner own production exposure, log access/retention, and response policy. This branch tests the existing endpoint and includes a deployment-independent runbook.
+
+## JR-178
+
+Extended the Compose drill to restart the backend, verify DB-container health and public liveness separately, deny the old session, log in, and compare the authenticated download with the original PNG. Added the isolated recovery runbook. The backend image now creates the attachment mountpoint owned by the existing runtime UID for new named volumes. It does not alter existing volumes. Rollback is reverting the Dockerfile change. No endpoint or JSON changes. Shell syntax and diff whitespace passed. Real restart and image tests are pending fresh CI. The baseline lacks a redacted correlation ID.

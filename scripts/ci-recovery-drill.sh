@@ -38,7 +38,7 @@ SELECT jsonb_build_object(
     'versions', (SELECT jsonb_agg(to_jsonb(v) ORDER BY version_number) FROM log_versions v WHERE log_id = :'log'),
     'attachments', (SELECT jsonb_agg(to_jsonb(a)) FROM attachments a WHERE log_id = :'log'),
     'members', (SELECT jsonb_agg(to_jsonb(m) ORDER BY id) FROM engagement_members m WHERE engagement_id = :'engagement'),
-    'audit', (SELECT jsonb_agg(to_jsonb(a) ORDER BY id) FROM audit_log a),
+    'audit', (SELECT jsonb_agg(to_jsonb(a) ORDER BY id) FROM audit_log a WHERE target_type = 'LOG' AND target_id = :'log'),
     'migrations', (SELECT jsonb_agg(jsonb_build_array(version, checksum, success) ORDER BY installed_rank)
                    FROM flyway_schema_history)
 );
@@ -76,6 +76,7 @@ attachment="$(curl -fsS --max-time 10 -b "$jar" -H "X-XSRF-TOKEN: $csrf" \
 media_url="$base/logs/$log/attachments/$attachment"
 curl -fsS --max-time 10 -b "$jar" "$media_url" -o "$scratch/http-image.png"
 cmp "$scratch/image.png" "$scratch/http-image.png"
+write_json -d '{"action":"SUBMIT"}' "$base/logs/$log/transition" > /dev/null
 
 # The backend is the only application writer in the disposable stack.
 docker compose stop backend
@@ -106,7 +107,8 @@ with open(sys.argv[1]) as file:
     fixture = json.load(file)
 assert len(fixture["engagements"]) == len(fixture["logs"]) == len(fixture["attachments"]) == len(fixture["members"]) == 1
 assert [row["version_number"] for row in fixture["versions"]] == [1, 2]
-assert fixture["audit"] and all(row[2] for row in fixture["migrations"])
+assert [row["action"] for row in fixture["audit"]] == ["SUBMIT"]
+assert fixture["migrations"] and all(row[2] for row in fixture["migrations"])
 print("Recovered engagement=1 log=1 versions=2 attachment=1 membership=1 and preserved audit/Flyway records.")
 PY
 sha256sum "$scratch/restored/$storage_path" | cut -d ' ' -f 1
@@ -120,3 +122,55 @@ cmp "$scratch/restored.json" "$scratch/after-denial.json"
 printf 'Missing-media denial left restored database records unchanged.\n'
 
 docker compose --profile app up --detach --wait --wait-timeout 120 backend
+test "$(docker inspect -f '{{.State.Health.Status}}' plogit-db)" = healthy
+curl -fsS --max-time 10 "$base/health" |
+    python3 -c 'import json,sys; result=json.load(sys.stdin); assert result["status"] == "UP" and result["app"] == "plogit"'
+prior_session_status="$(curl -sS --max-time 10 -b "$jar" -o /dev/null -w '%{http_code}' "$media_url")"
+test "$prior_session_status" = 403
+login
+curl -fsS --max-time 10 -b "$jar" "$media_url" -o "$scratch/restarted-image.png"
+cmp "$scratch/image.png" "$scratch/restarted-image.png"
+printf 'Backend restart preserved authenticated access to PostgreSQL records and attachment bytes. Old session denied.\n'
+
+docker compose exec -T backend mv "/data/attachments/$storage_path" "/data/attachments/$storage_path.held"
+storage_code="$(curl -sS --max-time 10 -b "$jar" -o "$scratch/storage-error.json" -w '%{http_code}' "$media_url")"
+docker compose exec -T backend mv "/data/attachments/$storage_path.held" "/data/attachments/$storage_path"
+test "$storage_code" = 404
+python3 -c 'import json,sys; error=json.load(open(sys.argv[1])); assert error["status"] == 404 and error["message"] == "File not found on disk"' "$scratch/storage-error.json"
+
+docker compose stop db
+started="$SECONDS"
+database_code="$(curl -sS --max-time 45 -b "$jar" -o "$scratch/database-error.json" -w '%{http_code}' "$base/logs/$log")"
+elapsed="$((SECONDS - started))"
+test "$database_code" = 500
+python3 -c 'import json,sys; error=json.load(open(sys.argv[1])); assert error["status"] == 500 and error["message"] == "Something went wrong"' "$scratch/database-error.json"
+curl -fsS --max-time 10 "$base/health" |
+    python3 -c 'import json,sys; assert json.load(sys.stdin)["status"] == "UP"'
+docker compose up --detach --wait --wait-timeout 90 db
+curl -fsS --max-time 45 -b "$jar" "$media_url" -o "$scratch/recovered-image.png"
+cmp "$scratch/image.png" "$scratch/recovered-image.png"
+manifest "$POSTGRES_DB" > "$scratch/source-after-faults.json"
+cmp "$scratch/source.json" "$scratch/source-after-faults.json"
+
+docker compose logs --no-color backend > "$scratch/backend.log" 2>&1
+python3 - "$scratch" <<'PY'
+import os
+from pathlib import Path
+import sys
+
+root = Path(sys.argv[1])
+markers = [
+    os.environ["POSTGRES_PASSWORD"],
+    os.environ["SEED_USER_PASSWORD"],
+    "Updated version",
+]
+for line in (root / "cookies").read_text().splitlines():
+    fields = line.split("\t")
+    if len(fields) == 7 and fields[5] in {"JSESSIONID", "XSRF-TOKEN"}:
+        markers.append(fields[6])
+for filename in ("backend.log", "database-error.json", "storage-error.json"):
+    content = (root / filename).read_text()
+    if any(marker in content for marker in markers):
+        raise SystemExit(f"Unexpected credential or fixture content in {filename}")
+PY
+printf 'Missing attachment returned 404. PostgreSQL outage returned generic 500 in %ss, while liveness remained UP. Records and bytes matched after recovery. Checked synthetic credential, session and evidence markers.\n' "$elapsed"
