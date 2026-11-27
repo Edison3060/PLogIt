@@ -885,3 +885,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Record schema verification boundary. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-165). Checkpoint parent `47af4575190aa6cdc8193b86b9e4efc46b360180`.
 - Continue with JR-166 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:04:39Z | Session 17 | JR-166
+
+- **DONE.** Trace leadership review and export transaction owners. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-166). Checkpoint parent `0705e9e1bb566c947fb20707ecee53aeeff38087`.
+- Continue with JR-167 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.

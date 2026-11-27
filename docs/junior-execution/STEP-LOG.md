@@ -1227,3 +1227,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Record schema verification boundary. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-165). Checkpoint parent `47af4575190aa6cdc8193b86b9e4efc46b360180`. Builder Lead reviewed.
 - Continue with JR-166 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:39Z | Session 17 | JR-166 | DONE
+
+- Trace leadership review and export transaction owners. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-166). Checkpoint parent `0705e9e1bb566c947fb20707ecee53aeeff38087`. Builder Lead reviewed.
+- Continue with JR-167 on this branch. INT-001 and production authorization remain pending.
