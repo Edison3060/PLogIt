@@ -1197,3 +1197,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T14:18:27Z | Session 16 | JR-160 | DONE
 
 - Reconcile Phase 08 browser, regression and CI evidence. [Evidence](SESSION-16-EVIDENCE.md#jr-160). Checkpoint parent `782e0800cf444275222ac85caef2acc8db823e76`. Builder Lead reviewed.
+
+
+### 2026-11-27T02:03:02Z | Session 17 | JR-161 | DONE
+
+- Map canonical schema and constraints. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-161). Checkpoint parent `01dc9925a1f55924e242a888a592224cad956737`. Builder Lead reviewed.
+- Continue with JR-162 on this branch. INT-001 and production authorization remain pending.

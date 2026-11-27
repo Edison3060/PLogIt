@@ -855,3 +855,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Reconcile Phase 08 browser, regression and CI evidence. [Evidence](SESSION-16-EVIDENCE.md#jr-160). Checkpoint parent `782e0800cf444275222ac85caef2acc8db823e76`.
 - Reconcile the ten checkpoints and controller before the next session. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:03:02Z | Session 17 | JR-161
+
+- **DONE.** Map canonical schema and constraints. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-161). Checkpoint parent `01dc9925a1f55924e242a888a592224cad956737`.
+- Continue with JR-162 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
