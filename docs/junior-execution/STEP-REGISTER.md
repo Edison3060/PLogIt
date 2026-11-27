@@ -173,7 +173,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-165 | Close Schema integrity constraints verification | 17 | IN REVIEW | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-165) | 2026-11-27 |
 | JR-166 | Inventory Transactional business actions | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-166) | 2026-11-27 |
 | JR-167 | Specify Transactional business actions acceptance | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-167) | 2026-11-27 |
-| JR-168 | Reproduce Transactional business actions success | 17 | NOT STARTED | — | — |
+| JR-168 | Reproduce Transactional business actions success | 17 | IN REVIEW | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-168) | 2026-11-27 |
 | JR-169 | Reject Transactional business actions invalid operation | 17 | NOT STARTED | — | — |
 | JR-170 | Close Transactional business actions verification | 17 | NOT STARTED | — | — |
 | JR-171 | Inventory Database and attachment backup | 18 | NOT STARTED | — | — |

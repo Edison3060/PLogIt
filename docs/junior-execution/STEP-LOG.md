@@ -1239,3 +1239,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Specify atomic audit acceptance. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-167). Checkpoint parent `0a9d4bf1509d896e4feb6b21af9ec9b07cb10c1d`. Builder Lead reviewed.
 - Continue with JR-168 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:45Z | Session 17 | JR-168 | IN REVIEW
+
+- Map committed business records to audit assertions. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-168). Checkpoint parent `ae3f596962e042171730380dfedc3e632cb27437`. Builder Lead reviewed.
+- Continue with JR-169 on this branch. INT-001 and production authorization remain pending.
