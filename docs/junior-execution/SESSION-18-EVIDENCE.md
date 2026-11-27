@@ -33,3 +33,7 @@ Preserve the public /api/health liveness payload. Verify PostgreSQL and storage 
 ## JR-178
 
 Extended the Compose drill to restart the backend, verify DB-container health and public liveness separately, deny the old session, log in, and compare the authenticated download with the original PNG. Added the isolated recovery runbook. The backend image now creates the attachment mountpoint owned by the existing runtime UID for new named volumes. It does not alter existing volumes. Rollback is reverting the Dockerfile change. No endpoint or JSON changes. Shell syntax and diff whitespace passed. Real restart and image tests are pending fresh CI. The baseline lacks a redacted correlation ID.
+
+## JR-179
+
+The CI drill temporarily removes the synthetic image from its expected path and checks a bounded generic 404. It stops the disposable DB and makes an authenticated, CSRF-protected edit request with a 45s budget. It expects a generic 500, verifies current liveness behavior, restarts PostgreSQL, and compares the post-recovery database manifest and image to baseline. It checks response and backend logs for seeded credentials, cookies and synthetic evidence text. Media capture uses a networkless, read-only helper attached to the stopped backend volumes. Shell syntax and the CI-only guard passed. Runtime evidence is pending.

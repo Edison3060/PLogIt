@@ -87,9 +87,11 @@ SQL
 )"
 [[ "$storage_path" == "$engagement/$log/"* && "${storage_path##*/}" == *-image.png ]]
 docker compose exec -T db pg_dump -U "$POSTGRES_USER" -Fc "$POSTGRES_DB" > "$scratch/database.dump"
-mkdir "$scratch/captured" "$scratch/restored" "$scratch/missing"
-docker cp plogit-backend:/data/attachments/. "$scratch/captured"
-tar -cf "$scratch/media.tar" -C "$scratch/captured" .
+mkdir "$scratch/restored" "$scratch/missing"
+backend_image="$(docker compose images -q backend)"
+test -n "$backend_image"
+docker run --rm --network none --volumes-from plogit-backend:ro --entrypoint tar "$backend_image" \
+    -C /data/attachments -cf - . > "$scratch/media.tar"
 (cd "$scratch" && sha256sum database.dump media.tar > SHA256SUMS && sha256sum -c SHA256SUMS)
 
 docker compose exec -T db createdb -U "$POSTGRES_USER" "$restored_db"
@@ -140,7 +142,9 @@ python3 -c 'import json,sys; error=json.load(open(sys.argv[1])); assert error["s
 
 docker compose stop db
 started="$SECONDS"
-database_code="$(curl -sS --max-time 45 -b "$jar" -o "$scratch/database-error.json" -w '%{http_code}' "$base/logs/$log")"
+database_code="$(curl -sS --max-time 45 -b "$jar" -o "$scratch/database-error.json" -w '%{http_code}' \
+    -H "X-XSRF-TOKEN: $csrf" -H 'Content-Type: application/json' -X PUT \
+    -d '{"description":"Synthetic unavailable-database edit"}' "$base/logs/$log")"
 elapsed="$((SECONDS - started))"
 test "$database_code" = 500
 python3 -c 'import json,sys; error=json.load(open(sys.argv[1])); assert error["status"] == 500 and error["message"] == "Something went wrong"' "$scratch/database-error.json"
@@ -163,6 +167,7 @@ markers = [
     os.environ["POSTGRES_PASSWORD"],
     os.environ["SEED_USER_PASSWORD"],
     "Updated version",
+    "Synthetic unavailable-database edit",
 ]
 for line in (root / "cookies").read_text().splitlines():
     fields = line.split("\t")
