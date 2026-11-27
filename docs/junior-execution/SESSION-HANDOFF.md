@@ -903,3 +903,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Map committed business records to audit assertions. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-168). Checkpoint parent `ae3f596962e042171730380dfedc3e632cb27437`.
 - Continue with JR-169 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:05:17Z | Session 17 | JR-169
+
+- **IN REVIEW.** Exercise atomic rollback on audit write failure. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-169). Checkpoint parent `9b50e8f4b544ef24a9807c21e244bfe4845cfeeb`.
+- Continue with JR-170 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.

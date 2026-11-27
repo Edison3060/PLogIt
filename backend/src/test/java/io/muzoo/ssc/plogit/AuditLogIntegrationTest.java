@@ -18,6 +18,7 @@ import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
@@ -31,6 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,6 +48,9 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
 
     @Autowired
     private TransactionTemplate transactionTemplate;
+
+    @Autowired
+    private JdbcTemplate jdbc;
 
     private List<AuditLog> auditFor(Engagement engagement) {
         return auditLogRepository.findByEngagementId(String.valueOf(engagement.getId()), 200);
@@ -399,6 +404,101 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
 
         assertEquals(ReviewState.SUBMITTED, logRepository.findById(log.getId()).orElseThrow().getReviewState());
         assertTrue(auditFor(engagement).isEmpty());
+    }
+    @Test
+    void rejectedAuditWriteRollsBackLeadershipTransfer() throws Exception {
+        User leader = createUser("leader@test.local");
+        User member = createUser("member@test.local");
+        Engagement engagement = createEngagement(leader);
+        addMember(engagement, member, EngagementRole.MEMBER);
+        String transferUri = "/api/engagements/" + engagement.getId() + "/transfer-leadership";
+
+        rejectAuditWrites();
+        try {
+            mockMvc.perform(post(transferUri).with(asUser(leader)).with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("{\"newLeaderId\":" + member.getId() + "}"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.message").value("Something went wrong"));
+        } finally {
+            allowAuditWrites();
+        }
+
+        Engagement reloaded = engagementRepository.findById(engagement.getId()).orElseThrow();
+        assertEquals(leader.getId(), reloaded.getLeader().getId());
+        assertEquals(engagement.getVersion(), reloaded.getVersion());
+        assertEquals(EngagementRole.LEADER, memberRepository.findByEngagementAndUser(engagement, leader)
+            .orElseThrow().getRole());
+        assertEquals(EngagementRole.MEMBER, memberRepository.findByEngagementAndUser(engagement, member)
+            .orElseThrow().getRole());
+        assertEquals(0, auditLogRepository.count());
+    }
+
+    @Test
+    void rejectedAuditWriteRollsBackReviewApproval() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry log = createLog(engagement, leader, ReviewState.SUBMITTED);
+
+        rejectAuditWrites();
+        try {
+            mockMvc.perform(post(logUri(log.getId()) + "/transition").with(asUser(leader)).with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("""
+                        {"action":"APPROVE"}
+                        """))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.message").value("Something went wrong"));
+        } finally {
+            allowAuditWrites();
+        }
+
+        assertUnchangedReview(log);
+        assertEquals(0, auditLogRepository.count());
+    }
+
+    @Test
+    void rejectedAggregateAuditWriteRollsBackEveryExportedLogAndAudit() throws Exception {
+        User leader = createUser("leader@test.local");
+        Engagement engagement = createEngagement(leader);
+        LogEntry first = createLog(engagement, leader, ReviewState.APPROVED);
+        LogEntry second = createLog(engagement, leader, ReviewState.APPROVED);
+
+        rejectAuditWrites();
+        try {
+            mockMvc.perform(post("/api/engagements/" + engagement.getId() + "/export")
+                    .with(asUser(leader)).with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("""
+                        {"format":"JSON"}
+                        """))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.message").value("Something went wrong"))
+                .andExpect(header().doesNotExist("Content-Disposition"));
+        } finally {
+            allowAuditWrites();
+        }
+
+        assertUnchangedReview(first);
+        assertUnchangedReview(second);
+        assertEquals(0, auditLogRepository.count());
+    }
+
+    private void assertUnchangedReview(LogEntry original) {
+        LogEntry reloaded = logRepository.findById(original.getId()).orElseThrow();
+        assertEquals(original.getReviewState(), reloaded.getReviewState());
+        assertEquals(original.getVersion(), reloaded.getVersion());
+    }
+
+    private void rejectAuditWrites() {
+        jdbc.execute("""
+            ALTER TABLE audit_log ADD CONSTRAINT test_reject_audit
+            CHECK (action NOT IN ('TRANSFER_LEADERSHIP', 'APPROVE', 'EXPORT_ENGAGEMENT'))
+            """);
+    }
+
+    private void allowAuditWrites() {
+        jdbc.execute("ALTER TABLE audit_log DROP CONSTRAINT test_reject_audit");
     }
 
 }

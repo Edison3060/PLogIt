@@ -33,3 +33,7 @@ Leadership POST requires the active leader and `newLeaderId` of an active member
 ## JR-168
 
 Use `mvn -B clean verify` from `backend/`. `TeamWorkflowIntegrationTest.transferRefreshesPermissionsRosterAndSingleAuditThenRemovalPreservesHistory` uses `/api/engagements/{id}/transfer-leadership` and reloads pointer, roster, access and audit. `ReviewTransitionIntegrationTest` uses `/api/logs/{id}/transition` and verifies stored submission/approval plus scoped audit actor and action. `ExportIntegrationTest.jsonExportSelectsExactLogsAndCommitsAudit` uses `/api/engagements/{id}/export` and re-reads selected and excluded states, affected targets, actor and per-log and aggregate events. Prior Phase 08 CI is historical. Runtime verification on the Session 17 head is pending. Reviewer is the Builder Lead.
+
+## JR-169
+
+Added three `AuditLogIntegrationTest` requests through MockMvc and the real database. A test-only CHECK rejects the relevant audit INSERT at commit and is removed in `finally`. The export test permits per-log EXPORT writes and rejects the aggregate. Expected results are generic HTTP 500, no download response, unchanged persisted role assignments and leader pointer, review states and versions, and no surviving audit. Authorization denials are separately covered by the existing HTTP integration suite. Local `git diff --check` passed. Exact-head CI pending. Reviewer is the Builder Lead.
