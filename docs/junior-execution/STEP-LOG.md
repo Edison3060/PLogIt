@@ -1256,3 +1256,33 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-27T02:05:56Z | Session 17 | JR-169 | IN REVIEW
 
 Require PostgreSQL `23514` and the test constraint in the server-side cause while preserving the generic HTTP body. `git diff --check` passed. Exact-head CI pending.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-163 | DONE
+
+Clean and seeded V1-to-V3 migrations succeeded. PostgreSQL reported six validated foreign keys and two unique constraints. The seeded leadership, log, JSON snapshot and version defaults were preserved. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-164 | DONE
+
+The duplicate membership and invalid user FK produced SQLSTATE 23505 and 23503, respectively. Both transactions reported 25P02 after the rejected statement. Fresh queries confirmed the first write rolled back and the original membership remained. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-168 | DONE
+
+Leadership, submission and approval, and legacy JSON export committed. The tests re-read the leader and roster, review states, selected and excluded export logs, and the matching actor, action and target of the audit rows. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-169 | DONE
+
+Three PostgreSQL audit constraints returned SQLSTATE 23514 at commit. The API returned a generic 500 and export returned no download header. Fresh reads confirmed the original leader and roles, log states and versions, and zero remaining audit rows. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-165 | IN REVIEW
+
+Foreign-key, unique constraint and rollback evidence passed. PostgreSQL enum enforcement remains open under DEC-2026-11-27-01, so JR-165 remains IN REVIEW. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-170 | DONE
+
+The original transactional success and denial evidence both passed. VERIFIED NO CHANGE to application code, migrations, authentication, audit data and unversioned JSON. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.

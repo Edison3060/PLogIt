@@ -912,3 +912,10 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 
 JR-169 test review added a check for the injected SQLSTATE and constraint. Await exact-head CI before closing JR-170.
+
+
+## Session 17 closeout | 2026-11-27T02:09:53Z
+
+**READY WITH PROVISIONAL INTEGRATION** for independently initiated Session 18, JR-171–JR-180 on `work/plogit-phase-09`. Session 17 assessed all ten assigned JRs. JR-165 remains IN REVIEW for database enum enforcement, DEC-2026-11-27-01. All other assigned JRs are DONE. Reconcile the controller before beginning JR-171. Executable SHA `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023) ran `mvn -B clean verify` with Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16. All 170 backend tests passed with zero failures, errors or skips. This includes 4 Flyway migration tests, 18 audit tests, 21 review tests, 2 team tests and 18 export tests. Frontend build and all 25 Vitest tests passed. Isolated Compose HTTP and volume-restart smoke, Semgrep, Trivy filesystem and both images, and proxy validation passed. Production CD was skipped. Local `git diff --check` and an append-only step log check passed. Builder Lead reviewed.
+
+Draft [PR #30](https://github.com/Edison3060/PLogIt/pull/30) stacks on unmerged [PR #29](https://github.com/Edison3060/PLogIt/pull/29). Phase 09 recovery and merge acceptance, the prior phase gates, INT-001 JudgeIt compatibility, and DEC-2026-11-06-11 production authorization remain open. This JR-170 commit changes tracking only.

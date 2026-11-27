@@ -168,14 +168,14 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-160 | Close Themes, devices and exports verification | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-160) | 2026-11-26T14:18:27Z |
 | JR-161 | Inventory Schema integrity constraints | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-161) | 2026-11-27 |
 | JR-162 | Specify Schema integrity constraints acceptance | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-162) | 2026-11-27 |
-| JR-163 | Reproduce Schema integrity constraints success | 17 | IN REVIEW | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-163) | 2026-11-27 |
-| JR-164 | Reject Schema integrity constraints invalid operation | 17 | IN REVIEW | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-164) | 2026-11-27 |
+| JR-163 | Reproduce Schema integrity constraints success | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-163) | 2026-11-27 |
+| JR-164 | Reject Schema integrity constraints invalid operation | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-164) | 2026-11-27 |
 | JR-165 | Close Schema integrity constraints verification | 17 | IN REVIEW | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-165) | 2026-11-27 |
 | JR-166 | Inventory Transactional business actions | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-166) | 2026-11-27 |
 | JR-167 | Specify Transactional business actions acceptance | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-167) | 2026-11-27 |
-| JR-168 | Reproduce Transactional business actions success | 17 | IN REVIEW | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-168) | 2026-11-27 |
-| JR-169 | Reject Transactional business actions invalid operation | 17 | IN REVIEW | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-169) | 2026-11-27 |
-| JR-170 | Close Transactional business actions verification | 17 | NOT STARTED | — | — |
+| JR-168 | Reproduce Transactional business actions success | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-168) | 2026-11-27 |
+| JR-169 | Reject Transactional business actions invalid operation | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-169) | 2026-11-27 |
+| JR-170 | Close Transactional business actions verification | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-170) | 2026-11-27 |
 | JR-171 | Inventory Database and attachment backup | 18 | NOT STARTED | — | — |
 | JR-172 | Specify Database and attachment backup acceptance | 18 | NOT STARTED | — | — |
 | JR-173 | Reproduce Database and attachment backup success | 18 | NOT STARTED | — | — |
