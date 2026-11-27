@@ -292,3 +292,6 @@ The mirrored Product Spec describes additional board filters, leader edits after
 
 
 ### DEC-2026-11-27-01 | OPEN | PLogIt owner and database maintainer | JR-162, JR-165\n\nThe target is database enforcement of the approved enum domain alongside existing foreign keys and uniqueness. The deployed migration chain at the reviewed SHA uses unrestricted enum-shaped `VARCHAR` fields. Recommend a read-only legacy-value inventory and an approved additive constraint migration with tested rollout and rollback before tightening storage. Historical value remediation and database enforcement are pending owner review. Phase 09A uses isolated tests and preserves recorded evidence.
+
+
+### DEC-2026-11-27-02 | APPROVED FOR TEST-ONLY VERIFICATION | Builder Lead | JR-167, JR-169\n\nThe service layer puts each business mutation and its audit in the same transaction. Existing rollback evidence uses an optimistic transfer failure or marks a review rollback manually. Require the real application to surface a safe error and roll back both business and audit on a rejected audit INSERT. Exercise the failure using a temporary check in an isolated Testcontainers database. Existing success tests verify commit and read-back. Keep application code and the unversioned export contract unchanged during verification.

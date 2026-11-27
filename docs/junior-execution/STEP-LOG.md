@@ -1233,3 +1233,9 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 
 - Trace leadership review and export transaction owners. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-166). Checkpoint parent `0705e9e1bb566c947fb20707ecee53aeeff38087`. Builder Lead reviewed.
 - Continue with JR-167 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:42Z | Session 17 | JR-167 | DONE
+
+- Specify atomic audit acceptance. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-167). Checkpoint parent `0a9d4bf1509d896e4feb6b21af9ec9b07cb10c1d`. Builder Lead reviewed.
+- Continue with JR-168 on this branch. INT-001 and production authorization remain pending.
