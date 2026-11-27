@@ -17,3 +17,7 @@ Added `scripts/ci-recovery-drill.sh` to the existing CI Compose job. It creates 
 ## JR-174
 
 The isolated drill also supplies an empty restored media directory to the same byte verifier. It requires explicit missing-media denial and compares the restored database manifest again to detect side effects. The code never promotes the candidate or connects to production. Runtime pending on GitHub Actions.
+
+## JR-175
+
+Paired restore acceptance depends on fresh CI for JR-173/174 and operational sign-off under DEC-2026-11-27-03. Keep production promotion, access, retention and RPO/RTO unapproved. The test uses only synthetic data and a separate destination; no application source or export changes.

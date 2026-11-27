@@ -180,7 +180,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-172 | Specify Database and attachment backup acceptance | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-172) | 2026-11-27T14:05:39Z |
 | JR-173 | Reproduce Database and attachment backup success | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-173) | 2026-11-27T14:06:51Z |
 | JR-174 | Reject Database and attachment backup invalid operation | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-174) | 2026-11-27T14:07:08Z |
-| JR-175 | Close Database and attachment backup verification | 18 | NOT STARTED | — | — |
+| JR-175 | Close Database and attachment backup verification | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-175) | 2026-11-27T14:07:13Z |
 | JR-176 | Inventory Health, logging and incident recovery | 18 | NOT STARTED | — | — |
 | JR-177 | Specify Health, logging and incident recovery acceptance | 18 | NOT STARTED | — | — |
 | JR-178 | Reproduce Health, logging and incident recovery success | 18 | NOT STARTED | — | — |
