@@ -1286,3 +1286,10 @@ Foreign-key, unique constraint and rollback evidence passed. PostgreSQL enum enf
 ### 2026-11-27T02:09:53Z | Session 17 | JR-170 | DONE
 
 The original transactional success and denial evidence both passed. VERIFIED NO CHANGE to application code, migrations, authentication, audit data and unversioned JSON. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T14:05:19Z | Session 18 | JR-171 | DONE
+
+- **Task / result:** Inventory Database and attachment backup. IN PROGRESS → DONE. Reviewed base `927085c4f3ed7def4f55eaae351b2add2abe66d8`. Compose mounts `pgdata` at PostgreSQL and `attachments` at the backend. Flyway owns schema and AttachmentService stores relative paths in PostgreSQL. Production Compose retains both volumes. Existing `scripts/ci-compose-smoke.sh` restarts PostgreSQL and re-reads one row. README documents liveness and release operations. No canonical paired backup, restore or pre-promotion verification was identified. Deployment operator owns backup and restore. Inventory only.
+- **GitHub / review:** Builder Lead reviewed. This JR-171 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `927085c4f3ed7def4f55eaae351b2add2abe66d8`.
+- **Next:** Specify paired checkpoint acceptance in JR-172.
