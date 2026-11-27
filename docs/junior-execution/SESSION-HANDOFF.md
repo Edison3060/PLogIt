@@ -879,3 +879,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Verify PostgreSQL duplicate and foreign-key rollback. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-164). Checkpoint parent `13c712e0fc3668b7a12ee9cee5dc2c37a10a51e6`.
 - Continue with JR-165 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:04:15Z | Session 17 | JR-165
+
+- **IN REVIEW.** Record schema verification boundary. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-165). Checkpoint parent `47af4575190aa6cdc8193b86b9e4efc46b360180`.
+- Continue with JR-166 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.

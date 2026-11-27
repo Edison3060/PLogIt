@@ -17,3 +17,7 @@ Added `cleanDatabaseAppliesCanonicalMigrationsAndEnforcesDeclaredSchema` and ext
 ## JR-164
 
 Added `duplicateAndForeignKeyViolationsRollBackPriorWrites`: PostgreSQL is expected to return `23505` for a repeated membership pair and `23503` for a non-existent user. Each transaction first updates a synthetic user. Both failure cases must reach `25P02`, then roll back and preserve the prior user and exact membership. SQL fixture runs on a disposable server. HTTP active membership denial is covered separately by `TeamWorkflowIntegrationTest` and `JoinCodeWorkflowIntegrationTest`. Local `git diff --check` passed. Test execution is pending GitHub CI. Reviewer is the Builder Lead.
+
+## JR-165
+
+JR-163 and JR-164 exercise Flyway and active database FKs and uniqueness. Existing `LogVersioningIntegrationTest` and `OptimisticLockingIntegrationTest` cover snapshot and optimistic version behavior. Storage-level enforcement of the domain enum values remains open in DEC-2026-11-27-01. `EnumType.STRING` constrains ORM writes and the application API validates inputs. V1–V3 do not contain an enum or enum CHECK constraint. No change to migrations. Close the reviewed FK/uniqueness evidence after exact-head CI and keep the broader enum invariant open. Reviewer is the Builder Lead.
