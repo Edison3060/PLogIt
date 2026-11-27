@@ -178,7 +178,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-170 | Close Transactional business actions verification | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-170) | 2026-11-27 |
 | JR-171 | Inventory Database and attachment backup | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-171) | 2026-11-27T14:05:19Z |
 | JR-172 | Specify Database and attachment backup acceptance | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-172) | 2026-11-27T14:05:39Z |
-| JR-173 | Reproduce Database and attachment backup success | 18 | NOT STARTED | — | — |
+| JR-173 | Reproduce Database and attachment backup success | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-173) | 2026-11-27T14:06:51Z |
 | JR-174 | Reject Database and attachment backup invalid operation | 18 | NOT STARTED | — | — |
 | JR-175 | Close Database and attachment backup verification | 18 | NOT STARTED | — | — |
 | JR-176 | Inventory Health, logging and incident recovery | 18 | NOT STARTED | — | — |

@@ -931,3 +931,9 @@ Draft [PR #30](https://github.com/Edison3060/PLogIt/pull/30) stacks on unmerged 
 
 - **DONE.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-172). Checkpoint parent `33b860926b08c1ccd518262823f51895716680ec`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
 - **Next safe action:** Run the synthetic restore drill in JR-173.
+
+
+### 2026-11-27T14:06:51Z | Session 18 | JR-173
+
+- **IN REVIEW.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-173). Checkpoint parent `e5ead1426185825d6221cf03ad5101907be7518c`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Verify the missing-media rejection in JR-174 and reconcile fresh CI.

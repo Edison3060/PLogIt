@@ -9,3 +9,7 @@ Reviewed base `927085c4f3ed7def4f55eaae351b2add2abe66d8`. Compose mounts `pgdata
 ## JR-172
 
 Require a writer-quiesced checkpoint containing a PostgreSQL custom-format dump and separate attachment archive, with private checksums and restore into a fresh isolated target. Compare engagement, log, version, attachment and audit records and image bytes. Missing media, a failed restore or an incompatible application schema must stop any promotion. The source currently provisions separate volumes. The PLogIt owner and deployment operator own production backup access, encryption, retention, RPO/RTO and cutover; those decisions remain open. This session authorizes a disposable drill.
+
+## JR-173
+
+Added `scripts/ci-recovery-drill.sh` to the existing CI Compose job. It creates a synthetic engagement, a log with two versions and a PNG through authenticated HTTP. It stops the backend writer, captures a PostgreSQL custom-format dump and a separate attachment archive, restores them to a fresh database and directory, and compares records and original image bytes. `bash -n scripts/ci-recovery-drill.sh` and the out-of-CI guard passed locally. Runtime requires the CI Docker environment. Local Maven could not resolve its parent POM through sandbox DNS.
