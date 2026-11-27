@@ -1307,3 +1307,10 @@ The original transactional success and denial evidence both passed. VERIFIED NO 
 - **Task / result:** Reproduce Database and attachment backup success. IN PROGRESS → IN REVIEW. Added `scripts/ci-recovery-drill.sh` to the existing CI Compose job. It creates a synthetic engagement, a log with two versions and a PNG through authenticated HTTP. It stops the backend writer, captures a PostgreSQL custom-format dump and a separate attachment archive, restores them to a fresh database and directory, and compares records and original image bytes. `bash -n scripts/ci-recovery-drill.sh` and the out-of-CI guard passed locally. Runtime requires the CI Docker environment. Local Maven could not resolve its parent POM through sandbox DNS.
 - **GitHub / review:** Builder Lead reviewed. This JR-173 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `e5ead1426185825d6221cf03ad5101907be7518c`.
 - **Next:** Verify the missing-media rejection in JR-174 and reconcile fresh CI.
+
+
+### 2026-11-27T14:07:08Z | Session 18 | JR-174 | IN REVIEW
+
+- **Task / result:** Reject Database and attachment backup invalid operation. IN PROGRESS → IN REVIEW. The isolated drill also supplies an empty restored media directory to the same byte verifier. It requires explicit missing-media denial and compares the restored database manifest again to detect side effects. The code never promotes the candidate or connects to production. Runtime pending on GitHub Actions.
+- **GitHub / review:** Builder Lead reviewed. This JR-174 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `ab9f4a5a9b8cb3cdd6d4373bce07191d7a6fd4dd`.
+- **Next:** Reconcile the restore and denial in JR-175.
