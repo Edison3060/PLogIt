@@ -21,3 +21,7 @@ The isolated drill also supplies an empty restored media directory to the same b
 ## JR-175
 
 Paired restore acceptance depends on fresh CI for JR-173/174 and operational sign-off under DEC-2026-11-27-03. Keep production promotion, access, retention and RPO/RTO unapproved. The test uses only synthetic data and a separate destination; no application source or export changes.
+
+## JR-176
+
+Reviewed `HealthController.java`, `GlobalExceptionHandler.java`, the backend Dockerfile, Compose, README and the existing Compose smoke at the Phase 09 base. The public endpoint returns process liveness only. Compose exposes PostgreSQL container health and gates backend startup. HTTP 500 uses a generic response, with no application correlation ID or matching structured incident record. The README describes deployment and probes; a recovery and triage procedure is incomplete. The deployment operator owns recovery and backend maintainers own application diagnostics.

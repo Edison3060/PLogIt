@@ -1321,3 +1321,10 @@ The original transactional success and denial evidence both passed. VERIFIED NO 
 - **Task / result:** Close Database and attachment backup verification. IN PROGRESS → IN REVIEW. Paired restore acceptance depends on fresh CI for JR-173/174 and operational sign-off under DEC-2026-11-27-03. Keep production promotion, access, retention and RPO/RTO unapproved. The test uses only synthetic data and a separate destination; no application source or export changes.
 - **GitHub / review:** Builder Lead reviewed. This JR-175 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `de7ca1f6e57cbe9667c91c558e261e2c2fb3082b`.
 - **Next:** Inventory health, logging and restart controls in JR-176.
+
+
+### 2026-11-27T14:07:29Z | Session 18 | JR-176 | DONE
+
+- **Task / result:** Inventory Health, logging and incident recovery. IN PROGRESS → DONE. Reviewed `HealthController.java`, `GlobalExceptionHandler.java`, the backend Dockerfile, Compose, README and the existing Compose smoke at the Phase 09 base. The public endpoint returns process liveness only. Compose exposes PostgreSQL container health and gates backend startup. HTTP 500 uses a generic response, with no application correlation ID or matching structured incident record. The README describes deployment and probes; a recovery and triage procedure is incomplete. The deployment operator owns recovery and backend maintainers own application diagnostics.
+- **GitHub / review:** Builder Lead reviewed. This JR-176 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `7f25abeab51957dcdff1698182172b3393fc742d`.
+- **Next:** Record separate liveness and dependency acceptance in JR-177.
