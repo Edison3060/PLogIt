@@ -37,3 +37,7 @@ Extended the Compose drill to restart the backend, verify DB-container health an
 ## JR-179
 
 The CI drill temporarily removes the synthetic image from its expected path and checks a bounded generic 404. It stops the disposable DB and makes an authenticated, CSRF-protected edit request with a 45s budget. It expects a generic 500, verifies current liveness behavior, restarts PostgreSQL, and compares the post-recovery database manifest and image to baseline. It checks response and backend logs for seeded credentials, cookies and synthetic evidence text. Media capture uses a networkless, read-only helper attached to the stopped backend volumes. Shell syntax and the CI-only guard passed. Runtime evidence is pending.
+
+## JR-180
+
+Application diagnostics remain incomplete under DEC-2026-11-27-04: public liveness does not verify dependencies and generic failures lack structured correlation. Interim operations use independent dependency and authenticated probes. Await fresh Compose and regression CI. Phase acceptance also retains JR-165 and upstream phase, privacy, production and JudgeIt gates.

@@ -185,7 +185,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-177 | Specify Health, logging and incident recovery acceptance | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-177) | 2026-11-27T14:07:35Z |
 | JR-178 | Reproduce Health, logging and incident recovery success | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-178) | 2026-11-27T14:08:41Z |
 | JR-179 | Reject Health, logging and incident recovery invalid operation | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-179) | 2026-11-27T14:09:21Z |
-| JR-180 | Close Health, logging and incident recovery verification | 18 | NOT STARTED | — | — |
+| JR-180 | Close Health, logging and incident recovery verification | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-180) | 2026-11-27T14:09:26Z |
 | JR-181 | Inventory Java and Spring version review | 19 | NOT STARTED | — | — |
 | JR-182 | Specify Java and Spring version review acceptance | 19 | NOT STARTED | — | — |
 | JR-183 | Reproduce Java and Spring version review success | 19 | NOT STARTED | — | — |

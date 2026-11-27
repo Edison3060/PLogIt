@@ -1349,3 +1349,10 @@ The original transactional success and denial evidence both passed. VERIFIED NO 
 - **Task / result:** Reject Health, logging and incident recovery invalid operation. IN PROGRESS → IN REVIEW. The CI drill temporarily removes the synthetic image from its expected path and checks a bounded generic 404. It stops the disposable DB and makes an authenticated, CSRF-protected edit request with a 45s budget. It expects a generic 500, verifies current liveness behavior, restarts PostgreSQL, and compares the post-recovery database manifest and image to baseline. It checks response and backend logs for seeded credentials, cookies and synthetic evidence text. Media capture uses a networkless, read-only helper attached to the stopped backend volumes. Shell syntax and the CI-only guard passed. Runtime evidence is pending.
 - **GitHub / review:** Builder Lead reviewed. This JR-179 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `5db8835ff6f6ccf352ec243d286ffef09046ef49`.
 - **Next:** Close Phase 09 assessment in JR-180.
+
+
+### 2026-11-27T14:09:26Z | Session 18 | JR-180 | IN REVIEW
+
+- **Task / result:** Close Health, logging and incident recovery verification. IN PROGRESS → IN REVIEW. Application diagnostics remain incomplete under DEC-2026-11-27-04: public liveness does not verify dependencies and generic failures lack structured correlation. Interim operations use independent dependency and authenticated probes. Await fresh Compose and regression CI. Phase acceptance also retains JR-165 and upstream phase, privacy, production and JudgeIt gates.
+- **GitHub / review:** Builder Lead reviewed. This JR-180 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `6eb74d7985f2363547f7bf7974a327b92d61de31`.
+- **Next:** Reconcile the exact run and the controller. Do not merge the phase or begin Session 19.
