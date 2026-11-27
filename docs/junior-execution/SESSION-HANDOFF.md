@@ -979,3 +979,12 @@ Draft [PR #30](https://github.com/Edison3060/PLogIt/pull/30) stacks on unmerged 
 
 - **IN REVIEW.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-180). Checkpoint parent `6eb74d7985f2363547f7bf7974a327b92d61de31`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
 - **Next safe action:** Reconcile the exact run and the controller. Do not merge the phase or begin Session 19.
+
+
+## Session 18 closeout | 2026-11-27T14:13:20Z
+
+**READY WITH PROVISIONAL INTEGRATION** for independent Session 19, JR-181–JR-190. Start `work/plogit-phase-10` from the final unmerged `work/plogit-phase-09` head. JR-181 has not begun.
+
+Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured redacted correlation and the separate dependency readiness gap. All ten JR checkpoints are recorded on `work/plogit-phase-09`. Tested `7734c0712ad774069c28c1476f7cb48c6087303f` in [CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). GitHub Actions passed Java 21/Maven 170 tests with PostgreSQL 16.16, frontend build and 25 tests, Compose recovery, Semgrep, Trivy filesystem and both images, and production proxy validation. Production CD was skipped. The equivalent stacked PR validation run 46013380950 passed. Local frontend lint/build and all 25 tests, shell syntax, the CI guard, whitespace and append-only checks passed. The first local Maven attempt hit DNS without JVM proxy configuration. A proxy retry resolved dependencies but the local environment lacked a Java 21 compiler. Maven build and tests ran in CI.
+
+[Draft PR #30](https://github.com/Edison3060/PLogIt/pull/30) remains stacked on unmerged [PR #29](https://github.com/Edison3060/PLogIt/pull/29). Phase 09 has no merge or production sign-off. DEC-2026-11-27-01/03/04, prior stack acceptance, INT-001 and DEC-2026-11-06-11 remain open. Keep the existing unversioned JSON contract. See [Session 18 evidence](SESSION-18-EVIDENCE.md#executed-verification-and-reconciliation) and the [recovery runbook](../operations/recovery.md).

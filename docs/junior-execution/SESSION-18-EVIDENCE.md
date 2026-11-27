@@ -41,3 +41,31 @@ The CI drill temporarily removes the synthetic image from its expected path and 
 ## JR-180
 
 Application diagnostics remain incomplete under DEC-2026-11-27-04: public liveness does not verify dependencies and generic failures lack structured correlation. Interim operations use independent dependency and authenticated probes. Await fresh Compose and regression CI. Phase acceptance also retains JR-165 and upstream phase, privacy, production and JudgeIt gates.
+
+## Executed verification and reconciliation
+
+[GitHub Actions 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940) on `7734c0712ad774069c28c1476f7cb48c6087303f`. Builder Lead reviewed.
+
+### JR-173 | DONE
+
+CI ran the actual authenticated create, edit, upload and submit APIs. Dump and media archive checksums passed. Restore recovered 1 engagement, 1 membership, 1 log, 2 versions, 1 attachment and the matching submit audit record and Flyway history. Image SHA-256 `2da746510008efb247a5f13c32a809748eb1bec2b882c7fac7eba990f55ee1cb` matched. A separate local PostgreSQL 16.16/pg_dump/pg_restore drill with direct SQL fixtures also compared the same counts and image hash.
+
+### JR-174 | DONE
+
+The same verifier rejected a fresh target with absent media and reported the missing attachment explicitly. Both database manifests matched after rejection. No target was promoted.
+
+### JR-175 | DONE
+
+The tested synthetic backup and denial meet local acceptance. The operator runbook records backup access, retention, encryption, objectives, operational migration validation and authorized promotion. DEC-2026-11-27-03 remains open for production.
+
+### JR-178 | IN REVIEW
+
+After backend restart, PostgreSQL health and process liveness passed. The old session received 403. A fresh authorized session downloaded identical bytes. Redacted correlation remains missing. The fresh attachment mount initialization was exercised by the successful real upload. [Docker volume mount behavior](https://docs.docker.com/engine/storage/volumes/#mounting-a-volume-over-existing-data), accessed 2026-11-27, informed the fix. Existing volume ownership requires operator verification.
+
+### JR-179 | DONE
+
+Missing storage returned 404. The authenticated edit during DB outage returned generic 500 within the 45-second budget, reporting 0 elapsed whole seconds. The public liveness endpoint still showed UP. The backend startup with unavailable DB also failed within its 110-second budget. Recovered database records and image bytes matched the originals. Selected credential, cookie and content markers were absent from backend logs and error responses.
+
+### JR-180 | IN REVIEW
+
+Checks ran against `7734c0712ad774069c28c1476f7cb48c6087303f`. GitHub Actions passed Java 21/Maven 170 tests with PostgreSQL 16.16, frontend build and 25 tests, Compose recovery, Semgrep, Trivy filesystem and both images, and production proxy validation. Production CD was skipped. The equivalent stacked PR validation run 46013380950 passed. The phase retains open dependency readiness and structured correlation work, DB enum enforcement (JR-165), prior stacked acceptance, the INT-001 contract test and production approvals.
