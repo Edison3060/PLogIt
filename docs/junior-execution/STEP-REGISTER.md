@@ -166,26 +166,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-158 | Reproduce Themes, devices and exports success | 16 | DONE | [Reconciled evidence](SESSION-16-EVIDENCE.md#jr-160) | 2026-11-26T14:16:35Z |
 | JR-159 | Reject Themes, devices and exports invalid operation | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-159) | 2026-11-26T14:14:06Z |
 | JR-160 | Close Themes, devices and exports verification | 16 | DONE | [Evidence](SESSION-16-EVIDENCE.md#jr-160) | 2026-11-26T14:18:27Z |
-| JR-161 | Inventory Schema integrity constraints | 17 | NOT STARTED | — | — |
-| JR-162 | Specify Schema integrity constraints acceptance | 17 | NOT STARTED | — | — |
-| JR-163 | Reproduce Schema integrity constraints success | 17 | NOT STARTED | — | — |
-| JR-164 | Reject Schema integrity constraints invalid operation | 17 | NOT STARTED | — | — |
-| JR-165 | Close Schema integrity constraints verification | 17 | NOT STARTED | — | — |
-| JR-166 | Inventory Transactional business actions | 17 | NOT STARTED | — | — |
-| JR-167 | Specify Transactional business actions acceptance | 17 | NOT STARTED | — | — |
-| JR-168 | Reproduce Transactional business actions success | 17 | NOT STARTED | — | — |
-| JR-169 | Reject Transactional business actions invalid operation | 17 | NOT STARTED | — | — |
-| JR-170 | Close Transactional business actions verification | 17 | NOT STARTED | — | — |
-| JR-171 | Inventory Database and attachment backup | 18 | NOT STARTED | — | — |
-| JR-172 | Specify Database and attachment backup acceptance | 18 | NOT STARTED | — | — |
-| JR-173 | Reproduce Database and attachment backup success | 18 | NOT STARTED | — | — |
-| JR-174 | Reject Database and attachment backup invalid operation | 18 | NOT STARTED | — | — |
-| JR-175 | Close Database and attachment backup verification | 18 | NOT STARTED | — | — |
-| JR-176 | Inventory Health, logging and incident recovery | 18 | NOT STARTED | — | — |
-| JR-177 | Specify Health, logging and incident recovery acceptance | 18 | NOT STARTED | — | — |
-| JR-178 | Reproduce Health, logging and incident recovery success | 18 | NOT STARTED | — | — |
-| JR-179 | Reject Health, logging and incident recovery invalid operation | 18 | NOT STARTED | — | — |
-| JR-180 | Close Health, logging and incident recovery verification | 18 | NOT STARTED | — | — |
+| JR-161 | Inventory Schema integrity constraints | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-161) | 2026-11-27 |
+| JR-162 | Specify Schema integrity constraints acceptance | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-162) | 2026-11-27 |
+| JR-163 | Reproduce Schema integrity constraints success | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-163) | 2026-11-27 |
+| JR-164 | Reject Schema integrity constraints invalid operation | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-164) | 2026-11-27 |
+| JR-165 | Close Schema integrity constraints verification | 17 | IN REVIEW | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-165) | 2026-11-27 |
+| JR-166 | Inventory Transactional business actions | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-166) | 2026-11-27 |
+| JR-167 | Specify Transactional business actions acceptance | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-167) | 2026-11-27 |
+| JR-168 | Reproduce Transactional business actions success | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-168) | 2026-11-27 |
+| JR-169 | Reject Transactional business actions invalid operation | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-169) | 2026-11-27 |
+| JR-170 | Close Transactional business actions verification | 17 | DONE | [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-170) | 2026-11-27 |
+| JR-171 | Inventory Database and attachment backup | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-171) | 2026-11-27T14:05:19Z |
+| JR-172 | Specify Database and attachment backup acceptance | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-172) | 2026-11-27T14:05:39Z |
+| JR-173 | Reproduce Database and attachment backup success | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-173) | 2026-11-27T14:13:20Z |
+| JR-174 | Reject Database and attachment backup invalid operation | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-174) | 2026-11-27T14:13:20Z |
+| JR-175 | Close Database and attachment backup verification | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-175) | 2026-11-27T14:13:20Z |
+| JR-176 | Inventory Health, logging and incident recovery | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-176) | 2026-11-27T14:07:29Z |
+| JR-177 | Specify Health, logging and incident recovery acceptance | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-177) | 2026-11-27T14:07:35Z |
+| JR-178 | Reproduce Health, logging and incident recovery success | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-178) | 2026-11-27T14:13:20Z |
+| JR-179 | Reject Health, logging and incident recovery invalid operation | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-179) | 2026-11-27T14:13:20Z |
+| JR-180 | Close Health, logging and incident recovery verification | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-180) | 2026-11-27T14:13:20Z |
 | JR-181 | Inventory Java and Spring version review | 19 | NOT STARTED | — | — |
 | JR-182 | Specify Java and Spring version review acceptance | 19 | NOT STARTED | — | — |
 | JR-183 | Reproduce Java and Spring version review success | 19 | NOT STARTED | — | — |

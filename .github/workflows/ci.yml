@@ -272,6 +272,8 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Start isolated development stack and verify liveness and persistence
         run: bash scripts/ci-compose-smoke.sh
+      - name: Verify paired PostgreSQL and attachment recovery
+        run: bash scripts/ci-recovery-drill.sh
       - name: Clean up isolated CI-only volumes and containers
         if: always()
         run: docker compose --profile app down --volumes --remove-orphans

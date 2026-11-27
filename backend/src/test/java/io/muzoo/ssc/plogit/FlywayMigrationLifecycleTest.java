@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,6 +20,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class FlywayMigrationLifecycleTest {
 
     private static final String SAMPLE_ID = "00000000-0000-0000-0000-000000000031";
+
+    @Test
+    void cleanDatabaseAppliesCanonicalMigrationsAndEnforcesDeclaredSchema() throws Exception {
+        try (PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:16-alpine")) {
+            postgres.start();
+            migrate(postgres, "classpath:db/migration");
+            assertCanonicalConstraints(postgres);
+        }
+    }
 
     @Test
     void cleanV1ThenIncrementalV2V3PreservesSyntheticLogAndSnapshot() throws Exception {
@@ -43,6 +53,8 @@ class FlywayMigrationLifecycleTest {
                     VALUES (31, 'synthetic-migration@invalid.test', 'synthetic-not-a-password', 'Synthetic');
                     INSERT INTO engagements (id, name, description, status, leader_id)
                     VALUES (31, 'Synthetic', 'Migration preservation fixture', 'ACTIVE', 31);
+                    INSERT INTO engagement_members (engagement_id, user_id, role, joined_via)
+                    VALUES (31, 31, 'LEADER', 'synthetic');
                     INSERT INTO logs (id, engagement_id, author_id, activity_type, title,
                                       description, result, outcome, review_state)
                     VALUES ('00000000-0000-0000-0000-000000000031'::uuid, 31, 31,
@@ -55,8 +67,9 @@ class FlywayMigrationLifecycleTest {
 
                 migrate(postgres, "classpath:db/migration");
 
-                assertEquals(3, queryCount(postgres,
-                    "SELECT count(*) FROM flyway_schema_history WHERE success AND version IN ('1','2','3')"));
+                assertCanonicalConstraints(postgres);
+                assertEquals(1, queryCount(postgres,
+                    "SELECT count(*) FROM engagement_members WHERE engagement_id = 31 AND user_id = 31 AND role = 'LEADER'"));
                 assertEquals(1, queryCount(postgres,
                     "SELECT count(*) FROM logs WHERE id = '" + SAMPLE_ID
                         + "'::uuid AND title = 'Preserve this log' AND version = 0"));
@@ -64,9 +77,7 @@ class FlywayMigrationLifecycleTest {
                     "SELECT count(*) FROM engagements WHERE id = 31 AND version = 0"));
                 assertEquals(1, queryCount(postgres,
                     "SELECT count(*) FROM log_versions WHERE log_id = '" + SAMPLE_ID
-                        + "'::uuid AND version_number = 1"));
-                assertEquals(1, queryCount(postgres,
-                    "SELECT count(*) FROM pg_constraint WHERE conname = 'uk_log_versions_log_version'"));
+                        + "'::uuid AND version_number = 1 AND snapshot ->> 'title' = 'Preserve this log'"));
             } finally {
                 Files.deleteIfExists(directory.resolve("V1__init_schema.sql"));
                 Files.deleteIfExists(directory);
@@ -116,6 +127,72 @@ class FlywayMigrationLifecycleTest {
                 Files.deleteIfExists(directory);
             }
         }
+    }
+
+    @Test
+    void duplicateAndForeignKeyViolationsRollBackPriorWrites() throws Exception {
+        try (PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:16-alpine")) {
+            postgres.start();
+            migrate(postgres, "classpath:db/migration");
+            execute(postgres, """
+                INSERT INTO users (id, email, password_hash, display_name)
+                VALUES (41, 'constraints@invalid.test', 'synthetic', 'Original');
+                INSERT INTO engagements (id, name, description, status, leader_id)
+                VALUES (41, 'Synthetic', 'Constraint fixture', 'ACTIVE', 41);
+                INSERT INTO engagement_members (engagement_id, user_id, role, joined_via)
+                VALUES (41, 41, 'LEADER', 'synthetic');
+                """);
+
+            assertRejectedAndRolledBack(postgres, "23505", """
+                INSERT INTO engagement_members (engagement_id, user_id, role, joined_via)
+                VALUES (41, 41, 'MEMBER', 'synthetic')
+                """);
+            assertRejectedAndRolledBack(postgres, "23503", """
+                INSERT INTO engagement_members (engagement_id, user_id, role, joined_via)
+                VALUES (41, 42, 'MEMBER', 'synthetic')
+                """);
+
+            assertEquals(1, queryCount(postgres, "SELECT count(*) FROM engagement_members"));
+            assertEquals(1, queryCount(postgres, """
+                SELECT count(*) FROM engagement_members
+                WHERE engagement_id = 41 AND user_id = 41 AND role = 'LEADER'
+                """));
+        }
+    }
+
+    private static void assertRejectedAndRolledBack(
+        PostgreSQLContainer postgres, String expectedSqlState, String invalidWrite
+    ) throws Exception {
+        try (Connection connection = DriverManager.getConnection(
+                postgres.getJdbcUrl(), postgres.getUsername(), postgres.getPassword());
+             Statement statement = connection.createStatement()) {
+            connection.setAutoCommit(false);
+            assertEquals(1, statement.executeUpdate("UPDATE users SET display_name = 'Partial' WHERE id = 41"));
+            SQLException failure = assertThrows(SQLException.class, () -> statement.executeUpdate(invalidWrite));
+            assertEquals(expectedSqlState, failure.getSQLState());
+            SQLException aborted = assertThrows(SQLException.class, () -> statement.executeQuery("SELECT 1"));
+            assertEquals("25P02", aborted.getSQLState());
+            connection.rollback();
+        }
+        assertEquals(1, queryCount(postgres,
+            "SELECT count(*) FROM users WHERE id = 41 AND display_name = 'Original'"));
+    }
+
+    private static void assertCanonicalConstraints(PostgreSQLContainer postgres) throws Exception {
+        assertEquals(3, queryCount(postgres,
+            "SELECT count(*) FROM flyway_schema_history WHERE success AND version IN ('1','2','3')"));
+        assertEquals(6, queryCount(postgres, """
+            SELECT count(*) FROM pg_constraint WHERE contype = 'f' AND convalidated AND conname IN (
+                'engagement_members_engagement_id_fkey', 'engagement_members_user_id_fkey',
+                'logs_engagement_id_fkey', 'logs_author_id_fkey',
+                'log_versions_log_id_fkey', 'log_versions_edited_by_id_fkey'
+            )
+            """));
+        assertEquals(2, queryCount(postgres, """
+            SELECT count(*) FROM pg_constraint WHERE contype = 'u' AND convalidated AND conname IN (
+                'uk_engagement_members_engagement_user', 'uk_log_versions_log_version'
+            )
+            """));
     }
 
     private static void migrate(PostgreSQLContainer postgres, String location) {

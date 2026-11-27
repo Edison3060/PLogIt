@@ -1197,3 +1197,192 @@ _No JR execution has been recorded yet. Planning document synchronization does n
 ### 2026-11-26T14:18:27Z | Session 16 | JR-160 | DONE
 
 - Reconcile Phase 08 browser, regression and CI evidence. [Evidence](SESSION-16-EVIDENCE.md#jr-160). Checkpoint parent `782e0800cf444275222ac85caef2acc8db823e76`. Builder Lead reviewed.
+
+
+### 2026-11-27T02:03:02Z | Session 17 | JR-161 | DONE
+
+- Map canonical schema and constraints. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-161). Checkpoint parent `01dc9925a1f55924e242a888a592224cad956737`. Builder Lead reviewed.
+- Continue with JR-162 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:03:13Z | Session 17 | JR-162 | DONE
+
+- Record database acceptance and enum policy gap. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-162). Checkpoint parent `c9dac553310aa842fcb6c2a04e768a8e5b48a3b1`. Builder Lead reviewed.
+- Continue with JR-163 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:03:47Z | Session 17 | JR-163 | IN REVIEW
+
+- Exercise clean and seeded Flyway migration paths. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-163). Checkpoint parent `efb04e1155e62e1fab1b0b78fa96ee08f18b58f9`. Builder Lead reviewed.
+- Continue with JR-164 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:12Z | Session 17 | JR-164 | IN REVIEW
+
+- Verify PostgreSQL duplicate and foreign-key rollback. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-164). Checkpoint parent `13c712e0fc3668b7a12ee9cee5dc2c37a10a51e6`. Builder Lead reviewed.
+- Continue with JR-165 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:15Z | Session 17 | JR-165 | IN REVIEW
+
+- Record schema verification boundary. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-165). Checkpoint parent `47af4575190aa6cdc8193b86b9e4efc46b360180`. Builder Lead reviewed.
+- Continue with JR-166 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:39Z | Session 17 | JR-166 | DONE
+
+- Trace leadership review and export transaction owners. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-166). Checkpoint parent `0705e9e1bb566c947fb20707ecee53aeeff38087`. Builder Lead reviewed.
+- Continue with JR-167 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:42Z | Session 17 | JR-167 | DONE
+
+- Specify atomic audit acceptance. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-167). Checkpoint parent `0a9d4bf1509d896e4feb6b21af9ec9b07cb10c1d`. Builder Lead reviewed.
+- Continue with JR-168 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:04:45Z | Session 17 | JR-168 | IN REVIEW
+
+- Map committed business records to audit assertions. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-168). Checkpoint parent `ae3f596962e042171730380dfedc3e632cb27437`. Builder Lead reviewed.
+- Continue with JR-169 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:05:17Z | Session 17 | JR-169 | IN REVIEW
+
+- Exercise atomic rollback on audit write failure. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-169). Checkpoint parent `9b50e8f4b544ef24a9807c21e244bfe4845cfeeb`. Builder Lead reviewed.
+- Continue with JR-170 on this branch. INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:05:56Z | Session 17 | JR-169 | IN REVIEW
+
+Require PostgreSQL `23514` and the test constraint in the server-side cause while preserving the generic HTTP body. `git diff --check` passed. Exact-head CI pending.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-163 | DONE
+
+Clean and seeded V1-to-V3 migrations succeeded. PostgreSQL reported six validated foreign keys and two unique constraints. The seeded leadership, log, JSON snapshot and version defaults were preserved. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-164 | DONE
+
+The duplicate membership and invalid user FK produced SQLSTATE 23505 and 23503, respectively. Both transactions reported 25P02 after the rejected statement. Fresh queries confirmed the first write rolled back and the original membership remained. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-168 | DONE
+
+Leadership, submission and approval, and legacy JSON export committed. The tests re-read the leader and roster, review states, selected and excluded export logs, and the matching actor, action and target of the audit rows. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-169 | DONE
+
+Three PostgreSQL audit constraints returned SQLSTATE 23514 at commit. The API returned a generic 500 and export returned no download header. Fresh reads confirmed the original leader and roles, log states and versions, and zero remaining audit rows. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-165 | IN REVIEW
+
+Foreign-key, unique constraint and rollback evidence passed. PostgreSQL enum enforcement remains open under DEC-2026-11-27-01, so JR-165 remains IN REVIEW. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T02:09:53Z | Session 17 | JR-170 | DONE
+
+The original transactional success and denial evidence both passed. VERIFIED NO CHANGE to application code, migrations, authentication, audit data and unversioned JSON. Tested `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023). Builder Lead reviewed.
+
+
+### 2026-11-27T14:05:19Z | Session 18 | JR-171 | DONE
+
+- **Task / result:** Inventory Database and attachment backup. IN PROGRESS → DONE. Reviewed base `927085c4f3ed7def4f55eaae351b2add2abe66d8`. Compose mounts `pgdata` at PostgreSQL and `attachments` at the backend. Flyway owns schema and AttachmentService stores relative paths in PostgreSQL. Production Compose retains both volumes. Existing `scripts/ci-compose-smoke.sh` restarts PostgreSQL and re-reads one row. README documents liveness and release operations. No canonical paired backup, restore or pre-promotion verification was identified. Deployment operator owns backup and restore. Inventory only.
+- **GitHub / review:** Builder Lead reviewed. This JR-171 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `927085c4f3ed7def4f55eaae351b2add2abe66d8`.
+- **Next:** Specify paired checkpoint acceptance in JR-172.
+
+
+### 2026-11-27T14:05:39Z | Session 18 | JR-172 | DONE
+
+- **Task / result:** Specify Database and attachment backup acceptance. IN PROGRESS → DONE. Require a writer-quiesced checkpoint containing a PostgreSQL custom-format dump and separate attachment archive, with private checksums and restore into a fresh isolated target. Compare engagement, log, version, attachment and audit records and image bytes. Missing media, a failed restore or an incompatible application schema must stop any promotion. The source currently provisions separate volumes. The PLogIt owner and deployment operator own production backup access, encryption, retention, RPO/RTO and cutover; those decisions remain open. This session authorizes a disposable drill.
+- **GitHub / review:** Builder Lead reviewed. This JR-172 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `33b860926b08c1ccd518262823f51895716680ec`.
+- **Next:** Run the synthetic restore drill in JR-173.
+
+
+### 2026-11-27T14:06:51Z | Session 18 | JR-173 | IN REVIEW
+
+- **Task / result:** Reproduce Database and attachment backup success. IN PROGRESS → IN REVIEW. Added `scripts/ci-recovery-drill.sh` to the existing CI Compose job. It creates a synthetic engagement, a log with two versions and a PNG through authenticated HTTP. It stops the backend writer, captures a PostgreSQL custom-format dump and a separate attachment archive, restores them to a fresh database and directory, and compares records and original image bytes. `bash -n scripts/ci-recovery-drill.sh` and the out-of-CI guard passed locally. Runtime requires the CI Docker environment. Local Maven could not resolve its parent POM through sandbox DNS.
+- **GitHub / review:** Builder Lead reviewed. This JR-173 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `e5ead1426185825d6221cf03ad5101907be7518c`.
+- **Next:** Verify the missing-media rejection in JR-174 and reconcile fresh CI.
+
+
+### 2026-11-27T14:07:08Z | Session 18 | JR-174 | IN REVIEW
+
+- **Task / result:** Reject Database and attachment backup invalid operation. IN PROGRESS → IN REVIEW. The isolated drill also supplies an empty restored media directory to the same byte verifier. It requires explicit missing-media denial and compares the restored database manifest again to detect side effects. The code never promotes the candidate or connects to production. Runtime pending on GitHub Actions.
+- **GitHub / review:** Builder Lead reviewed. This JR-174 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `ab9f4a5a9b8cb3cdd6d4373bce07191d7a6fd4dd`.
+- **Next:** Reconcile the restore and denial in JR-175.
+
+
+### 2026-11-27T14:07:13Z | Session 18 | JR-175 | IN REVIEW
+
+- **Task / result:** Close Database and attachment backup verification. IN PROGRESS → IN REVIEW. Paired restore acceptance depends on fresh CI for JR-173/174 and operational sign-off under DEC-2026-11-27-03. Keep production promotion, access, retention and RPO/RTO unapproved. The test uses only synthetic data and a separate destination; no application source or export changes.
+- **GitHub / review:** Builder Lead reviewed. This JR-175 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `de7ca1f6e57cbe9667c91c558e261e2c2fb3082b`.
+- **Next:** Inventory health, logging and restart controls in JR-176.
+
+
+### 2026-11-27T14:07:29Z | Session 18 | JR-176 | DONE
+
+- **Task / result:** Inventory Health, logging and incident recovery. IN PROGRESS → DONE. Reviewed `HealthController.java`, `GlobalExceptionHandler.java`, the backend Dockerfile, Compose, README and the existing Compose smoke at the Phase 09 base. The public endpoint returns process liveness only. Compose exposes PostgreSQL container health and gates backend startup. HTTP 500 uses a generic response, with no application correlation ID or matching structured incident record. The README describes deployment and probes; a recovery and triage procedure is incomplete. The deployment operator owns recovery and backend maintainers own application diagnostics.
+- **GitHub / review:** Builder Lead reviewed. This JR-176 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `7f25abeab51957dcdff1698182172b3393fc742d`.
+- **Next:** Record separate liveness and dependency acceptance in JR-177.
+
+
+### 2026-11-27T14:07:35Z | Session 18 | JR-177 | DONE
+
+- **Task / result:** Specify Health, logging and incident recovery acceptance. IN PROGRESS → DONE. Preserve the public /api/health liveness payload. Verify PostgreSQL and storage using authenticated bounded operations, restart in dependency order, and check the logs and external responses for seeded credential and payload values. An operator readiness design should expose only dependency state to an approved audience, with generated opaque correlation IDs and allowlisted diagnostic fields. The deployment operator and PLogIt owner own production exposure, log access/retention, and response policy. This branch tests the existing endpoint and includes a deployment-independent runbook.
+- **GitHub / review:** Builder Lead reviewed. This JR-177 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `48903fc4911286b6e7e29e6433f0e04b4be3d53d`.
+- **Next:** Verify restart and fault behavior in JR-178 and JR-179.
+
+
+### 2026-11-27T14:08:41Z | Session 18 | JR-178 | IN REVIEW
+
+- **Task / result:** Reproduce Health, logging and incident recovery success. IN PROGRESS → IN REVIEW. Extended the Compose drill to restart the backend, verify DB-container health and public liveness separately, deny the old session, log in, and compare the authenticated download with the original PNG. Added the isolated recovery runbook. The backend image now creates the attachment mountpoint owned by the existing runtime UID for new named volumes. It does not alter existing volumes. Rollback is reverting the Dockerfile change. No endpoint or JSON changes. Shell syntax and diff whitespace passed. Real restart and image tests are pending fresh CI. The baseline lacks a redacted correlation ID.
+- **GitHub / review:** Builder Lead reviewed. This JR-178 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `82c5fdb9c88ef5febfeffe5f2f3384a564306006`.
+- **Next:** Verify fault behavior for JR-179 and reconcile CI.
+
+
+### 2026-11-27T14:09:21Z | Session 18 | JR-179 | IN REVIEW
+
+- **Task / result:** Reject Health, logging and incident recovery invalid operation. IN PROGRESS → IN REVIEW. The CI drill temporarily removes the synthetic image from its expected path and checks a bounded generic 404. It stops the disposable DB and makes an authenticated, CSRF-protected edit request with a 45s budget. It expects a generic 500, verifies current liveness behavior, restarts PostgreSQL, and compares the post-recovery database manifest and image to baseline. It checks response and backend logs for seeded credentials, cookies and synthetic evidence text. Media capture uses a networkless, read-only helper attached to the stopped backend volumes. Shell syntax and the CI-only guard passed. Runtime evidence is pending.
+- **GitHub / review:** Builder Lead reviewed. This JR-179 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `5db8835ff6f6ccf352ec243d286ffef09046ef49`.
+- **Next:** Close Phase 09 assessment in JR-180.
+
+
+### 2026-11-27T14:09:26Z | Session 18 | JR-180 | IN REVIEW
+
+- **Task / result:** Close Health, logging and incident recovery verification. IN PROGRESS → IN REVIEW. Application diagnostics remain incomplete under DEC-2026-11-27-04: public liveness does not verify dependencies and generic failures lack structured correlation. Interim operations use independent dependency and authenticated probes. Await fresh Compose and regression CI. Phase acceptance also retains JR-165 and upstream phase, privacy, production and JudgeIt gates.
+- **GitHub / review:** Builder Lead reviewed. This JR-180 checkpoint is identified by its commit on `work/plogit-phase-09`, [draft PR #30](https://github.com/Edison3060/PLogIt/pull/30). Parent `6eb74d7985f2363547f7bf7974a327b92d61de31`.
+- **Next:** Reconcile the exact run and the controller. Do not merge the phase or begin Session 19.
+
+
+### 2026-11-27T14:13:20Z | Session 18 | JR-173 | DONE
+
+CI ran the actual authenticated create, edit, upload and submit APIs. Dump and media archive checksums passed. Restore recovered 1 engagement, 1 membership, 1 log, 2 versions, 1 attachment and the matching submit audit record and Flyway history. Image SHA-256 `2da746510008efb247a5f13c32a809748eb1bec2b882c7fac7eba990f55ee1cb` matched. A separate local PostgreSQL 16.16/pg_dump/pg_restore drill with direct SQL fixtures also compared the same counts and image hash. [Executed CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). Builder Lead reviewed.
+
+
+### 2026-11-27T14:13:20Z | Session 18 | JR-174 | DONE
+
+The same verifier rejected a fresh target with absent media and reported the missing attachment explicitly. Both database manifests matched after rejection. No target was promoted. [Executed CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). Builder Lead reviewed.
+
+
+### 2026-11-27T14:13:20Z | Session 18 | JR-175 | DONE
+
+The tested synthetic backup and denial meet local acceptance. The operator runbook records backup access, retention, encryption, objectives, operational migration validation and authorized promotion. DEC-2026-11-27-03 remains open for production. [Executed CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). Builder Lead reviewed.
+
+
+### 2026-11-27T14:13:20Z | Session 18 | JR-178 | IN REVIEW
+
+After backend restart, PostgreSQL health and process liveness passed. The old session received 403. A fresh authorized session downloaded identical bytes. Redacted correlation remains missing. The fresh attachment mount initialization was exercised by the successful real upload. [Docker volume mount behavior](https://docs.docker.com/engine/storage/volumes/#mounting-a-volume-over-existing-data), accessed 2026-11-27, informed the fix. Existing volume ownership requires operator verification. [Executed CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). Builder Lead reviewed.
+
+
+### 2026-11-27T14:13:20Z | Session 18 | JR-179 | DONE
+
+Missing storage returned 404. The authenticated edit during DB outage returned generic 500 within the 45-second budget, reporting 0 elapsed whole seconds. The public liveness endpoint still showed UP. The backend startup with unavailable DB also failed within its 110-second budget. Recovered database records and image bytes matched the originals. Selected credential, cookie and content markers were absent from backend logs and error responses. [Executed CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). Builder Lead reviewed.
+
+
+### 2026-11-27T14:13:20Z | Session 18 | JR-180 | IN REVIEW
+
+Checks ran against `7734c0712ad774069c28c1476f7cb48c6087303f`. GitHub Actions passed Java 21/Maven 170 tests with PostgreSQL 16.16, frontend build and 25 tests, Compose recovery, Semgrep, Trivy filesystem and both images, and production proxy validation. Production CD was skipped. The equivalent stacked PR validation run 46013380950 passed. The phase retains open dependency readiness and structured correlation work, DB enum enforcement (JR-165), prior stacked acceptance, the INT-001 contract test and production approvals. [Executed CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). Builder Lead reviewed.

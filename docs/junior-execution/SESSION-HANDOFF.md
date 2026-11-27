@@ -855,3 +855,136 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Reconcile Phase 08 browser, regression and CI evidence. [Evidence](SESSION-16-EVIDENCE.md#jr-160). Checkpoint parent `782e0800cf444275222ac85caef2acc8db823e76`.
 - Reconcile the ten checkpoints and controller before the next session. Phase 07 acceptance, INT-001 and production authorization remain pending.
+
+
+### 2026-11-27T02:03:02Z | Session 17 | JR-161
+
+- **DONE.** Map canonical schema and constraints. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-161). Checkpoint parent `01dc9925a1f55924e242a888a592224cad956737`.
+- Continue with JR-162 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:03:13Z | Session 17 | JR-162
+
+- **DONE.** Record database acceptance and enum policy gap. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-162). Checkpoint parent `c9dac553310aa842fcb6c2a04e768a8e5b48a3b1`.
+- Continue with JR-163 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:03:47Z | Session 17 | JR-163
+
+- **IN REVIEW.** Exercise clean and seeded Flyway migration paths. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-163). Checkpoint parent `efb04e1155e62e1fab1b0b78fa96ee08f18b58f9`.
+- Continue with JR-164 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:04:12Z | Session 17 | JR-164
+
+- **IN REVIEW.** Verify PostgreSQL duplicate and foreign-key rollback. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-164). Checkpoint parent `13c712e0fc3668b7a12ee9cee5dc2c37a10a51e6`.
+- Continue with JR-165 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:04:15Z | Session 17 | JR-165
+
+- **IN REVIEW.** Record schema verification boundary. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-165). Checkpoint parent `47af4575190aa6cdc8193b86b9e4efc46b360180`.
+- Continue with JR-166 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:04:39Z | Session 17 | JR-166
+
+- **DONE.** Trace leadership review and export transaction owners. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-166). Checkpoint parent `0705e9e1bb566c947fb20707ecee53aeeff38087`.
+- Continue with JR-167 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:04:42Z | Session 17 | JR-167
+
+- **DONE.** Specify atomic audit acceptance. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-167). Checkpoint parent `0a9d4bf1509d896e4feb6b21af9ec9b07cb10c1d`.
+- Continue with JR-168 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:04:45Z | Session 17 | JR-168
+
+- **IN REVIEW.** Map committed business records to audit assertions. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-168). Checkpoint parent `ae3f596962e042171730380dfedc3e632cb27437`.
+- Continue with JR-169 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:05:17Z | Session 17 | JR-169
+
+- **IN REVIEW.** Exercise atomic rollback on audit write failure. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-169). Checkpoint parent `9b50e8f4b544ef24a9807c21e244bfe4845cfeeb`.
+- Continue with JR-170 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+JR-169 test review added a check for the injected SQLSTATE and constraint. Await exact-head CI before closing JR-170.
+
+
+## Session 17 closeout | 2026-11-27T02:09:53Z
+
+**READY WITH PROVISIONAL INTEGRATION** for independently initiated Session 18, JR-171–JR-180 on `work/plogit-phase-09`. Session 17 assessed all ten assigned JRs. JR-165 remains IN REVIEW for database enum enforcement, DEC-2026-11-27-01. All other assigned JRs are DONE. Reconcile the controller before beginning JR-171. Executable SHA `8c852b564928bbb1ed7613fb0310b71273de7792`. [GitHub Actions run 45926331023](https://github.com/Edison3060/PLogIt/actions/runs/45926331023) ran `mvn -B clean verify` with Java 21.0.13, Maven 3.9.15 and PostgreSQL 16.16. All 170 backend tests passed with zero failures, errors or skips. This includes 4 Flyway migration tests, 18 audit tests, 21 review tests, 2 team tests and 18 export tests. Frontend build and all 25 Vitest tests passed. Isolated Compose HTTP and volume-restart smoke, Semgrep, Trivy filesystem and both images, and proxy validation passed. Production CD was skipped. Local `git diff --check` and an append-only step log check passed. Builder Lead reviewed.
+
+Draft [PR #30](https://github.com/Edison3060/PLogIt/pull/30) stacks on unmerged [PR #29](https://github.com/Edison3060/PLogIt/pull/29). Phase 09 recovery and merge acceptance, the prior phase gates, INT-001 JudgeIt compatibility, and DEC-2026-11-06-11 production authorization remain open. This JR-170 commit changes tracking only.
+
+
+### 2026-11-27T14:05:19Z | Session 18 | JR-171
+
+- **DONE.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-171). Checkpoint parent `927085c4f3ed7def4f55eaae351b2add2abe66d8`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Specify paired checkpoint acceptance in JR-172.
+
+
+### 2026-11-27T14:05:39Z | Session 18 | JR-172
+
+- **DONE.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-172). Checkpoint parent `33b860926b08c1ccd518262823f51895716680ec`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Run the synthetic restore drill in JR-173.
+
+
+### 2026-11-27T14:06:51Z | Session 18 | JR-173
+
+- **IN REVIEW.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-173). Checkpoint parent `e5ead1426185825d6221cf03ad5101907be7518c`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Verify the missing-media rejection in JR-174 and reconcile fresh CI.
+
+
+### 2026-11-27T14:07:08Z | Session 18 | JR-174
+
+- **IN REVIEW.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-174). Checkpoint parent `ab9f4a5a9b8cb3cdd6d4373bce07191d7a6fd4dd`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Reconcile the restore and denial in JR-175.
+
+
+### 2026-11-27T14:07:13Z | Session 18 | JR-175
+
+- **IN REVIEW.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-175). Checkpoint parent `de7ca1f6e57cbe9667c91c558e261e2c2fb3082b`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Inventory health, logging and restart controls in JR-176.
+
+
+### 2026-11-27T14:07:29Z | Session 18 | JR-176
+
+- **DONE.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-176). Checkpoint parent `7f25abeab51957dcdff1698182172b3393fc742d`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Record separate liveness and dependency acceptance in JR-177.
+
+
+### 2026-11-27T14:07:35Z | Session 18 | JR-177
+
+- **DONE.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-177). Checkpoint parent `48903fc4911286b6e7e29e6433f0e04b4be3d53d`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Verify restart and fault behavior in JR-178 and JR-179.
+
+
+### 2026-11-27T14:08:41Z | Session 18 | JR-178
+
+- **IN REVIEW.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-178). Checkpoint parent `82c5fdb9c88ef5febfeffe5f2f3384a564306006`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Verify fault behavior for JR-179 and reconcile CI.
+
+
+### 2026-11-27T14:09:21Z | Session 18 | JR-179
+
+- **IN REVIEW.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-179). Checkpoint parent `5db8835ff6f6ccf352ec243d286ffef09046ef49`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Close Phase 09 assessment in JR-180.
+
+
+### 2026-11-27T14:09:26Z | Session 18 | JR-180
+
+- **IN REVIEW.** [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-180). Checkpoint parent `6eb74d7985f2363547f7bf7974a327b92d61de31`. See the register for all assigned results and evidence. INT-001, DEC-2026-11-27-01 and production authorization remain pending.
+- **Next safe action:** Reconcile the exact run and the controller. Do not merge the phase or begin Session 19.
+
+
+## Session 18 closeout | 2026-11-27T14:13:20Z
+
+**READY WITH PROVISIONAL INTEGRATION** for independent Session 19, JR-181–JR-190. Start `work/plogit-phase-10` from the final unmerged `work/plogit-phase-09` head. JR-181 has not begun.
+
+Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured redacted correlation and the separate dependency readiness gap. All ten JR checkpoints are recorded on `work/plogit-phase-09`. Tested `7734c0712ad774069c28c1476f7cb48c6087303f` in [CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). GitHub Actions passed Java 21/Maven 170 tests with PostgreSQL 16.16, frontend build and 25 tests, Compose recovery, Semgrep, Trivy filesystem and both images, and production proxy validation. Production CD was skipped. The equivalent stacked PR validation run 46013380950 passed. Local frontend lint/build and all 25 tests, shell syntax, the CI guard, whitespace and append-only checks passed. The first local Maven attempt hit DNS without JVM proxy configuration. A proxy retry resolved dependencies but the local environment lacked a Java 21 compiler. Maven build and tests ran in CI.
+
+[Draft PR #30](https://github.com/Edison3060/PLogIt/pull/30) remains stacked on unmerged [PR #29](https://github.com/Edison3060/PLogIt/pull/29). Phase 09 has no merge or production sign-off. DEC-2026-11-27-01/03/04, prior stack acceptance, INT-001 and DEC-2026-11-06-11 remain open. Keep the existing unversioned JSON contract. See [Session 18 evidence](SESSION-18-EVIDENCE.md#executed-verification-and-reconciliation) and the [recovery runbook](../operations/recovery.md).

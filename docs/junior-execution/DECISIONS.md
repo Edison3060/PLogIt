@@ -289,3 +289,19 @@ Use a native modal dialog and browser keyboard checks to verify opening, focus c
 ### DEC-2026-11-26-06 | JR-160 | Preserve the current log and export contracts
 
 The mirrored Product Spec describes additional board filters, leader edits after approval, and customized PDF filters and sort. This phase verified the implemented flow. The server permits edits only in DRAFT, uses the existing board filter set, and applies approved plus optional previously exported inclusion rather than a custom export query. Keep the tested server rules. The product owner must approve any of those separate changes. Keep DEC-2026-11-23-03 for delayed writes to a still-DRAFT log and DEC-2026-11-25-04 for Phase 07 PDF capacity, disclosure and lifecycle policy.
+
+
+### DEC-2026-11-27-01 | OPEN | PLogIt owner and database maintainer | JR-162, JR-165\n\nThe target is database enforcement of the approved enum domain alongside existing foreign keys and uniqueness. The deployed migration chain at the reviewed SHA uses unrestricted enum-shaped `VARCHAR` fields. Recommend a read-only legacy-value inventory and an approved additive constraint migration with tested rollout and rollback before tightening storage. Historical value remediation and database enforcement are pending owner review. Phase 09A uses isolated tests and preserves recorded evidence.
+
+
+### DEC-2026-11-27-02 | APPROVED FOR TEST-ONLY VERIFICATION | Builder Lead | JR-167, JR-169\n\nThe service layer puts each business mutation and its audit in the same transaction. Existing rollback evidence uses an optimistic transfer failure or marks a review rollback manually. Require the real application to surface a safe error and roll back both business and audit on a rejected audit INSERT. Exercise the failure using a temporary check in an isolated Testcontainers database. Existing success tests verify commit and read-back. Keep application code and the unversioned export contract unchanged during verification.
+
+
+### DEC-2026-11-27-03 | JR-172/JR-175 | Paired evidence recovery
+
+Require a writer-quiesced checkpoint containing a PostgreSQL custom-format dump and separate attachment archive, with private checksums and restore into a fresh isolated target. Compare engagement, log, version, attachment and audit records and image bytes. Missing media, a failed restore or an incompatible application schema must stop any promotion. The source currently provisions separate volumes. The PLogIt owner and deployment operator own production backup access, encryption, retention, RPO/RTO and cutover; those decisions remain open. This session authorizes a disposable drill.
+
+
+### DEC-2026-11-27-04 | JR-177/JR-178/JR-180 | Liveness and incident diagnostics
+
+Preserve the public /api/health liveness payload. Verify PostgreSQL and storage using authenticated bounded operations, restart in dependency order, and check the logs and external responses for seeded credential and payload values. An operator readiness design should expose only dependency state to an approved audience, with generated opaque correlation IDs and allowlisted diagnostic fields. The deployment operator and PLogIt owner own production exposure, log access/retention, and response policy. This branch tests the existing endpoint and includes a deployment-independent runbook.
