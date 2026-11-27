@@ -289,3 +289,6 @@ Use a native modal dialog and browser keyboard checks to verify opening, focus c
 ### DEC-2026-11-26-06 | JR-160 | Preserve the current log and export contracts
 
 The mirrored Product Spec describes additional board filters, leader edits after approval, and customized PDF filters and sort. This phase verified the implemented flow. The server permits edits only in DRAFT, uses the existing board filter set, and applies approved plus optional previously exported inclusion rather than a custom export query. Keep the tested server rules. The product owner must approve any of those separate changes. Keep DEC-2026-11-23-03 for delayed writes to a still-DRAFT log and DEC-2026-11-25-04 for Phase 07 PDF capacity, disclosure and lifecycle policy.
+
+
+### DEC-2026-11-27-01 | OPEN | PLogIt owner and database maintainer | JR-162, JR-165\n\nThe target is database enforcement of the approved enum domain alongside existing foreign keys and uniqueness. The deployed migration chain at the reviewed SHA uses unrestricted enum-shaped `VARCHAR` fields. Recommend a read-only legacy-value inventory and an approved additive constraint migration with tested rollout and rollback before tightening storage. Historical value remediation and database enforcement are pending owner review. Phase 09A uses isolated tests and preserves recorded evidence.

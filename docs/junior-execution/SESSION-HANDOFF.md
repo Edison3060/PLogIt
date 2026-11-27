@@ -861,3 +861,9 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **DONE.** Map canonical schema and constraints. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-161). Checkpoint parent `01dc9925a1f55924e242a888a592224cad956737`.
 - Continue with JR-162 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+### 2026-11-27T02:03:13Z | Session 17 | JR-162
+
+- **DONE.** Record database acceptance and enum policy gap. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-162). Checkpoint parent `c9dac553310aa842fcb6c2a04e768a8e5b48a3b1`.
+- Continue with JR-163 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
