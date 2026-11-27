@@ -909,3 +909,6 @@ The owner authorized **provisional, documented and replaceable integration assum
 
 - **IN REVIEW.** Exercise atomic rollback on audit write failure. [Session 17 evidence](SESSION-17-EVIDENCE.md#jr-169). Checkpoint parent `9b50e8f4b544ef24a9807c21e244bfe4845cfeeb`.
 - Continue with JR-170 on this branch. Phase 09 stacks on Phase 08 PR #29. INT-001 and release authorization remain pending.
+
+
+JR-169 test review added a check for the injected SQLSTATE and constraint. Await exact-head CI before closing JR-170.

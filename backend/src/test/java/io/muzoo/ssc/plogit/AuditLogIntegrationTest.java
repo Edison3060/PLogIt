@@ -20,7 +20,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.test.web.servlet.MvcResult;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -419,13 +421,15 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("{\"newLeaderId\":" + member.getId() + "}"))
                 .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.message").value("Something went wrong"));
+                .andExpect(jsonPath("$.message").value("Something went wrong"))
+                .andExpect(this::assertAuditConstraintRejected);
         } finally {
             allowAuditWrites();
         }
 
         Engagement reloaded = engagementRepository.findById(engagement.getId()).orElseThrow();
-        assertEquals(leader.getId(), reloaded.getLeader().getId());
+        assertEquals(leader.getId(), jdbc.queryForObject(
+            "SELECT leader_id FROM engagements WHERE id = ?", Long.class, engagement.getId()));
         assertEquals(engagement.getVersion(), reloaded.getVersion());
         assertEquals(EngagementRole.LEADER, memberRepository.findByEngagementAndUser(engagement, leader)
             .orElseThrow().getRole());
@@ -448,7 +452,8 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
                         {"action":"APPROVE"}
                         """))
                 .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.message").value("Something went wrong"));
+                .andExpect(jsonPath("$.message").value("Something went wrong"))
+                .andExpect(this::assertAuditConstraintRejected);
         } finally {
             allowAuditWrites();
         }
@@ -474,7 +479,8 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
                         """))
                 .andExpect(status().isInternalServerError())
                 .andExpect(jsonPath("$.message").value("Something went wrong"))
-                .andExpect(header().doesNotExist("Content-Disposition"));
+                .andExpect(header().doesNotExist("Content-Disposition"))
+                .andExpect(this::assertAuditConstraintRejected);
         } finally {
             allowAuditWrites();
         }
@@ -488,6 +494,16 @@ class AuditLogIntegrationTest extends IntegrationTestBase {
         LogEntry reloaded = logRepository.findById(original.getId()).orElseThrow();
         assertEquals(original.getReviewState(), reloaded.getReviewState());
         assertEquals(original.getVersion(), reloaded.getVersion());
+    }
+
+    private void assertAuditConstraintRejected(MvcResult result) {
+        Throwable cause = result.getResolvedException();
+        while (cause != null && !(cause instanceof SQLException)) {
+            cause = cause.getCause();
+        }
+        assertTrue(cause instanceof SQLException, "Expected the database to reject the audit write");
+        assertEquals("23514", ((SQLException) cause).getSQLState());
+        assertTrue(cause.getMessage().contains("test_reject_audit"));
     }
 
     private void rejectAuditWrites() {

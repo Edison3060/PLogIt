@@ -37,3 +37,5 @@ Use `mvn -B clean verify` from `backend/`. `TeamWorkflowIntegrationTest.transfer
 ## JR-169
 
 Added three `AuditLogIntegrationTest` requests through MockMvc and the real database. A test-only CHECK rejects the relevant audit INSERT at commit and is removed in `finally`. The export test permits per-log EXPORT writes and rejects the aggregate. Expected results are generic HTTP 500, no download response, unchanged persisted role assignments and leader pointer, review states and versions, and no surviving audit. Authorization denials are separately covered by the existing HTTP integration suite. Local `git diff --check` passed. Exact-head CI pending. Reviewer is the Builder Lead.
+
+The follow-up also checks that the server's internal exception chain carries `23514` from the named audit constraint. This prevents an unrelated HTTP 500 from satisfying the fixture.
