@@ -305,3 +305,8 @@ Require a writer-quiesced checkpoint containing a PostgreSQL custom-format dump 
 ### DEC-2026-11-27-04 | JR-177/JR-178/JR-180 | Liveness and incident diagnostics
 
 Preserve the public /api/health liveness payload. Verify PostgreSQL and storage using authenticated bounded operations, restart in dependency order, and check the logs and external responses for seeded credential and payload values. An operator readiness design should expose only dependency state to an approved audience, with generated opaque correlation IDs and allowlisted diagnostic fields. The deployment operator and PLogIt owner own production exposure, log access/retention, and response policy. This branch tests the existing endpoint and includes a deployment-independent runbook.
+
+
+### DEC-2026-11-28-01 | JR-182/JR-185 | Isolated Spring Boot 4.1.3 candidate
+
+Builder Lead approved testing a one-property Boot patch in an isolated development branch. Retain Java 21 and explicit library pins. Require the complete Maven/PostgreSQL suite, effective dependency review, immutable legacy export evidence and normal security checks before acceptance. The PLogIt maintainer owns dependency promotion and the release gates remain open. [JR-182](SESSION-19-EVIDENCE.md#jr-182).
