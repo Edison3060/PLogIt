@@ -1081,3 +1081,5 @@ Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edi
 - JR-197 DONE
 
 Run the offline artifact candidate in GitHub Actions after both blocking image scans. [Session 20 evidence](SESSION-20-EVIDENCE.md). Phase 09 recovery acceptance, JR-190 advisory triage, INT-001 and production authorization remain open.
+
+JR-198 candidate [#35](https://github.com/Edison3060/PLogIt/pull/35) is running. Await its blocking Trivy job, exact image archive and reload proof, migration comparison and modified-image result. Resume JR-198 first if interrupted.
