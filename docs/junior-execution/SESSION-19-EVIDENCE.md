@@ -31,3 +31,9 @@ On candidate [Maven job 140829239686](https://github.com/Edison3060/PLogIt/actio
 **DONE.** Close Boot verification without changing Phase 10 runtime
 
 The supported patch reproduced the complete 170-test Maven baseline and rolled back the invalid migration on PostgreSQL 16.16. The Boot proposal remains in draft PR #31, reversible by retaining 4.1.1 or reverting its one-line commit if subsequently accepted. Phase 10 retains the 4.1.1 POM. Promotion still requires review of effective dependency changes, candidate CI and the existing Phase 09 and release gates. The patch announcement is evidence of availability. Applicability of upstream advisories and library pins must be evaluated separately.
+
+## JR-186
+
+**DONE.** Map the Node and frontend dependency baseline
+
+Phase 09 head `591e3e8a88f82e38c66203ff4fbe69ef238411cf` contains a digest-pinned `node:20-alpine` frontend build stage and pinned nginx runtime in `frontend/Dockerfile`. `.github/workflows/ci.yml` uses Node 22.23.4 for npm and Vitest. The canonical lock resolves React and React DOM 18.3.1, Vite 6.4.3, Vitest 4.1.12 and the React plugin 4.7.0. `frontend/package.json` owns build, lint and test entry points. Existing test suites cover protected routes, API handling, theme, engagement and log detail. `scripts/verify-log-export-journeys.cjs` owns full browser journeys. Older mirrored specs describe the architecture and baseline, whereas the current files own what is built.
