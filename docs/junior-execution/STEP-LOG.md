@@ -1446,3 +1446,8 @@ Checks ran against `7734c0712ad774069c28c1476f7cb48c6087303f`. GitHub Actions pa
 
 - **NOT STARTED → IN PROGRESS → IN REVIEW.** Record Node candidate evidence and open frontend advisory review [Evidence](SESSION-19-EVIDENCE.md#jr-190).
 - Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `fe087536492d453e86891971a83efb138d2deaa8`. Reconcile candidate CI and update the controller for independent supply-chain verification only. Prior gates and maintainer decisions stay open.
+
+
+### 2026-11-28T02:16:26.785Z | Session 19 | JR-190 reconciliation
+
+Both candidate CI runs passed their configured validation with production CD skipped. The current lockfile's registry advisories still require maintainer triage. Corrected evidence and timestamp column placement for JR-181–187. [Final evidence](SESSION-19-EVIDENCE.md#executed-verification-and-reconciliation). [Handoff](SESSION-HANDOFF.md). Checkpoint parent `b17195ae953f2c6bdfba46edcd54001a506d1917`.
