@@ -1481,3 +1481,8 @@ Both candidate CI runs passed their configured validation with production CD ski
 
 - **NOT STARTED → IN PROGRESS → DONE.** Trace current CI and deployment artifact ownership [Evidence](SESSION-20-EVIDENCE.md#jr-196).
 - Reviewed by Builder Lead. Checkpoint parent `46c9ca69f9bbc97414f49528298e8dbed0628fa0`. Write the artifact identity contract with a separate synthetic acceptance path.
+
+### 2026-11-28T14:06:11Z | Session 20 | JR-197
+
+- **NOT STARTED → IN PROGRESS → DONE.** Define the traceability evidence and release gate [Evidence](SESSION-20-EVIDENCE.md#jr-197).
+- Reviewed by Builder Lead. Checkpoint parent `19c5c30507e70b09299a05519addb5008e656b1a`. Run the offline artifact candidate in GitHub Actions after both blocking image scans.

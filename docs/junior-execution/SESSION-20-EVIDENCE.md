@@ -37,3 +37,9 @@ The canonical inputs, scanner settings and Compose restrictions passed baseline 
 **DONE**. Trace current CI and deployment artifact ownership
 
 At Phase 10 baseline `a30b501f61285f79cb5db57f7064c67fa497d6bf`, `.github/workflows/ci.yml` uses `docker build -t plogit-backend:ci ./backend` and `docker build -t plogit-frontend:ci ./frontend`, validates the resulting images and scans the local tags. The main-only SSH job checks out `DEPLOY_SHA` and executes `docker compose ... up -d --build`. It has source SHA linkage and no promotion of the CI-scanned image IDs. The separate Compose smoke also builds images. The three migrations live in `backend/src/main/resources/db/migration/`. `docs/operations/recovery.md` preserves rollback records and paired data requirements. `git diff --name-only 591e3e8... HEAD` confirmed the baseline Phase 10 change set was tracking-only. Expected traceability is incomplete. Builder Lead reviewed source and exact CI scan steps. The deployment operator owns production promotion and rollback.
+
+## JR-197
+
+**DONE**. Define the traceability evidence and release gate
+
+DEC-2026-11-28-05 defines the offline evidence tuple and production approvals. The exercised tuple covers exact checked-out SHA and Actions execution, local image IDs, archive SHA-256, packaged migration hashes and an ancestral test rollback SHA. Expected release evidence also binds tested and deployed registry manifests by digest, including the platform, migration verification and a known-good rollback artifact. The current source rebuilds on the deployment host. The release gate remains pending authorized configuration and genuine artifact evidence. [Docker digest guidance](https://docs.docker.com/learn/content/prove-where-your-image-came-from/) and [GitHub attestations guidance](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations) reviewed 2026-11-28.

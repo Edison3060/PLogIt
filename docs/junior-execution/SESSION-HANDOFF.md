@@ -1068,9 +1068,9 @@ Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured
 
 Confirm the controller points to Session 20 before separately starting it. Reuse the current phase branch, carry DEC-2026-11-28-03 into release review and preserve the prior data and integration gates. This run stopped at JR-190.
 
-## Session 20 | 2026-11-28T14:06:08Z
+## Session 20 | 2026-11-28T14:06:11Z
 
-Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edison3060/PLogIt/pull/33) above unmerged #30. Last assessed JR-196 (DONE). Checkpoint parent `46c9ca69f9bbc97414f49528298e8dbed0628fa0`.
+Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edison3060/PLogIt/pull/33) above unmerged #30. Last assessed JR-197 (DONE). Checkpoint parent `19c5c30507e70b09299a05519addb5008e656b1a`.
 
 - JR-191 DONE
 - JR-192 DONE
@@ -1078,5 +1078,6 @@ Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edi
 - JR-194 DONE
 - JR-195 DONE
 - JR-196 DONE
+- JR-197 DONE
 
-Write the artifact identity contract with a separate synthetic acceptance path. [Session 20 evidence](SESSION-20-EVIDENCE.md). Phase 09 recovery acceptance, JR-190 advisory triage, INT-001 and production authorization remain open.
+Run the offline artifact candidate in GitHub Actions after both blocking image scans. [Session 20 evidence](SESSION-20-EVIDENCE.md). Phase 09 recovery acceptance, JR-190 advisory triage, INT-001 and production authorization remain open.

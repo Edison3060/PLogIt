@@ -202,7 +202,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-194 | Reject Image and workflow hardening invalid operation | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-194) | 2026-11-28T14:05:34Z |
 | JR-195 | Close Image and workflow hardening verification | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-195) | 2026-11-28T14:05:44Z |
 | JR-196 | Inventory Artifact traceability | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-196) | 2026-11-28T14:06:08Z |
-| JR-197 | Specify Artifact traceability acceptance | 20 | NOT STARTED | — | — |
+| JR-197 | Specify Artifact traceability acceptance | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-197) | 2026-11-28T14:06:11Z |
 | JR-198 | Reproduce Artifact traceability success | 20 | NOT STARTED | — | — |
 | JR-199 | Reject Artifact traceability invalid operation | 20 | NOT STARTED | — | — |
 | JR-200 | Close Artifact traceability verification | 20 | NOT STARTED | — | — |
