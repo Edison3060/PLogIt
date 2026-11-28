@@ -1461,3 +1461,8 @@ Both candidate CI runs passed their configured validation with production CD ski
 
 - **NOT STARTED → IN PROGRESS → DONE.** Set image and workflow acceptance criteria [Evidence](SESSION-20-EVIDENCE.md#jr-192).
 - Reviewed by Builder Lead. Checkpoint parent `91e62818274f41ba976d074a3a67d1fe0693a1ce`. Correlate current source assertions with exact-head security and rendered Compose CI.
+
+### 2026-11-28T14:04:34Z | Session 20 | JR-193
+
+- **NOT STARTED → IN PROGRESS → DONE.** Verify pinned inputs and rendered Compose controls [Evidence](SESSION-20-EVIDENCE.md#jr-193).
+- Reviewed by Builder Lead. Checkpoint parent `e92769d6cf4604997e7530bbc3170ddfcfedaa10`. Verify the synthetic Semgrep finding produces a failed blocking step on its disposable branch.

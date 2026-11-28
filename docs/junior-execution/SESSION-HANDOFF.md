@@ -1068,11 +1068,12 @@ Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured
 
 Confirm the controller points to Session 20 before separately starting it. Reuse the current phase branch, carry DEC-2026-11-28-03 into release review and preserve the prior data and integration gates. This run stopped at JR-190.
 
-## Session 20 | 2026-11-28T14:03:42Z
+## Session 20 | 2026-11-28T14:04:34Z
 
-Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edison3060/PLogIt/pull/33) above unmerged #30. Last assessed JR-192 (DONE). Checkpoint parent `91e62818274f41ba976d074a3a67d1fe0693a1ce`.
+Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edison3060/PLogIt/pull/33) above unmerged #30. Last assessed JR-193 (DONE). Checkpoint parent `e92769d6cf4604997e7530bbc3170ddfcfedaa10`.
 
 - JR-191 DONE
 - JR-192 DONE
+- JR-193 DONE
 
-Correlate current source assertions with exact-head security and rendered Compose CI. [Session 20 evidence](SESSION-20-EVIDENCE.md). Phase 09 recovery acceptance, JR-190 advisory triage, INT-001 and production authorization remain open.
+Verify the synthetic Semgrep finding produces a failed blocking step on its disposable branch. [Session 20 evidence](SESSION-20-EVIDENCE.md). Phase 09 recovery acceptance, JR-190 advisory triage, INT-001 and production authorization remain open.
