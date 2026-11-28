@@ -189,7 +189,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-181 | Inventory Java and Spring version review | 19 | DONE | 2026-11-28 | [Session 19](SESSION-19-EVIDENCE.md#jr-181) |
 | JR-182 | Specify Java and Spring version review acceptance | 19 | DONE | 2026-11-28 | [Session 19](SESSION-19-EVIDENCE.md#jr-182) |
 | JR-183 | Reproduce Java and Spring version review success | 19 | DONE | 2026-11-28 | [Session 19](SESSION-19-EVIDENCE.md#jr-183) |
-| JR-184 | Reject Java and Spring version review invalid operation | 19 | NOT STARTED | — | — |
+| JR-184 | Reject Java and Spring version review invalid operation | 19 | DONE | 2026-11-28 | [Session 19](SESSION-19-EVIDENCE.md#jr-184) |
 | JR-185 | Close Java and Spring version review verification | 19 | NOT STARTED | — | — |
 | JR-186 | Inventory Node React Vite support | 19 | NOT STARTED | — | — |
 | JR-187 | Specify Node React Vite support acceptance | 19 | NOT STARTED | — | — |

@@ -19,3 +19,9 @@ The baseline is Java 21 and Boot 4.1.1, with the prior Phase 09 PostgreSQL-backe
 **DONE.** Run the full Maven suite on Boot 4.1.3
 
 The isolated one-line patch on `work/plogit-session-19-boot-candidate` at `2e079773d3d61b7bf019dc0d2bcbef9302358f3d` went through [draft PR #31](https://github.com/Edison3060/PLogIt/pull/31) and [CI 46096595474](https://github.com/Edison3060/PLogIt/actions/runs/46096595474). Expected complete Java/PostgreSQL regression and a packaged candidate. Observed `mvn -B clean verify` with Java 21.0.13.1, Maven 3.9.15, Boot 4.1.3, and PostgreSQL 16.16: 170 tests, zero failures, errors or skips, then `BUILD SUCCESS`. Relevant suites included Flyway (4), export (18), log authorization (12) and audit (18). The Testcontainers fixture uses isolated PostgreSQL from `PostgresTestConfig` and independent databases for migration lifecycle cases. A local Maven retry hit proxy connectivity. The recorded complete suite ran on GitHub.
+
+## JR-184
+
+**DONE.** Verify migration conflict rollback on the candidate
+
+On candidate [Maven job 140829239686](https://github.com/Edison3060/PLogIt/actions/runs/46096595474/job/140829239686), `FlywayMigrationLifecycleTest#invalidMigrationRollsBackPartialDdlAndPreservesV1Data` applies V1, seeds one user, then attempts a synthetic V2 with partial DDL and an invalid write. The log reports that the V2 failed and Flyway rolled it back. Source assertions require zero partial table, no successful V2 history row and preserved user and V1 history. All four migration tests passed. The same run passed 12 log-authorization, 18 audit and 18 export tests, including the checked-in unversioned JSON fixture. The only candidate change is the Boot parent property. Unapproved version and dependency conflicts remain gated on the draft branch.
