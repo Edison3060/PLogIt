@@ -86,3 +86,8 @@ PDF is a local auditor evidence pack and does not establish JudgeIt compatibilit
 ### INT-001 | PROVISIONAL | Session 16 export presentation
 
 The browser exercised existing local PDF, CSV and unversioned JSON export on synthetic records. JSON disclosure now explains raw Markdown and attachment filenames. The browser did not transfer files to JudgeIt. The exact producer nullable-list mismatch and authorized consumer reconciliation remain open. See [Session 16 evidence](SESSION-16-EVIDENCE.md#jr-160).
+
+
+### INT-001 | PROVISIONAL | Session 19 dependency verification
+
+The Boot candidate ran the existing synthetic unversioned JSON fixture and export authorization tests, and the Node candidate retained the same frontend lockfile. These regressions preserve the local producer evidence. Exact legacy nullable targets and tags still require authorized JudgeIt consumer reconciliation. No new one-way format was introduced. [Session 19](SESSION-19-EVIDENCE.md#jr-183).

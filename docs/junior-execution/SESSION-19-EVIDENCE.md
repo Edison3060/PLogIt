@@ -1,0 +1,73 @@
+# Session 19 | Dependency refresh
+
+Phase 10 stacks on unmerged Phase 09 PR #30 at `591e3e8a88f82e38c66203ff4fbe69ef238411cf`. The controller permits isolated verification while Phase 09 and production acceptance remain open. The canonical source and copied suite plans retain their separate roles.
+
+## JR-181
+
+**DONE.** Map the Java and Spring dependency baseline
+
+At Phase 09 head `591e3e8a88f82e38c66203ff4fbe69ef238411cf`, canonical `backend/pom.xml` owns Java 21 and Spring Boot 4.1.1. It pins PostgreSQL JDBC 42.7.12, Tomcat 11.0.25, Jackson 3 BOM 3.1.7, and independently imports the Jackson 2.21.7 BOM. `backend/Dockerfile` separately pins Java 21 build/runtime images. `.github/workflows/ci.yml` owns the actual Java 21 Maven regression and uses Docker-backed PostgreSQL 16 via `PostgresTestConfig` and `FlywayMigrationLifecycleTest`. `ExportIntegrationTest` covers the legacy export, while authentication, CSRF, review, attachment and audit integration classes cover the affected boundaries. The dated PLogIt Product Spec and Suite Master Spec corroborate the baseline and describe historical status. Phase 09 executable CI 46013369940 passed 170 backend tests. Expected authoritative manifest and coverage map found. Builder Lead reviewed.
+
+## JR-182
+
+**DONE.** Set isolated Boot patch acceptance
+
+The baseline is Java 21 and Boot 4.1.1, with the prior Phase 09 PostgreSQL-backed result. Choose Boot 4.1.3 within the same minor line, keep the Java level and four explicit library pins, and resolve the effective dependency tree before considering a source PR. Spring announced 4.1.3 on 2026-11-20 (https://spring.io/blog/2026/11/20/spring-boot-4-1-3-available-now/, accessed 2026-11-28). A BOM patch can change transitive libraries even when direct code is identical. Verify the same V1→V3 Flyway history with existing synthetic rows, rejection and rollback on an invalid migration, anonymous and out-of-scope denial without writes, and the existing unversioned JSON DTO and attachment-filename contract. Java 25 and Boot 4.2 need independent assessment.
+
+## JR-183
+
+**DONE.** Run the full Maven suite on Boot 4.1.3
+
+The isolated one-line patch on `work/plogit-session-19-boot-candidate` at `2e079773d3d61b7bf019dc0d2bcbef9302358f3d` went through [draft PR #31](https://github.com/Edison3060/PLogIt/pull/31) and [CI 46096595474](https://github.com/Edison3060/PLogIt/actions/runs/46096595474). Expected complete Java/PostgreSQL regression and a packaged candidate. Observed `mvn -B clean verify` with Java 21.0.13.1, Maven 3.9.15, Boot 4.1.3, and PostgreSQL 16.16: 170 tests, zero failures, errors or skips, then `BUILD SUCCESS`. Relevant suites included Flyway (4), export (18), log authorization (12) and audit (18). The Testcontainers fixture uses isolated PostgreSQL from `PostgresTestConfig` and independent databases for migration lifecycle cases. A local Maven retry hit proxy connectivity. The recorded complete suite ran on GitHub.
+
+## JR-184
+
+**DONE.** Verify migration conflict rollback on the candidate
+
+On candidate [Maven job 140829239686](https://github.com/Edison3060/PLogIt/actions/runs/46096595474/job/140829239686), `FlywayMigrationLifecycleTest#invalidMigrationRollsBackPartialDdlAndPreservesV1Data` applies V1, seeds one user, then attempts a synthetic V2 with partial DDL and an invalid write. The log reports that the V2 failed and Flyway rolled it back. Source assertions require zero partial table, no successful V2 history row and preserved user and V1 history. All four migration tests passed. The same run passed 12 log-authorization, 18 audit and 18 export tests, including the checked-in unversioned JSON fixture. The only candidate change is the Boot parent property. Unapproved version and dependency conflicts remain gated on the draft branch.
+
+## JR-185
+
+**DONE.** Close Boot verification without changing Phase 10 runtime
+
+The supported patch reproduced the complete 170-test Maven baseline and rolled back the invalid migration on PostgreSQL 16.16. The Boot proposal remains in draft PR #31, reversible by retaining 4.1.1 or reverting its one-line commit if subsequently accepted. Phase 10 retains the 4.1.1 POM. Promotion still requires review of effective dependency changes, candidate CI and the existing Phase 09 and release gates. The patch announcement is evidence of availability. Applicability of upstream advisories and library pins must be evaluated separately.
+
+## JR-186
+
+**DONE.** Map the Node and frontend dependency baseline
+
+Phase 09 head `591e3e8a88f82e38c66203ff4fbe69ef238411cf` contains a digest-pinned `node:20-alpine` frontend build stage and pinned nginx runtime in `frontend/Dockerfile`. `.github/workflows/ci.yml` uses Node 22.23.4 for npm and Vitest. The canonical lock resolves React and React DOM 18.3.1, Vite 6.4.3, Vitest 4.1.12 and the React plugin 4.7.0. `frontend/package.json` owns build, lint and test entry points. Existing test suites cover protected routes, API handling, theme, engagement and log detail. `scripts/verify-log-export-journeys.cjs` owns full browser journeys. Older mirrored specs describe the architecture and baseline, whereas the current files own what is built.
+
+## JR-187
+
+**DONE.** Select an isolated Node 24 LTS image candidate
+
+Node's official EOL page lists Node 20's final update in March 2026, and its official security release identifies Node 24.22.3 LTS on 2026-11-11 (https://nodejs.org/en/about/eol and https://nodejs.org/en/blog/release/v24.22.3/, accessed 2026-11-28). Verify the existing lock with Node 24.22.3 and the published multi-platform digest, keep React and Vite changes isolated, and verify production asset serving and unauthenticated routing. Vite's support page requires using a currently supported minor for security fixes. Preserve current Vite in the Node-only candidate and track supported-line evaluation separately rather than expanding this runtime patch (https://vite.dev/releases.html, accessed 2026-11-28).
+
+## JR-188
+
+**DONE.** Verify the Node 24 production frontend bundle
+
+Draft [PR #32](https://github.com/Edison3060/PLogIt/pull/32) at `286b6ddf1436feccc411795599523826c32b7c23` changes one Dockerfile line, pinning Node 24.22.3 Alpine to published manifest digest `sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5`. Docker Hub registry metadata for `library/node:24.22.3-alpine` returned the same digest. With Node 24.22.3 and npm 11.19.1, `npm ci && npm run build && npm run lint && npm test` exited 0, installing 326 packages, building 102 modules, and passing 25 tests across seven files. Chromium 158.0.8127.0 loaded the compiled `dist` bundle on a local loopback origin. With test-only synthetic API responses it checked the guard on `/engagements/931/logs`, rejected credentials, the CSRF header on sign-in, successful navigation, the empty dashboard and no browser exceptions. Independent [candidate CI 46096884430](https://github.com/Edison3060/PLogIt/actions/runs/46096884430) exercises the Docker build and real HTTP against PostgreSQL. Browser fixture result covers frontend behavior.
+
+## JR-189
+
+**DONE.** Reject the split React and React DOM upgrade
+
+On Node 24.22.3/npm 11.19.1, a minimal disposable manifest with exact React 19.2.0 and React DOM 18.3.1 ran `npm install --strict-peer-deps --package-lock-only --ignore-scripts --no-audit --no-fund`. npm exited 1 with `ERESOLVE` because React DOM 18.3.1 requires React `^18.3.1`. The fixture produced neither a lockfile nor `node_modules`. The canonical manifest and lockfile had a clean `git diff --exit-code`. The initial attempt with a copied stale lock yielded peer warnings and rewrote only the disposable lock despite strict mode, so it cannot establish denial. The fresh fixture exercised deterministic failure, while the candidate CI separately exercises the corrupt-lock guard.
+
+## JR-190
+
+**IN REVIEW.** Record Node candidate evidence and open frontend advisory review
+
+The Node-only draft [#32](https://github.com/Edison3060/PLogIt/pull/32) passed local lock install, lint, build, Vitest, Chromium frontend smoke and the peer-dependency denial. Its [Compose job](https://github.com/Edison3060/PLogIt/actions/runs/46096884430/job/140830173403) resolved the exact Node 24 Alpine digest, served the SPA, passed real authenticated HTTP and old-session replay denial, verified volume restart and completed the paired recovery drill. At this checkpoint the Trivy image job was still executing.
+
+On 2026-11-28, `npm audit --json` on the canonical lock returned exit 1, with 18 reported packages (7 high, 11 moderate). `npm audit --omit=dev --json` returned exit 1 for 2 moderate packages, React Router and React Router DOM 6.30.4. Vite 6.4.3 is a build dependency and falls in the advisory ranges. The high Vite advisory reports Windows-specific development tooling conditions (https://github.com/advisories/GHSA-587h-7wmj-h5pm). The reviewed React Router DOM advisory covers the installed range (https://github.com/advisories/GHSA-jjmj-jmhj-qwj2). The frontend serves Vite's built output from nginx, and reviewed application routes use the SPA router. This source review does not close applicability for the reported advisories. Vite upstream lists security backports for 6.4 and the npm registry lists patches through 6.4.6. Run independent focused dependency candidates and documented advisory triage before promotion. No package manifest or lockfile change was included in the Node candidate. Rollback for the draft is retaining the existing builder reference, with Node 20 EOL still open.
+
+
+## Executed verification and reconciliation
+
+- Boot draft #31 at `2e079773d3d61b7bf019dc0d2bcbef9302358f3d` passed [CI 46096595474](https://github.com/Edison3060/PLogIt/actions/runs/46096595474). Node draft #32 at `286b6ddf1436feccc411795599523826c32b7c23` passed [CI 46096884430](https://github.com/Edison3060/PLogIt/actions/runs/46096884430). Backend, frontend, live Compose and recovery, Semgrep, pinned Trivy filesystem and both images, and proxy validation passed in both runs. Production CD was skipped. On #32, the image scan also checked both application healthchecks. These results describe the configured checks and exact candidate revisions. The npm registry advisory results in JR-190 remain open.
+- Maven Central BOM review on 2026-11-28 compared `spring-boot-dependencies-4.1.1.pom` and `spring-boot-dependencies-4.1.3.pom`. The defaults change Spring Framework 7.0.9→7.0.11, Spring Security 7.1.1→7.1.3 and Hibernate 7.4.5.Final→7.4.15.Final, with Flyway at 12.4.0. The app explicitly retains the Jackson, PostgreSQL JDBC and Tomcat overrides named in JR-181. A patch changes the platform dependency set even with identical app and migration code. Spring's 2026-11-19 advisory for certain request matchers lists 4.1.3 as a fix (https://spring.io/security/cve-2026-59414/). A source search found no app use of `EndpointRequest`, `PathRequest` or Actuator in this baseline. Keep the patch and any pin reconciliation subject to separately reviewed promotion.
+- Frontend browser setup used temporary Playwright 1.65.1 and @sparticuz/chromium 158.0.0, outside the npm project. The scratch harness served `frontend/dist` on 127.0.0.1 with SPA fallback, used `page.route` for only synthetic API responses, and checked successful hashed JavaScript loading and no uncaught exceptions. Fixture route responses were unauthenticated `GET /api/auth/me` 403, `GET /api/health` 200 with a synthetic CSRF cookie, `POST /api/auth/login` 401 then 200 with the expected header, and authenticated `GET /api/engagements` 200 with an empty list. The separate candidate Compose run executed real authenticated HTTP and recovery. Local attempts to run a backend encountered Maven transport and local PostgreSQL socket limitations. Candidate Maven and real PostgreSQL evidence came from the linked CI.
+- `npm audit` and Trivy use different reported scopes and gates. Preserve DEC-2026-11-28-03 alongside the passing configured checks. Maintain the existing source/security rules, audit and evidence persistence, and unversioned export. No application, build or workflow change is on the Phase 10 tracking branch. Builder Lead reviewed the two one-line candidate diffs and selected no promotion during this increment.

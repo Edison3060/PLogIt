@@ -988,3 +988,99 @@ Draft [PR #30](https://github.com/Edison3060/PLogIt/pull/30) stacks on unmerged 
 Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured redacted correlation and the separate dependency readiness gap. All ten JR checkpoints are recorded on `work/plogit-phase-09`. Tested `7734c0712ad774069c28c1476f7cb48c6087303f` in [CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). GitHub Actions passed Java 21/Maven 170 tests with PostgreSQL 16.16, frontend build and 25 tests, Compose recovery, Semgrep, Trivy filesystem and both images, and production proxy validation. Production CD was skipped. The equivalent stacked PR validation run 46013380950 passed. Local frontend lint/build and all 25 tests, shell syntax, the CI guard, whitespace and append-only checks passed. The first local Maven attempt hit DNS without JVM proxy configuration. A proxy retry resolved dependencies but the local environment lacked a Java 21 compiler. Maven build and tests ran in CI.
 
 [Draft PR #30](https://github.com/Edison3060/PLogIt/pull/30) remains stacked on unmerged [PR #29](https://github.com/Edison3060/PLogIt/pull/29). Phase 09 has no merge or production sign-off. DEC-2026-11-27-01/03/04, prior stack acceptance, INT-001 and DEC-2026-11-06-11 remain open. Keep the existing unversioned JSON contract. See [Session 18 evidence](SESSION-18-EVIDENCE.md#executed-verification-and-reconciliation) and the [recovery runbook](../operations/recovery.md).
+
+
+### 2026-11-28T02:08:01.707Z | Session 19 | JR-181
+
+- **DONE.** Map the Java and Spring dependency baseline [Evidence](SESSION-19-EVIDENCE.md#jr-181). Checkpoint parent `591e3e8a88f82e38c66203ff4fbe69ef238411cf`.
+- Assessed DONE: JR-181. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:08:16.912Z | Session 19 | JR-182
+
+- **DONE.** Set isolated Boot patch acceptance [Evidence](SESSION-19-EVIDENCE.md#jr-182). Checkpoint parent `865dcfef97fa0a275f252d5867583336d0d54bba`.
+- Assessed DONE: JR-181, JR-182. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:31.412Z | Session 19 | JR-183
+
+- **DONE.** Run the full Maven suite on Boot 4.1.3 [Evidence](SESSION-19-EVIDENCE.md#jr-183). Checkpoint parent `bc5528990321934f4d3b7d477045b967d43c2707`.
+- Assessed DONE: JR-181, JR-182, JR-183. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:34.428Z | Session 19 | JR-184
+
+- **DONE.** Verify migration conflict rollback on the candidate [Evidence](SESSION-19-EVIDENCE.md#jr-184). Checkpoint parent `e187470ca60ab64fd93809ec17c5e53661b6b449`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:36.912Z | Session 19 | JR-185
+
+- **DONE.** Close Boot verification without changing Phase 10 runtime [Evidence](SESSION-19-EVIDENCE.md#jr-185). Checkpoint parent `f054ede02c04e58e816833271276f91176a1c56c`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:39.936Z | Session 19 | JR-186
+
+- **DONE.** Map the Node and frontend dependency baseline [Evidence](SESSION-19-EVIDENCE.md#jr-186). Checkpoint parent `f290855c38ba93094f4d2adb9598f49f7ca0fbf1`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:43.228Z | Session 19 | JR-187
+
+- **DONE.** Select an isolated Node 24 LTS image candidate [Evidence](SESSION-19-EVIDENCE.md#jr-187). Checkpoint parent `2e3779780796c18419588ce8697f3c7e53178020`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:13:46.527Z | Session 19 | JR-188
+
+- **DONE.** Verify the Node 24 production frontend bundle [Evidence](SESSION-19-EVIDENCE.md#jr-188). Checkpoint parent `ff29b3bccf56baf1e572e4df417981f8c8cc457e`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187, JR-188. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:13:49.416Z | Session 19 | JR-189
+
+- **DONE.** Reject the split React and React DOM upgrade [Evidence](SESSION-19-EVIDENCE.md#jr-189). Checkpoint parent `9f77c2c81f50abc8b33c305650761f432c7587a0`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187, JR-188, JR-189. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:15:29.133Z | Session 19 | JR-190
+
+- **IN REVIEW.** Record Node candidate evidence and open frontend advisory review [Evidence](SESSION-19-EVIDENCE.md#jr-190). Checkpoint parent `fe087536492d453e86891971a83efb138d2deaa8`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187, JR-188, JR-189. IN REVIEW: JR-190. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Reconcile candidate CI and update the controller for independent supply-chain verification only. Prior gates and maintainer decisions stay open.
+
+
+## Session 19 closeout | 2026-11-28T02:16:26.785Z
+
+**READY WITH PROVISIONAL INTEGRATION** for independent Session 20, JR-191–JR-200 on `work/plogit-phase-10`. JR-181–189 are DONE. JR-190 remains IN REVIEW for frontend advisory triage and dependency promotion. The stack, Phase 09 acceptance, INT-001 actual JudgeIt compatibility, and production approval remain open. The existing Phase 10 application and workflow files are identical to Phase 09 at `591e3e8a88f82e38c66203ff4fbe69ef238411cf`.
+
+[Draft Phase 10 PR #33](https://github.com/Edison3060/PLogIt/pull/33) stacks on unmerged Phase 09 PR #30. Candidate drafts [#31](https://github.com/Edison3060/PLogIt/pull/31) and [#32](https://github.com/Edison3060/PLogIt/pull/32) each diverge directly from the same Phase 09 baseline and are independently reversible. [Session 19 evidence](SESSION-19-EVIDENCE.md#executed-verification-and-reconciliation) records both full candidate CI runs and the npm advisory findings. Keep all three PRs draft. JR checkpoints in order are `865dcfef97fa`, `bc5528990321`, `e187470ca60a`, `f054ede02c04`, `f290855c38ba`, `2e3779780796`, `ff29b3bccf56`, `9f77c2c81f50`, `fe087536492d`, `b17195ae953f`.
+
+Confirm the controller points to Session 20 before separately starting it. Reuse the current phase branch, carry DEC-2026-11-28-03 into release review and preserve the prior data and integration gates. This run stopped at JR-190.
+
+## Session 20 | 2026-11-28T14:11:08Z
+
+Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edison3060/PLogIt/pull/33) above unmerged #30. Last assessed JR-200 (IN REVIEW). Checkpoint parent `a2261c5dfce8336b621243b41a95d876c0a8d941`.
+
+- JR-191 DONE
+- JR-192 DONE
+- JR-193 DONE
+- JR-194 DONE
+- JR-195 DONE
+- JR-196 DONE
+- JR-197 DONE
+- JR-198 DONE
+- JR-199 DONE
+- JR-200 IN REVIEW
+
+Readiness is READY WITH PROVISIONAL INTEGRATION for the independent Session 21 (JR-201–JR-210). Stack future `work/plogit-phase-11` on the final unmerged Phase 10 branch. Begin only in the next authorized session and use isolated verification for SSH host trust and reverse proxy. Do not deploy or merge the phase. [Session 20 evidence](SESSION-20-EVIDENCE.md). Phase 09 recovery acceptance, JR-190 advisory triage, INT-001 and production authorization remain open.

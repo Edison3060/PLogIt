@@ -1386,3 +1386,118 @@ Missing storage returned 404. The authenticated edit during DB outage returned g
 ### 2026-11-27T14:13:20Z | Session 18 | JR-180 | IN REVIEW
 
 Checks ran against `7734c0712ad774069c28c1476f7cb48c6087303f`. GitHub Actions passed Java 21/Maven 170 tests with PostgreSQL 16.16, frontend build and 25 tests, Compose recovery, Semgrep, Trivy filesystem and both images, and production proxy validation. Production CD was skipped. The equivalent stacked PR validation run 46013380950 passed. The phase retains open dependency readiness and structured correlation work, DB enum enforcement (JR-165), prior stacked acceptance, the INT-001 contract test and production approvals. [Executed CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). Builder Lead reviewed.
+
+
+### 2026-11-28T02:08:01.707Z | Session 19 | JR-181
+
+- **NOT STARTED → IN PROGRESS → DONE.** Map the Java and Spring dependency baseline [Evidence](SESSION-19-EVIDENCE.md#jr-181).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `591e3e8a88f82e38c66203ff4fbe69ef238411cf`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:08:16.912Z | Session 19 | JR-182
+
+- **NOT STARTED → IN PROGRESS → DONE.** Set isolated Boot patch acceptance [Evidence](SESSION-19-EVIDENCE.md#jr-182).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `865dcfef97fa0a275f252d5867583336d0d54bba`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:31.412Z | Session 19 | JR-183
+
+- **NOT STARTED → IN PROGRESS → DONE.** Run the full Maven suite on Boot 4.1.3 [Evidence](SESSION-19-EVIDENCE.md#jr-183).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `bc5528990321934f4d3b7d477045b967d43c2707`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:34.428Z | Session 19 | JR-184
+
+- **NOT STARTED → IN PROGRESS → DONE.** Verify migration conflict rollback on the candidate [Evidence](SESSION-19-EVIDENCE.md#jr-184).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `e187470ca60ab64fd93809ec17c5e53661b6b449`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:36.912Z | Session 19 | JR-185
+
+- **NOT STARTED → IN PROGRESS → DONE.** Close Boot verification without changing Phase 10 runtime [Evidence](SESSION-19-EVIDENCE.md#jr-185).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `f054ede02c04e58e816833271276f91176a1c56c`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:39.936Z | Session 19 | JR-186
+
+- **NOT STARTED → IN PROGRESS → DONE.** Map the Node and frontend dependency baseline [Evidence](SESSION-19-EVIDENCE.md#jr-186).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `f290855c38ba93094f4d2adb9598f49f7ca0fbf1`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:43.228Z | Session 19 | JR-187
+
+- **NOT STARTED → IN PROGRESS → DONE.** Select an isolated Node 24 LTS image candidate [Evidence](SESSION-19-EVIDENCE.md#jr-187).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `2e3779780796c18419588ce8697f3c7e53178020`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:13:46.527Z | Session 19 | JR-188
+
+- **NOT STARTED → IN PROGRESS → DONE.** Verify the Node 24 production frontend bundle [Evidence](SESSION-19-EVIDENCE.md#jr-188).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `ff29b3bccf56baf1e572e4df417981f8c8cc457e`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:13:49.416Z | Session 19 | JR-189
+
+- **NOT STARTED → IN PROGRESS → DONE.** Reject the split React and React DOM upgrade [Evidence](SESSION-19-EVIDENCE.md#jr-189).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `9f77c2c81f50abc8b33c305650761f432c7587a0`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:15:29.133Z | Session 19 | JR-190
+
+- **NOT STARTED → IN PROGRESS → IN REVIEW.** Record Node candidate evidence and open frontend advisory review [Evidence](SESSION-19-EVIDENCE.md#jr-190).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `fe087536492d453e86891971a83efb138d2deaa8`. Reconcile candidate CI and update the controller for independent supply-chain verification only. Prior gates and maintainer decisions stay open.
+
+
+### 2026-11-28T02:16:26.785Z | Session 19 | JR-190 reconciliation
+
+Both candidate CI runs passed their configured validation with production CD skipped. The current lockfile's registry advisories still require maintainer triage. Corrected evidence and timestamp column placement for JR-181–187. [Final evidence](SESSION-19-EVIDENCE.md#executed-verification-and-reconciliation). [Handoff](SESSION-HANDOFF.md). Checkpoint parent `b17195ae953f2c6bdfba46edcd54001a506d1917`.
+
+### 2026-11-28T14:03:31Z | Session 20 | JR-191
+
+- **NOT STARTED → IN PROGRESS → DONE.** Inventory image pins and scanner ownership [Evidence](SESSION-20-EVIDENCE.md#jr-191).
+- Reviewed by Builder Lead. Checkpoint parent `a30b501f61285f79cb5db57f7064c67fa497d6bf`. Specify immutable inputs, least privilege, rendered Compose policy and fail-closed scanner evidence.
+
+### 2026-11-28T14:03:42Z | Session 20 | JR-192
+
+- **NOT STARTED → IN PROGRESS → DONE.** Set image and workflow acceptance criteria [Evidence](SESSION-20-EVIDENCE.md#jr-192).
+- Reviewed by Builder Lead. Checkpoint parent `91e62818274f41ba976d074a3a67d1fe0693a1ce`. Correlate current source assertions with exact-head security and rendered Compose CI.
+
+### 2026-11-28T14:04:34Z | Session 20 | JR-193
+
+- **NOT STARTED → IN PROGRESS → DONE.** Verify pinned inputs and rendered Compose controls [Evidence](SESSION-20-EVIDENCE.md#jr-193).
+- Reviewed by Builder Lead. Checkpoint parent `e92769d6cf4604997e7530bbc3170ddfcfedaa10`. Verify the synthetic Semgrep finding produces a failed blocking step on its disposable branch.
+
+### 2026-11-28T14:05:34Z | Session 20 | JR-194
+
+- **NOT STARTED → IN PROGRESS → DONE.** Verify Semgrep fails on a synthetic finding [Evidence](SESSION-20-EVIDENCE.md#jr-194).
+- Reviewed by Builder Lead. Checkpoint parent `33e9dcd601e683ca7de6525d8447ad215b9cad53`. Reconcile baseline positive and isolated failure evidence. Keep production and promotion gates intact.
+
+### 2026-11-28T14:05:44Z | Session 20 | JR-195
+
+- **NOT STARTED → IN PROGRESS → DONE.** Close image and workflow hardening verification [Evidence](SESSION-20-EVIDENCE.md#jr-195).
+- Reviewed by Builder Lead. Checkpoint parent `db0712af3d441ed9c39cfde8f4fce3d69fe78478`. Inventory artifact identity, Flyway metadata and the current deployment rebuild path.
+
+### 2026-11-28T14:06:08Z | Session 20 | JR-196
+
+- **NOT STARTED → IN PROGRESS → DONE.** Trace current CI and deployment artifact ownership [Evidence](SESSION-20-EVIDENCE.md#jr-196).
+- Reviewed by Builder Lead. Checkpoint parent `46c9ca69f9bbc97414f49528298e8dbed0628fa0`. Write the artifact identity contract with a separate synthetic acceptance path.
+
+### 2026-11-28T14:06:11Z | Session 20 | JR-197
+
+- **NOT STARTED → IN PROGRESS → DONE.** Define the traceability evidence and release gate [Evidence](SESSION-20-EVIDENCE.md#jr-197).
+- Reviewed by Builder Lead. Checkpoint parent `19c5c30507e70b09299a05519addb5008e656b1a`. Run the offline artifact candidate in GitHub Actions after both blocking image scans.
+
+### 2026-11-28T14:10:51Z | Session 20 | JR-198
+
+- **NOT STARTED → IN PROGRESS → DONE.** Trace scanned images through offline archive and reload [Evidence](SESSION-20-EVIDENCE.md#jr-198).
+- Reviewed by Builder Lead. Checkpoint parent `b06458e894dcfa9b3a9a4b42c14a0de53923a064`. Reconcile the separate changed-configuration image rejection from the same isolated run.
+
+### 2026-11-28T14:10:53Z | Session 20 | JR-199
+
+- **NOT STARTED → IN PROGRESS → DONE.** Reject the mismatched rebuilt image [Evidence](SESSION-20-EVIDENCE.md#jr-199).
+- Reviewed by Builder Lead. Checkpoint parent `e68b7dd3e3ba04a1c19a3f8310f59d386811952a`. Close Phase 10 evidence with all upstream, provenance and release gates listed.
+
+### 2026-11-28T14:11:08Z | Session 20 | JR-200
+
+- **NOT STARTED → IN PROGRESS → IN REVIEW.** Close Phase 10 evidence with release traceability open [Evidence](SESSION-20-EVIDENCE.md#jr-200).
+- Reviewed by Builder Lead. Checkpoint parent `a2261c5dfce8336b621243b41a95d876c0a8d941`. Readiness is READY WITH PROVISIONAL INTEGRATION for the independent Session 21 (JR-201–JR-210). Stack future `work/plogit-phase-11` on the final unmerged Phase 10 branch. Begin only in the next authorized session and use isolated verification for SSH host trust and reverse proxy. Do not deploy or merge the phase.

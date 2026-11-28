@@ -305,3 +305,26 @@ Require a writer-quiesced checkpoint containing a PostgreSQL custom-format dump 
 ### DEC-2026-11-27-04 | JR-177/JR-178/JR-180 | Liveness and incident diagnostics
 
 Preserve the public /api/health liveness payload. Verify PostgreSQL and storage using authenticated bounded operations, restart in dependency order, and check the logs and external responses for seeded credential and payload values. An operator readiness design should expose only dependency state to an approved audience, with generated opaque correlation IDs and allowlisted diagnostic fields. The deployment operator and PLogIt owner own production exposure, log access/retention, and response policy. This branch tests the existing endpoint and includes a deployment-independent runbook.
+
+
+### DEC-2026-11-28-01 | JR-182/JR-185 | Isolated Spring Boot 4.1.3 candidate
+
+Builder Lead approved testing a one-property Boot patch in an isolated development branch. Retain Java 21 and explicit library pins. Require the complete Maven/PostgreSQL suite, effective dependency review, immutable legacy export evidence and normal security checks before acceptance. The PLogIt maintainer owns dependency promotion and the release gates remain open. [JR-182](SESSION-19-EVIDENCE.md#jr-182).
+
+
+### DEC-2026-11-28-02 | JR-187/JR-190 | Node build-stage support
+
+The current Docker build stage pins Node 20 and CI runs Node 22.23.4. Builder Lead approved isolated verification of Node 24.22.3 LTS against the current dependency lock. Keep React, React DOM and Vite out of the Node-only proposal. Require exact digest, build and security checks, browser evidence and maintainer acceptance for promotion. [JR-187](SESSION-19-EVIDENCE.md#jr-187).
+
+
+### DEC-2026-11-28-03 | OPEN | JR-190 frontend lock advisory triage
+
+Keep the Node-only build-stage candidate isolated. The 2026-11-28 npm registry audit found 7 high and 11 moderate package entries in the existing lock. The production dependency audit reported two moderate React Router entries. Treat these as package advisory matches pending source applicability and fix review. The PLogIt maintainer owns review of the smallest supported lock changes and any compatible React Router migration. Phase 10B can exercise independent image/workflow and traceability controls with temporary synthetic inputs. Do not promote a candidate from these results alone. [Evidence](SESSION-19-EVIDENCE.md#jr-190).
+
+### DEC-2026-11-28-04 | JR-192/JR-195 | Verify image and workflow hardening in isolation
+
+Builder Lead approved verification of the existing controls and a synthetic scanner failure on a disposable non-main branch. Require full SHA pins for external actions, digest pins for pulled images, read-only workflow contents, no database host publication, loopback-only application ports in rendered production Compose and blocking scanner results. Base image pins coexist with build-time OS package updates. Any change to deployment gates or promotion of dependency candidates remains subject to maintainer and release acceptance. [GitHub secure-use reference](https://docs.github.com/en/actions/reference/security/secure-use) and [Docker image input policy](https://docs.docker.com/build/policies/validate-images/) reviewed 2026-11-28.
+
+### DEC-2026-11-28-05 | JR-197/JR-200 | Scanned image identity and release provenance
+
+Builder Lead approved an isolated CI candidate that records the source SHA, Actions run and attempt, two local image IDs, archive SHA-256, Flyway migration file hashes and an ancestral test rollback source SHA. Verify the archived images after reload, compare the packaged SQL to the same source SHA and reject a real image with changed configuration. The production target additionally requires an approved immutable registry digest for each platform image, a link to its scan and actual deployment, migration and paired recovery evidence, and an approved known-good rollback artifact. The maintainer and deployment operator own registry access, provenance signing or attestation, and promotion and rollback authorization. [Docker digest guidance](https://docs.docker.com/learn/content/prove-where-your-image-came-from/) and [GitHub attestations guidance](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations) reviewed 2026-11-28.

@@ -186,26 +186,26 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-178 | Reproduce Health, logging and incident recovery success | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-178) | 2026-11-27T14:13:20Z |
 | JR-179 | Reject Health, logging and incident recovery invalid operation | 18 | DONE | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-179) | 2026-11-27T14:13:20Z |
 | JR-180 | Close Health, logging and incident recovery verification | 18 | IN REVIEW | [Session 18 evidence](SESSION-18-EVIDENCE.md#jr-180) | 2026-11-27T14:13:20Z |
-| JR-181 | Inventory Java and Spring version review | 19 | NOT STARTED | — | — |
-| JR-182 | Specify Java and Spring version review acceptance | 19 | NOT STARTED | — | — |
-| JR-183 | Reproduce Java and Spring version review success | 19 | NOT STARTED | — | — |
-| JR-184 | Reject Java and Spring version review invalid operation | 19 | NOT STARTED | — | — |
-| JR-185 | Close Java and Spring version review verification | 19 | NOT STARTED | — | — |
-| JR-186 | Inventory Node React Vite support | 19 | NOT STARTED | — | — |
-| JR-187 | Specify Node React Vite support acceptance | 19 | NOT STARTED | — | — |
-| JR-188 | Reproduce Node React Vite support success | 19 | NOT STARTED | — | — |
-| JR-189 | Reject Node React Vite support invalid operation | 19 | NOT STARTED | — | — |
-| JR-190 | Close Node React Vite support verification | 19 | NOT STARTED | — | — |
-| JR-191 | Inventory Image and workflow hardening | 20 | NOT STARTED | — | — |
-| JR-192 | Specify Image and workflow hardening acceptance | 20 | NOT STARTED | — | — |
-| JR-193 | Reproduce Image and workflow hardening success | 20 | NOT STARTED | — | — |
-| JR-194 | Reject Image and workflow hardening invalid operation | 20 | NOT STARTED | — | — |
-| JR-195 | Close Image and workflow hardening verification | 20 | NOT STARTED | — | — |
-| JR-196 | Inventory Artifact traceability | 20 | NOT STARTED | — | — |
-| JR-197 | Specify Artifact traceability acceptance | 20 | NOT STARTED | — | — |
-| JR-198 | Reproduce Artifact traceability success | 20 | NOT STARTED | — | — |
-| JR-199 | Reject Artifact traceability invalid operation | 20 | NOT STARTED | — | — |
-| JR-200 | Close Artifact traceability verification | 20 | NOT STARTED | — | — |
+| JR-181 | Inventory Java and Spring version review | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-181) | 2026-11-28T02:08:01.707Z |
+| JR-182 | Specify Java and Spring version review acceptance | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-182) | 2026-11-28T02:08:16.912Z |
+| JR-183 | Reproduce Java and Spring version review success | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-183) | 2026-11-28T02:11:31.412Z |
+| JR-184 | Reject Java and Spring version review invalid operation | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-184) | 2026-11-28T02:11:34.428Z |
+| JR-185 | Close Java and Spring version review verification | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-185) | 2026-11-28T02:11:36.912Z |
+| JR-186 | Inventory Node React Vite support | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-186) | 2026-11-28T02:11:39.936Z |
+| JR-187 | Specify Node React Vite support acceptance | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-187) | 2026-11-28T02:11:43.228Z |
+| JR-188 | Reproduce Node React Vite support success | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-188) | 2026-11-28T02:13:46.527Z |
+| JR-189 | Reject Node React Vite support invalid operation | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-189) | 2026-11-28T02:13:49.416Z |
+| JR-190 | Close Node React Vite support verification | 19 | IN REVIEW | [Session 19](SESSION-19-EVIDENCE.md#jr-190) | 2026-11-28T02:15:29.133Z |
+| JR-191 | Inventory Image and workflow hardening | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-191) | 2026-11-28T14:03:31Z |
+| JR-192 | Specify Image and workflow hardening acceptance | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-192) | 2026-11-28T14:03:42Z |
+| JR-193 | Reproduce Image and workflow hardening success | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-193) | 2026-11-28T14:04:34Z |
+| JR-194 | Reject Image and workflow hardening invalid operation | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-194) | 2026-11-28T14:05:34Z |
+| JR-195 | Close Image and workflow hardening verification | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-195) | 2026-11-28T14:05:44Z |
+| JR-196 | Inventory Artifact traceability | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-196) | 2026-11-28T14:06:08Z |
+| JR-197 | Specify Artifact traceability acceptance | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-197) | 2026-11-28T14:06:11Z |
+| JR-198 | Reproduce Artifact traceability success | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-198) | 2026-11-28T14:10:51Z |
+| JR-199 | Reject Artifact traceability invalid operation | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-199) | 2026-11-28T14:10:53Z |
+| JR-200 | Close Artifact traceability verification | 20 | IN REVIEW | [Session 20](SESSION-20-EVIDENCE.md#jr-200) | 2026-11-28T14:11:08Z |
 | JR-201 | Inventory SSH host trust preflight | 21 | NOT STARTED | — | — |
 | JR-202 | Specify SSH host trust preflight acceptance | 21 | NOT STARTED | — | — |
 | JR-203 | Reproduce SSH host trust preflight success | 21 | NOT STARTED | — | — |
