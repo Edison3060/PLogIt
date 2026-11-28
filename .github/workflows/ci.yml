@@ -156,6 +156,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
       - name: Install pinned Trivy CLI
         run: |
           set -euo pipefail
@@ -218,6 +220,9 @@ jobs:
 
       - name: Trivy frontend image scan (block fixable findings)
         run: trivy image --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed plogit-frontend:ci
+
+      - name: Verify offline scanned artifact identity (JR-198 and JR-199)
+        run: python3 scripts/ci-artifact-identity.py
 
   proxy:
     name: Production proxy - validate
