@@ -197,7 +197,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-189 | Reject Node React Vite support invalid operation | 19 | DONE | [Session 19](SESSION-19-EVIDENCE.md#jr-189) | 2026-11-28T02:13:49.416Z |
 | JR-190 | Close Node React Vite support verification | 19 | IN REVIEW | [Session 19](SESSION-19-EVIDENCE.md#jr-190) | 2026-11-28T02:15:29.133Z |
 | JR-191 | Inventory Image and workflow hardening | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-191) | 2026-11-28T14:03:31Z |
-| JR-192 | Specify Image and workflow hardening acceptance | 20 | NOT STARTED | — | — |
+| JR-192 | Specify Image and workflow hardening acceptance | 20 | DONE | [Session 20](SESSION-20-EVIDENCE.md#jr-192) | 2026-11-28T14:03:42Z |
 | JR-193 | Reproduce Image and workflow hardening success | 20 | NOT STARTED | — | — |
 | JR-194 | Reject Image and workflow hardening invalid operation | 20 | NOT STARTED | — | — |
 | JR-195 | Close Image and workflow hardening verification | 20 | NOT STARTED | — | — |

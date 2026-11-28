@@ -1456,3 +1456,8 @@ Both candidate CI runs passed their configured validation with production CD ski
 
 - **NOT STARTED → IN PROGRESS → DONE.** Inventory image pins and scanner ownership [Evidence](SESSION-20-EVIDENCE.md#jr-191).
 - Reviewed by Builder Lead. Checkpoint parent `a30b501f61285f79cb5db57f7064c67fa497d6bf`. Specify immutable inputs, least privilege, rendered Compose policy and fail-closed scanner evidence.
+
+### 2026-11-28T14:03:42Z | Session 20 | JR-192
+
+- **NOT STARTED → IN PROGRESS → DONE.** Set image and workflow acceptance criteria [Evidence](SESSION-20-EVIDENCE.md#jr-192).
+- Reviewed by Builder Lead. Checkpoint parent `91e62818274f41ba976d074a3a67d1fe0693a1ce`. Correlate current source assertions with exact-head security and rendered Compose CI.
