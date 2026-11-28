@@ -9,14 +9,14 @@ Only this per-app controller selects what a fresh Builder Lead session does next
 | Key | Value |
 |---|---|
 | NEXT_SESSION | 20 |
-| STATE | READY |
+| STATE | IN_PROGRESS |
 | LAST_ASSESSED_SESSION | 19 |
 | LAST_ASSESSED_JR_RANGE | JR-181–JR-190 |
 | CURRENT_TARGET_JR_RANGE | JR-191–JR-200 |
 | CURRENT_TARGET_PHASE_BRANCH | work/plogit-phase-10 |
 | LAST_PHASE_BRANCH | work/plogit-phase-10 |
-| CURRENT_RUN_OWNER | NONE |
-| LAST_UPDATE_UTC | 2026-11-28T02:17:17.397Z |
+| CURRENT_RUN_OWNER | builder-session20-2026-11-28T14:02:42Z-kwtxf2 |
+| LAST_UPDATE_UTC | 2026-11-28T14:02:42Z |
 | PENDING_PHASE_ACCEPTANCE | Session 19 JR-181–189 DONE. JR-190 IN REVIEW for existing npm lock advisories and dependency promotion (DEC-2026-11-28-03). Boot #31 and Node #32 passed candidate CI and remain draft. Phase 10 #33 is tracking-only, draft and stacked on unmerged #30. Session 18 JR-171–177 and JR-179 DONE with isolated paired recovery, restart and fault denial. JR-178/180 IN REVIEW for dependency readiness and structured correlation (DEC-2026-11-27-04). Operational backup access, encryption, retention and recovery objectives remain owner decisions (DEC-2026-11-27-03). Session 17 JR-161–164 and JR-166–170 DONE. JR-165 IN REVIEW for database enum enforcement and legacy-value inventory DEC-2026-11-27-01. Draft Phase 09 PR #30 stacks on unmerged #29. Phase 09 merge acceptance remains pending. Sessions 15–16 JR-141–160 DONE. Phase 08 browser usability and CI passed. Keep draft PR #29 stacked on unmerged #28 while Phase 07 acceptance and production approval remain pending. Local elapsed expiry verified with a one-minute test profile. Session 14 JR-131–137 DONE. JR-138–140 IN REVIEW for aggregate PDF size and server memory, sensitive-field policy, backup access and retention (DEC-2026-11-25-04). Phase 07 draft PR #28 stacks on unmerged #27. JR-124/125 and JR-129/130 IN REVIEW for complete image validation and strict path-like display-name rejection (DEC-2026-11-25-01/02). Session 13 six DONE. Phase 06 draft PR #27 remains stacked on unmerged #26. JR-109/110, JR-118/120 IN REVIEW for exact legacy nullable-list compatibility (INT-001, DEC-2026-11-24-03) and approval of a future envelope (DEC-2026-11-24-05). Isolated JudgeIt controller/PostgreSQL coverage passed for scoped diagnostic replay, unknown version, duplicate UUID, filename revision conflict and missing-media caveat. Session 12 eight DONE. Phase 01–05 draft PRs #22–26 remain unmerged. Preserve JR-094/095 delayed stale draft save (DEC-2026-11-23-03), Phase 04 duplicate-name, v1 expiry/concurrent join and target validation, JR-040 scanner acceptance, JR-044/045 elapsed idle timeout, direct API CSRF compatibility and owner CD DEC-2026-11-06-11. |
 | AFTER_FINAL_SESSION | COMPLETE, no automatic wraparound |
 
@@ -117,3 +117,5 @@ Odd sessions start/resume one of the original twelve `work/plogit-phase-XX` bran
 - 2026-11-28T02:06:35.998Z Session 19 JR-181–JR-190 claimed by builder-session19-2026-11-28T02:06:35.998Z-w1hx6t. Phase 10 will stack on unmerged Phase 09 at `591e3e8a88f82e38c66203ff4fbe69ef238411cf`. Phase 09 acceptance and production authorization remain pending.
 
 - 2026-11-28T02:17:17.397Z Session 19 JR-181–JR-190 assessed in ten numbered checkpoints and one tracking closeout on `work/plogit-phase-10` at `a30b501f61285f79cb5db57f7064c67fa497d6bf`. JR-181–189 DONE. JR-190 IN REVIEW for frontend registry advisories and candidate promotion. [Boot candidate CI 46096595474](https://github.com/Edison3060/PLogIt/actions/runs/46096595474) and [Node candidate CI 46096884430](https://github.com/Edison3060/PLogIt/actions/runs/46096884430) passed Maven, PostgreSQL, frontend, Compose/recovery, Semgrep, Trivy and proxy with CD skipped. Chromium verified the Node 24 bundle with synthetic API responses. Drafts #31, #32 and [#33](https://github.com/Edison3060/PLogIt/pull/33) remain unmerged. **READY WITH PROVISIONAL INTEGRATION** for independent Session 20, JR-191–JR-200, on the same phase branch. Phase 09 acceptance, INT-001 and production authorization remain pending. Claim cleared. No JR-191 work began.
+
+- 2026-11-28T14:02:42Z Session 20 JR-191–JR-200 claimed by builder-session20-2026-11-28T14:02:42Z-kwtxf2. Resume Phase 10 at `a30b501f61285f79cb5db57f7064c67fa497d6bf` for isolated supply-chain verification. Phase acceptance and release authorization remain pending.
