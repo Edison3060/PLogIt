@@ -145,6 +145,21 @@ jobs:
       image: semgrep/semgrep:latest@sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Reject synthetic scanner finding (JR-194)
+        run: |
+          set -eu
+          probe="$(mktemp -d)"
+          trap 'rm -rf "$probe"' EXIT
+          cat > "$probe/rule.yml" <<'RULE'
+          rules:
+            - id: jr194-ci-probe
+              languages: [python]
+              severity: ERROR
+              message: Synthetic CI scanner finding
+              pattern: print("PLOGIT_JR194_CI_PROBE")
+          RULE
+          printf '%s\n' 'print("PLOGIT_JR194_CI_PROBE")' > "$probe/probe.py"
+          semgrep scan --metrics=off --config "$probe/rule.yml" --error "$probe/probe.py"
       # --error makes findings fail the build (blocking).
       # --exclude .env.example: .env.example is a template with placeholder
       # values (change-me-*), not real secrets. Scanning it produces only
