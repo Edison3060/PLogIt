@@ -31,3 +31,9 @@ Disposable branch `verify/plogit-jr194-scanner-denial` at `3d3295a1a4c883608fe01
 **DONE**. Close image and workflow hardening verification
 
 The canonical inputs, scanner settings and Compose restrictions passed baseline [CI 46097253142](https://github.com/Edison3060/PLogIt/actions/runs/46097253142) at `a30b501f61285f79cb5db57f7064c67fa497d6bf`. The separate synthetic negative [job 141002808014](https://github.com/Edison3060/PLogIt/actions/runs/46152779031/job/141002808014) returned an actual blocking scanner finding. Verification required no change to the Phase 10 runtime or security gate. Base image digest pinning constrains inputs, while package upgrades during image build can still produce different output. The maintainer owns promotion and the draft branch is excluded from the Phase 10 deliverable.
+
+## JR-196
+
+**DONE**. Trace current CI and deployment artifact ownership
+
+At Phase 10 baseline `a30b501f61285f79cb5db57f7064c67fa497d6bf`, `.github/workflows/ci.yml` uses `docker build -t plogit-backend:ci ./backend` and `docker build -t plogit-frontend:ci ./frontend`, validates the resulting images and scans the local tags. The main-only SSH job checks out `DEPLOY_SHA` and executes `docker compose ... up -d --build`. It has source SHA linkage and no promotion of the CI-scanned image IDs. The separate Compose smoke also builds images. The three migrations live in `backend/src/main/resources/db/migration/`. `docs/operations/recovery.md` preserves rollback records and paired data requirements. `git diff --name-only 591e3e8... HEAD` confirmed the baseline Phase 10 change set was tracking-only. Expected traceability is incomplete. Builder Lead reviewed source and exact CI scan steps. The deployment operator owns production promotion and rollback.

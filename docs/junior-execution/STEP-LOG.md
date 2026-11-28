@@ -1476,3 +1476,8 @@ Both candidate CI runs passed their configured validation with production CD ski
 
 - **NOT STARTED → IN PROGRESS → DONE.** Close image and workflow hardening verification [Evidence](SESSION-20-EVIDENCE.md#jr-195).
 - Reviewed by Builder Lead. Checkpoint parent `db0712af3d441ed9c39cfde8f4fce3d69fe78478`. Inventory artifact identity, Flyway metadata and the current deployment rebuild path.
+
+### 2026-11-28T14:06:08Z | Session 20 | JR-196
+
+- **NOT STARTED → IN PROGRESS → DONE.** Trace current CI and deployment artifact ownership [Evidence](SESSION-20-EVIDENCE.md#jr-196).
+- Reviewed by Builder Lead. Checkpoint parent `46c9ca69f9bbc97414f49528298e8dbed0628fa0`. Write the artifact identity contract with a separate synthetic acceptance path.
