@@ -1491,3 +1491,8 @@ Both candidate CI runs passed their configured validation with production CD ski
 
 - **NOT STARTED → IN PROGRESS → DONE.** Trace scanned images through offline archive and reload [Evidence](SESSION-20-EVIDENCE.md#jr-198).
 - Reviewed by Builder Lead. Checkpoint parent `b06458e894dcfa9b3a9a4b42c14a0de53923a064`. Reconcile the separate changed-configuration image rejection from the same isolated run.
+
+### 2026-11-28T14:10:53Z | Session 20 | JR-199
+
+- **NOT STARTED → IN PROGRESS → DONE.** Reject the mismatched rebuilt image [Evidence](SESSION-20-EVIDENCE.md#jr-199).
+- Reviewed by Builder Lead. Checkpoint parent `e68b7dd3e3ba04a1c19a3f8310f59d386811952a`. Close Phase 10 evidence with all upstream, provenance and release gates listed.

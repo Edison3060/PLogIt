@@ -70,3 +70,9 @@ DEC-2026-11-28-05 defines the offline evidence tuple and production approvals. T
 ```
 
 The test used temporary runner storage. The Phase 10 release gate still requires an approved registry digest, deployment parity and authenticated rollback evidence.
+
+## JR-199
+
+**DONE**. Reject the mismatched rebuilt image
+
+On the real GitHub Docker runner, the candidate rebuilt a derived local backend image with a synthetic changed configuration label. A comparison of Docker image IDs rejected it with `Expected mismatch rejected: Loaded images differ from the images scanned in CI`. The script subsequently re-read both canonical local tags, matched them to the original scanned IDs and finished successfully. An archive with the original IDs still passed in the same run. The job used runner-local storage and the production deployment job was skipped. [Exact job](https://github.com/Edison3060/PLogIt/actions/runs/46152942373/job/141003305486).
