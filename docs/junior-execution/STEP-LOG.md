@@ -1466,3 +1466,8 @@ Both candidate CI runs passed their configured validation with production CD ski
 
 - **NOT STARTED → IN PROGRESS → DONE.** Verify pinned inputs and rendered Compose controls [Evidence](SESSION-20-EVIDENCE.md#jr-193).
 - Reviewed by Builder Lead. Checkpoint parent `e92769d6cf4604997e7530bbc3170ddfcfedaa10`. Verify the synthetic Semgrep finding produces a failed blocking step on its disposable branch.
+
+### 2026-11-28T14:05:34Z | Session 20 | JR-194
+
+- **NOT STARTED → IN PROGRESS → DONE.** Verify Semgrep fails on a synthetic finding [Evidence](SESSION-20-EVIDENCE.md#jr-194).
+- Reviewed by Builder Lead. Checkpoint parent `33e9dcd601e683ca7de6525d8447ad215b9cad53`. Reconcile baseline positive and isolated failure evidence. Keep production and promotion gates intact.

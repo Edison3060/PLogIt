@@ -19,3 +19,9 @@ DEC-2026-11-28-04 sets the expected inputs and owners. Third-party action refs m
 **DONE**. Verify pinned inputs and rendered Compose controls
 
 Local Python with PyYAML 6.0.3 parsed the canonical Dockerfiles, Compose and Actions YAML at `a30b501f61285f79cb5db57f7064c67fa497d6bf`. It observed four valid Dockerfile digest pins, two pinned Compose images, ten full action pins, the pinned Semgrep container, read-only contents permission, three blocking Trivy commands and main-only deployment. The static assertions printed PASS. Exact-head [CI 46097253142](https://github.com/Edison3060/PLogIt/actions/runs/46097253142) separately ran `docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile app --profile tls config --quiet` and the JSON policy assertions under synthetic environment values. Proxy job `140831421564`, Semgrep `140831421362`, and Trivy `140831421432` all passed. The CI jobs also pulled pinned PostgreSQL, validated Caddy and checked final image healthchecks. Production CD was skipped. Local Docker is unavailable. The live Compose and scanner evidence comes from the GitHub runner.
+
+## JR-194
+
+**DONE**. Verify Semgrep fails on a synthetic finding
+
+Disposable branch `verify/plogit-jr194-scanner-denial` at `3d3295a1a4c883608fe01ca8c03430322cfbc57b` executed `semgrep scan --metrics=off --config "$probe/rule.yml" --error "$probe/probe.py"`. The fixture was a harmless print statement matched by one local ERROR rule. The job log showed `Findings: 1 (1 blocking)` and exit 1. The Semgrep job failed and the following step was skipped. The workflow requires successful Semgrep and Trivy and restricts CD to main. The fixture was generated in a runner temp directory and removed on exit. [Draft PR #34](https://github.com/Edison3060/PLogIt/pull/34). [Scanner job](https://github.com/Edison3060/PLogIt/actions/runs/46152779031/job/141002808014).
