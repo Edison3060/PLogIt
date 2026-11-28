@@ -1451,3 +1451,8 @@ Checks ran against `7734c0712ad774069c28c1476f7cb48c6087303f`. GitHub Actions pa
 ### 2026-11-28T02:16:26.785Z | Session 19 | JR-190 reconciliation
 
 Both candidate CI runs passed their configured validation with production CD skipped. The current lockfile's registry advisories still require maintainer triage. Corrected evidence and timestamp column placement for JR-181–187. [Final evidence](SESSION-19-EVIDENCE.md#executed-verification-and-reconciliation). [Handoff](SESSION-HANDOFF.md). Checkpoint parent `b17195ae953f2c6bdfba46edcd54001a506d1917`.
+
+### 2026-11-28T14:03:31Z | Session 20 | JR-191
+
+- **NOT STARTED → IN PROGRESS → DONE.** Inventory image pins and scanner ownership [Evidence](SESSION-20-EVIDENCE.md#jr-191).
+- Reviewed by Builder Lead. Checkpoint parent `a30b501f61285f79cb5db57f7064c67fa497d6bf`. Specify immutable inputs, least privilege, rendered Compose policy and fail-closed scanner evidence.
