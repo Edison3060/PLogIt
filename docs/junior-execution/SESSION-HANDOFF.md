@@ -988,3 +988,10 @@ Draft [PR #30](https://github.com/Edison3060/PLogIt/pull/30) stacks on unmerged 
 Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured redacted correlation and the separate dependency readiness gap. All ten JR checkpoints are recorded on `work/plogit-phase-09`. Tested `7734c0712ad774069c28c1476f7cb48c6087303f` in [CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). GitHub Actions passed Java 21/Maven 170 tests with PostgreSQL 16.16, frontend build and 25 tests, Compose recovery, Semgrep, Trivy filesystem and both images, and production proxy validation. Production CD was skipped. The equivalent stacked PR validation run 46013380950 passed. Local frontend lint/build and all 25 tests, shell syntax, the CI guard, whitespace and append-only checks passed. The first local Maven attempt hit DNS without JVM proxy configuration. A proxy retry resolved dependencies but the local environment lacked a Java 21 compiler. Maven build and tests ran in CI.
 
 [Draft PR #30](https://github.com/Edison3060/PLogIt/pull/30) remains stacked on unmerged [PR #29](https://github.com/Edison3060/PLogIt/pull/29). Phase 09 has no merge or production sign-off. DEC-2026-11-27-01/03/04, prior stack acceptance, INT-001 and DEC-2026-11-06-11 remain open. Keep the existing unversioned JSON contract. See [Session 18 evidence](SESSION-18-EVIDENCE.md#executed-verification-and-reconciliation) and the [recovery runbook](../operations/recovery.md).
+
+
+### 2026-11-28T02:08:01.707Z | Session 19 | JR-181
+
+- **DONE.** Map the Java and Spring dependency baseline [Evidence](SESSION-19-EVIDENCE.md#jr-181). Checkpoint parent `591e3e8a88f82e38c66203ff4fbe69ef238411cf`.
+- Assessed DONE: JR-181. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.

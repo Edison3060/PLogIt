@@ -1386,3 +1386,9 @@ Missing storage returned 404. The authenticated edit during DB outage returned g
 ### 2026-11-27T14:13:20Z | Session 18 | JR-180 | IN REVIEW
 
 Checks ran against `7734c0712ad774069c28c1476f7cb48c6087303f`. GitHub Actions passed Java 21/Maven 170 tests with PostgreSQL 16.16, frontend build and 25 tests, Compose recovery, Semgrep, Trivy filesystem and both images, and production proxy validation. Production CD was skipped. The equivalent stacked PR validation run 46013380950 passed. The phase retains open dependency readiness and structured correlation work, DB enum enforcement (JR-165), prior stacked acceptance, the INT-001 contract test and production approvals. [Executed CI 46013369940](https://github.com/Edison3060/PLogIt/actions/runs/46013369940). Builder Lead reviewed.
+
+
+### 2026-11-28T02:08:01.707Z | Session 19 | JR-181
+
+- **NOT STARTED → IN PROGRESS → DONE.** Map the Java and Spring dependency baseline [Evidence](SESSION-19-EVIDENCE.md#jr-181).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `591e3e8a88f82e38c66203ff4fbe69ef238411cf`. Continue within the assigned Session 19 range.
