@@ -76,3 +76,13 @@ The test used temporary runner storage. The Phase 10 release gate still requires
 **DONE**. Reject the mismatched rebuilt image
 
 On the real GitHub Docker runner, the candidate rebuilt a derived local backend image with a synthetic changed configuration label. A comparison of Docker image IDs rejected it with `Expected mismatch rejected: Loaded images differ from the images scanned in CI`. The script subsequently re-read both canonical local tags, matched them to the original scanned IDs and finished successfully. An archive with the original IDs still passed in the same run. The job used runner-local storage and the production deployment job was skipped. [Exact job](https://github.com/Edison3060/PLogIt/actions/runs/46152942373/job/141003305486).
+
+## JR-200
+
+**IN REVIEW**. Close Phase 10 evidence with release traceability open
+
+The Phase 10 branch has tracking changes. The scoped Docker archive and mismatch cases passed in draft [#35](https://github.com/Edison3060/PLogIt/pull/35). The intentional scanner test [#34](https://github.com/Edison3060/PLogIt/pull/34) was closed unmerged. Keeping the artifact experiment on its draft makes rollback a matter of discarding the isolated code change. The baseline deployment still rebuilds on the target, with no approved registry digest, scan-to-deployment equality proof or known-good paired rollback artifact. Keep DEC-2026-11-28-05 open until the maintainer and release operator record these requirements and approve a production-safe route.
+
+[Baseline CI 46097253142](https://github.com/Edison3060/PLogIt/actions/runs/46097253142) and [artifact candidate CI 46152942373](https://github.com/Edison3060/PLogIt/actions/runs/46152942373) passed 170 backend tests with PostgreSQL 16.16, 25 frontend tests, isolated Compose and paired recovery, proxy, Semgrep and Trivy filesystem and application images. Production CD was skipped. The separate [negative scanner run 46152779031](https://github.com/Edison3060/PLogIt/actions/runs/46152779031) failed in Semgrep as intended and skipped CD. Session 19 dependency candidates remain isolated. Phase 09 acceptance, JR-190 package advisories and dependency promotion, JudgeIt INT-001 and overall production authorization remain open. Phase 10 sign-off remains pending.
+
+Numbered checkpoints through JR-199 are JR-191 `91e62818274f`, JR-192 `e92769d6cf46`, JR-193 `33e9dcd601e6`, JR-194 `db0712af3d44`, JR-195 `46c9ca69f9bb`, JR-196 `19c5c30507e7`, JR-197 `a24ea016b640`, JR-198 `e68b7dd3e3ba`, JR-199 `a2261c5dfce8`. The branch tip commit for this section is the JR-200 checkpoint and its SHA is recorded on the session controller.
