@@ -43,3 +43,9 @@ Phase 09 head `591e3e8a88f82e38c66203ff4fbe69ef238411cf` contains a digest-pinne
 **DONE.** Select an isolated Node 24 LTS image candidate
 
 Node's official EOL page lists Node 20's final update in March 2026, and its official security release identifies Node 24.22.3 LTS on 2026-11-11 (https://nodejs.org/en/about/eol and https://nodejs.org/en/blog/release/v24.22.3/, accessed 2026-11-28). Verify the existing lock with Node 24.22.3 and the published multi-platform digest, keep React and Vite changes isolated, and verify production asset serving and unauthenticated routing. Vite's support page requires using a currently supported minor for security fixes. Preserve current Vite in the Node-only candidate and track supported-line evaluation separately rather than expanding this runtime patch (https://vite.dev/releases.html, accessed 2026-11-28).
+
+## JR-188
+
+**DONE.** Verify the Node 24 production frontend bundle
+
+Draft [PR #32](https://github.com/Edison3060/PLogIt/pull/32) at `286b6ddf1436feccc411795599523826c32b7c23` changes one Dockerfile line, pinning Node 24.22.3 Alpine to published manifest digest `sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5`. Docker Hub registry metadata for `library/node:24.22.3-alpine` returned the same digest. With Node 24.22.3 and npm 11.19.1, `npm ci && npm run build && npm run lint && npm test` exited 0, installing 326 packages, building 102 modules, and passing 25 tests across seven files. Chromium 158.0.8127.0 loaded the compiled `dist` bundle on a local loopback origin. With test-only synthetic API responses it checked the guard on `/engagements/931/logs`, rejected credentials, the CSRF header on sign-in, successful navigation, the empty dashboard and no browser exceptions. Independent [candidate CI 46096884430](https://github.com/Edison3060/PLogIt/actions/runs/46096884430) exercises the Docker build and real HTTP against PostgreSQL. Browser fixture result covers frontend behavior.
