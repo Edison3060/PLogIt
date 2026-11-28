@@ -13,3 +13,9 @@ At Phase 09 head `591e3e8a88f82e38c66203ff4fbe69ef238411cf`, canonical `backend/
 **DONE.** Set isolated Boot patch acceptance
 
 The baseline is Java 21 and Boot 4.1.1, with the prior Phase 09 PostgreSQL-backed result. Choose Boot 4.1.3 within the same minor line, keep the Java level and four explicit library pins, and resolve the effective dependency tree before considering a source PR. Spring announced 4.1.3 on 2026-11-20 (https://spring.io/blog/2026/11/20/spring-boot-4-1-3-available-now/, accessed 2026-11-28). A BOM patch can change transitive libraries even when direct code is identical. Verify the same V1→V3 Flyway history with existing synthetic rows, rejection and rollback on an invalid migration, anonymous and out-of-scope denial without writes, and the existing unversioned JSON DTO and attachment-filename contract. Java 25 and Boot 4.2 need independent assessment.
+
+## JR-183
+
+**DONE.** Run the full Maven suite on Boot 4.1.3
+
+The isolated one-line patch on `work/plogit-session-19-boot-candidate` at `2e079773d3d61b7bf019dc0d2bcbef9302358f3d` went through [draft PR #31](https://github.com/Edison3060/PLogIt/pull/31) and [CI 46096595474](https://github.com/Edison3060/PLogIt/actions/runs/46096595474). Expected complete Java/PostgreSQL regression and a packaged candidate. Observed `mvn -B clean verify` with Java 21.0.13.1, Maven 3.9.15, Boot 4.1.3, and PostgreSQL 16.16: 170 tests, zero failures, errors or skips, then `BUILD SUCCESS`. Relevant suites included Flyway (4), export (18), log authorization (12) and audit (18). The Testcontainers fixture uses isolated PostgreSQL from `PostgresTestConfig` and independent databases for migration lifecycle cases. A local Maven retry hit proxy connectivity. The recorded complete suite ran on GitHub.
