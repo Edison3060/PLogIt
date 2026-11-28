@@ -1486,3 +1486,8 @@ Both candidate CI runs passed their configured validation with production CD ski
 
 - **NOT STARTED → IN PROGRESS → DONE.** Define the traceability evidence and release gate [Evidence](SESSION-20-EVIDENCE.md#jr-197).
 - Reviewed by Builder Lead. Checkpoint parent `19c5c30507e70b09299a05519addb5008e656b1a`. Run the offline artifact candidate in GitHub Actions after both blocking image scans.
+
+### 2026-11-28T14:10:51Z | Session 20 | JR-198
+
+- **NOT STARTED → IN PROGRESS → DONE.** Trace scanned images through offline archive and reload [Evidence](SESSION-20-EVIDENCE.md#jr-198).
+- Reviewed by Builder Lead. Checkpoint parent `b06458e894dcfa9b3a9a4b42c14a0de53923a064`. Reconcile the separate changed-configuration image rejection from the same isolated run.
