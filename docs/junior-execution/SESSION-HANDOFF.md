@@ -1044,3 +1044,10 @@ Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured
 - **DONE.** Verify the Node 24 production frontend bundle [Evidence](SESSION-19-EVIDENCE.md#jr-188). Checkpoint parent `ff29b3bccf56baf1e572e4df417981f8c8cc457e`.
 - Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187, JR-188. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
 - Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:13:49.416Z | Session 19 | JR-189
+
+- **DONE.** Reject the split React and React DOM upgrade [Evidence](SESSION-19-EVIDENCE.md#jr-189). Checkpoint parent `9f77c2c81f50abc8b33c305650761f432c7587a0`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187, JR-188, JR-189. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.

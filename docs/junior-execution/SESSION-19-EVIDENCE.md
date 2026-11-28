@@ -49,3 +49,9 @@ Node's official EOL page lists Node 20's final update in March 2026, and its off
 **DONE.** Verify the Node 24 production frontend bundle
 
 Draft [PR #32](https://github.com/Edison3060/PLogIt/pull/32) at `286b6ddf1436feccc411795599523826c32b7c23` changes one Dockerfile line, pinning Node 24.22.3 Alpine to published manifest digest `sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5`. Docker Hub registry metadata for `library/node:24.22.3-alpine` returned the same digest. With Node 24.22.3 and npm 11.19.1, `npm ci && npm run build && npm run lint && npm test` exited 0, installing 326 packages, building 102 modules, and passing 25 tests across seven files. Chromium 158.0.8127.0 loaded the compiled `dist` bundle on a local loopback origin. With test-only synthetic API responses it checked the guard on `/engagements/931/logs`, rejected credentials, the CSRF header on sign-in, successful navigation, the empty dashboard and no browser exceptions. Independent [candidate CI 46096884430](https://github.com/Edison3060/PLogIt/actions/runs/46096884430) exercises the Docker build and real HTTP against PostgreSQL. Browser fixture result covers frontend behavior.
+
+## JR-189
+
+**DONE.** Reject the split React and React DOM upgrade
+
+On Node 24.22.3/npm 11.19.1, a minimal disposable manifest with exact React 19.2.0 and React DOM 18.3.1 ran `npm install --strict-peer-deps --package-lock-only --ignore-scripts --no-audit --no-fund`. npm exited 1 with `ERESOLVE` because React DOM 18.3.1 requires React `^18.3.1`. The fixture produced neither a lockfile nor `node_modules`. The canonical manifest and lockfile had a clean `git diff --exit-code`. The initial attempt with a copied stale lock yielded peer warnings and rewrote only the disposable lock despite strict mode, so it cannot establish denial. The fresh fixture exercised deterministic failure, while the candidate CI separately exercises the corrupt-lock guard.

@@ -1434,3 +1434,9 @@ Checks ran against `7734c0712ad774069c28c1476f7cb48c6087303f`. GitHub Actions pa
 
 - **NOT STARTED → IN PROGRESS → DONE.** Verify the Node 24 production frontend bundle [Evidence](SESSION-19-EVIDENCE.md#jr-188).
 - Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `ff29b3bccf56baf1e572e4df417981f8c8cc457e`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:13:49.416Z | Session 19 | JR-189
+
+- **NOT STARTED → IN PROGRESS → DONE.** Reject the split React and React DOM upgrade [Evidence](SESSION-19-EVIDENCE.md#jr-189).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `9f77c2c81f50abc8b33c305650761f432c7587a0`. Continue within the assigned Session 19 range.
