@@ -1471,3 +1471,8 @@ Both candidate CI runs passed their configured validation with production CD ski
 
 - **NOT STARTED → IN PROGRESS → DONE.** Verify Semgrep fails on a synthetic finding [Evidence](SESSION-20-EVIDENCE.md#jr-194).
 - Reviewed by Builder Lead. Checkpoint parent `33e9dcd601e683ca7de6525d8447ad215b9cad53`. Reconcile baseline positive and isolated failure evidence. Keep production and promotion gates intact.
+
+### 2026-11-28T14:05:44Z | Session 20 | JR-195
+
+- **NOT STARTED → IN PROGRESS → DONE.** Close image and workflow hardening verification [Evidence](SESSION-20-EVIDENCE.md#jr-195).
+- Reviewed by Builder Lead. Checkpoint parent `db0712af3d441ed9c39cfde8f4fce3d69fe78478`. Inventory artifact identity, Flyway metadata and the current deployment rebuild path.

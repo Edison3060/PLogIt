@@ -1068,13 +1068,14 @@ Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured
 
 Confirm the controller points to Session 20 before separately starting it. Reuse the current phase branch, carry DEC-2026-11-28-03 into release review and preserve the prior data and integration gates. This run stopped at JR-190.
 
-## Session 20 | 2026-11-28T14:05:34Z
+## Session 20 | 2026-11-28T14:05:44Z
 
-Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edison3060/PLogIt/pull/33) above unmerged #30. Last assessed JR-194 (DONE). Checkpoint parent `33e9dcd601e683ca7de6525d8447ad215b9cad53`.
+Phase 10 branch `work/plogit-phase-10` and draft [PR #33](https://github.com/Edison3060/PLogIt/pull/33) above unmerged #30. Last assessed JR-195 (DONE). Checkpoint parent `db0712af3d441ed9c39cfde8f4fce3d69fe78478`.
 
 - JR-191 DONE
 - JR-192 DONE
 - JR-193 DONE
 - JR-194 DONE
+- JR-195 DONE
 
-Reconcile baseline positive and isolated failure evidence. Keep production and promotion gates intact. [Session 20 evidence](SESSION-20-EVIDENCE.md). Phase 09 recovery acceptance, JR-190 advisory triage, INT-001 and production authorization remain open.
+Inventory artifact identity, Flyway metadata and the current deployment rebuild path. [Session 20 evidence](SESSION-20-EVIDENCE.md). Phase 09 recovery acceptance, JR-190 advisory triage, INT-001 and production authorization remain open.

@@ -25,3 +25,9 @@ Local Python with PyYAML 6.0.3 parsed the canonical Dockerfiles, Compose and Act
 **DONE**. Verify Semgrep fails on a synthetic finding
 
 Disposable branch `verify/plogit-jr194-scanner-denial` at `3d3295a1a4c883608fe01ca8c03430322cfbc57b` executed `semgrep scan --metrics=off --config "$probe/rule.yml" --error "$probe/probe.py"`. The fixture was a harmless print statement matched by one local ERROR rule. The job log showed `Findings: 1 (1 blocking)` and exit 1. The Semgrep job failed and the following step was skipped. The workflow requires successful Semgrep and Trivy and restricts CD to main. The fixture was generated in a runner temp directory and removed on exit. [Draft PR #34](https://github.com/Edison3060/PLogIt/pull/34). [Scanner job](https://github.com/Edison3060/PLogIt/actions/runs/46152779031/job/141002808014).
+
+## JR-195
+
+**DONE**. Close image and workflow hardening verification
+
+The canonical inputs, scanner settings and Compose restrictions passed baseline [CI 46097253142](https://github.com/Edison3060/PLogIt/actions/runs/46097253142) at `a30b501f61285f79cb5db57f7064c67fa497d6bf`. The separate synthetic negative [job 141002808014](https://github.com/Edison3060/PLogIt/actions/runs/46152779031/job/141002808014) returned an actual blocking scanner finding. Verification required no change to the Phase 10 runtime or security gate. Base image digest pinning constrains inputs, while package upgrades during image build can still produce different output. The maintainer owns promotion and the draft branch is excluded from the Phase 10 deliverable.
