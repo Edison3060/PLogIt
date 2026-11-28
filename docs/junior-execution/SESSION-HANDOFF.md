@@ -1030,3 +1030,10 @@ Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured
 - **DONE.** Map the Node and frontend dependency baseline [Evidence](SESSION-19-EVIDENCE.md#jr-186). Checkpoint parent `f290855c38ba93094f4d2adb9598f49f7ca0fbf1`.
 - Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
 - Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:11:43.228Z | Session 19 | JR-187
+
+- **DONE.** Select an isolated Node 24 LTS image candidate [Evidence](SESSION-19-EVIDENCE.md#jr-187). Checkpoint parent `2e3779780796c18419588ce8697f3c7e53178020`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Continue within the assigned Session 19 range.

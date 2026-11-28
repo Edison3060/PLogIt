@@ -37,3 +37,9 @@ The supported patch reproduced the complete 170-test Maven baseline and rolled b
 **DONE.** Map the Node and frontend dependency baseline
 
 Phase 09 head `591e3e8a88f82e38c66203ff4fbe69ef238411cf` contains a digest-pinned `node:20-alpine` frontend build stage and pinned nginx runtime in `frontend/Dockerfile`. `.github/workflows/ci.yml` uses Node 22.23.4 for npm and Vitest. The canonical lock resolves React and React DOM 18.3.1, Vite 6.4.3, Vitest 4.1.12 and the React plugin 4.7.0. `frontend/package.json` owns build, lint and test entry points. Existing test suites cover protected routes, API handling, theme, engagement and log detail. `scripts/verify-log-export-journeys.cjs` owns full browser journeys. Older mirrored specs describe the architecture and baseline, whereas the current files own what is built.
+
+## JR-187
+
+**DONE.** Select an isolated Node 24 LTS image candidate
+
+Node's official EOL page lists Node 20's final update in March 2026, and its official security release identifies Node 24.22.3 LTS on 2026-11-11 (https://nodejs.org/en/about/eol and https://nodejs.org/en/blog/release/v24.22.3/, accessed 2026-11-28). Verify the existing lock with Node 24.22.3 and the published multi-platform digest, keep React and Vite changes isolated, and verify production asset serving and unauthenticated routing. Vite's support page requires using a currently supported minor for security fixes. Preserve current Vite in the Node-only candidate and track supported-line evaluation separately rather than expanding this runtime patch (https://vite.dev/releases.html, accessed 2026-11-28).

@@ -192,7 +192,7 @@ Allowed statuses: `NOT STARTED`, `IN PROGRESS`, `IN REVIEW`, `BLOCKED`, `DONE`. 
 | JR-184 | Reject Java and Spring version review invalid operation | 19 | DONE | 2026-11-28 | [Session 19](SESSION-19-EVIDENCE.md#jr-184) |
 | JR-185 | Close Java and Spring version review verification | 19 | DONE | 2026-11-28 | [Session 19](SESSION-19-EVIDENCE.md#jr-185) |
 | JR-186 | Inventory Node React Vite support | 19 | DONE | 2026-11-28 | [Session 19](SESSION-19-EVIDENCE.md#jr-186) |
-| JR-187 | Specify Node React Vite support acceptance | 19 | NOT STARTED | — | — |
+| JR-187 | Specify Node React Vite support acceptance | 19 | DONE | 2026-11-28 | [Session 19](SESSION-19-EVIDENCE.md#jr-187) |
 | JR-188 | Reproduce Node React Vite support success | 19 | NOT STARTED | — | — |
 | JR-189 | Reject Node React Vite support invalid operation | 19 | NOT STARTED | — | — |
 | JR-190 | Close Node React Vite support verification | 19 | NOT STARTED | — | — |

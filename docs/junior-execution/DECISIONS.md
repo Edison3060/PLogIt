@@ -310,3 +310,8 @@ Preserve the public /api/health liveness payload. Verify PostgreSQL and storage 
 ### DEC-2026-11-28-01 | JR-182/JR-185 | Isolated Spring Boot 4.1.3 candidate
 
 Builder Lead approved testing a one-property Boot patch in an isolated development branch. Retain Java 21 and explicit library pins. Require the complete Maven/PostgreSQL suite, effective dependency review, immutable legacy export evidence and normal security checks before acceptance. The PLogIt maintainer owns dependency promotion and the release gates remain open. [JR-182](SESSION-19-EVIDENCE.md#jr-182).
+
+
+### DEC-2026-11-28-02 | JR-187/JR-190 | Node build-stage support
+
+The current Docker build stage pins Node 20 and CI runs Node 22.23.4. Builder Lead approved isolated verification of Node 24.22.3 LTS against the current dependency lock. Keep React, React DOM and Vite out of the Node-only proposal. Require exact digest, build and security checks, browser evidence and maintainer acceptance for promotion. [JR-187](SESSION-19-EVIDENCE.md#jr-187).
