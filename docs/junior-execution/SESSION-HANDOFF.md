@@ -1051,3 +1051,10 @@ Eight DONE (JR-171–177 and JR-179). JR-178 and JR-180 IN REVIEW for structured
 - **DONE.** Reject the split React and React DOM upgrade [Evidence](SESSION-19-EVIDENCE.md#jr-189). Checkpoint parent `9f77c2c81f50abc8b33c305650761f432c7587a0`.
 - Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187, JR-188, JR-189. IN REVIEW: none. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
 - Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:15:29.133Z | Session 19 | JR-190
+
+- **IN REVIEW.** Record Node candidate evidence and open frontend advisory review [Evidence](SESSION-19-EVIDENCE.md#jr-190). Checkpoint parent `fe087536492d453e86891971a83efb138d2deaa8`.
+- Assessed DONE: JR-181, JR-182, JR-183, JR-184, JR-185, JR-186, JR-187, JR-188, JR-189. IN REVIEW: JR-190. Phase 10 stacks on unmerged #30. INT-001, Phase 09 gates and production authority remain open.
+- Reconcile candidate CI and update the controller for independent supply-chain verification only. Prior gates and maintainer decisions stay open.

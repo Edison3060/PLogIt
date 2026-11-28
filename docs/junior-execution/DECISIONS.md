@@ -315,3 +315,8 @@ Builder Lead approved testing a one-property Boot patch in an isolated developme
 ### DEC-2026-11-28-02 | JR-187/JR-190 | Node build-stage support
 
 The current Docker build stage pins Node 20 and CI runs Node 22.23.4. Builder Lead approved isolated verification of Node 24.22.3 LTS against the current dependency lock. Keep React, React DOM and Vite out of the Node-only proposal. Require exact digest, build and security checks, browser evidence and maintainer acceptance for promotion. [JR-187](SESSION-19-EVIDENCE.md#jr-187).
+
+
+### DEC-2026-11-28-03 | OPEN | JR-190 frontend lock advisory triage
+
+Keep the Node-only build-stage candidate isolated. The 2026-11-28 npm registry audit found 7 high and 11 moderate package entries in the existing lock. The production dependency audit reported two moderate React Router entries. Treat these as package advisory matches pending source applicability and fix review. The PLogIt maintainer owns review of the smallest supported lock changes and any compatible React Router migration. Phase 10B can exercise independent image/workflow and traceability controls with temporary synthetic inputs. Do not promote a candidate from these results alone. [Evidence](SESSION-19-EVIDENCE.md#jr-190).

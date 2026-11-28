@@ -1440,3 +1440,9 @@ Checks ran against `7734c0712ad774069c28c1476f7cb48c6087303f`. GitHub Actions pa
 
 - **NOT STARTED → IN PROGRESS → DONE.** Reject the split React and React DOM upgrade [Evidence](SESSION-19-EVIDENCE.md#jr-189).
 - Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `9f77c2c81f50abc8b33c305650761f432c7587a0`. Continue within the assigned Session 19 range.
+
+
+### 2026-11-28T02:15:29.133Z | Session 19 | JR-190
+
+- **NOT STARTED → IN PROGRESS → IN REVIEW.** Record Node candidate evidence and open frontend advisory review [Evidence](SESSION-19-EVIDENCE.md#jr-190).
+- Builder Lead reviewed the checkpoint. Tracking paths include the register, log, handoff and Session 19 evidence. Checkpoint parent `fe087536492d453e86891971a83efb138d2deaa8`. Reconcile candidate CI and update the controller for independent supply-chain verification only. Prior gates and maintainer decisions stay open.
