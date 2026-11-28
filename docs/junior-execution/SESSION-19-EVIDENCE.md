@@ -25,3 +25,9 @@ The isolated one-line patch on `work/plogit-session-19-boot-candidate` at `2e079
 **DONE.** Verify migration conflict rollback on the candidate
 
 On candidate [Maven job 140829239686](https://github.com/Edison3060/PLogIt/actions/runs/46096595474/job/140829239686), `FlywayMigrationLifecycleTest#invalidMigrationRollsBackPartialDdlAndPreservesV1Data` applies V1, seeds one user, then attempts a synthetic V2 with partial DDL and an invalid write. The log reports that the V2 failed and Flyway rolled it back. Source assertions require zero partial table, no successful V2 history row and preserved user and V1 history. All four migration tests passed. The same run passed 12 log-authorization, 18 audit and 18 export tests, including the checked-in unversioned JSON fixture. The only candidate change is the Boot parent property. Unapproved version and dependency conflicts remain gated on the draft branch.
+
+## JR-185
+
+**DONE.** Close Boot verification without changing Phase 10 runtime
+
+The supported patch reproduced the complete 170-test Maven baseline and rolled back the invalid migration on PostgreSQL 16.16. The Boot proposal remains in draft PR #31, reversible by retaining 4.1.1 or reverting its one-line commit if subsequently accepted. Phase 10 retains the 4.1.1 POM. Promotion still requires review of effective dependency changes, candidate CI and the existing Phase 09 and release gates. The patch announcement is evidence of availability. Applicability of upstream advisories and library pins must be evaluated separately.
